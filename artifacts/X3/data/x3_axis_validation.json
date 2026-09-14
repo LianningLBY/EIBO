@@ -5622,11 +5622,13 @@
     "/root/eibo/x3_parametric_growth.py",
     "/root/eibo/x3_controls.py"
   ],
-  "runner_sha256": "675acae7290fdb1b598031e8eb26a0adfa452b7073c7ea010f18abe3dd9aa0b2",
+  "runner_sha256": "93d705ccb8ed87afd251bea1cf8df92c30926e9af376d7653b8cda026e640ae8",
   "artifact_status": {
     "vote_artifact": "verified-correct",
-    "parametric_artifact": "verified-correct"
+    "parametric_artifact": "axis-verified; conclusion remains NON-DIAGNOSTIC per D057",
+    "parametric_artifact_note": "The k axis is correctly labelled (what this check tested). That says nothing about whether the route's LINEAR verdict is informative: per D057 the verdict is a mathematical tautology -- D_k is affine by construction for any fitted order >= 1 and identically 0 for order 0 -- so the route cannot distinguish the hypotheses. Axis correct != conclusion usable.",
+    "self_reference_note": "The embedded artifact_size_bytes / artifact_sha256 are a SNAPSHOT TAKEN BEFORE this field was written, so they intentionally do not equal this file's own bytes. Verify against the externally reported hash instead."
   },
-  "artifact_size_bytes": 122495,
-  "artifact_sha256": "ae3ccc37256f569af6ea89ca64f468f39eb78b86f021a4586ded7cd5dafa36af"
+  "artifact_size_bytes": 123173,
+  "artifact_sha256": "d6277b074b2f070c3075c7cb2dd6d30ec37782afe72aaf784bf991186f8a5dbe"
 }
