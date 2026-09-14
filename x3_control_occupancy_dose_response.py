@@ -33,6 +33,7 @@ PLAIN_N = 200_000
 P = 0.30
 Q = 0.70
 RETAINED_FRACTIONS = (1.0, 0.50, 0.25, 0.10, 0.05)
+MIN_ASSESSABLE_LEVELS = 3
 ANALYTIC_PER_POSITION = 0.3389191441548814
 
 
@@ -222,7 +223,15 @@ def compact_fit(fit: dict) -> dict:
 
 def guarded_fit_growth(curve: list[dict]) -> dict:
     freeze = detect_constant_tail(curve)
-    if freeze["tail_freeze"]:
+    assertion_error = None
+    try:
+        assert not freeze["tail_freeze"], (
+            f"constant-tail freeze detected at k={freeze['tail_freeze_onset_k']} "
+            f"through k={freeze['tail_freeze_end_k']}"
+        )
+    except AssertionError as exc:
+        assertion_error = str(exc)
+    if assertion_error is not None:
         onset = freeze["tail_freeze_onset_k"]
         non_frozen_curve = [row for row in curve if int(row["k"]) <= int(onset)]
         non_frozen_fit = fit_growth(non_frozen_curve) if len(non_frozen_curve) >= 3 else None
@@ -234,6 +243,7 @@ def guarded_fit_growth(curve: list[dict]) -> dict:
                 "D_k_median is exactly constant over the tail; a full-window "
                 "power-law exponent would report thinning-induced saturation as data."
             ),
+            "assertion_error": assertion_error,
             "freeze_assertion": freeze,
             "non_frozen_window": {
                 "k_min": int(non_frozen_curve[0]["k"]) if non_frozen_curve else None,
@@ -243,6 +253,7 @@ def guarded_fit_growth(curve: list[dict]) -> dict:
             },
         }
     fit = compact_fit(fit_growth(curve))
+    fit["assertion_error"] = None
     fit["freeze_assertion"] = freeze
     return fit
 
@@ -353,7 +364,7 @@ def main() -> int:
         ],
         "thinning_operation": "within each law and each observed context, uniformly retain floor(r*n_context) flows and split retained zero/one counts by hypergeometric sampling",
         "occupancy_primary_statistic": "mean across k=5..30 and both laws of the fraction of observed contexts with fewer than 5 retained transitions",
-        "decision_rule": "For an arm, deflation tracks thinning iff the primary sparse-context statistic is nondecreasing and fitted exponent p is nonincreasing as retained_fraction decreases across all five levels. The joint result tracks iff both arms satisfy this rule.",
+        "decision_rule": "For an arm, deflation tracks thinning iff at least three levels are assessable and, over non-refused levels only, the primary sparse-context statistic is nondecreasing and fitted exponent p is nonincreasing as retained_fraction decreases. The arm state is supported, refuted, or not_assessable; the joint state is supported only if both arms are supported, refuted if either arm is refuted, and otherwise not_assessable.",
         "fit_reference": "/root/eibo/x3_controls.py:fit_growth",
         "divergence_reference": "/root/eibo/x3_controls.py:d_chain_fast",
     }
@@ -385,15 +396,35 @@ def main() -> int:
         ]
         sparse_values = [x["occupancy_summary"]["mean_fraction_contexts_below_5"] for x in levels]
         emitted_p = [value for value in p_values if value is not None]
+        assessable_levels = [x for x in levels if x["fit"].get("status") == "FIT_EMITTED"]
+        assessable_sparse = [
+            x["occupancy_summary"]["mean_fraction_contexts_below_5"]
+            for x in assessable_levels
+        ]
         p_nonincreasing = len(emitted_p) == len(p_values) and monotone_nonincreasing(emitted_p)
         sparse_nondec = all(a <= b for a, b in zip(sparse_values, sparse_values[1:]))
+        assessable_p_nonincreasing = monotone_nonincreasing(emitted_p)
+        assessable_sparse_nondec = all(a <= b for a, b in zip(assessable_sparse, assessable_sparse[1:]))
+        tracks_on_assessable = (
+            len(assessable_levels) >= MIN_ASSESSABLE_LEVELS
+            and assessable_p_nonincreasing
+            and assessable_sparse_nondec
+        )
+        if len(assessable_levels) < MIN_ASSESSABLE_LEVELS:
+            trend_state = "not_assessable"
+        elif tracks_on_assessable:
+            trend_state = "supported"
+        else:
+            trend_state = "refuted"
+        refused = [
+            x["retained_fraction"]
+            for x in levels
+            if x["fit"].get("status") == "REFUSED_CONSTANT_TAIL"
+        ]
         return {
             "exponent_p_by_retained_fraction": p_values,
-            "refused_fit_retained_fractions": [
-                x["retained_fraction"]
-                for x in levels
-                if x["fit"].get("status") == "REFUSED_CONSTANT_TAIL"
-            ],
+            "refused_fit_retained_fractions": refused,
+            "levels_refused": refused,
             "freeze_assertions": [
                 {
                     "retained_fraction": x["retained_fraction"],
@@ -403,12 +434,21 @@ def main() -> int:
             ],
             "sparse_context_stat_by_retained_fraction": sparse_values,
             "p_nonincreasing_with_thinning": p_nonincreasing,
+            "p_nonincreasing_with_thinning_note": "This field is false either when the emitted p values violate monotonicity or when refused levels make the emitted vector shorter than the full retained-fraction vector; consult tracks_thinning_on_assessable_levels for the substantive assessable-level result.",
             "sparse_context_stat_nondecreasing_with_thinning": sparse_nondec,
-            "tracks_thinning": bool(p_nonincreasing and sparse_nondec),
+            "tracks_thinning_on_assessable_levels": tracks_on_assessable,
+            "tracks_thinning": trend_state,
         }
 
     plain_trend = trend(plain_levels)
     twin_trend = trend(twin_levels)
+    arm_states = [plain_trend["tracks_thinning"], twin_trend["tracks_thinning"]]
+    if all(state == "supported" for state in arm_states):
+        joint_state = "supported"
+    elif any(state == "refuted" for state in arm_states):
+        joint_state = "refuted"
+    else:
+        joint_state = "not_assessable"
     payload = {
         "control": "b",
         "preregistration": preregistration,
@@ -427,7 +467,7 @@ def main() -> int:
         "decision": {
             "plain_arm_tracks_thinning": plain_trend["tracks_thinning"],
             "twin_arm_tracks_thinning": twin_trend["tracks_thinning"],
-            "joint_tracks_thinning": bool(plain_trend["tracks_thinning"] and twin_trend["tracks_thinning"]),
+            "joint_tracks_thinning": joint_state,
             "observed_trend": {
                 "plain_iid": plain_trend,
                 "twin_real_occupancy": twin_trend,

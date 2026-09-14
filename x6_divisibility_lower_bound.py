@@ -49,7 +49,8 @@ NONTRIVIAL_THRESHOLD = 0.0
 INFORMATIVE_THRESHOLD = 0.05
 VALIDITY_K_VALUES = (5, 10, 15, 20, 25, 30)
 VALIDITY_REPLICATIONS_PER_K = 20
-VALIDITY_SAMPLE_SIZE = 400
+VALIDITY_SAMPLE_SIZE = 20_000
+MIN_POSITIVE_BOUND_FRACTION = 0.50
 SEED = 20260914
 RUN_TIMESTAMP_UTC = "2026-09-14 05:28:41 UTC"
 
@@ -249,7 +250,13 @@ def validity_check() -> dict[str, Any]:
     requested_tvs = (0.0, 0.10, 0.25, 0.50, 0.75)
     rows = []
     violations = 0
+    testable_violations = 0
     total = 0
+    testable_replications = 0
+    vacuous_replications = 0
+    requested_truth_zero_rows = 0
+    raw_bound_negative_rows = 0
+    strictly_positive_bound_rows = 0
     for k in VALIDITY_K_VALUES:
         for rep in range(VALIDITY_REPLICATIONS_PER_K):
             requested_tv = requested_tvs[rep % len(requested_tvs)]
@@ -258,8 +265,16 @@ def validity_check() -> dict[str, Any]:
             bound, diagnostics = call_bound(x1, x2, SEED + 200_000 + 1_000 * k + rep)
             truth = true_tv_for_mixture(k, requested_tv)
             violation = bool(bound > truth + 1e-12)
+            is_vacuous = bool(diagnostics["vacuous"])
+            raw_bound_went_negative = bool(diagnostics["raw_bound_went_negative"])
             violations += int(violation)
+            testable_violations += int(violation and float(bound) > 0.0)
             total += 1
+            testable_replications += int(float(bound) > 0.0)
+            vacuous_replications += int(is_vacuous)
+            requested_truth_zero_rows += int(truth == 0.0)
+            raw_bound_negative_rows += int(raw_bound_went_negative)
+            strictly_positive_bound_rows += int(float(bound) > 0.0)
             if rep < 2:
                 rows.append(
                     {
@@ -272,16 +287,49 @@ def validity_check() -> dict[str, Any]:
                     }
                 )
     rate = float(violations / total)
+    testable_violation_rate = float(
+        testable_violations / testable_replications
+    ) if testable_replications else 0.0
+    positive_bound_fraction = float(strictly_positive_bound_rows / total)
+    assertion_text = (
+        "assert strictly_positive_bound_fraction >= MIN_POSITIVE_BOUND_FRACTION"
+    )
+    assertion_error = None
+    try:
+        assert positive_bound_fraction >= MIN_POSITIVE_BOUND_FRACTION, (
+            "X6 validity precondition failed: "
+            f"strictly_positive_bound_fraction={positive_bound_fraction:.12f} "
+            f"is below MIN_POSITIVE_BOUND_FRACTION={MIN_POSITIVE_BOUND_FRACTION:.12f}"
+        )
+    except AssertionError as error:
+        assertion_error = str(error)
     return {
         "criterion": PRE_REGISTERED_VALIDITY,
         "k_values": list(VALIDITY_K_VALUES),
         "replications_per_k": VALIDITY_REPLICATIONS_PER_K,
         "total_replications": total,
         "violations": violations,
+        "testable_violations": testable_violations,
         "violation_rate": rate,
+        "testable_violation_rate": testable_violation_rate,
+        "testable_replications": testable_replications,
+        "vacuous_replications": vacuous_replications,
+        "requested_truth_zero_rows": requested_truth_zero_rows,
+        "raw_bound_went_negative_rows": raw_bound_negative_rows,
+        "strictly_positive_bound_rows": strictly_positive_bound_rows,
+        "strictly_positive_bound_fraction": positive_bound_fraction,
+        "validity_precondition": {
+            "assertion": assertion_text,
+            "minimum_fraction": MIN_POSITIVE_BOUND_FRACTION,
+            "passed": assertion_error is None,
+            "error": assertion_error,
+        },
         "declared_alpha": ALPHA,
-        "falsified": bool(rate > ALPHA),
-        "outcome": "PASS" if rate <= ALPHA else "FAIL",
+        "falsified": bool(testable_violation_rate > ALPHA),
+        "verdict": "PASS" if testable_violation_rate <= ALPHA and assertion_error is None else "FAIL",
+        "outcome": (
+            f"{testable_replications - testable_violations}/{testable_replications} TESTABLE rows comply"
+        ),
         "representative_rows": rows,
     }
 
@@ -698,7 +746,11 @@ def main() -> int:
     context = source_context()
     print("HEADLINE_CONTEXT", json.dumps({"k_cert": context["headline_k_cert"], "certifiability_crossover": context["headline_certifiability_crossover"]}, sort_keys=True), flush=True)
     payload = {
-        "status": "COMPLETE",
+        "status": (
+            "COMPLETE"
+            if validity["verdict"] == "PASS"
+            else "FAILED"
+        ),
         "experiment": "X6",
         "run_timestamp_utc": RUN_TIMESTAMP_UTC,
         "execution": {
@@ -713,6 +765,7 @@ def main() -> int:
             "repository_function_call_count_validity": validity["total_replications"],
             "repository_function_call_count_real": detail["repository_function_call_count_real"],
             "repository_function_call_count_total": validity["total_replications"] + detail["repository_function_call_count_real"],
+            "validity_gate_passed": validity["verdict"] == "PASS",
         },
         "repository_function": {
             "path": "/root/eibo/src/eibo/divisibility.py",

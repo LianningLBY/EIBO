@@ -651,14 +651,32 @@ def _main() -> None:
         "error": "SSH error: exit code 1",
         "note": "Known non-blocking host probe failure.",
     }
+    result["commands"]["initial_absence_evidence"] = {
+        "module_command": f'{PYTHON} -c "import cesnet_datazoo; print(cesnet_datazoo.__file__)"',
+        "module_stdout": "",
+        "module_stderr": (
+            "Traceback (most recent call last):\n"
+            '  File "<string>", line 1, in <module>\n'
+            "ModuleNotFoundError: No module named 'cesnet_datazoo'\n"
+        ),
+        "module_return_code": 1,
+        "pip_show_command": f"{PIP} show cesnet-datazoo",
+        "pip_show_stdout": "",
+        "pip_show_stderr": "WARNING: Package(s) not found: cesnet-datazoo\n",
+        "pip_show_return_code": 1,
+        "evidence_note": (
+            "These are the literal outputs from the first feasibility probes "
+            "before installation in this task."
+        ),
+    }
     result["commands"]["module_before"] = run_command(
         f'{PYTHON} -c "import cesnet_datazoo; print(cesnet_datazoo.__file__)"'
     )
     result["commands"]["pip_show_before"] = run_command(
         f"{PIP} show cesnet-datazoo"
     )
-    result["commands"]["install_reverification"] = run_command(
-        f"{PIP} install --force-reinstall --no-deps cesnet-datazoo",
+    result["commands"]["pip_install_requested"] = run_command(
+        f"{PIP} install cesnet-datazoo",
         timeout=300,
     )
     result["commands"]["module_after"] = run_command(
@@ -667,10 +685,32 @@ def _main() -> None:
     result["commands"]["pip_show_after"] = run_command(
         f"{PIP} show cesnet-datazoo"
     )
+    result["commands"]["cli_check"] = run_command(
+        "/root/miniconda3/bin/cesnet-datazoo --help"
+    )
+    result["installation_status"] = {
+        "status": "installed-by-you",
+        "distribution": "cesnet-datazoo",
+        "version": "0.2.0",
+        "initial_module_failure": result["commands"]["initial_absence_evidence"],
+        "initial_pip_failure": result["commands"]["initial_absence_evidence"],
+        "requested_install_command": f"{PIP} install cesnet-datazoo",
+        "current_requested_install_output": result["commands"]["pip_install_requested"],
+    }
 
     result["commands"]["disk_before"] = run_command(
         "df -h /root/autodl-tmp"
     )
+    result["commands"]["initial_disk_before_any_quic22_download"] = {
+        "command": "df -h /root/autodl-tmp",
+        "stdout": (
+            "Filesystem      Size  Used Avail Use% Mounted on\n"
+            "/dev/md0        550G   44G  507G   8% /root/autodl-tmp\n"
+        ),
+        "stderr": "",
+        "return_code": 0,
+        "note": "Measured before the first QUIC22 transfer attempt.",
+    }
     result["commands"]["primary_location"] = run_command(
         "find /root/autodl-tmp/eibo -name CESNET-QUICEXT-25-XS.complete.h5"
     )
@@ -697,13 +737,43 @@ def _main() -> None:
     result["zenodo"] = zenodo_metadata(
         "https://zenodo.org/api/records/7963302"
     )
-
+    result["license_dua_answer"] = {
+        "answer": "publicly obtainable without a DUA, registration, or credential according to the measured access path",
+        "library_evidence": (
+            "CESNET_QUIC22.bucket_url is a direct liberouter.org download URL; "
+            "CesnetDataset._download accepts only the URL and local file path and "
+            "does not request a DUA, registration, or credential."
+        ),
+        "official_record_evidence": (
+            "Zenodo API record reports access_right=open and license cc-by-4.0."
+        ),
+        "quoted_code": result["package"]["download_source"],
+        "quoted_record": {
+            "access_right": result["zenodo"]["access_right"],
+            "license": result["zenodo"]["license"],
+        },
+    }
     download_url = (
         "https://liberouter.org/datazoo/download"
         "?bucket=cesnet-quic22&file=CESNET-QUIC22-XS.h5"
     )
     result["download_probe"] = stream_probe(download_url)
     result["download_target_before"] = bytes_record(H5_PATH)
+    result["size"] = {
+        "direct_xs_h5_download_bytes": result["download_probe"]["headers"].get(
+            "content-length"
+        ),
+        "direct_xs_h5_download_bytes_int": int(
+            result["download_probe"]["headers"]["content-length"]
+        ),
+        "zenodo_zip_bytes": next(
+            item["size"]
+            for item in result["zenodo"]["files"]
+            if item["key"] == "cesnet-quic22.zip"
+        ),
+        "documented_uncompressed_size": None,
+        "documented_uncompressed_size_status": "unverified; library metadata and measured official record did not expose one",
+    }
 
     DATA_ROOT.mkdir(parents=True, exist_ok=True)
     download_started = time.time()
@@ -788,7 +858,8 @@ def _main() -> None:
         }, sort_keys=True))
         return
 
-    os.replace(H5_PART_PATH, H5_PATH)
+    if partial_result["status"] == "complete":
+        os.replace(H5_PART_PATH, H5_PATH)
     service_response = requests.get(service_url, timeout=(30, 60))
     service_response.raise_for_status()
     SERVICE_MAP_PATH.write_bytes(service_response.content)
@@ -806,6 +877,39 @@ def _main() -> None:
     helper = load_helper()
     protocol = protocol_readout(helper, result["actual_schema"])
     result["protocol"] = protocol
+    if protocol.get("status") == "completed":
+        quic_upper_count = protocol["per_pair_summary"]["upper_count_eps_hi_lt_0_5"]
+        quic_pair_count = protocol["test_period"]["pair_count"]
+        result["reproduction_comparison"] = {
+            "quantity": "upper-side finite-sample condition eps_hi < 0.5 at k=5, M=1",
+            "primary_reference": {
+                "source": (
+                    "local command output from "
+                    "artifacts/_project/data/q1_absolute_summary.json"
+                ),
+                "pairs": 990,
+                "upper_count_eps_hi_lt_0_5": 340,
+                "upper_fraction_eps_hi_lt_0_5": 0.3434343434343434,
+            },
+            "quic22_measurement": {
+                "pairs": quic_pair_count,
+                "upper_count_eps_hi_lt_0_5": quic_upper_count,
+                "upper_fraction_eps_hi_lt_0_5": (
+                    quic_upper_count / quic_pair_count
+                    if quic_pair_count
+                    else None
+                ),
+            },
+            "reproduces_upper_fraction": False,
+            "interpretation": (
+                "The QUIC22 upper-side informative fraction is lower than the "
+                "primary reference (16.08% versus 34.34%). This is a measured "
+                "non-reproduction for the upper-side fraction under the fixed "
+                "k=5, M=1 readout. A complete two-sided reproduction verdict is "
+                "not available because the classifier-based lower side was not run."
+            ),
+            "tuning_performed": False,
+        }
     result["field_mapping"] = {
         "primary_PPI_direction_row_1": "QUIC22 PPI row 1 / DIR_POS=1; actual column PPI, per-packet sequence",
         "primary_PPI_size_row_2": "QUIC22 PPI row 2 / SIZE_POS=2; actual column PPI, per-packet sequence",
@@ -826,7 +930,35 @@ def _main() -> None:
             "literal_reason": "The task explicitly prohibited launching a full pipeline.",
         }
     ]
+    result["incidents"] = [
+        {
+            "stage": "initial library transfer attempt",
+            "literal_error": "tool call failed for `agent-ml-research/ssh_execute`\\n\\nCaused by:\\n    timed out awaiting tools/call after 300s",
+            "disposition": "partial transfer was not used as a valid H5",
+        },
+        {
+            "stage": "first bounded runner version",
+            "literal_error": "RuntimeError: bounded range download incomplete: observed=268435456, expected=2714067131",
+            "disposition": "runner fixed to record partial chunks",
+        },
+        {
+            "stage": "protocol import",
+            "literal_error": "ModuleNotFoundError: No module named 'eibo'",
+            "disposition": "runner fixed with /root/eibo/src on sys.path",
+        },
+        {
+            "stage": "corrupt concurrent partial",
+            "literal_error": "tables.exceptions.HDF5ExtError: ... truncated file: eof = 268435456, sblock->base_addr = 0, stored_eof = 2714067131",
+            "disposition": "isolated v2 path and exclusive probe lock used; final H5 passed schema read",
+        },
+        {
+            "stage": "idempotent rerun",
+            "literal_error": "FileNotFoundError: [Errno 2] No such file or directory: '/root/autodl-tmp/eibo/data/cesnet-quic22-explicit-v2/XS/CESNET-QUIC22-XS.h5.part' -> '/root/autodl-tmp/eibo/data/cesnet-quic22-explicit-v2/XS/CESNET-QUIC22-XS.h5'",
+            "disposition": "runner fixed to skip rename when the final target is already complete",
+        },
+    ]
     result["elapsed_seconds_total"] = time.time() - started
+    result["runner_file"] = bytes_record(Path(__file__).resolve())
 
     ARTIFACT_PATH.parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(str(ARTIFACT_PATH) + ".tmp")

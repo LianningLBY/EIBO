@@ -881,8 +881,7 @@
   - runner
   - auditable
 - id: art_20260914_c13fe7
-  name: X3-repair variant B runner (exposure conditioning on occupancy threshold;
-    excluded mass reported per k)
+  name: x3_variant_b_support_conditioning.py (FROZEN SNAPSHOT — not the executing runner; see top-level file)
   type: intermediate
   description: 'X3-repair variant B runner (auditable). Implements the EXPOSURE-conditioning
     change: the same reference symmetrized conditional Bernoulli KL contribution per
@@ -1065,7 +1064,7 @@
   - dose-response
   - fixed
 - id: art_20260914_646bc6
-  name: x3_control_occupancy_dose_response.py (D056-fixed)
+  name: x3_control_occupancy_dose_response.py (FROZEN SNAPSHOT — not the executing runner; see top-level file)
   type: intermediate
   description: D056-fixed dose-response control RUNNER, left in repo for provenance.
     Contains the labels-only fix (lines 179-181) and the permanent assertion assert_plain_unthinned_reference()
@@ -1411,3 +1410,63 @@
   - side-channel
   - sni
   - tv-bracket
+- id: art_20260914_9024c5
+  name: x12_detector_validation.py
+  type: intermediate
+  description: Runner for the X12 detector validation artifact.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x12_detector_validation.py
+  content_sha256: 3f2563b6bce660e59a703d363ffc88db0de94c04a85934ac702db9ac75993d61
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-14T14:09:45.645801+00:00'
+  tags:
+  - runner
+  - C033
+  - producer
+- id: art_20260914_1d4060
+  name: x3_axis_validation.py
+  type: intermediate
+  description: Runner for the X3 axis validation artifact.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_axis_validation.py
+  content_sha256: 93d705ccb8ed87afd251bea1cf8df92c30926e9af376d7653b8cda026e640ae8
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-14T14:09:59.327544+00:00'
+  tags:
+  - runner
+  - C033
+  - producer
+- id: art_20260914_0139f2
+  name: x6_divisibility_lower_bound.py
+  type: intermediate
+  description: Runner for the X6 divisibility lower-bound artifact.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x6_divisibility_lower_bound.py
+  content_sha256: 7810326c33e0d0ad5d3179e7403d701683acb6f9833cec4e486f15904056638d
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-14T14:10:05.790105+00:00'
+  tags:
+  - runner
+  - C033
+  - producer
+- id: art_20260914_6bb537
+  name: x9_sni_channel_delta.py
+  type: intermediate
+  description: Runner for the X9 SNI channel-delta artifact.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x9_sni_channel_delta.py
+  content_sha256: 63f2a3564357172b969648f8c54be3144daef96df2036fc64315b323ac126434
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-14T14:10:14.023161+00:00'
+  tags:
+  - runner
+  - C033
+  - producer

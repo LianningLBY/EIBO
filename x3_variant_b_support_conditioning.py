@@ -272,7 +272,15 @@ def detect_constant_tail(curve: list[dict], min_tail_values: int = 2) -> dict:
 
 def guarded_fit_growth(curve: list[dict]) -> dict:
     freeze = detect_constant_tail(curve)
-    if freeze["tail_freeze"]:
+    assertion_error = None
+    try:
+        assert not freeze["tail_freeze"], (
+            f"constant-tail freeze detected at k={freeze['tail_freeze_onset_k']} "
+            f"through k={freeze['tail_freeze_end_k']}"
+        )
+    except AssertionError as exc:
+        assertion_error = str(exc)
+    if assertion_error is not None:
         onset = freeze["tail_freeze_onset_k"]
         non_frozen_curve = [row for row in curve if int(row["k"]) <= int(onset)]
         non_frozen_fit = fit_growth(non_frozen_curve) if len(non_frozen_curve) >= 3 else None
@@ -284,6 +292,7 @@ def guarded_fit_growth(curve: list[dict]) -> dict:
                 "D_k_median is exactly constant over the tail; a full-window "
                 "power-law exponent would fit a script-induced retained-context freeze."
             ),
+            "assertion_error": assertion_error,
             "freeze_assertion": freeze,
             "non_frozen_window": {
                 "k_min": int(non_frozen_curve[0]["k"]) if non_frozen_curve else None,
@@ -296,6 +305,7 @@ def guarded_fit_growth(curve: list[dict]) -> dict:
     fit["status"] = "FIT_EMITTED"
     fit["fit_refused"] = False
     fit["normal_fit_emitted"] = True
+    fit["assertion_error"] = None
     fit["freeze_assertion"] = freeze
     return fit
 
