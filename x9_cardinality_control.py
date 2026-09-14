@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# SUPERSEDED AND NEVER RUN. Do not use, extend, or execute this file.
+# Its ARM C took m from a data-dependent quantity, which C005 forbids.
+# The replacement is the a-priori declared-hash-bucket family (D084).
+# Line 58 (CONTROL_ALPHABET_SIZE = INCLUSIVE_ALPHABET_SIZE) is a DEFECT, not a property:
+# it makes ARM C identical to ARM B, so any 'arm_c_equals_arm_b = true' it would print
+# is a bug report, not a pass.
+
 # X9_C adds a matched-cardinality, SNI-independent control arm to X9.
 # Arm C crosses the existing k=5 packed prefix with per-flow random 10-byte
 # identifiers, matching Arm B's fixed alphabet while breaking DST_IP dependence.
