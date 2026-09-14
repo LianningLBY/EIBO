@@ -110,6 +110,28 @@
 > STOPS clipping ⇒ the "SNI destroys certification" reading dissolves, leaving the true statement
 > "including the host identifier raises measured TV by ~0.39".** **⇒ If that happens it is the SECOND headline
 > today to dissolve on inspection — and that pattern is itself the finding.**
+>
+> **★ D085 — THE FOUR-RUNNER REGISTRATION WAS REFUSED FOR A FALSE REASON, AND UNDER IT IS A REAL GAP.**
+> **FALSE BLOCKER:** registration was rejected for `type: code`. **The manifest ALREADY registers runners** —
+> seven `.py` entries, **every one typed `intermediate`.** The allowed type was never in question; the refusal
+> came from choosing a type the vocabulary does not use. **⇒ Fix: register as `intermediate`.**
+> **⇒ Same shape as everything else today: a rejection whose stated reason is not its actual reason.**
+>
+> **★ THE REAL GAP, measured this turn:** `x6_divisibility_lower_bound.json` **self-reports**
+> `runner_sha256 = 7810326c33e0d0ad…`, and the top-level `x6_divisibility_lower_bound.py` on disk **is** that
+> sha — **but HEAD holds `9b5c2d4de2d6ddfe…`. ⇒ THE RUNNER THAT PRODUCED THE FINAL VERIFIED X6 ARTIFACT IS IN
+> NO COMMIT.** A reader who checks out the repository gets a runner that **cannot** reproduce the artifact whose
+> binding is recorded. **⇒ M124's defect surviving under a new name — and the one item here that actually
+> threatens the byte-traceability claim.**
+>
+> **★ A second, quieter defect: two manifest runner entries bind STALE SNAPSHOTS.** Entries `c13fe7`
+> (`x3_variant_b_support_conditioning.py`) and `646bc6` (`x3_control_occupancy_dose_response.py`) point at copies
+> under `artifacts/_project/intermediate/` that **DIFFER from the top-level runners that execute**
+> (`c2de06e0…` vs `59015898…`; `da81dabb…` vs `e741a0c2…`). **⇒ Both snapshots are legitimate frozen records and
+> both carry the D056 assertion — but neither is the executor, and `646bc6` is NAMED as though it were. ⇒ An entry
+> that binds a snapshot must say so, or a reader will cite the wrong bytes.**
+>
+> **⇒ Same discipline as the rest of the session: a binding that RESOLVES is not the same as a binding that is RIGHT.**
 > **⇒ Same discipline as the rest of the session: turn a load-bearing assumption into a measurement.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
