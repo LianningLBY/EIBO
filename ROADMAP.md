@@ -265,6 +265,19 @@
 > arm would *probably stop clipping* at a sane `m`. **The opposite is equally possible — that it clips everywhere**
 > — and if so the honest headline is *"even a coarse 1-bit sketch of the host identifier is enough to destroy the
 > certificate"*, **not** "no separation". **⇒ Both readings are findings; neither may be presented as the other.**
+>
+> **★ D092 — AND THE RUNNER HAS A HOLE THAT MAKES THE D091 CASE READ AS ITS OPPOSITE.**
+> `delta_summary(values, excluded_reason)` returns `status="excluded"` **only when `excluded_reason is not None`**.
+> When **no** row is excluded but the list is nonetheless empty, it returns **`{"status": "informative",
+> "count": 0, "mean": None, "median": None}`** — verified by tracing the code path, not inferred.
+> **⇒ An EMPTY comparison is labelled `informative` with `count: 0`, so a reader filtering on `status` sees a
+> measurement where there is nothing.** In the D091 scenario the SATURATED path is safe (it reports `excluded`),
+> but the empty-but-unexcluded path is not — **and that is precisely the rung where the question is unanswerable.**
+> **⇒ FIX: an empty list must never carry `status="informative"`** — use `unavailable`/`no_rows`, or keep
+> `informative` only when `count > 0`. **⇒ With the D091 per-rung flag explicit, `count: 0` can never be read as
+> "no effect".**
+> **⇒ Same discipline as the rest of the session: the field a reader filters on must not say "measured" about an
+> empty set — the same failure as a `PREPARING` row for a withdrawn design (D088).**
 > **⇒ Same discipline as the rest of the session: state what the arithmetic forbids BEFORE the run, so the run
 > cannot be read as having discovered it.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
