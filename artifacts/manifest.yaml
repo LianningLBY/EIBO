@@ -5,6 +5,7 @@
     source-index repair) plus the third blocked rerun, for Director routing. Includes
     verbatim rejection text and the full prompt bodies.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/report/blocked_dispatch_packages.md
+  content_sha256: c4df013b962b50dc5e429a8e06b5989d60b94c6db5e44774fc438689cd8a64eb
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -22,6 +23,7 @@
     band lower-edge fraction, upper fraction, both, saturation fraction, T_n_median,
     radius_median, over M in {1,2,4,8,16} on 45 services / 990 pairs.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_summary.json
+  content_sha256: 32c1934ba27da16bec743a9cda8b125bbca593dd3c647c52e390e4d3cb9041a8
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -39,6 +41,7 @@
     pair, rung M) with service_a, service_b, M, n_a, n_b, tv_k5_masked. 4,950 rows.
     TV scalars only, no verdicts.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts.json
+  content_sha256: 979c462e0638f624438fee2d8965f4c49140d8f975561b870c3af03144348094
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -55,6 +58,7 @@
   description: E3's count table as CSV, same schema as q1_absolute_counts.json (4,950
     rows).
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts.csv
+  content_sha256: 388495382742723461212b0384a8d997dcc66b72fa053feee1bd81b0c132b15b
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -74,6 +78,7 @@
     coverage, split policy and measured granularity, h5 sha256, pairing rule, two-layer
     service threshold, per-k coverage, k=5 post-mask usable pairs.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts.meta.json
+  content_sha256: f4e8609e4722a28feda129bb2092ec4379785992ccf82c223b10fc71ee3f7a4e
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -91,6 +96,7 @@
     allowing an independent implementation to recompute the 990 per-pair TVs from
     counts rather than trusting E3's tv routine.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_dense_counts_m1_m2.json
+  content_sha256: 479571b55bae30c6d09846f004969759365f92c21e8b67274b09f2ecf612a099
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -108,6 +114,7 @@
   description: 'E3b''s k=10 per-pair count table: one row per (unordered service pair,
     rung M) with service_a, service_b, M, n_a, n_b, tv_k10_masked. 4,950 rows.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts_k10.json
+  content_sha256: 26b62988b5d6bb90b29efe8a013694cb61115bc624d79b9e3b65d3fc335cd3bd
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -124,6 +131,7 @@
   description: 'E3b''s k=10 per-rung summary: upper/band-edge/both fractions, saturation
     fraction and dynamic-range label per M in {1,2,4,8,16}.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_k10_summary.json
+  content_sha256: a6a9f3884f218cda171e41e270924f39c77fc61cbaf8a350fd5d07d9de98551f
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -140,6 +148,7 @@
   description: E3b's k=10 metadata header, including the per-month TIME_FIRST flow
     counts that decide month-level split feasibility.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts_k10.meta.json
+  content_sha256: 5917153bcfc60630711ada3e447e0b924fbacb261f515348d15cbe751b6fe4fb
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -158,6 +167,7 @@
     990 pairs, zero eps_lo<=eps_hi violations. NOTE: its eps_hi was computed with
     the 2x-inflated radius and must be recomputed.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_eps_lo_symbol_map.json
+  content_sha256: aafe46afa9cde831f5576634c780021b63259815a012f717115b89639fccdf83
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -176,6 +186,7 @@
     eps_hi = tv_hat + 31*r_a + 31*r_b), lower side Michel one-hot draws. 45 services
     / 990 pairs, 0 eps_lo>eps_hi violations, cap 20000 flows/service.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q2_phist_certificate_v3.json
+  content_sha256: 71a20309c2d12fbeb5f7204f312243c951e0259d6ae3550ea579fcf6cbb94840
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -195,6 +206,7 @@
     0.0. NOTE: its radii used the 2x-inflated formula from my spec and are VOID for
     upper-side use.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_independent_recompute.json
+  content_sha256: 896c091dd49e3f473f73c1e82e826c7a44054fe675dee95d46464f4d5bfea8c2
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -213,6 +225,7 @@
     reference radius. k=1, gate 336/990. Also confirms the per-rung reference-radius
     counts 340/47/3/0/0 and C016 violations 0.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_gate_five_pairs_full_n.json
+  content_sha256: 0a0c239f2a7c0cd3a081087c578443d36e6305ab4ab5fab67eae986093fe3557
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -231,6 +244,7 @@
     the exhaustive sign-pattern check confirming max L1/r == m for m=2,4,8,16,32,
     and the note that the Weissman categorical form is unproven for this estimator.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q2_upper_bound_16r.json
+  content_sha256: 77fcaf7c88b6b576d9fa59b02be57c6884cc46e07c01b60ac8fac74fc0a8bff3
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -250,6 +264,7 @@
     990/990 pairs with 0 services dropped. Also records that E8b''s signed difference
     was 0.0 at every (M,k) because my spec forced both arms onto the same flow set.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/masking_verification.json
+  content_sha256: f7cbab76f4261839d60118612a97fb73913e8a0acf9e37caab2258b6bb3b679f
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -270,6 +285,7 @@
     the prefixes identical by construction. Non-finding: no discriminating power,
     so the masking effect is neither measured nor refuted.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/masking_regime_sweep.json
+  content_sha256: 453ac98df4afca9834034b7e2ddce93a719b5789d8b2637c25797d5d3f11094e
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -292,6 +308,7 @@
     This DISCHARGES the half-measured caveat and the [333,336] range: no pair''s lower
     side is assumed any more.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_lower_side_full_n.json
+  content_sha256: 9fe81e271a386335a9526563ca03631bcdf832fa5d66d3861b2e22ec079256f5
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -324,6 +341,7 @@
     8134 bytes; this is the corrected file, and the earlier 119b1221/7296-byte pre-correction
     copy is deleted with no copy on disk.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_vector_level_one_sided_full_n.json
+  content_sha256: b9c27c0ceefc8b1c372c409904ddc420fa09ef866f73857af0a0505b6e368df5
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -349,6 +367,7 @@
     in both. Inequality D_sym >= 2*TV^2 checked per item. Used PyTables and PPI[1]/PPI[2]
     only (PPI[0] excluded).'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_chain_rule_divergence.json
+  content_sha256: c19d73926f4e51d64b22af06a1f1f939f971176bb24d4a662db542c16a3d5605
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -374,6 +393,7 @@
     from XS measured 10M/45, a ~17.5x gap that must not be compared directly), and
     why_finer_alphabet_cannot_help.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x4_frontier_function.json
+  content_sha256: 3fd919a41bf5e599ded3cff5524029e07f31372805ab1f59602f961200e3113b
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -401,6 +421,7 @@
     0.34040404040404043 -> 0.3393939393939394. Adds test_under_split_guard to tests/test_q1_thresholds.py,
     which rejects the unsplit form and passes at alpha/2.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x1_headline_table.json
+  content_sha256: c9f840a94644687e50e672f6cdd3c65fd0469a9045ca55d1881d11a8afd41c9c
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -455,6 +476,7 @@
     artifact sha256 31bbee3f4d3a8d89ed2606485fd481e543ae233a1aadac0640c4e839942a08e9;
     bytes 135979; generated_at_utc 2026-09-14T03:12:35.303829+00:00.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x5_estimator_ground_truth.json
+  content_sha256: 31bbee3f4d3a8d89ed2606485fd481e543ae233a1aadac0640c4e839942a08e9
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -500,6 +522,7 @@
     what proved unstable. No rescue attempted. The pre-existing x3_chain_rule_divergence.json
     was NOT modified; the auditable runner is left at /root/eibo/x3_controls.py.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_control_known_truth.json
+  content_sha256: 048cf42fcc2b1cc88018ca35b1503226ea751b9f6c210a528e8ebd8a0b5be26a
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -537,6 +560,7 @@
     the published per-k medians at 1e-9 -- which it did. The auditable runner is left
     at /root/eibo/x3_controls.py so the estimator is now reproducible.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_fixed_population_and_occupancy.json
+  content_sha256: 394b7790d892144af21be618b12f64ca8bf7dad3da31a7ba4e4e2359665119b0
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -577,6 +601,7 @@
     15,236 B, sha256 f815676e..., carrying the OLD weaker reason); this registration
     records the corrected bytes at the manifest-registered data-artifact path.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/pcap_encoder_availability.json
+  content_sha256: 1234f2d8f09e11bf6c71884c568e2bea4b9d75237febefcf429f9c354bc836b1
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -603,6 +628,7 @@
     is now reproducible, and the controls'' admissibility is independently checkable
     from this file plus the two control artifacts. Size 58,196 bytes on the server.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_controls.py
+  content_sha256: b8145a48b1635aa569140c86e82a3b237175d2fdead49b6010715a3c7ef93b88
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -696,6 +722,7 @@
     (sha256 35581cef...). NOT COMPLETED BY IT: artifact registry registration (tooling
     unavailable to it); performed here.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_variant_c_nested_lr.json
+  content_sha256: fa1eeaabc52003cb2399719d2611dc837d2803d40676f59e107989c6b5e1645e
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -740,6 +767,7 @@
     COMPLETED BY IT: artifact registration (its tooling lacked register_artifact);
     performed here.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_variant_a_estimator_family.json
+  content_sha256: ee01233bd8271243d8a67f00689caec63de89a14bbfdfa03c472be7c8c287d3e
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -812,6 +840,7 @@
     as a novel result and NOT as a restoration of any SUBLINEAR growth verdict. Left
     in the repo so this route is reproducible. sha256 35581cefa00219271ef6040c32a65c317adfceadd14146c8e21bf9184b8905fb.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_variant_c_nested_lr.py
+  content_sha256: 35581cefa00219271ef6040c32a65c317adfceadd14146c8e21bf9184b8905fb
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -840,6 +869,7 @@
     robust: a bias-corrected estimator family does NOT fix the sparse-context bias.
     Left in the repo so this route is reproducible. sha256 37ad36a9765e99913184dbdc91925cb2d76d2de3859b62c3607fb785f40d74cf.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_variant_a_estimator_family.py
+  content_sha256: 37ad36a9765e99913184dbdc91925cb2d76d2de3859b62c3607fb785f40d74cf
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -869,6 +899,7 @@
     vs 0.651 no-filter, twin opposite). Left in the repo so this route is reproducible.
     Server sha256 c2de06e0ec1530aac641b280de70f6189953ed601562affc3d801c9de21b95df.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_variant_b_support_conditioning.py
+  content_sha256: c2de06e0ec1530aac641b280de70f6189953ed601562affc3d801c9de21b95df
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -906,6 +937,7 @@
     TRAIN-SIDE CONTROL is now the decisive check. This artifact asserts no interpretation,
     no cause, and no fix -- numbers only.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x12_label_space_check.json
+  content_sha256: f884df70034661652accc260714b4b706c02e9458c19f73fb3fed9a64bbbbe15
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -945,6 +977,7 @@
     Cache reused (/dev/shm/eibo_x3_chain_rule, 360 .npz parts), no H5 rescan. X12
     untouched.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_control_heterogeneous_iid.json
+  content_sha256: 22ece9bc49e5cd93183e643291f4faaf5c0a97caa6cebe0270ef51ab7f4b68ed
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -1040,6 +1073,7 @@
     k=5..30 (bit-identical against the shared d_chain_fast(raw_p[:k], raw_q[:k], 0.5))
     and that the analytic k=5 ratio is within 0.001 of one.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_control_occupancy_dose_response.py
+  content_sha256: da81dabb4fb4289194cf5ef46cbfea45b04a4e60c73855634607a43a6a7b2e7a
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
@@ -1065,6 +1099,7 @@
     reading is explained by per-position MARGINAL structure for most services, not
     by transition structure.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_positionwise_iid_null.json
+  content_sha256: 83505f9f069b68c6d505c81dea98484c794712417d92abfd7e5ca72757c48650
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
@@ -1081,6 +1116,7 @@
   type: intermediate
   description: D064 runner for the position-wise i.i.d. null, left in repo for provenance.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/intermediate/x3_positionwise_null.py
+  content_sha256: 4374651a96be7a019b40e270af2fea91a4a663deb2d0f36143f07a29453bf802
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
@@ -1104,6 +1140,7 @@
     curve defect; the position-wise null (D064) supersedes both as the direct negative
     on ''first-order''.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_parametric_growth.json
+  content_sha256: 3c47da3825d06a313b888c6b6310f371be00fc07d3313a045740aadce8049dba
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
@@ -1126,6 +1163,7 @@
     affine by construction and therefore cannot fail. DO NOT repair or re-run without
     a new approved design.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/intermediate/x3_parametric_growth.py
+  content_sha256: 08f49cf702e26b1bb8b8b8a69ae88350fb8d1122fd2133b547fc2c74dd781790
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
@@ -1157,6 +1195,7 @@
     THE PARAMETRIC ROUTE WAS NOT REPAIRED. Per-artifact: x3_control_heterogeneous_iid.py
     verified-correct; x3_parametric_growth.py verified-correct.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_axis_validation.json
+  content_sha256: 4061258ecb39c37329608e9468d8ac6a6d0340d4915c0806e28dd675107c9c78
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
@@ -1185,6 +1224,7 @@
     exists; the artifact declares large-k entries EXPLORATORY because the plug-in
     upper side is lost.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X6/data/x6_divisibility_lower_bound.json
+  content_sha256: d9e17986066e7db7fee0d84eebaf602920dd1048743871908c5a1b39f4406ce0
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X6
@@ -1217,6 +1257,7 @@
     so the freeze did not algebraically create the mass VALUE -- but k=30 IS post-freeze,
     so a non-frozen-axis reading is the k=16 value.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_variant_b_support_conditioning.json
+  content_sha256: 16308ae79fe20000921e1262b2da31e31c7e5a346ae52a573a2e814e511f1f26
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
@@ -1244,6 +1285,7 @@
     values were fits across frozen windows and must not be cited as sparsity response.
     Artifact 310141 B.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_control_occupancy_dose_response.json
+  content_sha256: 2ff2dd05befce758db81ab15df7b2fd54971254cd28f0266f4708ba511a085fa
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
@@ -1287,6 +1329,7 @@
     SIDE AND THE FULL TWO-SIDED BRACKET WERE NOT RUN, as the feasibility-first scope
     required. ***'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X11/data/x11_feasibility.json
+  content_sha256: 60d205fb10399bc05c732b3e40f630ab03aeee3f7f70ade9c974ec4fd3d45e5d
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X11
@@ -1315,6 +1358,7 @@
     the pair-level error is a PROXY (macro-average of two single-service classification
     errors), and classification_error is CLOSED-SET while the floor is OPEN-SET.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X12_k5/data/x12_detector_validation_k5.json
+  content_sha256: 14f0f581dc52ff8e5c8a26907fc105f5bf6ef7cc92550daab0d861f4cd5fa999
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X12_k5

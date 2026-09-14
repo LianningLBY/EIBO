@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""X12 Stage 1 detector validation.
+"""X12 Stage 2 detector validation.
 
 The script deliberately does not compute the X1-dependent containment
 statistic. It validates the declared channel and open-set detector plumbing,
@@ -30,6 +30,15 @@ DEFAULT_JSON = DEFAULT_ARTIFACT_DIR / "x12_detector_validation.json"
 DEFAULT_CSV = DEFAULT_ARTIFACT_DIR / "x12_detector_validation_per_pair.csv"
 CHECKPOINT_SECONDS = 300.0
 FLOW_KEY_BASE = 10_000_000_000
+DEFAULT_X1_JSON = DEFAULT_ARTIFACT_DIR / "q1_lower_side_full_n.json"
+DETECTOR_NAMES = ("lightgbm", "prototype", "ronetc", "pcap_encoder")
+NEAR_ZERO_TPR_THRESHOLD = 0.01
+PAIR_OBJECT_STATEMENT = (
+    "A pair is the unordered (service_a, service_b) service pair from X1; "
+    "because this script emits no pairwise detector, floor_violation uses the "
+    "explicitly labeled macro-average of the two constituent per-service "
+    "classification-error rates as a pair-level surrogate."
+)
 
 
 def utc_now() -> str:
@@ -51,10 +60,75 @@ def atomic_json(path: Path, payload: dict[str, Any]) -> None:
     os.replace(tmp, path)
 
 
+def score_matrix_path(output_json: Path, detector: str) -> Path:
+    return output_json.with_name(
+        f"{output_json.stem}__per_class_scores__{detector}.npz"
+    )
+
+
+def persist_score_matrix(
+    output_json: Path,
+    detector: str,
+    result: dict[str, Any],
+    test: dict[str, Any],
+    classes: list[int],
+) -> dict[str, Any]:
+    import numpy as np
+
+    matrix = result.pop("score_matrix", None)
+    score_kind = str(result.get("score_kind", "class_score"))
+    if matrix is None:
+        return {
+            "status": "not_written",
+            "reason": result.get("error", "detector did not provide a class score matrix"),
+            "score_kind": score_kind,
+        }
+    scores = np.asarray(matrix, dtype=np.float32)
+    flow_tokens = np.asarray(test["flow_tokens"], dtype=np.uint64)
+    row_ids = np.asarray(test["ids"], dtype=np.uint64)
+    dates = np.asarray(test["date"], dtype="U")
+    true_labels = np.asarray(test["y_original"], dtype=np.int64)
+    class_labels = np.asarray(classes, dtype=np.int64)
+    expected_shape = (len(true_labels), len(class_labels))
+    if scores.shape != expected_shape:
+        raise ValueError(
+            f"{detector} score matrix shape {scores.shape} != held-out shape {expected_shape}"
+        )
+    if len(np.unique(flow_tokens)) != len(flow_tokens):
+        raise ValueError(f"{detector} score payload has duplicate flow_token keys")
+    path = score_matrix_path(output_json, detector)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
+    with tmp.open("wb") as handle:
+        np.savez(
+            handle,
+            scores=scores,
+            flow_tokens=flow_tokens,
+            row_ids=row_ids,
+            dates=dates,
+            true_labels=true_labels,
+            class_labels=class_labels,
+            alignment_key=np.asarray("flow_token"),
+            score_kind=np.asarray(score_kind),
+        )
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(tmp, path)
+    return {
+        "status": "written",
+        "path": str(path),
+        "rows": int(scores.shape[0]),
+        "classes": int(scores.shape[1]),
+        "dtype": str(scores.dtype),
+        "alignment_key": "flow_token",
+        "score_kind": score_kind,
+    }
+
+
 def preregistration_payload(args: argparse.Namespace, output_json: Path) -> dict[str, Any]:
     timestamp = utc_now()
     return {
-        "stage": "X12 Stage 1",
+        "stage": "X12 Stage 2",
         "status": "PREREGISTERED",
         "preregistration_timestamp": timestamp,
         "first_measurement_timestamp": None,
@@ -80,6 +154,18 @@ def preregistration_payload(args: argparse.Namespace, output_json: Path) -> dict
                 "an excess of floor violations falsifies either the estimate or "
                 "the channel model and must be reported"
             ),
+            "pair_object_statement": PAIR_OBJECT_STATEMENT,
+            "deferred_history": {
+                "previously_deferred": True,
+                "previous_reason": (
+                    "Stage 1 had no join from detector measurements to the X1 "
+                    "upper-side values."
+                ),
+                "resolution": (
+                    "Stage 2 reads upper_recomputed.eps_hi from the rebuilt X1 "
+                    "artifact and computes the floor through eibo.statcore."
+                ),
+            },
         },
         "channel_declaration": {
             "features": ["PPI[1] direction", "PPI[2] size"],
@@ -105,12 +191,22 @@ def preregistration_payload(args: argparse.Namespace, output_json: Path) -> dict
         },
         "holdout_levels": [0.05, 0.10, 0.20] if not args.smoke else [0.20],
         "containment_statistic": (
-            "DEFERRED: depends on the rebuilt X1 upper side; no un-rebuilt "
-            "upper-side numbers are consumed."
+            "Stage 2 joins rebuilt X1 per-pair eps_hi values to explicitly "
+            "labeled per-service detector-error surrogates."
         ),
         "per_pair_detector_errors": {
             "csv_path": str(resolve_output_paths(args)[1]),
             "status": "PENDING",
+            "row_definition": "one X1 service pair x holdout x detector per row",
+            "detector_error_definition": (
+                "per-service classification error is the emitted per-flow "
+                "predicted-label mismatch rate"
+            ),
+            "pair_error_definition": (
+                "macro-average of service_a and service_b per-service error "
+                "rates; explicitly a pair-level surrogate"
+            ),
+            "x1_upper_bound_source": str(DEFAULT_X1_JSON),
         },
         "output_json": str(output_json),
     }
@@ -154,6 +250,13 @@ def import_tables() -> Any:
 
 def month_of(date_name: str) -> str:
     return date_name[:6]
+
+
+def flow_tokens(date_name: str, ids: Any) -> Any:
+    import numpy as np
+
+    return np.asarray(ids, dtype=np.uint64) + np.uint64(int(date_name) * FLOW_KEY_BASE)
+
 
 def extract_features(data: Any, k_packets: int, label_field: str) -> dict[str, Any]:
     import numpy as np
@@ -244,80 +347,270 @@ def prepare_csv(path: Path) -> None:
         writer = csv.writer(handle)
         writer.writerow(
             [
-                "flow_key",
-                "date",
-                "service_label",
+                "pair_id",
+                "service_a",
+                "service_b",
                 "holdout_level",
-                "true_label",
-                "lightgbm_pred",
-                "lightgbm_accepted",
-                "lightgbm_score",
-                "lightgbm_error",
-                "prototype_pred",
-                "prototype_accepted",
-                "prototype_score",
-                "prototype_error",
-                "ronetc_pred",
-                "ronetc_accepted",
-                "ronetc_score",
-                "ronetc_error",
-                "pcap_encoder_pred",
-                "pcap_encoder_accepted",
-                "pcap_encoder_score",
-                "pcap_encoder_error",
+                "detector",
+                "detector_status",
+                "detector_error",
+                "service_a_error",
+                "service_b_error",
+                "pair_error_surrogate",
+                "service_a_max_tpr",
+                "service_b_max_tpr",
+                "pair_max_tpr",
+                "service_a_accepted_rate",
+                "service_b_accepted_rate",
+                "pair_accepted_rate",
                 "eps_hat_k_hi",
                 "informative_stratum",
+                "secondary_stratum",
+                "excluded_stratum",
+                "predicted_floor",
                 "floor_violation",
+                "validation_eligible",
             ]
         )
 
 
-def append_pair_rows(
-    path: Path,
-    indices: Any,
-    holdout_level: float,
-    test: dict[str, Any],
-    classes: list[int],
-    results: dict[str, dict[str, Any]],
-) -> int:
-    import numpy as np
-
-    flow_keys = build_flow_keys(test["date"], test["ids"])
-    count = 0
+def append_pair_rows(path: Path, rows: list[dict[str, Any]]) -> int:
+    fields = [
+        "pair_id", "service_a", "service_b", "holdout_level", "detector",
+        "detector_status", "detector_error", "service_a_error", "service_b_error",
+        "pair_error_surrogate", "service_a_max_tpr", "service_b_max_tpr", "pair_max_tpr",
+        "service_a_accepted_rate", "service_b_accepted_rate", "pair_accepted_rate",
+        "eps_hat_k_hi", "informative_stratum", "secondary_stratum", "excluded_stratum",
+        "predicted_floor", "floor_violation", "validation_eligible",
+    ]
     with path.open("a", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle)
-        for index in indices.tolist():
-            row: list[Any] = [
-                flow_keys[index],
-                str(test["date"][index]),
-                int(test["y"][index]),
-                holdout_level,
-                int(test["y"][index]),
-            ]
-            for detector in ("lightgbm", "prototype", "ronetc", "pcap_encoder"):
-                result = results.get(detector, {})
-                pred = result.get("pred")
-                accepted = result.get("accepted")
-                score = result.get("score")
-                if pred is None:
-                    row.extend(["", "", "", result.get("error", "not_run")])
-                else:
-                    pred_label = int(classes[int(pred[index])])
-                    accepted_value = bool(accepted[index]) if accepted is not None else ""
-                    score_value = float(score[index]) if score is not None else ""
-                    row.extend(
-                        [
-                            pred_label,
-                            accepted_value,
-                            score_value,
-                            int(pred_label != int(test["y"][index])),
-                        ]
-                    )
-            row.extend(["", "DEFERRED", "DEFERRED"])
-            writer.writerow(row)
-            count += 1
-    return count
+        for row in rows:
+            writer.writerow([row.get(field) for field in fields])
+    return len(rows)
 
+
+def error_floor_from_eps_hi(eps_hi: float) -> float:
+    source_root = str(PROJECT_ROOT / "src")
+    if source_root not in sys.path:
+        sys.path.insert(0, source_root)
+    from eibo.statcore import TVUpperBoundResult
+
+    result = TVUpperBoundResult(
+        tv_hat=0.0, eps_hi=float(eps_hi), alpha=0.05, alphabet_size=1.0,
+        n1=1, n2=1, radius_1=0.0, radius_2=0.0,
+    )
+    return float(result.error_floor_lower_bound)
+
+
+def load_x1_upper_bounds(path: Path, k_packets: int) -> list[dict[str, Any]]:
+    if not path.is_file():
+        raise FileNotFoundError(
+            f"required X1 upper-bound input missing: {path}; expected "
+            f"per-row upper_recomputed.eps_hi for k={k_packets}"
+        )
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    rows = payload if isinstance(payload, list) else payload.get("rows", [])
+    selected: list[dict[str, Any]] = []
+    seen: set[tuple[int, int]] = set()
+    for row in rows:
+        if int(row.get("k", -1)) != k_packets:
+            continue
+        upper = row.get("upper_recomputed")
+        if not isinstance(upper, dict) or "eps_hi" not in upper:
+            raise KeyError(
+                f"required X1 field upper_recomputed.eps_hi missing in {path} "
+                f"for k={k_packets}"
+            )
+        service_a = int(row["service_a"])
+        service_b = int(row["service_b"])
+        pair_key = (min(service_a, service_b), max(service_a, service_b))
+        if pair_key in seen:
+            raise ValueError(f"duplicate X1 service pair {pair_key} in {path}")
+        eps_hi = float(upper["eps_hi"])
+        if not math.isfinite(eps_hi) or not 0.0 <= eps_hi <= 1.0:
+            raise ValueError(
+                f"invalid X1 upper_recomputed.eps_hi={eps_hi!r} for pair "
+                f"{pair_key} in {path}"
+            )
+        seen.add(pair_key)
+        selected.append({
+            "pair_id": f"{pair_key[0]}:{pair_key[1]}",
+            "service_a": pair_key[0],
+            "service_b": pair_key[1],
+            "eps_hat_k_hi": eps_hi,
+        })
+    if not selected:
+        raise ValueError(
+            f"required X1 upper-bound rows missing for k={k_packets} in {path}; "
+            "expected rows with upper_recomputed.eps_hi"
+        )
+    return selected
+
+
+def one_sided_binomial_test(violations: int, trials: int, *, alpha: float = 0.05) -> dict[str, Any] | None:
+    if trials < 1:
+        return None
+    if not 0 <= violations <= trials:
+        raise ValueError(f"invalid binomial count violations={violations}, trials={trials}")
+    null_rate = alpha
+    try:
+        scipy_stats = importlib.import_module("scipy.stats")
+        p_value = float(scipy_stats.binomtest(
+            violations, trials, p=null_rate, alternative="greater"
+        ).pvalue)
+        method = "scipy.stats.binomtest"
+    except ImportError:
+        p_value = sum(
+            math.comb(trials, count) * null_rate**count * (1.0 - null_rate) ** (trials - count)
+            for count in range(violations, trials + 1)
+        )
+        method = "exact binomial upper tail fallback"
+    return {
+        "null_violation_rate": null_rate,
+        "alternative": "greater",
+        "p_value": min(1.0, float(p_value)),
+        "reject_null": bool(p_value < alpha),
+        "alpha": alpha,
+        "method": method,
+    }
+
+
+def _pair_metric(metrics: dict[str, Any], detector: str, holdout_level: float, service: int) -> dict[str, Any] | None:
+    holdout = metrics.get(detector, {}).get("holdouts", {}).get(str(holdout_level), {})
+    return holdout.get("per_service", {}).get(str(service))
+
+
+def build_containment_join(pair_bounds: list[dict[str, Any]], metrics: dict[str, Any], holdouts: list[float], x1_source: Path = DEFAULT_X1_JSON) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    strata = {"informative": 0, "secondary": 0, "excluded": 0}
+    for pair in pair_bounds:
+        eps_hi = pair["eps_hat_k_hi"]
+        if eps_hi < 0.5:
+            strata["informative"] += 1
+        elif eps_hi < 0.9:
+            strata["secondary"] += 1
+        else:
+            strata["excluded"] += 1
+    rows: list[dict[str, Any]] = []
+    summaries: dict[str, Any] = {}
+    for detector in DETECTOR_NAMES:
+        detector_summary: dict[str, Any] = {
+            "status": "not_run" if metrics.get(detector, {}).get("status") != "completed" else "computed",
+            "error": metrics.get(detector, {}).get("error"),
+            "holdouts": {},
+        }
+        for holdout_level in holdouts:
+            entries: list[dict[str, Any]] = []
+            for pair in pair_bounds:
+                eps_hi = pair["eps_hat_k_hi"]
+                informative = eps_hi < 0.5
+                secondary = 0.5 <= eps_hi < 0.9
+                excluded = eps_hi >= 0.9
+                floor = error_floor_from_eps_hi(eps_hi)
+                metric_a = _pair_metric(metrics, detector, holdout_level, pair["service_a"])
+                metric_b = _pair_metric(metrics, detector, holdout_level, pair["service_b"])
+                if metric_a is None or metric_b is None:
+                    entries.append({
+                        **pair, "holdout_level": holdout_level, "detector": detector,
+                        "detector_status": "missing_service_metric",
+                        "detector_error": f"missing per-service metric for pair {pair['pair_id']} at holdout={holdout_level}",
+                        "informative_stratum": informative, "secondary_stratum": secondary,
+                        "excluded_stratum": excluded, "predicted_floor": floor,
+                        "floor_violation": None, "validation_eligible": False,
+                    })
+                    continue
+                error_a = metric_a.get("classification_error")
+                error_b = metric_b.get("classification_error")
+                tpr_a = metric_a.get("max_tpr")
+                tpr_b = metric_b.get("max_tpr")
+                accepted_a = metric_a.get("accepted_rate")
+                accepted_b = metric_b.get("accepted_rate")
+                if any(value is None for value in (error_a, error_b, tpr_a, tpr_b)):
+                    entries.append({
+                        **pair, "holdout_level": holdout_level, "detector": detector,
+                        "detector_status": "incomplete_service_metric",
+                        "detector_error": f"incomplete per-service metric for pair {pair['pair_id']} at holdout={holdout_level}",
+                        "service_a_error": error_a, "service_b_error": error_b,
+                        "service_a_max_tpr": tpr_a, "service_b_max_tpr": tpr_b,
+                        "service_a_accepted_rate": accepted_a, "service_b_accepted_rate": accepted_b,
+                        "informative_stratum": informative, "secondary_stratum": secondary,
+                        "excluded_stratum": excluded, "predicted_floor": floor,
+                        "floor_violation": None, "validation_eligible": False,
+                    })
+                    continue
+                pair_error = 0.5 * (float(error_a) + float(error_b))
+                pair_tpr = 0.5 * (float(tpr_a) + float(tpr_b))
+                entries.append({
+                    **pair, "holdout_level": holdout_level, "detector": detector,
+                    "detector_status": "computed",
+                    "service_a_error": float(error_a), "service_b_error": float(error_b),
+                    "pair_error_surrogate": pair_error,
+                    "service_a_max_tpr": float(tpr_a), "service_b_max_tpr": float(tpr_b),
+                    "pair_max_tpr": pair_tpr,
+                    "service_a_accepted_rate": accepted_a, "service_b_accepted_rate": accepted_b,
+                    "pair_accepted_rate": 0.5 * (float(accepted_a) + float(accepted_b)) if accepted_a is not None and accepted_b is not None else None,
+                    "informative_stratum": informative, "secondary_stratum": secondary,
+                    "excluded_stratum": excluded, "predicted_floor": floor,
+                })
+            computed_entries = [entry for entry in entries if entry.get("detector_status") == "computed"]
+            informative_entries = [entry for entry in computed_entries if entry["informative_stratum"]]
+            max_tpr = max((entry["pair_max_tpr"] for entry in informative_entries), default=None)
+            near_zero_tpr = max_tpr is not None and max_tpr <= NEAR_ZERO_TPR_THRESHOLD
+            for entry in entries:
+                if entry.get("detector_status") == "computed" and entry["informative_stratum"]:
+                    entry["floor_violation"] = bool(entry["pair_error_surrogate"] < entry["predicted_floor"])
+                else:
+                    entry["floor_violation"] = None
+                entry["validation_eligible"] = bool(entry.get("detector_status") == "computed" and entry["informative_stratum"] and not near_zero_tpr)
+                rows.append(entry)
+            violations = sum(bool(entry.get("floor_violation")) for entry in informative_entries)
+            test = one_sided_binomial_test(violations, len(informative_entries), alpha=0.05)
+            if strata["informative"] == 0:
+                status = "NO VALIDATION EVIDENCE"
+                reason = "informative stratum is empty for this X1 k"
+            elif detector_summary["status"] != "computed" or not informative_entries:
+                status = "NO INFORMATION"
+                reason = detector_summary.get("error") or "detector did not emit predictions"
+            elif near_zero_tpr:
+                status = "NO INFORMATION"
+                reason = f"maximum pair TPR={max_tpr:.6g} is at or below the near-zero threshold {NEAR_ZERO_TPR_THRESHOLD}"
+            elif detector_summary["status"] != "computed":
+                status = "NO INFORMATION"
+                reason = detector_summary.get("error") or "detector did not emit predictions"
+            else:
+                status = "computed"
+                reason = None
+            detector_summary["holdouts"][str(holdout_level)] = {
+                "status": status, "reason": reason,
+                "informative_pair_count": len(informative_entries),
+                "secondary_pair_count": sum(entry["secondary_stratum"] for entry in entries),
+                "excluded_pair_count": sum(entry["excluded_stratum"] for entry in entries),
+                "floor_violation_count": violations,
+                "observed_violation_rate": float(violations / len(informative_entries)) if informative_entries else None,
+                "maximum_pair_tpr": max_tpr, "near_zero_tpr_threshold": NEAR_ZERO_TPR_THRESHOLD,
+                "binomial_test": test, "nominal_coverage": 0.95, "alpha": 0.05,
+                "split_convention": "one-sided; alpha is not split",
+            }
+        summaries[detector] = detector_summary
+    if strata["informative"] == 0:
+        status = "NO VALIDATION EVIDENCE"
+        reason = "informative stratum is empty for this X1 k"
+    elif not any(detail["status"] == "computed" for detector in summaries.values() for detail in detector["holdouts"].values()):
+        status = "NO INFORMATION"
+        reason = "no detector/holdout combination provides non-vacuous evidence"
+    else:
+        status = "computed"
+        reason = None
+    return rows, {
+        "status": status, "reason": reason,
+        "object_granularity_statement": PAIR_OBJECT_STATEMENT,
+        "x1_upper_bound_source": str(x1_source),
+        "x1_eps_field": "upper_recomputed.eps_hi", "pair_count": len(pair_bounds),
+        "strata": strata,
+        "predicted_floor": "eibo.statcore.TVUpperBoundResult.error_floor_lower_bound",
+        "per_detector": summaries, "previously_deferred": True,
+        "deferred_resolution": "The X1 upper-side rows are now available and joined; the old missing-join condition no longer holds.",
+    }
 
 def stratified_holdout_indices(y: Any, classes: list[int], fraction: float) -> Any:
     import numpy as np
@@ -349,6 +642,8 @@ def oscr_and_fpr95(y: Any, pred: Any, accepted: Any, score: Any, label: int) -> 
             "oscr": None,
             "fpr95": None,
             "tpr_at_fpr95": None,
+            "max_tpr": float((correct & positive).sum() / n_positive) if n_positive else None,
+            "classification_error": float(np.mean(pred[positive] != label)) if n_positive else None,
             "accepted_rate": float(accepted.mean()) if len(accepted) else None,
         }
     thresholds = np.sort(finite_scores)[::-1]
@@ -377,6 +672,8 @@ def oscr_and_fpr95(y: Any, pred: Any, accepted: Any, score: Any, label: int) -> 
         "oscr": oscr,
         "fpr95": fpr95,
         "tpr_at_fpr95": tpr95,
+        "max_tpr": float(max(tprs)) if n_positive else None,
+        "classification_error": float(np.mean(pred[positive] != label)) if n_positive else None,
         "accepted_rate": float(accepted.mean()),
     }
 
@@ -483,6 +780,8 @@ def run_lightgbm(
     return {
         "pred": pred,
         "score": score,
+        "score_matrix": probabilities,
+        "score_kind": "predict_proba",
         "accepted": np.ones(len(pred), dtype=bool),
         "device": device,
         "status": "completed",
@@ -508,9 +807,12 @@ def run_prototype(X_train: Any, y_train: Any, X_test: Any, args: argparse.Namesp
     radius_array = np.asarray(radii, dtype=np.float32)[nearest]
     accepted = nearest_distance <= radius_array
     score = (1.0 / (1.0 + nearest_distance)).astype(np.float32)
+    class_scores = (1.0 / (1.0 + distances_test)).astype(np.float32)
     return {
         "pred": nearest,
         "score": score,
+        "score_matrix": class_scores,
+        "score_kind": "inverse_distance_class_score",
         "accepted": accepted,
         "device": "cpu",
         "status": "completed",
@@ -618,6 +920,8 @@ def run_ronetc(
     return {
         "pred": pred,
         "score": score,
+        "score_matrix": mean_probabilities.astype(np.float32),
+        "score_kind": "mean_predict_proba",
         "accepted": accepted,
         "device": str(device),
         "status": "completed",
@@ -685,31 +989,16 @@ def address_randomization_check(
     }
 
 
-def deferred_floor_test() -> dict[str, Any]:
-    return {
-        "status": "DEFERRED",
-        "reason": (
-            "eps_hat_k_hi is unavailable until the X1 upper side is rebuilt; "
-            "no un-rebuilt upper-side numbers are consumed"
-        ),
-        "primary_stratum": "eps_hat_k^hi < 0.5",
-        "secondary_stratum": "0.5 <= eps_hi < 0.9",
-        "excluded_stratum": "eps_hi >= 0.9",
-        "statistic": "number of floor violations",
-        "test": "one-sided binomial test",
-        "nominal_coverage": 0.95,
-        "alpha": 0.05,
-        "split_convention": "one-sided; alpha is not split",
-    }
-
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--h5", default=str(DEFAULT_H5))
+    parser.add_argument("--train-months", nargs="+", metavar="YYYYMM")
+    parser.add_argument("--test-months", nargs="+", metavar="YYYYMM")
     parser.add_argument("--output-json")
     parser.add_argument("--output-csv")
-    parser.add_argument("--label-field", default="CATEGORY", choices=["APP", "CATEGORY"])
-    parser.add_argument("--k-packets", type=int, default=15)
+    parser.add_argument("--x1-json", default=str(DEFAULT_X1_JSON))
+    parser.add_argument("--label-field", default="APP", choices=["APP", "CATEGORY"])
+    parser.add_argument("--k-packets", type=int)
     parser.add_argument("--holdouts", nargs="+", type=float, default=[0.05, 0.10, 0.20])
     parser.add_argument("--max-flows", type=int)
     parser.add_argument("--lgbm-rounds", type=int, default=40)
@@ -729,6 +1018,11 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    if not args.train_months or not args.test_months:
+        raise RuntimeError(
+            "explicit time split required: supply --train-months YYYYMM [...] "
+            "and --test-months YYYYMM [...]"
+        )
     if args.smoke:
         args.max_flows = 4_000 if args.max_flows is None else min(args.max_flows, 4_000)
         args.holdouts = [0.20]
@@ -736,8 +1030,11 @@ def main() -> int:
         args.ronetc_epochs = min(args.ronetc_epochs, 2)
         args.ronetc_mc_samples = min(args.ronetc_mc_samples, 2)
         args.ronetc_calibration_rows = min(args.ronetc_calibration_rows, 2_000)
+    if args.k_packets is None:
+        raise RuntimeError("packet-prefix length required: supply --k-packets N")
     if args.k_packets < 1 or args.k_packets > 30:
         raise SystemExit("--k-packets must be in [1, 30]")
+    log(f"K_LAUNCH k_packets={args.k_packets} source=explicit")
     output_json, output_csv = resolve_output_paths(args)
     state = preregistration_payload(args, output_json)
 
@@ -761,13 +1058,31 @@ def main() -> int:
             months = sorted(set(month_of(date_name) for date_name in dates))
             if len(months) < 2:
                 raise RuntimeError(f"need at least two months for a time split, found {months}")
-            if args.smoke:
-                train_months = {months[0]}
-                test_months = {months[1]}
-            else:
-                split_index = max(1, len(months) // 2)
-                train_months = set(months[:split_index])
-                test_months = set(months[split_index:])
+            train_months = set(args.train_months)
+            test_months = set(args.test_months)
+            selected_months = train_months | test_months
+            overlap_months = sorted(train_months & test_months)
+            if overlap_months:
+                raise RuntimeError(f"train/test month overlap: {overlap_months}")
+            unknown_months = sorted(selected_months - set(months))
+            if unknown_months:
+                raise RuntimeError(
+                    f"requested months are absent from the HDF5 corpus: {unknown_months}; "
+                    f"available={months}"
+                )
+            buffer_months = sorted(set(months) - selected_months)
+            log(
+                f"SPLIT_RESOLVED train_months={sorted(train_months)} "
+                f"buffer_months={buffer_months} test_months={sorted(test_months)}"
+            )
+            full_label_values = set();
+            for node in nodes:
+                if month_of(node._v_name[1:]) in train_months | test_months:
+                    full_label_values.update(int(x) for x in node.read(field=args.label_field))
+            full_class_count = len(full_label_values)
+            log(f"LABEL_AXIS field={args.label_field} full_month_class_count={full_class_count}")
+            if full_class_count < 20:
+                raise RuntimeError(f"label-axis guard failed: resolved label field {args.label_field!r} has {full_class_count} distinct classes across the full selected month tables; expected service-level APP cardinality (>= 20), not category-level grouping")
             train_cap = None if args.max_flows is None else max(1, args.max_flows // 2)
             test_cap = None if args.max_flows is None else max(1, args.max_flows - train_cap)
             train = read_side(
@@ -789,6 +1104,7 @@ def main() -> int:
             raw_train_count = len(train["y"])
             raw_test_count = len(test["y"])
             train, test, classes = select_common_labels(train, test)
+            log(f"CLASS_COUNT common_to_train_test={len(classes)}")
 
         train_keys = set(int(x) for x in train["flow_tokens"])
         test_keys = set(int(x) for x in test["flow_tokens"])
@@ -813,6 +1129,7 @@ def main() -> int:
             "h5_path": str(Path(args.h5)),
             "label_field": args.label_field,
             "k_packets": args.k_packets,
+            "x1_json": str(Path(args.x1_json)),
             "seed": args.seed,
             "smoke": bool(args.smoke),
         }
@@ -833,6 +1150,7 @@ def main() -> int:
             "flow_count_train_after_common_label_filter": int(len(train["y"])),
             "flow_count_test_after_common_label_filter": int(len(test["y"])),
             "train_months": sorted(train_months),
+            "buffer_months": sorted(buffer_months),
             "test_months": sorted(test_months),
             "train_date_boundary": {
                 "first_table_date": str(min(train["date"])),
@@ -861,7 +1179,7 @@ def main() -> int:
         log(
             "SPLIT "
             f"smoke_slice={args.smoke} "
-            f"train_months={sorted(train_months)} test_months={sorted(test_months)} "
+            f"train_months={sorted(train_months)} buffer_months={sorted(buffer_months)} test_months={sorted(test_months)} "
             f"train_flows={len(train['y'])} test_flows={len(test['y'])} "
             f"flow_disjoint=True time_disjoint={time_disjoint}"
         )
@@ -875,14 +1193,18 @@ def main() -> int:
         checkpoint(state, output_json, started, force=True)
 
         state["detectors"] = {}
+        state["score_matrices"] = {}
         results: dict[str, dict[str, Any]] = {}
 
         log("DETECTOR_START lightgbm")
         results["lightgbm"] = run_lightgbm(train["X"], train["y"], test["X"], args)
+        state["score_matrices"]["lightgbm"] = persist_score_matrix(
+            output_json, "lightgbm", results["lightgbm"], test, classes
+        )
         state["detectors"]["lightgbm"] = {
             key: value
             for key, value in results["lightgbm"].items()
-            if key not in {"pred", "score", "accepted"}
+            if key not in {"pred", "score", "accepted", "score_matrix"}
         }
         log(
             f"DETECTOR_DONE lightgbm status={results['lightgbm'].get('status')} "
@@ -893,10 +1215,13 @@ def main() -> int:
 
         log("DETECTOR_START prototype")
         results["prototype"] = run_prototype(train["X"], train["y"], test["X"], args)
+        state["score_matrices"]["prototype"] = persist_score_matrix(
+            output_json, "prototype", results["prototype"], test, classes
+        )
         state["detectors"]["prototype"] = {
             key: value
             for key, value in results["prototype"].items()
-            if key not in {"pred", "score", "accepted"}
+            if key not in {"pred", "score", "accepted", "score_matrix"}
         }
         log(
             f"DETECTOR_DONE prototype status={results['prototype'].get('status')} "
@@ -906,10 +1231,13 @@ def main() -> int:
 
         log("DETECTOR_START ronetc")
         results["ronetc"] = run_ronetc(train["X"], train["y"], test["X"], args)
+        state["score_matrices"]["ronetc"] = persist_score_matrix(
+            output_json, "ronetc", results["ronetc"], test, classes
+        )
         state["detectors"]["ronetc"] = {
             key: value
             for key, value in results["ronetc"].items()
-            if key not in {"pred", "score", "accepted"}
+            if key not in {"pred", "score", "accepted", "score_matrix"}
         }
         log(
             f"DETECTOR_DONE ronetc status={results['ronetc'].get('status')} "
@@ -920,23 +1248,26 @@ def main() -> int:
 
         log("DETECTOR_START pcap_encoder")
         results["pcap_encoder"] = run_pcap_encoder_probe(args)
+        state["score_matrices"]["pcap_encoder"] = persist_score_matrix(
+            output_json, "pcap_encoder", results["pcap_encoder"], test, classes
+        )
         state["detectors"]["pcap_encoder"] = {
             key: value
             for key, value in results["pcap_encoder"].items()
-            if key not in {"pred", "score", "accepted"}
+            if key not in {"pred", "score", "accepted", "score_matrix"}
         }
         checkpoint(state, output_json, started, force=True)
 
         holdouts = args.holdouts
         state["metrics"] = evaluate_results(test["y"], results, classes, holdouts)
         state["address_randomization_invariance"] = address_randomization_check(test["X"], results)
-        state["floor_violation_test"] = deferred_floor_test()
-        rows_written = 0
-        for level in holdouts:
-            indices = stratified_holdout_indices(test["y"], classes, level)
-            rows_written += append_pair_rows(output_csv, indices, level, test, classes, results)
-            state["per_pair_detector_errors"]["rows_written"] = rows_written
-            checkpoint(state, output_json, started, force=True)
+        pair_bounds = load_x1_upper_bounds(Path(args.x1_json), args.k_packets)
+        pair_rows, containment = build_containment_join(pair_bounds, state["metrics"], holdouts, Path(args.x1_json))
+        state["floor_violation_test"] = containment
+        state["per_pair_detector_errors"]["x1_upper_bound_source"] = str(Path(args.x1_json))
+        rows_written = append_pair_rows(output_csv, pair_rows)
+        state["per_pair_detector_errors"]["rows_written"] = rows_written
+        checkpoint(state, output_json, started, force=True)
 
         state["per_pair_detector_errors"]["status"] = "COMPLETED"
         state["status"] = "COMPLETED"
