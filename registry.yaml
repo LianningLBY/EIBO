@@ -2291,10 +2291,10 @@ experiments:
         standing check, not a per-incident one -- which is what caught the genuinely-missing
         registry entry here. ***'
   X9:
-    status: PREPARING
+    status: DONE
     retry_count: 0
     created_at: '2026-09-14T11:06:41.460Z'
-    updated_at: '2026-09-14T11:10:05.361Z'
+    updated_at: '2026-09-14T13:36:48.352Z'
     hypothesis: 'The anonymised destination-host identifier exported with this corpus
       is a DETERMINISTIC FUNCTION OF THE SNI, so it is a legitimate PRE-ENCRYPTION
       SIDE CHANNEL and must be EXCLUDED from the declared channel. MECHANISM UNDER
@@ -2314,41 +2314,150 @@ experiments:
       across objects with no DPI order relating them (in either direction) between
       the k-prefix symbol law and the PHIST vector law.'
     spec:
-      command: 'to be finalised by the Worker: builds the SAME per-pair bracket twice
-        on the same flow set -- once on the SNI-EXCLUDED declared channel (direction,
-        size) and once on the SNI-INCLUSIVE channel -- and reports the per-pair bound
-        delta as a measured price. It must CALL the repository functions (src/eibo/statcore.py::tv_upper_bound
-        and the packing helper), never restate a radius formula.'
-      compute_class: '*** CPU ONLY -- CORRECTED. X9 TRAINS NOTHING AND MUST NOT TOUCH
-        CUDA. *** It is a BOUND-COMPARISON measurement: the TV bracket delta between
-        an SNI-inclusive and an SNI-excluded channel, computed on the H5 corpus through
-        the same statcore machinery as X1/X3. This is the SAME compute class as every
-        other X-experiment in this project EXCEPT X12. THE PRIOR TEXT ON THIS FIELD
-        SAID ''CPU-primary; the GPU is available if the worker finds a GPU-eligible
-        step'' -- THAT WAS WRONG AND IS WITHDRAWN, because it implied a GPU expectation
-        from the mere fact that a card was free. NO GPU STEP EXISTS IN THIS EXPERIMENT.'
-      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5 -- the
-        same corpus and the same XS subset the main axis uses
-      declared_channel: 'the observable channel is (direction, size). The exporter''s
-        PPI array carries THREE rows: row 1 direction, row 2 size, row 0 inter-packet
-        timing. ROW 0 IS DELIBERATELY EXCLUDED. No TLS-fingerprint-side data (QUIC_USER_AGENT,
-        QUIC_TLS_EXT_*, QUIC_*CID) is consumed.'
-      deliverable: the bound delta between an SNI-INCLUSIVE and an SNI-EXCLUDED channel,
-        reported as a MEASURED PRICE so the exclusion is a quantified choice rather
-        than an unstated assumption. Report the delta per pair and in aggregate, with
-        the sensitivity of the aggregate to the inclusion rule stated explicitly.
-      k_and_ladder: k=5, M=1, so the numbers sit beside X1's rather than beside a
-        different construction
-      object_declaration_REQUIRED: 'One sentence naming WHICH object each channel
-        is a law over, confirming the two are the SAME object differing only by the
-        channel -- so the delta is a LIKE-FOR-LIKE comparison. This is a required
-        output, not a nicety: this project already has one retracted claim from the
-        word marginal silently naming two objects (M055).'
-      service_threshold: 2000
-      split_policy: flow-disjoint AND time-disjoint; packet-level splitting PROHIBITED;
-        D043 buffer-month discipline where the month structure allows (train 202406..202411,
-        buffer 202412 UNUSED, test 202501..202505)
-      why_this_matters_for_channel_declaration: 'A reviewer reading the dataset docs
-        will see three channels and ask why the bound was computed on two. The exclusion
-        must therefore be stated explicitly AND priced. That is the whole point of
-        the experiment: convert a stated assumption into evidence.'
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x9_sni_channel_delta.py
+      server: '111'
+      gpu:
+      - cuda:0
+      log_path: ~/runs/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/X9.log
+      submitted_at: '2026-09-14T12:48:23.735Z'
+      submitted_via: submit_training_job
+      backend: tmux
+      server_id: 2bf74c35-2d17-4f5a-90d6-d89ab97959b6
+      tmux_session: X9
+      account: root
+      pid: '705774'
+      process_identity: 5e68e8c3-d682-417f-9d47-e47c05a92a7e:287158125
+      wall_clock_seconds: 959.9
+      gpu_hours: 0.27
+    server: '111'
+    gpu: cuda:0
+    account: root
+    allocation_id: bcb417228e2d4fa2bb3dffe940a15b77
+    reproduce:
+      server: '111'
+      gpu: cuda:0
+      started_at: '2026-09-14T11:53:59.114Z'
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x9_sni_channel_delta.py
+      code_commit: 0b7d7cc9bcef53d32c608a868d3a7bf6152c3777
+      finished_at: '2026-09-14T12:53:28.354Z'
+      training_hours: 0.99
+    pid: '705774'
+    process_identity: 5e68e8c3-d682-417f-9d47-e47c05a92a7e:287158125
+    tmux_session: X9
+    log_path: ~/runs/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/X9.log
+    extra:
+      hook_events:
+      - event: on_complete
+        action: agent
+        ts: '2026-09-14T12:53:31.245084+00:00'
+    conclusion: negative
+    checkpoint_path: artifacts/X9/data/x9_sni_channel_delta.json
+    metrics:
+      artifact_bytes: 1928205
+      artifact_id: art_20260914_7836e1
+      artifact_sha256: 7f6edd6b1b9ca2dacb385b5af3029e7411a990fb2c4c2d02280fa2aa8877c736
+      runner_sha256: 63f2a3564357172b969648f8c54be3144daef96df2036fc64315b323ac126434
+      outcome: MEASURED_SNI_CHANNEL_INCLUSION_DELTA
+      X9_RESULT_CONFOUNDED_ATTRIBUTION_OPEN_M127: '*** X9 RAN CLEANLY AND ITS ARITHMETIC
+        RECONCILES, BUT ITS CAUSAL ATTRIBUTION IS OPEN. DO NOT REPORT +0.39 AS THE
+        PRICE OF SNI. *** DELTA MEASURED (703 common service pairs, train+test averaged
+        per pair): delta_tv_hat mean +0.3923 / median +0.3769 (range 0.0048-0.9185);
+        delta_eps_hi mean +0.3897 / median +0.3879 (range 0.0-0.8895). DESIGN VERIFIED
+        CORRECT ON EVERY SPECIFIED AXIS: same_flow_set_across_arms=true, flow_disjoint=true,
+        time_disjoint=true (train_max 1733004000 < test_min 1735682400), k=5, M=1,
+        service_threshold=2000, buffer month 202412 unused, cpu_only=true, cuda_touched=false,
+        packet_level_split=false, 38 common services (train 44 / test 38). ARITHMETIC
+        RECONCILED: on the first real pair the assembled eps_hi equals a direct tv_upper_bound
+        call to |diff|=0.0 in BOTH arms, train and test. ⇒ THE MEASUREMENT IS NOT
+        THE PROBLEM. THE PROBLEM IS THAT THE TWO ARMS DIFFER IN A SECOND WAY: ARM
+        A alphabet = 32 (declared (direction,size) k=5 prefix) versus ARM B = 256^10
+        = 3.87e25 (full fixed-width DST_IP storage domain), a ratio of ~1e24. THE
+        TREATMENT AND THE CARDINALITY ARE THE SAME TREATMENT, so +0.39 has TWO live
+        explanations -- SNI dependence separating services, or a 1e24-finer partition
+        separating flows -- and this artifact cannot separate them. ⇒ THE HYPOTHESIS''S
+        OWN FALSIFICATION CLAUSE IS TRIGGERED: it named ''an undecomposable difference''
+        as disqualifying, and that is exactly what this is. The pre-registered LIKE-FOR-LIKE
+        object declaration is NOT satisfied: the arms share the flow set and the pair
+        population but NOT the alphabet, and the artifact''s own object_declaration
+        sentence asserts ''the same k-prefix symbol alphabet'' -- which the alphabet
+        block contradicts. ⇒ THE +0.39 IS OVERWHELMINGLY A CEILING ARTIFACT: the inclusive
+        arm''s mean eps_hi is 1.0 with clipped_fraction 1.0 (all 1406 arm-split rows
+        at the eps=1 ceiling), versus the excluded arm''s mean 0.6103 with clipped_fraction
+        0.0477. The delta is therefore computed largely against a saturated arm and
+        is NOT a free measurement. ⇒ QUOTABLE FORM, UNTIL A CONTROL LANDS: ''a partition
+        augmented with the destination-host identifier raises measured TV by ~0.39,
+        ATTRIBUTION OPEN''. NOT quotable: ''the price of SNI exclusion is 0.39''.
+        ⇒ REQUIRED CONTROL (one of): (a) MATCHED-CARDINALITY ARM B -- re-run with
+        a random identifier from the SAME fixed-width storage domain but INDEPENDENT
+        of the SNI, holding alphabet size fixed and breaking only the SNI dependence
+        (delta collapses ⇒ cardinality; delta survives ⇒ SNI); or (b) state the confound
+        explicitly and refuse the ''price of SNI'' reading. ⇒ THE SECOND PREMISE IS
+        ALSO UNVERIFIED AND SEPARATE: this runner consumes DST_IP and never measures
+        whether DST_IP is in fact a deterministic function of QUIC_SNI -- the artifact
+        names both fields but has no mapping-consistency field whatsoever (grep for
+        determini/mapping/unique: zero hits). The premise was inherited from the plan
+        text, not tested. That is its own defect and must not be folded into the confound.
+        ⇒ NOTE THE EPS CEILING IS NOT THE M055 OBJECT-CONFLATION CLASS: the arms are
+        laws over the same flows; the defect is an UNCONTROLLED SECOND FACTOR, not
+        two different objects under one word. SEE ALSO X9_DELTA_EPS_HI_CHARACTERIZED_AS_ARITHMETIC_RESIDUE:
+        delta_eps_hi is provably the ceiling minus ARM A''s mean, which is a stronger
+        statement than the alphabet-size confound recorded here.'
+      X9_FRAMING_CONSEQUENCE_RC5: The plan's stated purpose for X9 -- to convert the
+        SNI/ECH channel exclusion from an unstated assumption into a MEASURED PRICE
+        (framing_ref RC5, claim C1) -- is NOT delivered by this artifact. The exclusion
+        itself remains justified as a channel-declaration choice (the identifier is
+        a legitimate pre-encryption side channel and a bracket over a channel carrying
+        it would be a bracket over a richer object), but the PRICE is not measured,
+        because the delta is confounded with a 1e24 alphabet change and the inclusive
+        arm saturates at eps=1. The methods-section obligation from the plan (state
+        the row-0 timing exclusion and the no-TLS-fingerprint consumption explicitly)
+        is independent of this result and UNAFFECTED.
+      X9_DELTA_EPS_HI_CHARACTERIZED_AS_ARITHMETIC_RESIDUE: '*** X9''s delta_eps_hi
+        IS NOT A MEASUREMENT. *** It is identically 1.0 minus the mean of ARM A''s
+        eps_hi, PROVEN to the last digit: 1.0 - 0.6102972071320967 = 0.3897027928679033,
+        which equals the artifact''s aggregate_delta_eps_hi exactly. CAUSE: ARM B
+        (SNI-inclusive) DECLARED a legitimate a-priori alphabet - the full 10-byte
+        storage domain 256^10 = 38685626227668133590597632 - which is exactly what
+        C005 REQUIRES (m must be a provable a-priori reachable set; realized support
+        is forbidden). The defect is not that declaration but its RESOLUTION: the
+        repository bound''s radius scales as 0.5*sqrt(m/n), so at m ~ 3.87e25 and
+        n ~ 700,000 the radius is ~3.7e9 and the bound MUST clip. The contribution
+        is therefore determined by the DECLARED alphabet, not by the channel. OBSERVED: ARM B
+        clipped to eps_hi = 1.0 in 1406 of 1406 observations (100%); ARM A clipped
+        in 67 of 1406 (4.77%). The artifact records realized_support_not_used_for_m:
+        true, which is C005-COMPLIANT - not an admission but the correct behaviour. ⇒ THIS IS STRONGER THAN "the two arms differ in alphabet size": delta_tv_hat
+        IS a real measurement of the empirical shift (+0.377 median) but delta_eps_hi
+        carries ZERO information about SNI. NEVER QUOTE delta_eps_hi AS A RESULT,
+        AND NEVER AVERAGE A SATURATED ARM INTO A DELTA. REMEDY: the realized-support remedy first recorded here is WITHDRAWN (D084) -
+        m from realized support violates C005 and is invalid, not merely loose. The
+        replacement is X9_E: a declared-hash dose-response family, m = 32*B fixed
+        before any data is seen, carrying at each declared m BOTH the SNI-dependent
+        arm hash_B(DST_IP) and the SNI-independent arm hash_B(random), so the two
+        explanations are separable. Each arm reports declared m, n, the radius term
+        and the clipped fraction; a saturated arm is reported as saturated and
+        EXCLUDED from every delta.'
+    completed_at: '2026-09-14T13:04:23.657Z'
+  X9_C:
+    status: PREPARING
+    retry_count: 0
+    created_at: '2026-09-14T13:02:08.927Z'
+    updated_at: '2026-09-14T13:02:08.927Z'
+    hypothesis: 'The +0.39 TV / eps_hi shift measured by X9 is attributable to ALPHABET
+      CARDINALITY, not to SNI dependence. MECHANISM UNDER TEST: X9''s ARM B partitions
+      on (packed k=5 prefix, full fixed-width DST_IP storage value), giving a FIXED
+      alphabet of 256^10 versus ARM A''s 32 -- 24 orders of magnitude finer -- and
+      X9''s own sensitivity block records that ARM B''s upper bound is CLIPPED AT
+      1.0 FOR 100% OF THE 703 PAIRS (inclusive_arm_clipped_fraction 1.0, inclusive_arm_mean_eps_hi
+      exactly 1.0) while ARM A clips on only 4.77%. So X9''s eps_hi delta is dominated
+      by a SATURATING radius term 0.5*sqrt(m/n) and carries no resolved separation
+      information, while its tv_hat delta is the empirical inflation any finer partition
+      produces (which this project already measured as C2''s headline mechanism: a
+      finer alphabet RESOLVES MORE). FALSIFIABLE BY: (a) a matched-cardinality SNI-DEPENDENT
+      arm, with the host identifier coarsened so the radius''s m and the realized
+      support are comparable to ARM A''s, that STILL shows a large delta versus ARM
+      A -- that would establish a genuine SNI effect at matched resolution and refute
+      the cardinality reading; and (b) an SNI-INDEPENDENT random-identifier arm in
+      the same full 256^10 domain whose delta versus ARM A is comparable to ARM B''s
+      -- that would confirm the cardinality reading. PARENT: derived from X9''s measured
+      delta, whose attribution X9''s own design cannot settle. This is the M055 class:
+      one treatment changing two things at once.'

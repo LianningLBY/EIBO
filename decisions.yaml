@@ -1,4 +1,4 @@
-_next_id: 84
+_next_id: 85
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -4850,7 +4850,10 @@ decisions:
 
     (2) The runner was then synced to the server (16,592 B, D057 wording at line 350,
     deployed correctly with backup, managed upload, py_compile and before/after sha256)
-    but was NOT re-run, so the stored artifact kept the bare label. Logged as D084.
+    but was NOT re-run, so the stored artifact kept the bare label. This instance is
+    recorded HERE, as D079; an earlier wording of this paragraph said "Logged as D084",
+    naming an ID that did not then exist. Corrected so D084 unambiguously means the
+    later, unrelated ruling on the bound''s alphabet.
 
 
     (3) The runner was then re-run server-side and produced 123,295 B / 4061258e with
@@ -5180,3 +5183,71 @@ decisions:
     role: subject
   depends_on:
   - D082
+- id: D084
+  date: 2026-09-14 14:00 UTC
+  summary: 'Retracted my own D119 §3 instruction to take the bound''s m from each
+    arm''s realized support (it violated C005), and named the actual cause of the
+    X9 headline: ARM B''s declared a-priori alphabet of 32*256^10 drives the radius
+    term to ~3.1e12, forcing 1406/1406 clipping. What X9 measured is a property of
+    the declared alphabet, not of the channel.'
+  rationale: 'Two separate corrections, both mine to own.
+
+
+    (1) MY INSTRUCTION WAS WRONG IN THE PROJECT''S OWN TERMS. C005 states the bound''s
+    m must come from a provable a-priori reachable set and never from realized support
+    or any data-derived quantity, because a certificate built on a data-dependent
+    m is INVALID, not merely loose. My D119 §3 directed the opposite. The Worker read
+    statcore.tv_upper_bound first, found the guard at line 404 (`alphabet_size is
+    smaller than the observed support`) — which is C005 expressed in code — and stopped
+    at preflight without bypassing the check. That is the correct outcome and is to
+    be recorded as a pass, not a failure. The realized-support design must not be
+    re-run in any arm.
+
+
+    (2) THE ACTUAL CAUSE OF THE X9 HEADLINE. ARM B declared an a-priori alphabet of
+    32*256^10 ~= 3.87e25. The repository bound''s radius scales as 0.5*sqrt(m/n),
+    which at that m is ~3.1e12 — astronomically past 1, so the bound MUST clip: observed
+    1406/1406 for ARM B against 67/1406 (4.77%) for ARM A. That is why delta_eps_hi
+    collapses to the identity 1 - mean(ARM A) (M128). So the +0.39 is not "SNI makes
+    pairs uncertifiable"; it is "this declared alphabet is too fine to certify at
+    this n" — a property of the declaration, not of the channel.
+
+
+    (3) THE C005-COMPLIANT REPLACEMENT is a fixed, publicly declared hash of DST_IP
+    into B buckets: m = 32*B, fixed before any data is seen, hence a provable a-priori
+    reachable set. Run it as a dose-response family in the declared alphabet size,
+    carrying at each m BOTH the SNI-dependent arm (hash_B(DST_IP)) and the SNI-independent
+    arm (hash_B(random)) at matched declared m. Comparing those two at matched m is
+    what separates "SNI separates services" from "any finer partition separates flows".
+    The existing 256^10 point becomes the extreme of the family rather than the headline.
+
+
+    (4) EXPECTED OUTCOME STATED IN ADVANCE so it cannot be spun afterwards: at a sane
+    declared m the inclusion arm will probably stop clipping, so the "SNI destroys
+    certification" reading should dissolve, leaving the true statement "including
+    the host identifier raises measured TV by ~0.39". If that happens it is the second
+    headline today to dissolve on inspection.
+
+
+    (5) TWO DELTAS STAY SEPARATE ON EVERY SURFACE: delta_eps_hi is an arithmetic residue
+    with zero SNI information and is never quotable; delta_tv_hat (median 0.377) is
+    a real radius-free measurement but says nothing about certificates.
+
+
+    (6) Two record defects found while making this entry: the X9 registry metrics
+    key attributes the cause to ARM B using the storage domain "rather than the realized
+    support" and points at the retracted remedy — both wrong, since realized support
+    is exactly what C005 forbids. And decisions.yaml D079 rationale contains a stray
+    "Logged as D084" referring to a decision ID that never existed; corrected there
+    to point at D079 itself so this entry takes the ID unambiguously.'
+  related_experiments:
+  - exp_id: X9
+    role: retracted_interpretation
+    result: DONE/negative; delta_eps_hi is an arithmetic residue, delta_tv_hat is
+      real
+  - exp_id: X9_E
+    role: replacement
+    result: 'dispatched: a-priori declared-hash dose-response family plus the QUIC_SNI
+      premise test'
+  depends_on:
+  - D083

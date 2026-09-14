@@ -781,6 +781,7 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D084 | 2026-09-14 | Retracted my own D119 §3 instruction to take the b | X9, X9_E |
 | D083 | 2026-09-14 | Ruled the X9 SNI arm: keep DST_IP as primary per s | X9 |
 | D082 | 2026-09-14 | X9 measured a +0.38 SNI-inclusion delta, but the t | X9, X4 |
 | D081 | 2026-09-14 | The max_tpr re-measurement produced its answer and | X12_k5, X12 |
@@ -790,5 +791,4 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 | D077 | 2026-09-14 | Reviewer's three points accepted and acted on: wid | X12_k5 |
 | D076 | 2026-09-14 | X11 measured 0.1608 vs the primary corpus's 0.3434 | X11, X1 |
 | D075 | 2026-09-14 | Three rulings settled by measurement: (1) the k=5  | X12, X3 |
-| D074 | 2026-09-14 | The D063 freeze guard works but its boolean output | X3 |
 
