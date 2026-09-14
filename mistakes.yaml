@@ -1,4 +1,4 @@
-_next_id: 129
+_next_id: 130
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -6503,3 +6503,40 @@ mistakes:
   related_decisions:
   - D078
   - D082
+- id: M129
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: medium
+  summary: I bundled an unexplained 62k-line file deletion into my own ROADMAP commit,
+    the exact discipline I had just imposed on Main Agent
+  root_cause: I applied a discipline to the team that I did not apply to my own commits.
+    `git add <specific path>` does not reveal what is ALREADY in the index; a commit
+    sweeps the whole index, not just what that turn staged. Checking the working tree
+    before committing is not the same as checking the staging area.
+  prevention: Before committing, read the STAGED set (`git diff --cached --stat`),
+    not the working tree (`git status`). A commit sweeps the entire index, and a path
+    staged by an earlier operation rides along silently. When staging with an explicit
+    pathspec, verify the staged set equals the intended set first. This matters most
+    for deletions, which this project requires to be named in the message.
+  status: active
+  context: 'D086/D089 established that a file deletion must be committed deliberately
+    and named in the commit message (''duplicate cleanup''), so a removal is never
+    silent. I issued that instruction to Main Agent and confirmed it in writing twice.
+    My own commit c468739 (''Correct D087: my own count came from the defect I was
+    describing'') then bundled the deletion of artifacts/X9_x9_sni_channel_delta.json
+    (62,178 lines) alongside the ROADMAP edit, with no mention of it in the message.
+    I had staged only ROADMAP.md, but the deletion was already staged in the index
+    from an earlier operation and `git commit` swept it in.
+
+
+    Verified afterwards: the deletion was lossless. The deleted blob''s sha (7f6edd6b1b9ca2dacb38)
+    is byte-identical to the surviving registered copy at artifacts/X9/data/x9_sni_channel_delta.json,
+    and the manifest binds exactly one entry resolving to that surviving path. Nothing
+    was lost. But the commit was already published, so the record shows an unexplained
+    62k-line deletion.'
+  fix: Recorded in the ROADMAP that c468739 carried the deletion unexplained, together
+    with the losslessness verification (deleted blob sha == surviving registered copy
+    sha == the single manifest entry's content_sha256).
+  related_decisions:
+  - D086
+  - D089
