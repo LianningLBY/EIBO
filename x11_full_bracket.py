@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import collections
+import concurrent.futures
 import datetime as dt
 import hashlib
 import importlib.util
@@ -37,6 +38,9 @@ ALPHABET_SIZE = 32
 ALPHA_PER_LAW = 0.025
 SERVICE_THRESHOLD = 2000
 LOWER_RANDOM_STATE = 0
+LOWER_SAMPLE_CAP = 20_000
+LOWER_SAMPLE_SEED = 20_260_913
+COMPUTE_WORKERS = 8
 CHUNK_SIZE = 100_000
 LOWER_EDGE = 0.05
 TRAIN_DATES = [
@@ -141,11 +145,45 @@ def quantiles(values: list[float]) -> dict[str, float | None]:
     }
 
 
-def scan_test_flows(helper) -> tuple[dict[str, np.ndarray], dict[str, Any]]:
+def update_reservoir(
+    reservoirs: dict[int, np.ndarray],
+    seen: collections.Counter[int],
+    label: int,
+    values: np.ndarray,
+) -> None:
+    if label not in reservoirs:
+        reservoirs[label] = np.empty(LOWER_SAMPLE_CAP, dtype=np.int16)
+    old_seen = int(seen.get(label, 0))
+    new_seen = old_seen + len(values)
+    fill = min(max(LOWER_SAMPLE_CAP - old_seen, 0), len(values))
+    if fill:
+        reservoirs[label][old_seen : old_seen + fill] = values[:fill]
+    remainder = values[fill:]
+    if len(remainder):
+        positions = np.arange(
+            old_seen + fill + 1, new_seen + 1, dtype=np.int64
+        )
+        destinations = RESERVOIR_RNG.integers(
+            0, positions, size=len(positions), dtype=np.int64
+        )
+        keep = destinations < LOWER_SAMPLE_CAP
+        if np.any(keep):
+            reservoirs[label][destinations[keep]] = remainder[keep]
+    seen[label] = new_seen
+
+
+RESERVOIR_RNG = np.random.default_rng(LOWER_SAMPLE_SEED)
+
+
+def scan_test_flows(
+    helper,
+) -> tuple[dict[str, np.ndarray], dict[str, np.ndarray], dict[str, Any]]:
     test_paths = {f"/flows/D{date}" for date in TEST_DATES}
     train_paths = {f"/flows/D{date}" for date in TRAIN_DATES}
     buffer_paths = {f"/flows/D{date}" for date in BUFFER_DATES}
     code_chunks: dict[int, list[np.ndarray]] = collections.defaultdict(list)
+    lower_reservoirs: dict[int, np.ndarray] = {}
+    lower_seen: collections.Counter[int] = collections.Counter()
     app_counts: collections.Counter[int] = collections.Counter()
     eligible_counts: collections.Counter[int] = collections.Counter()
     total_rows = 0
@@ -212,8 +250,13 @@ def scan_test_flows(helper) -> tuple[dict[str, np.ndarray], dict[str, Any]]:
                     eligible_counts[int(label)] += int(amount)
                 for label in values:
                     label_int = int(label)
-                    code_chunks[label_int].append(
-                        codes[apps_e == label_int]
+                    service_codes = codes[apps_e == label_int]
+                    code_chunks[label_int].append(service_codes)
+                    update_reservoir(
+                        lower_reservoirs,
+                        lower_seen,
+                        label_int,
+                        service_codes,
                     )
 
     services = sorted(
@@ -222,8 +265,14 @@ def scan_test_flows(helper) -> tuple[dict[str, np.ndarray], dict[str, Any]]:
         if app_counts[label] >= SERVICE_THRESHOLD
         and eligible_counts[label] >= SERVICE_THRESHOLD
     )
-    samples = {
+    full_samples = {
         str(label): np.concatenate(code_chunks[label]).astype(np.int16, copy=False)
+        for label in services
+    }
+    lower_samples = {
+        str(label): lower_reservoirs[label][
+            : min(int(lower_seen[label]), LOWER_SAMPLE_CAP)
+        ].copy()
         for label in services
     }
     metadata = {
@@ -238,33 +287,39 @@ def scan_test_flows(helper) -> tuple[dict[str, np.ndarray], dict[str, Any]]:
             str(label): int(eligible_counts[label]) for label in services
         },
         "sample_unit": "one eligible flow from one APP service",
-        "sample_cap_per_service": None,
+        "upper_sample_cap_per_service": None,
+        "lower_sample_cap_per_service": LOWER_SAMPLE_CAP,
+        "lower_sample_seed": LOWER_SAMPLE_SEED,
+        "lower_sample_counts": {
+            str(label): int(len(lower_samples[str(label)])) for label in services
+        },
     }
-    return samples, metadata
+    return full_samples, lower_samples, metadata
 
 
-def compute_rows(samples: dict[str, np.ndarray]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def compute_rows(
+    full_samples: dict[str, np.ndarray],
+    lower_samples: dict[str, np.ndarray],
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     from eibo.statcore import tv_lower_bound, tv_upper_bound
 
-    services = sorted(samples, key=int)
+    services = sorted(full_samples, key=int)
     identity = np.eye(ALPHABET_SIZE, dtype=np.float64)
-    rows: list[dict[str, Any]] = []
-    first_lower_diagnostics = None
     started = time.time()
 
-    for pair_index, (service_a, service_b) in enumerate(
-        itertools.combinations(services, 2), start=1
-    ):
-        codes_a = samples[service_a]
-        codes_b = samples[service_b]
+    def compute_pair(service_a: str, service_b: str):
+        codes_a = full_samples[service_a]
+        codes_b = full_samples[service_b]
+        lower_codes_a = lower_samples[service_a]
+        lower_codes_b = lower_samples[service_b]
         upper = tv_upper_bound(
             codes_a,
             codes_b,
             alphabet_size=ALPHABET_SIZE,
             alpha=ALPHA_PER_LAW,
         )
-        one_hot_a = identity[codes_a]
-        one_hot_b = identity[codes_b]
+        one_hot_a = identity[lower_codes_a]
+        one_hot_b = identity[lower_codes_b]
         eps_lo, diagnostics = tv_lower_bound(
             one_hot_a,
             one_hot_b,
@@ -272,12 +327,6 @@ def compute_rows(samples: dict[str, np.ndarray]) -> tuple[list[dict[str, Any]], 
             method="michel",
             random_state=LOWER_RANDOM_STATE,
         )
-        if first_lower_diagnostics is None:
-            first_lower_diagnostics = {
-                key: value
-                for key, value in diagnostics.items()
-                if key != "classifier"
-            }
         eps_hi = float(upper.eps_hi)
         eps_lo = float(eps_lo)
         if eps_lo > eps_hi:
@@ -285,38 +334,65 @@ def compute_rows(samples: dict[str, np.ndarray]) -> tuple[list[dict[str, Any]], 
                 "C016 invariant violation before final artifact: "
                 f"{service_a}-{service_b} eps_lo={eps_lo} eps_hi={eps_hi}"
             )
-        rows.append(
+        return (
             {
                 "service_a": service_a,
                 "service_b": service_b,
                 "n_a": int(len(codes_a)),
                 "n_b": int(len(codes_b)),
+                "lower_n_a": int(len(lower_codes_a)),
+                "lower_n_b": int(len(lower_codes_b)),
                 "tv_hat": float(upper.tv_hat),
                 "eps_hi": eps_hi,
                 "eps_lo": eps_lo,
                 "gate_pass": bool(
                     eps_lo > LOWER_EDGE and eps_hi < 0.5
                 ),
-            }
+            },
+            {
+                key: value
+                for key, value in diagnostics.items()
+                if key != "classifier"
+            },
         )
-        if pair_index % 100 == 0 or pair_index == len(services) * (len(services) - 1) // 2:
-            print(
-                json.dumps(
-                    {
-                        "progress_pairs": pair_index,
-                        "pair_total": len(services) * (len(services) - 1) // 2,
-                        "elapsed_seconds": time.time() - started,
-                    },
-                    sort_keys=True,
-                ),
-                flush=True,
-            )
-        del one_hot_a, one_hot_b
+
+    pairs = list(itertools.combinations(services, 2))
+    completed: list[tuple[dict[str, Any], dict[str, Any]]] = []
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=COMPUTE_WORKERS
+    ) as executor:
+        futures = [
+            executor.submit(compute_pair, service_a, service_b)
+            for service_a, service_b in pairs
+        ]
+        for pair_index, future in enumerate(
+            concurrent.futures.as_completed(futures), start=1
+        ):
+            completed.append(future.result())
+            if pair_index % 100 == 0 or pair_index == len(pairs):
+                print(
+                    json.dumps(
+                        {
+                            "progress_pairs": pair_index,
+                            "pair_total": len(services) * (len(services) - 1) // 2,
+                            "elapsed_seconds": time.time() - started,
+                        },
+                        sort_keys=True,
+                    ),
+                    flush=True,
+                )
+
+    completed.sort(
+        key=lambda item: (int(item[0]["service_a"]), int(item[0]["service_b"]))
+    )
+    rows = [item[0] for item in completed]
+    first_lower_diagnostics = completed[0][1] if completed else None
 
     return rows, {
         "upper_reference": f"{STATCORE_PATH}::tv_upper_bound",
         "lower_reference": f"{STATCORE_PATH}::tv_lower_bound",
         "lower_method": "michel_adaptive_sup_cutoff",
+        "compute_workers": COMPUTE_WORKERS,
         "first_lower_diagnostics": first_lower_diagnostics,
     }
 
@@ -467,8 +543,8 @@ def build_reproduction_verdict(
 def main() -> None:
     started = time.time()
     helper = load_helper()
-    samples, scan_metadata = scan_test_flows(helper)
-    rows, method_metadata = compute_rows(samples)
+    full_samples, lower_samples, scan_metadata = scan_test_flows(helper)
+    rows, method_metadata = compute_rows(full_samples, lower_samples)
     pair_count = len(rows)
     violations = sum(row["eps_lo"] > row["eps_hi"] for row in rows)
     if violations != 0:
@@ -519,7 +595,9 @@ def main() -> None:
                 "the lower method's internal convention is owned by tv_lower_bound"
             ),
             "service_threshold_flows": SERVICE_THRESHOLD,
-            "sample_cap_per_service": None,
+            "upper_sample_cap_per_service": None,
+            "lower_sample_cap_per_service": LOWER_SAMPLE_CAP,
+            "lower_sample_seed": LOWER_SAMPLE_SEED,
             "tuning_performed": False,
             "split": {
                 "train_dates": TRAIN_DATES,

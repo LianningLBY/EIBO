@@ -22,7 +22,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 ## Near-term tasks
 
-- [ ] **x3_parametric_growth re-run + pull** — the stored artifact still carries the D057-withdrawn sentence; the fixed runner must be re-run on the server and the result pulled. Do NOT hand-edit (sha quoted in registry as the defect fingerprint).
+- [x] **x3_parametric_growth re-run + pull** — DONE; withdrawn sentence gone from both trees, sha 1a6f9f65 matches manifest.
 - [ ] **x3_axis_validation pull + re-register** — server holds 123,295 B / 4061258e… with the fix; local is stale.
 - [ ] **X13 manifest consolidation** — one live entry, canonical path clean, sha computed; retire the duplicate suffixed entries. (In flight.)
 - [ ] **X8 DPI relabel** — D091: relabel the DPI check as a smoke-test, drop "holds per pair"/"990/990" wording; do not cite dpi_violations:0 as theorem verification.
@@ -34,7 +34,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | gate | trigger | state |
 |---|---|---|
 | ~~X12 Stage 2 containment statistic~~ | n/a | **CLOSED** — implemented and ran at k=5; containment holds, all detectors `reject_null=false` |
-| x3_parametric_growth stored artifact carries D057-withdrawn sentence | fixed runner re-run + pull | **OPEN** — do not hand-edit (sha quoted) |
+| ~~x3_parametric_growth D057 sentence~~ | n/a | **CLOSED** — withdrawn sentence gone from both trees; local sha 1a6f9f65 matches manifest; plain_statement is the corrected NON-DIAGNOSTIC wording |
 | x3_axis_validation stored artifact predates synced fix | re-run + pull | **RE-RUN DONE, PULL OUTSTANDING** — server 123,295 B / 4061258e…; local still stale |
 | git push | platform sync route | **CLOSING** — instructed to push; confirm origin/main sha |
 
