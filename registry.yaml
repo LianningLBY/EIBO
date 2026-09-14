@@ -492,10 +492,45 @@ experiments:
         own field says: ''A fabricated direction is worse than an inconclusive test.'''
     conclusion: success
     metrics:
-      D058_ORDERING_CORRECTED_CONTAINMENT_IS_NOT_BLOCKED_BY_THE_AUC_DIAGNOSTIC: 'The containment statistic consumes (a) eps_hat_k_hi from the rebuilt X1 artifact and (b) the per-flow detector error; it does NOT reference OSCR or FPR95 anywhere. THEREFORE: (1) THE k=5 CONTAINMENT RESULT IS VALID REGARDLESS OF HOW THE AUC DIAGNOSTIC RESOLVES; (2) THE DIAGNOSTIC RUNS IN PARALLEL, NOT IN FRONT; (3) ONE RUN SHOULD SERVE BOTH PURPOSES. The reviewer independently confirmed this. VACUITY RULE HOLDS: a violation count computed on a vacuous detector state is reported as UNINFORMATIVE, never as a pass.'
-      D059_THE_AGREEMENT_BASELINE_IS_THE_MAJORITY_CLASS_NOT_UNIFORM: '*** THE CHANCE BASELINE FOR THE ROW-LEVEL AGREEMENT RATES IS THE MAJORITY-CLASS RATE, NOT uniform 1/53 = 1.89%. *** The service-label distribution is STRONGLY IMBALANCED: majority class 14.73% (745,293 of 5,058,007 flows, train-side), held-out test-side 24.89%. BOTH recorded. *** RULE: ANY PLACE THAT CITES THESE AGREEMENT RATES MUST CARRY THE MAJORITY-CLASS BASELINE BESIDE THEM. *** AGAINST IT: LIGHTGBM (48.6%) and RONETC (58.1%) ABOVE; *** PROTOTYPE (13.5%) BELOW -- WORSE THAN ALWAYS GUESSING THE MAJORITY CLASS. *** ALSO: `all_rows_accepted = true` FOR LIGHTGBM IS STRUCTURAL -- line 486 hard-codes accepted: np.ones(len(pred), dtype=bool); AN OPEN-SET DETECTOR THAT NEVER REJECTS HAS NO REJECTION CAPABILITY.'
-      D061_THE_FIX_FIRST_LANDED_IN_A_STRAY_LAYER_CONSOLIDATION_COMPLETE: 'The D056 fix wrote to a STRAY layer (artifacts/X3/data/) while the AUTHORITATIVE mirror (artifacts/_project/data/) kept PRE-FIX bytes -- TWO LIVE CONTRADICTORY MANIFEST ENTRIES. The Director fixed the BYTES directly. CONSOLIDATION COMPLETE AND VERIFIED BY READING THE TREE. *** TWO PROCESS RULES ADOPTED: (1) A WORKER REPORT MUST BE GENERATED AFTER ITS ARTIFACT IS FROZEN. (2) A FIX MUST LAND WHERE THE ARTIFACT ALREADY LIVES. *** *** ★ ROOT CAUSE FOUND: `register_artifact(server=..., remote_path=...)` ITSELF PLACES FETCHED FILES AT artifacts/<EXPID>/data/ AND artifacts/<EXPID>/intermediate/. SO artifacts/<EXPID>/ IS THE REGISTER TOOL''S DEFAULT DESTINATION, NOT A FORK INVENTED DURING A REPAIR -- AND EVERY REGISTRATION RE-CREATES IT, UNDOING A CONSOLIDATION. CONFIRMED THREE TIMES NOW (X3 twice, X6 once). THE MANIFEST''S ''NOT A CONVENTION'' COMMENT CONTRADICTS THE DEPLOYED TOOL AND NEEDS A DIRECTOR RULING. OPEN. ***'
-      BASELINE_BLOCKER_STATUS: '*** CLOSED (D066/D067). *** NOT OPEN, NOT BLOCKING. The two controls agree on a SHARED quantity at DIFFERENT intervention settings, which is a DOSE-RESPONSE FAMILY, not a conflict; the standing same-nominal-quantity rule was MIS-SCOPED and should never have fired here. Substantive content is carried under D066_THE_BLOCKER_IS_CLOSED_SAME_CONSTRUCTION_WITH_AND_WITHOUT_A_FILTER and D066_DO_NOT_READ_THIS_AS_A_RESCUE. Restored as an explicit standalone record because the review chain cites it by NAME and a name that resolves to nothing is worse than a documented reconstruction.'
+      D058_ORDERING_CORRECTED_CONTAINMENT_IS_NOT_BLOCKED_BY_THE_AUC_DIAGNOSTIC: 'The
+        containment statistic consumes (a) eps_hat_k_hi from the rebuilt X1 artifact
+        and (b) the per-flow detector error; it does NOT reference OSCR or FPR95 anywhere.
+        THEREFORE: (1) THE k=5 CONTAINMENT RESULT IS VALID REGARDLESS OF HOW THE AUC
+        DIAGNOSTIC RESOLVES; (2) THE DIAGNOSTIC RUNS IN PARALLEL, NOT IN FRONT; (3)
+        ONE RUN SHOULD SERVE BOTH PURPOSES. The reviewer independently confirmed this.
+        VACUITY RULE HOLDS: a violation count computed on a vacuous detector state
+        is reported as UNINFORMATIVE, never as a pass.'
+      D059_THE_AGREEMENT_BASELINE_IS_THE_MAJORITY_CLASS_NOT_UNIFORM: '*** THE CHANCE
+        BASELINE FOR THE ROW-LEVEL AGREEMENT RATES IS THE MAJORITY-CLASS RATE, NOT
+        uniform 1/53 = 1.89%. *** The service-label distribution is STRONGLY IMBALANCED:
+        majority class 14.73% (745,293 of 5,058,007 flows, train-side), held-out test-side
+        24.89%. BOTH recorded. *** RULE: ANY PLACE THAT CITES THESE AGREEMENT RATES
+        MUST CARRY THE MAJORITY-CLASS BASELINE BESIDE THEM. *** AGAINST IT: LIGHTGBM
+        (48.6%) and RONETC (58.1%) ABOVE; *** PROTOTYPE (13.5%) BELOW -- WORSE THAN
+        ALWAYS GUESSING THE MAJORITY CLASS. *** ALSO: `all_rows_accepted = true` FOR
+        LIGHTGBM IS STRUCTURAL -- line 486 hard-codes accepted: np.ones(len(pred),
+        dtype=bool); AN OPEN-SET DETECTOR THAT NEVER REJECTS HAS NO REJECTION CAPABILITY.'
+      D061_THE_FIX_FIRST_LANDED_IN_A_STRAY_LAYER_CONSOLIDATION_COMPLETE: 'The D056
+        fix wrote to a STRAY layer (artifacts/X3/data/) while the AUTHORITATIVE mirror
+        (artifacts/_project/data/) kept PRE-FIX bytes -- TWO LIVE CONTRADICTORY MANIFEST
+        ENTRIES. The Director fixed the BYTES directly. CONSOLIDATION COMPLETE AND
+        VERIFIED BY READING THE TREE. *** TWO PROCESS RULES ADOPTED: (1) A WORKER
+        REPORT MUST BE GENERATED AFTER ITS ARTIFACT IS FROZEN. (2) A FIX MUST LAND
+        WHERE THE ARTIFACT ALREADY LIVES. *** *** ★ ROOT CAUSE FOUND: `register_artifact(server=...,
+        remote_path=...)` ITSELF PLACES FETCHED FILES AT artifacts/<EXPID>/data/ AND
+        artifacts/<EXPID>/intermediate/. SO artifacts/<EXPID>/ IS THE REGISTER TOOL''S
+        DEFAULT DESTINATION, NOT A FORK INVENTED DURING A REPAIR -- AND EVERY REGISTRATION
+        RE-CREATES IT, UNDOING A CONSOLIDATION. CONFIRMED THREE TIMES NOW (X3 twice,
+        X6 once). THE MANIFEST''S ''NOT A CONVENTION'' COMMENT CONTRADICTS THE DEPLOYED
+        TOOL AND NEEDS A DIRECTOR RULING. OPEN. ***'
+      BASELINE_BLOCKER_STATUS: '*** CLOSED (D066/D067). *** NOT OPEN, NOT BLOCKING.
+        The two controls agree on a SHARED quantity at DIFFERENT intervention settings,
+        which is a DOSE-RESPONSE FAMILY, not a conflict; the standing same-nominal-quantity
+        rule was MIS-SCOPED and should never have fired here. Substantive content
+        is carried under D066_THE_BLOCKER_IS_CLOSED_SAME_CONSTRUCTION_WITH_AND_WITHOUT_A_FILTER
+        and D066_DO_NOT_READ_THIS_AS_A_RESCUE. Restored as an explicit standalone
+        record because the review chain cites it by NAME and a name that resolves
+        to nothing is worse than a documented reconstruction.'
       D069_HARD_RULE_READ_WHOLE_WRITE_WHOLE_AND_THE_FINDINGS_MD_LOSS: '*** `update_registry(exp_id,
         field=''metrics'', value={...})` REPLACES the entire value. IT DOES NOT MERGE.
         I DESTROYED THIS BLOCK EIGHT TIMES BY PASSING A PARTIAL DICT. THE PROCEDURE,
@@ -2255,3 +2290,65 @@ experiments:
         CHECK IS ADOPTED: treat ''artifact exists but appears on no surface'' as a
         standing check, not a per-incident one -- which is what caught the genuinely-missing
         registry entry here. ***'
+  X9:
+    status: PREPARING
+    retry_count: 0
+    created_at: '2026-09-14T11:06:41.460Z'
+    updated_at: '2026-09-14T11:10:05.361Z'
+    hypothesis: 'The anonymised destination-host identifier exported with this corpus
+      is a DETERMINISTIC FUNCTION OF THE SNI, so it is a legitimate PRE-ENCRYPTION
+      SIDE CHANNEL and must be EXCLUDED from the declared channel. MECHANISM UNDER
+      TEST: including it would let any consumer partition flows by destination host
+      with no cryptographic work, so the certified bracket computed on a channel that
+      carries it would be a bracket over a DIFFERENT, richer object. HYPOTHESIS: the
+      bound delta between an SNI-INCLUSIVE and an SNI-EXCLUDED channel is MEASURABLE,
+      so the exclusion becomes a QUANTIFIED PRICE rather than an unstated assumption.
+      FALSIFIABLE BY: a delta indistinguishable from zero (which would make the exclusion
+      free and the stated assumption harmless) or an undecomposable difference. OBJECT
+      DECLARATION, REQUIRED IN ONE SENTENCE: both channels are laws over the SAME
+      object -- the same flows, the same (direction,size) channel, the same k-prefix
+      symbol alphabet -- differing ONLY by whether the SNI-derived identifier participates
+      in the partition; the delta is therefore LIKE-FOR-LIKE. This must be confirmed
+      rather than assumed, because this project has already been bitten by an object-conflation
+      (the word marginal silently named TWO objects, M055) and by an inequality asserted
+      across objects with no DPI order relating them (in either direction) between
+      the k-prefix symbol law and the PHIST vector law.'
+    spec:
+      command: 'to be finalised by the Worker: builds the SAME per-pair bracket twice
+        on the same flow set -- once on the SNI-EXCLUDED declared channel (direction,
+        size) and once on the SNI-INCLUSIVE channel -- and reports the per-pair bound
+        delta as a measured price. It must CALL the repository functions (src/eibo/statcore.py::tv_upper_bound
+        and the packing helper), never restate a radius formula.'
+      compute_class: '*** CPU ONLY -- CORRECTED. X9 TRAINS NOTHING AND MUST NOT TOUCH
+        CUDA. *** It is a BOUND-COMPARISON measurement: the TV bracket delta between
+        an SNI-inclusive and an SNI-excluded channel, computed on the H5 corpus through
+        the same statcore machinery as X1/X3. This is the SAME compute class as every
+        other X-experiment in this project EXCEPT X12. THE PRIOR TEXT ON THIS FIELD
+        SAID ''CPU-primary; the GPU is available if the worker finds a GPU-eligible
+        step'' -- THAT WAS WRONG AND IS WITHDRAWN, because it implied a GPU expectation
+        from the mere fact that a card was free. NO GPU STEP EXISTS IN THIS EXPERIMENT.'
+      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5 -- the
+        same corpus and the same XS subset the main axis uses
+      declared_channel: 'the observable channel is (direction, size). The exporter''s
+        PPI array carries THREE rows: row 1 direction, row 2 size, row 0 inter-packet
+        timing. ROW 0 IS DELIBERATELY EXCLUDED. No TLS-fingerprint-side data (QUIC_USER_AGENT,
+        QUIC_TLS_EXT_*, QUIC_*CID) is consumed.'
+      deliverable: the bound delta between an SNI-INCLUSIVE and an SNI-EXCLUDED channel,
+        reported as a MEASURED PRICE so the exclusion is a quantified choice rather
+        than an unstated assumption. Report the delta per pair and in aggregate, with
+        the sensitivity of the aggregate to the inclusion rule stated explicitly.
+      k_and_ladder: k=5, M=1, so the numbers sit beside X1's rather than beside a
+        different construction
+      object_declaration_REQUIRED: 'One sentence naming WHICH object each channel
+        is a law over, confirming the two are the SAME object differing only by the
+        channel -- so the delta is a LIKE-FOR-LIKE comparison. This is a required
+        output, not a nicety: this project already has one retracted claim from the
+        word marginal silently naming two objects (M055).'
+      service_threshold: 2000
+      split_policy: flow-disjoint AND time-disjoint; packet-level splitting PROHIBITED;
+        D043 buffer-month discipline where the month structure allows (train 202406..202411,
+        buffer 202412 UNUSED, test 202501..202505)
+      why_this_matters_for_channel_declaration: 'A reviewer reading the dataset docs
+        will see three channels and ask why the bound was computed on two. The exclusion
+        must therefore be stated explicitly AND priced. That is the whole point of
+        the experiment: convert a stated assumption into evidence.'
