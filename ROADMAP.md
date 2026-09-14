@@ -80,6 +80,37 @@
 > **(c) A `QUIC_SNI` arm is DEFERRED**, triggered only by a **NO** from (b) or by wanting an explicit leak bound.
 > **⇒ Same discipline as the rest of the session: turn a load-bearing assumption into a measurement.**
 > **⇒ Same class as M055, where a word silently named two objects.**
+>
+> **★ D084 — I RETRACT MY OWN D119 §3, AND THE CAUSE OF THE X9 HEADLINE IS NOW NAMED.**
+> **My instruction was to take `m` from each arm's REALIZED SUPPORT. That VIOLATES the project's own C005:**
+> *"m must come from a provable a-priori reachable set, never from realized support or any data-derived quantity;
+> a certificate built on a data-dependent m is invalid, **not merely loose**."* **⇒ The Worker stopped at preflight
+> and read `statcore.tv_upper_bound` first — the guard at line 404 (`alphabet_size is smaller than the observed
+> support`) is exactly C005 in code. **A stopped run is the correct outcome here, not a failure.** **⇒ Credited.**
+>
+> **★ AND THE REAL FINDING, which neither the spec nor I had: the X9 headline is an ALPHABET-CHOICE artefact.**
+> ARM B declared an a-priori alphabet of `32 × 256^10 ≈ 3.87e25`. In `tv_upper_bound` the radius carries
+> `0.5·sqrt(m/n)`, so with that m the term is `≈ 3.1e12` — **astronomically past 1, hence clipped to 1.0 on
+> 1406/1406 observations.** That is *why* `delta_eps_hi` collapses to the identity `1 − mean(ARM A)` (M128).
+> **⇒ So the +0.39 was never "SNI makes pairs uncertifiable". It was "this declared alphabet is too fine to
+> certify at this n" — a property of the DECLARATION, not of the channel.**
+>
+> **★ THE CORRECT ARM IS C005-COMPLIANT AND IS A FAMILY, NOT A SINGLE CONTROL.**
+> A **fixed, publicly declared hash of `DST_IP` into B buckets** is a provable a-priori reachable set —
+> `m = 32·B` fixed BEFORE any data is seen. So run a **dose–response curve in the declared alphabet size**, and at
+> **each** declared `m` run the pair that isolates the two explanations:
+> **(i) `ARM B_B` = (k=5 prefix, `hash_B(DST_IP)`)** — SNI-DEPENDENT, coarse; **(ii) `ARM C_B` = (k=5 prefix,
+> `hash_B(random)`)** — SNI-INDEPENDENT, SAME a-priori m. **⇒ Comparing B_B against C_B at matched m is what
+> separates "SNI separates services" from "any finer partition separates flows".** Then face ARM A.
+> **⇒ The X9 256^10 point becomes the EXTREME of the family, not the headline.**
+>
+> **★ TWO DELTAS, NEVER ONE:** `delta_eps_hi` = arithmetic residue, **zero SNI information, never quotable** (M128);
+> `delta_tv_hat` median **0.377 = a real measurement**, radius-free, but it says nothing about certificates.
+> **⇒ LIKELY OUTCOME, stated in advance so it cannot be spun later: at a sane declared m the inclusion arm probably
+> STOPS clipping ⇒ the "SNI destroys certification" reading dissolves, leaving the true statement
+> "including the host identifier raises measured TV by ~0.39".** **⇒ If that happens it is the SECOND headline
+> today to dissolve on inspection — and that pattern is itself the finding.**
+> **⇒ Same discipline as the rest of the session: turn a load-bearing assumption into a measurement.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
 > `excluded_arm_mean_eps_hi = 0.6102972071320967`, `aggregate_delta_eps_hi = 0.3897027928679033`, and
