@@ -403,6 +403,19 @@
 > could see (local) rather than the layout of the tree where the code RUNS. ⇒ The successful artifact was the evidence that
 > could have settled it, and I did not look at it first.**
 >
+> **⚠ D097(b) COLLISION — MY CORRECTION AND THE DISPATCHED TASK CROSSED IN FLIGHT.**
+> Measured at `16:45:33 UTC`: the in-flight task's spec is still **(a) nested-FIRST + (b) create a nested server copy** —
+> **exactly the direction my correction reverses** — and `x9_dose_response_channels.py:493` is **unedited** (still the single
+> hardcoded nested path). **My correction reached the Agent's queue while it was composing its report, so its dispatch
+> predates it.** **⇒ No harm yet: nothing has been executed, no nested copy created.**
+> **⇒ ⇒ AND THIS IS THE GENERAL LESSON, now demonstrated twice in one hour: an instruction and its correction can be
+> in flight simultaneously, and the LATER one is not automatically the one that takes effect — it takes effect only if it
+> arrives before the earlier one is ACTED ON.** ⇒ **The window is not "until the next message" but "until the action".**
+> **⇒ ⇒ THE STANDING RULE THIS ADDS: when I correct an already-dispatched instruction, I must say explicitly whether the
+> in-flight task should be CANCELLED or allowed to finish — and the same when I am the one receiving a correction.**
+> **⇒ Same discipline as the rest of the session: the record showed the corrected direction while the task still carried
+> the old one, and only reading BOTH made the collision visible.**
+>
 > **✓✓ D096 CLOSED BY DIRECT MEASUREMENT — THE RUN LOADED THE GATED FILE. No longer inference.**
 > The decisive server-side check (`ps lstart` + `stat`, read-only, pid 728753) settles it:
 > **`/root/eibo/x9_dose_response_channels.py  mtime = 2026-09-14 23:53:27 +0800` (= `15:53:27 UTC`, 34,554 B)
