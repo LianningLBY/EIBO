@@ -1,4 +1,4 @@
-_next_id: 125
+_next_id: 128
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -6212,3 +6212,221 @@ mistakes:
   related_decisions:
   - D078
   - D098
+- id: M125
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: high
+  summary: 'I declared the git push permanently blocked on an unreadable credential
+    and asked the user to act on that. They were right that a credential was provided:
+    it is registered in the project inventory, and the framework''s sync_code_to_remote
+    tool injects it and pushes. The 09:35:24 success came from that path. I generalized
+    from one failed shell attempt.'
+  root_cause: I ran git push from the Director's shell, saw "could not read Username",
+    and generalized from that single path to "the credential is unreadable by either
+    role". I did not consult get_resource_inventory, which lists the credential, nor
+    the encrypted secret store, which names push as its purpose, nor the framework's
+    sync_code_to_remote tool, which injects the credential and pushes. The evidence
+    that a working path existed was available and I did not look.
+  prevention: 'Never conclude that a capability is unavailable from a failure of ONE
+    access path. Distinguish "I cannot do this from where I am" from "this cannot
+    be done". Concretely: before declaring a credential, resource, or capability missing,
+    check the authoritative inventory that owns that fact - here get_resource_inventory
+    explicitly listed the git credential, and the encrypted store named its purpose.
+    A failed attempt tells you the attempt failed; it does not tell you the capability
+    is absent, and treating the two as the same converts a path problem into a false
+    claim about the system. This is the same defect class as the session''s other
+    errors, applied to my own conclusions: I asserted a state I had not measured,
+    and I asserted it repeatedly, and I asked the user to act on it.'
+  status: active
+  context: 'The user asked "不是给了凭证吗" (didn''t you get the credential?) after I had
+    reported the git push as permanently blocked on an unreadable credential. They
+    were right and I was wrong.
+
+
+    I had concluded from failed shell attempts that no credential existed. What I
+    actually had established was narrower: `git push` from a plain shell in the Director''s
+    environment fails with "could not read Username", because the Director''s shell
+    does not carry the project credential. That is a fact about one path, not about
+    the credential.
+
+
+    What I failed to check before concluding: (1) get_resource_inventory records a
+    git credential for this project - `project-epsilon...-github`, github.com, auth
+    type x-access-token; (2) the encrypted store at config/secrets/<project>/ contains
+    github_token.enc whose manifest purpose reads "Clone, pull, and push the configured
+    repository on github.com"; (3) the framework has a tool that injects exactly that
+    credential and pushes - `sync_code_to_remote`, whose implementation in ssh.py
+    prepares an authenticated origin URL with the project token and runs `git push
+    origin <branch>`, and which is in the Main Agent''s allowlist; (4) the 09:35:24
+    successful push was a side effect of that path: the submit at 09:35:19 was followed
+    by the remote-tracking ref being written at 09:35:24.
+
+
+    So a working, credential-bearing push path existed the whole time. I had been
+    asserting "blocked on a credential we do not control" for many rounds, and even
+    told the user to take an action on the basis of that wrong conclusion. The failure
+    is the same one I have been correcting in others all session: I generalized from
+    one measurement (the Director''s shell cannot authenticate) to a claim about the
+    system (no credential exists).
+
+
+    I also sent several dispatches instructing the Agent not to retry the push and
+    describing it as environmental, which suppressed the one path that would have
+    worked.'
+  fix: 'Verified the actual mechanism rather than reasoning from the failed shell
+    attempt: read get_resource_inventory (credential registered), the encrypted store
+    manifest (purpose explicitly includes push), the framework''s sync_code_to_remote
+    implementation (injects the project token and pushes), its presence in the Main
+    Agent allowlist, and the 09:35:19-to-09:35:24 timing that shows the earlier success
+    came from that path. Dispatched the correct instruction: use sync_code_to_remote
+    against server 111, which pushes from the project checkout and then pulls on the
+    remote. Retracted the "unreadable credential / environmental block" conclusion.'
+  related_decisions:
+  - D086
+  - D087
+- id: M126
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: high
+  summary: A worker declared server-to-local fetch unavailable after finding only
+    a local-to-server tool; ssh_fetch_file exists and had already worked twice today.
+    Third instance of "concluding a capability is absent from one failed path" - and
+    the first two were mine, including the git credential the user had to correct
+    me on.
+  root_cause: The worker tried a managed transfer tool, found it was local-to-server
+    only, and generalised to "server-to-local fetch is unavailable" without searching
+    for a function that does the reverse. ssh_fetch_file existed, was reachable via
+    a documented invocation pattern, and had already succeeded twice the same day.
+  prevention: 'Never conclude that a capability is missing from a single failed attempt.
+    Before reporting a path as unavailable, SEARCH the framework for the function
+    that performs it - the successful worker did exactly that and found ssh_fetch_file,
+    while the failing one reported absence. Concretely: grep the tool layer for the
+    operation by name or by intent, and if a function exists but a parameter blocks
+    it (here a default size cap), raise the parameter or chunk the operation rather
+    than concluding the capability is absent. A default limit is not an absence. This
+    has now happened three times today and two of them were my own conclusions, so
+    it is not a rare failure mode - it is the default way this system misreports its
+    own capabilities.'
+  status: active
+  context: 'A worker tasked with pulling the D057 artifact stopped and reported: "managed
+    server-to-local fetch unavailable in this session. The available managed transfer
+    tool is local-to-server only (ssh_upload_file)." It backed up the local stale
+    copy but did not replace it.
+
+
+    That conclusion is false. core.tools.ssh.ssh_fetch_file exists - binary-safe,
+    server to local, reading via head -c max_bytes - and had already worked twice
+    earlier today: the axis-validator pull (local went 122,617 to 123,295, matching
+    the server) and the x12 runner pull (local is now 56,232 B with the pair-level
+    code). The successful axis worker found it by grepping the framework for a fetch
+    function rather than reporting its absence, and the call form is visible in its
+    log.
+
+
+    This is the third instance today of the same error, and the first two were mine:
+    I declared the git credential unreadable after one failed shell attempt (the user
+    corrected me, and a working path - sync_code_to_remote injecting the project token
+    - existed the whole time), and I earlier inferred a compute class from an idle
+    GPU rather than from the plan entry. Now a worker did the same thing with the
+    fetch path.
+
+
+    There is a real constraint the worker would have hit: ssh_fetch_file''s max_bytes
+    defaults to 1 MiB, and the X6 artifact is 1,998,647 B. But that is a parameter
+    to raise, not evidence the path is unavailable - and discovering it would have
+    been the natural next step after finding the function.'
+  fix: Sent the correction with the exact working call form from the successful axis
+    pull's log, noted the max_bytes constraint and which of the three files exceeds
+    it (X6 at 1.99 MB), and instructed that after a bounded-range fetch the final
+    sha must be verified against the server's rather than the path being declared
+    unavailable. Re-issued all three pulls with the hash-update requirement after
+    each, since the manifest hashes written earlier now describe the previous bytes
+    for all three files.
+  related_decisions:
+  - D105
+- id: M127
+  date: '2026-09-14'
+  category: experiment_design
+  severity: high
+  summary: 'X9''s measured SNI-inclusion delta (+0.38 median TV over 703 pairs) is
+    confounded: ARM B''s alphabet is 256^10 vs ARM A''s 32, a 10^24 ratio, and C2
+    already showed a finer alphabet inflates TV. The artifact carries no control or
+    caveat separating SNI dependence from cardinality, so the delta''s attribution
+    is open and must not be reported as the price of SNI.'
+  root_cause: The SNI-inclusive arm was built by appending the fixed-width DST_IP
+    storage value to the partition symbol, which necessarily enlarged the alphabet
+    from 32 to 256^10. So the SNI dependence and the cardinality increase were introduced
+    by the same design decision, and no control was specified to separate them. The
+    artifact reports the delta without flagging that the two arms' alphabets differ
+    by ~10^24.
+  prevention: 'When an experiment varies a treatment, check whether the treatment
+    changes ONE thing or several - and specifically compare the cardinality, dimensionality,
+    or support size of the two arms, because a change in alphabet or partition size
+    is itself a treatment in this project (C2 measured that a finer alphabet inflates
+    TV). The concrete check: print the two arms'' alphabet or support sizes beside
+    the measured delta, and if they differ materially, the delta''s attribution is
+    open until a control holds size fixed and varies only the intended factor. And
+    the general rule this belongs to: a number whose attribution is unresolved must
+    not be published as a quantity with a named cause - the same discipline as M055,
+    where a word silently named two objects.'
+  status: active
+  context: 'X9 was built to measure the price of excluding the SNI-derived destination-host
+    identifier from the declared channel: run the same per-pair TV bracket twice,
+    once on the SNI-EXCLUDED (direction,size) k=5 prefix channel (ARM A) and once
+    on the SNI-INCLUSIVE channel (ARM B), and report the delta as a quantified price
+    rather than an unstated assumption.
+
+
+    It ran and produced a large, consistent shift: over 703 pairs, delta_tv_hat median
+    +0.3769 / mean +0.3923, and delta_eps_hi median +0.3879 / mean +0.3897. Outcome
+    field: MEASURED_SNI_CHANNEL_INCLUSION_DELTA.
+
+
+    The design is correct in the respects that were specified: same_flow_set_across_arms
+    true, flow-disjoint and time-disjoint verified, k=5/M=1, service threshold 2000,
+    buffer month 202412 unused, cpu_only true, no packet-level split. The object declaration
+    - that both arms are laws over the same object differing only by whether DST_IP
+    participates - is supported by the method section.
+
+
+    But the artifact''s own alphabet block shows the two arms differ in a second way:
+    arm_a fixed alphabet size 32 (the declared (direction,size) k=5 prefix), arm_b
+    fixed alphabet size 38685626227668133590597632 = 256^10 (the full fixed-width
+    DST_IP storage domain). The ratio is ~10^24.
+
+
+    This project has already established, as C2''s headline mechanism, that a finer
+    alphabet RESOLVES MORE rather than less: tv medians at k=5 rise 0.5805 -> 0.8833
+    -> 0.9248 -> 0.9462 -> 0.9673 as M increases. So a +0.38 TV shift has two available
+    explanations - SNI genuinely separating services, or a vastly finer partition
+    separating flows as an alphabet-cardinality property - and this artifact cannot
+    separate them, because the SNI treatment and the cardinality treatment are the
+    same treatment.
+
+
+    I searched the artifact for any control or caveat and found none: ''cardinalit''
+    0 hits, ''control'' 0 hits, ''matched'' 0 hits, ''confound'' 0 hits, ''caveat''
+    0 hits, ''limitation'' 0 hits. Nothing warns a reader that the arms differ in
+    alphabet size by 24 orders of magnitude.
+
+
+    This is the same class as M055, where the word ''marginal'' silently named two
+    objects and cost a conclusion. The failure mode is a treatment that changes two
+    things at once with no control separating them - so the measured number is real
+    but its attribution is not established.
+
+
+    I caught it by reading the artifact''s alphabet block directly rather than accepting
+    the outcome field, and before the result could be written into any paper-facing
+    surface.'
+  fix: 'Ruled that the +0.39 must not be reported as the price of SNI until the confound
+    is separated, and gave two paths: (a) add a matched-cardinality control - rerun
+    ARM B''s identity substitution using a random identifier drawn from the same fixed-width
+    storage domain but independent of the SNI, so the alphabet size is held fixed
+    and only the SNI dependence is broken; if the delta collapses the shift was cardinality,
+    if it survives it is SNI; or (b) state the confound explicitly and refuse the
+    ''price of SNI'' reading. (a) answers the question the experiment was built to
+    ask and is a small modification of the existing runner. Instructed that X9 advance
+    to DONE only with a conclusion reflecting this.'
+  related_decisions:
+  - D078

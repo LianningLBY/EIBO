@@ -43,6 +43,26 @@
 > **⇒ Required: a range assertion — anything named as a rate asserts `0 <= value <= 1` at production.** One line;
 > it is the check that would have caught this at the source rather than at a reviewer's anomaly.
 > **⇒ The containment verdict is UNAFFECTED** (it comes from `binomial_test`, which does not consume either field).
+> **⚠ M127 — X9 RAN AND ITS DELTA IS CONFOUNDED; IT MUST NOT BE REPORTED AS THE PRICE OF SNI.**
+> `x9_sni_channel_delta.json` (1,928,205 B) reports **`MEASURED_SNI_CHANNEL_INCLUSION_DELTA`** over **703 pairs**:
+> `delta_tv_hat` **median +0.3769** / mean +0.3923 · `delta_eps_hi` **median +0.3879** / mean +0.3897.
+> **Design is correct in every respect specified:** `same_flow_set_across_arms: true`, flow- and time-disjoint
+> verified, k=5/M=1, service threshold 2000, buffer month 202412 unused, `cpu_only: True`, no packet-level split.
+> **⇒ BUT THE TWO ARMS DIFFER IN A SECOND WAY (the artifact's own `alphabet` block):**
+> **ARM A alphabet = 32** (the declared (direction,size) k=5 prefix) · **ARM B = 256^10 = 3.87e25** (the full
+> fixed-width `DST_IP` storage domain) ⇒ **ratio ~10^24.**
+> **⚠ AND C2 ALREADY MEASURED THAT A FINER ALPHABET INFLATES TV** (*"a finer alphabet RESOLVES MORE, not less":
+> tv medians at k=5 rise 0.5805 → 0.8833 → 0.9248 → 0.9462 → 0.9673*). **⇒ So +0.38 has TWO available
+> explanations — SNI separating services, or a 10^24-finer partition separating flows — and this artifact
+> cannot separate them, because the SNI treatment and the cardinality treatment are the SAME treatment.**
+> **⇒ The artifact carries NO control or caveat: `cardinalit` 0 hits · `control` 0 · `matched` 0 · `confound` 0
+> · `caveat` 0 · `limitation` 0. Nothing warns a reader the arms differ in alphabet size by 24 orders.**
+> **⇒ REQUIRED: either (a) a MATCHED-CARDINALITY CONTROL** — re-run ARM B with a random identifier drawn from the
+> same fixed-width storage domain but INDEPENDENT of the SNI, holding alphabet size fixed and breaking only the
+> SNI dependence (**if the delta collapses it was cardinality; if it survives it is SNI**) — **or (b) state the
+> confound explicitly and refuse the "price of SNI" reading.** **UNTIL THEN the +0.39 may be reported only as
+> "a partition augmented with the destination-host identifier raises measured TV by ~0.39, attribution OPEN".**
+> **⇒ Same class as M055, where a word silently named two objects.**
 > **★★★ D078 — k=5 CONTAINMENT RESULT: THE FLOOR IS NOT FALSIFIED. C1's MISSING PIECE HAS LANDED.**
 > `X12_k5` COMPLETED 18:12; artifact 191,867 B (sha `14f0f581…`), GPU released. **I read all 9 cells myself.**
 > **Design:** 3 detectors × 3 holdout levels on the **informative stratum (340 pairs)** — a pre-registered,
