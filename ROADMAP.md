@@ -27,7 +27,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 - [x] **x3_axis_validation pull + re-register** — DONE; art_20260914_de3248, 123,295 B, sha 4061258e.
 - [x] **X13 manifest consolidation + pointer fix** — DONE; single live entry art_20260914_0c143b, sha 430ebed6; two retired; spec.artifact_id now resolves to the live entry.
 - [x] **X8 DPI relabel** — DONE; sha 0f8b83bb, 0/0 testable, smoke-test label, empirical claim note recorded.
-- [ ] **X12 k=5 violations/trials backfill** — the artifact's binomial p-values are real (9/9 reject_null=false) but the per-holdout violations/trials fields are None; persist them.
+- [x] **X12 k=5 violations/trials backfill** — DONE; 9/9 counts persisted and all reproduce their recorded p-values; `backfill_note` in-artifact; local == manifest == registry at 193,228 B / `bebe6bf0`.
 - [ ] **Paper: channel-sensitivity section** — X9_E dose-response finding, scoped to `tv_hat` per D087 (Paper Agent territory, later).
 
 ## BLOCKED_ON
