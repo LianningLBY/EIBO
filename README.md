@@ -14,11 +14,17 @@ Target venue: **USENIX Security 2027, Cycle 2 (deadline 2027-01-26)**.
 |---|---|
 | `src/eibo/` | Reusable research code. `statcore.py` (TV bounds) and `divisibility.py` (rejection-generic lower bound) are the **authority** for their formulas — call them, never restate. |
 | `scripts/` | Command-line experiment and analysis scripts. |
-| `artifacts/` | **Tracked.** The evidentiary chain: every reported number maps to an artifact's bytes. See `artifacts/manifest.yaml`, which is the authority for artifact location. |
+| `artifacts/` | **Tracked, including `artifacts/**/data/`.** The evidentiary chain: every reported number maps to an artifact's bytes. See `artifacts/manifest.yaml`, which is the authority for artifact location — not any directory. |
 | `docs/` | Paper working tree (`docs/paper/main.tex`), briefs, framing. |
 | `tests/` | Regression tests, including the alpha-split and radius guards. |
 | `logs/` | **Not tracked.** Runtime logs and chat transcripts. |
-| `data/` | **Not tracked.** Local corpora and staged inputs. |
+| `data/` | **Not tracked** (root-anchored; corpora and staged inputs only). |
+
+**Every artifact is tracked.** All 56 JSON artifacts under `artifacts/` are in version control (13.4 MB total,
+largest 1.9 MB). Bulk binaries — `*.h5`, `*.pcap`, `*.pt`, `*.pth`, `*.safetensors`, `*.pkl` — are excluded by
+extension, and there are no such files inside `artifacts/` in this tree. **If an artifact is ever added that is
+too large to track, it must be listed here by name as server-only**, because an untracked artifact silently
+breaks the byte-traceability claim below.
 
 ## Claims
 
