@@ -212,6 +212,18 @@
 > gap — but the numbers I published were wrong and the specific runner I named was wrong.** **⇒ Corrected here rather
 > than left standing, and the search method is the lesson: a key name is not a binding, and I must search for the
 > RELATIONSHIP (a 64-hex value tied to a runner) rather than a literal spelling I expect to find.
+>
+> **★ D093 — `X11` IS RECORDED AS COMPLETE IN THE DECISION LOG AND AS `PREPARING` IN THE REGISTRY.**
+> Measured: the artifact (`x11_feasibility.json`) reports **`protocol.status = completed`**, **3,321 per-pair rows**,
+> `upper_fraction_eps_hi_lt_0_5 = 0.16079494128274616` (= 534/3321). **D076 already logged that result and I recomputed it
+> myself at the time.** But the registry row reads **`PREPARING`, `conclusion: None`, `pid: None`, `completed_at: None`.**
+> **⇒ So the project's own record says both "finished with a result" and "not started", and the STATUS is the field a
+> reader and the coverage tool both filter on.** `compute_coverage_matrix` consequently counts X11 as `running`.
+> **⇒ ⇒ Consequence: the C1 coverage figure I just read (58.3%) is understated by a completed experiment being counted
+> as in-flight. ⇒ The fix is a normal terminal update — a completed experiment with a logged result and a registered
+> artifact moves to `DONE` with its conclusion — **not** a new status value (the D088 trap).
+> **⇒ Note the asymmetry with D088:** there I ruled that a WITHDRAWN design must not read as live; here a COMPLETED one
+> does not. **⇒ Both are the same defect: the status field disagrees with the artifact that settles the question.**
 > six we had not looked at.**
 >
 > **★ D088 — A WITHDRAWN DESIGN MUST NOT CARRY A LIVE STATUS.** `X9_C` is withdrawn (D084), its row carries the
