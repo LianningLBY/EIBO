@@ -278,6 +278,14 @@
 > "no effect".**
 > **⇒ Same discipline as the rest of the session: the field a reader filters on must not say "measured" about an
 > empty set — the same failure as a `PREPARING` row for a withdrawn design (D088).**
+>
+> **✓ D089 ITEM ① CLOSED.** Verified in the file (`2ff45422…`, 25,930 B): the artifact field (line 458) and the
+> stdout line (line 520) now both read **`RUNNER_SHA256`** — the single value captured at line 41. **No
+> recomputation remains, so those two channels can no longer disagree about which code ran.** `AST OK`.
+> **⇒ STILL OPEN BEFORE SUBMIT: D090 (per-point `arithmetically_forced_to_clip` + the ~7363 threshold), D091
+> (per-rung `both_arms_nonclipped`, deltas quoted only where true), D092 (an empty comparison must not be
+> labelled `informative`).** **⇒ The ladder, arms, exclusion logic and premise test are unchanged by all of
+> these — four labeling additions and one residual, no design change.**
 > **⇒ Same discipline as the rest of the session: state what the arithmetic forbids BEFORE the run, so the run
 > cannot be read as having discovered it.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
