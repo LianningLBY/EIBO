@@ -40,9 +40,21 @@ this file alone, which artifacts are *not* in the repository and why. The result
 ## Claims
 
 - **C1** — a two-sided ε-bracket is computable on real encrypted traffic, upper side finite-sample strict,
-  lower side asymptotic (**336/990 = 33.9%** of service pairs at k=5/M=1).
+  lower side asymptotic (**336/990 = 33.9%** of service pairs at k=5/M=1). **The gate is not a settled
+  constant and must not be cited as one:** it sits at 336 because exactly one boundary pair crosses the
+  0.05 line, and its own artifact requires the sensitivity to travel with the number. Corrected full-n
+  margins are **+0.0088** (nearest passing pair) and **−0.0073** (nearest failing pair), **0 pairs within
+  0.005**. Two companion readings travel with it: pair (35,49) moved the *wrong* direction as n grew, so
+  "larger n tightens the lower bound" is a tendency, not a guarantee; and pair (39,44) is bit-identical
+  across runs only because its full n sat *below* the cap, so "no change" there means "never bound", not
+  "stable".
 - **C2** — the certificate horizon is short and the coarsest channel is the only viable rung
-  (upper-only certifiable fraction falls monotonically in alphabet resolution M).
+  (upper-only certifiable fraction falls monotonically in alphabet resolution M). **The mechanism runs
+  opposite to the intuition:** a finer alphabet **resolves more, not less** — channel TV at k=5 rises
+  **0.5805 → 0.8833 → 0.9248 → 0.9462 → 0.9673** — and since the certificate requires
+  `eps_hi = tv + radius < 0.5`, that *higher* TV is exactly what destroys it. Coarse-graining is
+  *required* for a certificate to exist at all, not epistemically preferable. (M=1 also has the
+  **highest** `k_cert`, not the lowest.)
 - **C3** — a methods/limits finding: the standard plug-in chain-rule estimator **cannot adjudicate** the
   dependent-prefix growth question at this k window, n, and occupancy-collapse curve, and it is robust to
   two independent repair attempts.
