@@ -1,4 +1,4 @@
-_next_id: 32
+_next_id: 33
 constraints:
 - id: C001
   added: 2026-09-13 11:37 UTC
@@ -470,3 +470,23 @@ constraints:
     one instead of measured. A recorded lesson alone has not prevented this, so it
     needs to be a procedure.
   decision_id: D079
+- id: C032
+  added: 2026-09-14 11:41 UTC
+  summary: Any fix to a runner that executes on the server is not complete until synced
+    and verified AT THE DESTINATION. Before dispatching any task that re-runs a runner,
+    state the local size+sha and the server size+sha in the dispatch itself, so a
+    divergence is visible at dispatch rather than after a wasted run. After any runner
+    re-run, the task ends with a pull-and-verify step reported as a size+sha pair.
+    Never report a runner fix as done from the edit alone.
+  scope: all
+  reason: 'I made the same error twice on two different runners: fixed x3_axis_validation.py
+    locally and never pushed it (M108), then did exactly that again to x3_parametric_growth.py
+    (M123). In the second case the divergence was verifiable at dispatch time - local
+    14,233 B / sha 08f49cf702e26b1b with d057_caution present, server 13,276 B / sha
+    4445de273e130a89 with it absent - and I did not check. The first lesson was recorded
+    in the mistake ledger with a correct prevention text ("an edit is not in effect
+    until it is pushed to the tree where the code runs, and the push must be verified
+    by reading the file back ON THE REMOTE TREE"), and it still did not fire. A rule
+    that lives only in a ledger does not operate; this makes it a workflow step. A
+    worker caught the repeat by checking its own premise, not by any control of mine.'
+  decision_id: D098

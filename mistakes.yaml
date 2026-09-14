@@ -1,4 +1,4 @@
-_next_id: 122
+_next_id: 124
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -6028,3 +6028,123 @@ mistakes:
   - D070
   - D091
   - D092
+- id: M122
+  date: '2026-09-14'
+  category: communication
+  severity: medium
+  summary: My task book sent the parametric re-run worker hunting a file that exists
+    only locally, telling it to look on the server. It burned its whole budget searching,
+    produced nothing, and reported "completed" - the re-run never started. Second
+    instance of completed-with-no-output, and this one was mine.
+  root_cause: I named a server path for a file that only exists locally, and presented
+    a repository artifact as though it were a runtime prerequisite. The executor could
+    not find it, consumed its budget searching, and stopped - reporting completed
+    with no output. The status field did not distinguish this from success.
+  prevention: 'Every path named in a task book must state WHICH TREE it lives in (local
+    repository, server tree, or registration snapshot) and must be verified to exist
+    in that tree BEFORE the task is dispatched. A wrong or missing path does not fail
+    fast - it consumes the executor''s whole budget on the search, which is why it
+    presents as "completed with no output" rather than as an error. Concretely: before
+    writing a dispatch that references a file, confirm the file exists at that path
+    in the tree I claim; and when a path is a repository artifact rather than a runtime
+    input, do not present it as a prerequisite for execution. The general form, and
+    this is the third time this session: check that the thing I am asserting about
+    the environment is true of the environment, rather than true of my mental model
+    of it.'
+  status: active
+  context: 'I dispatched a parametric re-run task whose brief told the worker to check
+    for an intermediate copy at /root/eibo/artifacts/X3/intermediate/x3_parametric_growth.py
+    on the server. That path does not exist there: the intermediate copy is a LOCAL
+    tracked repository artifact (artifacts/X3/intermediate/x3_parametric_growth.py,
+    14,233 B), and it has nothing to do with executing the run - the runner writes
+    only to its own ARTIFACT_PATH. The worker spent its whole budget hunting the missing
+    file and stopped mid-investigation, then reported status "completed" with no output:
+    the re-run never started, and the local parametric artifact is still the pre-fix
+    version (215,476 B, mtime 08:09, withdrawn wording, no d057_caution).
+
+
+    This is the second instance of "completed with no output" (the first was the max_tpr
+    attempt). Both are the inverse of the session''s earlier false-failed pattern,
+    and both reinforce that neither status value is evidence about the work.
+
+
+    This one is my fault in a specific and preventable way: I named a path without
+    stating which tree it lives in, and the executor could not find it. A task book
+    that sends an executor hunting for a file burns its entire budget on the hunt
+    and produces nothing.
+
+
+    Verified alongside: the axis pull in the SAME round did succeed, and I confirmed
+    it by reading the bytes rather than the status - local went from 122,617 B / 9f7578be
+    to 123,295 B / 4061258e, matching the server, with a backup taken first and JSON
+    OK reported. So the pure-transport wording works; the distinction is that its
+    task book named paths it could actually reach.'
+  fix: 'Accepted the fault explicitly in the dispatch rather than framing it as a
+    worker failure, and issued a corrected task book that names the correct tree for
+    each path: sync the fixed LOCAL working-tree runner to the server root, run it,
+    confirm the D057 wording and d057_caution land in the top-level artifact, then
+    re-register and pull. Also separated X6, which was never in that worker''s scope
+    despite my asking for it in D095, into its own pull task.'
+  related_decisions:
+  - D095
+  - D096
+- id: M123
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: high
+  summary: 'M108 repeated on a different runner: I fixed x3_parametric_growth.py locally
+    (14,233 B, d057_caution present) and never pushed it to the server (13,276 B,
+    absent). A worker caught it by checking its premise and stopping. The lesson was
+    recorded but not attached to the step where it applies, so it did not operate.'
+  root_cause: I made a fix in the local tree and treated the edit as the completion
+    of the task, exactly as in M108. The earlier lesson was recorded but never attached
+    to the workflow step where it applies, so it did not fire. The worker's premise
+    check is what caught it, not any control of mine.
+  prevention: 'A rule that exists only in a mistake ledger does not operate; it must
+    be attached to the step where it applies. Concretely for this project: any fix
+    to a runner that executes on the server must be followed IMMEDIATELY by a sync
+    step whose verification is reading the file back on the remote tree and comparing
+    size and sha - not by a note that the fix is done. And because I have now made
+    this error twice on two different runners, the check belongs in the dispatch itself:
+    before writing a task that re-runs a runner, state the local size and sha and
+    the server size and sha, so the divergence is visible at the moment of dispatch
+    rather than after a wasted run. The general form: prefer a check that is forced
+    by the workflow over one that depends on remembering a lesson.'
+  status: active
+  context: 'Hours after logging M108 - where I fixed x3_axis_validation.py locally
+    and never pushed it to the server tree - I did exactly the same thing to a different
+    runner. I fixed x3_parametric_growth.py at the source (adding the D057 non-diagnostic
+    wording and a d057_caution field, in both the working-tree copy and the tracked
+    artifacts/X3/intermediate/ copy) and treated the fix as complete. The server''s
+    copy was never updated.
+
+
+    The divergence is stark and verifiable: LOCAL x3_parametric_growth.py is 14,233
+    B / sha 08f49cf702e26b1b with d057_caution present; SERVER x3_parametric_growth.py
+    is 13,276 B / sha 4445de273e130a89 with d057_caution absent and zero non-diagnostic
+    hits. The worker dispatched to re-run it checked the premise first, found neither
+    copy carried the fix, reported the specific bytes and the literal errors, and
+    stopped - which prevented a second wasted round in which an unfixed re-run would
+    have regenerated the identical withdrawn wording and we would have asked why the
+    fix had no effect.
+
+
+    I had also written a task book presenting the intermediate copy as a server-side
+    prerequisite when it is a local-only repository artifact (M122), and this worker
+    found the truth by testing rather than assuming.
+
+
+    The important lesson is not the repetition of M108 but that a recorded lesson
+    did not operate. M108''s prevention text said "an edit is not in effect until
+    it is pushed to the tree where the code runs, and the push must be verified by
+    reading the file back ON THE REMOTE TREE". That rule existed, was written by me,
+    and I still did not run the check. A rule that lives only in a mistake ledger
+    is not a control.'
+  fix: Confirmed the divergence and issued a corrected task that front-loads the sync
+    (backup, transfer, py_compile, compare size and sha and report both) and gates
+    the re-run on the sync matching. Explicitly credited the worker's stop as the
+    best-executed in the session, because it checked the premise, found it false,
+    reported specific bytes and literal errors, and refused to act - which is what
+    prevented the repeat from also costing a round.
+  related_decisions:
+  - D098
