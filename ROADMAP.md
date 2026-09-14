@@ -178,6 +178,21 @@
 > captured at MODULE IMPORT — before any work — not after the run.**
 > **⇒ Same discipline as the rest of the session: a binding must live in the bytes we ship, and be taken before the
 > thing it describes — otherwise it is a claim about a file that may no longer be the file that ran.**
+>
+> **★★ D087 EXTENDED — IT IS NOT AN X9_E QUIRK: 6 OF 8 RUNNERS DO NOT BIND THEIR HASH IN THE ARTIFACT.**
+> Measured across every runner: **only `x6_divisibility_lower_bound.py` and `x3_axis_validation.py` carry
+> `runner_sha256` inside the written output. Six do not** — `x12_detector_validation`, `x9_sni_channel_delta`,
+> `x9_dose_response_channels`, `x11_feasibility_probe`, `x3_parametric_growth`, `x9_cardinality_control`.
+> **⇒ So the artifact→code binding that the project's byte-traceability claim rests on holds for TWO artifacts
+> and is absent for six. The two that have it are the two whose hashes were quoted today as evidence — which is
+> exactly why the gap went unnoticed: the sampled cases were the compliant ones.**
+> **⇒ And the moment is wrong even where it exists:** all compute the hash at the END of the run, from disk.
+> **⇒ ⇒ FIX, APPLIES TO EVERY NEW RUNNER: capture the hash at MODULE IMPORT, record it as a field in the written
+> artifact, never only on stdout.** **Retro-fitting the six historical artifacts is a separate decision** — the
+> artifacts are frozen and re-running them is not free; the rule binds from here forward, and D087's list above
+> is the record of which shipped artifacts lack it.
+> **⇒ Same discipline as the rest of the session: a green check on the two compliant cases told us nothing about the
+> six we had not looked at.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
 > `excluded_arm_mean_eps_hi = 0.6102972071320967`, `aggregate_delta_eps_hi = 0.3897027928679033`, and
