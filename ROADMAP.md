@@ -385,6 +385,24 @@
 > **⇒ Same discipline as the rest of the session: the runner asserted a path; nothing verified the path existed before
 > 9.5 minutes of computation depended on it — a precondition checked LAST instead of first.**
 >
+> **⚠⚠ D097 CORRECTED — MY FIX (b) WAS BACKWARDS, AND THE EVIDENCE IS AN ARTIFACT THAT SUCCEEDED.**
+> I ruled: *"place the bytes where the manifest says they are — the nested path — since that is what our registry-of-record
+> binds."* **Wrong, and measurable. The SERVER uses the FLAT layout; the NESTED layout is a LOCAL convention.**
+> **⇒ PROOF: `x6_divisibility_lower_bound` SUCCEEDED, and its own artifact records the paths it read —
+> `/root/eibo/artifacts/q1_eps_lo_symbol_map.json` (FLAT), `…/x4_frontier_function.json` (FLAT) — with sha `aafe46af…`,
+> which is **byte-identical to the local NESTED copy** `artifacts/_project/data/q1_eps_lo_symbol_map.json`.**
+> **⇒ So the same bytes live FLAT on the server and NESTED locally. `register_artifact` creates the nested layout LOCALLY;
+> the server copies are flat.** **⇒ `x6` is written for the server and works. `x9_dose_response_channels` hardcoded the
+> NESTED path — a local-only convention — and failed on the server.**
+> **⇒ ⇒ MY (b) WOULD HAVE DEEPENED THE DIVERGENCE: placing a nested copy on the server creates BOTH layouts there.**
+> **⇒ ⇒ CORRECTED FIX: (a) still — make the runner try BOTH and name every path it tried — but the ORDER is FLAT FIRST**
+> (where the bytes actually are on the machine that executes), **NESTED as fallback.** **⇒ And do NOT create a second copy
+> on the server.** **⇒ The real defect in the runner was not "used the wrong path" but "tried exactly ONE path, and it was
+> the one that exists only in the other tree".**
+> **⇒ Same discipline as the rest of the session, and again against my own instruction: I asserted a fix from the layout I
+> could see (local) rather than the layout of the tree where the code RUNS. ⇒ The successful artifact was the evidence that
+> could have settled it, and I did not look at it first.**
+>
 > **✓✓ D096 CLOSED BY DIRECT MEASUREMENT — THE RUN LOADED THE GATED FILE. No longer inference.**
 > The decisive server-side check (`ps lstart` + `stat`, read-only, pid 728753) settles it:
 > **`/root/eibo/x9_dose_response_channels.py  mtime = 2026-09-14 23:53:27 +0800` (= `15:53:27 UTC`, 34,554 B)
