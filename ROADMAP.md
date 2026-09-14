@@ -192,6 +192,7 @@
 > artifacts are frozen and re-running them is not free; the rule binds from here forward, and D087's list above
 > is the record of which shipped artifacts lack it.
 > **⇒ Same discipline as the rest of the session: a green check on the two compliant cases told us nothing about the
+> six we had not looked at.**
 >
 > **⚠ D087 CORRECTED — MY OWN COUNT WAS PRODUCED BY THE DEFECT I WAS DESCRIBING.** The extension above lists
 > **six** runners as not binding, **including `x11_feasibility_probe`**. **That is wrong: X11 DOES bind** — its artifact
@@ -213,6 +214,19 @@
 > than left standing, and the search method is the lesson: a key name is not a binding, and I must search for the
 > RELATIONSHIP (a 64-hex value tied to a runner) rather than a literal spelling I expect to find.
 >
+> **⚠ M129 — MY OWN COMMIT SWEPT AN UNEXPLAINED DELETION, AND IT IS THE DISCIPLINE I HAD JUST IMPOSED ON OTHERS.**
+> Commit `c468739` carried **both** the ROADMAP correction **and the deletion of `artifacts/X9_x9_sni_channel_delta.json`**
+> (**62,178 lines**) — **with no mention of it in the message.** I had staged only `ROADMAP.md`; the deletion was **already
+> in the index** from an earlier operation, and a commit sweeps the **whole index**, not just what that turn staged.
+> **⇒ I had told Main Agent, twice and in writing, that a deletion must be committed deliberately and NAMED as duplicate
+> cleanup.** I then did the opposite in my own commit, and it is already published.
+> **⇒ VERIFIED LOSSLESS, which is why this is a discipline failure and not a data loss:** the deleted blob's sha
+> (`7f6edd6b…`) **equals the surviving registered copy** at `artifacts/X9/data/x9_sni_channel_delta.json`, and the manifest
+> binds **exactly one** entry resolving there. **Nothing was lost.**
+> **⇒ RULE: before committing, read the STAGED set (`git diff --cached --stat`), not the working tree.** A path staged by
+> an earlier operation rides along silently. **The working tree was clean of surprises; the INDEX was not, and I checked
+> the wrong one** — the same class as everything else today: **I verified the neighbour of the thing under claim.**
+>
 > **★ D093 — `X11` IS RECORDED AS COMPLETE IN THE DECISION LOG AND AS `PREPARING` IN THE REGISTRY.**
 > Measured: the artifact (`x11_feasibility.json`) reports **`protocol.status = completed`**, **3,321 per-pair rows**,
 > `upper_fraction_eps_hi_lt_0_5 = 0.16079494128274616` (= 534/3321). **D076 already logged that result and I recomputed it
@@ -224,7 +238,6 @@
 > artifact moves to `DONE` with its conclusion — **not** a new status value (the D088 trap).
 > **⇒ Note the asymmetry with D088:** there I ruled that a WITHDRAWN design must not read as live; here a COMPLETED one
 > does not. **⇒ Both are the same defect: the status field disagrees with the artifact that settles the question.**
-> six we had not looked at.**
 >
 > **★ D088 — A WITHDRAWN DESIGN MUST NOT CARRY A LIVE STATUS.** `X9_C` is withdrawn (D084), its row carries the
 > withdrawal note, its runner is marked dead at the head, it was never run, and it has no artifact — **yet its
