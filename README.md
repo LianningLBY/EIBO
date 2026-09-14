@@ -20,11 +20,22 @@ Target venue: **USENIX Security 2027, Cycle 2 (deadline 2027-01-26)**.
 | `logs/` | **Not tracked.** Runtime logs and chat transcripts. |
 | `data/` | **Not tracked** (root-anchored; corpora and staged inputs only). |
 
-**Every artifact is tracked.** All 56 JSON artifacts under `artifacts/` are in version control (13.4 MB total,
-largest 1.9 MB). Bulk binaries — `*.h5`, `*.pcap`, `*.pt`, `*.pth`, `*.safetensors`, `*.pkl` — are excluded by
-extension, and there are no such files inside `artifacts/` in this tree. **If an artifact is ever added that is
-too large to track, it must be listed here by name as server-only**, because an untracked artifact silently
-breaks the byte-traceability claim below.
+**Every artifact is tracked.** All 58 JSON artifacts under `artifacts/` are in version control. Bulk binaries —
+`*.h5`, `*.pcap`, `*.pt`, `*.pth`, `*.safetensors`, `*.pkl` — are excluded by extension.
+
+**Server-only payloads, listed by name (the one exception to byte-traceability).** The k=5 detector run wrote
+three score payloads of about **1.14 GB each**:
+
+| payload | size | why it is not tracked |
+|---|---|---|
+| `artifacts/X12_k5/data/x12_detector_validation_k5__per_class_scores__lightgbm.npz` | ≈1.14 GB | too large to version; per-flow error is reconstructable from it |
+| `…__per_class_scores__prototype.npz` | ≈1.14 GB | same |
+| `…__per_class_scores__ronetc.npz` | ≈1.14 GB | same |
+
+These live on the experiment server only and are excluded by the `*.npz` rule. **They are named here because an
+untracked artifact silently breaks the byte-traceability claim below** — a reader must be able to tell, from
+this file alone, which artifacts are *not* in the repository and why. The results computed from them are in
+`x12_detector_validation_k5.json`, which *is* tracked.
 
 ## Claims
 

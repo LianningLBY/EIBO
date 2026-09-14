@@ -40,6 +40,15 @@ __pycache__/
 # --- Bulk intermediates inside artifacts that are regenerable, not cited ---
 artifacts/tmp/
 artifacts/*.tmp
+
+# --- Server-only payloads: too large to track, named in README.md ------------
+# These MUST come after the !artifacts/**/data/** negation above, or that
+# negation re-includes them and ~3.4 GB enters the repository. k=5 wrote three
+# ~1.14 GB score payloads (per_class_scores__{lightgbm,prototype,ronetc}.npz);
+# they are load-bearing (per-flow error is reconstructable from them) but they
+# stay on the server, and README.md lists them by name as the exception to the
+# byte-traceability claim.
+*.npz
 # --- Stale scaffolding from an earlier repo attempt (referenced by no script) ---
 .eibo_remote_gitignore
 .work/
