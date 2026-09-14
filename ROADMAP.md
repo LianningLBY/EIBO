@@ -62,6 +62,19 @@
 > SNI dependence (**if the delta collapses it was cardinality; if it survives it is SNI**) — **or (b) state the
 > confound explicitly and refuse the "price of SNI" reading.** **UNTIL THEN the +0.39 may be reported only as
 > "a partition augmented with the destination-host identifier raises measured TV by ~0.39, attribution OPEN".**
+> **★ D083 — SNI ARM RULED, AND THE SPEC'S FOUNDING CLAIM IS NOW TESTABLE RATHER THAN ASSUMED.**
+> The artifact's own source block records that the corpus carries **BOTH** fields:
+> `sni_derived_destination_host_identifier_field: DST_IP` **and** `sni_field: QUIC_SNI`.
+> **⇒ So the claim that the anonymised identifier is a DETERMINISTIC FUNCTION of the SNI — the claim the whole
+> exclusion rests on — can be MEASURED on the shared flows in the same pass, and had NEVER been checked.**
+> **(a) PRIMARY ARM stays `DST_IP`** (do NOT substitute the raw hostname — the declared channel excludes the
+> identifier, and RC5 justifies THAT exclusion; a hostname arm would change the claim, not control it).
+> **(b) ADD THE PREMISE TEST:** is `DST_IP` a deterministic function of `QUIC_SNI` on the shared flows? **Report yes
+> or no.** **YES** ⇒ the exclusion is justified as claimed and the artifact should SAY so rather than ask a reader
+> to trust it. **NO** ⇒ the object declaration's central phrase is unproven and the anonymisation destroyed
+> information, which is itself a finding.
+> **(c) A `QUIC_SNI` arm is DEFERRED**, triggered only by a **NO** from (b) or by wanting an explicit leak bound.
+> **⇒ Same discipline as the rest of the session: turn a load-bearing assumption into a measurement.**
 > **⇒ Same class as M055, where a word silently named two objects.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
@@ -733,6 +746,7 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D083 | 2026-09-14 | Ruled the X9 SNI arm: keep DST_IP as primary per s | X9 |
 | D082 | 2026-09-14 | X9 measured a +0.38 SNI-inclusion delta, but the t | X9, X4 |
 | D081 | 2026-09-14 | The max_tpr re-measurement produced its answer and | X12_k5, X12 |
 | D080 | 2026-09-14 | M108 repeated on a second runner: the parametric r | X3, X6 |
@@ -742,5 +756,4 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 | D076 | 2026-09-14 | X11 measured 0.1608 vs the primary corpus's 0.3434 | X11, X1 |
 | D075 | 2026-09-14 | Three rulings settled by measurement: (1) the k=5  | X12, X3 |
 | D074 | 2026-09-14 | The D063 freeze guard works but its boolean output | X3 |
-| D073 | 2026-09-14 | Fixed .gitignore so artifacts/ (the evidence chain | — |
 

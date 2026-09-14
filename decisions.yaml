@@ -1,4 +1,4 @@
-_next_id: 82
+_next_id: 84
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -3704,14 +3704,20 @@ decisions:
   - D046
 - id: D065
   date: 2026-09-14 07:46 UTC
-  superseded_by: 'D071'
-  superseded_note: 'The "0/120 violations" validity figure in this record was SUPERSEDED by D071. The zero count was an artifact of an undersized validity sample (VALIDITY_SAMPLE_SIZE was 400 at the time of this record and was later raised). D071 restates the outcome in terms of TESTABLE replications and breaks out a separate set of vacuously-non-violating replications. The corrected figures must be read from D071 and from the X6 artifact, not from this record. DO NOT CITE THE 0/120 FIGURE.'
+  superseded_by: D071
+  superseded_note: The "0/120 violations" validity figure in this record was SUPERSEDED
+    by D071. The zero count was an artifact of an undersized validity sample (VALIDITY_SAMPLE_SIZE
+    was 400 at the time of this record and was later raised). D071 restates the outcome
+    in terms of TESTABLE replications and breaks out a separate set of vacuously-non-violating
+    replications. The corrected figures must be read from D071 and from the X6 artifact,
+    not from this record. DO NOT CITE THE 0/120 FIGURE.
   summary: 'X6 COMPLETED and delivers what C2 needed: the divisibility lower bound
     is non-empty exactly where the plug-in certificate is lost (100% nontrivial at
-    k=15-30, informative 0.9989-1.0), validity 0/120 at alpha 0.05 -- SUPERSEDED, DO NOT CITE THIS FIGURE (see
-    superseded_note): the corrected form is 96/96 TESTABLE rows comply -- repo function
-    called not reimplemented. It was being recorded as not-run on three surfaces;
-    registered now. I also fixed the framing''s banned "assumption-free" wording myself.'
+    k=15-30, informative 0.9989-1.0), validity 0/120 at alpha 0.05 -- SUPERSEDED,
+    DO NOT CITE THIS FIGURE (see superseded_note): the corrected form is 96/96 TESTABLE
+    rows comply -- repo function called not reimplemented. It was being recorded as
+    not-run on three surfaces; registered now. I also fixed the framing''s banned
+    "assumption-free" wording myself.'
   rationale: 'X6 -- the plan''s only MECHANISM-NOVELTY track and the P1 line I restarted
     earlier today -- has COMPLETED, and the project was recording it as not-run on
     three surfaces. I verified the gaps in my own tree (no local artifact, no manifest
@@ -3726,7 +3732,10 @@ decisions:
 
     - VALIDITY PASSES at the declared rate: alpha 0.05, 120 synthetic replications
     (20 per k over k in {5,10,15,20,25,30}), 70/30 stratified, analytic truth known
-    -- 0/120 violations, violation_rate 0.0, falsified false — SUPERSEDED, DO NOT CITE THIS FIGURE (see superseded_note): this count was an artifact of VALIDITY_SAMPLE_SIZE being 400; the corrected form is 96/96 TESTABLE rows comply with 24 vacuous rows all at requested_tv 0.00.
+    -- 0/120 violations, violation_rate 0.0, falsified false — SUPERSEDED, DO NOT
+    CITE THIS FIGURE (see superseded_note): this count was an artifact of VALIDITY_SAMPLE_SIZE
+    being 400; the corrected form is 96/96 TESTABLE rows comply with 24 vacuous rows
+    all at requested_tv 0.00.
 
     - THE PAYOFF, large-k is non-empty: the divisibility lower bound is nontrivial
     (>0) on 100% of pairs at k=15/20/25/30, informative (>0.05) at 0.9989/1.0/1.0/1.0,
@@ -5044,4 +5053,130 @@ decisions:
     role: provenance
   depends_on:
   - D078
+  - D082
+- id: D082
+  date: 2026-09-14 13:01 UTC
+  summary: 'X9 measured a +0.38 SNI-inclusion delta, but the two arms differ in alphabet
+    size by ~10^24 and C2 already showed a finer alphabet inflates TV - so the SNI
+    dependence and the cardinality increase are the same treatment and the attribution
+    is OPEN. Ruled the number unreportable as the price of SNI until a matched-cardinality
+    control (ARM C: same-width random identifier, independent of the SNI, fixed seed)
+    separates the two.'
+  rationale: 'X9 ran and produced a large, consistent result: over 703 pairs, delta_tv_hat
+    median +0.3769 / mean +0.3923, and delta_eps_hi median +0.3879 / mean +0.3897,
+    with outcome field MEASURED_SNI_CHANNEL_INCLUSION_DELTA.
+
+
+    I fetched and read the artifact myself rather than accepting the outcome field,
+    and found the measurement is confounded by a second treatment change.
+
+
+    The design is correct in every respect that was specified: same_flow_set_across_arms
+    true, flow-disjoint and time-disjoint verified, k=5/M=1, service threshold 2000,
+    buffer month 202412 unused, cpu_only true, no packet-level split. The object declaration
+    - that both arms are laws over the same object differing only by whether the SNI-derived
+    DST_IP participates - is supported by the method section. The execution is correct
+    and the plumbing is right.
+
+
+    But the artifact''s own alphabet block shows the arms differ in a second way:
+    ARM A''s fixed alphabet size is 32 (the declared (direction,size) k=5 prefix)
+    while ARM B''s is 38685626227668133590597632 = 256^10 (the full fixed-width DST_IP
+    storage domain), a ratio of about 10^24. So ARM B is not "the same channel plus
+    SNI" - it is a partition whose alphabet is 24 orders of magnitude finer. And this
+    project has already established as C2''s headline mechanism that a finer alphabet
+    RESOLVES MORE rather than less: tv medians at k=5 rise 0.5805 -> 0.8833 -> 0.9248
+    -> 0.9462 -> 0.9673 as M increases.
+
+
+    Therefore a +0.38 shift has two available explanations - SNI genuinely separating
+    services, or a vastly finer partition inflating TV as an alphabet-cardinality
+    property - and this artifact cannot separate them, because the SNI treatment and
+    the cardinality treatment are the same treatment. I searched the artifact for
+    any control or caveat and found none: cardinality, control, matched, confound,
+    caveat, limitation all zero hits. Nothing warns a reader that the arms differ
+    in alphabet size by 24 orders of magnitude.
+
+
+    RULING: the +0.39 must not be reported as the price of SNI/ECH in any surface
+    until the confound is separated. Required remedy, dispatched: add a third arm,
+    ARM C - matched cardinality, SNI-independent - partitioning by the packed (direction,size)
+    k=5 prefix concatenated with a random identifier drawn from the SAME fixed-width
+    storage domain as DST_IP but assigned independently of the SNI, per flow, same
+    width, fixed seed recorded. Then the reading is decisive: if ARM C''s delta versus
+    ARM A is also about +0.38, the shift is cardinality and the SNI reading collapses;
+    if ARM C''s delta is about zero while ARM B''s stays +0.38, the shift is genuinely
+    the SNI dependence. Also required: an explicit arms block in the artifact giving
+    each arm''s alphabet size, so a reader sees 32 / 256^10 / 256^10 side by side
+    - that block is what was missing and what let the confound hide. X9 stays ANALYZING
+    rather than advancing to DONE with the confounded delta as its conclusion. Option
+    (b), writing the confound into the artifact and refusing the price-of-SNI reading,
+    is available but leaves the experiment''s central question unanswered; the control
+    is a small addition to a runner that already runs in 190 seconds.
+
+
+    This is the same class as M055, where the word "marginal" silently named two objects
+    and cost a conclusion. Caught by reading the artifact''s alphabet block rather
+    than its outcome field, and before the number reached any paper-facing surface.'
+  related_experiments:
+  - exp_id: X9
+    result: 'SNI-inclusion delta measured at +0.38 median TV over 703 pairs, but confounded:
+      ARM B''s alphabet is 256^10 vs ARM A''s 32, a 10^24 ratio, and C2 already showed
+      a finer alphabet inflates TV. Attribution OPEN pending a matched-cardinality
+      control.'
+    role: subject
+  - exp_id: X4
+    result: C2's measured alphabet-resolution ladder (tv medians 0.5805 -> 0.8833
+      -> 0.9248 -> 0.9462 -> 0.9673) is the mechanism that makes the confound live
+      rather than theoretical
+    role: reference
+  depends_on:
+  - D078
+- id: D083
+  date: 2026-09-14 13:44 UTC
+  summary: 'Ruled the X9 SNI arm: keep DST_IP as primary per spec (do not substitute
+    the raw QUIC_SNI hostname, which would change what the experiment is about), add
+    a cheap premise test of whether DST_IP is a deterministic function of QUIC_SNI
+    on the shared flows since both fields exist and the claim had never been verified,
+    and defer a QUIC_SNI arm with the trigger being a NO from that premise test.'
+  rationale: "The X9 spec's founding claim is that the anonymised destination-host
+    identifier DST_IP is a deterministic function of the SNI, and that claim is what
+    justifies excluding it from the declared channel. RC5's purpose is to convert
+    that exclusion from an unstated assumption into a measured price.\n\nThe artifact's
+    own source block reveals that BOTH fields exist in the corpus and are recorded:\n\n
+    \ sni_derived_destination_host_identifier_field : DST_IP\n  sni_field                                     :
+    QUIC_SNI\n\nSo the derivation is no longer something we must assume - it is directly
+    testable on the shared flows, in the same pass, at essentially no cost. And it
+    had never been tested: the object declaration asserts \"the SNI-derived destination-host
+    identifier DST_IP\" as a description and nothing in the artifact verifies it.\n\nRULING,
+    in three parts:\n\n(a) PRIMARY ARM stays DST_IP, per spec. Do NOT switch to QUIC_SNI.
+    QUIC_SNI is the raw hostname; DST_IP is the anonymised identifier. The declared
+    channel excludes the identifier and RC5 justifies that exclusion, so the price
+    to measure is the identifier's. Substituting the raw hostname would change what
+    the experiment is about rather than control it.\n\n(b) ADD THE PREMISE TEST: is
+    DST_IP a deterministic function of QUIC_SNI on the shared flows? Same pass, both
+    columns already being read. Report either way. If YES, the exclusion is justified
+    exactly as claimed and the artifact should say so rather than ask a reader to
+    take it on trust. If NO, the object declaration's central phrase is unproven and
+    the anonymisation destroyed information - itself a finding, and one that would
+    justify keeping a QUIC_SNI arm as the stronger object rather than as a substitute.\n\n(c)
+    QUIC_SNI AS A THIRD MEASUREMENT is DEFERRED with an explicit trigger: add it only
+    if (b) returns NO, or if an explicit upper bound on the leak is wanted. Two arms
+    already exist plus B' and C for the cardinality question, and a raw-hostname arm
+    changes the claim being made rather than controlling it. If (b) is NO, I rule
+    on the SNI arm then, with that fact in hand.\n\nThis turns the spec's load-bearing
+    assumption into a measured fact, which is the same discipline the session has
+    applied throughout - the premise was central to RC5 and had never been checked.\n\nAlso
+    relevant to this ruling: the artifact's recorded runner_sha256 (63f2a3564357172b...)
+    matches x9_sni_channel_delta.py exactly, so the artifact is explicitly bound to
+    its producer. A worker was found rebuilding that same runner; it was stopped,
+    and the sha binding verified intact."
+  related_experiments:
+  - exp_id: X9
+    result: 'DONE/negative with M127+M128 recorded: delta_eps_hi is identically 1.0
+      minus ARM A''s mean and carries no SNI information, because ARM B declared m
+      as the storage domain (256^10) rather than realized support and clipped to 1.0
+      in 100% of 1406 observations'
+    role: subject
+  depends_on:
   - D082
