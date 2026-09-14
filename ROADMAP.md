@@ -204,6 +204,22 @@
 > reason.** A design that will never run must not sit in the queue-reader's view.
 > **⇒ Same discipline as the rest of the session: a field people filter on is a claim, and it must not say "live"
 > about something we have ruled out.**
+>
+> **★ D089 — THE BINDING FIX IS IN, EXCEPT IN THE ONE CHANNEL THAT ORIGINALLY CARRIED IT.**
+> Verified in the working file (`1d820d6a…`, 25,941 B): `RUNNER_SHA256 = sha256_file(RUNNER_PATH)` sits at **line 41**,
+> **after `def sha256_file` at line 29 and before any data work** ⇒ import-time capture, no `NameError`, `AST OK`.
+> The artifact dict now carries **`runner_path` and `runner_sha256: RUNNER_SHA256`** as its own fields.
+> **⇒ BUT the final stdout print still calls `sha256_file(RUNNER_PATH)` — recomputing at the END, from disk.**
+> **⇒ So the artifact is now right and the LOG LINE is still late.** A file replaced mid-run makes those two
+> disagree, and the log line is the one an operator reads to report "which version ran". **⇒ Two hashes, one of
+> them wrong, and no way after the fact to tell which.**
+> **⇒ FIX: the print must emit the SAME captured `RUNNER_SHA256`.** One token. **⇒ Same defect, relocated: the
+> binding was moved into the artifact and left behind in the channel it came from.**
+>
+> **★ AND A LOCAL PROOF IS IMPOSSIBLE, which changes how item 3 must be demonstrated:** `import tables` fails on
+> the platform-local runtime (PyTables lives server-side), so the module cannot be imported here at all.
+> **⇒ The import-time capture is provable STATICALLY** (line 29 defines, line 41 calls) **or by importing on the
+> server — not locally.** **⇒ Do not let "we could not import it locally" be recorded as a failed proof.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
 > `excluded_arm_mean_eps_hi = 0.6102972071320967`, `aggregate_delta_eps_hi = 0.3897027928679033`, and
