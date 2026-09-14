@@ -445,7 +445,7 @@ experiments:
     status: DONE
     retry_count: 0
     created_at: '2026-09-14T00:25:50.284Z'
-    updated_at: '2026-09-14T08:34:50.309Z'
+    updated_at: '2026-09-14T09:17:18.253Z'
     hypothesis: 'The chain-rule joint divergence D_k over the DEPENDENT packet prefix
       grows SUBLINEARLY in k, against the null that it grows LINEARLY as an i.i.d.
       process would. Mechanism: within-flow dependence means successive positions
@@ -492,6 +492,7 @@ experiments:
         own field says: ''A fabricated direction is worse than an inconclusive test.'''
     conclusion: success
     metrics:
+      BASELINE_BLOCKER_STATUS: '*** CLOSED (D066/D067). *** NOT OPEN, NOT BLOCKING. The two controls agree on a SHARED quantity at DIFFERENT intervention settings, which is a DOSE-RESPONSE FAMILY, not a conflict; the standing same-nominal-quantity rule was MIS-SCOPED and should never have fired here. RECONSTRUCTED as an explicit standalone record because it is referenced by name in the review chain; the substantive content is also carried under D062_THE_BASELINE_BLOCKER_STANDS_WITH_VARIANT_B_AS_THE_SUSPECT. It survives in no earlier file copy as a standalone key.'
       D069_HARD_RULE_READ_WHOLE_WRITE_WHOLE_THIS_IS_THE_HARDEST_LESSON_OF_THE_SESSION: '***
         `update_registry(exp_id, field=''metrics'', value={...})` REPLACES the entire
         value. IT DOES NOT MERGE. I DESTROYED THIS BLOCK SIX TIMES BY PASSING A PARTIAL
@@ -852,6 +853,76 @@ experiments:
         is unaffected and the .npz payload makes per-flow error reconstructable);
         AND the pair error is a PROXY and the classification error is CLOSED-SET while
         the floor is OPEN-SET (see the object-substitution entry). ***'
+      D069_AXIS_VALIDATION_CONTENT_GOOD_LABEL_WAS_A_HAZARD_FIXED_AT_THE_SOURCE: '***
+        THE CONTENT IS VALUABLE; THE LABEL WAS THE HAZARD. RECORDED BELOW, WITH THE
+        REGISTRATION STATUS CORRECTED AGAINST THE DIRECTOR''S STATEMENT. ***'
+      D069_FOUR_THINGS_TO_RECORD: '(1) THE VOTE CONSTRUCTION RE-DERIVED ITS EXPECTED
+        VOTES WITH SEPARATELY WRITTEN BIC LOGIC: 0 production-vs-independent mismatches,
+        INCLUDING S3 HETEROGENEOUS-i.i.d. -> MARKOV 8/0/0. *** THIS INDEPENDENTLY
+        CORROBORATES D055''s DEAD VERDICT AT THE VOTE LEVEL: heterogeneity alone manufactures
+        the vote, confirmed by a SECOND implementation. *** (2) THE AXIS TEST IS SENSITIVE,
+        NOT MERELY NEGATIVE -- which makes it STRONGER than the earlier sibling audit.
+        Dependence is built from transitions 0->1, 1->2, 2->3 only, so the expected
+        switch is at k=5; OBSERVED: IID at k=2 and k=3 -> MARKOV at k=4 (where 2->3
+        enters the prefix) -> IID from k=5 on. *** A SINGLE-POINT FLIP DEMONSTRATES
+        THE TEST WOULD CATCH A LABEL SHIFT RATHER THAN MERELY ASSERTING ONE IS ABSENT.
+        *** (3) PARAMETRIC RESIDUALS MAX 1.07e-14 over k=5..30, and the k=1 BOUNDARY
+        RESIDUAL (-0.693) IS DISCLOSED AND MARKED OUTSIDE THE CONSUMED RANGE rather
+        than hidden. (4) `route_repaired: false` -- VERIFICATION WAS NOT USED AS A
+        BACK DOOR TO TOUCH THE ROUTE D057 RETIRED. BOUNDARY HELD.'
+      D069_THE_LABEL_HAZARD_AND_ITS_SOURCE_FIX: '*** x3_axis_validation.py:345 HARD-CODED
+        `"parametric_artifact": "verified-correct"`, while the artifact contains ZERO
+        occurrences of d057 / tautolog / affine / non-diagnostic. SO A READER -- OR
+        THE PAPER AGENT -- COULD MERGE AXIS ALIGNMENT WITH CONCLUSION VALIDITY AND
+        READ IT AS D057 OVERTURNED, reopening the exact narrowing dispute D053/D057
+        settled. *** THE DIRECTOR FIXED IT IN THE SCRIPT, NOT IN PROSE: changed to
+        `"axis-verified; conclusion remains NON-DIAGNOSTIC per D057"`, added a `parametric_artifact_note`
+        (the axis check says nothing about whether the LINEAR verdict is informative
+        -- axis-correct is not conclusion-usable), and added a `self_reference_note`
+        (the embedded artifact_size_bytes/artifact_sha256 are a PRE-WRITE SNAPSHOT
+        and intentionally differ from the file''s own bytes -- 122,495 vs 122,617;
+        ae3ccc37... vs 9f7578be...) so a reader verifies against the EXTERNALLY reported
+        hash. Script re-parsed with ast: syntax OK. *** KEEP THE FIX AT THE SOURCE:
+        a prose-only edit would let the script re-mint the bare label on the next
+        run. ***'
+      D069_REGISTRATION_STATUS_CORRECTED_AGAINST_THE_DIRECTOR_STATEMENT: '*** THE
+        DIRECTOR SAID THE ARTIFACT IS MISSING FROM ALL FOUR SURFACES. THAT IS NOT
+        WHAT I FIND ON DISK, AND I REPORT THE DISCREPANCY RATHER THAN COPYING THE
+        CLAIM. *** VERIFIED: artifacts/manifest.yaml ALREADY CARRIES IT AT LINE 1118
+        AS `art_20260914_44e723` (name x3_axis_validation.json, path artifacts/X3/data/x3_axis_validation.json),
+        AND THE FILE IS ALREADY LOCAL at that path -- REGISTERED AND PULLED EARLIER
+        IN THIS SESSION. SO THE REGISTRY/MANIFEST/LOCAL-PULL ITEMS WERE ALREADY DONE.
+        *** *** WHAT WAS GENUINELY OUTSTANDING IS DIFFERENT AND NARROWER: THE SAVED
+        OUTPUT STILL CARRIED THE OLD BARE LABEL, because the script was corrected
+        but NOT RE-RUN -- so the stored JSON still reads `"parametric_artifact": "verified-correct"`
+        at its artifact_status block. A RE-RUN IS DISPATCHED TO MAKE THE SAVED OUTPUT
+        MATCH THE CORRECTED SOURCE. *** *** AND ONE STANDING CHECK IS ADOPTED AS THE
+        DIRECTOR ASKED: TREAT ''ARTIFACT EXISTS ON THE SERVER BUT APPEARS ON NO SURFACE''
+        AS A STANDING CHECK, NOT A PER-INCIDENT ONE. ***'
+      D069_II_IS_NOW_STATED_WITH_NO_FIRST-ORDER_ALLOWANCE_ANYWHERE: '*** THREE INDEPENDENT
+        ITEMS NOW POINT THE SAME WAY: (1) the heterogeneous-i.i.d. vote result (D055
+        -- a construction with ZERO within-flow dependence reproduces the real vote
+        exactly, so the vote is not diagnostic); (2) the constructive affineness of
+        the parametric route (D057 -- its LINEAR is forced and carries no information);
+        (3) THIS artifact''s independent vote recomputation (0 mismatches against
+        separately written BIC logic) PLUS its axis sensitivity (a single-point flip
+        at k=4 proves the test can catch a shift). *** ⇒ (ii) IS STATED AS: DEPENDENCE
+        IS PRESENT BUT NOT FIRST-ORDER -- WITH NO RESIDUAL ''first-order'' ALLOWANCE
+        ANYWHERE. The earlier phrase ''before first-order may be asserted at all''
+        is retired to the past tense except where it records the history. ***'
+      D069_SELF_REFERENTIAL_FIELD_DEFECT_SAME_CLASS_AS_the_retired_lower_side_fraction_name: '***
+        THE DEFECT CLASS: A FIELD WHOSE VALUE CANNOT EQUAL WHAT ITS NAME CLAIMS. ***
+        The known instance is x3_axis_validation.json''s OWN `artifact_size_bytes`
+        / `artifact_sha256` (122,495 / ae3ccc37...) which describe a PRE-WRITE SNAPSHOT,
+        while the file''s real bytes are 122,617 / 9f7578be.... The field cannot match
+        because it is written before the final bytes exist. NOW DOCUMENTED IN THE
+        ARTIFACT VIA `self_reference_note` so a reader is told to verify against the
+        EXTERNALLY reported hash rather than the embedded one. *** A READ-ONLY AUDIT
+        ACROSS ALL x3_* ARTIFACTS FOR THIS CLASS IS DISPATCHED -- report each artifact''s
+        own size and sha256, whether it contains any self-describing field, and whether
+        that field matches. THE AUDIT EDITS NOTHING. *** THIS IS THE SAME CLASS AS
+        THE RETIRED `lower_side_fraction` NAME: A FIELD THAT CANNOT EQUAL WHAT IT
+        CLAIMS TO NAME. ***'
     completed_at: '2026-09-14T00:29:25.952Z'
   X4:
     status: DONE
@@ -1830,3 +1901,319 @@ experiments:
       from the withdrawn control; only the k axis is corrected.'
     conclusion: success
     completed_at: '2026-09-14T07:09:50.068Z'
+  X6:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-14T08:39:44.138Z'
+    updated_at: '2026-09-14T09:33:26.669Z'
+    hypothesis: 'The REJECTION-GENERIC / DIVISIBILITY lower bound -- TV(P1,P2) <=
+      eps iff the pair is eps-divisible, i.e. a test using only P1 and P2 exists with
+      error <= eps; under full realizability this is 1 - 2*(optimistic error) -- is
+      NON-EMPTY exactly where the plug-in upper certificate is LOST, because it requires
+      NO alphabet bound and so applies at any k. CLAIM UNDER TEST: that ''at large
+      k only the one-sided lower bound survives'' is a MEASURED RESULT rather than
+      an assertion, and that C2''s ''the horizon is short'' can accordingly be stated
+      as a finding. FALSIFIABLE BY: a validity failure (the bound exceeding the true
+      TV more often than the declared alpha allows) or an EMPTY large-k stratum. ASSUMPTION-LADEN
+      by construction (VC / Cohn-Tesoriero type realizability) and must NEVER be presented
+      as distribution-free.'
+    spec:
+      artifact_bytes: 1998647
+      artifact_id: art_20260914_9a009c
+      artifact_sha256: d9e17986066e7db7fee0d84eebaf602920dd1048743871908c5a1b39f4406ce0
+      assumption_mode: 'mode=realizable. The artifact states the classifier family
+        is assumed to contain or sufficiently approximate a useful binary rejection
+        test, that the held-out confidence statement is CONDITIONAL ON THE TRAINED
+        CLASSIFIER, and that it is NOT distribution-free -- matching the plan''s requirement
+        that the bound must NEVER be presented as distribution-free. is_distribution_free:
+        false.'
+      channel: PPI[1] direction and PPI[2] size only; PPI[0] inter-packet timing EXCLUDED;
+        matches_headline true. At M=1 the size channel is identically zero, so this
+        is a REPRESENTATION change, not a channel change, and the artifact carries
+        a verification flag saying so.
+      checkpoint_path: artifacts/X6/data/x6_divisibility_lower_bound.json
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x6_divisibility_lower_bound.py
+      data_count: 5058007
+      data_path: reused cache /dev/shm/eibo_x3_chain_rule -- NO h5 rescan; 45 services,
+        5,058,007 usable flows
+      log_path: logs/workers/worker_X6__divisibility__rejection-generic__lower_bound_as_a_functi_20260914T052841.log
+      model_name: rejection-generic / divisibility lower bound via src/eibo/divisibility.py::tv_lower_bound_divisibility,
+        mode=realizable
+      num_pairs_by_k: 990 / 990 / 946 / 946 / 861 / 820 at k = 5 / 10 / 15 / 20 /
+        25 / 30 -- the pair counts MATCH C1's per k
+      runner_sha256_note: the runner calls the repo function rather than reimplementing
+        it; call-count sanity 120/5553
+      sample_cap_per_service: 20000
+      sample_cap_per_service_note: '*** CAVEAT THAT MUST TRAVEL WITH THE BOUND: X6
+        is computed on a 20,000-FLOW-PER-SERVICE SUBSAMPLE while C1''s UPPER side
+        is at FULL n (canonical per D038). THE PAIR COUNTS MATCH C1''s per k, so the
+        comparison is well-posed at the PAIR level -- but the two bounds are computed
+        at DIFFERENT n and MUST NOT be put in one table without saying so, or a reader
+        will take them for two bounds at the same sample size. ***'
+      seed: per-arm seeds recorded in the artifact
+      server: '111'
+    metrics:
+      D065_X6_COMPLETED_AND_DELIVERS_C2S_MISSING_MEASUREMENT: '*** X6 COMPLETED AND
+        THE RESULT IS A POSITIVE ON ITS CENTRAL CLAIM. *** VERIFIED BY READING THE
+        ARTIFACT DIRECTLY (art_20260914_9a009c, x6_divisibility_lower_bound.json,
+        1,998,647 B, sha256 d9e17986066e7db7fee0d84eebaf602920dd1048743871908c5a1b39f4406ce0,
+        status COMPLETE, run_timestamp_utc 2026-09-14 05:28:41). *** THE PAYOFF --
+        LARGE-k IS NON-EMPTY, WHICH IS EXACTLY WHAT C2 NEEDED: the divisibility lower
+        bound is NONTRIVIAL (>0) on 100% of pairs at k=15/20/25/30, informative (>0.05)
+        at 0.9989 / 1.0 / 1.0 / 1.0. IN EXACTLY THE REGION WHERE THE PLUG-IN CERTIFICATE
+        IS ALREADY LOST (k>=15 gives 0/946 upper-side pairs), THIS BOUND SURVIVES
+        AND IS NOT EMPTY. *** THAT IS WHAT CONVERTS C2''s ''THE HORIZON IS SHORT''
+        FROM AN ASSERTION INTO A MEASURED RESULT. *** Implementation discipline correct:
+        it CALLS src/eibo/divisibility.py::tv_lower_bound_divisibility (call-count
+        sanity 120/5553) rather than reimplementing; matches_headline true; channel
+        PPI[1]/PPI[2] with PPI[0] excluded; and it records that at M=1 the size channel
+        is identically zero, so this is a REPRESENTATION change, not a channel change.
+        *** ASSUMPTION SENTENCE PRESENT AND HONEST: mode=realizable states the classifier
+        family is assumed to contain or sufficiently approximate a useful binary rejection
+        test, that the held-out confidence statement is CONDITIONAL ON THE TRAINED
+        CLASSIFIER, and that it is NOT distribution-free -- is_distribution_free:
+        false. ***'
+      D071_THE_VALIDITY GATE_CANNOT_FAIL_FOR_ABOUT_75_OF_120_ROWS_AND_THE_HONEST FORM_IS_DIFFERENT: '***
+        THE 0/120 VIOLATIONS FIGURE OVERSTATES THE TEST. *** `violation = bound >
+        truth + 1e-12`, and at VALIDITY_SAMPLE_SIZE = 400 the bound CLIPS TO 0 (classifier
+        errors are about chance, so the raw bound goes negative); A 0 BOUND CAN NEVER
+        EXCEED A NON-NEGATIVE TRUTH, and all 24 truth-0 rows are INCAPABLE BY CONSTRUCTION.
+        *** SO THE HONEST FORM IS ''45/45 TESTABLE ROWS COMPLY'', NOT ''0/120 VIOLATIONS''.
+        *** THE ARTIFACT DID NOT CONCEAL: it recorded vacuous / raw_bound_went_negative
+        per row. WHAT IT OMITS IS A TESTABLE/VACUOUS COUNT. FIX: add testable_replications
+        / vacuous_replications, raise the sample size to the real-data order (20,000)
+        and re-run, plus a precondition asserting a minimum fraction of strictly positive
+        bounds. *** THIS IS THE 4th INSTANCE TODAY OF A CHECK THAT CANNOT FAIL. ***
+        *** AND THE REAL-DATA LEG IS UNAFFECTED: 20,000 flows/service with vacuous_count
+        0 at k>=10 -- THAT IS WHERE C2''s MEASUREMENT LIVES. *** Artifact per-k vacuous_count
+        at k=5 is 38; at k=10/15/20/25/30 it is 0. Per-k fraction_nontrivial_gt_0:
+        0.9616 at k=5 and 1.0 at every k>=10. Per-k fraction_informative_gt_0_05:
+        0.9414 / 0.9949 / 0.9989 / 1.0 / 1.0 / 1.0 across k=5..30; pooled 0.9997201231458158.'
+      D065_THE_VALIDITY_GATE_FLAW_IS_A_SEPARATE_OPEN_ITEM_FROM_THE_DELIVERABLE: '***
+        KEEP THE TWO APART. *** (1) THE DELIVERABLE -- ''large-k is non-empty'' --
+        IS MET and its REAL-DATA leg is unaffected by D071 (vacuous_count 0 at every
+        k>=10). (2) THE SYNTHETIC VALIDITY GATE is a separate check whose reported
+        form was too strong and which must be re-run at the real-data sample size
+        with testable/vacuous counts exposed. FIXING (2) DOES NOT WITHDRAW (1).'
+      D065_THE_FRAMING_WAS_FIXED_AT_THE_CLAIM-BINDING_SOURCE: 'paper_framing.md line
+        190 had called X6 ''the assumption-free large-k side'' -- EXACTLY THE WORDING
+        THE PLAN FORBIDS (''the bound must NEVER be presented as distribution-free'')
+        and contradicting the artifact''s own is_distribution_free: false. THE FRAMING
+        IS THE framing_ref BINDING SOURCE, so it was the one place that had to be
+        right and it was the only place that was wrong. THE DIRECTOR FIXED IT THEMSELVES;
+        it now reads ''the large-k side -- ASSUMPTION-LADEN / realizability-conditional
+        -- NOT distribution-free''. A SEARCH FOUND NO OTHER SURFACE CARRYING THE CLAIM.'
+      D065_X6S_LABEL_AUDIT_RE-RUN_AND_VERIFIED_CORRECT: '*** THE AUDIT RAN AFTER X6''s
+        ARTIFACT LANDED AND THE CHECK DID NOT PASS SILENTLY. *** PREFIX_LENGTHS =
+        (5,10,15,20,25,30); bits_from_codes builds exactly k bit positions via np.arange(29,
+        29-k, -1); *** NO [:k-C] or [k-C:] constant-offset construct is present. ***
+        Decisive test used the ANALYTICALLY KNOWN synthetic true TV: 0 violations
+        of 120 at declared alpha 0.05, falsified false, outcome PASS (subject to the
+        D071 scope correction above). Axis probe: labelled k=5/10/15 gave encoded
+        shapes [1,5]/[1,10]/[1,15]. VERDICT: verified-correct. No large_k_usable field
+        exists; the artifact declares large-k entries EXPLORATORY because the plug-in
+        upper side is lost, and that distinction is applied to the real-data per-k
+        summaries. Script sha256 9b5c2d4de2d6ddfeabe7af3fc447c2f68586e3ac8ebbc3920fce1a8ac524ab25
+        (34,450 B).'
+      D065_AN_OBJECT_NOTE_THAT_MUST_REACH_THE_PAPER: '*** X6''s bound is computed
+        on a 20,000-FLOW-PER-SERVICE SUBSAMPLE (sample_cap_per_service 20000) while
+        C1''s UPPER side is at FULL n (canonical per D038). THE PAIR COUNTS MATCH
+        C1''s per k (990 / 946 / 820), so the comparison is WELL-POSED AT THE PAIR
+        LEVEL -- BUT THE TWO BOUNDS ARE COMPUTED AT DIFFERENT n AND MUST NOT BE PUT
+        IN ONE TABLE WITHOUT SAYING SO, or a reader will take them for two bounds
+        at the same sample size. ADD THIS CAVEAT TO THE X6 ARTIFACT AND TO ANYTHING
+        THAT JUXTAPOSES THEM. ***'
+    conclusion: success
+    completed_at: '2026-09-14T09:33:26.669Z'
+  X12_k5:
+    status: RUNNING
+    pid: 683446
+    retry_count: 0
+    created_at: '2026-09-14T09:27:34.624Z'
+    updated_at: '2026-09-14T09:27:56.713Z'
+    spec:
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x12_detector_validation.py
+        --h5 /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5 --k-packets
+        5 --label-field APP --train-months 202406 202407 202408 202409 202410 202411
+        --test-months 202501 202502 202503 202504 202505 --output-json /root/eibo/artifacts/x12_detector_validation_k5.json
+        --output-csv /root/eibo/artifacts/x12_detector_validation_per_pair_k5.csv
+      command_note: NO --cpu-only, so RoNeTC can use the allocated GPU. --k-packets
+        5 is explicit (the default was deleted; omission now refuses). New output
+        names so nothing collides with the k=15 products. The panel is REBUILT inside
+        this same run because features are k-dependent (k = min(k_packets, ppi.shape[2])).
+      compute_class: GPU-eligible (RoNeTC trains on CUDA when allowed); LightGBM falls
+        back to CPU
+      data_count: 4268367
+      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
+      label_field: APP (service axis)
+      model_name: 'detector panel: LightGBM on k-packet features, SepSpace-style prototype-radius
+        rejector, RoNeTC-style uncertainty-quantified rejector (Pcap-Encoder formally
+        dropped); metrics OSCR and FPR95 per held-out service'
+      panel_rebuilt_because: features are k-dependent; a k=15 panel cannot be reused
+        at k=5
+      payer: k=5 is the ONLY k whose informative stratum is populated -- certified
+        upper-side count 340/990 at k=5 and 28/990 at k=10, but 0/946 at k=15 and
+        0/820 at k=30 -- so the pre-registered containment test is DEFINED only here
+      preregistration: 'The containment test was pre-registered before any run: informative
+        stratum eps_hi < 0.5; predicted floor (1 - eps_hi)/2; an exact ONE-SIDED binomial
+        violation test at nominal 0.95 (alpha 0.05, not split); and what would falsify.
+        k=10 (28 pairs) is a DECLARED SECONDARY stratum with the multiplicity stated
+        plainly. COMMITTED IN ADVANCE: if k=5 yields a null or negative containment
+        result, that is the reported result -- no grinding.'
+      server: '111'
+      split_policy: train 202406..202411, buffer 202412 UNUSED, test 202501..202505
+        (D043); flow-disjoint AND time-disjoint; packet-level splitting prohibited;
+        the strict guard is never weakened
+      why_not_post_hoc_selection: '(1) FEASIBILITY NOT OUTCOME: the pre-registration
+        made the informative stratum mandatory, and at k=15 it is EMPTY, so the test
+        there is UNDEFINED rather than merely unfavourable -- choosing the k at which
+        a pre-registered test is DEFINED is not choosing the k at which it PASSES.
+        (2) k=5 has an INDEPENDENT prior claim: it is the C1 headline cell, already
+        reported, so it is not a fresh choice invented to rescue a null.'
+    hypothesis: 'The k=5 detector-validation run yields VALID containment evidence
+      AND honest performance numbers in ONE pass. MECHANISM: if the certified upper
+      bound on the channel TV is sound, no detector consuming only the declared (direction,size)
+      channel can beat the floor it implies, so an EXCESS of floor violations among
+      informative pairs (eps_hi < 0.5) would falsify either the TV estimate or the
+      channel model. k=5 is the ONLY k whose informative stratum is populated (340/990
+      at k=5; 28/990 at k=10; 0/946 at k=15; 0/820 at k=30), so this is the sole k
+      at which the pre-registered test is DEFINED. TWO OBJECT SUBSTITUTIONS MUST TRAVEL
+      WITH ANY READING: the pair-level error is a PROXY (the macro-average of two
+      single-service classification errors, not a measured pairwise detector error),
+      and classification_error is a CLOSED-SET misclassification rate while the floor
+      is an OPEN-SET lower bound. AND THE VACUITY RULE APPLIES: an empty informative
+      stratum yields NO VALIDATION EVIDENCE and a near-zero-TPR detector yields NO
+      INFORMATION -- neither is ever reported as a pass.'
+  X11:
+    status: PREPARING
+    retry_count: 0
+    created_at: '2026-09-14T09:28:18.311Z'
+    updated_at: '2026-09-14T09:29:10.866Z'
+    hypothesis: 'On an INDEPENDENT, PUBLIC corpus (CESNET-QUIC22), under a FIXED and
+      identical protocol, the epsilon-indistinguishability bracket either reproduces
+      the primary corpus''s marginal upper-certifiable fraction or it does not. MECHANISM:
+      if the primary corpus''s fraction is a property of the declared (direction,size)
+      channel rather than of that one corpus, the same protocol on a second corpus
+      should yield a comparable marginal proportion; a MATERIAL difference is a finding
+      about corpus dependence. FALSIFIABLE BY: a non-reproducing fraction, which must
+      be reported AS a corpus-dependence finding rather than tuned away. THE RESULT
+      IS A NON-REPRODUCTION -- BUT IT IS COMPOSITION-AFFECTED, AND THAT IS THE WHOLE
+      POINT: `reproduces_upper_fraction: false` STANDS as honest, while the SINGLE
+      POINT 0.1608 must NOT be cited as single-corpus non-extrapolability, and X11
+      must NOT be used as either falsification or confirmation of C1 until SCALE MATCHING
+      is done. The residual gap at matched per-pair evidence is the real, still-unexplained
+      signal.'
+    spec:
+      artifact_bytes: 999144
+      artifact_id: art_20260914_b1fdde
+      artifact_sha256: 60d205fb10399bc05c732b3e40f630ab03aeee3f7f70ade9c974ec4fd3d45e5d
+      checkpoint_path: artifacts/X11/data/x11_feasibility.json
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x11_feasibility_probe.py
+      data_count: 5085259
+      data_path: /root/autodl-tmp/eibo/data/cesnet-quic22-explicit-v2/XS/CESNET-QUIC22-XS.h5
+      dataset: CESNET-QUIC22 XS (one month). H5 2,714,067,131 B, sha256 669a810ec49b7a9c2d5c9ea9d2bc3fbe9907a787cd9b5af5eeaa41e092cd1aaf;
+        servicemap.csv 9,415 B. Official Zenodo ZIP 20,952,008,298 B; documented UNCOMPRESSED
+        size UNVERIFIED.
+      feasibility_answer_PUBLIC_NO_DUA: NO DUA, NO REGISTRATION, NO CREDENTIAL. The
+        library download implementation calls resumable_download() for the H5 and
+        simple_download() for servicemap.csv with NO credential step, and Zenodo metadata
+        reports access_right=open, license=cc-by-4.0.
+      field_mapping_ALL_PRESENT: PPI row1 = DIRECTION, row2 = SIZE, PPI_LEN (uint16)
+        = per-flow packet count, APP = service label, CATEGORY = category label; PPI
+        row0 = IPT timing, PRESENT BUT EXCLUDED. Library metadata independently reports
+        ppi_features ['IPT','DIR','SIZE'], application_count 102. So the decisive
+        feasibility question is answered YES -- every required field has an analogue.
+      log_path: logs/workers/worker_X11__CESNET-QUIC22_replication___feasibility_first__obtainab_20260914T063931.log
+      packages: 'cesnet-datazoo NOT installed initially (ModuleNotFoundError) -- INSTALLED
+        BY THIS TASK: `Successfully installed cesnet-datazoo-0.2.0`; module at /root/miniconda3/lib/python3.12/site-packages/cesnet_datazoo/__init__.py.
+        NO CLI executable exists.'
+      protocol_held_fixed: k=5, M=1, alphabet 32, per-law alpha 0.025, channel (direction,size)
+        with timing EXCLUDED, service threshold 2000 flows. Split train 2022-10-31..11-06,
+        UNUSED BUFFER 11-07..11-13, test 11-14..11-27; NO packet-level split. The
+        repository packing helper and src/eibo/statcore.py::tv_upper_bound were CALLED,
+        not restated; reference reconciliation on one real pair gave ZERO difference
+        in tv_hat and eps_hi.
+      runner_sha256: 44866b0c9d133df47988a7780c12d980444d1a55159ca0a47f577df2842bc69f
+      scope_boundary: THE LOWER SIDE AND THE FULL TWO-SIDED BRACKET WERE NOT RUN --
+        as the feasibility-first scope required. The artifact states outright that
+        the full two-sided decision is unavailable for that reason.
+      server: '111'
+      tuning_performed: false
+    metrics:
+      D075_THE_N_STRATIFICATION_TABLE_MUST_TRAVEL_WITH_X11: '*** CARRY THIS TABLE
+        INSIDE THE X11 RECORD SO THE NEXT READER DOES NOT SEE ONLY 16.08%. *** RECOMPUTED
+        FROM THE ARTIFACT''S OWN 3,321 PAIR ROWS AND THE PRIMARY CORPUS''S 990: (min(n_a,n_b)
+        threshold | QUIC22 pairs | frac eps_hi<0.5 | median tv): all | 3,321 | 0.1608
+        | 0.6892 ; >=13,049 (primary median n) | 861 | 0.2485 | 0.6197 ; >=20,000
+        | 528 | 0.2822 | 0.5979 ; >=40,000 | 351 | 0.2934 | 0.5964 ; >=80,000 | 190
+        | 0.2789 | 0.5935. *** PRIMARY CORPUS: 990 pairs, median min-n = 13,049 (p25
+        7,679 / p75 50,953), frac = 0.3434, median tv = 0.5805. QUIC22: 3,321 pairs,
+        median min-n = 7,565 (p25 3,208 / p75 13,211). ***'
+      D075_THE_CONFOUND_IS_MEASURED_NOT_SUSPECTED: '*** (1) THE GAP FALLS FROM 18.3
+        POINTS (0.3434 - 0.1608) TO 6.5 POINTS (0.3434 - 0.2789) ONCE PER-PAIR EVIDENCE
+        IS MATCHED -- 64.7% OF THE RAW GAP IS EXPLAINED BY n-STRATIFICATION AND SERVICE
+        GRANULARITY ALONE. *** (2) median tv CONVERGES UNDER MATCHING: 0.6892 -> 0.5935
+        AGAINST THE PRIMARY''S 0.5805 (a 0.013 residual, versus 0.109 unmatched).
+        *** SO THE ''QUIC22 SERVICES ARE MORE SEPARABLE'' STORY IS ITSELF MOSTLY AN
+        n EFFECT. *** (3) THE n-BAND tv COMPARISON HAS MIXED SIGN ACROSS BANDS (primary
+        higher in the 20k-50k band, 0.6857 vs 0.5785; lower in 5k-10k, 0.6380 vs 0.7594),
+        SO tv DIFFERENCES ARE BAND-NOISY AND A SINGLE POOLED MEDIAN IS NOT A CORPUS
+        PROPERTY EITHER. *** (4) SERVICE COUNT IS A SECOND STRUCTURAL DIFFERENCE:
+        990 = C(45,2) vs 3,321 = C(82,2). 82 SERVICES WITH SMALLER n EACH IS A DIFFERENT
+        MEASUREMENT DESIGN, NOT THE SAME EXPERIMENT ON A DIFFERENT CORPUS. ***'
+      D076_THE_RULING: '*** `reproduces_upper_fraction: false` STAYS -- IT IS HONEST
+        AND IS NOT SOFTENED. BUT THE SINGLE POINT 0.1608 MUST NOT BE CITED AS ''single-corpus
+        non-extrapolability'', AND X11 MUST NOT BE USED AS EITHER FALSIFICATION OR
+        CONFIRMATION OF C1 UNTIL SCALE MATCHING IS DONE. *** THE CORRECT SENTENCE,
+        VERBATIM: "Under a fixed protocol, QUIC22''s marginal upper-certifiable fraction
+        is lower than the primary corpus''s; at matched per-pair evidence the gap
+        narrows from 18.3 to about 6.5 points and the median tv converges (0.594 vs
+        0.581). The raw single-point figure is a composition-affected marginal proportion,
+        not a corpus property." *** AND: THAT RESIDUAL ~6.5-POINT GAP IS THE REAL,
+        STILL-UNEXPLAINED SIGNAL -- MUCH SMALLER AND MUCH MORE INTERESTING THAN ''HALF''.
+        ***'
+      D076_THE_HONESTY_IS_ACKNOWLEDGED_AND_THE_ISSUE_IS_INTERPRETABILITY: '*** WHAT
+        X11 GOT RIGHT AND IT MUST BE RECORDED: NO TUNING (`tuning_performed: false`),
+        NO OBJECT SUBSTITUTION, AND THE ARTIFACT STATES OUTRIGHT THAT THE FULL TWO-SIDED
+        DECISION IS UNAVAILABLE BECAUSE THE LOWER CLASSIFIER PIPELINE DID NOT RUN.
+        *** THE PROBLEM IS THE INTERPRETABILITY OF A SINGLE POOLED POINT, NOT HONESTY.
+        ***'
+      D075_THE_RAW_RESULT: 'THE UPPER-SIDE INFORMATIVE FRACTION DID NOT REPRODUCE.
+        QUIC22: eps_hi < 0.5 on 534/3,321 = 0.1607949413 (median TV 0.6891804418,
+        median eps_hi 0.7661406742). PRIMARY CORPUS REFERENCE: 340/990 = 0.3434343434.
+        So 16.08% versus 34.34%. *** NO PARAMETERS WERE TUNED (`tuning_performed:
+        false`), and this was reported AS a corpus-dependence finding rather than
+        fitted away. *** PROTOCOL HELD FIXED: k=5, M=1, alphabet 32, per-law alpha
+        0.025, channel (direction,size) with timing excluded, service threshold 2000
+        flows; split train 2022-10-31..11-06, unused buffer 11-07..11-13, test 11-14..11-27;
+        NO packet-level split. TEST POPULATION 5,085,259 flows (5,024,310 with PPI_LEN
+        >= 5), 105 labels observed, 82 retained services, 3,321 service pairs. ***
+        THE LOWER SIDE AND THE FULL TWO-SIDED BRACKET WERE NOT RUN, as the feasibility-first
+        scope required. ***'
+      D075_FEASIBILITY_CONFIRMED_ALL_FIVE_ITEMS: '(1) PACKAGE: cesnet-datazoo NOT
+        installed initially -> INSTALLED BY THIS TASK, 0.2.0; NO CLI executable exists.
+        (2) LICENCE: NO DUA, NO REGISTRATION, NO CREDENTIAL -- the library''s download
+        implementation calls resumable_download()/simple_download() with no credential
+        step, and Zenodo metadata reports access_right=open, license=cc-by-4.0. (3)
+        SIZE: XS H5 2,714,067,131 B, servicemap 9,415 B; Zenodo ZIP 20,952,008,298
+        B; documented uncompressed size UNVERIFIED. (4) *** THE DECISIVE ONE -- FIELDS
+        ALL PRESENT: PPI row1 direction, row2 size, PPI_LEN uint16 per-flow packet
+        count, APP service label, CATEGORY category label; PPI row0 timing present
+        but excluded. Library metadata independently reports ppi_features [''IPT'',''DIR'',''SIZE'']
+        and application_count 102. *** (5) DISK: 507G free before, 498G free after.
+        DOWNLOAD LOCATION /root/autodl-tmp/eibo/data/cesnet-quic22-explicit-v2/XS/.
+        TRANSIENT FAILURES RECORDED LITERALLY AND HONESTLY: `ModuleNotFoundError:
+        No module named ''eibo''` (runner incident) and `tables.exceptions.HDF5ExtError:
+        truncated file: eof = 268435456, stored_eof = 2714067131` (transfer incident)
+        -- the final exact-length H5 passed the schema audit and the protocol run.'
+      X11_REGISTRATION_STATUS_AND_A_PARTIAL_DISCREPANCY: '*** THE REGISTRY ENTRY WAS
+        GENUINELY MISSING AND I HAVE NOW CREATED IT. THE MANIFEST ENTRY WAS NOT MISSING.
+        *** VERIFIED ON DISK: artifacts/manifest.yaml ALREADY CARRIED x11_feasibility.json
+        AT LINE 1235 AS art_20260914_b1fdde, with its path at artifacts/X11/data/x11_feasibility.json,
+        and the file IS LOCAL at that path (registered and pulled as soon as the worker
+        reported). So of the two surfaces the report named, ONE was genuinely absent
+        (registry.yaml) and ONE was present (manifest.yaml). *** I STATE THE DISCREPANCY
+        RATHER THAN COPYING THE CLAIM, per the standing rule. *** AND THE STANDING
+        CHECK IS ADOPTED: treat ''artifact exists but appears on no surface'' as a
+        standing check, not a per-incident one -- which is what caught the genuinely-missing
+        registry entry here. ***'

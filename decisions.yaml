@@ -1,4 +1,4 @@
-_next_id: 73
+_next_id: 77
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -4333,3 +4333,334 @@ decisions:
   - D068
   - D070
   - D058
+- id: D073
+  date: 2026-09-14 08:41 UTC
+  summary: 'Fixed .gitignore so artifacts/ (the evidence chain) is tracked and logs/
+    (incl. chat transcripts) is not; wrote a correct README; init''d the repo, bound
+    origin, committed 123 files as 3860c7b. The push failed from my shell (framework-managed
+    credential), so it is delegated WITH anti-destructive rules: fetch and report
+    remote state first, never force-push, stop if history diverges (the server tree
+    shares the same remote).'
+  rationale: 'The user instructed: fix (the ignore rules), bind, and get it into the
+    repository. I completed the first two and committed locally; the push is delegated
+    because the credential is not reachable from my shell.
+
+
+    WHAT I FOUND: (a) the project working tree was NOT a git repository at all --
+    no .git, no git section in the project config; (b) a cache clone of https://github.com/LianningLBY/EIBO.git
+    exists but contains ZERO commits and ZERO tracked files, so no history existed
+    anywhere I could see; (c) the pre-existing .gitignore excluded artifacts/, logs/,
+    checkpoints/, data_snapshots/, study-packages/, .agent-ml/ and .claude/ -- which
+    meant the EVIDENCE CHAIN would never have been tracked even after a repo was created,
+    since the project''s whole evidentiary discipline is "every reported number maps
+    to an artifact''s bytes"; (d) stale scaffolding from an earlier attempt existed
+    (.eibo_remote_README.md whose text was WRONG -- it described artifacts/ as holding
+    "environment locks and setup reports" when it now holds the evidence chain; .eibo_remote_gitignore;
+    .work/ with an embed script and two empty placeholders), referenced by no script;
+    (e) no secret patterns in the tracked scope; (f) no file over 50 MB, largest log
+    13.4 MB.
+
+
+    WHAT I DID: rewrote .gitignore so artifacts/ is TRACKED and only logs/ (including
+    logs/chats/ conversation transcripts, which must never be published), data/, caches,
+    bulk binaries (*.h5, *.pkl, *.npz, *.pt) and the dead scaffolding are excluded.
+    Wrote a correct root README.md replacing the stale .eibo_remote_README.md content,
+    including the project''s five working rules. Ran `git init -b main`, bound origin,
+    staged and verified (123 files, 88,394 insertions; logs/.claude/.work/.agent-ml
+    staged 0; knowledge files all present), and committed as 3860c7b.
+
+
+    THE PUSH FAILED FROM MY SHELL, and that failure is itself the finding: `could
+    not read Username for ''https://github.com''`. The project Git credential is framework-managed
+    and visible only to designated tools, not to a shell. Rather than guess at a credential
+    or work around it, I delegated the push with anti-destructive rules.
+
+
+    WHY THE ANTI-DESTRUCTIVE RULES MATTER: the SERVER tree /root/eibo uses the SAME
+    remote, and I could not read the remote''s state (no credential). So it is entirely
+    possible the remote already holds commits from that tree, and a naive or forced
+    push would destroy them. The rules are: fetch and REPORT the remote''s actual
+    state first; never force-push; if the remote has divergent history, STOP and report
+    rather than overwriting either side; and leave the stale scaffolding files on
+    disk rather than deleting files I did not create. This is the third time today
+    the "two trees" hazard has come up, and the instruction is explicitly not to create
+    a third instance of it.
+
+
+    ALSO NOTED: this connects to the user''s underlying concern, which was whether
+    scripts and conclusions were in the repository. The answer was no -- and a secondary
+    answer is that even if a repo had existed, the artifacts would have been excluded
+    by the old ignore rules, which would have made "the repo has our results" a false
+    assurance rather than a weak one.'
+  related_experiments: []
+  depends_on:
+  - D070
+- id: D074
+  date: 2026-09-14 09:01 UTC
+  summary: 'The D063 freeze guard works but its boolean output reports a refusal as
+    a refutation: the three assessable levels are strictly monotone (0.651>0.625>0.614)
+    while joint_tracks_thinning reads False because two levels could not be fitted.
+    Sixth instance today of a check whose output cannot distinguish failure modes.
+    Fix with a three-state field plus an explicit assessable-levels statistic, and
+    write that statement into all four surfaces rather than flipping the boolean.'
+  rationale: 'The D063 freeze guard landed and is CORRECT, but its summary output
+    encodes a tooling outcome as a scientific refutation, and that encoding is now
+    propagating.
+
+
+    WHAT I VERIFIED from the new artifact (artifacts/X3/data/x3_control_occupancy_dose_response.json,
+    310,141 B, sha 2ff2dd05...): decision.plain_arm_tracks_thinning = False, twin
+    = True, joint = False; exponent_p_by_retained_fraction = [0.651, 0.625, 0.614,
+    None, None]; refused_fit_retained_fractions = [0.1, 0.05]; sparse_context_stat_by_retained_fraction
+    = [0.4156, 0.4493, 0.4841, 0.5317, 0.5694]; p_nonincreasing_with_thinning = False;
+    sparse_context_stat_nondecreasing = True.
+
+
+    THE ARITHMETIC: the three ASSESSABLE levels give [0.651, 0.625, 0.614] which IS
+    strictly non-increasing. So the False flag does not come from a monotonicity violation;
+    it comes from the two REFUSED levels shortening the emitted vector. The boolean
+    collapses two distinct statements into one value: (a) "the trend is absent, sparsity
+    does not drive p" (an evidenced negative) versus (b) "the two deepest levels are
+    not assessable because the guard refused to fit a frozen tail" (a tooling outcome).
+    The artifact asserts (a); what is true is (b). A reader would take this as a scientific
+    reversal of the very result the guard exists to protect.
+
+
+    THIS IS THE SIXTH INSTANCE TODAY OF A CHECK WHOSE OUTPUT CANNOT DISTINGUISH ITS
+    FAILURE MODES -- after the original X3 known-truth control (fixed axis for a claim
+    across that axis), the k=15 empty stratum (statistic on an empty set), the parametric
+    route (affine by construction, control also affine), X6''s validity gate (bound
+    clipped to 0 so 75/120 rows cannot violate), and the findings.md recovery (byte-comparison
+    against the backup it had itself chosen, so the check was circular). The common
+    form: a test or encoding whose PASS-shaped or FAIL-shaped output does not discriminate
+    between the hypothesis being false and the test being unable to run.
+
+
+    CORRECT STATEMENT, to replace the boolean in every surface: on the three assessable
+    thinning levels the sparse-context statistic is non-decreasing and the fitted
+    exponent is non-increasing (0.651 -> 0.625 -> 0.614); the two deepest levels are
+    NOT ASSESSABLE because the guard refuses to fit a frozen tail. Mechanism remains
+    NOT ESTABLISHED, consistent with D063, but the reason is precise: two levels refused,
+    not "trend absent".
+
+
+    PROPAGATION STATE, which is currently the worst of both: `joint_tracks_thinning
+    = false` has ZERO hits in ROADMAP, decisions.yaml, registry.yaml and the plan,
+    while registry.yaml (2 hits) and decisions.yaml (4 hits) still carry `true`. So
+    the artifact now disagrees with every knowledge file, and the knowledge files
+    assert a value the artifact no longer supports. The fix is NOT to flip true to
+    false -- that propagates the same semantic error in the other direction -- but
+    to write the three-state statement in all four surfaces.
+
+
+    REQUIRED IMPLEMENTATION: replace the boolean with a three-state field (tracks_thinning:
+    supported | refuted | not_assessable) at both arm and joint level; add tracks_thinning_on_assessable_levels
+    computed over non-refused levels only (TRUE for this run, and a real measured
+    result) alongside levels_refused; and rename or annotate p_nonincreasing_with_thinning
+    so a False cannot be read as a violation when it is a short-vector artefact. Keep
+    the per-level detail and the freeze_assertions block, which are correct and good.
+
+
+    ALSO CONFIRMED CORRECT AND WORTH RECORDING: the freeze itself reproduces at 14/25
+    exact-zero increments with the original control at 0/25; the mechanism is quantified
+    (new retained contexts collapse 2464 -> 5 -> 0 across k = 13 -> 14 -> 16, retained
+    total saturating at 8762); the non-frozen-window exponent is p = 1.093 (LINEAR),
+    exactly reproducing the value I computed independently earlier; the superseded
+    full-window p = 0.539 is no longer emitted; and the guard correctly leaves the
+    un-frozen twin arm alone. Refusing to fit rather than silently fitting the degenerate
+    window is the right choice; only the summary encoding is defective.'
+  related_experiments:
+  - exp_id: X3
+    result: freeze guard correct (14/25 zero increments reproduced; non-frozen p=1.093
+      LINEAR reproduced) but its summary boolean encodes 'two levels refused' as 'trend
+      absent', flipping joint_tracks_thinning to False and disagreeing with all four
+      knowledge files
+    role: subject
+  depends_on:
+  - D063
+  - D068
+  - D071
+- id: D075
+  date: 2026-09-14 09:21 UTC
+  summary: 'Three rulings settled by measurement: (1) the k=5 entry was never created
+    - creating it is the agent''s step, not a wait on my allocation, while the GPU
+    sits idle at 0%; (2) the blocked 0.651 write task is unnecessary because exponent_p
+    = 0.651 already exists in the control artifact, with control-vs-B bit-identity
+    at k=5..9 and divergence at k=10 independently confirmed; (3) the misleading /tmp
+    backup names were cleared, and whole-file overwrite of append-only knowledge files
+    is now an L1 constraint (C028) with "current is newer" a valid success termination.'
+  rationale: 'THREE RULINGS, each settled by measurement rather than by relaying a
+    summary.
+
+
+    (1) THE k=5 DEADLOCK HAS A CAUSE, AND IT IS NOT "WAITING ON THE DIRECTOR". I queried
+    the authoritative sources myself rather than continuing to accept the relayed
+    phrase "no ALLOCATED item". get_pending_approvals returns 0 experiments. The registry
+    has 16 entries and NONE of them is a k=5 entry - the entries are E1, E3, E7, E8,
+    E9_Q2v3, E10, X1, X3, X3_A, X3_B, X3_C, X3_D056, X4, X5, X6, X12. So the state
+    is not "an entry awaits my allocation"; the entry was never created. D072 split
+    the work as create-entry -> I allocate -> submit, and the agent had been reporting
+    "I am waiting for allocate, I have nothing to do", which inverts the split: the
+    create-entry step is theirs and had not happened. Meanwhile list_available_gpus
+    confirms the card at 0% utilisation with 2 MB reserved and NO processes - an allocated
+    GPU idle across several rounds. This is the single highest-priority operational
+    item and I instructed the agent to create the entry before anything else in the
+    next turn and report the ID in one line, with an explicit instruction not to report
+    the symptom again but the blocker if one exists.
+
+
+    (2) THE BLOCKED 0.651 TASK IS UNNECESSARY - THE NUMBER ALREADY LIVES IN AN ARTIFACT.
+    The agent was blocked three times by a guard while trying to write "B @ T=0 =
+    0.651" into variant B''s artifact, and correctly stopped rather than rephrasing
+    until the guard passed. I ruled that stopping was right, and separately established
+    by reading the artifacts that the task is not needed. The control artifact already
+    contains exponent_p = 0.651 at known_truth_control.plain_iid.fit.power.exponent_p
+    - a real fitted exponent over a real curve, in an artifact that is now tracked
+    in the repository, not merely in review prose. I also independently verified the
+    identity claim: control-plain and B-plain are bit-identical at k = 5, 6, 7, 8,
+    9 with the first difference at k = 10 (3.443794066025302 vs 3.4502297569802005).
+    That divergence point is precisely the signature of the T=5 filter, which is inert
+    where every context still has >= 5 samples and begins to bite at k=10. Two independent
+    measurements, same conclusion, now confirmed from bytes by me. RULING: drop the
+    task; record that the number''s home is that field. TRAP RECORDED: variant B''s
+    artifact contains the string "0.651" twice, both as substrings of 10.651108547284124
+    (the k=30 D_k value), so a naive substring grep reports a hit that does not exist
+    - match the field, not the digits.
+
+
+    (3) THE NAMING TRAP WAS CLEARED BY ME. The Reviewer correctly identified that
+    in /tmp the file named findings.md.damaged_* held the CORRECT newest superset
+    copy (113,414 B, sha ffcee5ade580..., 184 headers) while files named findings_safety3_*
+    and findings.md.bak held the STALE versions (101,721 B, sha 528ccf9dbaf6..., 164
+    headers) - the names pointed the opposite way from the content, which would have
+    induced the next mistake. I renamed the correct copy to findings.SUPERSET_same_as_git_ffcee5ad.md
+    and prefixed all four older ones with STALE_. Verified both 113,414 B copies and
+    git HEAD:findings.md share sha ffcee5ade580..., the stale set is 101,721 / 97,370
+    / 90,970 B, and the working-tree file is byte-identical to the commit. Because
+    /tmp is volatile and the only durable copy is the committed one, the repository
+    commit is the backup of record for these files.
+
+
+    ADOPTED AS A STRUCTURAL CONSTRAINT (C028), effective now, applying to the Director
+    as much as to the Agent: for findings.md, memory.md, mistakes.yaml, decisions.yaml,
+    constraints.yaml and registry.yaml, no recovery, restore or rewrite may proceed
+    by whole-file replacement. Any restore must FIRST prove by cmp/sha256 that the
+    candidate version STRICTLY CONTAINS the current file; otherwise stop and report.
+    And "current is newer than the chosen source" is a LEGITIMATE SUCCESSFUL TERMINATION,
+    not a failure. That last clause comes from the Reviewer''s sharpest observation:
+    in the last incident the worker''s failed label was literally correct - its task
+    premise was mis-specified while its execution was right - and its refusal to write
+    is what prevented the loss. That is the first instance in this sequence where
+    a failed flag means "the task was wrong", not "the work did not happen". Recovery
+    tasks must therefore be defined as "confirm current is newest; restore only if
+    it is not", so that stopping counts as success.'
+  related_experiments:
+  - exp_id: X12
+    result: k=5 entry does not exist in the registry (16 entries, none k=5) while
+      the GPU sits at 0% utilisation - the create-entry step is the agent's and has
+      not happened
+    role: blocked-work
+  - exp_id: X3
+    result: control artifact already carries exponent_p = 0.651 at known_truth_control.plain_iid.fit.power.exponent_p;
+      control-plain and B-plain are bit-identical at k=5..9 with first divergence
+      at k=10, matching the T=5 filter signature
+    role: evidence
+  depends_on:
+  - D066
+  - D068
+  - D072
+- id: D076
+  date: 2026-09-14 09:27 UTC
+  summary: 'X11 measured 0.1608 vs the primary corpus''s 0.3434 with no tuning - a
+    result against our own C1 headline. I recomputed both artifacts myself: 64.7%
+    of the 18.3-point gap is per-pair evidence volume and service granularity (82
+    services at smaller n vs 45), median tv converges to 0.5935 vs 0.5805 under matching,
+    so 0.1608 must not be cited as corpus non-extrapolability. The residual ~6.5-point
+    gap is the real signal. X11 must be registered, with the stratification carried
+    inside it.'
+  rationale: 'X11 (cross-corpus feasibility on CESNET-QUIC22) completed and produced
+    a result that argues AGAINST our own headline number: the upper-side certifiable
+    fraction is 534/3321 = 0.1608 on QUIC22 versus 340/990 = 0.3434 on the primary
+    corpus, with tuning_performed = false. That is the single most important scientific
+    result of the session so far, because it speaks directly to the hardest reviewer
+    objection (single-corpus, unknown month coverage) and it goes against us.
+
+
+    The Reviewer raised a warning that the comparison may be confounded, and I RECOMPUTED
+    IT MYSELF from the two artifacts rather than accepting either the agent''s framing
+    ("half, does not reproduce") or the Reviewer''s summary. Both corpora''s per-pair
+    rows are in tracked artifacts: artifacts/X11/data/x11_feasibility.json (protocol.per_pair_summary.rows,
+    3,321 rows) and artifacts/_project/data/q1_absolute_counts.json (pairs with M=1,
+    990 rows).
+
+
+    WHAT I MEASURED:
+
+    - Primary corpus (990 pairs): min(n_a,n_b) min 2,791 / p25 7,679 / median 13,049
+    / p75 50,953 / p90 159,842 / max 1,375,270. frac eps_hi<0.5 = 0.3434. median tv
+    = 0.5805.
+
+    - QUIC22 (3,321 pairs): min 2,080 / p25 3,208 / median 7,565 / p75 13,211 / p90
+    42,294 / max 339,731. frac = 0.1608. median tv = 0.6892.
+
+    - QUIC22 stratified by min-n: all 0.1608 (3,321) / >=5,000 0.1941 (1,891) / >=10,000
+    0.2217 (1,326) / >=13,049 0.2485 (861) / >=20,000 0.2822 (528) / >=40,000 0.2934
+    (351) / >=80,000 0.2789 (190). This reproduces the Reviewer''s table exactly.
+
+    - Matched comparison at the primary median n: raw gap 0.3434-0.1608 = 0.1826;
+    matched gap 0.3434-0.2789 = 0.0645; so 64.7% of the raw gap is explained by per-pair
+    evidence volume and service granularity alone.
+
+    - median tv CONVERGES under matching: 0.6892 unmatched -> 0.5935 matched, versus
+    the primary''s 0.5805. The residual is 0.013 matched against 0.109 unmatched,
+    so the "QUIC22 services are intrinsically more separable" explanation is itself
+    largely an n effect.
+
+    - A common-n-band tv comparison has MIXED SIGN across bands: primary higher in
+    20k-50k (0.6857 vs 0.5785), QUIC22 higher in 5k-10k (0.7594 vs 0.6380) and 10k-20k
+    (0.6745 vs 0.5257), roughly equal at >=200k (0.4732 vs 0.5251). So pooled tv medians
+    are band-noisy and are not a corpus property either.
+
+    - Structural: 990 = C(45,2) and 3,321 = C(82,2). QUIC22 has 82 retained services
+    at smaller per-service n against the primary''s 45 services. That is a different
+    measurement design, not the same experiment on a different corpus.
+
+
+    RULING: `reproduces_upper_fraction: false` STAYS as recorded - it is honest and
+    I am not softening it, and the absence of tuning (tuning_performed: false), the
+    absence of object substitution, and the artifact''s own statement that the full
+    two-sided decision is unavailable because the lower classifier pipeline did not
+    run are all to the agent''s credit. BUT the single pooled point 0.1608 must NOT
+    be cited as evidence of "single-corpus non-extrapolability", and X11 must NOT
+    be used as either falsification or confirmation of C1 until a scale-matched resampling
+    is done. The citable sentence is: under a fixed protocol QUIC22''s marginal upper-certifiable
+    fraction is lower; at matched per-pair evidence the gap narrows from 18.3 to ~6.5
+    points and the median tv converges (0.594 vs 0.581); the raw single-point figure
+    is a composition-affected marginal proportion, not a corpus property.
+
+
+    The residual ~6.5-point gap is the real, still-unexplained signal, and it is far
+    smaller and more interesting than the "half" framing suggests. Also required:
+    X11 is UNREGISTERED - the Reviewer greps 0 hits in both registry.yaml and manifest.yaml
+    - which is the same "ran it but recorded it as never run" pattern seen with X6
+    and position-wise. The registration must carry the stratification table, or the
+    next reader sees only 16.08%.
+
+
+    This instance also reinforces the session''s governing lesson: a pooled single-point
+    proportion across two differently-composed pair populations is a derived view
+    that hides the composition, exactly like a pooled median hiding sign reversals
+    (D064) or a boolean hiding a refusal (D074). The instrument must expose the stratification.'
+  related_experiments:
+  - exp_id: X11
+    result: upper certifiable fraction 0.1608 (534/3321) vs primary 0.3434 (340/990),
+      no tuning; 64.7% of the 18.3-point gap explained by n-stratification and service
+      granularity, median tv converges 0.6892 -> 0.5935 vs primary 0.5805 under matching
+    role: headline
+  - exp_id: X1
+    result: primary corpus per-pair n distribution (990 pairs, median min-n 13,049)
+      used as the matching reference; frac 0.3434 and median tv 0.5805
+    role: reference
+  depends_on:
+  - D072
+  - D075

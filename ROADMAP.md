@@ -29,8 +29,46 @@
 > that is where C2's measurement lives. **4th instance today of a check that cannot fail.**
 > **⚠ Paper caveat: 20,000-flow/service subsample vs C1's full-n upper.** **⚠ I fixed the framing's banned
 > "assumption-free" wording myself — the claim-binding source was the one surface that was wrong.**
+> **★★ D076 — X11 CROSS-CORPUS RESULT: AN ARGUMENT AGAINST OUR OWN HEADLINE, AND ITS CAUSE IS MEASURED.**
+> On **CESNET-QUIC22** (independent, public, same protocol: k=5 · M=1 · alpha=0.025 · channel (direction,size),
+> timing excluded · service threshold 2,000 · **no tuning**, `tuning_performed: false`) the upper certifiable
+> fraction is **534/3321 = 0.1608** against the primary corpus's **340/990 = 0.3434**. **`reproduces_upper_fraction: false`.**
+> **I recomputed BOTH artifacts myself.** The raw gap is **18.3 points**, but it is **mostly composition**:
+> | min(n_a,n_b) | QUIC22 pairs | frac eps_hi<0.5 | median tv |
+> |---|---|---|---|
+> | all | 3,321 | **0.1608** | 0.6892 |
+> | >=13,049 (= primary median n) | 861 | **0.2485** | 0.6197 |
+> | >=20,000 | 528 | **0.2822** | 0.5979 |
+> | >=80,000 | 190 | **0.2789** | 0.5935 |
+> **⇒ 64.7% of the gap is per-pair evidence volume and service granularity alone** (raw 0.1826 → matched 0.0645).
+> **median tv CONVERGES under matching: 0.6892 → 0.5935 vs the primary's 0.5805** — so "QUIC22 services are
+> intrinsically more separable" is itself largely an n effect. **Structural difference: 990 = C(45,2) vs 3,321 = C(82,2)**
+> — 82 services at smaller n each is **a different measurement design, not the same experiment on another corpus.**
+> **⚠ A common-n-band tv comparison has MIXED SIGN** (primary higher in 20k–50k; QUIC22 higher in 5k–10k and
+> 10k–20k) ⇒ **pooled tv medians are band-noisy and are not a corpus property either.**
+> **⇒ RULING: `does not reproduce` STAYS (not softened). But 0.1608 must NOT be cited as "single-corpus
+> non-extrapolability", and X11 is neither falsification nor confirmation of C1 until a scale-matched
+> resampling is done.** The citable form: *under a fixed protocol QUIC22's marginal upper-certifiable fraction
+> is lower; at matched per-pair evidence the gap narrows from 18.3 to ~6.5 points and median tv converges
+> (0.594 vs 0.581); the raw single point is a **composition-affected marginal proportion, not a corpus property**.*
+> **★ The residual ~6.5-point gap is the REAL, still-unexplained signal** — far smaller, and far more
+> interesting, than "half". **Credit: no tuning, no object substitution, and the artifact states outright that
+> the two-sided decision is unavailable because the lower classifier pipeline did not run.** The defect is the
+> interpretability of a pooled point, not honesty. **⚠ X11 is UNREGISTERED (0 hits in registry and manifest) —
+> same "ran it but recorded it as never run" pattern; must carry this table, or the next reader sees only 16.08%.**
 > **D068 — I over-reached and retracted:** the **0.608 mass figure is NOT freeze-contaminated** (direct
 > drop/total ratio, no estimator in the path) — **the MASS is citable; the INFERENCE from it is not.**
+> **★ D074 — THE FREEZE GUARD LANDED, AND ITS BOOLEAN SAID THE WRONG THING.** The guard is **correct**
+> (reproduces **14/25** exact-zero increments vs the unfiltered control's **0/25**; quantifies the mechanism:
+> new retained contexts collapse 2464→5→0 at k=13→14→16, total saturating at 8762; refuses to fit a frozen
+> tail; non-frozen exponent **`p = 1.093` LINEAR**, exactly reproducing my independent computation; the
+> superseded `0.539` is no longer emitted). **⚠ But `joint_tracks_thinning` flipped to False for a SEMANTIC
+> reason, not a scientific one:** the assessable levels are **0.651 → 0.625 → 0.614, strictly monotone**,
+> and the False came from **two levels being REFUSED** — a boolean cannot express "not assessable" and so
+> reported "trend absent". **⇒ Correct statement everywhere: trend SUPPORTED on the three assessable
+> levels; the two deepest NOT ASSESSABLE; mechanism NOT ESTABLISHED (two levels refused, not "trend
+> absent"). Do NOT flip the stored `true` to `false`.** **6th instance today of a check whose output
+> cannot distinguish its failure modes.**
 > **D067** — 0.651-vs-0.539 closed as **three settings of ONE construction** (freeze point moves earlier as `T`
 > rises: none/**k=28**/**k=20**/**k=16**/**k=14/13/11/10** ⇒ the sweep is a **freeze-length series, not a sparsity
 > dose-response**). **D064** — **(ii): dependence present, first-order NOT supported.**
@@ -161,13 +199,29 @@ Both questions answered on real wire data with **fully measured** quantities (re
   exactly.** A permanent assertion now enforces this (zero-intervention curve **bit-identical** to the shared
   reference; analytic k=5 ratio within 0.001).
   **② BUT MY D056 PREDICTION WAS WRONG — THE DISAGREEMENT SURVIVES THE FIX.** I wrote that the two controls'
-  opposition "was itself an artifact of this bug". **It is not.** With the corrected axis, `joint_tracks_thinning
-  = true` still holds and the directions are still OPPOSITE: the dose-response **adds** sparsity (0.4156 → 0.5694)
-  and drives `p` **down** (0.651 → 0.891, i.e. more sublinear); variant B's real-data scan
-  **removes** the sparsest contexts (keeps only denser ones) and **also** drives `p` down (0.539 → 0.210).
+  opposition "was itself an artifact of this bug". **It is not.** With the corrected axis the directions remain
+  OPPOSITE: the dose-response **adds** sparsity (0.4156 → 0.5694) and drives `p` **down**; variant B's
+  real-data scan **removes** the sparsest contexts and **also** drives `p` down (0.539 → 0.210).
   **More sparsity → sublinear in one; less sparsity → sublinear in the other.** ⇒ **The disagreement is REAL
   and unexplained**, so the mechanism is unresolved for **two independent reasons, not one** — the bug (now
   fixed) **and** the remaining opposition.
+  **③ ★★ AND THE FREEZE GUARD HAS NOW LANDED, WHICH CHANGES WHAT MAY BE QUOTED (D063 → D074).** The guard is
+  **correct** — it reproduces **14/25 exact-zero increments** in B's plain curve against **0/25** in the
+  unfiltered control, quantifies the mechanism (new retained contexts collapse 2464 → 5 → 0 across
+  k=13 → 14 → 16, retained total saturating at **8762**), and **refuses to emit a fit on a frozen tail**
+  rather than silently fitting it. **The non-frozen-window exponent is `p = 1.093` (LINEAR)** — exactly the
+  value I computed independently — **and the superseded full-window `p = 0.539` is no longer emitted.**
+  **⚠ BUT ITS SUMMARY BOOLEAN SAID THE WRONG THING (D074).** `joint_tracks_thinning` flipped to **False**,
+  and the flip does **not** come from a monotonicity violation: the three ASSESSABLE levels are
+  **0.651 → 0.625 → 0.614, strictly non-increasing**. It comes from **two levels being REFUSED**
+  (`[0.1, 0.05]`), which shortened the emitted vector and made `p_nonincreasing` false. **A boolean cannot
+  express "not assessable", so it reported "trend absent".**
+  **⇒ THE CORRECT STATEMENT, and it is what every surface must carry:** *on the three assessable thinning
+  levels the sparse-context statistic is non-decreasing and the fitted exponent is non-increasing
+  (0.651 → 0.625 → 0.614); **the two deepest levels are NOT ASSESSABLE** because the guard refuses to fit a
+  frozen tail.* **Mechanism remains NOT ESTABLISHED** — the reason is now precise: **two levels refused,
+  not "trend absent".** **Do NOT flip the stored `true` to `false`** — that propagates the same semantic
+  error the other way. **Sixth instance today of a check whose output cannot distinguish its failure modes.**
   **③ NEW BLOCKER EXPOSED BY THE FIX:** the **original known-truth control** and the **corrected dose-response**
   both give a no-filter baseline of **p = 0.651**, while **variant B** gives **0.539** — for nominally the same
   construction (200,000 synthetic 30-bit flows, p=0.30/q=0.70). **Two nominal quantities, one setting ⇒ per my
@@ -251,9 +305,15 @@ advantage, so **real within-flow sequential dependence beyond between-flow mixin
 with **a SINGLE GLOBAL `p`** over all 30 positions, which is maximally weak; I had said a position-wise null was
 needed to test "first-order" rather than assume it. **That test has now RUN, and it settles the question in the
 opposite direction from a mere narrowing:** the **position-wise i.i.d. null** (independent across positions,
-one free marginal rate PER position) **beats first-order Markov at nearly every k** — **45/45 at k=2**,
-42/45 at k=5, **43–44 of 45 for k=8..29**, 41/45 at k=30, **zero ties**, with median `ΔBIC` (positionwise −
-markov) negative throughout (**−10.69 at k=2, −9346 at k=5, ≈−35k…−39k mid-range, −27,267 at k=30**).
+one free marginal rate PER position) **beats first-order Markov at most k — but the per-k shape matters,
+and my first phrasing ("nearly every k") was WRONG.** Full table (position-wise wins / Markov wins / ties):
+**k=2 45/0 · k=3 25/20 · k=4 33/12 · k=5 42/3 · k=6 44/1 · k=7–8 44/1 · k=9–29 43/2 (each) · k=30 41/4**,
+**0 ties anywhere**; median `ΔBIC` negative at every k (−10.69 at k=2 → ≈−38k mid-range → −27,267 at k=30).
+**⚠ k=3 (25/20) and k=4 (33/12) are MARGINAL** — not lopsided. The preregistered rule is decisive anyway
+because it demands Markov strictly win at EVERY k, and **k=2 alone breaks it**.
+**⚠ AND THE VOTE, NOT THE MEDIAN, IS THE INSTRUMENT:** at k=30 the largest per-service `ΔBIC` is
+**+408,971 (POSITIVE)** — on the 4 services where Markov wins, the sign REVERSES against the −27,267 median.
+**A pooled median would have hidden exactly those services.**
 **Pre-registered rule** (written before measurement): "first-order" is licensed only if position-wise i.i.d. is
 defeated by first-order Markov at k=30 **and** at every k=2..30; else not licensed. Artifact records
 **`first_order_licensed: false`**.
@@ -541,14 +601,14 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D076 | 2026-09-14 | X11 measured 0.1608 vs the primary corpus's 0.3434 | X11, X1 |
+| D075 | 2026-09-14 | Three rulings settled by measurement: (1) the k=5  | X12, X3 |
+| D074 | 2026-09-14 | The D063 freeze guard works but its boolean output | X3 |
+| D073 | 2026-09-14 | Fixed .gitignore so artifacts/ (the evidence chain | — |
 | D072 | 2026-09-14 | RULED: k=5 goes via create-entry-then-allocate (no | X12, X3 |
 | D071 | 2026-09-14 | CONFIRMED structurally: X6's validity gate cannot  | X6 |
 | D070 | 2026-09-14 | CONFIRMED the root cause: register_artifact itself | X3 |
 | D069 | 2026-09-14 | FIXED a labelling hazard at its source: the axis-v | X3 |
 | D068 | 2026-09-14 | RETRACTED my own D063 over-reach: the 0.608 exclud | X3 |
 | D067 | 2026-09-14 | CLOSED: 0.651-vs-0.539 is three settings of ONE co | X3 |
-| D066 | 2026-09-14 | The Agent's retraction OVER-CORRECTED. I measured  | X3 |
-| D065 | 2026-09-14 | X6 COMPLETED and delivers what C2 needed: the divi | X6 |
-| D064 | 2026-09-14 | The position-wise i.i.d. null ran and BEATS first- | X3, X12 |
-| D063 | 2026-09-14 | VERIFIED a critical defect: variant B's plain know | X3 |
 

@@ -4,30 +4,48 @@
 # X10 -> E1). A null means the plan item has not run and has no registry entry. A value is only
 # valid once the registry entry EXISTS -- do not fill a null by name-matching, and do not rename an
 # E-numbered link to a self-name, because the E-id is the true id of the run that produced it.
+
 experiments:
 - id: X1
   claim:
   - C1
   - C2
   priority: 0
-  description: "HEADLINE BRACKET TABLE (k-prefix chain). The paper's primary result. Present, for the pre-registered\
-    \ rung ladder M in {1,2,4,8,16} and k in {5,10,15,30}, the per-pair joint gate `(eps_lo > 0.05) AND (eps_hi\
-    \ < 0.5)` as a PROPORTION OF PAIRS, with the one-sided proportions beside it so the binding side is visible,\
-    \ and the saturation fraction (tv >= 0.99) per cell. ALREADY MEASURED for k=5 and k=10 (k=5: gate 336/990 =\
-    \ 0.3394 at M=1, 0 beyond M=4; k=10: 11/990 at M=1 only). X1 is the act of ASSEMBLING the certified table, not\
-    \ new computation, unless k=15/30 cells are wanted -- those require one additional pass and are the only compute\
-    \ in this entry. REQUIREMENTS (all learned the hard way this session):\n  - BOTH sides on ONE named object per\
-    \ cell; state the object in one sentence.\n  - reference radius ONLY: radius_i = 0.5*sqrt(m/n_i) + 0.5*sqrt(2*ln(2/alpha_law)/n_i),\
-    \ i.e.\n    CALL src/eibo/statcore.py::tv_upper_bound. NEVER restate the formula (C020); a spec that\n    restates\
-    \ it has already produced a 2x error once.\n  - ALPHA: per-law alpha/2 = 0.025 on both sides, union bound over\
-    \ the two laws => joint 0.95\n    for EACH side. State the split on every number; unstated splits are NOT citable.\n\
-    \  - per-row invariant `eps_lo <= eps_hi`, violation count reported; a violation is a BUG.\n  - for any two\
-    \ quantities related by a known inequality, assert that inequality PER ITEM. The\n    vector/marginal pair is\
-    \ the live example -- ***RETRACTED (M055/M057): this line called it a self-failing mismatch detector and that is FALSE.*** The word marginal silently named TWO objects. The DPI-ordered pair is the VECTOR law against the PHIST POOLED CELL law (deterministic pooling, same flows, same channel) -- that IS a theorem and is the pair to assert. Against the k-PREFIX SYMBOL law there is NO DPI order in either direction, so that ordering is an EMPIRICAL observation only (medians 0.8674 vs 0.5349) and it INVERTS on 78/990 pairs by measurement. AND it is not a detector even for the valid pair: BOTH SIDES ARE LOWER BOUNDS, so a pass means only no-contradiction-observed and two lower bounds compared can never falsify. Verify ANY new assertion against (a) the inequality IS a theorem for the objects actually named, (b) the quantity types permit contradiction (at least one side an upper bound or point estimate).\n  - report the nearest margins to each threshold,\
-    \ so sensitivity is visible rather than implied.\nDELIVERABLE: one table + the artifact behind it. The claim\
-    \ sentence it must support is exactly: \"at k=5/M=1, 33.9% of service pairs admit a two-sided interval whose\
-    \ upper side is finite-sample strict and whose lower side is an asymptotic lower bound exceeding 0.05\" -- NOT\
-    \ \"the bracket is provable\".\n"
+  description: "HEADLINE BRACKET TABLE (k-prefix chain). The paper's primary result.\
+    \ Present, for the pre-registered rung ladder M in {1,2,4,8,16} and k in {5,10,15,30},\
+    \ the per-pair joint gate `(eps_lo > 0.05) AND (eps_hi < 0.5)` as a PROPORTION\
+    \ OF PAIRS, with the one-sided proportions beside it so the binding side is visible,\
+    \ and the saturation fraction (tv >= 0.99) per cell. ALREADY MEASURED for k=5\
+    \ and k=10 (k=5: gate 336/990 = 0.3394 at M=1, 0 beyond M=4; k=10: 11/990 at M=1\
+    \ only). X1 is the act of ASSEMBLING the certified table, not new computation,\
+    \ unless k=15/30 cells are wanted -- those require one additional pass and are\
+    \ the only compute in this entry. REQUIREMENTS (all learned the hard way this\
+    \ session):\n  - BOTH sides on ONE named object per cell; state the object in\
+    \ one sentence.\n  - reference radius ONLY: radius_i = 0.5*sqrt(m/n_i) + 0.5*sqrt(2*ln(2/alpha_law)/n_i),\
+    \ i.e.\n    CALL src/eibo/statcore.py::tv_upper_bound. NEVER restate the formula\
+    \ (C020); a spec that\n    restates it has already produced a 2x error once.\n\
+    \  - ALPHA: per-law alpha/2 = 0.025 on both sides, union bound over the two laws\
+    \ => joint 0.95\n    for EACH side. State the split on every number; unstated\
+    \ splits are NOT citable.\n  - per-row invariant `eps_lo <= eps_hi`, violation\
+    \ count reported; a violation is a BUG.\n  - for any two quantities related by\
+    \ a known inequality, assert that inequality PER ITEM. The\n    vector/marginal\
+    \ pair is the live example -- ***RETRACTED (M055/M057): this line called it a\
+    \ self-failing mismatch detector and that is FALSE.*** The word marginal silently\
+    \ named TWO objects. The DPI-ordered pair is the VECTOR law against the PHIST\
+    \ POOLED CELL law (deterministic pooling, same flows, same channel) -- that IS\
+    \ a theorem and is the pair to assert. Against the k-PREFIX SYMBOL law there is\
+    \ NO DPI order in either direction, so that ordering is an EMPIRICAL observation\
+    \ only (medians 0.8674 vs 0.5349) and it INVERTS on 78/990 pairs by measurement.\
+    \ AND it is not a detector even for the valid pair: BOTH SIDES ARE LOWER BOUNDS,\
+    \ so a pass means only no-contradiction-observed and two lower bounds compared\
+    \ can never falsify. Verify ANY new assertion against (a) the inequality IS a\
+    \ theorem for the objects actually named, (b) the quantity types permit contradiction\
+    \ (at least one side an upper bound or point estimate).\n  - report the nearest\
+    \ margins to each threshold, so sensitivity is visible rather than implied.\n\
+    DELIVERABLE: one table + the artifact behind it. The claim sentence it must support\
+    \ is exactly: \"at k=5/M=1, 33.9% of service pairs admit a two-sided interval\
+    \ whose upper side is finite-sample strict and whose lower side is an asymptotic\
+    \ lower bound exceeding 0.05\" -- NOT \"the bracket is provable\".\n"
   depends_on: []
   registry_id: X1
   framing_ref:
@@ -37,17 +55,21 @@ experiments:
 - id: X2
   claim:
   - C1
-  description: 'SECOND CERTIFIED OBJECT (PHIST whole-flow) on the SHARP bound, reported as a COEXISTING object that
-    may NOT be ranked against X1. Uses the packet-cell law at m=32 with the sum-to-zero coefficient 16 (NOT 31:
-    sum(delta)=0 forces positive and negative mass equal, so the positive part is capped at m/2 = 16). Already measured:
-    342/990 = 0.3455 informative, vs 152/990 under the superseded 2x-loose 31r. MANDATORY in the artifact: (a) the
-    object named in one sentence; (b) the Weissman categorical form (would give 935/990) is UNPROVEN for this correlated-simplex-vector
-    estimator and MUST NOT be quoted -- Var(f_i(c)) <= P(c)(1-P(c)) holds, but per-coordinate variance bounds do
-    not establish an L1 concentration inequality for correlated coordinates; (c) the 31r form is superseded and
-    must not be resurrected. ***THE CLAIM THAT MUST NOT BE MADE:*** X1''s 340/990 and X2''s 342/990 do NOT corroborate
-    each other. A 2x2 decomposition gives own-radii 340/342 but common-radii 340 vs 935 and 81 vs 342: the underlying
-    statistics differ 2.7x and the constants 7.34x, i.e. two large differences in OPPOSITE directions CANCELLING.
-    Record the 2x2 beside the two fractions so no reader can read agreement as confirmation.
+  description: 'SECOND CERTIFIED OBJECT (PHIST whole-flow) on the SHARP bound, reported
+    as a COEXISTING object that may NOT be ranked against X1. Uses the packet-cell
+    law at m=32 with the sum-to-zero coefficient 16 (NOT 31: sum(delta)=0 forces positive
+    and negative mass equal, so the positive part is capped at m/2 = 16). Already
+    measured: 342/990 = 0.3455 informative, vs 152/990 under the superseded 2x-loose
+    31r. MANDATORY in the artifact: (a) the object named in one sentence; (b) the
+    Weissman categorical form (would give 935/990) is UNPROVEN for this correlated-simplex-vector
+    estimator and MUST NOT be quoted -- Var(f_i(c)) <= P(c)(1-P(c)) holds, but per-coordinate
+    variance bounds do not establish an L1 concentration inequality for correlated
+    coordinates; (c) the 31r form is superseded and must not be resurrected. ***THE
+    CLAIM THAT MUST NOT BE MADE:*** X1''s 340/990 and X2''s 342/990 do NOT corroborate
+    each other. A 2x2 decomposition gives own-radii 340/342 but common-radii 340 vs
+    935 and 81 vs 342: the underlying statistics differ 2.7x and the constants 7.34x,
+    i.e. two large differences in OPPOSITE directions CANCELLING. Record the 2x2 beside
+    the two fractions so no reader can read agreement as confirmation.
 
     '
   priority: 0
@@ -61,7 +83,114 @@ experiments:
   claim:
   - C3
   priority: 0
-  description: 'THE THEORY TEST THAT DISCRIMINATES THE FRAMING (chain-rule D_k vs the i.i.d. null). ***STATUS -- INCONCLUSIVE, fixed by the pre-committed adjudication rule. NOT a falsification and NOT a confirmation.*** Estimate the CHAIN-RULE joint divergence D_k over the DEPENDENT packet prefix and test its growth against the LINEAR i.i.d. null. THE RULE, fixed in advance -- SUBLINEAR is CONFIRMED only if the fit survives BOTH (i) a fixed-population recompute AND (ii) a known-linear-truth control the estimator must recover; otherwise DOWNGRADE TO INCONCLUSIVE. The fixed-population recompute PASSED (fixed 820-pair denominator gives p=0.844, AIC advantage 74.15, increment ratio 1.503, near-identical to the variable-population fit, so composition is not the cause). The known-truth control FAILED -- on synthetic data whose analytic truth is EXACTLY LINEAR (p=0.30, q=0.70, per-position truth 0.3389191441548814, so D_k equals k times 0.3389191441548814) the estimator returned SUBLINEAR in BOTH arms, including a twin control built on the REAL occupancy profile; its est/true ratio FALLS with k (1.0002 at k=5 down to 0.6769 at k=30; twin 0.9987 down to 0.8824), i.e. it DEFLATES large-k divergence. THE CAUSAL MECHANISM IS ***NOT*** ESTABLISHED, AND NOW FOR TWO REASONS. (a) The earlier text asserted sparse occupancy as THE measured mechanism, and that is CONTRADICTED BY VARIANT B OWN SCAN -- tightening the occupancy threshold makes the PLAIN arm MORE sublinear (power exponent 0.539 / 0.420 / 0.372 / 0.260 / 0.210 at T = 5 / 10 / 20 / 50 / 100), while the TWIN arm moves the OPPOSITE way (1.042 / 1.027 / 1.016 / 1.011 / 1.007). If sparse contexts manufactured sublinearity, REMOVING them should push the plain arm toward LINEAR; it does not. *** THE ATTRIBUTION OF THESE VALUES WAS CORRECTED UNDER D062: THIS TEXT ONCE SAID the plain arm ran "vs a no-filter baseline of 0.651" and the twin "vs baseline 0.897" -- BOTH MISATTRIBUTED. 0.651 AND 0.897 ARE THE ORIGINAL KNOWN-TRUTH CONTROL VALUES, NOT VARIANT B VALUES; VARIANT B HAS NO no-filter FIELD IN ITS ARTIFACT AT ALL. *** The occupancy CORRELATION is real and unchallenged (frac_lt_5 0.0154 to 0.9055; effective n per context 64966 to 8.1), but the CAUSAL word may not be used. *** D056/D062: THE DOSE-RESPONSE CONTROL HAS BEEN REPAIRED AND ITS VERDICT IS NOW A CLEAN POSITIVE ON A VALIDATED AXIS -- BUT THE MECHANISM STILL DOES NOT FOLLOW. *** The off-by-4 k-indexing defect is FOUND AND FIXED (labels only, lines 179-181; est/true = 1.0001850 at k=5; the zero-intervention curve is now BIT-IDENTICAL to the original control at every labelled k=5..30, guarded by the permanent assertion assert_plain_unthinned_reference). On the corrected axis plain p falls monotonically 0.651 -> 0.625 -> 0.614 -> 0.603 -> 0.557 as sparsity rises 0.4156 -> 0.4493 -> 0.4841 -> 0.5317 -> 0.5694; twin 0.891 -> 0.821. *** BUT THE CAUSAL SENTENCE MAY NOT BE RESTORED, FOR THREE REASONS: (1) the control is SYNTHETIC, so it characterises the ESTIMATOR, not the CORPUS; (2) its own zero-thinning baseline is ALREADY SUBLINEAR (p = 0.651 on data whose analytic truth is EXACTLY LINEAR), so tracks_thinning means THE ESTIMATOR BIAS GROWS WITH SPARSITY, not that real-data sublinearity is corpus-driven; (3) the real-data p = 0.844 versus synthetic 0.651 comparison is NOT same-convention (200k synthetic i.i.d. flows vs 820 real pairs) and is a READING, NOT A FINDING. TWO CAVEATS WHEN CITING IT: it rests on ONE seed (20260914) while the approved control protocol asked for >= 3; and it is a SHALLOW response (about 14 percent relative). *** *** THE BASELINE BLOCKER STANDS (D062) AND BLOCKS BOTH VALUES: the original control and the corrected dose-response AGREE at p = 0.651, but VARIANT B READS 0.539 for nominally the same construction (200,000 synthetic 30-bit flows at p=0.30/q=0.70). PER THE STANDING RULE -- two artifacts reporting the same nominal quantity at the same nominal setting with different values is a BLOCKER ON BOTH, not a tension to note -- NOTHING MAY CITE EITHER BASELINE UNTIL RESOLVED, AND THE AGREEING PAIR SIDES AGAINST VARIANT B SO VARIANT B IS THE SUSPECT. The resolution is a COMPARISON OF VARIANT B SYNTHETIC-ARM GENERATOR against the one the other two use; that work is dispatched and its RESULT, not an inference, is what closes this. NOTE THE COINCIDENCE THAT CAUSED A FALSE CLAIM: the string 0.651 DOES occur inside the variant B artifact, but it is a COINCIDENTAL D_k median (10.651108547284124 at k=30), NOT a baseline field -- a substring match on a number is not a field match. *** *** D057: THE PARAMETRIC ROUTE IS STRUCTURALLY NON-DIAGNOSTIC AND DOES NOT NARROW PART (i). *** It fits a Markov model of order 0/1/2 by BIC ONCE PER SERVICE and computes the curve UNDER THAT ALREADY-FITTED MODEL with NO PER-k REFIT, so for ANY stationary chain D_k is AFFINE in k (the order-0 branch returns D_k identically to 0). THE ONLY REACHABLE OUTCOMES ARE D_k = 0 OR AFFINE; SUBLINEAR IS UNREACHABLE, so LINEAR IS FORCED AND CARRIES NO INFORMATION ABOUT THE DATA. Numerically verified, not argued: a first-order chain [[0.8,0.2],[0.3,0.7]] has CONSTANT increments +0.128424 for every k=2..30, and an order-2 chain is constant at +0.187831748 for every k at least 4 (spread 3.6e-15). Its "decisively passed" control checks that the exact and fitted curves get the SAME verdict -- and BOTH ARE AFFINE BY CONSTRUCTION, so the control CANNOT FAIL and IS NOT A CONTROL. DO NOT CITE THAT PASS AS EVIDENCE. Consequently part (i) KEEPS ITS SCOPE -- the standard PLUG-IN estimator cannot adjudicate the growth question at this k window, n and occupancy-collapse curve -- and the honest strengthening is that NO ROUTE TRIED SO FAR CAN ADJUDICATE IT. The parametric route is ATTEMPTED AND VACUOUS, NOT a counterexample; it must NOT be repaired or re-run without a new approved design. *** THE EXISTENCE CORROBORATION (ii) IS NOT EVIDENCE (D055). *** The heterogeneous-i.i.d. arm, which by construction has ZERO within-flow dependence (each flow its own rate from the measured per-flow distribution, then 30 i.i.d. bits), returns Markov 45/45 at k at least 8 and 98.2% overall (1,281 vs 24 of 1,305; verdict DEAD, clearing the pre-registered threshold of at least 44/45) -- IT REPRODUCES THE REAL VOTE EXACTLY, so THE VOTE IS NOT DIAGNOSTIC. The magnitude is nevertheless about 58x larger than that null (arm k=30 median dBIC about 1,896 vs real about 110,091), so heterogeneity does not explain the size either -- and neither the vote nor the magnitude establishes "first-order", because the i.i.d. null uses a SINGLE GLOBAL p, so any position-wise marginal drift would suffice. A POSITION-WISE i.i.d. null (or variable-order Markov selection) is REQUIRED before "first-order" may be asserted at all, AND IS THE ONLY LISTED ROUTE NOT YET SHOWN TO BE VACUOUS. *** PRE-REGISTERED WINDOW, CORRECTED -- the first version was unfalsifiable by construction. *** It confined adjudication to the set of k where two-sided brackets exist -- which per X1 is {5,10}, i.e. TWO points, one resting on 11 pairs (1.1%). A growth-RATE claim needs at least 3 points to have leverage, so any concave curve would have fit; worse, the window was defined by the object that dies first, making "inconclusive" the PRE-DETERMINED outcome. THE DESIGN THAT WORKS computes D_k over ALL 990 pairs across the FULL k range (5 through 30), and uses the certified subset ONLY to validate the estimator. This separates the growth claim from the certification claim -- many k-points for the rate, while C1 is untouched; D_k is defined on the k-prefix law, so this is its natural domain. ***k beyond the largest certifiable rung is EXPLORATORY ONLY and must be labelled so*** (at large k only the one-sided lower bound survives, and growth evidence there is structurally weakest). DISCIPLINE -- the window and the null are fixed before the measurement. REPORT the estimate, the confidence treatment, and the window used; and if the estimator cannot separate sublinear from linear over the FULL k range, report the test as inconclusive rather than a direction. ***DISPOSITION (D057): C3 IS RETAINED AS A THREE-CLAIM PAPER AND IS WRITTEN AS A METHODS/LIMITS FINDING -- NOT CUT, AND NOT NARROWED. A TWO-CLAIM PAPER IS NOT AN OPEN QUESTION.*** *** GENERAL RULE, THIRD INSTANCE IN ONE DAY: BEFORE treating any control or test as evidence, ASK what would this have to output for the hypothesis to be FALSE? If the answer is nothing it could output -- as here, where both the test and its control are affine by construction -- IT IS NOT A TEST. Same family as (a) the original known-truth control that could not exercise the mechanism, and (b) the empty informative stratum at k=15, a statistic defined on an empty set. ***'
+  description: 'THE THEORY TEST THAT DISCRIMINATES THE FRAMING (chain-rule D_k vs
+    the i.i.d. null). ***STATUS -- INCONCLUSIVE, fixed by the pre-committed adjudication
+    rule. NOT a falsification and NOT a confirmation.*** Estimate the CHAIN-RULE joint
+    divergence D_k over the DEPENDENT packet prefix and test its growth against the
+    LINEAR i.i.d. null. THE RULE, fixed in advance -- SUBLINEAR is CONFIRMED only
+    if the fit survives BOTH (i) a fixed-population recompute AND (ii) a known-linear-truth
+    control the estimator must recover; otherwise DOWNGRADE TO INCONCLUSIVE. The fixed-population
+    recompute PASSED (fixed 820-pair denominator gives p=0.844, AIC advantage 74.15,
+    increment ratio 1.503, near-identical to the variable-population fit, so composition
+    is not the cause). The known-truth control FAILED -- on synthetic data whose analytic
+    truth is EXACTLY LINEAR (p=0.30, q=0.70, per-position truth 0.3389191441548814,
+    so D_k equals k times 0.3389191441548814) the estimator returned SUBLINEAR in
+    BOTH arms, including a twin control built on the REAL occupancy profile; its est/true
+    ratio FALLS with k (1.0002 at k=5 down to 0.6769 at k=30; twin 0.9987 down to
+    0.8824), i.e. it DEFLATES large-k divergence. THE CAUSAL MECHANISM IS ***NOT***
+    ESTABLISHED, AND NOW FOR TWO REASONS. (a) The earlier text asserted sparse occupancy
+    as THE measured mechanism, and that is CONTRADICTED BY VARIANT B OWN SCAN -- tightening
+    the occupancy threshold makes the PLAIN arm MORE sublinear (power exponent 0.539
+    / 0.420 / 0.372 / 0.260 / 0.210 at T = 5 / 10 / 20 / 50 / 100), while the TWIN
+    arm moves the OPPOSITE way (1.042 / 1.027 / 1.016 / 1.011 / 1.007). If sparse
+    contexts manufactured sublinearity, REMOVING them should push the plain arm toward
+    LINEAR; it does not. *** THE ATTRIBUTION OF THESE VALUES WAS CORRECTED UNDER D062:
+    THIS TEXT ONCE SAID the plain arm ran "vs a no-filter baseline of 0.651" and the
+    twin "vs baseline 0.897" -- BOTH MISATTRIBUTED. 0.651 AND 0.897 ARE THE ORIGINAL
+    KNOWN-TRUTH CONTROL VALUES, NOT VARIANT B VALUES; VARIANT B HAS NO no-filter FIELD
+    IN ITS ARTIFACT AT ALL. *** The occupancy CORRELATION is real and unchallenged
+    (frac_lt_5 0.0154 to 0.9055; effective n per context 64966 to 8.1), but the CAUSAL
+    word may not be used. *** D056/D062: THE DOSE-RESPONSE CONTROL HAS BEEN REPAIRED
+    AND ITS VERDICT IS NOW A CLEAN POSITIVE ON A VALIDATED AXIS -- BUT THE MECHANISM
+    STILL DOES NOT FOLLOW. *** The off-by-4 k-indexing defect is FOUND AND FIXED (labels
+    only, lines 179-181; est/true = 1.0001850 at k=5; the zero-intervention curve
+    is now BIT-IDENTICAL to the original control at every labelled k=5..30, guarded
+    by the permanent assertion assert_plain_unthinned_reference). On the corrected
+    axis plain p falls monotonically 0.651 -> 0.625 -> 0.614 -> 0.603 -> 0.557 as
+    sparsity rises 0.4156 -> 0.4493 -> 0.4841 -> 0.5317 -> 0.5694; twin 0.891 -> 0.821.
+    *** BUT THE CAUSAL SENTENCE MAY NOT BE RESTORED, FOR THREE REASONS: (1) the control
+    is SYNTHETIC, so it characterises the ESTIMATOR, not the CORPUS; (2) its own zero-thinning
+    baseline is ALREADY SUBLINEAR (p = 0.651 on data whose analytic truth is EXACTLY
+    LINEAR), so tracks_thinning means THE ESTIMATOR BIAS GROWS WITH SPARSITY, not
+    that real-data sublinearity is corpus-driven; (3) the real-data p = 0.844 versus
+    synthetic 0.651 comparison is NOT same-convention (200k synthetic i.i.d. flows
+    vs 820 real pairs) and is a READING, NOT A FINDING. TWO CAVEATS WHEN CITING IT:
+    it rests on ONE seed (20260914) while the approved control protocol asked for
+    >= 3; and it is a SHALLOW response (about 14 percent relative). *** *** THE BASELINE
+    BLOCKER STANDS (D062) AND BLOCKS BOTH VALUES: the original control and the corrected
+    dose-response AGREE at p = 0.651, but VARIANT B READS 0.539 for nominally the
+    same construction (200,000 synthetic 30-bit flows at p=0.30/q=0.70). PER THE STANDING
+    RULE -- two artifacts reporting the same nominal quantity at the same nominal
+    setting with different values is a BLOCKER ON BOTH, not a tension to note -- NOTHING
+    MAY CITE EITHER BASELINE UNTIL RESOLVED, AND THE AGREEING PAIR SIDES AGAINST VARIANT
+    B SO VARIANT B IS THE SUSPECT. The resolution is a COMPARISON OF VARIANT B SYNTHETIC-ARM
+    GENERATOR against the one the other two use; that work is dispatched and its RESULT,
+    not an inference, is what closes this. NOTE THE COINCIDENCE THAT CAUSED A FALSE
+    CLAIM: the string 0.651 DOES occur inside the variant B artifact, but it is a
+    COINCIDENTAL D_k median (10.651108547284124 at k=30), NOT a baseline field --
+    a substring match on a number is not a field match. *** *** D057: THE PARAMETRIC
+    ROUTE IS STRUCTURALLY NON-DIAGNOSTIC AND DOES NOT NARROW PART (i). *** It fits
+    a Markov model of order 0/1/2 by BIC ONCE PER SERVICE and computes the curve UNDER
+    THAT ALREADY-FITTED MODEL with NO PER-k REFIT, so for ANY stationary chain D_k
+    is AFFINE in k (the order-0 branch returns D_k identically to 0). THE ONLY REACHABLE
+    OUTCOMES ARE D_k = 0 OR AFFINE; SUBLINEAR IS UNREACHABLE, so LINEAR IS FORCED
+    AND CARRIES NO INFORMATION ABOUT THE DATA. Numerically verified, not argued: a
+    first-order chain [[0.8,0.2],[0.3,0.7]] has CONSTANT increments +0.128424 for
+    every k=2..30, and an order-2 chain is constant at +0.187831748 for every k at
+    least 4 (spread 3.6e-15). Its "decisively passed" control checks that the exact
+    and fitted curves get the SAME verdict -- and BOTH ARE AFFINE BY CONSTRUCTION,
+    so the control CANNOT FAIL and IS NOT A CONTROL. DO NOT CITE THAT PASS AS EVIDENCE.
+    Consequently part (i) KEEPS ITS SCOPE -- the standard PLUG-IN estimator cannot
+    adjudicate the growth question at this k window, n and occupancy-collapse curve
+    -- and the honest strengthening is that NO ROUTE TRIED SO FAR CAN ADJUDICATE IT.
+    The parametric route is ATTEMPTED AND VACUOUS, NOT a counterexample; it must NOT
+    be repaired or re-run without a new approved design. *** THE EXISTENCE CORROBORATION
+    (ii) IS NOT EVIDENCE (D055). *** The heterogeneous-i.i.d. arm, which by construction
+    has ZERO within-flow dependence (each flow its own rate from the measured per-flow
+    distribution, then 30 i.i.d. bits), returns Markov 45/45 at k at least 8 and 98.2%
+    overall (1,281 vs 24 of 1,305; verdict DEAD, clearing the pre-registered threshold
+    of at least 44/45) -- IT REPRODUCES THE REAL VOTE EXACTLY, so THE VOTE IS NOT
+    DIAGNOSTIC. The magnitude is nevertheless about 58x larger than that null (arm
+    k=30 median dBIC about 1,896 vs real about 110,091), so heterogeneity does not
+    explain the size either -- and neither the vote nor the magnitude establishes
+    "first-order", because the i.i.d. null uses a SINGLE GLOBAL p, so any position-wise
+    marginal drift would suffice. A POSITION-WISE i.i.d. null (or variable-order Markov
+    selection) is REQUIRED before "first-order" may be asserted at all, AND IS THE
+    ONLY LISTED ROUTE NOT YET SHOWN TO BE VACUOUS. *** PRE-REGISTERED WINDOW, CORRECTED
+    -- the first version was unfalsifiable by construction. *** It confined adjudication
+    to the set of k where two-sided brackets exist -- which per X1 is {5,10}, i.e.
+    TWO points, one resting on 11 pairs (1.1%). A growth-RATE claim needs at least
+    3 points to have leverage, so any concave curve would have fit; worse, the window
+    was defined by the object that dies first, making "inconclusive" the PRE-DETERMINED
+    outcome. THE DESIGN THAT WORKS computes D_k over ALL 990 pairs across the FULL
+    k range (5 through 30), and uses the certified subset ONLY to validate the estimator.
+    This separates the growth claim from the certification claim -- many k-points
+    for the rate, while C1 is untouched; D_k is defined on the k-prefix law, so this
+    is its natural domain. ***k beyond the largest certifiable rung is EXPLORATORY
+    ONLY and must be labelled so*** (at large k only the one-sided lower bound survives,
+    and growth evidence there is structurally weakest). DISCIPLINE -- the window and
+    the null are fixed before the measurement. REPORT the estimate, the confidence
+    treatment, and the window used; and if the estimator cannot separate sublinear
+    from linear over the FULL k range, report the test as inconclusive rather than
+    a direction. ***DISPOSITION (D057): C3 IS RETAINED AS A THREE-CLAIM PAPER AND
+    IS WRITTEN AS A METHODS/LIMITS FINDING -- NOT CUT, AND NOT NARROWED. A TWO-CLAIM
+    PAPER IS NOT AN OPEN QUESTION.*** *** GENERAL RULE, THIRD INSTANCE IN ONE DAY:
+    BEFORE treating any control or test as evidence, ASK what would this have to output
+    for the hypothesis to be FALSE? If the answer is nothing it could output -- as
+    here, where both the test and its control are affine by construction -- IT IS
+    NOT A TEST. Same family as (a) the original known-truth control that could not
+    exercise the mechanism, and (b) the empty informative stratum at k=15, a statistic
+    defined on an empty set. ***'
   depends_on:
   - X1
   registry_id: X3
@@ -71,22 +200,27 @@ experiments:
   claim:
   - C2
   priority: 0
-  description: "THE FRONTIER AS A FUNCTION, NOT A NUMBER -- this is what makes C2 a generalizable limit rather than\
-    \ one dataset's figure. M_max is a FUNCTION of (k, n, tv):\n  M_max = 0.5 * (n * B^2)^(1/k),  B = 0.5 - tv_hat\
-    \ - sqrt(2*ln(2/alpha_law)/n), alpha_law = alpha/2.\nReport the frontier table with tv_hat PINNED at each value\
-    \ (the published failure mode was an unpinned \"M_max ~ 2-4\", which is unfalsifiable). Already computed at\
-    \ n=3.9e6, k=5: M_max = 7/7/6/5/4/3/2 for tv_hat = 0.00/0.10/0.20/0.30/0.40/0.45/0.48. REQUIRED ADDITIONS: (a)\
-    \ ***THE M=8 CROSSOVER MUST BE REPORTED ON THE CERTIFIABILITY CRITERION, NOT RADIUS-ONLY (M054).*** `radius_sum\
-    \ < 0.5` is NECESSARY but NOT SUFFICIENT; the verdict uses `eps_hi = tv + radius < 0.5`. At k=5, M=8, reference\
-    \ radius: radius-only crossover = 4,218,591 at EVERY tv (it is tv-independent), but the CERTIFIABILITY crossover\
-    \ is 4,218,591 / 6,591,548 / 26,366,192 at tv = 0.00 / 0.10 / 0.30 -- i.e. ~6.2x larger at tv=0.30, and ~600x\
-    \ at tv=0.48. Citing the radius-only value as 'the crossover, only ~8% above the corpus mean' UNDERSTATES the\
-    \ requirement by ~6x. Report the eps_hi crossover as PRIMARY across the same tv grid as the frontier table;\
-    \ keep radius-only ONLY if labelled 'necessary, not sufficient'. NOTE the older 4,218,591 in earlier text is\
-    \ a 2x-FORM value and must not be mixed with reference-radius numbers.; (b) the same frontier at k=8 and k=10;\
-    \ (c) a sentence stating WHY a finer alphabet cannot help -- the certificate provably does not exist there at\
-    \ these k and n. CROSS-CHECK against the measured saturation (0/0.105/0.239/0.336/0.391 across M) so the closed\
-    \ form and the empirical monotonicity are shown to agree.\n"
+  description: "THE FRONTIER AS A FUNCTION, NOT A NUMBER -- this is what makes C2\
+    \ a generalizable limit rather than one dataset's figure. M_max is a FUNCTION\
+    \ of (k, n, tv):\n  M_max = 0.5 * (n * B^2)^(1/k),  B = 0.5 - tv_hat - sqrt(2*ln(2/alpha_law)/n),\
+    \ alpha_law = alpha/2.\nReport the frontier table with tv_hat PINNED at each value\
+    \ (the published failure mode was an unpinned \"M_max ~ 2-4\", which is unfalsifiable).\
+    \ Already computed at n=3.9e6, k=5: M_max = 7/7/6/5/4/3/2 for tv_hat = 0.00/0.10/0.20/0.30/0.40/0.45/0.48.\
+    \ REQUIRED ADDITIONS: (a) ***THE M=8 CROSSOVER MUST BE REPORTED ON THE CERTIFIABILITY\
+    \ CRITERION, NOT RADIUS-ONLY (M054).*** `radius_sum < 0.5` is NECESSARY but NOT\
+    \ SUFFICIENT; the verdict uses `eps_hi = tv + radius < 0.5`. At k=5, M=8, reference\
+    \ radius: radius-only crossover = 4,218,591 at EVERY tv (it is tv-independent),\
+    \ but the CERTIFIABILITY crossover is 4,218,591 / 6,591,548 / 26,366,192 at tv\
+    \ = 0.00 / 0.10 / 0.30 -- i.e. ~6.2x larger at tv=0.30, and ~600x at tv=0.48.\
+    \ Citing the radius-only value as 'the crossover, only ~8% above the corpus mean'\
+    \ UNDERSTATES the requirement by ~6x. Report the eps_hi crossover as PRIMARY across\
+    \ the same tv grid as the frontier table; keep radius-only ONLY if labelled 'necessary,\
+    \ not sufficient'. NOTE the older 4,218,591 in earlier text is a 2x-FORM value\
+    \ and must not be mixed with reference-radius numbers.; (b) the same frontier\
+    \ at k=8 and k=10; (c) a sentence stating WHY a finer alphabet cannot help --\
+    \ the certificate provably does not exist there at these k and n. CROSS-CHECK\
+    \ against the measured saturation (0/0.105/0.239/0.336/0.391 across M) so the\
+    \ closed form and the empirical monotonicity are shown to agree.\n"
   depends_on:
   - X1
   registry_id: X4
@@ -97,17 +231,21 @@ experiments:
   claim:
   - C1
   priority: 1
-  description: "ESTIMATOR CORRECTNESS UNDER KNOWN GROUND TRUTH (the evidence that the numbers are not artefacts\
-    \ of the implementation). Synthetic discrete distributions with ANALYTICALLY known TV:\n  (i) tv_hat converges\
-    \ to the true TV;\n  (ii) the upper bound >= true TV at the DECLARED per-law alpha/2 rate -- a bare-alpha check\
-    \ would\n       be testing a different guarantee than the bracket uses;\n  (iii) eps_lo <= eps_hi per row;\n\
-    \  (iv) a weak classifier never yields a larger lower bound than a strong one;\n  (v) identical distributions\
-    \ give tv_hat near 0 with the bound shrinking in n.\nMETA-LESSON, binding: two runs of the SAME implementation\
-    \ agreeing defines NOTHING. Independence must be at the IMPLEMENTATION level -- a second implementation written\
-    \ from the definition. This session produced a 2x error that survived a nominal \"independent recompute\" precisely\
-    \ because the spec was the two implementations' common ancestor. STATE THE LIMITATION: the existing lower-side\
-    \ falsification result (divisibility crossing where the classifier does not) is about the SYNTHETIC ensemble\
-    \ sharing the same assumed factors, NOT about real channels.\n"
+  description: "ESTIMATOR CORRECTNESS UNDER KNOWN GROUND TRUTH (the evidence that\
+    \ the numbers are not artefacts of the implementation). Synthetic discrete distributions\
+    \ with ANALYTICALLY known TV:\n  (i) tv_hat converges to the true TV;\n  (ii)\
+    \ the upper bound >= true TV at the DECLARED per-law alpha/2 rate -- a bare-alpha\
+    \ check would\n       be testing a different guarantee than the bracket uses;\n\
+    \  (iii) eps_lo <= eps_hi per row;\n  (iv) a weak classifier never yields a larger\
+    \ lower bound than a strong one;\n  (v) identical distributions give tv_hat near\
+    \ 0 with the bound shrinking in n.\nMETA-LESSON, binding: two runs of the SAME\
+    \ implementation agreeing defines NOTHING. Independence must be at the IMPLEMENTATION\
+    \ level -- a second implementation written from the definition. This session produced\
+    \ a 2x error that survived a nominal \"independent recompute\" precisely because\
+    \ the spec was the two implementations' common ancestor. STATE THE LIMITATION:\
+    \ the existing lower-side falsification result (divisibility crossing where the\
+    \ classifier does not) is about the SYNTHETIC ensemble sharing the same assumed\
+    \ factors, NOT about real channels.\n"
   depends_on:
   - X1
   registry_id: X5
@@ -117,22 +255,44 @@ experiments:
   claim:
   - C1
   priority: 1
-  description: '***MECHANISM-NOVELTY TRACK.*** REJECTION-GENERIC / DIVISIBILITY LOWER BOUND -- a structurally DIFFERENT
-    bound mechanism from the plug-in upper side, which is why it belongs in the plan independent of any single number.
-    TV(P1,P2) <= eps  <=>  the pair is eps-divisible (a test using only P1 and P2 exists with error <= eps); under
-    full realizability this is 1 - 2*(optimistic error). It requires NO alphabet bound, so it applies at ANY k --
-    precisely the large-k region where the plug-in certificate is lost. ASSUMPTION-LADEN (VC / Cohn-Tesoriero type
-    realizability): the assumption must be stated explicitly and the bound must NEVER be presented as distribution-free.
-    DELIVERABLE THAT MATTERS: turn "at large k only the one-sided lower bound survives" from an ASSERTION into a
-    MEASURED RESULT with numbers -- this is what lets C2''s claim about the horizon be stated as a finding rather
-    than a limitation. VALIDITY CHECK: over many replications the bound must not exceed the true TV more often than
-    the DECLARED alpha allows (state the split). ***RUN IN PROGRESS.*** The repository function is `src/eibo/divisibility.py::tv_lower_bound_divisibility`
-    and it is to be CALLED, never restated (restating a radius formula already produced a 2x defect once). A synthetic
-    self-test artifact for the divisibility module already exists on the tree (dated Sep 13, sample_size 800, true_tv
-    grid 0.0-0.75) and is the MODULE self-test, NOT this experiment''s real-data run: any `large_k_usable` line in
-    it is scoped to the synthetic test only and the real-data version must NOT inherit that sentence unqualified.
-    *** THE X6 LABEL AUDIT IS STILL UNVERIFIED: the same-label test could not run while its artifact was absent mid-flight.
-    RE-RUN IT ONCE X6 LANDS AND DO NOT LET IT PASS SILENTLY. ***
+  description: '***MECHANISM-NOVELTY TRACK.*** REJECTION-GENERIC / DIVISIBILITY LOWER
+    BOUND -- a structurally DIFFERENT bound mechanism from the plug-in upper side,
+    which is why it belongs in the plan independent of any single number. TV(P1,P2)
+    <= eps  <=>  the pair is eps-divisible (a test using only P1 and P2 exists with
+    error <= eps); under full realizability this is 1 - 2*(optimistic error). It requires
+    NO alphabet bound, so it applies at ANY k -- precisely the large-k region where
+    the plug-in certificate is lost. ASSUMPTION-LADEN (VC / Cohn-Tesoriero type realizability):
+    the assumption must be stated explicitly and the bound must NEVER be presented
+    as distribution-free. DELIVERABLE THAT MATTERS: turn "at large k only the one-sided
+    lower bound survives" from an ASSERTION into a MEASURED RESULT with numbers --
+    this is what lets C2''s claim about the horizon be stated as a finding rather
+    than a limitation. VALIDITY CHECK: over many replications the bound must not exceed
+    the true TV more often than the DECLARED alpha allows (state the split). *** OUTCOME
+    -- COMPLETED: the run finished and it DELIVERS THE DELIVERABLE. The divisibility
+    lower bound is NONTRIVIAL (greater than 0) on 100% of pairs at k=15/20/25/30 and
+    informative (greater than 0.05) at 0.9989 / 1.0 / 1.0 / 1.0, IN EXACTLY THE REGION
+    WHERE THE PLUG-IN CERTIFICATE IS ALREADY LOST. That converts the horizon claim
+    from an assertion into a MEASURED result. Artifact x6_divisibility_lower_bound.json,
+    1998647 B, sha256 d9e17986066e7db7fee0d84eebaf602920dd1048743871908c5a1b39f4406ce0,
+    status COMPLETE, run 2026-09-14 05:28:41. TWO CAVEATS THAT MUST TRAVEL WITH IT:
+    (1) it is computed on a 20000-flow-per-service SUBSAMPLE while the C1 upper side
+    is at full n -- the pair counts match per k so the comparison is well-posed at
+    the pair level, but the two bounds are computed at DIFFERENT n and must NOT be
+    placed in one table without saying so; (2) its SYNTHETIC VALIDITY GATE overstates
+    itself -- the bound clips to 0 at the validity sample size and a 0 bound can never
+    exceed a non-negative truth, so the honest form is that the TESTABLE rows comply,
+    NOT that there were zero violations of 120. The real-data leg is unaffected (vacuous
+    count is 0 at every k of 10 or more). *** The repository function is `src/eibo/divisibility.py::tv_lower_bound_divisibility`
+    and it is to be CALLED, never restated (restating a radius formula already produced
+    a 2x defect once). A synthetic self-test artifact for the divisibility module
+    already exists on the tree (dated Sep 13, sample_size 800, true_tv grid 0.0-0.75)
+    and is the MODULE self-test, NOT this experiment''s real-data run: any `large_k_usable`
+    line in it is scoped to the synthetic test only and the real-data version must
+    NOT inherit that sentence unqualified. *** THE X6 LABEL AUDIT HAS BEEN RE-RUN
+    AND IS VERIFIED-CORRECT: the artifact has landed, the script contains no constant-offset
+    k construct, and the axis probe showed labelled k=5/10/15 producing encoded shapes
+    [1,5]/[1,10]/[1,15]. A COMPLETED POSITIVE MUST NOT BE LEFT QUEUED BEHIND A STALE
+    UNVERIFIED NOTE. ***
 
     '
   depends_on: []
@@ -143,16 +303,20 @@ experiments:
   claim:
   - C1
   priority: 1
-  description: 'MASKING AS A PRECONDITION, WITH A DESIGN THAT CAN ACTUALLY DETECT THE EFFECT. The padding question
-    is not cleanup: sampled short-flow tail slots are all zero while sizes are read as abs(...), so a raw 0 is not
-    a legal packet length and naive binning puts it in the LOWEST size bin, inflating that bin in a SERVICE-DEPENDENT
-    way. ***THE TWO ARMS MUST USE DIFFERENT FLOW SETS*** (masked arm truncates at PPI_LEN; unmasked arm zero-pads
-    to k). Requiring both arms to use the SAME `PPI_LEN >= k` set makes the comparison STRUCTURALLY NULL, since
-    then min(PPI_LEN,k) == k and the prefixes are identical by construction. ***WRITE THIS REQUIREMENT INTO THE
-    SCRIPT***, not into a per-run spec: it has now been attempted twice in regimes where the effect cannot appear,
-    both times because the spec made it vacuous. READING RULE: "no change at this k" is a statement about that k,
-    NOT "no contamination". Report the padding value distribution, the difference quantiles, the count of pairs
-    that change, and the PPI_LEN distribution; annotate any k=30 denominator as the LONG-FLOW subset, not the corpus.
+  description: 'MASKING AS A PRECONDITION, WITH A DESIGN THAT CAN ACTUALLY DETECT
+    THE EFFECT. The padding question is not cleanup: sampled short-flow tail slots
+    are all zero while sizes are read as abs(...), so a raw 0 is not a legal packet
+    length and naive binning puts it in the LOWEST size bin, inflating that bin in
+    a SERVICE-DEPENDENT way. ***THE TWO ARMS MUST USE DIFFERENT FLOW SETS*** (masked
+    arm truncates at PPI_LEN; unmasked arm zero-pads to k). Requiring both arms to
+    use the SAME `PPI_LEN >= k` set makes the comparison STRUCTURALLY NULL, since
+    then min(PPI_LEN,k) == k and the prefixes are identical by construction. ***WRITE
+    THIS REQUIREMENT INTO THE SCRIPT***, not into a per-run spec: it has now been
+    attempted twice in regimes where the effect cannot appear, both times because
+    the spec made it vacuous. READING RULE: "no change at this k" is a statement about
+    that k, NOT "no contamination". Report the padding value distribution, the difference
+    quantiles, the count of pairs that change, and the PPI_LEN distribution; annotate
+    any k=30 denominator as the LONG-FLOW subset, not the corpus.
 
     '
   depends_on:
@@ -164,27 +328,34 @@ experiments:
   claim:
   - C1
   priority: 1
-  description: 'VECTOR-LEVEL DISTINGUISHABILITY AS A ONE-SIDED RESULT (in flight). The quantity one-hot discards
-    to put both sides on ONE object: TV(per-flow normalised 32-vector law). ***CORRECTED (M055): the word marginal
-    here silently named TWO DIFFERENT OBJECTS.*** (A) the **PHIST-side POOLED CELL LAW** (average the per-flow 32-vectors
-    within a service) IS a deterministic function of the vector law on the SAME flows and channel, so TV(vector)
-    >= TV(pooled) IS a DPI theorem. (B) the **k-PREFIX SYMBOL LAW** (first 5 direction,size codes) is NOT a function
-    of the PHIST 32-vector -- the two consume different aspects of the flow -- so **NO DPI order relates them in
-    EITHER direction**, exactly as the framework states. **The artifact compares against (B).** So the per-item
-    inequality against the k-prefix marginal is NOT a theorem, and a violation would not be an object-mismatch bug.
-    The observed medians do order (vector 0.8674 > k-prefix marginal 0.5349) but that is an EMPIRICAL fact about
-    this corpus, not a guarantee. ***THE PER-ITEM ASSERTION MUST TARGET THE OBJECT PAIR THAT IS ACTUALLY DPI-ORDERED
-    (M055):*** assert TV(vector)_i >= TV(pooled cell law)_i on EVERY pair, BOTH on the SAME flow set and channel,
-    where pooling is deterministic -- THAT is a theorem. ***BUT IT IS NOT A DETECTOR (M056) -- BOTH SIDES ARE LOWER
-    BOUNDS.*** The vector-side value is tv_lower_bound(method=michel) (guarantee: asymptotic HPLB estimate) and
-    the pooled side carries tv_hat; a LOWER BOUND on TV(vector) may sit BELOW TV(pooled) even when DPI holds. So
-    PASSING means only ''no contradiction observed'', and FAILING is EXPECTED and indicates nothing. Report vector_side_quantity_type,
-    pairs_where_the_check_can_falsify: 0, and check_is_sanity_not_detector: true. ***RULE: to call any assertion
-    a detector, BOTH must hold -- (a) the inequality is a theorem for the two objects NAMED; (b) the quantity TYPES
-    permit contradiction, i.e. at least one side is an UPPER bound or a POINT ESTIMATE. Two lower bounds compared
-    can never falsify.*** Do NOT assert it against the k-prefix marginal; report that ordering as an EMPIRICAL observation
-    only, and record that an earlier version of this spec asserted a non-theorem. Expect ~0.8585 vector vs ~0.5349
-    marginal (medians). New artifact; overwrite nothing.
+  description: 'VECTOR-LEVEL DISTINGUISHABILITY AS A ONE-SIDED RESULT (in flight).
+    The quantity one-hot discards to put both sides on ONE object: TV(per-flow normalised
+    32-vector law). ***CORRECTED (M055): the word marginal here silently named TWO
+    DIFFERENT OBJECTS.*** (A) the **PHIST-side POOLED CELL LAW** (average the per-flow
+    32-vectors within a service) IS a deterministic function of the vector law on
+    the SAME flows and channel, so TV(vector) >= TV(pooled) IS a DPI theorem. (B)
+    the **k-PREFIX SYMBOL LAW** (first 5 direction,size codes) is NOT a function of
+    the PHIST 32-vector -- the two consume different aspects of the flow -- so **NO
+    DPI order relates them in EITHER direction**, exactly as the framework states.
+    **The artifact compares against (B).** So the per-item inequality against the
+    k-prefix marginal is NOT a theorem, and a violation would not be an object-mismatch
+    bug. The observed medians do order (vector 0.8674 > k-prefix marginal 0.5349)
+    but that is an EMPIRICAL fact about this corpus, not a guarantee. ***THE PER-ITEM
+    ASSERTION MUST TARGET THE OBJECT PAIR THAT IS ACTUALLY DPI-ORDERED (M055):***
+    assert TV(vector)_i >= TV(pooled cell law)_i on EVERY pair, BOTH on the SAME flow
+    set and channel, where pooling is deterministic -- THAT is a theorem. ***BUT IT
+    IS NOT A DETECTOR (M056) -- BOTH SIDES ARE LOWER BOUNDS.*** The vector-side value
+    is tv_lower_bound(method=michel) (guarantee: asymptotic HPLB estimate) and the
+    pooled side carries tv_hat; a LOWER BOUND on TV(vector) may sit BELOW TV(pooled)
+    even when DPI holds. So PASSING means only ''no contradiction observed'', and
+    FAILING is EXPECTED and indicates nothing. Report vector_side_quantity_type, pairs_where_the_check_can_falsify:
+    0, and check_is_sanity_not_detector: true. ***RULE: to call any assertion a detector,
+    BOTH must hold -- (a) the inequality is a theorem for the two objects NAMED; (b)
+    the quantity TYPES permit contradiction, i.e. at least one side is an UPPER bound
+    or a POINT ESTIMATE. Two lower bounds compared can never falsify.*** Do NOT assert
+    it against the k-prefix marginal; report that ordering as an EMPIRICAL observation
+    only, and record that an earlier version of this spec asserted a non-theorem.
+    Expect ~0.8585 vector vs ~0.5349 marginal (medians). New artifact; overwrite nothing.
 
     '
   depends_on:
@@ -196,15 +367,18 @@ experiments:
   claim:
   - C1
   priority: 1
-  description: 'SNI/ECH SENSITIVITY -- THE MEASURED PRICE OF ECH. The anonymised destination-host identifier is
-    a deterministic function of the SNI, so it is a legitimate pre-encryption side channel and MUST be excluded
-    from the declared channel. Report the bound delta between an SNI-INCLUSIVE and an SNI-EXCLUDED channel as a
-    measured price, so the exclusion is a quantified choice rather than an unstated assumption. CHANNEL DECLARATION
-    (must appear in the methods section, not only here): the observable channel is (direction, size). The exporter''s
-    PPI array carries THREE channels -- row 1 direction, row 2 size, row 0 inter-packet timing. Row 0 is DELIBERATELY
-    EXCLUDED; including it would change |A_k| and every k_cert. No TLS-fingerprint-side data (QUIC_USER_AGENT, QUIC_TLS_EXT_*,
-    QUIC_*CID) is consumed. A reviewer reading the dataset docs will see three channels and ask why the bound was
-    computed on two, so the exclusion must be stated explicitly.
+  description: 'SNI/ECH SENSITIVITY -- THE MEASURED PRICE OF ECH. The anonymised destination-host
+    identifier is a deterministic function of the SNI, so it is a legitimate pre-encryption
+    side channel and MUST be excluded from the declared channel. Report the bound
+    delta between an SNI-INCLUSIVE and an SNI-EXCLUDED channel as a measured price,
+    so the exclusion is a quantified choice rather than an unstated assumption. CHANNEL
+    DECLARATION (must appear in the methods section, not only here): the observable
+    channel is (direction, size). The exporter''s PPI array carries THREE channels
+    -- row 1 direction, row 2 size, row 0 inter-packet timing. Row 0 is DELIBERATELY
+    EXCLUDED; including it would change |A_k| and every k_cert. No TLS-fingerprint-side
+    data (QUIC_USER_AGENT, QUIC_TLS_EXT_*, QUIC_*CID) is consumed. A reviewer reading
+    the dataset docs will see three channels and ask why the bound was computed on
+    two, so the exclusion must be stated explicitly.
 
     '
   depends_on:
@@ -216,19 +390,24 @@ experiments:
   claim:
   - C1
   priority: 2
-  description: 'CLOSE THE ENVIRONMENT GATE. Step-0 PASSED on the XS subset (53 services; 45 at the 2000-flow threshold;
-    two-axis 43/39; full-crossing 39/36 -- comfortably clearing >= 15) with TIME_FIRST spanning 13 months (12 full
-    + a 69-flow 2024-05 boundary fragment). **THAT PASS IS PROVISIONAL**: the XS subset has unknown month coverage,
-    so occupancy characterises the subset and does NOT establish corpus representativeness. The Parquet months are
-    the closing condition. ***STATUS: THE PARQUET MONTH TRANSFER IS PAUSED (eleven months, zero of eleven previously
-    succeeded, suspended for an endpoint fault) AND THIS ENTRY MUST NOT BE MADE THE PREREQUISITE OF ANY REACHABLE
-    WORK -- the replication entry X11 uses a DIFFERENT, PUBLIC corpus and proceeds INDEPENDENTLY of this transfer.***
-    ALSO REQUIRED: the month-level split. Flows per month: 12 full months at 524,108-1,217,162 each, PLUS a 69-flow
-    2024-05 fragment that MUST be excluded (a one-day stub, not a month). Corpus level this is a clean 68/32 split;
-    ***BUT "corpus-level feasible" is the WRONG TEST*** -- service sizes span four orders of magnitude, and a threshold
-    service retains only ~105 flows in the thinnest month, where m=32 gives a radius ~0.744 so eps_hi > 0.5 and NO
-    certificate can exist. The honest statement is: feasible in aggregate, per-month certifiable only for high-volume
-    services. `DST_ASN` stays an AUDIT CONFOUND, not an environment axis (32/53 services are single-ASN).
+  description: 'CLOSE THE ENVIRONMENT GATE. Step-0 PASSED on the XS subset (53 services;
+    45 at the 2000-flow threshold; two-axis 43/39; full-crossing 39/36 -- comfortably
+    clearing >= 15) with TIME_FIRST spanning 13 months (12 full + a 69-flow 2024-05
+    boundary fragment). **THAT PASS IS PROVISIONAL**: the XS subset has unknown month
+    coverage, so occupancy characterises the subset and does NOT establish corpus
+    representativeness. The Parquet months are the closing condition. ***STATUS: THE
+    PARQUET MONTH TRANSFER IS PAUSED (eleven months, zero of eleven previously succeeded,
+    suspended for an endpoint fault) AND THIS ENTRY MUST NOT BE MADE THE PREREQUISITE
+    OF ANY REACHABLE WORK -- the replication entry X11 uses a DIFFERENT, PUBLIC corpus
+    and proceeds INDEPENDENTLY of this transfer.*** ALSO REQUIRED: the month-level
+    split. Flows per month: 12 full months at 524,108-1,217,162 each, PLUS a 69-flow
+    2024-05 fragment that MUST be excluded (a one-day stub, not a month). Corpus level
+    this is a clean 68/32 split; ***BUT "corpus-level feasible" is the WRONG TEST***
+    -- service sizes span four orders of magnitude, and a threshold service retains
+    only ~105 flows in the thinnest month, where m=32 gives a radius ~0.744 so eps_hi
+    > 0.5 and NO certificate can exist. The honest statement is: feasible in aggregate,
+    per-month certifiable only for high-volume services. `DST_ASN` stays an AUDIT
+    CONFOUND, not an environment axis (32/53 services are single-ASN).
 
     '
   depends_on:
@@ -240,18 +419,22 @@ experiments:
   claim:
   - C1
   priority: 2
-  description: 'REPLICATION ON AN INDEPENDENT DATASET (CESNET-QUIC22, one month, 102 labels). The strongest defence
-    against a single-dataset review, and the project''s ONLY direct answer to it -- nothing has been run on it.
-    Same protocol, same declared channel, same split policy, same reporting discipline. ***PROCEED INDEPENDENTLY
-    OF X10.*** X10 is blocked on a paused Parquet transfer; X11 uses a public corpus and does not need it. FEASIBILITY
-    FIRST, in this order and with literal evidence at every step: (1) is `cesnet-datazoo` installed, and if not does
-    it install; (2) is QUIC22 obtainable WITHOUT a data-use agreement, as stated by the library''s own API or docs;
-    (3) its size; (4) ***THE DECISIVE ONE: does it carry a per-packet direction sequence, a per-packet size sequence,
-    a per-flow packet count, and a service label*** -- print the real field names and report which are ABSENT rather
-    than papering over; (5) disk headroom before downloading. Report where the bracket REPRODUCES and where it does
-    NOT; ***A FAILURE TO REPRODUCE IS A FINDING ABOUT CORPUS DEPENDENCE AND MUST BE REPORTED AS SUCH -- DO NOT TUNE
-    PARAMETERS TO MAKE IT FIT.*** Cannot-obtain-it requires the literal error as proof. Place any downloaded data
-    on the DATA disk, never the container OS disk.
+  description: 'REPLICATION ON AN INDEPENDENT DATASET (CESNET-QUIC22, one month, 102
+    labels). The strongest defence against a single-dataset review, and the project''s
+    ONLY direct answer to it -- nothing has been run on it. Same protocol, same declared
+    channel, same split policy, same reporting discipline. ***PROCEED INDEPENDENTLY
+    OF X10.*** X10 is blocked on a paused Parquet transfer; X11 uses a public corpus
+    and does not need it. FEASIBILITY FIRST, in this order and with literal evidence
+    at every step: (1) is `cesnet-datazoo` installed, and if not does it install;
+    (2) is QUIC22 obtainable WITHOUT a data-use agreement, as stated by the library''s
+    own API or docs; (3) its size; (4) ***THE DECISIVE ONE: does it carry a per-packet
+    direction sequence, a per-packet size sequence, a per-flow packet count, and a
+    service label*** -- print the real field names and report which are ABSENT rather
+    than papering over; (5) disk headroom before downloading. Report where the bracket
+    REPRODUCES and where it does NOT; ***A FAILURE TO REPRODUCE IS A FINDING ABOUT
+    CORPUS DEPENDENCE AND MUST BE REPORTED AS SUCH -- DO NOT TUNE PARAMETERS TO MAKE
+    IT FIT.*** Cannot-obtain-it requires the literal error as proof. Place any downloaded
+    data on the DATA disk, never the container OS disk.
 
     '
   depends_on:
@@ -267,60 +450,78 @@ experiments:
   - RC3
   - RC6
   priority: 1
-  registry_id: X12
-  description: 'DETECTOR VALIDATION -- THE FALSIFIABLE CONTAINMENT (restored from the brief; it was missing from
-    my first plan). Pre-registered ONE-SIDED COVERAGE test: every observed per-pair detector error must respect
-    the predicted floor (1 - eps_hi)/2 within its CI. ***INFORMATIVE-PAIR STRATUM IS MANDATORY*** -- only pairs
-    with eps_hat_k^hi < 0.5 (predicted floor > 0.25) enter the PRIMARY statistic; 0.5 <= eps_hi < 0.9 is a secondary
-    stratum; above 0.9 is reported but excluded. WITHOUT this restriction, trivial coverage on well-separated pairs
-    dilutes the check and the test can be passed by saying nothing. TEST STATISTIC: the NUMBER OF FLOOR VIOLATIONS
-    among informative pairs against a one-sided binomial test at the nominal coverage level -- any excess falsifies
-    either the estimate or the channel model and MUST be reported. ***THE CONTAINMENT STATISTIC IS NOT YET IMPLEMENTED***:
-    `floor_violation_test` is a stub that unconditionally returns DEFERRED and the per-pair CSV carries the literal
-    string in its columns; Stage 2 implementation is in progress. ***AND THE VACUITY RULE STANDS -- AN EMPTY SET
-    IS NOT A PASS, AND A VACUOUS COUNT IS NOT EVIDENCE.*** IF THE INFORMATIVE STRATUM IS EMPTY at some k, that k
-    contributes NO validation evidence and this is stated, not papered over; likewise a detector whose true-positive
-    rate is near zero yields zero violations FOR A VACUOUS REASON and must be reported as UNINFORMATIVE, never as
-    a pass. ***K IS PINNED AT 5 -- MANDATORY, AND NOW STRUCTURALLY ENFORCED*** (the default was deleted and omission
-    now refuses with an actionable message): k=5 is the ONLY k whose informative stratum is POPULATED -- at M=1 the
-    certified upper-side count is 340/990 at k=5 and 28/990 at k=10, but 0/946 at k=15 and 0/820 at k=30. ***A SILENT
-    EMPTY SET IS MORE DANGEROUS THAN A LOUD REFUSAL***: a run at k=15 reaches DONE while evaluating its primary
-    statistic on the empty set. ***L0 -- THE DETECTOR PANEL IS UNDER DETERMINATION, NOT CONDEMNED.*** OSCR reads
-    about 1e-3 and FPR95 is undefined nearly everywhere, BUT the SAME run''s row-level agreement with the true label
-    is 48.6% / 13.5% / 58.1% against a ***MAJORITY-CLASS*** baseline of 14.73% (train-side, 745,293 of 5,058,007)
-    / 24.89% (held-out test-side) -- NOT against the superseded uniform 1/53 = 1.89%, which is WRONG because the
-    true service-label distribution is strongly imbalanced (D059). *** ANY CITATION OF THESE RATES MUST CARRY THE
-    MAJORITY-CLASS BASELINE BESIDE THEM, or they read stronger than they are. *** Against it, LIGHTGBM (48.6%)
-    and RONETC (58.1%) are ABOVE the baseline, and ***PROTOTYPE (13.5%) IS BELOW IT -- WORSE THAN ALWAYS GUESSING
-    THE MAJORITY CLASS***; the earlier sentence "the detectors predict far above chance" OVER-CLAIMED for prototype.
-    So a broken pipeline is NOT the story, but neither is a uniformly strong panel.
-    ***AND `all_rows_accepted = true` FOR LIGHTGBM IS STRUCTURAL, NOT MEASURED (D059):*** line 486 hard-codes
-    `"accepted": np.ones(len(pred), dtype=bool)`, independent of the data (prototype computes `nearest_distance <=
-    radius_array`, ronetc `score >= threshold`), and its JSON accepted_rate has 1 distinct value (all 1.0) against
-    3 for prototype and 3 for ronetc. ***AN OPEN-SET DETECTOR THAT NEVER REJECTS HAS NO REJECTION CAPABILITY***,
-    so its OSCR/FPR95 are computed in a DEGENERATE NEVER-REJECT STATE and its accepted_rate = 1.0 is a DESIGN RESIDUE,
-    NOT A MEASUREMENT. Mark it STRUCTURAL in the artifact and in any caption.
-    A code reading says OSCR is not a standard AUC (it scores only rows the detector already labelled as that service,
-    so the curve cannot reach (1,1) and a perfect one-vs-rest classifier would integrate to zero) -- WHETHER THE
-    METRIC OR THE DETECTOR IS AT FAULT IS UNDER DETERMINATION by a standard per-class AUC comparison, and the earlier
-    at-or-below-chance framing is WITHDRAWN. ***D058: THAT DIAGNOSTIC RUNS IN PARALLEL AND DOES NOT GATE THE k=5
-    CONTAINMENT RUN*** -- containment consumes only eps_hat_k^hi and the per-pair error, never OSCR or FPR95, so
-    the k=5 containment result is valid regardless; and ONE RUN SHOULD SERVE BOTH PURPOSES, so before submitting
-    k=5 the run must persist the per-class score material a standard AUC needs, making the metric fix post-hoc arithmetic
-    rather than a second run. The index-vs-label prime suspect is REFUTED BY MEASUREMENT (the class
-    list is exactly 0..52, so index equals raw label). Detectors: LightGBM on k-packet features, SepSpace-style
-    prototype-radius rejector, RoNeTC-style uncertainty-quantified rejector, frozen Pcap-Encoder probe; metrics
-    OSCR and FPR95 per held-out service (5/10/20% label holdout). Address-field randomization (DST_IP/SUBNET/ASN/COUNTRY)
-    applied at test time for any baseline consuming them, before/after delta reported -- our channel excludes these
-    by construction so its predicted bound must be INVARIANT, which is itself a check. ***LABEL AXIS (corrected):***
-    run with --label-field APP; the earlier CATEGORY default validated on PROVIDER groups, which is an OBJECT-MISMATCH
-    with the per-service bracket it tests. ***SPLIT (D043, refused-if-absent):*** --train-months 202406..202411 and
-    --test-months 202501..202505, with buffer month 202412 UNUSED; adjacent month buckets share TIME_FIRST boundary
-    values (they are local-time UTC+3 buckets compared as raw UTC), so a strict ordering REQUIRES the gap. The strict
-    guard is never weakened: no <=, no --no-check, no try/except. ***THREE_OF_FOUR:*** the frozen Pcap-Encoder probe
-    is unavailable (the authors report the pretraining model at ~800 GB, beyond this project''s resource envelope,
-    independent of any network reachability), so the evaluated baseline set is three of four and this is stated as
-    a limitation rather than silently substituted.'
+  registry_id: X12_k5
+  description: 'DETECTOR VALIDATION -- THE FALSIFIABLE CONTAINMENT (restored from
+    the brief; it was missing from my first plan). Pre-registered ONE-SIDED COVERAGE
+    test: every observed per-pair detector error must respect the predicted floor
+    (1 - eps_hi)/2 within its CI. ***INFORMATIVE-PAIR STRATUM IS MANDATORY*** -- only
+    pairs with eps_hat_k^hi < 0.5 (predicted floor > 0.25) enter the PRIMARY statistic;
+    0.5 <= eps_hi < 0.9 is a secondary stratum; above 0.9 is reported but excluded.
+    WITHOUT this restriction, trivial coverage on well-separated pairs dilutes the
+    check and the test can be passed by saying nothing. TEST STATISTIC: the NUMBER
+    OF FLOOR VIOLATIONS among informative pairs against a one-sided binomial test
+    at the nominal coverage level -- any excess falsifies either the estimate or the
+    channel model and MUST be reported. ***THE CONTAINMENT STATISTIC IS NOT YET IMPLEMENTED***:
+    `floor_violation_test` is a stub that unconditionally returns DEFERRED and the
+    per-pair CSV carries the literal string in its columns; Stage 2 implementation
+    is in progress. ***AND THE VACUITY RULE STANDS -- AN EMPTY SET IS NOT A PASS,
+    AND A VACUOUS COUNT IS NOT EVIDENCE.*** IF THE INFORMATIVE STRATUM IS EMPTY at
+    some k, that k contributes NO validation evidence and this is stated, not papered
+    over; likewise a detector whose true-positive rate is near zero yields zero violations
+    FOR A VACUOUS REASON and must be reported as UNINFORMATIVE, never as a pass. ***K
+    IS PINNED AT 5 -- MANDATORY, AND NOW STRUCTURALLY ENFORCED*** (the default was
+    deleted and omission now refuses with an actionable message): k=5 is the ONLY
+    k whose informative stratum is POPULATED -- at M=1 the certified upper-side count
+    is 340/990 at k=5 and 28/990 at k=10, but 0/946 at k=15 and 0/820 at k=30. ***A
+    SILENT EMPTY SET IS MORE DANGEROUS THAN A LOUD REFUSAL***: a run at k=15 reaches
+    DONE while evaluating its primary statistic on the empty set. ***L0 -- THE DETECTOR
+    PANEL IS UNDER DETERMINATION, NOT CONDEMNED.*** OSCR reads about 1e-3 and FPR95
+    is undefined nearly everywhere, BUT the SAME run''s row-level agreement with the
+    true label is 48.6% / 13.5% / 58.1% against a ***MAJORITY-CLASS*** baseline of
+    14.73% (train-side, 745,293 of 5,058,007) / 24.89% (held-out test-side) -- NOT
+    against the superseded uniform 1/53 = 1.89%, which is WRONG because the true service-label
+    distribution is strongly imbalanced (D059). *** ANY CITATION OF THESE RATES MUST
+    CARRY THE MAJORITY-CLASS BASELINE BESIDE THEM, or they read stronger than they
+    are. *** Against it, LIGHTGBM (48.6%) and RONETC (58.1%) are ABOVE the baseline,
+    and ***PROTOTYPE (13.5%) IS BELOW IT -- WORSE THAN ALWAYS GUESSING THE MAJORITY
+    CLASS***; the earlier sentence "the detectors predict far above chance" OVER-CLAIMED
+    for prototype. So a broken pipeline is NOT the story, but neither is a uniformly
+    strong panel. ***AND `all_rows_accepted = true` FOR LIGHTGBM IS STRUCTURAL, NOT
+    MEASURED (D059):*** line 486 hard-codes `"accepted": np.ones(len(pred), dtype=bool)`,
+    independent of the data (prototype computes `nearest_distance <= radius_array`,
+    ronetc `score >= threshold`), and its JSON accepted_rate has 1 distinct value
+    (all 1.0) against 3 for prototype and 3 for ronetc. ***AN OPEN-SET DETECTOR THAT
+    NEVER REJECTS HAS NO REJECTION CAPABILITY***, so its OSCR/FPR95 are computed in
+    a DEGENERATE NEVER-REJECT STATE and its accepted_rate = 1.0 is a DESIGN RESIDUE,
+    NOT A MEASUREMENT. Mark it STRUCTURAL in the artifact and in any caption. A code
+    reading says OSCR is not a standard AUC (it scores only rows the detector already
+    labelled as that service, so the curve cannot reach (1,1) and a perfect one-vs-rest
+    classifier would integrate to zero) -- WHETHER THE METRIC OR THE DETECTOR IS AT
+    FAULT IS UNDER DETERMINATION by a standard per-class AUC comparison, and the earlier
+    at-or-below-chance framing is WITHDRAWN. ***D058: THAT DIAGNOSTIC RUNS IN PARALLEL
+    AND DOES NOT GATE THE k=5 CONTAINMENT RUN*** -- containment consumes only eps_hat_k^hi
+    and the per-pair error, never OSCR or FPR95, so the k=5 containment result is
+    valid regardless; and ONE RUN SHOULD SERVE BOTH PURPOSES, so before submitting
+    k=5 the run must persist the per-class score material a standard AUC needs, making
+    the metric fix post-hoc arithmetic rather than a second run. The index-vs-label
+    prime suspect is REFUTED BY MEASUREMENT (the class list is exactly 0..52, so index
+    equals raw label). Detectors: LightGBM on k-packet features, SepSpace-style prototype-radius
+    rejector, RoNeTC-style uncertainty-quantified rejector, frozen Pcap-Encoder probe;
+    metrics OSCR and FPR95 per held-out service (5/10/20% label holdout). Address-field
+    randomization (DST_IP/SUBNET/ASN/COUNTRY) applied at test time for any baseline
+    consuming them, before/after delta reported -- our channel excludes these by construction
+    so its predicted bound must be INVARIANT, which is itself a check. ***LABEL AXIS
+    (corrected):*** run with --label-field APP; the earlier CATEGORY default validated
+    on PROVIDER groups, which is an OBJECT-MISMATCH with the per-service bracket it
+    tests. ***SPLIT (D043, refused-if-absent):*** --train-months 202406..202411 and
+    --test-months 202501..202505, with buffer month 202412 UNUSED; adjacent month
+    buckets share TIME_FIRST boundary values (they are local-time UTC+3 buckets compared
+    as raw UTC), so a strict ordering REQUIRES the gap. The strict guard is never
+    weakened: no <=, no --no-check, no try/except. ***THREE_OF_FOUR:*** the frozen
+    Pcap-Encoder probe is unavailable (the authors report the pretraining model at
+    ~800 GB, beyond this project''s resource envelope, independent of any network
+    reachability), so the evaluated baseline set is three of four and this is stated
+    as a limitation rather than silently substituted.'
 - id: X13
   claim:
   - C1
@@ -328,14 +529,73 @@ experiments:
   - RC7
   priority: 2
   registry_id: null
-  description: GOOD-TOULMIN MISSING-SERVICE MASS (restored from the brief; missing from my first plan). The unknown-class
-    mass entering the open-set bound is scoped as a ***DEPLOYMENT-SITE MISSING SERVICE MASS***, estimated from the
-    flow-level frequency-of-frequencies over fine-grained anonymised destination-host identifiers, with Eriksson-type
-    prediction intervals and a MANDATORY 1:100-SAMPLING SENSITIVITY ANALYSIS. ***NEVER a universal unknown prior.***
-    Report bounds WITH and WITHOUT this term separately, so a reader can see how much of the open-set gap the unknown
+  description: GOOD-TOULMIN MISSING-SERVICE MASS (restored from the brief; missing
+    from my first plan). The unknown-class mass entering the open-set bound is scoped
+    as a ***DEPLOYMENT-SITE MISSING SERVICE MASS***, estimated from the flow-level
+    frequency-of-frequencies over fine-grained anonymised destination-host identifiers,
+    with Eriksson-type prediction intervals and a MANDATORY 1:100-SAMPLING SENSITIVITY
+    ANALYSIS. ***NEVER a universal unknown prior.*** Report bounds WITH and WITHOUT
+    this term separately, so a reader can see how much of the open-set gap the unknown
     class accounts for.
 claims:
-  C1: A two-sided epsilon-indistinguishability bracket is computable on real encrypted traffic, with the two sides
-    carrying explicitly different certification strength (336/990 = 33.9% of service pairs at k=5, M=1)
-  C2: The certificate horizon is short, and the coarsest channel is the ONLY viable rung
-  C3: 'Methods/limits finding, and it is the third of three claims -- NOT to be cut and NOT to be narrowed. The standard PLUG-IN chain-rule divergence estimator cannot adjudicate the dependent-prefix growth question at this k window, n, and occupancy-collapse curve: it DEFLATES large-k divergence (est/true 1.0002 down to 0.6769 measured on analytically LINEAR truth), and this is robust to two independent repair attempts (estimator-family/jackknife and exposure-conditioning both FAILED their known-truth gates; the second would have to discard 60.8% of transition mass at k=30 and STILL fails). The honest strengthening is that NO ROUTE TRIED SO FAR CAN ADJUDICATE IT: the PARAMETRIC route was attempted and is STRUCTURALLY NON-DIAGNOSTIC -- it fits a Markov model once per service and computes D_k under that already-fitted model with no per-k refit, so D_k is AFFINE for any stationary chain (order 0 gives D_k identically 0) and SUBLINEAR IS UNREACHABLE, i.e. its LINEAR is FORCED BY CONSTRUCTION and carries no information about the data; its "decisively passed" control compares two things that are BOTH affine by construction and therefore CANNOT FAIL. It is NOT a counterexample and must NOT be repaired or re-run without a new approved design. The causal MECHANISM (sparse-occupancy attribution) is NOT ESTABLISHED, and now for TWO reasons. (a) Variant B own threshold scan pushes the plain exponent DOWN as the threshold tightens (0.539 / 0.420 / 0.372 / 0.260 / 0.210 at T = 5 / 10 / 20 / 50 / 100) while the twin arm moves the OPPOSITE way -- so if sparse contexts manufactured sublinearity, REMOVING them should push the plain arm toward LINEAR and it does not. *** THE ATTRIBUTION OF 0.651 AND 0.897 TO VARIANT B WAS A MISATTRIBUTION CORRECTED UNDER D062: BOTH ARE THE ORIGINAL KNOWN-TRUTH CONTROL VALUES, AND VARIANT B HAS NO no-filter FIELD IN ITS ARTIFACT AT ALL. *** (b) The dose-response control that was to test the mechanism has been REPAIRED: the verified off-by-4 k-indexing defect is fixed (labels only; est/true = 1.0001850 at k=5; the zero-intervention curve is BIT-IDENTICAL to the original control at every labelled k=5..30, guarded by a permanent assertion), and on the corrected axis its verdict IS a clean positive -- plain p falls monotonically 0.651 -> 0.625 -> 0.614 -> 0.603 -> 0.557 as sparsity rises 0.4156 -> 0.5694, twin 0.891 -> 0.821. *** BUT THE CAUSAL SENTENCE MAY NOT BE RESTORED, FOR THREE REASONS: (1) the control is SYNTHETIC, so it characterises the ESTIMATOR, not the CORPUS; (2) its own zero-thinning baseline is ALREADY SUBLINEAR (p = 0.651 on data whose analytic truth is EXACTLY LINEAR), so tracks_thinning means THE ESTIMATOR BIAS GROWS WITH SPARSITY, not that real-data sublinearity is corpus-driven; (3) the real-data p = 0.844 versus synthetic 0.651 comparison is NOT same-convention (200k synthetic i.i.d. flows vs 820 real pairs) and is a READING, NOT A FINDING. TWO CAVEATS WHEN CITING IT: one seed only (20260914) against an approved protocol that asked for >= 3; and a SHALLOW response (about 14 percent relative). *** AND THE BASELINE BLOCKER STANDS (D062): the original control and the corrected dose-response AGREE at 0.651, but VARIANT B READS 0.539 for nominally the same construction, so by the standing rule BOTH are blocked, the agreeing pair sides against variant B, and NOTHING MAY CITE EITHER BASELINE until the dispatched generator comparison reports. *** THE EXISTENCE CORROBORATION (ii) IS NOT EVIDENCE: the heterogeneous-i.i.d. arm, which by construction has ZERO within-flow dependence, returns Markov 45/45 at k at least 8 and 98.2% overall, reproducing the real vote exactly, so the vote is not diagnostic; the magnitude is nevertheless about 58x larger than that null, so heterogeneity does not explain the size either; and neither supports "first-order", because the i.i.d. null uses a SINGLE GLOBAL p. A position-wise i.i.d. null is REQUIRED before "first-order" may be asserted, AND IS THE ONLY LISTED ROUTE NOT YET SHOWN TO BE VACUOUS. ***GENERAL RULE ADOPTED: before treating any control or test as evidence, ask what would this have to output for the hypothesis to be FALSE? If the answer is nothing it could output, IT IS NOT A TEST -- the same family as the known-truth control that could not exercise the mechanism and the empty informative stratum at k=15. AND: when a report says a blocker is resolved, READ THE SPECIFIC FIELD IN THE SPECIFIC FILE before treating it as closed -- a substring match on a number is not a field match.***'
+  C1: A two-sided epsilon-indistinguishability bracket is computable on real encrypted
+    traffic, with the two sides carrying explicitly different certification strength
+    (336/990 = 33.9% of service pairs at k=5, M=1)
+  C2: The certificate horizon is short, and the coarsest channel is the ONLY viable
+    rung
+  C3: 'Methods/limits finding, and it is the third of three claims -- NOT to be cut
+    and NOT to be narrowed. The standard PLUG-IN chain-rule divergence estimator cannot
+    adjudicate the dependent-prefix growth question at this k window, n, and occupancy-collapse
+    curve: it DEFLATES large-k divergence (est/true 1.0002 down to 0.6769 measured
+    on analytically LINEAR truth), and this is robust to two independent repair attempts
+    (estimator-family/jackknife and exposure-conditioning both FAILED their known-truth
+    gates; the second would have to discard 60.8% of transition mass at k=30 and STILL
+    fails). The honest strengthening is that NO ROUTE TRIED SO FAR CAN ADJUDICATE
+    IT: the PARAMETRIC route was attempted and is STRUCTURALLY NON-DIAGNOSTIC -- it
+    fits a Markov model once per service and computes D_k under that already-fitted
+    model with no per-k refit, so D_k is AFFINE for any stationary chain (order 0
+    gives D_k identically 0) and SUBLINEAR IS UNREACHABLE, i.e. its LINEAR is FORCED
+    BY CONSTRUCTION and carries no information about the data; its "decisively passed"
+    control compares two things that are BOTH affine by construction and therefore
+    CANNOT FAIL. It is NOT a counterexample and must NOT be repaired or re-run without
+    a new approved design. The causal MECHANISM (sparse-occupancy attribution) is
+    NOT ESTABLISHED, and now for TWO reasons. (a) Variant B own threshold scan pushes
+    the plain exponent DOWN as the threshold tightens (0.539 / 0.420 / 0.372 / 0.260
+    / 0.210 at T = 5 / 10 / 20 / 50 / 100) while the twin arm moves the OPPOSITE way
+    -- so if sparse contexts manufactured sublinearity, REMOVING them should push
+    the plain arm toward LINEAR and it does not. *** THE ATTRIBUTION OF 0.651 AND
+    0.897 TO VARIANT B WAS A MISATTRIBUTION CORRECTED UNDER D062: BOTH ARE THE ORIGINAL
+    KNOWN-TRUTH CONTROL VALUES, AND VARIANT B HAS NO no-filter FIELD IN ITS ARTIFACT
+    AT ALL. *** (b) The dose-response control that was to test the mechanism has been
+    REPAIRED: the verified off-by-4 k-indexing defect is fixed (labels only; est/true
+    = 1.0001850 at k=5; the zero-intervention curve is BIT-IDENTICAL to the original
+    control at every labelled k=5..30, guarded by a permanent assertion), and on the
+    corrected axis its verdict IS a clean positive -- plain p falls monotonically
+    0.651 -> 0.625 -> 0.614 -> 0.603 -> 0.557 as sparsity rises 0.4156 -> 0.5694,
+    twin 0.891 -> 0.821. *** BUT THE CAUSAL SENTENCE MAY NOT BE RESTORED, FOR THREE
+    REASONS: (1) the control is SYNTHETIC, so it characterises the ESTIMATOR, not
+    the CORPUS; (2) its own zero-thinning baseline is ALREADY SUBLINEAR (p = 0.651
+    on data whose analytic truth is EXACTLY LINEAR), so tracks_thinning means THE
+    ESTIMATOR BIAS GROWS WITH SPARSITY, not that real-data sublinearity is corpus-driven;
+    (3) the real-data p = 0.844 versus synthetic 0.651 comparison is NOT same-convention
+    (200k synthetic i.i.d. flows vs 820 real pairs) and is a READING, NOT A FINDING.
+    TWO CAVEATS WHEN CITING IT: one seed only (20260914) against an approved protocol
+    that asked for >= 3; and a SHALLOW response (about 14 percent relative). *** AND
+    THE BASELINE BLOCKER STANDS (D062): the original control and the corrected dose-response
+    AGREE at 0.651, but VARIANT B READS 0.539 for nominally the same construction,
+    so by the standing rule BOTH are blocked, the agreeing pair sides against variant
+    B, and NOTHING MAY CITE EITHER BASELINE until the dispatched generator comparison
+    reports. *** THE EXISTENCE CORROBORATION (ii) IS NOT EVIDENCE: the heterogeneous-i.i.d.
+    arm, which by construction has ZERO within-flow dependence, returns Markov 45/45
+    at k at least 8 and 98.2% overall, reproducing the real vote exactly, so the vote
+    is not diagnostic; the magnitude is nevertheless about 58x larger than that null,
+    so heterogeneity does not explain the size either; and neither supports "first-order",
+    because the i.i.d. null uses a SINGLE GLOBAL p. A position-wise i.i.d. null is
+    REQUIRED before "first-order" may be asserted, AND IS THE ONLY LISTED ROUTE NOT
+    YET SHOWN TO BE VACUOUS. ***GENERAL RULE ADOPTED: before treating any control
+    or test as evidence, ask what would this have to output for the hypothesis to
+    be FALSE? If the answer is nothing it could output, IT IS NOT A TEST -- the same
+    family as the known-truth control that could not exercise the mechanism and the
+    empty informative stratum at k=15. AND: when a report says a blocker is resolved,
+    READ THE SPECIFIC FIELD IN THE SPECIFIC FILE before treating it as closed -- a
+    substring match on a number is not a field match.***'

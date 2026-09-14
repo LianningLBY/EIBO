@@ -1,4 +1,4 @@
-_next_id: 28
+_next_id: 30
 constraints:
 - id: C001
   added: 2026-09-13 11:37 UTC
@@ -399,3 +399,54 @@ constraints:
     Without this, C3 can be "confirmed" by estimator bias alone — the exact failure
     just measured.
   decision_id: D044
+- id: C028
+  added: 2026-09-14 09:21 UTC
+  summary: 'For the append-only knowledge files (findings.md, memory.md, mistakes.yaml,
+    decisions.yaml, constraints.yaml, registry.yaml): NO recovery, restore, or rewrite
+    may proceed by whole-file replacement. Any restore must FIRST prove by cmp/sha256
+    that the candidate version STRICTLY CONTAINS the current file; otherwise stop
+    and report. "Current is newer than the chosen source" is a LEGITIMATE SUCCESSFUL
+    TERMINATION, not a failure. The repository commit is the backup of record - never
+    /tmp.'
+  scope: all
+  reason: findings.md was destroyed by a wrong-filename whole-file write (113,414
+    B / 34 sections to 3,885 B / 0 sections), and the subsequent recovery worker nearly
+    repeated the loss by overwriting the correct file with an older backup. This is
+    the sixth approach of the same hazard in this project, and the previous version
+    of this rule (C023, "append-only; a decrease is data loss") has repeatedly failed
+    to prevent it because it stated a property rather than forbidding the operation
+    that violates it. The Reviewer proposed elevating it from a repeated incident
+    to a structural prohibition; that is correct, and it applies to the Director as
+    much as to the Agent. The successful outcome in the last incident was produced
+    by the worker's "mismatch, so stop" discipline rather than by the process, which
+    is not a control. Additionally the only durable copy of these files is the committed
+    one - /tmp is volatile - so the repository commit, not a temporary copy, is the
+    backup of record.
+  decision_id: D075
+- id: C029
+  added: 2026-09-14 09:47 UTC
+  summary: registry.yaml has exactly ONE writer at a time. Never dispatch two workers
+    that may both write it, and never let a worker write it from a snapshot it read
+    earlier in its own run. Every registry write must be preceded by a fresh read
+    whose timestamp is reported; if the file changed since the read, abort and report
+    rather than writing. Edits must be text-level anchored splices, never serializer
+    round-trips. Any worker that would produce a registry write must verify FIRST
+    that the file is stable (no write in the preceding interval) and must report the
+    pre-write mtime and the exact base it used.
+  scope: all
+  reason: 'The registry was found in a regressed state at 09:38:58: X12_k5 reverted
+    from RUNNING to PREPARING and lost its PID, the X3 metrics union I had just restored
+    was reverted from 34 keys to 6, the X11 entry disappeared entirely, and X6 reverted
+    from DONE to PREPARING. This was not a single overwrite but the result of MULTIPLE
+    concurrent workers each performing read-modify-whole-file-write against the same
+    registry, with at least one holding a stale snapshot taken before those updates.
+    The recovery worker dispatched to fix the metrics damage restored FROM a source
+    that was already worse than the live file, and its own pre-write backup has the
+    same regressed shape, showing the file was already degraded between 09:35 and
+    09:38. Earlier in the same period the X6 status update propagated a stale snapshot.
+    Every individual writer was local and reasonable; the failures are purely from
+    concurrency and from accepting whatever bytes were on disk as the base. This is
+    the eighth instance of this family this session and the first where the mechanism
+    is concurrency rather than a single bad write, so the countermeasure must be structural
+    rather than another per-incident discipline.'
+  decision_id: D078

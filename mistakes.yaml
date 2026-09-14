@@ -1,4 +1,4 @@
-_next_id: 104
+_next_id: 111
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -4874,3 +4874,439 @@ mistakes:
   - D057
   - D063
   - D071
+- id: M104
+  date: '2026-09-14'
+  category: communication
+  severity: medium
+  summary: Described a per-k result as "nearly every k" when two rungs (k=3, k=4)
+    are marginal; caught by downstream reading the artifact against my summary.
+  root_cause: My local tree was stale so I could not open the artifact, and I characterised
+    its shape ("nearly every k") from a relayed summary rather than restricting myself
+    to the quantities I had actually seen. A summary of per-rung results does not
+    carry the per-rung shape, and I generalised across rungs I had not read. The downstream
+    role checked the file against my prose and found the discrepancy.
+  prevention: 'When relaying numbers from an artifact I cannot open locally, either
+    pull it first or describe only the quantities I have actually seen, and never
+    characterise a SHAPE ("nearly every k", "monotone", "uniformly") from aggregated
+    statistics — a median or a total cannot tell you the shape across rungs, and the
+    shape is often the load-bearing part. Concretely: state the endpoints and the
+    aggregate as measured, and say explicitly that intermediate rungs are unverified
+    if they are. This is the same class as the project''s standing rule to verify
+    by reading the file rather than a derived view; the new part is that a SUMMARY
+    I write from someone else''s numbers is itself a derived view, and needs the same
+    scepticism as a tool''s derived output.'
+  status: active
+  context: 'I described the position-wise i.i.d. null result as beating first-order
+    Markov at "nearly every k", on the basis of a relayed summary of a server-side
+    artifact I could not open (my local tree was stale). Once the artifact was pulled
+    locally, I read the full per-prefix table myself: k=2 45/0, k=3 25/20, k=4 33/12,
+    k=5 42/3, k=6 44/1, k=7-8 44/1, k=9-29 43/2, k=30 41/4, zero ties. The k=3 and
+    k=4 rungs are MARGINAL (25/20 and 33/12), not lopsided, so "nearly every k" misdescribed
+    the shape. The downstream role caught it by reading the file and comparing against
+    my summary, not by re-deriving the conclusion. The eventual conclusion happened
+    to be unaffected because the preregistered rule requires Markov to strictly win
+    at EVERY k and k=2 alone breaks that.'
+  fix: 'Corrected the ROADMAP with the full per-k table and an explicit note that
+    my earlier phrasing was wrong and that k=3/k=4 are marginal. Also recorded the
+    supporting evidence for using the per-service VOTE rather than a pooled median:
+    at k=30 the largest per-service dBIC is +408,971 (positive), i.e. the sign reverses
+    on the four services where Markov wins, so a pooled median hides exactly those
+    services.'
+  related_decisions:
+  - D064
+- id: M105
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: high
+  summary: Agent overwrote the Director-owned, append-only findings.md with whole-file
+    semantics (113,414 -> 3,885 bytes, all sections lost); the recovery worker then
+    overwrote my git-based restoration with an inferior /tmp backup, and its "byte-for-byte"
+    proof was circular.
+  root_cause: 'The original destruction was a wrong-filename plus whole-file-replacement
+    write against a file the Agent is forbidden to write and which is append-only.
+    The recovery then failed for an independent reason: its source-selection rule
+    was "the most complete /tmp copy", with /tmp as the only candidate set, so it
+    never considered the version-control history that held the true pre-damage state.
+    Its verification was circular -- it compared the restored file against the very
+    backup it had selected, so "byte-for-byte verified" was guaranteed regardless
+    of whether that backup was correct or complete.'
+  prevention: 'Three rules. FIRST: for any append-only or owner-restricted file, whole-file
+    replacement must be structurally impossible for roles that do not own it -- a
+    guard that refuses and reports, not a correct filename. A filename is a habit;
+    a guard is a control. SECOND: when recovering a damaged tracked file, the candidate
+    set MUST include the version-control history, and the selection rule must be "the
+    newest complete pre-damage state", not "the largest copy in /tmp". The last commit
+    before the damage is exactly that state and is the strongest evidence available.
+    THIRD and most general: a byte-for-byte or equality check is only meaningful against
+    an INDEPENDENT reference. The recovery verified the file matched the backup it
+    had itself chosen, which is guaranteed and therefore proves nothing -- the same
+    structural failure as this session''s other defective checks (an empty stratum,
+    an affine-by-construction curve, a bound clipped to a boundary). Whenever writing
+    a verification, ask: could this comparison succeed because I chose both sides?
+    If yes, it is not verification.'
+  status: active
+  context: "findings.md is Director-owned (constraint C024: the Agent must NOT write
+    it) and append-only (C023: a decrease is data loss). The Agent, while editing
+    experiment_plan.yaml, passed the wrong target filename and used WHOLE-FILE REPLACEMENT
+    semantics, destroying findings.md: it fell from 113,414 bytes and 34 '##' sections
+    to 3,885 bytes with ZERO section headers. The Agent then dispatched a recovery
+    worker instructed to restore byte-for-byte from \"the most complete\" candidate,
+    and correctly gave that worker a candidate list, a pre-write backup, and a prohibition
+    on creative writing.\n\nTHE RECOVERY ITSELF WENT WRONG, and I caught it by checking
+    rather than waiting. The worker chose its source from a candidate set of /tmp
+    copies ONLY, and picked /tmp/findings_safety3_1789337314.md at 101,721 bytes /
+    30 '##' / 133 '###' -- declaring it \"the most complete\". But the authoritative
+    pre-damage state was in the git commit I had made 5 minutes BEFORE the damage
+    (08:40:02 vs damage at 08:45:26): 113,414 bytes / 34 '##' / 149 '###'. It was
+    missing from the worker's candidate list. The four sections unique to the git
+    copy were exactly the load-bearing recent ones:\n  ## 2026-09-14 ~10:15 UTC --
+    The gate question is CLOSED by mutual agreement\n  ## 2026-09-14 ~10:45 UTC --
+    Research phase launched (framing + plan + Dream)\n  ## 2026-09-14 ~11:30 UTC --
+    I wrote a false mechanism claim into the authority file (M050)\n  ## 2026-09-14
+    ~12:30 UTC -- C2's mechanism was inverted in both parts; C3 was unfalsifiable
+    (M051)\nI restored from git at 08:53:53 and verified byte-for-byte against HEAD.
+    The recovery worker then OVERWROTE my correct restoration at 08:54:21 with its
+    inferior 101,721-byte copy -- and its report would have claimed \"byte-for-byte
+    verified\" because it compared the file against the backup it had just chosen.
+    I re-restored from git at 08:55:02 and re-verified. The worker did preserve my
+    version first as /tmp/findings.md.damaged_1789376061 (113,414 B, same sha), which
+    is why nothing was permanently lost."
+  fix: 'Restored findings.md from `git show HEAD:findings.md` -- the pre-damage commit
+    made 5 minutes before the damage -- and verified it byte-for-byte identical to
+    HEAD (113,414 bytes, sha ffcee5ade580a69a, 34 ''##'' / 149 ''###''), then re-restored
+    after the recovery worker overwrote it, and preserved an authoritative safety
+    copy. Dispatched D074: stop the recovery worker, verify the current bytes (do
+    not re-write), and add the last commit to the recovery-source set permanently.
+    Root-cause fix demanded: no write path in the Agent''s tooling may target findings.md
+    with whole-file semantics -- add a refusing guard rather than relying on passing
+    the right filename. Also generalised: for the eight long-lived files, a write
+    that REDUCES size or section count is a defect, not a success, because "the command
+    succeeded" is exactly the signal that hid this.'
+  related_decisions:
+  - D074
+- id: M106
+  date: '2026-09-14'
+  category: code_bug
+  severity: high
+  summary: 'My unanchored `data/` .gitignore rule silently excluded the ENTIRE evidence
+    chain (artifacts/**/data/: 56 JSON artifacts, 0 tracked) while tracking their
+    producing scripts -- inverting the project''s core byte-traceability discipline
+    and falsifying the README. Caught by an independent reviewer measuring tracked-vs-on-disk;
+    fixed by anchoring and negation, verified by count.'
+  root_cause: I wrote an unanchored `data/` pattern intending it to match only the
+    root data directory, not knowing or not checking that git matches such patterns
+    at every depth. I then described the .gitignore's behaviour in a comment and in
+    the README from my INTENT rather than from a measurement of what git actually
+    tracked. The one-second check that would have caught it (`git ls-files 'artifacts/**/*.json'`
+    returning 0 against 56 files on disk) was never run, because the change "looked
+    right".
+  prevention: 'Two rules. FIRST: after any .gitignore change, VERIFY BY MEASUREMENT
+    -- run `git ls-files <the paths that must be tracked>` and compare the count against
+    `find`, and run `git check-ignore -v` on a representative path from each directory
+    that must be included. Reading the diff, or reasoning from the edit''s intent,
+    cannot detect an unanchored pattern matching at depth; the diff looks exactly
+    right. SECOND: never write an unanchored directory pattern in a .gitignore that
+    is meant to scope one location -- anchor it (`/data/`), because git''s matching
+    is depth-agnostic and a bare name silently captures same-named directories anywhere
+    in the tree. Both rules apply generally: this is a "check whether what you asserted
+    is what the system actually does" failure, the same family as the other defective
+    checks found in this project, and it was again caught by comparing an assertion
+    against a measured count rather than against the reasoning that produced it.'
+  status: active
+  context: 'I wrote the project''s .gitignore while fixing the repository scope requested
+    by the user. My intent was to exclude bulk corpora and keep the evidence chain
+    (artifacts/) tracked. I wrote an UNANCHORED rule `data/` under the heading "Bulk
+    data and weights: never track". In git, a pattern with no leading slash matches
+    at ANY depth, so `data/` matched not only the root data/ directory but also artifacts/_project/data/,
+    artifacts/X3/data/, and artifacts/X6/data/ -- which is where the artifact JSON
+    that constitutes the evidence chain lives. I did remove the earlier `artifacts/`
+    exclusion, and I wrote a correct explanatory header saying artifacts/ MUST be
+    tracked, so the file''s stated intent and its actual behaviour contradicted each
+    other. Measured result: 56 artifact JSON files on disk under artifacts/, 0 tracked
+    by git, while the runner scripts that PRODUCE those artifacts were tracked. That
+    is the exact inversion of the project''s central discipline ("every reported number
+    maps to an artifact''s bytes"), and it also falsified the README''s claim that
+    artifacts/ is tracked. An independent reviewer caught it by running `git check-ignore
+    -v` on a specific artifact path and comparing `git ls-files` against `find`.
+
+
+    A second, related defect in my own fix: I initially placed the negation `!artifacts/**/data/`
+    AFTER the bulk-extension rules, which is the wrong order -- a later ignore rule
+    would override the earlier negation and could have silently re-excluded bulk kinds
+    under artifacts/. I also carried forward an `artifacts/**/*.npz` rule that I had
+    assumed was load-bearing; on checking, there are ZERO .npz files under artifacts/,
+    so it was dead and its interaction with the new negation was undefined.'
+  fix: 'Anchored the bulk rule to the repository root (`/data/`) so it no longer matches
+    at depth, added an explicit `!artifacts/**/data/` negation placed BEFORE the extension
+    rules so those still win for genuinely bulky kinds, and deleted the dead `artifacts/**/*.npz`
+    rule after verifying 0 such files exist. Verified by measurement rather than by
+    reading the diff: 56 of 56 artifact JSON tracked, 0 ignored, 0 untracked outside
+    artifacts, 13.4 MB total and largest 1.9 MB (acceptable), secret scan clean, and
+    logs/ + chats/ still 0 in the index. Committed the evidence chain (e0ba1da) and
+    a README correction (4242dd7) that states all 56 artifacts are tracked and that
+    any future artifact too large to track must be named as server-only, because an
+    untracked artifact silently breaks the byte-traceability claim. Kept the known-stale
+    local variant-C file visible in the commit message rather than enshrining it silently.'
+- id: M107
+  date: '2026-09-14'
+  category: code_bug
+  severity: high
+  summary: 'I violated my own C028 within minutes of writing it: restored the X3 metrics
+    keys via a yaml.safe_dump whole-file rewrite that preserved all data but collapsed
+    registry.yaml from 1,832 to 867 lines. Also caught that the supplied acceptance
+    test (after == delta + 5) was arithmetically wrong - the true union is 34, not
+    27 - and would have passed an incomplete restore.'
+  root_cause: 'I reached for the most convenient mechanism (load, merge in memory,
+    dump) without asking whether it was permitted for this file, minutes after writing
+    the constraint that forbids exactly that mechanism for it. The convenience was
+    the trap: the operation succeeded, the data was preserved, and the destruction
+    was confined to formatting - which is precisely why the parsed-content comparison
+    I used to sanity-check it did not catch the problem. Two independent failures
+    in one action: the wrong mechanism, and a check blind to that mechanism''s characteristic
+    damage.'
+  prevention: 'For any edit to a hand-maintained append-only knowledge file: NEVER
+    round-trip it through a serializer (yaml.safe_dump, json.dump with indent, a formatter,
+    or a formatter-on-save setting). A serializer preserves the parsed data while
+    destroying the file''s actual content - formatting, block-scalar folding, ordering,
+    comments - and the loss is silent because the parsed result compares equal. What
+    that means practically: "the parsed content is identical" is NOT evidence that
+    the edit was safe, precisely because that comparison is blind to everything a
+    serializer changes. The correct method is an anchored text splice that leaves
+    every line outside the edited region byte-identical, verified line-by-line before
+    and after the region. And when a count-based acceptance test is specified, recompute
+    the target from the actual key sets rather than trusting a delta formula derived
+    from an earlier count - a formula like after == delta + 5 encodes an assumption
+    about overlap that may be false, and a wrong acceptance test fails a correct restore
+    or, worse, passes an incomplete one.'
+  status: active
+  context: 'While restoring the X3 metrics keys that had been lost to the seventh
+    partial-dict overwrite, I first did it by loading registry.yaml with yaml.safe_load,
+    merging the key sets in Python, and writing the whole file back with yaml.safe_dump.
+    The data was preserved - I verified the parsed content was identical to the pre-edit
+    state everywhere outside X3.metrics - but the serializer collapsed the file from
+    1,832 lines to 867, rewriting the formatting wholesale and folding multi-line
+    block scalars. registry.yaml is a hand-maintained append-only knowledge file that
+    C028 (which I had written minutes earlier) explicitly protects from whole-file
+    replacement, and whose long single-quoted narrative entries are meaningful content,
+    not incidental formatting. I reverted from the backup I had made, and redid the
+    edit as a text-level splice: extract HEAD''s 28-key block and the live file''s
+    6-key block by anchor, insert both between the same anchors, and verify the lines
+    before and after the block are byte-identical. I then applied C028''s own test
+    before placing it - proof that current is a strict subset of candidate, that every
+    current key AND value is preserved, and that the rest of the file is unchanged
+    - and placed it only after that test passed. Final state verified by read-back:
+    X3.metrics = 34 keys, no HEAD key missing anywhere, and the damage confined to
+    X3 (all other experiments matched HEAD exactly).
+
+
+    Separately, the acceptance test I had been given for this restore was arithmetically
+    wrong and would have passed a partial restore: it asserted after == delta + 5,
+    but HEAD has 28 keys, the live file had 6, and their overlap is ZERO, so the correct
+    union is 34 and the formula gives 27. I computed the true union myself rather
+    than applying the given formula.'
+  fix: 'Reverted the whole-file rewrite from backup and redid the restore as an anchor-based
+    text splice with C028''s strict-containment proof (current subset of candidate,
+    all keys and values preserved, rest of file byte-identical) taken BEFORE placing
+    the result. Verified by read-back: X3.metrics = 34 keys, zero HEAD keys lost across
+    all experiments, damage confined to X3, all knowledge files still parse. Recorded
+    the working method in the correction dispatch: anchor-based text splicing with
+    containment proof, never a serializer round-trip.'
+  related_decisions:
+  - D076
+- id: M108
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: high
+  summary: I fixed x3_axis_validation.py in the LOCAL tree and never pushed it to
+    the server tree where it runs, so the dispatched rerun reproduced the old output
+    and wasted a run plus a full audit sweep. The worker's "the correction did not
+    land" report was correct; the error is mine and violates the project's own two-trees
+    rule.
+  root_cause: I edited the runner in the local tree and treated the edit as complete,
+    without propagating it to the server tree where the script actually executes.
+    The task premise then asserted the correction was already in place and the rerun
+    reproduced the old output. The local file was fixed AND committed, both true,
+    neither of which is evidence about the tree the code runs in - the same blindness
+    as parsing a file and concluding the edit was safe.
+  prevention: 'For any runner that executes on a remote tree: an edit is not in effect
+    until it is pushed to the tree where the code runs, and the push must be verified
+    by reading the file back ON THE REMOTE TREE - never by the local edit succeeding,
+    and never by a local commit existing. Concretely, before dispatching a re-run
+    task, state which tree the change is in and verify the change is present there;
+    and never write an assertion of completed work ("the already-corrected X", "the
+    fixed runner") into a task title or premise without checking that assertion against
+    the tree the task will operate on. The general form: a local action and a remote
+    effect are different facts, and the convenience of "I already did that" is exactly
+    what makes the gap invisible. This is the same family as the session''s other
+    defective checks - the check that cannot detect the condition it is supposed to
+    detect - because "the local file is fixed and committed" is a true statement that
+    says nothing about the tree that matters.'
+  status: active
+  context: 'The axis-validator task was dispatched as "re-run the already-corrected
+    axis validator." The rerun reproduced the old output: the artifact still carried
+    the bare hard-coded label "parametric_artifact": "verified-correct" and the stale
+    embedded self-reference pair (122,495 B / ae3ccc37...) against real bytes 122,617
+    B / 9f7578be..., with no pre-write snapshot note. An independent verification
+    confirmed the script''s line 345 still hard-codes the bare label and that "axis-verified"
+    / "non-diagnostic" / "D057" / "pre-write" / "snapshot" have ZERO occurrences anywhere
+    in the server copy.
+
+
+    I checked this myself on disk and the root cause is mine: the LOCAL runner at
+    x3_axis_validation.py line 350 already reads "axis-verified; conclusion remains
+    NON-DIAGNOSTIC per D057" and line 360 already contains the self_reference_note
+    explaining the pre-write snapshot, and that local file has been committed since
+    the first commit (3860c7b). The fix was made in the local tree and never propagated
+    to the server tree, where the script actually executes. So the rerun did exactly
+    what a rerun of unchanged code must do, and it emitted the old output correctly.
+
+
+    The cost was concrete: one full rerun plus a full 10-artifact audit sweep, both
+    wasted on an unfulfilled premise. The worker''s report was honest and correct
+    - "the corrected label did not land. The source still emits the old bare label,
+    and the rerun output contains no requested notes" - and it correctly did not convert
+    "the correction is not present" into "verified correct."
+
+
+    This project has a standing documented rule that the two trees are separate and
+    that a "file is missing" verdict is a statement about which tree. I have been
+    enforcing that rule all session and then violated it myself by treating a local
+    edit as if it were in effect where the code runs.'
+  fix: Confirmed the local runner carries both fixes and that it is committed; ruled
+    that the fix must be pushed to the server tree and the rerun performed there,
+    with the artifact verified to show the corrected wording and the self_reference_note,
+    and the new real size/sha reported. Adopted the reviewer's better structure for
+    the status field - two fields (parametric_axis_verified plus parametric_conclusion_status)
+    instead of one string, so "axis aligned" and "conclusion usable" cannot be conflated.
+    Accepted the reviewer's point that a task title must not assert work is already
+    done unless that has been verified before dispatch.
+  related_decisions:
+  - D077
+  - D069
+- id: M109
+  date: '2026-09-14'
+  category: experiment_design
+  severity: high
+  summary: 'Class-level recurrence: a check that cannot exercise its own failure mode
+    can produce PASS-shaped output without testing the hypothesis.'
+  root_cause: 'The controls and audits were designed to confirm a desired conclusion
+    without first specifying a reachable output that would falsify it. Four separate
+    checks therefore accepted non-testable or self-certifying configurations: a fixed
+    axis, an empty population, an affine-by-construction comparison, and a bound clipped
+    to a boundary that cannot exceed a non-negative truth. Two independent audits
+    also treated self-certifying anomalies in their own printed output as normal data.
+    The common defect is structural: the check cannot produce the failure that its
+    PASS is supposed to rule out.'
+  prevention: 'Rule A: before treating any control or test as evidence, ask: WHAT
+    WOULD THIS HAVE TO OUTPUT FOR THE HYPOTHESIS TO BE FALSE? If the answer is "nothing
+    it could output", it is not a test. Rule B: audit scope is set by anomaly signals,
+    not by the task description alone. Every audit must scan the values it prints
+    for constant, repeated and boundary values, constant tails, exact-zero increments
+    and non-monotone jumps; every such run must be explained rather than merely listed.
+    Report testable and non-testable rows separately, and keep a consistency guard
+    distinct from the falsifiable verdict.'
+  status: active
+  context: 'Four instances occurred in this project on 2026-09-14. (1) The original
+    X3 known-truth control was a control construction that could not exercise the
+    mechanism it was meant to probe. (2) The k=15 informative stratum was empty, so
+    the statistic was defined on an empty set and could not report anything. (3) The
+    parametric route and its control were affine by construction for any stationary
+    chain, so SUBLINEAR was unreachable and the control could not fail. (4) X6 used
+    `violation = bound > truth + 1e-12`; at the validity sample size the bound clipped
+    to 0, and a 0 bound could never exceed a non-negative truth. About 75 of 120 rows
+    were non-testable, so the reported 0/120 violations conflated rows that could
+    not fail with rows that could. Two audits missed self-certifying anomalies in
+    their own printed output: the D063 audit printed k=20 and k=30 with identical
+    values and passed them as normal data; the X6 audit printed twelve representative
+    comparison rows that were all `bound 0.0`, the exact signature of a non-falsifiable
+    control, and passed them. Two independent audits therefore missed a self-certifying
+    anomaly sitting in their own printed output.'
+  fix: 'Recorded this as a failure class rather than as another isolated incident.
+    Adopted Rule A: every control or test must show a reachable falsifying output
+    before its result is used as evidence. Adopted Rule B: every audit must scan its
+    printed values for constant, repeated and boundary values, constant tails, exact-zero
+    increments and non-monotone jumps, and explain every such run. Require non-testable
+    row counts beside violation counts, and never present a count such as 0/120 as
+    evidence when its denominator includes rows that cannot fail.'
+  related_decisions:
+  - D056
+  - D057
+  - D063
+  - D071
+- id: M110
+  date: '2026-09-14'
+  category: resource_misuse
+  severity: high
+  summary: Concurrent registry writers clobbered registry.yaml into a strictly worse
+    state (X12_k5 RUNNING+pid lost, X3.metrics 34 to 6, X6 DONE to PREPARING, X11
+    entry gone) while the k=5 process kept running - producing the "ran it but recorded
+    it as never run" defect, and a false GPU-idle signal that would have caused a
+    collision. Restored as single writer with C028 proof; added C029 one-writer constraint.
+  root_cause: Multiple workers concurrently performed read-modify-whole-file-write
+    on registry.yaml, with at least one writing from a stale snapshot. No write was
+    individually wrong; the destruction came from concurrency, which makes "read the
+    current bytes" a false premise. Compounding it, the GPU-idle probe derives its
+    answer from that same clobbered registry, so it reported the card idle while k=5
+    was running and recommended filling it.
+  prevention: 'Where a file has one logical owner, ENFORCE ownership rather than assuming
+    it: serialize all writers, and require each write to begin from a fresh read whose
+    timestamp is reported, aborting if the file changed since that read. Never let
+    a worker write a shared file from a snapshot it read earlier in its own run. And
+    critically: never derive a resource-state decision (is the GPU idle? is a job
+    running?) from a shared mutable record that other processes are concurrently writing
+    - query the authoritative live source instead. The idle probe recommending "fill
+    the idle card" would have caused a real collision, because the card was busy and
+    only the record said otherwise. The general form, and the eighth instance of this
+    family: a check whose input can be clobbered by a concurrent writer will confidently
+    report the wrong answer, and the more authoritative it looks the more damage its
+    recommendation does.'
+  status: active
+  context: 'registry.yaml was found at 09:38:58 in a state strictly worse than the
+    state verified minutes earlier: entries 18 to 17, X3.metrics 34 (a union I had
+    just restored) to 6, X6 DONE to PREPARING, the X11 entry disappeared entirely,
+    and X12_k5 RUNNING with pid 683446 reverted to PREPARING with no pid. The k=5
+    job itself was unaffected and still running: a GPU probe showed PID 683452, /root/miniconda3/bin/python3,
+    cwd /root/eibo, 654 MB on cuda:0 (683446 is the tmux parent, 683452 the python
+    child). So the record said "never started" while the process was alive - the project''s
+    recurring "ran it but recorded it as never run" defect, this time produced by
+    a concurrent write rather than a missing update.
+
+
+    Root cause: several workers were live in the same minutes, each performing read-modify-whole-file-write
+    on registry.yaml, and at least one operated from a snapshot taken before the other
+    updates landed. Evidence that this is concurrency rather than a single bad write:
+    the recovery worker dispatched to repair the X3.metrics damage restored FROM a
+    source already worse than the live file, and its own pre-write "damaged" backup
+    has the same regressed shape (17 entries / 6 keys / X6=PREPARING / no X11), which
+    means the file was already degraded before that worker touched it. The X6 status
+    update and the X12_k5 update both landed and were then lost. Every individual
+    writer was locally reasonable; the destruction came purely from concurrency and
+    from accepting whatever bytes were on disk as the base.
+
+
+    The GPU-idle probe also reported the card idle during this window, which was wrong
+    for the same reason - it reads registry state, and registry state had been clobbered.
+    The probe''s recommendation ("dispatch a candidate experiment to fill the idle
+    card") would have been actively harmful, since the card was not idle and k=5 was
+    already using it.
+
+
+    I restored the file myself as a single writer: verified no writer was active (no
+    worker log modified in the preceding 90s, registry mtime stable since 09:38:58,
+    and the D070 worker touched only manifest.yaml - 100 hits on manifest.yaml, 0
+    on registry.yaml), restored from the richest source, and applied C028''s containment
+    proof (every current entry preserved, every current key AND value preserved, nothing
+    removed) before placing. Read-back confirmed entries 18, X3.metrics 34, X6 DONE,
+    X11 present, X12_k5 RUNNING pid 683446.'
+  fix: 'Restored registry.yaml as a single writer with a C028 containment proof, from
+    the anchored text-splice copy rather than any serializer output. Added hard constraint
+    C029: registry.yaml has exactly one writer at a time; every write must begin with
+    a fresh timestamped read and abort if the file changed since; edits are text-level
+    anchored splices with containment proof, never serializer round-trips; recovery
+    workers for the registry are stopped and replaced by a single serialized writer.
+    Noted that the good copy came from the earlier anchored splice while the serializer
+    round-trip copy was useless, so serializers are not a recovery tool. Reconfirmed
+    the k=5 process is alive via direct GPU probe, against the registry-derived idle
+    signal.'
+  related_decisions:
+  - D078
