@@ -243,6 +243,29 @@
 > status, keep the note.** ⇒ Recorded because it is the THIRD instance of the same defect today, and the second on this
 > one row.
 >
+> **★ D094 — THE `PREPARING`→`DONE` REJECTION IS NOT A STATE-MACHINE BUG: `X11` WAS NEVER A MANAGED EXPERIMENT.**
+> The Agent reported the transition is refused (`PREPARING → DONE` rejected; only `PENDING`/`QUEUED` permitted). **That is
+> correct behaviour, and the reason is structural, not a defect in the tool.** Measured:
+> **— `X11`'s registry row was created `09:28:18` and last updated `09:29:10` — a 52-second STUB, never advanced.**
+> **— its fields are only `[created_at, hypothesis, metrics, retry_count, spec, status, updated_at]`** — **no `pid`,
+> `process_identity`, `tmux_session`, `allocation_id`, `log_path`, `completed_at`, or `checkpoint_path`.**
+> **— `X9`, which DID run managed, carries all of those.** ⇒ **The two rows are different KINDS of record wearing the same
+> field name.**
+> **— `X11`'s artifact itself mentions `tmux`/`pid`/`allocation`/`submit` zero times**, and its execution is documented only
+> in a **worker log** (`logs/workers/worker_X11__CESNET-QUIC22_replication…`).
+> **⇒ ⇒ SO THE HONEST CONCLUSION: `X11` ran as a WORKER, not through `submit_on_allocated`.** It has a completed artifact
+> and a logged result (D076) **without ever having a managed lifecycle.**
+> **⇒ THE WRONG FIX, and it is the one to refuse:** driving the row through `QUEUED → … → DONE` would **manufacture a pid,
+> an allocation and a tmux session that never existed** — **fabricating exactly the monitoring state the worker correctly
+> refused to invent when it declined to register a cron without a real PID.** **⇒ Do NOT force the transition.**
+> **⇒ THE RIGHT FIX: record the truth in a field that CAN express it** (the `note`/`metrics` channel D088/D093 already use),
+> stating that the artifact and D076 settle this experiment, and that its non-terminal `status` reflects **an unmanaged
+> worker run, not unfinished work.** **⇒ And the same for `X9_C`** — withdrawn, never run; its `conclusion: killed` is
+> defensible, its `PREPARING` status is not.
+> **⇒ ⇒ And the generalisable rule: when a state machine refuses a transition, ask first whether the OBJECT is the kind of
+> thing the machine governs. A rejected transition can be a categorisation fact, not an obstacle — and forcing it would
+> have created a record that was false in every field but the one being set.**
+>
 > **★ D093 — `X11` IS RECORDED AS COMPLETE IN THE DECISION LOG AND AS `PREPARING` IN THE REGISTRY.**
 > Measured: the artifact (`x11_feasibility.json`) reports **`protocol.status = completed`**, **3,321 per-pair rows**,
 > `upper_fraction_eps_hi_lt_0_5 = 0.16079494128274616` (= 534/3321). **D076 already logged that result and I recomputed it
