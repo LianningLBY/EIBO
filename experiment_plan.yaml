@@ -11,6 +11,7 @@ experiments:
   - C1
   - C2
   priority: 0
+  compute_class: 'CPU (assembly of measured values; no training)'
   description: "HEADLINE BRACKET TABLE (k-prefix chain). The paper's primary result.\
     \ Present, for the pre-registered rung ladder M in {1,2,4,8,16} and k in {5,10,15,30},\
     \ the per-pair joint gate `(eps_lo > 0.05) AND (eps_hi < 0.5)` as a PROPORTION\
@@ -73,6 +74,7 @@ experiments:
 
     '
   priority: 0
+  compute_class: 'CPU (measured bound comparison)'
   depends_on: []
   registry_id: E9_Q2v3
   framing_ref:
@@ -83,6 +85,7 @@ experiments:
   claim:
   - C3
   priority: 0
+  compute_class: 'CPU (chain-rule divergence on symbol streams)'
   description: 'THE THEORY TEST THAT DISCRIMINATES THE FRAMING (chain-rule D_k vs
     the i.i.d. null). ***STATUS -- INCONCLUSIVE, fixed by the pre-committed adjudication
     rule. NOT a falsification and NOT a confirmation.*** Estimate the CHAIN-RULE joint
@@ -200,6 +203,7 @@ experiments:
   claim:
   - C2
   priority: 0
+  compute_class: 'CPU (frontier function over measured values)'
   description: "THE FRONTIER AS A FUNCTION, NOT A NUMBER -- this is what makes C2\
     \ a generalizable limit rather than one dataset's figure. M_max is a FUNCTION\
     \ of (k, n, tv):\n  M_max = 0.5 * (n * B^2)^(1/k),  B = 0.5 - tv_hat - sqrt(2*ln(2/alpha_law)/n),\
@@ -231,6 +235,7 @@ experiments:
   claim:
   - C1
   priority: 1
+  compute_class: 'CPU (estimator ground-truth comparison)'
   description: "ESTIMATOR CORRECTNESS UNDER KNOWN GROUND TRUTH (the evidence that\
     \ the numbers are not artefacts of the implementation). Synthetic discrete distributions\
     \ with ANALYTICALLY known TV:\n  (i) tv_hat converges to the true TV;\n  (ii)\
@@ -255,6 +260,7 @@ experiments:
   claim:
   - C1
   priority: 1
+  compute_class: 'CPU (divisibility lower bound; produces no D_k curve)'
   description: '***MECHANISM-NOVELTY TRACK.*** REJECTION-GENERIC / DIVISIBILITY LOWER
     BOUND -- a structurally DIFFERENT bound mechanism from the plug-in upper side,
     which is why it belongs in the plan independent of any single number. TV(P1,P2)
@@ -303,6 +309,7 @@ experiments:
   claim:
   - C1
   priority: 1
+  compute_class: 'CPU (bound comparison)'
   description: 'MASKING AS A PRECONDITION, WITH A DESIGN THAT CAN ACTUALLY DETECT
     THE EFFECT. The padding question is not cleanup: sampled short-flow tail slots
     are all zero while sizes are read as abs(...), so a raw 0 is not a legal packet
@@ -328,6 +335,7 @@ experiments:
   claim:
   - C1
   priority: 1
+  compute_class: 'CPU (vector-law TV bound)'
   description: 'VECTOR-LEVEL DISTINGUISHABILITY AS A ONE-SIDED RESULT (in flight).
     The quantity one-hot discards to put both sides on ONE object: TV(per-flow normalised
     32-vector law). ***CORRECTED (M055): the word marginal here silently named TWO
@@ -367,6 +375,7 @@ experiments:
   claim:
   - C1
   priority: 1
+  compute_class: 'CPU (bound delta between two channel declarations; NO training, does not touch CUDA)'
   description: 'SNI/ECH SENSITIVITY -- THE MEASURED PRICE OF ECH. The anonymised destination-host
     identifier is a deterministic function of the SNI, so it is a legitimate pre-encryption
     side channel and MUST be excluded from the declared channel. Report the bound
@@ -390,6 +399,7 @@ experiments:
   claim:
   - C1
   priority: 2
+  compute_class: 'CPU (bound comparison)'
   description: 'CLOSE THE ENVIRONMENT GATE. Step-0 PASSED on the XS subset (53 services;
     45 at the 2000-flow threshold; two-axis 43/39; full-crossing 39/36 -- comfortably
     clearing >= 15) with TIME_FIRST spanning 13 months (12 full + a 69-flow 2024-05
@@ -419,6 +429,7 @@ experiments:
   claim:
   - C1
   priority: 2
+  compute_class: 'CPU (cross-corpus feasibility at the k=5/M=1 protocol; ran CPU-side)'
   description: 'REPLICATION ON AN INDEPENDENT DATASET (CESNET-QUIC22, one month, 102
     labels). The strongest defence against a single-dataset review, and the project''s
     ONLY direct answer to it -- nothing has been run on it. Same protocol, same declared
@@ -450,6 +461,7 @@ experiments:
   - RC3
   - RC6
   priority: 1
+  compute_class: 'GPU-ELIGIBLE -- the ONLY such entry; trains a detector panel, RoNeTC uses CUDA, LightGBM and prototype fall back to CPU'
   registry_id: X12_k5
   description: 'DETECTOR VALIDATION -- THE FALSIFIABLE CONTAINMENT (restored from
     the brief; it was missing from my first plan). Pre-registered ONE-SIDED COVERAGE
@@ -528,6 +540,7 @@ experiments:
   framing_ref:
   - RC7
   priority: 2
+  compute_class: 'CPU (frequency-of-frequencies missing-service-mass estimate)'
   registry_id: null
   description: GOOD-TOULMIN MISSING-SERVICE MASS (restored from the brief; missing
     from my first plan). The unknown-class mass entering the open-set bound is scoped
