@@ -449,6 +449,20 @@
 > **⇒ Same discipline as the rest of the session: an audit that stops at "the others are fine" has tested only the tree the
 > audit was run in. The check that closes it is "would this resolve in the OTHER tree", and it was not run.**
 >
+> **⚠ D098 — THE RE-RUN ETA WAS BUILT ON A FIELD I HAD ALREADY PROVEN MEANS SOMETHING ELSE.**
+> The reported ETA was **1 h 39 m – 1 h 57 m**, whose dominant term is a claimed-measured **92 minutes** of run time.
+> **⇒ I traced `92` to its source: it is `reproduce.started_at` (15:00:38) minus the failure time (16:32:29) = 91.8 min.**
+> **⇒ And `reproduce.started_at` is the ALLOCATION-time field, not the process start — established by measurement at D096:**
+> it reads 15:00:38, **which is BEFORE the runner file was even uploaded (15:53:27).** A process cannot have been running
+> before its own code existed on the machine.
+> **⇒ THE ACTUAL MEASURED WINDOW, from `ps lstart` (16:00:06) to the failure (16:32:29): 32.4 min — 2.84× SHORTER.**
+> **⇒ ⇒ ETA recomputed through `calculate_experiment_eta` with the true window: `32.4 + 5 + 2` to `32.4 + 15 + 10` =
+> **40–58 minutes**, not 99–117. **⇒ The reported range overstated the wait by roughly an hour.**
+> **⇒ Same discipline as the rest of the session: the number was labelled "measured, not guessed" and it WAS measured —
+> **from the wrong field.** A measurement is only as good as the object it measures, and this project has a field that
+> **looks like a run start and is not one.** **⇒ ⇒ And that field is now implicated twice in one session (D096, D098),
+> so anything deriving a duration from it is suspect by default.
+>
 > **✓✓ D096 CLOSED BY DIRECT MEASUREMENT — THE RUN LOADED THE GATED FILE. No longer inference.**
 > The decisive server-side check (`ps lstart` + `stat`, read-only, pid 728753) settles it:
 > **`/root/eibo/x9_dose_response_channels.py  mtime = 2026-09-14 23:53:27 +0800` (= `15:53:27 UTC`, 34,554 B)
