@@ -1,4 +1,4 @@
-_next_id: 114
+_next_id: 116
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -5476,3 +5476,149 @@ mistakes:
   related_decisions:
   - D069
   - D074
+- id: M114
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: high
+  summary: 'Told the Agent to use X9 (a CPU bound-comparison) to fill an idle GPU
+    - inferring the compute class from the resource state rather than the plan entry,
+    which had no such field. Then broke experiment_plan.yaml twice while adding that
+    field: a serializer round-trip (C028 violation, repeat of M107) and an unquoted
+    colon in an inserted value.'
+  root_cause: 'I inferred X9''s compute class from the fact that a GPU was idle, because
+    the plan lacked a compute_class field and the idle card created pressure to fill
+    it. Then, fixing the missing field, I twice broke the file: once with a serializer
+    round-trip (C028 violation, repeat of M107) and once by inserting a value containing
+    a colon into YAML unquoted. Both are instances of asserting or emitting something
+    without measuring what it actually does.'
+  prevention: 'TWO rules. (1) NEVER infer a resource class, cost, or requirement from
+    the state of the resource. Read it from the entry, plan, or spec that determines
+    it. A free GPU is not evidence that the next experiment uses a GPU; an idle card
+    creates pressure to fill it, and that pressure is exactly what makes the inference
+    feel safe. If a field needed to make the decision is absent, add the field, do
+    not guess the value. (2) For a structured file, insert by rewriting lines with
+    values that are SAFE AS YAML - quote any value containing a colon, hash, or leading
+    special character - and never locate an insertion point by matching a key name
+    that could also appear inside a multi-line scalar. And never write a structured
+    file back through a serializer: parse to find, edit text to write, then re-parse
+    before committing. Both failures share one shape, the same shape as M107, M112
+    and the whole session''s recurring lesson: I acted on a value I had inferred rather
+    than measured, and the tool returning success told me nothing about whether the
+    artifact was correct.'
+  status: active
+  context: 'Two related failures in one turn, both mine.
+
+
+    (1) I dispatched X9 with the instruction to use it to "fill the GPU", on the reasoning
+    that a card was allocated, idle, and must not sit idle. X9 is a bound-comparison
+    measurement - it computes the TV bracket delta between an SNI-inclusive and SNI-excluded
+    channel - which is CPU work over the H5 corpus, like every X-experiment except
+    X12. The experiment_plan.yaml entry carried no compute_class field, so I inferred
+    the class from the outside fact that a card was free rather than from the entry
+    that determines it. I caught it myself before the Agent could act, and sent a
+    correction: dispatch X9 as CPU work, and do not force a CPU task onto the card
+    to justify the allocation.
+
+
+    (2) While adding the missing compute_class field, I used yaml.safe_dump to write
+    the file back, which collapsed experiment_plan.yaml from 601 lines to 193 - the
+    exact whole-file serializer round-trip that C028 forbids and that I had already
+    recorded as M107 when I did the same thing to registry.yaml. I caught it immediately
+    via the line-count check. My second attempt inserted lines by regex on the ''priority:''
+    line, but one of my inserted values contained a colon followed by a space, which
+    YAML read as a mapping key, breaking the file at line 464. Third attempt: inserted
+    the same lines but single-quoted every value so any colon is inert, which parsed
+    and changed exactly 13 lines with nothing else touched.
+
+
+    The substantive finding from (1) is worth keeping: X12 is the only GPU-eligible
+    entry in this project, because it is the only one that trains, and RoNeTC is the
+    sole CUDA consumer. Running X12 at another k would not fill the card usefully,
+    because k=5 is the only level with a populated informative stratum (340 pairs;
+    28 at k=10, 0 at k=15/30), so any other k reproduces the empty-population pattern
+    this project has recorded four times. So the honest statement is that there is
+    currently no GPU-eligible experiment on the plan - which is a fact to report,
+    not something to paper over by placing CPU work on the card.'
+  fix: Sent the compute-class correction to the Agent immediately, instructing that
+    X9 be dispatched as CPU work and that no GPU experiment be invented to justify
+    the allocation, and stating plainly that no GPU-eligible experiment remains on
+    the plan. Added the missing compute_class field to all 13 plan entries via a line-by-line
+    text insertion with single-quoted values, verified by parsing before committing,
+    with the diff showing exactly 13 insertions and nothing else changed. Committed
+    with the finding that X12 is the only GPU-eligible entry and why another k would
+    not help.
+  related_decisions:
+  - D078
+  - D079
+- id: M115
+  date: '2026-09-14'
+  category: experiment_design
+  severity: high
+  summary: 'max_tpr is a genuine formula bug, not a naming defect: numerator counts
+    correct predictions over ALL flows while the denominator counts only that service''s
+    positives, so values exceed 1 (up to 341, 22 of 53 services). Proved arithmetically
+    - max_tpr x n_positive is an integer for 53/53 services, and the implied numerators
+    exceed the denominators. Fix is (correct & positive).sum(); add a 0<=v<=1 assertion.'
+  root_cause: The rate was computed with a numerator over all flows and a denominator
+    over one service's positives. No range assertion guarded the name, and no check
+    verified that the numerator and denominator ranged over the same population, so
+    a formula error that produces impossible values passed through production and
+    surfaced only when a reviewer noticed a value above 1. The same absence of a name-claim
+    assertion produced the two earlier instances of this class.
+  prevention: 'Keep the rule, and sharpen it: when a computed field is emitted under
+    a name that asserts a range or an identity, ASSERT THAT CLAIM IN CODE at the point
+    of production - a rate asserts 0 <= value <= 1, a maximum asserts it is >= every
+    element it summarises and equal to one of them, a self-referential size or hash
+    asserts it cannot be written before those bytes exist. One line each. Second and
+    more specific: when a rate is computed, check that its NUMERATOR AND DENOMINATOR
+    range over the same population. A recall-style denominator (this class''s positives)
+    with an all-items numerator is a silent formula error that produces plausible-looking
+    numbers above 1, and the only reliable detection is the range assertion or an
+    explicit numerator/denominator population check. The general form, which this
+    session has now demonstrated in eight different guises: the name and the value
+    are separate claims, and nothing verifies the second against the first unless
+    it is made to.'
+  status: active
+  context: 'The field max_tpr in the k=5 detector artifact is not merely mis-named:
+    its value is affirmatively WRONG. I established this arithmetically from the artifact
+    rather than accepting the naming-defect explanation. For every one of the 53 services
+    in metrics.lightgbm.holdouts[''0.05''].per_service, max_tpr times n_positive is
+    an exact integer (53 of 53), which proves the numerator is a count and the denominator
+    is that service''s n_positive. The implied numerators then EXCEED the denominator:
+    service 0 gives 1.0673 x 53,116 = 56,692 correct against 53,116 positives; service
+    1 gives 1.2483 x 6,009 = 7,501 against 6,009; service 13 gives 1.4121 x 182 =
+    257 against 182. So the computation is (correct predictions across the whole holdout)
+    divided by (this service''s positive flows) - the numerator ranges over all flows
+    while the denominator counts only this service''s positives. That is a recall
+    denominator with an all-flows numerator.
+
+
+    Consequence: the value cannot be quoted for a weak reason AND for a strong one
+    - not only does the name claim a rate in [0,1] that the number cannot be, but
+    the number itself is computed wrong. The same wrong formula feeds maximum_pair_tpr
+    at the pair level (170.5 lightgbm, 192.9 prototype, 2.10 ronetc).
+
+
+    Secondary consequence I confirmed: the near_zero_tpr_threshold = 0.01 guard can
+    never fire, because every maximum_pair_tpr is far above 0.01. So that NO-INFORMATION
+    branch is dead code. It is not load-bearing, since pcap_encoder is separately
+    and correctly marked not_run, but it must not be described as a guard.
+
+
+    This is the third field in this project whose name asserted something its value
+    violated - after the retired lower_side_fraction name and the self-referential
+    artifact_size_bytes - and the first where the value is affirmatively wrong rather
+    than merely misleading.'
+  fix: 'Recorded the arithmetic proof and the exact fix: the numerator must be constrained
+    to the service''s own positives, (correct & positive).sum() rather than correct.sum(),
+    after which every value lies in [0,1] and the name becomes true. Ruled that max_tpr
+    and maximum_pair_tpr must not be quoted until that fix lands, and that the fix
+    is stronger than a rename because a wrong value currently travels under a right-sounding
+    name. Also required a one-line range assertion - anything named as a TPR or rate
+    asserts 0 <= value <= 1 at production - which is the check that would have caught
+    this at the point of production rather than at a reviewer''s anomaly. The containment
+    verdict itself is unaffected: it comes from the binomial_test block, which does
+    not consume max_tpr.'
+  related_decisions:
+  - D078
+  - D080

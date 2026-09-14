@@ -29,6 +29,20 @@
 > that is where C2's measurement lives. **4th instance today of a check that cannot fail.**
 > **⚠ Paper caveat: 20,000-flow/service subsample vs C1's full-n upper.** **⚠ I fixed the framing's banned
 > "assumption-free" wording myself — the claim-binding source was the one surface that was wrong.**
+> **⚠ M115 — `max_tpr` IS A FORMULA BUG, NOT MERELY A MIS-NAME (I proved it arithmetically).**
+> For **all 53 services**, `max_tpr × n_positive` is an **exact integer** ⇒ the numerator is a **COUNT** and the
+> denominator is **that service's `n_positive`** — **but the numerator ranges over ALL flows, not that service's**:
+> svc 0 `1.0673 × 53,116 = 56,692` against **53,116** positives; svc 1 `1.2483 × 6,009 = 7,501` against **6,009**;
+> svc 13 `1.4121 × 182 = 257` against **182**. **⇒ A recall denominator with an all-flows numerator.**
+> **⇒ The fix is `(correct & positive).sum()` instead of `correct.sum()`**, after which every value lies in [0,1]
+> and the name becomes true. **⇒ UNTIL THAT LANDS, `max_tpr` AND `maximum_pair_tpr` MUST NOT BE QUOTED** —
+> **stronger than "mis-named": a wrong value travels under a right-sounding name.**
+> **⚠ Secondary: `near_zero_tpr_threshold = 0.01` CAN NEVER FIRE** (every value is far above it) ⇒ that
+> NO-INFORMATION branch is **dead code — the sixth unfalsifiable check**. Not load-bearing (pcap_encoder is
+> separately and correctly `not_run`), but **it must not be described as a guard.**
+> **⇒ Required: a range assertion — anything named as a rate asserts `0 <= value <= 1` at production.** One line;
+> it is the check that would have caught this at the source rather than at a reviewer's anomaly.
+> **⇒ The containment verdict is UNAFFECTED** (it comes from `binomial_test`, which does not consume either field).
 > **★★★ D078 — k=5 CONTAINMENT RESULT: THE FLOOR IS NOT FALSIFIED. C1's MISSING PIECE HAS LANDED.**
 > `X12_k5` COMPLETED 18:12; artifact 191,867 B (sha `14f0f581…`), GPU released. **I read all 9 cells myself.**
 > **Design:** 3 detectors × 3 holdout levels on the **informative stratum (340 pairs)** — a pre-registered,
