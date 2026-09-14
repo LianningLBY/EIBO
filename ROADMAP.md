@@ -151,6 +151,16 @@
 > half-true: registered but unpushed, or pushed but stale.**
 > **⇒ Same discipline as the rest of the session: a binding that RESOLVES is not the same as a binding that is RIGHT —
 > and neither is the same as a binding that SURVIVES.**
+>
+> **✓ D086 CLOSED — verified at the destination, not at the source.** All **11** manifest `.py` entries now satisfy
+> `tracked=True`, `in_HEAD=True`, `sha OK` — including the two that matter: `x6_divisibility_lower_bound.py` at
+> `7810326c…` (= the sha the X6 artifact self-reports) and `x9_sni_channel_delta.py` at `63f2a356…` (= the sha X9's
+> run logged). **A clean checkout now materializes every producer.** The four modified top-level runners landed in
+> the same commit, so the two halves are no longer half-true. Both snapshot entries were renamed to say
+> `FROZEN SNAPSHOT — not the executing runner`.
+> **⇒ Still uncommitted and deliberately separate:** the duplicate deletion of `artifacts/X9_x9_sni_channel_delta.json`
+> plus registry/constraints/plan/report bookkeeping. **⇒ Recorded so the next reader does not mistake the remaining
+> dirty set for an unfinished binding** — the binding is done; what is left is bookkeeping with its own writer.
 > **⇒ Same discipline as the rest of the session: turn a load-bearing assumption into a measurement.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
