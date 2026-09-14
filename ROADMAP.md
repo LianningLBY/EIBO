@@ -655,6 +655,20 @@ means *near-zero, ≤chance, under L0 investigation, supporting no claim in eith
   **Then P2:** X10 (closes Step-0), X11, X13.
 - [ ] **Registry/plan linkage** — backfill any remaining `registry_id`
 
+## BLOCKED_ON — cross-experiment conditional gates
+
+Cross-experiment conditional todos are the easiest thing to lose: they live as free text in a registry entry and
+nothing guarantees they fire. This list is the single enumerable place for them. **A gate is added when it is
+created and removed only when it fires and is verified, so an empty-looking entry is itself a claim to check.**
+
+| gate | trigger | state |
+|---|---|---|
+| `X3_D056` point 3 — the X6 label audit must be re-run once X6 lands, and must not pass silently | X6 artifact lands | **FIRED AND CLOSED** — registry records `X6_LABEL_AUDIT_RE-RUN_RESULT`: *"THE AUDIT RAN AFTER X6'S ARTIFACT LANDED AND X6 IS VERIFIED-CORRECT -- THE CHECK DID NOT PASS SILENTLY."* Seeded as the first entry **to show the list starts accurate rather than empty** |
+| `x3_parametric_growth.json` — the stored artifact still carries the D057-withdrawn sentence | the fixed runner is re-run on the server tree | **OPEN** — the source is fixed (both runner copies emit the non-diagnostic wording + `d057_caution`); the stored bytes must NOT be hand-edited because their sha is quoted in the registry as this defect's fingerprint |
+| `x3_axis_validation.json` — the stored artifact predates the synced fix | the fixed runner is re-run and the output pulled | **RE-RUN DONE, PULL OUTSTANDING** — the server now holds **123,295 B / `4061258e…`** with the D057 wording and both notes, and all computed values unchanged; **the local copy is still 122,617 B / `9f7578be…`**. Re-register once pulled (D070) |
+| `max_tpr` / `maximum_pair_tpr` — computed wrong, not merely mis-named (M115) | the numerator is constrained to the service's own positives | **OPEN** — fix `(correct & positive).sum() / n_positive`, add the `0 <= value <= 1` assertion, re-run, and re-measure whether the containment cell count is still 9 or has dropped to 6 |
+| git push — the framework credential is not readable from a plain shell | a credential channel exists | **BLOCKED (cause known, not an action)** — remote is at `4242dd7`; local is 12 commits ahead; both shells get the identical `could not read Username`. **Report once; do not retry each round.** |
+
 ## GPU budget
 1× RTX 5090 D bound. **X12 is RUNNING (PID 626935) but on CPU (`--cpu-only`) — the card is idle as a
 property of the command, not an omission.** X12 is the only GPU-shaped work besides X11; `ronetc` trains on
