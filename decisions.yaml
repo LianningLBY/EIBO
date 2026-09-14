@@ -1,4 +1,4 @@
-_next_id: 81
+_next_id: 82
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -4955,3 +4955,90 @@ decisions:
     role: related
   depends_on:
   - D079
+- id: D081
+  date: 2026-09-14 11:51 UTC
+  summary: The max_tpr re-measurement produced its answer and the acceptance gate
+    passed (known-wrong values reproduced from payloads before deriving the correction).
+    Corrected values are 0.8746/0.8264/0.7758, all inside [0,1]; the guard still cannot
+    fire, so the containment cell count STAYS AT 9, not 6. Corrected values are now
+    quotable once the server-only artifact is pulled (C031's fifth instance).
+  rationale: 'The max_tpr re-measurement ran and produced an answer, and the acceptance
+    gate I required is what makes it usable.
+
+
+    THE GATE PASSED. The worker first reproduced the known-wrong values from the stored
+    payloads alone: reproduced = bool(a == 0.39913232104121477 and b == 385.38 and
+    0.5*(a+b) == 192.88956616052062), which returned True. That verifies the instrument
+    against a known value BEFORE any corrected value is derived from it. This is the
+    first of four attempts to get past that step, and the gate is precisely why the
+    result can be trusted. Had the payloads failed to reproduce the known value, the
+    honest outcome would have been to stop - and that would have meant no post-hoc
+    recomputation was possible and a full pipeline run would be needed.
+
+
+    THE RESULT. Corrected maximum_pair_tpr values: lightgbm 0.8746, prototype 0.8264,
+    ronetc 0.7758 (range 0.776-0.875 across cells). All now lie inside [0,1], as a
+    rate must. can_fire_at_or_below_0.01 is FALSE in all 12 checked cells. inform
+
+    ative_positive_fraction is high (lightgbm 0.9971 ...).
+
+
+    THEREFORE THE CELL COUNT STAYS AT 9, NOT 6. The near_zero_tpr guard still cannot
+    fire, because the corrected values (~0.78-0.87) remain far above the 0.01 threshold.
+    My earlier prediction was correct, and it is now measured rather than assumed.
+    The 9-cell containment headline stands, and the "under re-measurement" flag can
+    be cleared from both ROADMAP and framing once the artifact is in hand.
+
+
+    M115''s prohibition is now lifted FOR THIS FIELD: the corrected maximum_pair_tpr
+    values are rates in [0,1] and are quotable - but only after the pull, so that
+    the artifact backs the claim. The old values (170.5 / 192.9 / 2.10) remain unquotable.
+
+
+    TWO DISTINCTIONS THAT MUST NOT BE MERGED in any wording that reaches the paper.
+    First, "the guard cannot fire" is still true of the corrected data (0.78-0.87
+    is far above 0.01) - the guard is inert in its own terms, which is a statement
+    about the threshold, not about correctness. Second, "the quantity was miscomputed"
+    is also true - the old numerator ranged over all flows rather than the service''s
+    own positives. Both statements hold simultaneously and they concern different
+    things.
+
+
+    PROVENANCE: the recomputed artifact x12_k5_max_tpr_recomputed.json is 11,132 B
+    / sha256 e0dc82e03e0e56fc2c49f5036ff265c5c8724d88b8eb349ecc022d46ecfb1fae and
+    is SERVER-ONLY - a local search finds it nowhere. So every number above currently
+    comes from the worker''s log rather than from an artifact we hold, which is the
+    same condition under which I refused to write the X6 numbers. The numbers are
+    therefore not citable into the framing until the pull lands.
+
+
+    This is C031''s fifth instance. The tally: axis (closed by a pull), X6 (pull outstanding),
+    parametric (runner synced, re-run and pull pending), max_tpr recomputation (needs
+    a pull), and the x12 runner itself (pull never dispatched). All five are one defect
+    - a change or a result existing in one tree and not the other - which is why C032
+    must make pull-and-verify the closing step of every task rather than a recalled
+    reminder.
+
+
+    ALSO CONFIRMED: the parametric runner is now genuinely synced (server target after
+    copy = 14,233 B / 08f49cf702e26b1b, equal to local, AST OK, d057_caution present),
+    closing the M108/M123 sync gap for that runner. The max_tpr script now parses
+    with AST OK and the worker removed an empty probe file it had created during the
+    write-path check, which matters because a stray file under artifacts/ would itself
+    be a manifest problem. The content-hash worker reported all 44 live entries resolve
+    with a full size+sha inventory and is about to insert 44 checksum lines, but I
+    verified the manifest mtime is still 10:17:45 and no sha field is present - so
+    it has not landed.'
+  related_experiments:
+  - exp_id: X12_k5
+    result: max_tpr corrected to 0.8746/0.8264/0.7758 (all in [0,1]); guard cannot
+      fire; cell count stays 9, not 6; acceptance gate reproduced the known-wrong
+      values first
+    role: subject
+  - exp_id: X12
+    result: the pair-level runner that produced k=5 is still not in the repository
+      - pull not dispatched
+    role: provenance
+  depends_on:
+  - D078
+  - D082
