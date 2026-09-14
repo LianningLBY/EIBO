@@ -74,8 +74,7 @@
 > **⚠ AND KEEP THE TWO STATEMENTS SEPARATE:** *"the guard cannot fire"* (still true — 0.78–0.87 ≫ 0.01, a
 > statement about the threshold) and *"the quantity was miscomputed"* (also true — the numerator ranged over
 > all flows) are DIFFERENT claims. **The corrected values are quotable as rates; the old 170.5/192.9/2.10 are not.**
-> **⚠ Citable only once the artifact is local: `x12_k5_max_tpr_recomputed.json` (11,132 B / `e0dc82e0…`) is
-> **NOW LOCAL** at `artifacts/X12/data/` (11,132 B / `e0dc82e0…`); **needs a manifest entry before it is citable as a registered artifact.****
+> **✅ Citable now: `x12_k5_max_tpr_recomputed.json` (11,132 B / `e0dc82e0…`) is LOCAL, REGISTERED (`art_20260914_28bbfe`, commits to `artifacts/X12_k5/data/`), and its `content_sha256` is recorded.**
 > **(b) `maximum_pair_tpr` CANNOT BE QUOTED (M113).** Its values (170.5 / 192.9 / 2.10) cannot be rates, and the
 > per-service `max_tpr` beneath it spans **0.0022–341.06 with 22 of 53 services above 1.0**. **Third instance of
 > this project's "field whose value cannot equal what its name claims" class** (after the retired
