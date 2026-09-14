@@ -1,3 +1,7 @@
+# The manifest, not any directory, is the authority for artifact location.
+# artifacts/_project/ and artifacts/<EXPID>/ are both tool-produced layouts with no canonical claim.
+# Invariant: exactly one live entry per artifact, whose path resolves to existing bytes.
+# A second live entry is a defect, and a broken resolver is a defect.
 - id: art_20260913_04f411
   name: Blocked dispatch packages
   type: report
@@ -572,10 +576,10 @@
     and only the WEIGHTS are the blocker. Conclusion: decision = three_of_four, so
     the evaluated baseline set is three of the four planned detectors. Retains no_substitution_statement
     (no substitute probe was used and the planned baseline set was not silently reduced)
-    and false_negative_risk. NOTE ON ABSENCE OF A CANONICAL LOCAL COPY: the only local
+    and false_negative_risk. NOTE ON ABSENCE OF A PRIOR REGISTERED LOCAL COPY: the only local
     copy previously was a STALE top-level file (artifacts/pcap_encoder_availability.json,
     15,236 B, sha256 f815676e..., carrying the OLD weaker reason); this registration
-    places the corrected bytes at the canonical data-artifact path.'
+    records the corrected bytes at the manifest-registered data-artifact path.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/pcap_encoder_availability.json
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -615,7 +619,8 @@
   - auditable
   - provenance-fix
 - id: art_20260914_542f5d
-  name: X3-repair variant B (support/conditioning) — gate FAILED, real data untouched
+  name: SUPERSEDED -- do not cite -- X3-repair variant B (support/conditioning) pre-fix
+    table (gate FAILED, real data untouched)
   type: data
   description: 'X3-repair variant B (support/conditioning change), gate FAILED --
     real data NOT touched. ESTIMATOR: same reference symmetrized conditional Bernoulli
@@ -642,12 +647,15 @@
     before and after). Runner left in repo at /root/eibo/x3_variant_b_support_conditioning.py
     (24,885 B, sha256 c2de06e0...). NOT COMPLETED: artifact registry registration
     -- that role''s tooling was unavailable to it; performed here.'
-  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_variant_b_support_conditioning.json
+  path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
   skill: ''
   created_at: '2026-09-14T04:30:57.464762+00:00'
+  superseded_by: art_20260914_0118c2
+  retirement_note: Described the pre-fix support-conditioning table; the later D063
+    artifact supersedes it and this entry must not be cited. The superseded BYTES are retained at artifacts/_project/data/x3_variant_b_support_conditioning.RETIRED_pre_freeze_do_not_cite.json (109,361 B / sha256 29f9bcab3e0b92a5...), renamed so a path- or filename-based reader cannot mistake the pre-freeze table for the live one. The rename left the bytes and sha256 unchanged, so the registry X3_B checkpoint_path sha binding still resolves.
   tags:
   - x3-repair
   - variant-b
@@ -743,8 +751,8 @@
   - gate-failed
   - real-data-untouched
 - id: art_20260914_a4f090
-  name: X3-repair variant C (nested Markov-vs-IID BIC) — DIFFERENT ROUTE; control
-    USABLE; Markov 45/45 at every k=2..30
+  name: SUPERSEDED -- do not cite -- X3-repair variant C (nested Markov-vs-IID BIC)
+    — DIFFERENT ROUTE; control USABLE; Markov 45/45 at every k=2..30
   type: data
   description: 'X3-repair variant C (nested-model likelihood-ratio route) -- the DIFFERENT
     ROUTE, and the evidence for C3''s existence corroboration (D046 part ii). ROUTE
@@ -773,12 +781,16 @@
     383,660,740 bytes; no H5 rescan. Protected x3_chain_rule_divergence.json UNCHANGED.
     Runner left in repo at /root/eibo/x3_variant_c_nested_lr.py (sha256 35581cefa00219271ef6040c32a65c317adfceadd14146c8e21bf9184b8905fb).
     File size 748,847 B on the server.'
-  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_variant_c_nested_lr_a4f090.json
+  path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
   skill: ''
   created_at: '2026-09-14T04:47:42.188979+00:00'
+  superseded_by: art_20260914_7986d6
+  retirement_note: Path never resolved because the file does not exist, so this entry
+    must not be cited. The physical RETIRED suffix duplicate preserves the PRE-RESHAPE
+    version; the live entry now holds the newer fa1eeaab bytes.
   tags:
   - x3-repair
   - variant-c
@@ -979,15 +991,16 @@
   skill: ''
   created_at: '2026-09-14T06:12:36.541671+00:00'
   superseded_by: art_20260914_4d9b49
-  retirement_note: Described the pre-fix shifted-axis table with p=1.001; the canonical
-    path now holds the D056-fixed file and this entry must not be cited.
+  retirement_note: Described the pre-fix shifted-axis table with p=1.001; the later
+    D056-fixed entry supersedes it and this entry must not be cited.
   tags:
   - x3
   - control
   - occupancy
   - dose-response
 - id: art_20260914_4d9b49
-  name: x3_control_occupancy_dose_response.json (D056-fixed)
+  name: SUPERSEDED -- do not cite -- x3_control_occupancy_dose_response.json (D056-fixed
+    older twin)
   type: data
   description: 'D056-fixed dose-response control artifact. Off-by-4 k-axis corrected
     at lines 179-181 (thinned_p[: k - 4] -> thinned_p[:k]); no estimator/smoothing/arm/thinning/acceptance
@@ -996,12 +1009,16 @@
     no-thinning exponent p = 0.651, exactly matching the original control''s 0.651
     (the defective value was 1.001). Permanent bit-identical assertion added. Verdict
     on the corrected axis remains joint_tracks_thinning = true.'
-  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_control_occupancy_dose_response.json
+  path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
   skill: ''
   created_at: '2026-09-14T07:02:14.721114+00:00'
+  superseded_by: art_20260914_fc478a
+  retirement_note: Described the D056-fixed occupancy dose-response table; the later
+    D063 artifact supersedes it and this entry must not be cited.
+    The superseded BYTES are retained at artifacts/_project/data/x3_control_occupancy_dose_response.RETIRED_pre_guard_do_not_cite.json (291,163 B / sha256 88625bbacbe95984...), renamed so a path- or filename-based reader cannot mistake the pre-guard table for the live one. Those bytes predate the D063 freeze guard, where joint_tracks_thinning reads True in them, which is the SEMANTIC error D074 ruled on. The rename left the bytes and sha256 unchanged.
   supersedes: art_20260914_b9b161
   tags:
   - X3
@@ -1200,6 +1217,7 @@
   exp_id: X3
   skill: ''
   created_at: '2026-09-14T08:52:33.604105+00:00'
+  supersedes: art_20260914_542f5d
   tags:
   - X3
   - D063
@@ -1226,9 +1244,53 @@
   exp_id: X3
   skill: ''
   created_at: '2026-09-14T08:52:38.057906+00:00'
+  supersedes: art_20260914_4d9b49
   tags:
   - X3
   - D063
   - no-freeze assertion
   - dose-response
   - deep levels refused
+- id: art_20260914_b1fdde
+  name: x11_feasibility.json
+  type: data
+  description: 'X11 CESNET-QUIC22 replication feasibility + one-month protocol run.
+    FEASIBILITY CONFIRMED: cesnet-datazoo installed by this task (0.2.0; module at
+    /root/miniconda3/lib/python3.12/site-packages/cesnet_datazoo/__init__.py; NO CLI
+    executable exists). ACCESS IS PUBLIC -- no DUA, no registration, no credential
+    (the library calls resumable_download()/simple_download() with no credential step;
+    Zenodo metadata access_right=open, license cc-by-4.0). SIZE: downloaded XS H5
+    = 2,714,067,131 bytes, servicemap 9,415 bytes; official Zenodo ZIP = 20,952,008,298
+    bytes; documented uncompressed size UNVERIFIED. Data disk before = 507G free,
+    after = 498G free. FIELD MAPPING CONFIRMED PRESENT: PPI row 1 = direction, row
+    2 = size, PPI_LEN = packet-sequence length (uint16), APP = service label, CATEGORY
+    = category label; PPI row 0 = IPT timing, present but EXCLUDED. Library metadata
+    independently reports ppi_features [''IPT'',''DIR'',''SIZE''], application_count
+    102. Download location /root/autodl-tmp/eibo/data/cesnet-quic22-explicit-v2/XS/.
+    H5 sha256 669a810ec49b7a9c2d5c9ea9d2bc3fbe9907a787cd9b5af5eeaa41e092cd1aaf. ***
+    THE SCIENTIFIC RESULT -- A CORPUS-DEPENDENCE FINDING, REPORTED AS SUCH AND NOT
+    TUNED: the upper-side informative fraction DID NOT REPRODUCE. QUIC22: eps_hi <
+    0.5 on 534/3,321 = 0.1607949413 (median TV 0.6891804418, median eps_hi 0.7661406742).
+    Primary corpus reference: 340/990 = 0.3434343434. So 16.08% versus 34.34% -- roughly
+    half. *** PROTOCOL HELD FIXED: k=5, M=1, alphabet 32, per-law alpha 0.025, channel
+    (direction,size) with timing excluded, service threshold 2000 flows; split train
+    2022-10-31..11-06, unused buffer 11-07..11-13, test 11-14..11-27; NO packet-level
+    split; the repository packing helper and src/eibo/statcore.py::tv_upper_bound
+    were CALLED (reference reconciliation on one real pair gave zero difference in
+    tv_hat and eps_hi). Test population 5,085,259 flows (5,024,310 with PPI_LEN >=
+    5), 105 labels observed, 82 retained services, 3,321 service pairs. *** THE LOWER
+    SIDE AND THE FULL TWO-SIDED BRACKET WERE NOT RUN, as the feasibility-first scope
+    required. ***'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X11/data/x11_feasibility.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X11
+  skill: ''
+  created_at: '2026-09-14T09:21:07.174063+00:00'
+  tags:
+  - X11
+  - replication
+  - CESNET-QUIC22
+  - corpus-dependence
+  - did not reproduce
+  - feasibility confirmed

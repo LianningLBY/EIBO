@@ -21975,5 +21975,44 @@
     ],
     "cached_service_count": 45,
     "elapsed_seconds": 14.036629676818848
+  },
+  "heterogeneous_iid_null": {
+    "label": "Published falsification check; original nested-model numbers and conclusions are unchanged.",
+    "null_definition": "Each cached service keeps its exact usable-flow count. Each flow independently draws one rate with replacement from the pooled empirical per-flow rate distribution, then emits 30 i.i.d. Bernoulli bits at that rate.",
+    "predicted_2_delta_ll_over_N_nats_per_observation": 0.0030542874307106535,
+    "observed_2_delta_ll_over_N_nats_per_observation": 0.1441683079210465,
+    "ratio_observed_to_predicted": 47.201945197247625,
+    "bic_penalty": {
+      "reported_reference": "service-level row whose Delta_BIC equals the original k=30 median Delta_BIC",
+      "service": 50,
+      "2_log_N": 26.79989931684813,
+      "delta_bic": 110091.1431249677,
+      "penalty_share_of_delta_bic": 0.0002434337454960094,
+      "effect_reference_service_0": {
+        "2_log_N": 33.83318039417926,
+        "delta_bic": 3203664.2136595473
+      }
+    },
+    "measured_per_flow_rate_distribution_service_0": {
+      "n_flows": 740731,
+      "mean": 0.4751677284556292,
+      "sd_population": 0.11866809208296707,
+      "p01": 0.16666666666666666,
+      "p99": 0.7
+    },
+    "interpretation": "Heterogeneity accounts for roughly 2% of the observed effect.",
+    "reproduction": {
+      "predicted_effect_reproduced_from_heterogeneous_artifact": true,
+      "observed_effect_reproduced_from_original_artifact": true,
+      "ratio_reproduced": true,
+      "bic_penalty_reproduced": true,
+      "service_0_rate_distribution_reproduced_from_merged_cache": true,
+      "original_measured_values_altered": false
+    },
+    "aggregation": {
+      "summary": "service 0, one of the largest services, as the requested reference row",
+      "predicted_reference_item": "0",
+      "observed_reference_service": 0
+    }
   }
 }
