@@ -312,6 +312,21 @@
 > artifact, and re-run with the gated file already in place.**
 > **⇒ Same discipline as the rest of the session, and this time against my own claim: I inferred "the process holds the
 > right file" from "the file on disk is right". Those are different facts, and the one I asserted is the one I did not measure.**
+>
+> **★ TIMELINE ASSEMBLED from the state-transition checkpoints (`X9_E_{PREPARING,QUEUED,RUNNING}_*.json`) — STRONG BUT NOT
+> DECISIVE EVIDENCE THAT THE GATED FILE WAS LOADED:**
+> `14:13:41` row created · `14:56:16` QUEUED · `15:00:38` `reproduce.started_at` · `15:45:39` local gated file written ·
+> **`15:56:37` server file becomes `0137df32…`** · **`16:00:13` transition `ALLOCATED → RUNNING` (trigger `update_registry`)**.
+> **⇒ The RUNNING transition IS the submit event, and it is `3m36s` AFTER the server file was gated.**
+> **⇒ AND `reproduce.started_at` (`15:00:38`) PREDATES that transition** — so it **cannot** be the process start; it is an
+> allocation-time field. **That removes the one piece of evidence pointing the other way.**
+> **⇒ ⇒ STILL NOT PROOF, and I will not overclaim twice:** a `submit` at `16:00:13` is consistent with a process that started
+> then, but the file is read by the interpreter at launch and the registry reflects a submit call, not necessarily the
+> exec. **⇒ THE DECISIVE CHECK REMAINS `ps -o lstart= -p 728753` on the server** (requested), **with the artifact
+> fingerprint as the independent confirmation** (`runner_sha256` as a FIELD + `arithmetically_forced_to_clip` +
+> `both_arms_nonclipped` + `no_rows` ⇒ gated; none of them ⇒ original).
+> **⇒ Current best reading: the run most likely DID load the gated file.** **⇒ Same discipline as the rest of the session:
+> assemble the strongest available evidence, state its residual weakness, and name the one measurement that would close it.**
 > stating that the artifact and D076 settle this experiment, and that its non-terminal `status` reflects **an unmanaged
 > worker run, not unfinished work.** **⇒ And the same for `X9_C`** — withdrawn, never run; its `conclusion: killed` is
 > defensible, its `PREPARING` status is not.
