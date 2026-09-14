@@ -1,4 +1,4 @@
-_next_id: 79
+_next_id: 80
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -4815,3 +4815,76 @@ decisions:
   depends_on:
   - D072
   - D075
+- id: D079
+  date: 2026-09-14 11:00 UTC
+  summary: 'Three instances of "the change was made but not propagated" (local fix
+    not pushed; runner synced but not re-run; re-run server-side but not pulled),
+    each leaving our own tree showing the old behaviour and each inviting an optimistic
+    and wrong conclusion. Adopted C031: verify every propagation step at the destination,
+    and never report a fix complete from having made the edit.'
+  rationale: 'Three times in one session a change was made in one place and did not
+    take effect in the place that mattered, and each time our own working tree still
+    showed the old behaviour, so a reader of the tree would reach the optimistic and
+    wrong conclusion.
+
+
+    (1) x3_axis_validation.py was fixed in the LOCAL tree but never pushed to the
+    SERVER tree where it executes. A re-run therefore reproduced the byte-identical
+    artifact (122,617 B / 9f7578be) and the fix appeared ineffective. Caught by a
+    reviewer reading the server copy and finding the bare "verified-correct" label
+    still present. Logged as M108 - and it was my own error, in a project whose standing
+    rule is that the two trees are separate.
+
+
+    (2) The runner was then synced to the server (16,592 B, D057 wording at line 350,
+    deployed correctly with backup, managed upload, py_compile and before/after sha256)
+    but was NOT re-run, so the stored artifact kept the bare label. Logged as D084.
+
+
+    (3) The runner was then re-run server-side and produced 123,295 B / 4061258e with
+    the D057 wording, both notes present, and all computed values unchanged (vote
+    mismatches 0, axis transition at prefix 5 / bits 3 to 4, max parametric residual
+    0.6931471805599453, route residual 1.0658141036401503e-14, projection sha 2213723c
+    unchanged). But the output was never PULLED, so the copy the repository would
+    ship is still the stale 122,617 B / 9f7578be. I verified: 4061258e appears nowhere
+    in the local tree and no file of 123,295 B exists.
+
+
+    Each individual step was reasonable, and the failure is the same in all three:
+    the later step was INFERRED from the earlier one rather than measured. The wrong
+    conclusion was always the optimistic one - "the fix is in place", "the artifact
+    is fixed", "the re-run landed" - and the check that distinguishes them is identical
+    each time: compare the artifact we actually hold against the artifact the code
+    would now produce.
+
+
+    COUNTERMEASURE, adopted as C031 because a recorded lesson alone did not prevent
+    this. For any change that must take effect somewhere other than where it is authored,
+    verify EACH propagation step AT THE DESTINATION: (i) is the change present in
+    the tree where the code RUNS; (ii) has the consumer been re-executed since; (iii)
+    has the resulting artifact been PULLED to the tree we will ship. Each is a separate
+    yes/no verifiable by reading, and none is implied by the previous. Never report
+    a fix complete on the strength of having made the edit - only after measuring
+    the artifact the fix was meant to change, in the tree where that artifact is used.
+
+
+    ALSO RECORDED THIS TURN, and this one is my own recurring defect rather than a
+    propagation failure: I wrote C031 with decision_id D086, and D086 did not exist
+    - the newest decision at the time was D078. That is the fourth occurrence of the
+    same error (M111 logged the first two for C028 and C030). The cause is identical
+    each time: the decision numbering is assigned by the tool at call time, so any
+    id composed before reading the tool''s return value is a guess, and a guessed
+    id is syntactically valid and semantically dead, so no parser catches it and only
+    an explicit lookup does. The rule is unchanged and I failed to apply it again:
+    take the id from the tool''s return value, never from expectation, and read the
+    referencing file back afterwards.'
+  related_experiments:
+  - exp_id: X3
+    result: 'axis validator: runner fixed locally, then synced to server, then re-run
+      server-side - three separate propagation steps, each initially assumed rather
+      than verified; final state 123,295 B / 4061258e on the server, stale 122,617
+      B / 9f7578be locally'
+    role: subject
+  depends_on:
+  - D084
+  - D085

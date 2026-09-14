@@ -1,4 +1,4 @@
-_next_id: 31
+_next_id: 32
 constraints:
 - id: C001
   added: 2026-09-13 11:37 UTC
@@ -445,3 +445,28 @@ constraints:
     not a merge. The earlier version of this constraint covered registry.yaml only,
     which leaves the mistakes/decisions id race unaddressed.'
   decision_id: D077
+- id: C031
+  added: 2026-09-14 10:59 UTC
+  summary: 'For any change that must take effect somewhere other than where it is
+    authored, verify EACH propagation step AT THE DESTINATION: (i) is the change present
+    in the tree where the code RUNS; (ii) has the consumer been re-executed since;
+    (iii) has the resulting artifact been PULLED to the tree we will ship. Each is
+    a separate yes/no verifiable by reading, and none is implied by the previous.
+    Never report a fix complete on the strength of having made the edit - report it
+    complete only after measuring the artifact the fix was meant to change, in the
+    tree where that artifact is used.'
+  scope: all
+  reason: Three times in one session a change was made in one place and did not take
+    effect in the place that mattered, and each time the working copy still showed
+    the old behaviour, so a reader of our own tree would reach the optimistic and
+    wrong conclusion. (1) x3_axis_validation.py was fixed locally but never pushed
+    to the server tree where it executes, so a re-run reproduced the byte-identical
+    artifact and the fix appeared ineffective (M108). (2) The runner was then synced
+    but never re-run, so the stored artifact kept the bare label (D084). (3) The runner
+    was then re-run server-side producing 123,295 B / 4061258e with the D057 wording
+    and unchanged computed values, but the output was never pulled, so the copy the
+    repository holds is still the stale 122,617 B / 9f7578be. Each individual step
+    was reasonable; the failure is that the later step was inferred from the earlier
+    one instead of measured. A recorded lesson alone has not prevented this, so it
+    needs to be a procedure.
+  decision_id: D079

@@ -1,4 +1,4 @@
-_next_id: 116
+_next_id: 119
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -5622,3 +5622,195 @@ mistakes:
   related_decisions:
   - D078
   - D080
+- id: M116
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: high
+  summary: Ninth partial-block metrics overwrite dropped four X3 records (BASELINE_BLOCKER_STATUS,
+    D058, D059, D061). Recovery required distinguishing genuinely-lost from renamed-survivors,
+    since a naive whole-block restore would have duplicated seven records that survive
+    under current names.
+  root_cause: 'A partial-dict metrics write dropped four records. Recovery was made
+    non-trivial by an earlier renaming pass: some records survived under new keys,
+    so a name-based diff both overstated the loss and would have caused duplication
+    if restored naively. The underlying gap is that nothing asserted the key-count
+    invariant at write time - had the write verified its count against the pre-read
+    count, the loss would have been caught at the moment of production rather than
+    discovered by a diff hours later.'
+  prevention: 'TWO rules. (1) The existing one stands: never write a structured map
+    with a partial dict; read the whole block, merge in memory, write the whole block,
+    read back and check the key count against the pre-read value. Nine failures makes
+    this a hard procedure, not a habit. (2) NEW, and specific to recovery: when restoring
+    lost keys to a shared record, FIRST subtract what is present, by CONTENT and not
+    by name. A key set can be renamed while its substance survives, so a name-based
+    diff overstates the loss and a name-based restore duplicates records. The discrimination
+    is: absent-and-content-missing (restore), present-under-a-new-name (do not restore),
+    newer than the snapshot (preserve), and legitimate progress since the snapshot
+    (preserve). Restoring a whole older block is the wrong default because it silently
+    reverts all four categories except the first. The general form, and this session
+    has now shown it nine times: the integrity check must compare against what the
+    record is FOR - the decisions it carries - not merely against the key names it
+    happens to use.'
+  status: active
+  context: 'A metrics write that carried only a subset of keys silently dropped four
+    records from X3.metrics: BASELINE_BLOCKER_STATUS (the dose-response-family rule
+    closing the blocker), D058 (containment is not blocked by the AUC diagnostic),
+    D059 (the agreement baseline is the MAJORITY class, not uniform 1/53 - the rule
+    that any cited agreement rate must carry the majority-class baseline beside it),
+    and D061 (the fix landed in a stray layer; two process rules). The live block
+    went from 35 to 32 keys.
+
+
+    This is the ninth instance of the same partial-block overwrite family, but it
+    has a property the earlier eight did not: because some records survived under
+    RENAMED keys after the D069-to-D077 numbering correction, a naive restore would
+    have been wrong in a new way. I checked each candidate key by content rather than
+    by name and found that D057, D063, D064, D065, D069, D070 and D071 were all present
+    under current names - so re-adding them from the older block would have created
+    two live records for one decision, which is its own defect class (the same "two
+    live entries" problem the manifest invariant was written to prevent).
+
+
+    So the recovery required a four-way discrimination: (1) restored because genuinely
+    absent and content missing - BASELINE_BLOCKER_STATUS, D058, D059, D061; (2) NOT
+    restored because present under a new name - D057, D063, D064, D065, D069, D070,
+    D071; (3) newer live records that must be preserved - the D077 block, D074, D066,
+    D070; (4) legitimate progress since the older snapshot - X12_k5 RUNNING to DONE,
+    plus X6 and X3 updates. Restoring the whole old block would have handled (1) and
+    destroyed (2), (3) and (4).'
+  fix: Restored exactly the four genuinely-lost records by inserting them at text
+    level with quoted values, verified by content-probe that the renaming survivors
+    were NOT re-added, and confirmed all 18 entries and every other key intact. X3.metrics
+    32 to 36 keys, nothing removed. Committed with the discrimination recorded so
+    a later reader can see why seven other keys were deliberately not restored.
+  related_decisions:
+  - D077
+  - D080
+- id: M117
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: high
+  summary: A stale [EXPERIMENT ALLOCATED] notice for an already-completed X12_k5 would
+    have triggered a re-run overwriting the registered artifact. The Agent verified
+    against the registry and declined; I confirmed the notice's allocation_id appears
+    zero times in the registry, so it referred to a dead allocation.
+  root_cause: A scheduler notice was delivered late or replayed, carrying an allocation
+    id that no longer appeared in the registry. Nothing in the delivery path marks
+    such a notice as stale, so its literal execution would have re-run a completed
+    experiment and overwritten its registered artifact. The Agent's verification-before-action
+    is what prevented it; there is no mechanism that would have prevented a less careful
+    actor.
+  prevention: 'Treat any externally-generated control signal - a scheduler notice,
+    an allocation event, a queued directive, a replayed callback - as a CLAIM ABOUT
+    STATE that must be verified against the authoritative store before it is executed.
+    It is not an instruction that outranks the store. Concretely: if such a notice
+    names an identifier (an allocation id, a run id, a job id), check that identifier
+    against the record before acting; if it is absent, the notice is stale by definition
+    and the correct action is usually NONE. The general form: when a signal and a
+    store disagree, the store is the source of truth about state, and the safe default
+    is to report the disagreement rather than to reconcile it by performing the action.
+    The strongest version of this rule, which the Agent applied: never take an action
+    that is destructive to existing evidence in order to satisfy a control message.'
+  status: active
+  context: 'A scheduler notice [EXPERIMENT ALLOCATED] for X12_k5 was delivered to
+    the Agent. Acting on it literally would have called submit_on_allocated for an
+    experiment that had already completed - a re-run that would overwrite the registered
+    artifact art_20260914_082a7f. The Agent verified the registry first, found X12_k5
+    already DONE with conclusion and completed_at present, confirmed the process PID
+    683446 was gone, and declined to submit, reporting the conflict instead of acting
+    on it.
+
+
+    I then verified independently and found two things: the state had advanced further
+    than the Agent''s report (DONE, not ANALYZING), and the allocation_id from that
+    notice (4cfe2d7b...) appears ZERO times in the registry. So the notice referred
+    to an allocation that is not recorded as live - it was a replayed or delayed delivery
+    of the allocation I had made hours earlier for the run that has since finished.
+
+
+    This is a new failure class in this session, distinct from the eight partial-write
+    instances and the naming/field defects: an authority signal (a scheduler notice)
+    arrived with stale content, and its literal execution would have been destructive.
+    The Agent''s correct behaviour was to treat it as a claim to be checked against
+    the authoritative store rather than as an instruction that outranks it.
+
+
+    Note the asymmetry that made this safe: the notice was a message, the registry
+    is state. The Agent checked the state and reported the discrepancy instead of
+    reconciling it by force.'
+  fix: Ruled Option 1 and confirmed no submission, no re-run and no re-save. Verified
+    from the registry that X12_k5 is DONE with conclusion and completed_at, and that
+    the notice's allocation_id appears zero times in the registry, so the notice refers
+    to an allocation not recorded as live. Explicitly credited the Agent's refusal
+    rather than merely noting it, and gave the push an exact terminal answer (blocked
+    on a credential neither role can read; report once as blocked-with-cause, do not
+    re-dispatch each round).
+  related_decisions:
+  - D083
+- id: M118
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: medium
+  summary: 'Three instances of "the change was made but not propagated": (1) local
+    fix never pushed to the server tree; (2) runner synced but never re-run; (3) re-run
+    server-side but never pulled locally - so the shipped copy is still stale each
+    time. Change and propagation are separate, separately verifiable steps.'
+  root_cause: A change and its propagation are separate operations across three boundaries
+    that exist in this project (local tree, server tree, stored artifact). Each was
+    verified independently of the others, and in each case the later step was assumed
+    from the earlier one rather than measured. The result was three consecutive rounds
+    in which the fix was real and the evidence still showed the defect.
+  prevention: 'For any change that must take effect somewhere other than where it
+    is authored, enumerate the propagation steps explicitly and verify EACH at the
+    destination, not at the origin. The concrete checklist that would have caught
+    all three: (i) is the change present in the tree where the code RUNS; (ii) has
+    the thing that CONSUMES the change been re-executed since; (iii) has the resulting
+    artifact been PULLED to the tree we will ship. Each is a separate yes/no, each
+    verifiable by reading, and none is implied by the previous. The strongest general
+    form: never report a fix as complete on the basis of having made the edit - report
+    it complete only after measuring the artifact that the fix was supposed to change,
+    in the tree where that artifact is used.'
+  status: active
+  context: 'Three instances in one session of the same underlying failure: a change
+    was made, and the separate step of propagating it to where it takes effect was
+    not, so the system behaved as though no change had been made.
+
+
+    (1) x3_axis_validation.py was fixed in the local tree but never pushed to the
+    server tree where it executes. A re-run therefore reproduced the byte-identical
+    artifact and the fix appeared ineffective. Caught by a reviewer reading the server
+    copy and finding the bare label still present. Logged as M108.
+
+
+    (2) The runner was then synced to the server (16,592 B, D057 wording at line 350)
+    but was NOT re-run, so the stored artifact remained the old 122,617 B with the
+    bare label. The code was fixed and the artifact did not reflect it. Logged as
+    D084.
+
+
+    (3) The runner was then re-run server-side and produced 123,295 B with the D057
+    wording, both notes present, and all computed values unchanged - but the output
+    was never PULLED to the local tree, so the copy the repository holds is still
+    the stale 122,617 B.
+
+
+    Each time, a person reading only one tree would reach the wrong conclusion, and
+    in each case the wrong conclusion was the optimistic one: "the fix is in place",
+    "the artifact is fixed", "the re-run landed". The check that distinguishes them
+    is the same each time - compare the artifact actually held against the artifact
+    the code would now produce - and it was not run until a reviewer or a diff forced
+    it.
+
+
+    The general shape matches the session''s other recurring defects: a claim about
+    state was made from the act of making a change rather than from measuring the
+    result.'
+  fix: 'Recorded the three-instance pattern explicitly. Added the outstanding pull-and-re-register
+    to the ROADMAP''s new BLOCKED_ON list so it cannot go quiet, and stated the rule
+    in the dispatch: a change and its propagation are separate steps, and only the
+    second is verifiable by reading our own tree. The immediate action is to pull
+    the re-run output (123,295 B / 4061258e) and re-register so the manifest''s live
+    entry resolves to the new bytes.'
+  related_decisions:
+  - D084
+  - D086
