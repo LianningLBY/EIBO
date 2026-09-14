@@ -492,6 +492,10 @@ experiments:
         own field says: ''A fabricated direction is worse than an inconclusive test.'''
     conclusion: success
     metrics:
+      D058_ORDERING_CORRECTED_CONTAINMENT_IS_NOT_BLOCKED_BY_THE_AUC_DIAGNOSTIC: 'The containment statistic consumes (a) eps_hat_k_hi from the rebuilt X1 artifact and (b) the per-flow detector error; it does NOT reference OSCR or FPR95 anywhere. THEREFORE: (1) THE k=5 CONTAINMENT RESULT IS VALID REGARDLESS OF HOW THE AUC DIAGNOSTIC RESOLVES; (2) THE DIAGNOSTIC RUNS IN PARALLEL, NOT IN FRONT; (3) ONE RUN SHOULD SERVE BOTH PURPOSES. The reviewer independently confirmed this. VACUITY RULE HOLDS: a violation count computed on a vacuous detector state is reported as UNINFORMATIVE, never as a pass.'
+      D059_THE_AGREEMENT_BASELINE_IS_THE_MAJORITY_CLASS_NOT_UNIFORM: '*** THE CHANCE BASELINE FOR THE ROW-LEVEL AGREEMENT RATES IS THE MAJORITY-CLASS RATE, NOT uniform 1/53 = 1.89%. *** The service-label distribution is STRONGLY IMBALANCED: majority class 14.73% (745,293 of 5,058,007 flows, train-side), held-out test-side 24.89%. BOTH recorded. *** RULE: ANY PLACE THAT CITES THESE AGREEMENT RATES MUST CARRY THE MAJORITY-CLASS BASELINE BESIDE THEM. *** AGAINST IT: LIGHTGBM (48.6%) and RONETC (58.1%) ABOVE; *** PROTOTYPE (13.5%) BELOW -- WORSE THAN ALWAYS GUESSING THE MAJORITY CLASS. *** ALSO: `all_rows_accepted = true` FOR LIGHTGBM IS STRUCTURAL -- line 486 hard-codes accepted: np.ones(len(pred), dtype=bool); AN OPEN-SET DETECTOR THAT NEVER REJECTS HAS NO REJECTION CAPABILITY.'
+      D061_THE_FIX_FIRST_LANDED_IN_A_STRAY_LAYER_CONSOLIDATION_COMPLETE: 'The D056 fix wrote to a STRAY layer (artifacts/X3/data/) while the AUTHORITATIVE mirror (artifacts/_project/data/) kept PRE-FIX bytes -- TWO LIVE CONTRADICTORY MANIFEST ENTRIES. The Director fixed the BYTES directly. CONSOLIDATION COMPLETE AND VERIFIED BY READING THE TREE. *** TWO PROCESS RULES ADOPTED: (1) A WORKER REPORT MUST BE GENERATED AFTER ITS ARTIFACT IS FROZEN. (2) A FIX MUST LAND WHERE THE ARTIFACT ALREADY LIVES. *** *** ★ ROOT CAUSE FOUND: `register_artifact(server=..., remote_path=...)` ITSELF PLACES FETCHED FILES AT artifacts/<EXPID>/data/ AND artifacts/<EXPID>/intermediate/. SO artifacts/<EXPID>/ IS THE REGISTER TOOL''S DEFAULT DESTINATION, NOT A FORK INVENTED DURING A REPAIR -- AND EVERY REGISTRATION RE-CREATES IT, UNDOING A CONSOLIDATION. CONFIRMED THREE TIMES NOW (X3 twice, X6 once). THE MANIFEST''S ''NOT A CONVENTION'' COMMENT CONTRADICTS THE DEPLOYED TOOL AND NEEDS A DIRECTOR RULING. OPEN. ***'
+      BASELINE_BLOCKER_STATUS: '*** CLOSED (D066/D067). *** NOT OPEN, NOT BLOCKING. The two controls agree on a SHARED quantity at DIFFERENT intervention settings, which is a DOSE-RESPONSE FAMILY, not a conflict; the standing same-nominal-quantity rule was MIS-SCOPED and should never have fired here. Substantive content is carried under D066_THE_BLOCKER_IS_CLOSED_SAME_CONSTRUCTION_WITH_AND_WITHOUT_A_FILTER and D066_DO_NOT_READ_THIS_AS_A_RESCUE. Restored as an explicit standalone record because the review chain cites it by NAME and a name that resolves to nothing is worse than a documented reconstruction.'
       D069_HARD_RULE_READ_WHOLE_WRITE_WHOLE_AND_THE_FINDINGS_MD_LOSS: '*** `update_registry(exp_id,
         field=''metrics'', value={...})` REPLACES the entire value. IT DOES NOT MERGE.
         I DESTROYED THIS BLOCK EIGHT TIMES BY PASSING A PARTIAL DICT. THE PROCEDURE,
@@ -1986,50 +1990,47 @@ experiments:
     conclusion: success
     completed_at: '2026-09-14T09:33:26.669Z'
   X12_k5:
-    status: ANALYZING
+    status: DONE
     pid: 683446
     retry_count: 0
     created_at: '2026-09-14T09:27:34.624Z'
-    updated_at: '2026-09-14T10:19:17.838Z'
+    updated_at: '2026-09-14T10:38:37.711Z'
     spec:
-      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x12_detector_validation.py
-        --h5 /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5 --k-packets
-        5 --label-field APP --train-months 202406 202407 202408 202409 202410 202411
-        --test-months 202501 202502 202503 202504 202505 --output-json /root/eibo/artifacts/x12_detector_validation_k5.json
-        --output-csv /root/eibo/artifacts/x12_detector_validation_per_pair_k5.csv
-      command_note: NO --cpu-only, so RoNeTC can use the allocated GPU. --k-packets
-        5 is explicit (the default was deleted; omission now refuses). New output
-        names so nothing collides with the k=15 products. The panel is REBUILT inside
-        this same run because features are k-dependent (k = min(k_packets, ppi.shape[2])).
-      compute_class: GPU-eligible (RoNeTC trains on CUDA when allowed); LightGBM falls
-        back to CPU
-      data_count: 4268367
-      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
-      label_field: APP (service axis)
-      model_name: 'detector panel: LightGBM on k-packet features, SepSpace-style prototype-radius
-        rejector, RoNeTC-style uncertainty-quantified rejector (Pcap-Encoder formally
-        dropped); metrics OSCR and FPR95 per held-out service'
-      panel_rebuilt_because: features are k-dependent; a k=15 panel cannot be reused
-        at k=5
-      payer: k=5 is the ONLY k whose informative stratum is populated -- certified
-        upper-side count 340/990 at k=5 and 28/990 at k=10, but 0/946 at k=15 and
-        0/820 at k=30 -- so the pre-registered containment test is DEFINED only here
-      preregistration: 'The containment test was pre-registered before any run: informative
-        stratum eps_hi < 0.5; predicted floor (1 - eps_hi)/2; an exact ONE-SIDED binomial
-        violation test at nominal 0.95 (alpha 0.05, not split); and what would falsify.
-        k=10 (28 pairs) is a DECLARED SECONDARY stratum with the multiplicity stated
-        plainly. COMMITTED IN ADVANCE: if k=5 yields a null or negative containment
-        result, that is the reported result -- no grinding.'
-      server: '111'
-      split_policy: train 202406..202411, buffer 202412 UNUSED, test 202501..202505
-        (D043); flow-disjoint AND time-disjoint; packet-level splitting prohibited;
-        the strict guard is never weakened
-      why_not_post_hoc_selection: '(1) FEASIBILITY NOT OUTCOME: the pre-registration
-        made the informative stratum mandatory, and at k=15 it is EMPTY, so the test
-        there is UNDEFINED rather than merely unfavourable -- choosing the k at which
-        a pre-registered test is DEFINED is not choosing the k at which it PASSES.
-        (2) k=5 has an INDEPENDENT prior claim: it is the C1 headline cell, already
-        reported, so it is not a fresh choice invented to rescue a null.'
+      checkpoint_path: artifacts/X12_k5/data/x12_detector_validation_k5.json
+      log_path: /root/runs/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/X12_k5.log
+      artifact_id: art_20260914_082a7f
+      artifact_bytes: 191867
+      artifact_note: 'k=5 detector-validation artifact, EXIT_CODE=0 at 2026-09-14T10:12:25Z.
+        Companion outputs on the server: per-pair CSV x12_detector_validation_per_pair_k5.csv
+        (2,579,853 B, 11,880 rows) and three per-class score payloads (x12_detector_validation__per_class_scores__{lightgbm,prototype,ronetc}.npz),
+        each about 1,143,924,900 B -- those three are NOT tracked and need an explicit
+        server-only naming decision.'
+      status_note: COMPLETED. The run finished with EXIT_CODE=0; status had been left
+        at ANALYZING because the ANALYZING transition is the post-run state and no
+        further analysis stage was required to close it.
+      completion_evidence: 'Log tail: CHECKPOINT 2026-09-14T10:12:25.913112; ARTIFACT_JSON
+        bytes=191867; ARTIFACT_CSV bytes=2579853 rows=11880; ADDRESS_RANDOMIZATION
+        status=computed delta=0.0; CONTAINMENT_STATISTIC Stage 2 joins rebuilt X1
+        per-pair eps_hi values to explicitly labeled per-service detector-error surrogates;
+        EXIT_CODE=0.'
+      why_no_resubmission: '*** THE [EXPERIMENT ALLOCATED] NOTIFICATION ARRIVED TWICE
+        FOR AN EXPERIMENT THAT HAD ALREADY COMPLETED, AND THE STATE MACHINE CONFIRMED
+        IT: submit_on_allocated RETURNED ''Experiment X12_k5 status is ANALYZING,
+        expected ALLOCATED. Resources must be allocated by Director before submission.''
+        *** THAT REFUSAL IS THE DECISIVE EVIDENCE -- no submission occurred and none
+        was needed. THE ENTRY''S HISTORY (.agent-ml/checkpoints/) IS QUEUED -> RUNNING
+        -> ANALYZING WITH NO ALLOCATED CHECKPOINT AT ANY POINT, while the same assertion
+        was made about a DIFFERENT entry (X11 rather than X12_k5) on two earlier occasions.
+        THE RUN''S OUTPUTS ARE UNTOUCHED: the JSON was pulled and registered before
+        any of this, and the re-run that was attempted under a different output name
+        (x12_detector_validation_k5_rerun.*) NEVER LAUNCHED because submit_on_allocated
+        refused.'
+      completion_summary: 'k=5 COMPLETE. Pre-registered one-sided binomial containment
+        test: NO EXCESS OF FLOOR VIOLATIONS OBSERVED (observed violation rates 0.0088-0.0294
+        against a 0.05 null; reject_null FALSE for all three detectors; pcap_encoder
+        correctly NO INFORMATION). Two open items: (a) maximum_pair_tpr is not a rate
+        and its 0.01 guard may be inert -- trace dispatched; (b) the three ~1.14 GB
+        .npz payloads need a server-only naming decision.'
     hypothesis: 'The k=5 detector-validation run yields VALID containment evidence
       AND honest performance numbers in ONE pass. MECHANISM: if the certified upper
       bound on the channel TV is sound, no detector consuming only the declared (direction,size)
@@ -2119,6 +2120,8 @@ experiments:
         change already recorded. And the containment default X1 input covered k=5
         without any --x1-json argument, which is exactly the documented behaviour
         (k=5 has a default; k!=5 would raise).
+    conclusion: success
+    completed_at: '2026-09-14T10:38:37.711Z'
   X11:
     status: PREPARING
     retry_count: 0
