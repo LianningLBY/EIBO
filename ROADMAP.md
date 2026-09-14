@@ -35,7 +35,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 |---|---|---|
 | ~~X12 Stage 2 containment statistic~~ | n/a | **CLOSED** — implemented and ran at k=5; containment holds, all detectors `reject_null=false` |
 | ~~x3_parametric_growth D057 sentence~~ | n/a | **CLOSED** — withdrawn sentence gone from both trees; local sha 1a6f9f65 matches manifest; plain_statement is the corrected NON-DIAGNOSTIC wording |
-| x3_axis_validation stored artifact predates synced fix | re-run + pull | **RE-RUN DONE, PULL OUTSTANDING** — server 123,295 B / 4061258e…; local still stale |
+| ~~x3_axis_validation pull~~ | n/a | **CLOSED** — local sha 4061258e matches manifest; both trees consistent |
 | git push | platform sync route | **CLOSING** — instructed to push; confirm origin/main sha |
 
 ## GPU budget
