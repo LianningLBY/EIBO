@@ -65,11 +65,17 @@
 > is **CLOSED-SET** classification error while the floor is an **OPEN-SET** error lower bound. **⇒ The citable
 > sentence is "per-pair macro-average closed-set error stays above the floor on the informative stratum" —
 > NOT "per-pair open-set error never beats the certificate".**
-> **⚠⚠ AND THE 9-CELL COUNT IS UNDER RE-MEASUREMENT (D082):** the `max_tpr` fix (`(correct & positive).sum()`)
-> **REVIVES the `near_zero_tpr` guard that the bug had disabled** — the inflated numerator could never fall to
-> ≤0.01, so the guard was dead. Where the revived guard fires, that detector's rows become `NO INFORMATION`
-> instead of `computed`, so **the count may drop from 9 to 6.** **Direction is safe (cells can be lost, not
-> gained) and the verdict does not consume `max_tpr` — but the NUMBER must be re-measured before quoting.**
+> **✅ THE 9-CELL COUNT IS RESOLVED — IT STAYS AT 9 (D081).** The `max_tpr` fix (`(correct & positive).sum()`)
+> ran, and the acceptance gate PASSED: it reproduced the known-wrong values from the stored payloads FIRST
+> (`a=0.39913232104121477`, `b=385.38`, `0.5*(a+b)=192.88956616052062`) before deriving any correction.
+> **Corrected `max_tpr` = lightgbm 0.826/0.860/0.875 · prototype 0.817/0.813/0.826 · ronetc 0.789/0.778/0.776
+> — every value inside [0.776, 0.875], far above the 0.01 guard.** ⇒ **the `near_zero_tpr` guard does NOT fire,
+> so no cell moves from `computed` to `NO INFORMATION` and ALL NINE CELLS STAND.**
+> **⚠ AND KEEP THE TWO STATEMENTS SEPARATE:** *"the guard cannot fire"* (still true — 0.78–0.87 ≫ 0.01, a
+> statement about the threshold) and *"the quantity was miscomputed"* (also true — the numerator ranged over
+> all flows) are DIFFERENT claims. **The corrected values are quotable as rates; the old 170.5/192.9/2.10 are not.**
+> **⚠ Citable only once the artifact is local: `x12_k5_max_tpr_recomputed.json` (11,132 B / `e0dc82e0…`) is
+> SERVER-ONLY (C031's fifth instance) — the pull is outstanding.**
 > **(b) `maximum_pair_tpr` CANNOT BE QUOTED (M113).** Its values (170.5 / 192.9 / 2.10) cannot be rates, and the
 > per-service `max_tpr` beneath it spans **0.0022–341.06 with 22 of 53 services above 1.0**. **Third instance of
 > this project's "field whose value cannot equal what its name claims" class** (after the retired

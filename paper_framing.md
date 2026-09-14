@@ -214,7 +214,12 @@ rule alone is **uncovered**.
 - **★ X12 — MEASURED (D078). THE FLOOR IS NOT FALSIFIED.** The pre-registered one-sided binomial test ran on
   the informative stratum at k=5 (the populated stratum and C1's headline cell): **3 detectors × 3 holdout
   levels, all nine cells `reject_null = false`.**
-  **⚠⚠ PENDING RE-MEASUREMENT — DO NOT QUOTE THE 9-CELL COUNT YET (M115/D082).** The `max_tpr` fix
+  **✅ RESOLVED — THE 9-CELL COUNT STANDS (D081).** The `max_tpr` fix ran and its acceptance gate PASSED: it
+  reproduced the known-wrong values from the stored payloads before deriving the correction. Corrected values are
+  **0.776–0.875 across all nine cells, far above the 0.01 guard, so the guard does not fire and no cell becomes
+  `NO INFORMATION`.** **Keep two statements separate: "the guard cannot fire" (about the threshold) and "the
+  quantity was miscomputed" (about the numerator population) are different claims.** The corrected
+  `maximum_pair_tpr` values are **rates in [0,1] and quotable**; the old 170.5/192.9/2.10 are not. **⚠ Citable once the artifact is pulled locally — it is currently server-only.**
   (`(correct & positive).sum()`) REVIVES the `near_zero_tpr` guard at line 558, which the bug had
   disabled (the inflated numerator could never fall to <= 0.01). **Where the revived guard fires, that
   detector's rows become `NO INFORMATION` instead of `computed`, so the cell count may drop from 9 to 6.**
