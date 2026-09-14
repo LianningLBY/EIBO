@@ -416,6 +416,22 @@
 > **⇒ Same discipline as the rest of the session: the record showed the corrected direction while the task still carried
 > the old one, and only reading BOTH made the collision visible.**
 >
+> **✓✓ D097 FIX VERIFIED — and the wrong direction was stopped before it executed.**
+> **(1) No second layout exists.** The cancelled worker's own last words: *"the server confirms the flat calibration artifact
+> is present at 1,928,205 bytes, while the manifest-bound nested path is absent"* — it was **enumerating** when cancelled, so
+> **(b) never ran; nothing was created, nothing to clean up.** ⇒ Confirmed locally: no half-applied state.
+> **(2) The fix landed as (a) only, FLAT FIRST — verified at `3db1b28e…`, 35,075 B:**
+> `resolve_existing_path(candidates)` returns the **first** existing candidate and raises `FileNotFoundError` naming
+> **every** path tried; the candidate list is **`artifacts/x9_sni_channel_delta.json` (FLAT) first**, nested second; the
+> return dict records `candidates_tried`. **`AST OK`, zero torch references.**
+> **(3) I RE-DERIVED THE FIXTURE MYSELF rather than trusting the report:** resolving and running the calibration arithmetic
+> against the real artifact gives **predicted `eps_hi = 0.4178717724` vs recorded `0.4178717724`, |diff| = 0.00e+00** —
+> **the `1e-6` assertion passes with room to spare, so the gate will not fail on the numbers.**
+> **⇒ ⇒ So the rerun should now clear the step that killed the last attempt.** **⇒ And the prior run's 11/12 completed
+> split-points are recomputable, GPU idle throughout — one failure, well inside the cap.**
+> **⇒ Same discipline as the rest of the session: the correction was worth more than the fix — it stopped a change that
+> would have put TWO layouts on one machine, which is the divergence this project has already paid for repeatedly.**
+>
 > **✓✓ D096 CLOSED BY DIRECT MEASUREMENT — THE RUN LOADED THE GATED FILE. No longer inference.**
 > The decisive server-side check (`ps lstart` + `stat`, read-only, pid 728753) settles it:
 > **`/root/eibo/x9_dose_response_channels.py  mtime = 2026-09-14 23:53:27 +0800` (= `15:53:27 UTC`, 34,554 B)
