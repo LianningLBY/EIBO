@@ -63,6 +63,23 @@
 > confound explicitly and refuse the "price of SNI" reading.** **UNTIL THEN the +0.39 may be reported only as
 > "a partition augmented with the destination-host identifier raises measured TV by ~0.39, attribution OPEN".**
 > **⇒ Same class as M055, where a word silently named two objects.**
+> **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
+> From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
+> `excluded_arm_mean_eps_hi = 0.6102972071320967`, `aggregate_delta_eps_hi = 0.3897027928679033`, and
+> **`1.0 − 0.6102972071320967 = 0.3897027928679033` — IDENTICAL to the last digit.** ⇒ **the delta is the CEILING
+> minus ARM A's mean, carrying ZERO information about SNI.**
+> **Per-pair (1406 observations = 703 pairs × 2 splits): ARM A `eps_hi ≥ 1.0` in 67 (4.77%); ARM B in 1406 (100.00%).**
+> **Mechanism, from `src/eibo/statcore.py`: `radius_1 = 0.5·sqrt(m/n)`.** ARM B's **`m = 32·256^10 = 3.87e25`**
+> ⇒ at n≈700k, **`radius_1 ≈ 3.7e9 ≫ 1`**, so **the bound cannot do anything but clip.** **The artifact even flags
+> the cause without drawing it: `realized_support_not_used_for_m: True`.**
+> **⇒ AND MY ARM C SPEC WAS WRONG: matching `m` to ARM B's (256^10) would reproduce the saturation exactly and make
+> the control VACUOUS.** **⇒ The correct control holds the REALIZED SUPPORT equal and varies only the SNI dependence:**
+> ARM A as-is · **ARM B′** (SNI-inclusive, `m` from the realized distinct (prefix, DST_IP) count) · **ARM C** (random
+> 10-byte per-flow identifier, SNI-independent, `m` from its own realized support). **Each arm reports its realized
+> support and an explicit clipping flag; a saturated arm must be reported AS saturated, never averaged into a delta.**
+> **⇒ FRAMING: X9 cannot price the exclusion at this n — a 256^10-symbol alphabet is not estimable from ~10^6 flows.**
+> **That is a C3-shaped ESTIMATOR LIMITATION, not a defect in the exclusion**, whose channel-declaration argument
+> stands independently.
 > **★★★ D078 — k=5 CONTAINMENT RESULT: THE FLOOR IS NOT FALSIFIED. C1's MISSING PIECE HAS LANDED.**
 > `X12_k5` COMPLETED 18:12; artifact 191,867 B (sha `14f0f581…`), GPU released. **I read all 9 cells myself.**
 > **Design:** 3 detectors × 3 holdout levels on the **informative stratum (340 pairs)** — a pre-registered,

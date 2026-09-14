@@ -1,4 +1,4 @@
-_next_id: 128
+_next_id: 129
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -6430,3 +6430,76 @@ mistakes:
     to DONE only with a conclusion reflecting this.'
   related_decisions:
   - D078
+- id: M128
+  date: '2026-09-14'
+  category: experiment_design
+  severity: high
+  summary: 'X9''s delta_eps_hi (+0.3897) is not a measurement: ARM B''s bound clips
+    to 1.0 in 100% of 1406 observations because m was declared as 256^10 rather than
+    the realized support, and the delta is identically 1.0 minus ARM A''s mean. My
+    ARM C instruction would have reproduced this by matching m to ARM B''s; corrected
+    to match REALIZED support and vary only the SNI dependence.'
+  root_cause: 'ARM B declared its alphabet size as the full 10-byte storage domain
+    (256^10) instead of the realized host support, so the plug-in radius 0.5*sqrt(m/n)
+    was ~10^9 and the certified upper bound clipped to 1.0 in every observation. The
+    aggregate delta_eps_hi was then reported as though it were a measured price, when
+    it is identically the ceiling minus the other arm''s mean. The artifact flagged
+    the m choice (realized_support_not_used_for_m: True) without drawing the consequence,
+    and nothing reported the 100% clipping fraction alongside the delta. My own ARM
+    C instruction compounded this by specifying m equal to ARM B''s, which would have
+    reproduced the saturation in the control.'
+  prevention: 'When a bound depends on a declared quantity (here the alphabet size
+    m, entering the radius as sqrt(m/n)), CHECK WHETHER THE BOUND SATURATED BEFORE
+    INTERPRETING ANY DELTA THAT USES IT. The concrete test: compute what fraction
+    of observations hit the bound''s ceiling, and check whether the reported delta
+    identically equals that ceiling minus the other arm''s mean - an exact identity
+    of that form means the number is arithmetic residue, not measurement. And when
+    choosing a control''s parameters, match the quantity that actually DRIVES the
+    bound, not a superficially analogous one: here "matched alphabet" had to mean
+    matched REALIZED support, because matching the declared storage domain (256^10)
+    reproduces the saturation and makes the control vacuous. The general form, and
+    it is the same family as this project''s other defective checks: a quantity that
+    is clipped to its boundary carries no information about what varied, and must
+    be reported as saturated rather than averaged.'
+  status: active
+  context: "X9 measured a SNI-inclusion delta and reported delta_eps_hi median +0.3879
+    as the \"price\" of including the destination-host identifier in the channel.
+    I first reported this as confounded (M127): ARM A's alphabet is 32 while ARM B's
+    is 256^10, a ratio of ~10^24, and C2 had already shown a finer alphabet inflates
+    TV. That diagnosis was correct but understated.\n\nReading the artifact's own
+    sensitivity block and per-pair rows, I found something sharper and provable:\n\n
+    \ inclusive_arm_clipped_fraction : 1.0\n  excluded_arm_mean_eps_hi       : 0.6102972071320967\n
+    \ aggregate_delta_eps_hi         : 0.3897027928679033\n  CHECK: 1.0 - 0.6102972071320967
+    = 0.3897027928679033  -> IDENTICAL to the last digit\n\nSo delta_eps_hi is identically
+    \"1.0 minus the mean of ARM A's eps_hi\". It is not a measurement of anything;
+    it is the arithmetic residue of a saturated bound.\n\nPer-pair verification over
+    1406 observations (703 pairs x 2 splits):\n  ARM A eps_hi >= 1.0 :   67  ( 4.77%)\n
+    \ ARM B eps_hi >= 1.0 : 1406  (100.00%)\n\nThe mechanism, read from src/eibo/statcore.py:\n
+    \ radius_1 = 0.5 * sqrt(m / n1)\n  ARM B's m = 32 * 256^10 = 3.87e25\n  n = 696,731
+    -> radius_1 = 3.7e+09   (>> 1, so eps_hi clips to 1.0)\n  n = 586,090 -> radius_1
+    = 4.1e+09   (>> 1, so eps_hi clips to 1.0)\n\nThe radius scales as sqrt of the
+    declared alphabet size, and ARM B declared m as the full 10-byte storage domain
+    (256^10) rather than the realized host support. At ~700k flows the radius is ~10^9,
+    so the bound cannot do anything but clip to 1.0. The artifact even flags the choice
+    without drawing the consequence: realized_support_not_used_for_m: True.\n\nI found
+    this by reading the artifact's own sensitivity_to_channel_inclusion block and
+    per-pair data rather than accepting the aggregate delta - and critically, by computing
+    1.0 minus the other arm's mean and noticing it equalled the reported figure exactly.\n\nSeparately,
+    and importantly: I had instructed that ARM C (the matched-cardinality control)
+    use \"alphabet size equal to ARM B's\", i.e. m = 256^10. That instruction was
+    wrong and would have reproduced the saturation exactly, making the control vacuous
+    - any arm with m = 256^10 clips to 1.0 at these n. The correct control holds the
+    REALIZED support equal and varies only the SNI dependence, with m computed from
+    each arm's realized support rather than the storage domain."
+  fix: 'Recorded the arithmetic proof and corrected the ARM C design: three arms with
+    m taken from each arm''s REALIZED support rather than the storage domain - ARM
+    A (SNI-excluded) as it exists; ARM B'' (SNI-inclusive but with m from the realized
+    distinct (prefix, DST_IP) count); and ARM C (random 10-byte per-flow identifier,
+    SNI-independent, with m from its own realized support). Each arm must report its
+    realized support and an explicit clipping flag, and a saturated arm must never
+    be averaged into a delta. Instructed that X9''s status stay DONE/negative but
+    its metrics carry this sharper finding, since "delta_eps_hi is the ceiling minus
+    arm A''s mean" is more actionable than "the arms differ in alphabet size".'
+  related_decisions:
+  - D078
+  - D082
