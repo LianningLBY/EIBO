@@ -549,8 +549,20 @@ means *near-zero, ≤chance, under L0 investigation, supporting no claim in eith
   it as D057 overturned. **Now: `"axis-verified; conclusion remains NON-DIAGNOSTIC per D057"`** + an
   explanatory note + a `self_reference_note` (the embedded size/sha are a **pre-write snapshot** and must
   not be compared with the file's own bytes). **Axis correct ≠ conclusion usable — both sentences travel
-  together.** **⚠ Artifact is UNREGISTERED on all four surfaces** (registry, manifest, ROADMAP, decisions)
-  — needs a registry entry, manifest entry and local pull.
+  together.** **✅ STATUS AFTER THE SYNC (D084) — TWO DIFFERENT FACTS, DO NOT CONFLATE THEM:**
+  **(i) THE RUNNER IS SYNCED AND FIXED.** `x3_axis_validation.py` is **16,592 B** (was ~15,394 B) and line 350
+  carries the D057 wording; the byte-level deployment was done properly (server backup → upload → `py_compile` →
+  before/after `sha256`). **This closes the two-trees failure I logged as M108** — my earlier fix never left the
+  local tree, which is why a re-run then reproduced the SAME sha and the fix looked ineffective.
+  **(ii) THE ARTIFACT HAS NOT BEEN REGENERATED.** It is still **122,617 B / sha `9f7578be…`** with the bare
+  `"parametric_artifact": "verified-correct"` and **both notes absent** — because it records the LAST run, and no
+  run has happened since the fix landed. **"The code is fixed" and "the artifact reflects the fix" are different
+  facts; the sync closed the first, the second needs one execution.**
+  **⇒ ACTION: re-run the fixed runner, then re-register so the manifest's live entry resolves to the NEW bytes
+  (D070). SAFE TO DO: the stale sha `9f7578be…` appears ZERO times in `registry.yaml` and `manifest.yaml`, so
+  regenerating breaks no binding** — unlike `x3_parametric_growth.json`, whose sha IS quoted and must NOT be
+  hand-edited. **Report whether the sha actually changes; if it is unchanged after a genuine re-run, that is
+  itself a finding. Do NOT hand-edit the artifact — the script writes it.**
   **⚠ STILL NOT A RESCUE:** the **61%/0.608 "structural" argument stays dead (D063)** — that curve is frozen from k=16, and 0.539 is a fit across a constant tail. **Closing the attribution question does not revive the argument; it replaces it with a cleaner explanation for why the sweep moved.**
 - [ ] **② AUC diagnostic (routed by me; spec already in the registry).** Standard one-vs-rest AUC from
   per-class probabilities over ALL rows (curve reaches `(1,1)`), **beside** the current OSCR, same services and
