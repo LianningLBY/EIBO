@@ -192,6 +192,26 @@
 > artifacts are frozen and re-running them is not free; the rule binds from here forward, and D087's list above
 > is the record of which shipped artifacts lack it.
 > **⇒ Same discipline as the rest of the session: a green check on the two compliant cases told us nothing about the
+>
+> **⚠ D087 CORRECTED — MY OWN COUNT WAS PRODUCED BY THE DEFECT I WAS DESCRIBING.** The extension above lists
+> **six** runners as not binding, **including `x11_feasibility_probe`**. **That is wrong: X11 DOES bind** — its artifact
+> carries `runner_file.sha256 = 44866b0c…`, which equals both the file on disk and the registry's recorded value,
+> **cross-validated across three channels.**
+> **⇒ HOW I GOT IT WRONG: I searched for the literal string `runner_sha256`.** X11 names the key `runner_file` with a
+> nested `sha256` — so a **literal key-name search** missed a binding that **exists**. **⇒ That is the same failure as
+> the `x6`/`x12` name-vs-path confusion, the `type: code` false blocker, and the `PREPARING` row: I verified a
+> NEIGHBOUR of the object under claim.**
+> **⇒ CORRECTED COUNTS, by artifact and by runner:**
+> **— LIVE `data` artifacts (38): 4 carry a verifiable runner sha** (`x6_divisibility_lower_bound`, `x3_axis_validation`,
+> `x3_variant_b_support_conditioning` via `verification.runner_sha256`, and **`x11_feasibility`** via `runner_file.sha256`);
+> **34 do not** — not the 35/3 I first reported with the same broken search.
+> **— RUNNERS (8): 4 of 7 that write an artifact bind their own identity into it** (`x6`, `x3_axis`, `x11`, and now
+> `x9_dose_response_channels` once the in-flight fix lands); **`x12_detector_validation`, `x9_sni_channel_delta`, and
+> `x3_parametric_growth` do not.** The dead `x9_cardinality_control` never wrote one.
+> **⇒ The qualitative conclusion SURVIVES — most artifacts do not carry a verifiable producer binding, and that is a real
+> gap — but the numbers I published were wrong and the specific runner I named was wrong.** **⇒ Corrected here rather
+> than left standing, and the search method is the lesson: a key name is not a binding, and I must search for the
+> RELATIONSHIP (a 64-hex value tied to a runner) rather than a literal spelling I expect to find.
 > six we had not looked at.**
 >
 > **★ D088 — A WITHDRAWN DESIGN MUST NOT CARRY A LIVE STATUS.** `X9_C` is withdrawn (D084), its row carries the
