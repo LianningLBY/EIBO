@@ -193,6 +193,17 @@
 > is the record of which shipped artifacts lack it.
 > **⇒ Same discipline as the rest of the session: a green check on the two compliant cases told us nothing about the
 > six we had not looked at.**
+>
+> **★ D088 — A WITHDRAWN DESIGN MUST NOT CARRY A LIVE STATUS.** `X9_C` is withdrawn (D084), its row carries the
+> withdrawal note, its runner is marked dead at the head, it was never run, and it has no artifact — **yet its
+> `status` still reads `PREPARING`, which is what a reader filters on to find live work. ⇒ The note and the status
+> CONTRADICT each other, and the status is the field people actually query.**
+> **⇒ The registry vocabulary observed is only `DONE` / `PREPARING` / `ALLOCATED` — there is no `cancelled` or
+> `withdrawn` value.** So the fix is not to invent one (the same mistake as `type: code` and the `conclusion`
+> enum): **move `X9_C` to a terminal state that exists and whose meaning is honest, and let the note carry the
+> reason.** A design that will never run must not sit in the queue-reader's view.
+> **⇒ Same discipline as the rest of the session: a field people filter on is a claim, and it must not say "live"
+> about something we have ruled out.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
 > `excluded_arm_mean_eps_hi = 0.6102972071320967`, `aggregate_delta_eps_hi = 0.3897027928679033`, and
