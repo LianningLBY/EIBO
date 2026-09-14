@@ -1,4 +1,4 @@
-_next_id: 80
+_next_id: 81
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -4888,3 +4888,70 @@ decisions:
   depends_on:
   - D084
   - D085
+- id: D080
+  date: 2026-09-14 11:41 UTC
+  summary: 'M108 repeated on a second runner: the parametric runner''s D057 fix is
+    local-only (14,233 B vs the server''s 13,276 B). A worker caught it by checking
+    its premise and stopping. The earlier ledger entry did not operate, so C032 makes
+    it a workflow step: state local and server size+sha in the dispatch, and end every
+    re-run with a pull-and-verify.'
+  rationale: 'M108 repeated on a different runner, hours after I logged it. I fixed
+    x3_axis_validation.py locally and never pushed it to the server tree; then I fixed
+    x3_parametric_growth.py locally (adding the D057 non-diagnostic wording and a
+    d057_caution field, in the working-tree copy and the tracked artifacts/X3/intermediate/
+    copy) and again treated the edit as completion. The server''s copy was never updated.
+
+
+    The divergence was verifiable at dispatch time and I did not check: LOCAL x3_parametric_growth.py
+    is 14,233 B / sha 08f49cf702e26b1b with d057_caution present; SERVER x3_parametric_growth.py
+    is 13,276 B / sha 4445de273e130a89 with d057_caution absent and zero non-diagnostic
+    hits. A worker dispatched to re-run it checked the premise first, found neither
+    copy carried the fix, reported the specific bytes and the literal errors, and
+    stopped - which prevented a second wasted round in which an unfixed re-run would
+    have regenerated the identical withdrawn wording and we would have asked why the
+    fix had no effect. That stop is the best-executed in this session.
+
+
+    The significant finding is not the repetition but that a recorded lesson did not
+    operate. M108''s prevention text said "an edit is not in effect until it is pushed
+    to the tree where the code runs, and the push must be verified by reading the
+    file back ON THE REMOTE TREE". That rule existed, was mine, and still did not
+    fire. A rule that lives only in a mistake ledger is not a control.
+
+
+    COUNTERMEASURE, adopted as C032 because the ledger entry alone failed: any fix
+    to a runner that executes on the server is not complete until synced and verified
+    AT THE DESTINATION. Before dispatching any task that re-runs a runner, state the
+    local size+sha and the server size+sha IN THE DISPATCH ITSELF, so a divergence
+    is visible at dispatch rather than after a wasted run. After any runner re-run,
+    the task ends with a pull-and-verify step reported as a size+sha pair. Never report
+    a runner fix as done from the edit alone.
+
+
+    This is also the third open item in the X3 family to be the same failure: a change
+    made in one tree and not propagated to the one that matters. The axis validator
+    is the only one closed, and only because a pull was finally executed against it.
+    The other two are X6 (the artifact we hold asserts outcome: PASS on 120/120 with
+    no testable/vacuous split - the exact claim D071 identified as wrong - and the
+    corrected numbers exist only in prose) and the parametric runner (this case).
+    All three are the same defect shape, which is why the check must be attached to
+    the workflow rather than remembered.
+
+
+    Credit recorded: the worker''s premise-check-and-stop is what caught this, not
+    any control of mine. And it correctly established that the "intermediate copy"
+    is a local-only repository artifact that does not exist on the server, which my
+    earlier task book had wrongly presented as a server-side prerequisite (M122).'
+  related_experiments:
+  - exp_id: X3
+    result: x3_parametric_growth.py fixed locally (14,233 B, d057_caution present)
+      but the server copy was never updated (13,276 B, absent); the re-run worker
+      stopped on the false premise rather than regenerating the withdrawn wording
+    role: subject
+  - exp_id: X6
+    result: 'the local artifact still asserts outcome: PASS on 120/120 with no testable/vacuous
+      split; the corrected 96/96 numbers exist only in prose - same propagation failure,
+      pull not yet dispatched'
+    role: related
+  depends_on:
+  - D079
