@@ -1,0 +1,204 @@
+{
+  "alpha": 0.05,
+  "alpha_convention": "per-law alpha/2 = 0.025 on both sides; union bound over the two laws gives joint 0.95 for each side",
+  "channel_exclusion_declaration": "Channel is (direction, size). PPI row 1 = direction, row 2 = size. The exporter's third PPI channel (row 0, inter-packet time) is deliberately EXCLUDED; including it would change |A_k| and every k_cert value.",
+  "coverage_by_k": {
+    "10": {
+      "aggregate_flow_fraction": 0.8919443037771991,
+      "eligible_flow_count": 8912361,
+      "selected_flow_count": 9992060,
+      "services_usable": 45,
+      "total_pair_count": 990,
+      "usable_pair_count": 990,
+      "usable_pair_fraction": 1.0
+    },
+    "15": {
+      "aggregate_flow_fraction": 0.8349535531211782,
+      "eligible_flow_count": 8342906,
+      "selected_flow_count": 9992060,
+      "services_usable": 44,
+      "total_pair_count": 990,
+      "usable_pair_count": 946,
+      "usable_pair_fraction": 0.9555555555555556
+    },
+    "30": {
+      "aggregate_flow_fraction": 0.506202624884158,
+      "eligible_flow_count": 5058007,
+      "selected_flow_count": 9992060,
+      "services_usable": 41,
+      "total_pair_count": 990,
+      "usable_pair_count": 820,
+      "usable_pair_fraction": 0.8282828282828283
+    },
+    "5": {
+      "aggregate_flow_fraction": 0.925845521343947,
+      "eligible_flow_count": 9251104,
+      "selected_flow_count": 9992060,
+      "services_usable": 45,
+      "total_pair_count": 990,
+      "usable_pair_count": 990,
+      "usable_pair_fraction": 1.0
+    }
+  },
+  "executed_routines": [
+    {
+      "file": "/root/eibo/scripts/run_q1_absolute_e3.py",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "metadata_phase"
+    },
+    {
+      "file": "/root/eibo/scripts/run_q1_absolute_e3.py",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "rung_phase"
+    },
+    {
+      "file": "/root/eibo/scripts/run_q1_absolute_e3.py",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "build_summary"
+    },
+    {
+      "file": "/root/eibo/scripts/xs_compression_early_readout.py",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "table_paths"
+    },
+    {
+      "file": "/root/eibo/scripts/xs_compression_early_readout.py",
+      "note": "Executed on a real sample as the masking precondition; its output gates continuation, while k=5 TV values use pack_rung_k5 on PPI_LEN >= 5 rows.",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "pack_variable_masked_30"
+    },
+    {
+      "file": "/root/eibo/scripts/xs_compression_early_readout.py",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "pack_rung_k5"
+    },
+    {
+      "file": "/root/eibo/scripts/xs_compression_early_readout.py",
+      "note": "Called inside pack_rung_k5.",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "direction_bits"
+    },
+    {
+      "file": "/root/eibo/scripts/xs_compression_early_readout.py",
+      "note": "Called inside pack_rung_k5 for M >= 2.",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "size_bins"
+    },
+    {
+      "file": "/root/eibo/scripts/xs_compression_early_readout.py",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "tv"
+    },
+    {
+      "file": "/root/eibo/scripts/run_q1_absolute_e3.py",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "threshold_pair"
+    },
+    {
+      "file": "/root/eibo/scripts/run_q1_absolute_e3.py",
+      "output_consumed_by_reported_numbers": true,
+      "routine": "radius"
+    }
+  ],
+  "grid_fixed_a_priori": true,
+  "k": 5,
+  "k5_denominator_exactness": {
+    "post_mask_usable_pairs": 990,
+    "services_dropped_by_ppilen_ge_5_filter": 0,
+    "services_retained_after_ppilen_ge_5_filter": 45,
+    "total_pairs": 990,
+    "usable_pair_fraction": 1.0,
+    "verify_in_run": true
+  },
+  "lower_side_formula": "T(n_i) = 0.05 + 1.958/sqrt(n_i), with T(n_a) and T(n_b) substituted separately; lower passes iff tv > both thresholds",
+  "mask_validation": {
+    "all_use_true": true,
+    "masked_code_lengths_match_2_times_min_ppi_len": true,
+    "output_consumed_as_precondition": true,
+    "sample_rows": 256
+  },
+  "masked": true,
+  "masking_function": "pack_variable_masked_30",
+  "ml_only_inputs": "Only direction and size from PPI are consumed; QUIC_USER_AGENT, QUIC_TLS_EXT_*, and QUIC_*CID are not consumed.",
+  "pairing": {
+    "all_distinct_service_labels": 53,
+    "pairs_expected": 990,
+    "rule": "unordered pairs, service_a < service_b",
+    "service_threshold": ">= 2000 total flows AND >= 2000 flows with PPI_LEN >= 5; SELF-DEFINED",
+    "services_after_total_flow_layer": 45,
+    "services_dropped_by_PPI_LEN_ge_5_layer": 0,
+    "services_dropped_by_total_flow_layer": 8,
+    "services_retained": 45
+  },
+  "provenance": {
+    "alt_k": 15,
+    "chosen_k": 30,
+    "coverage_by_k": {
+      "10": {
+        "aggregate_flow_fraction": 0.8919443037771991,
+        "eligible_flow_count": 8912361,
+        "selected_flow_count": 9992060,
+        "services_usable": 45,
+        "total_pair_count": 990,
+        "usable_pair_count": 990,
+        "usable_pair_fraction": 1.0
+      },
+      "15": {
+        "aggregate_flow_fraction": 0.8349535531211782,
+        "eligible_flow_count": 8342906,
+        "selected_flow_count": 9992060,
+        "services_usable": 44,
+        "total_pair_count": 990,
+        "usable_pair_count": 946,
+        "usable_pair_fraction": 0.9555555555555556
+      },
+      "30": {
+        "aggregate_flow_fraction": 0.506202624884158,
+        "eligible_flow_count": 5058007,
+        "selected_flow_count": 9992060,
+        "services_usable": 41,
+        "total_pair_count": 990,
+        "usable_pair_count": 820,
+        "usable_pair_fraction": 0.8282828282828283
+      },
+      "5": {
+        "aggregate_flow_fraction": 0.925845521343947,
+        "eligible_flow_count": 9251104,
+        "selected_flow_count": 9992060,
+        "services_usable": 45,
+        "total_pair_count": 990,
+        "usable_pair_count": 990,
+        "usable_pair_fraction": 1.0
+      }
+    },
+    "note": "Provenance only; no cross-k ratio is a gate criterion."
+  },
+  "row_count": 4950,
+  "source_h5": {
+    "bytes": 3544625537,
+    "path": "/root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5",
+    "row_count": 10000000,
+    "sha256": "6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab",
+    "subset_note": "10M-flow BUDGET SUBSET; month coverage measured from TIME_FIRST"
+  },
+  "split": {
+    "TIME_FIRST_max": 1748725200.0,
+    "TIME_FIRST_max_utc": "2025-05-31T21:00:00+00:00",
+    "TIME_FIRST_min": 1717189200.0,
+    "TIME_FIRST_min_utc": "2024-05-31T21:00:00+00:00",
+    "deviation_label": null,
+    "flow_unit": "one H5 table row is one flow; no packet-level split was used",
+    "policy": "flow-disjoint AND time-disjoint; packet-level PROHIBITED",
+    "span_days": 365.0,
+    "time_granularity_achieved": "day-level (/flows/DYYYYMMDD daily tables)"
+  },
+  "table_fields": [
+    "service_a",
+    "service_b",
+    "M",
+    "n_a",
+    "n_b",
+    "tv_k5_masked"
+  ],
+  "upper_side_formula": "radius_i(M) = (sqrt((2M)^5) + 2.9604)/sqrt(n_i), evaluated separately for i=a,b; sufficient upper certificate used here is eps_hi = tv_k5_masked + radius_a + radius_b < 0.5. The weaker radius_i < 0.5 check alone is not sufficient."
+}

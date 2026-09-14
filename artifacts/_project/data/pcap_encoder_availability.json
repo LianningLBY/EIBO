@@ -1,0 +1,100 @@
+{
+  "decision": "three_of_four",
+  "channel_results": [
+    {
+      "channel": "PyPI",
+      "command": "/root/miniconda3/bin/pip index versions pcap-encoder",
+      "result": "WARNING: pip index is currently an experimental command. It may be removed/changed in a future release without prior warning.\nERROR: No matching distribution found for pcap-encoder\n"
+    },
+    {
+      "channel": "PyPI",
+      "command": "/root/miniconda3/bin/pip index versions pcap_encoder",
+      "result": "WARNING: pip index is currently an experimental command. It may be removed/changed in a future release without prior warning.\nERROR: No matching distribution found for pcap_encoder\n"
+    },
+    {
+      "channel": "PyPI",
+      "command": "/root/miniconda3/bin/pip index versions pcapencoder",
+      "result": "WARNING: pip index is currently an experimental command. It may be removed/changed in a future release without prior warning.\nERROR: No matching distribution found for pcapencoder\n"
+    },
+    {
+      "channel": "GitHub",
+      "attempts": [
+        {
+          "command": "cd /root/eibo && curl -sI https://github.com/SmartData-Polito/Debunk_Traffic_Representation | head -1",
+          "result": "HTTP/2 200 \r\n"
+        },
+        {
+          "command": "cd /root/eibo && curl -sL https://api.github.com/repos/SmartData-Polito/Debunk_Traffic_Representation/releases",
+          "result": "[\n\n]"
+        },
+        {
+          "command": "cd /root/eibo && curl -sL 'https://api.github.com/repos/SmartData-Polito/Debunk_Traffic_Representation/git/trees/master?recursive=1' | /root/miniconda3/bin/python3 -c 'import sys,json; d=json.load(sys.stdin); print(\"weight_or_checkpoint_paths:\"); print(\"\\n\".join(x[\"path\"] for x in d.get(\"tree\",[]) if any(t in x[\"path\"].lower() for t in (\"weight\",\"checkpoint\")))); print(\"recognized_weight_extensions:\"); print(\"\\n\".join(x[\"path\"] for x in d.get(\"tree\",[]) if x[\"path\"].lower().endswith((\".pt\",\".pth\",\".ckpt\",\".bin\",\".safetensors\"))))'",
+          "result": "weight_or_checkpoint_paths:\n\nrecognized_weight_extensions:\n\n"
+        },
+        {
+          "command": "cd /root/eibo && git ls-remote https://github.com/SmartData-Polito/Debunk_Traffic_Representation.git HEAD",
+          "result": "fatal: unable to access 'https://github.com/SmartData-Polito/Debunk_Traffic_Representation.git/': GnuTLS recv error (-110): The TLS connection was non-properly terminated."
+        },
+        {
+          "command": "cd /root/eibo && curl -sL 'https://github.com/SmartData-Polito/Debunk_Traffic_Representation/archive/refs/heads/master.tar.gz' | tar -tzf - | /root/miniconda3/bin/python3 -c 'import sys; p=list(sys.stdin); print(\"entries\",len(p)); print(\"\\n\".join(x.strip() for x in p if any(t in x.lower() for t in (\"pcap_encoder\",\"checkpoint\",\"weight\",\"model\"))))'",
+          "result": "entries 0\n\ngzip: stdin: unexpected end of file\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        }
+      ]
+    },
+    {
+      "channel": "Frozen weights",
+      "attempts": [
+        {
+          "command": "cd /root/eibo && curl -sL 'https://api.github.com/repos/SmartData-Polito/Debunk_Traffic_Representation/contents/code/PCAP_encoder/README.md?ref=master' | /root/miniconda3/bin/python3 -c 'import sys,json,base64; d=json.load(sys.stdin); print([x for x in base64.b64decode(d[\"content\"]).decode().splitlines() if \"Pre-trained model\" in x][0])'",
+          "result": "- **Experiments**: Contains ready-to-run experiment configurations (.sh files). To execute the PCAPencoder, navigate to this directory and select your desired experiment. Pre-trained model is available [here](https://drive.google.com/file/d/1j5ubI--9HflSFc_STpzFb9SHPmimvQiv/view?usp=share_link)\n"
+        },
+        {
+          "command": "cd /root/eibo && curl -sL https://raw.githubusercontent.com/SmartData-Polito/Debunk_Traffic_Representation/master/code/PCAP_encoder/README.md | grep 'Pre-trained model'",
+          "result": "tool call error: tool call failed for agent-ml-research/ssh_execute\n\nCaused by:\n    timed out awaiting tools/call after 300s"
+        },
+        {
+          "command": "cd /root/eibo && curl -sI 'https://drive.google.com/file/d/1j5ubI--9HflSFc_STpzFb9SHPmimvQiv/view?usp=share_link'",
+          "result": "curl exit code 7; stdout empty; stderr empty"
+        },
+        {
+          "command": "cd /root/eibo && curl -sL 'https://drive.google.com/uc?export=download&id=1j5ubI--9HflSFc_STpzFb9SHPmimvQiv' -o /root/eibo/.pcap_encoder_weights_probe && stat -c '%n %s bytes' /root/eibo/.pcap_encoder_weights_probe && file /root/eibo/.pcap_encoder_weights_probe",
+          "result": "curl exit code 7; stdout empty; stderr empty"
+        },
+        {
+          "command": "cd /root/eibo && curl -sI --max-time 30 'https://drive.usercontent.google.com/download?id=1j5ubI--9HflSFc_STpzFb9SHPmimvQiv&export=download&confirm=t'",
+          "result": "curl exit code 28; stdout empty; stderr empty"
+        },
+        {
+          "command": "cd /root/eibo && curl -sI --max-time 30 'https://docs.google.com/uc?export=download&id=1j5ubI--9HflSFc_STpzFb9SHPmimvQiv'",
+          "result": "curl exit code 28; stdout empty; stderr empty"
+        },
+        {
+          "command": "cd /root/eibo && curl -sL 'https://api.github.com/repos/SmartData-Polito/Debunk_Traffic_Representation/releases'",
+          "result": "[\n\n]"
+        },
+        {
+          "command": "cd /root/eibo && curl -sL 'https://huggingface.co/api/models?search=pcap-encoder&limit=20'",
+          "result": "curl exit code 28; stdout empty; stderr empty"
+        },
+        {
+          "command": "cd /root/eibo && curl -sL 'https://huggingface.co/api/datasets?search=pcap-encoder&limit=20'",
+          "result": "curl exit code 28; stdout empty; stderr empty"
+        },
+        {
+          "command": "cd /root/eibo && curl -sL 'https://zenodo.org/api/records?q=pcap%20encoder&size=20'",
+          "result": "<html><body><h1>504 Gateway Time-out</h1>\nThe server didn't respond in time.\n</body></html>\n"
+        }
+      ]
+    },
+    {
+      "channel": "Local filesystem",
+      "command": "cd /root/eibo && find /root -maxdepth 6 -iname '*pcap*' 2>/dev/null | head -50",
+      "result": "/root/autodl-tmp/open-set-nids/evidence/server/hcrl_pilot_pcap_audit.json\n/root/autodl-tmp/open-set-nids/tests/._test_audit_pcap.py\n/root/autodl-tmp/open-set-nids/tests/__pycache__/test_audit_pcap.cpython-312.pyc\n/root/autodl-tmp/open-set-nids/tests/__pycache__/test_pcap_prefix.cpython-312.pyc\n/root/autodl-tmp/open-set-nids/tests/test_pcap_prefix.py\n/root/autodl-tmp/open-set-nids/tests/test_audit_pcap.py\n/root/autodl-tmp/open-set-nids/notes/._pcap_audit_tool.md\n/root/autodl-tmp/open-set-nids/notes/pcap_audit_tool.md\n/root/autodl-tmp/open-set-nids/scripts/__pycache__/audit_pcap.cpython-312.pyc\n/root/autodl-tmp/open-set-nids/scripts/__pycache__/derive_complete_pcap_prefix.cpython-312.pyc\n/root/autodl-tmp/open-set-nids/data/ton_metadata/._third_party_reported_truncated_pcaps.csv\n/root/autodl-tmp/open-set-nids/data/ton_metadata/third_party_reported_truncated_pcaps.csv\n/root/autodl-tmp/open-set-nids/data/engineering_fixture/raw/imap.pcap\n/root/autodl-tmp/open-set-nids/data/engineering_fixture/filtered/imap.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot/MITM_normal4.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000000.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000001.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000002.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000003.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000004.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000005.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000006.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000007.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000008.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000009.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000010.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000011.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000012.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000013.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000014.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000015.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000016.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000017.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000018.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000019.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000020.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000021.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000022.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000023.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000024.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000025.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000026.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000027.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000028.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000029.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000030.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000031.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000032.pcap\n"
+    }
+  ],
+  "filesystem_search": "/root/autodl-tmp/open-set-nids/evidence/server/hcrl_pilot_pcap_audit.json\n/root/autodl-tmp/open-set-nids/tests/._test_audit_pcap.py\n/root/autodl-tmp/open-set-nids/tests/__pycache__/test_audit_pcap.cpython-312.pyc\n/root/autodl-tmp/open-set-nids/tests/__pycache__/test_pcap_prefix.cpython-312.pyc\n/root/autodl-tmp/open-set-nids/tests/test_pcap_prefix.py\n/root/autodl-tmp/open-set-nids/tests/test_audit_pcap.py\n/root/autodl-tmp/open-set-nids/notes/._pcap_audit_tool.md\n/root/autodl-tmp/open-set-nids/notes/pcap_audit_tool.md\n/root/autodl-tmp/open-set-nids/scripts/__pycache__/audit_pcap.cpython-312.pyc\n/root/autodl-tmp/open-set-nids/scripts/__pycache__/derive_complete_pcap_prefix.cpython-312.pyc\n/root/autodl-tmp/open-set-nids/data/ton_metadata/._third_party_reported_truncated_pcaps.csv\n/root/autodl-tmp/open-set-nids/data/ton_metadata/third_party_reported_truncated_pcaps.csv\n/root/autodl-tmp/open-set-nids/data/engineering_fixture/raw/imap.pcap\n/root/autodl-tmp/open-set-nids/data/engineering_fixture/filtered/imap.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot/MITM_normal4.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000000.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000001.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000002.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000003.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000004.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000005.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000006.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000007.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000008.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000009.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000010.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000011.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000012.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000013.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000014.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000015.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000016.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000017.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000018.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000019.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000020.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000021.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000022.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000023.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000024.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000025.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000026.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000027.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000028.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000029.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000030.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000031.pcap\n/root/autodl-tmp/open-set-nids/data/ton_pilot_preprocess/split/flow_000032.pcap\n",
+  "reason": "The Pcap-Encoder frozen-probe baseline is omitted from the evaluated set by design because the pretrained encoder is reported by the authors in the SIGCOMM 2025 conference Q&A for \"The Sweet Danger of Sugar: Debunking Representation Learning for Encrypted Traffic Classification\" (Politecnico di Torino / SmartData) at ~800 GB, answering the question \"What's the size of your model?\" with \"About 800GB for the pretraining model.\" This is authors' Q&A testimony, not a measurement here and not a figure from the paper text. That size is beyond this project's resource envelope for a frozen-probe baseline (single experiment capped at <=8 h on a 32 GB card), so the omission does not depend on any transient network condition. Secondarily, acquisition attempts from server 111 also failed with TRANSIENT network-class errors: a TLS/GnuTLS error on the repository clone; curl exit codes 7 and 28 against the documented Google Drive URL; a HuggingFace API timeout (exit 28); and a Zenodo 504. These TRANSIENT failures must not be read as evidence of non-existence. The code is public in the repository's code/PCAP_encoder implementation, and the DATA is available via HuggingFace per the repository README; only the WEIGHTS are the blocker. Consequently, the evaluated baseline set is three of four.",
+  "no_substitution_statement": "No substitute probe was used and the planned baseline set was not silently reduced.",
+  "false_negative_risk": "Absence from the default package index is not proof of non-existence; this check also searched PyPI under pcap-encoder, pcap_encoder, and pcapencoder, GitHub repository/API contents and releases, the documented Google Drive weights URL, HuggingFace model and dataset APIs, Zenodo records, and /root for local copies.",
+  "checked_at": "2026-09-14T02:42:58Z"
+}

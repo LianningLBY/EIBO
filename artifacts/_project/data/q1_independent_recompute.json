@@ -1,0 +1,410 @@
+{
+  "bisection": {
+    "alternative_cell_alpha": 0.0125,
+    "primary_cell_alpha": 0.025,
+    "target_lower_bound": 0.05,
+    "tolerance": 1e-13,
+    "tv_interval": [
+      0.0,
+      0.5
+    ]
+  },
+  "fraction_table": [
+    {
+      "M": 1,
+      "both_count": 289,
+      "both_fraction": 0.2919191919191919,
+      "lower_count": 987,
+      "lower_fraction": 0.996969696969697,
+      "max_abs_deviation": 0.0,
+      "max_abs_deviation_by_fraction": {
+        "both": 0.0,
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "pairs": 990,
+      "published": {
+        "both": 0.2919191919191919,
+        "lower": 0.996969696969697,
+        "upper": 0.29494949494949496
+      },
+      "upper_count": 292,
+      "upper_fraction": 0.29494949494949496
+    },
+    {
+      "M": 2,
+      "both_count": 27,
+      "both_fraction": 0.02727272727272727,
+      "lower_count": 990,
+      "lower_fraction": 1.0,
+      "max_abs_deviation": 0.0,
+      "max_abs_deviation_by_fraction": {
+        "both": 0.0,
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "pairs": 990,
+      "published": {
+        "both": 0.02727272727272727,
+        "lower": 1.0,
+        "upper": 0.02727272727272727
+      },
+      "upper_count": 27,
+      "upper_fraction": 0.02727272727272727
+    },
+    {
+      "M": 4,
+      "both_count": 0,
+      "both_fraction": 0.0,
+      "lower_count": 990,
+      "lower_fraction": 1.0,
+      "max_abs_deviation": 0.0,
+      "max_abs_deviation_by_fraction": {
+        "both": 0.0,
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "pairs": 990,
+      "published": {
+        "both": 0.0,
+        "lower": 1.0,
+        "upper": 0.0
+      },
+      "upper_count": 0,
+      "upper_fraction": 0.0
+    },
+    {
+      "M": 8,
+      "both_count": 0,
+      "both_fraction": 0.0,
+      "lower_count": 990,
+      "lower_fraction": 1.0,
+      "max_abs_deviation": 0.0,
+      "max_abs_deviation_by_fraction": {
+        "both": 0.0,
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "pairs": 990,
+      "published": {
+        "both": 0.0,
+        "lower": 1.0,
+        "upper": 0.0
+      },
+      "upper_count": 0,
+      "upper_fraction": 0.0
+    },
+    {
+      "M": 16,
+      "both_count": 0,
+      "both_fraction": 0.0,
+      "lower_count": 990,
+      "lower_fraction": 1.0,
+      "max_abs_deviation": 0.0,
+      "max_abs_deviation_by_fraction": {
+        "both": 0.0,
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "pairs": 990,
+      "published": {
+        "both": 0.0,
+        "lower": 1.0,
+        "upper": 0.0
+      },
+      "upper_count": 0,
+      "upper_fraction": 0.0
+    }
+  ],
+  "hard_invariant_c016": {
+    "assertion": "eps_lo <= eps_hi per row",
+    "count_table_row_count": 990,
+    "eps_hi_disagreement_count_vs_sibling": 819,
+    "eps_hi_disagreements": [
+      {
+        "absolute_difference": 0.09422612535668257,
+        "recomputed_eps_hi": 0.4091404562313759,
+        "service_a": "0",
+        "service_b": "1",
+        "sibling_eps_hi": 0.5033665815880585
+      },
+      {
+        "absolute_difference": 0.052369390117210646,
+        "recomputed_eps_hi": 0.60253418179118,
+        "service_a": "0",
+        "service_b": "10",
+        "sibling_eps_hi": 0.6549035719083907
+      },
+      {
+        "absolute_difference": 0.05030437832805157,
+        "recomputed_eps_hi": 0.44966728874140044,
+        "service_a": "0",
+        "service_b": "11",
+        "sibling_eps_hi": 0.499971667069452
+      },
+      {
+        "absolute_difference": 0.050730978023585394,
+        "recomputed_eps_hi": 0.5615355232172624,
+        "service_a": "0",
+        "service_b": "13",
+        "sibling_eps_hi": 0.6122665012408478
+      },
+      {
+        "absolute_difference": 0.1003325433223145,
+        "recomputed_eps_hi": 0.2966340382657439,
+        "service_a": "0",
+        "service_b": "14",
+        "sibling_eps_hi": 0.3969665815880584
+      },
+      {
+        "absolute_difference": 0.05143589368009582,
+        "recomputed_eps_hi": 0.43243101068100037,
+        "service_a": "0",
+        "service_b": "15",
+        "sibling_eps_hi": 0.4838669043610962
+      },
+      {
+        "absolute_difference": 0.10111110845584093,
+        "recomputed_eps_hi": 0.3764054731322175,
+        "service_a": "0",
+        "service_b": "16",
+        "sibling_eps_hi": 0.47751658158805843
+      },
+      {
+        "absolute_difference": 0.0749827174208364,
+        "recomputed_eps_hi": 0.45103386416722213,
+        "service_a": "0",
+        "service_b": "17",
+        "sibling_eps_hi": 0.5260165815880585
+      },
+      {
+        "absolute_difference": 0.05154079458987787,
+        "recomputed_eps_hi": 0.4803584458118085,
+        "service_a": "0",
+        "service_b": "18",
+        "sibling_eps_hi": 0.5318992404016863
+      },
+      {
+        "absolute_difference": 0.05362943650810126,
+        "recomputed_eps_hi": 0.7583015908469891,
+        "service_a": "0",
+        "service_b": "19",
+        "sibling_eps_hi": 0.8119310273550904
+      }
+    ],
+    "evaluated": true,
+    "joined_row_count": 990,
+    "missing_column": null,
+    "offending_rows": [],
+    "reason": "Sibling artifact exists and carries per-pair eps_lo; joined on (service_a, service_b).",
+    "sibling_row_count": 990,
+    "source_artifact": "/root/eibo/artifacts/q1_eps_lo_symbol_map.json",
+    "source_artifact_sha256": "aafe46afa9cde831f5576634c780021b63259815a012f717115b89639fccdf83",
+    "substitution_forbidden": "tv_k5_masked was not substituted for eps_lo",
+    "unmatched_count_table_keys": [],
+    "unmatched_sibling_keys": [],
+    "violation_count": 0
+  },
+  "independent_tv_comparison": [
+    {
+      "M": 1,
+      "alphabet_cardinality": 32,
+      "denominator_mismatch_count": 0,
+      "max_abs_deviation": 0.0,
+      "max_abs_deviation_pair": {
+        "published": 0.3874275182858193,
+        "recomputed": 0.3874275182858193,
+        "service_a": "0",
+        "service_b": "1"
+      },
+      "pairs": 990,
+      "routine": "own_tv_from_counts"
+    },
+    {
+      "M": 2,
+      "alphabet_cardinality": 1024,
+      "denominator_mismatch_count": 0,
+      "max_abs_deviation": 0.0,
+      "max_abs_deviation_pair": {
+        "published": 0.580049987964353,
+        "recomputed": 0.580049987964353,
+        "service_a": "0",
+        "service_b": "1"
+      },
+      "pairs": 990,
+      "routine": "own_tv_from_counts"
+    }
+  ],
+  "input_row_count": 4950,
+  "input_sha256": {
+    "/root/eibo/artifacts/q1_absolute_counts.csv": "388495382742723461212b0384a8d997dcc66b72fa053feee1bd81b0c132b15b",
+    "/root/eibo/artifacts/q1_absolute_counts.json": "979c462e0638f624438fee2d8965f4c49140d8f975561b870c3af03144348094",
+    "/root/eibo/artifacts/q1_absolute_counts.meta.json": "f4e8609e4722a28feda129bb2092ec4379785992ccf82c223b10fc71ee3f7a4e",
+    "/root/eibo/artifacts/q1_absolute_dense_counts_m1_m2.json": "479571b55bae30c6d09846f004969759365f92c21e8b67274b09f2ecf612a099",
+    "/root/eibo/artifacts/q1_absolute_summary.json": "d7eeb0c1189b5c963e712d7e6b9cf7d0f866680b40a3483a47215bbb23dd2934"
+  },
+  "output_path": "/root/eibo/artifacts/q1_independent_recompute.json",
+  "provenance": {
+    "consumed_existing_artifacts": [
+      "/root/eibo/artifacts/q1_absolute_summary.json",
+      "/root/eibo/artifacts/q1_absolute_counts.json",
+      "/root/eibo/artifacts/q1_absolute_counts.csv",
+      "/root/eibo/artifacts/q1_absolute_counts.meta.json",
+      "/root/eibo/artifacts/q1_absolute_dense_counts_m1_m2.json"
+    ],
+    "deliberately_not_used": [
+      "/root/eibo/scripts/xs_compression_early_readout.py::tv",
+      "/root/eibo/scripts/run_q1_absolute_e3.py",
+      "/root/eibo/scripts/run_q1_absolute_e3.py::threshold_pair",
+      "/root/eibo/scripts/run_q1_absolute_e3.py::radius",
+      "/root/eibo/scripts/evaluate_q1_absolute.py::eps_lo_two_cell",
+      "/root/eibo/scripts/evaluate_q1_absolute.py::t_of_n",
+      "/root/eibo/scripts/evaluate_q1_absolute.py::radius_sum",
+      "any E3-generated code path for the recomputation"
+    ],
+    "existing_artifacts_deleted": false,
+    "existing_artifacts_modified": false,
+    "interpreter": "/root/miniconda3/bin/python3",
+    "post_run_invariant_joiner": {
+      "file": "/root/eibo/scripts/q1_independent_finalize_invariant.py",
+      "output_consumed_by_reported_numbers": true,
+      "routines": [
+        "q1_eps_hi",
+        "join_on_service_pair",
+        "eps_lo_le_eps_hi_assertion"
+      ]
+    },
+    "script": "/root/eibo/scripts/q1_independent_recompute.py"
+  },
+  "raw_pairs": [
+    {
+      "M": 1,
+      "T_approx_n_a": 0.05166962409181465,
+      "T_approx_n_b": 0.05165511056869587,
+      "T_exact_minus_approx_n_a": 2.7670181211580935e-07,
+      "T_exact_minus_approx_n_b": 2.683330321273658e-07,
+      "T_exact_n_a": 0.051669900793626766,
+      "T_exact_n_b": 0.051655378901728,
+      "both_pass": true,
+      "eps_hi": 0.35936945639698553,
+      "lower_pass": true,
+      "n_a": 1375270,
+      "n_b": 1399495,
+      "radius_a": 0.007348109959359434,
+      "radius_b": 0.0072842351241211795,
+      "selection_note": "selected by largest n_a+n_b, upper-fail example, or closest upper-pass example",
+      "service_a": "0",
+      "service_b": "51",
+      "tv_k5_masked": 0.34473711131350493,
+      "upper_pass": true
+    },
+    {
+      "M": 1,
+      "T_approx_n_a": 0.07131663568613086,
+      "T_approx_n_b": 0.055484421711095445,
+      "T_exact_minus_approx_n_a": 0.00010700441741554045,
+      "T_exact_minus_approx_n_b": 6.0984886871770505e-06,
+      "T_exact_n_a": 0.0714236401035464,
+      "T_exact_n_b": 0.05549052019978262,
+      "both_pass": false,
+      "eps_hi": 0.5014861355773442,
+      "lower_pass": true,
+      "n_a": 8437,
+      "n_b": 127457,
+      "radius_a": 0.09381571801294052,
+      "radius_b": 0.02413724981221786,
+      "selection_note": "selected by largest n_a+n_b, upper-fail example, or closest upper-pass example",
+      "service_a": "38",
+      "service_b": "52",
+      "tv_k5_masked": 0.3835331677521859,
+      "upper_pass": false
+    },
+    {
+      "M": 1,
+      "T_approx_n_a": 0.07234397072451508,
+      "T_approx_n_b": 0.05932486682488724,
+      "T_exact_minus_approx_n_a": 0.00011780319093453173,
+      "T_exact_minus_approx_n_b": 1.9234802913443982e-05,
+      "T_exact_n_a": 0.07246177391544961,
+      "T_exact_n_b": 0.05934410162780068,
+      "both_pass": true,
+      "eps_hi": 0.4995780799632724,
+      "lower_pass": true,
+      "n_a": 7679,
+      "n_b": 44090,
+      "radius_a": 0.09833707755977433,
+      "radius_b": 0.04103926573746455,
+      "selection_note": "selected by largest n_a+n_b, upper-fail example, or closest upper-pass example",
+      "service_a": "15",
+      "service_b": "17",
+      "tv_k5_masked": 0.3602017366660335,
+      "upper_pass": true
+    }
+  ],
+  "report_text": "Q1 k=5 independent recomputation report\n\nExact two-cell construction: for candidate TV d, e=(1-d)/2. For each law i, U_i is the one-sided Clopper-Pearson upper endpoint BetaInv(0.975; e*n_i+1, n_i-e*n_i). The lower witness is max(0, 1-min(U_a,0.5)-min(U_b,0.5)). T_exact(n) is the equal-n bisection crossing where this witness exceeds 0.05. The reported guarantee convention is per-cell alpha=0.025; the union over the two laws is 95% for this lower construction. This is an exact numerical inversion of the stated construction, not the calibrated 1.958 approximation.\nBisection tolerance: 1.0e-13; maximum final interval width: 5.684e-14; maximum iterations: 43.\n\nThreshold samples (T_exact, approximation, exact-minus-approximation, unused alpha/4 comparison):\nn=7679: 0.072461773915, 0.072343970725, +1.178031909345e-04, 0.075666437106\nn=8437: 0.071423640104, 0.071316635686, +1.070044174155e-04, 0.074481108000\nn=44090: 0.059344101628, 0.059324866825, +1.923480291344e-05, 0.060682283557\nn=127457: 0.055490520200, 0.055484421711, +6.098488687177e-06, 0.056277692319\nn=1375270: 0.051669900794, 0.051669624092, +2.767018121158e-07, 0.051909574318\nn=1399495: 0.051655378902, 0.051655110569, +2.683330321274e-07, 0.051892969145\n\nFraction table; all lower tests use tv > T_exact(n_a) AND tv > T_exact(n_b), and upper tests use eps_hi < 0.5:\nM | lower count/fraction | upper count/fraction | both count/fraction | max abs deviation\n1 | 987/990=0.9969696970 | 292/990=0.2949494949 | 289/990=0.2919191919 | 0.0000000000\n2 | 990/990=1.0000000000 | 27/990=0.0272727273 | 27/990=0.0272727273 | 0.0000000000\n4 | 990/990=1.0000000000 | 0/990=0.0000000000 | 0/990=0.0000000000 | 0.0000000000\n8 | 990/990=1.0000000000 | 0/990=0.0000000000 | 0/990=0.0000000000 | 0.0000000000\n16 | 990/990=1.0000000000 | 0/990=0.0000000000 | 0/990=0.0000000000 | 0.0000000000\n\nMaximum absolute deviations by fraction:\nM=1: lower=0.0000000000, upper=0.0000000000, both=0.0000000000\nM=2: lower=0.0000000000, upper=0.0000000000, both=0.0000000000\nM=4: lower=0.0000000000, upper=0.0000000000, both=0.0000000000\nM=8: lower=0.0000000000, upper=0.0000000000, both=0.0000000000\nM=16: lower=0.0000000000, upper=0.0000000000, both=0.0000000000\n\nIndependent TV from dense symbol counts:\nM=1: max abs deviation=0.000000000000e+00; denominator mismatches=0; pair={'published': 0.3874275182858193, 'recomputed': 0.3874275182858193, 'service_a': '0', 'service_b': '1'}\nM=2: max abs deviation=0.000000000000e+00; denominator mismatches=0; pair={'published': 0.580049987964353, 'recomputed': 0.580049987964353, 'service_a': '0', 'service_b': '1'}\n\nC016 invariant: evaluated on 990 joined rows; violation_count=0; eps_hi disagreement count versus sibling=819. The point estimate tv_k5_masked was not substituted for eps_lo.\n\nThree raw pairs:\n{\"M\": 1, \"T_approx_n_a\": 0.05166962409181465, \"T_approx_n_b\": 0.05165511056869587, \"T_exact_minus_approx_n_a\": 2.7670181211580935e-07, \"T_exact_minus_approx_n_b\": 2.683330321273658e-07, \"T_exact_n_a\": 0.051669900793626766, \"T_exact_n_b\": 0.051655378901728, \"both_pass\": true, \"eps_hi\": 0.35936945639698553, \"lower_pass\": true, \"n_a\": 1375270, \"n_b\": 1399495, \"radius_a\": 0.007348109959359434, \"radius_b\": 0.0072842351241211795, \"selection_note\": \"selected by largest n_a+n_b, upper-fail example, or closest upper-pass example\", \"service_a\": \"0\", \"service_b\": \"51\", \"tv_k5_masked\": 0.34473711131350493, \"upper_pass\": true}\n{\"M\": 1, \"T_approx_n_a\": 0.07131663568613086, \"T_approx_n_b\": 0.055484421711095445, \"T_exact_minus_approx_n_a\": 0.00010700441741554045, \"T_exact_minus_approx_n_b\": 6.0984886871770505e-06, \"T_exact_n_a\": 0.0714236401035464, \"T_exact_n_b\": 0.05549052019978262, \"both_pass\": false, \"eps_hi\": 0.5014861355773442, \"lower_pass\": true, \"n_a\": 8437, \"n_b\": 127457, \"radius_a\": 0.09381571801294052, \"radius_b\": 0.02413724981221786, \"selection_note\": \"selected by largest n_a+n_b, upper-fail example, or closest upper-pass example\", \"service_a\": \"38\", \"service_b\": \"52\", \"tv_k5_masked\": 0.3835331677521859, \"upper_pass\": false}\n{\"M\": 1, \"T_approx_n_a\": 0.07234397072451508, \"T_approx_n_b\": 0.05932486682488724, \"T_exact_minus_approx_n_a\": 0.00011780319093453173, \"T_exact_minus_approx_n_b\": 1.9234802913443982e-05, \"T_exact_n_a\": 0.07246177391544961, \"T_exact_n_b\": 0.05934410162780068, \"both_pass\": true, \"eps_hi\": 0.4995780799632724, \"lower_pass\": true, \"n_a\": 7679, \"n_b\": 44090, \"radius_a\": 0.09833707755977433, \"radius_b\": 0.04103926573746455, \"selection_note\": \"selected by largest n_a+n_b, upper-fail example, or closest upper-pass example\", \"service_a\": \"15\", \"service_b\": \"17\", \"tv_k5_masked\": 0.3602017366660335, \"upper_pass\": true}\n\nProvenance: executed /root/eibo/scripts/q1_independent_recompute.py with /root/miniconda3/bin/python3. Its own beta inversion, CP endpoint, bisection threshold, radius, and own_tv_from_counts outputs are consumed above. Deliberately not used: /root/eibo/scripts/xs_compression_early_readout.py::tv; /root/eibo/scripts/run_q1_absolute_e3.py and its threshold_pair/radius routines; /root/eibo/scripts/evaluate_q1_absolute.py::eps_lo_two_cell, t_of_n, and radius_sum; and any E3 script code path for recomputation. C016 was finalized by /root/eibo/scripts/q1_independent_finalize_invariant.py, whose join_on_service_pair and eps_lo_le_eps_hi_assertion outputs are consumed by the invariant field.",
+  "row_count": 4950,
+  "source_h5_read": false,
+  "source_summary_metadata": {
+    "metadata_consumed_for_schema_and_provenance": true,
+    "metadata_path": "/root/eibo/artifacts/q1_absolute_counts.meta.json",
+    "metadata_table_fields": [
+      "service_a",
+      "service_b",
+      "M",
+      "n_a",
+      "n_b",
+      "tv_k5_masked"
+    ],
+    "sibling_eps_lo_path": "/root/eibo/artifacts/q1_eps_lo_symbol_map.json",
+    "sibling_eps_lo_sha256": "aafe46afa9cde831f5576634c780021b63259815a012f717115b89639fccdf83",
+    "summary_consumed_for_published_values": true,
+    "summary_path": "/root/eibo/artifacts/q1_absolute_summary.json"
+  },
+  "status": "complete",
+  "threshold_cache_summary": {
+    "alternative_definition": "Same construction with alpha_cell=0.0125 (alpha/4), shown only as the superseded double-split comparison; it is not used in any reported verdict.",
+    "converged_within_tolerance": true,
+    "definition": "For candidate TV d, let e=(1-d)/2. For each law i, compute the one-sided CP upper endpoint U_i=BetaInv(1-alpha_cell; e*n_i+1, n_i-e*n_i). The two-cell lower witness is max(0, 1-min(U_a,0.5)-min(U_b,0.5)). T_exact(n) is the equal-n crossing where this witness exceeds 0.05.",
+    "max_final_bisection_width": 5.684341886080802e-14,
+    "max_iterations": 43,
+    "unique_n_count": 45
+  },
+  "threshold_samples": {
+    "127457": {
+      "T_approx": 0.055484421711095445,
+      "T_exact": 0.05549052019978262,
+      "alternative_alpha_quarter": 0.05627769231864477,
+      "difference_exact_minus_approx": 6.0984886871770505e-06
+    },
+    "1375270": {
+      "T_approx": 0.05166962409181465,
+      "T_exact": 0.051669900793626766,
+      "alternative_alpha_quarter": 0.05190957431750576,
+      "difference_exact_minus_approx": 2.7670181211580935e-07
+    },
+    "1399495": {
+      "T_approx": 0.05165511056869587,
+      "T_exact": 0.051655378901728,
+      "alternative_alpha_quarter": 0.051892969145285406,
+      "difference_exact_minus_approx": 2.683330321273658e-07
+    },
+    "44090": {
+      "T_approx": 0.05932486682488724,
+      "T_exact": 0.05934410162780068,
+      "alternative_alpha_quarter": 0.060682283556502625,
+      "difference_exact_minus_approx": 1.9234802913443982e-05
+    },
+    "7679": {
+      "T_approx": 0.07234397072451508,
+      "T_exact": 0.07246177391544961,
+      "alternative_alpha_quarter": 0.07566643710640619,
+      "difference_exact_minus_approx": 0.00011780319093453173
+    },
+    "8437": {
+      "T_approx": 0.07131663568613086,
+      "T_exact": 0.0714236401035464,
+      "alternative_alpha_quarter": 0.07448110800021368,
+      "difference_exact_minus_approx": 0.00010700441741554045
+    }
+  }
+}

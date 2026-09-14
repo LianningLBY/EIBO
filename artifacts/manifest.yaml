@@ -1174,3 +1174,61 @@
   - divisibility
   - C2 horizon measured
   - verified-correct
+- id: art_20260914_0118c2
+  name: x3_variant_b_support_conditioning.json (D063 freeze-fixed, refusal implemented)
+  type: data
+  description: 'Variant B (exposure-conditioning repair) after the D063 freeze fix.
+    THE FREEZE IS CONFIRMED FROM THE ARTIFACT: the plain known-truth curve prior to
+    the fix was PINNED at 5.908567858844014 for every k=16..30 with 14/25 increments
+    EXACTLY ZERO, while the ORIGINAL unfiltered control has 0/25. Cause verified in
+    the code path (np_ctx >= threshold & nq_ctx >= threshold, lines ~155-180): with
+    fixed-length 200000-flow samples the context space grows while per-context counts
+    collapse -- new distinct contexts 4096/8192/16381/32400/59608/183870/395041 at
+    k=13/14/15/16/17/20/30 but new RETAINED 2464/2162/400/5/0/0/0, so the retained
+    total saturates at 8762 from k=16. The retained set CANNOT grow further without
+    changing the estimator''s conditioning definition, so the CONSTRUCTION WAS NOT
+    ALTERED and the runners now REFUSE instead. RESULT: B plain status REFUSED_CONSTANT_TAIL,
+    freeze onset k=16, non-frozen fit window k=5..16, CORRECTED POWER EXPONENT p =
+    1.093 -- LINEAR, NOT SUBLINEAR. The former full-window p=0.539 is no longer emitted.
+    EXCLUDED MASS: non-frozen-axis value at k=16 is 0.26544640625; the previous k=30
+    figure was 0.6082380833333334. The mass calculation does not use the fitted curve,
+    so the freeze did not algebraically create the mass VALUE -- but k=30 IS post-freeze,
+    so a non-frozen-axis reading is the k=16 value.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_variant_b_support_conditioning.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X3
+  skill: ''
+  created_at: '2026-09-14T08:52:33.604105+00:00'
+  tags:
+  - X3
+  - D063
+  - freeze
+  - refusal
+  - p=1.093 LINEAR
+  - corrected
+- id: art_20260914_fc478a
+  name: x3_control_occupancy_dose_response.json (D063 no-freeze assertion added)
+  type: data
+  description: 'Occupancy dose-response control after the D063 no-freeze assertion
+    was added. STILL CARRIES THE D056 FIX (no-thinning p = 0.651, k=5 D_k = 1.6949092697605275
+    matching analytic truth). NEW: a permanent no-freeze assertion using a threshold
+    of at least TWO exactly equal tail values, which catches both the variant-B freeze
+    and the dose-response''s own deep-level freezes. ASSERTION RESULTS: dose plain
+    retained=1.00 PASS, 0.50 PASS, 0.25 PASS, retained=0.10 FAIL at k=29..30, retained=0.05
+    FAIL at k=27..30; dose twin all levels PASS. So the two deepest plain levels are
+    now REFUSED rather than silently fitted -- meaning the 0.603 and 0.557 exponent
+    values were fits across frozen windows and must not be cited as sparsity response.
+    Artifact 310141 B.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_control_occupancy_dose_response.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X3
+  skill: ''
+  created_at: '2026-09-14T08:52:38.057906+00:00'
+  tags:
+  - X3
+  - D063
+  - no-freeze assertion
+  - dose-response
+  - deep levels refused

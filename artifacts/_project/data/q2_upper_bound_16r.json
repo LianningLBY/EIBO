@@ -1,0 +1,176 @@
+{
+  "correction_record": {
+    "cap_note": "Q2's UPPER side uses the FULL n_a/n_b. Recomputing the 16r upper side from the full-n columns gives 342/990 with median 0.591263, matching the artifact's self-reported values digit for digit. The 20,000-flow per-service cap on lower_n_a/lower_n_b applies ONLY to the LOWER side eps_lo (fed to the Michel lower bound). Therefore 342/990 is on the SAME n calibre as Q1's 340/990 and the two may be placed side by side.",
+    "coefficient_correction": "The coefficient 31 was exactly 2x too large; 16 is the sum-to-zero-constrained value because sum(delta)=0 makes positive and negative mass equal, so L1 <= m*r and TV <= (m/2)*r, giving 16r at m=32.",
+    "weissman_limitation": "The Weissman categorical form 0.5*(sqrt(m)+c)/sqrt(n) (~935/990) is UNPROVEN for this estimator and MUST NOT be quoted: it is a bound for IID one-hot categorical observations, whereas this estimator is the mean of correlated simplex vectors; Var(f_i(c)) <= P(c)(1-P(c)) holds but per-coordinate variance bounds do NOT establish an L1 concentration inequality for correlated coordinates.",
+    "population_note": "The only genuine calibre difference is WHICH FLOW POPULATION each object admits. Q2 takes any flow with a PHIST record; Q1 requires PPI_LEN >= 5 for k=5 eligibility. The measured per-service n differs by a median of 0.5%, which does not change the conclusion.",
+    "reproduction_note": "The 342 figure has been reproduced by two independent recomputations and no longer rests on a single source."
+  },
+  "created_at_utc": "2026-09-13T19:54:47+00:00",
+  "input": {
+    "actual_sha256": "71a20309c2d12fbeb5f7204f312243c951e0259d6ae3550ea579fcf6cbb94840",
+    "expected_sha256": "71a20309c2d12fbeb5f7204f312243c951e0259d6ae3550ea579fcf6cbb94840",
+    "path": "/root/eibo/artifacts/q2_phist_certificate_v3.json",
+    "record_count": 990,
+    "record_path": "rows",
+    "sha256_matches_expected": true
+  },
+  "routines_executed": [
+    {
+      "inputs_read": [
+        "/root/eibo/artifacts/q2_phist_certificate_v3.json"
+      ],
+      "output_consumed_by_reported_numbers": true,
+      "outputs_written": [
+        "/root/eibo/artifacts/q2_upper_bound_16r.json"
+      ],
+      "routine": "/root/miniconda3/bin/python3 via single-line exec from cwd /root/eibo"
+    }
+  ],
+  "step1_enumeration": {
+    "description": "Exact enumeration over k=0,...,m positive coordinates; arrangement does not change L1, and max L1/r = max_k 2 min(k,m-k).",
+    "table": [
+      {
+        "equals_m": true,
+        "m": 2,
+        "max_L1_over_r": 2
+      },
+      {
+        "equals_m": true,
+        "m": 4,
+        "max_L1_over_r": 4
+      },
+      {
+        "equals_m": true,
+        "m": 8,
+        "max_L1_over_r": 8
+      },
+      {
+        "equals_m": true,
+        "m": 16,
+        "max_L1_over_r": 16
+      },
+      {
+        "equals_m": true,
+        "m": 32,
+        "max_L1_over_r": 32
+      }
+    ]
+  },
+  "step2_upper_bound_recompute": {
+    "alpha_per_law": 0.025,
+    "eps_hi_16r": {
+      "coefficient": 16,
+      "count_eps_hi_lt_0_5": 342,
+      "fraction_eps_hi_lt_0_5": 0.34545454545454546,
+      "quantiles": {
+        "max": 1.46199273507737,
+        "median": 0.5912627795267633,
+        "min": 0.12698310039855681,
+        "q25": 0.4351024714117465,
+        "q5": 0.26523270693965645,
+        "q75": 0.7682581658320039,
+        "q95": 1.012489714951831
+      }
+    },
+    "eps_hi_31r": {
+      "coefficient": 31,
+      "count_eps_hi_lt_0_5": 152,
+      "fraction_eps_hi_lt_0_5": 0.15353535353535352,
+      "quantiles": {
+        "max": 2.2851208221631483,
+        "median": 0.9259189826115919,
+        "min": 0.18326057008752536,
+        "q25": 0.6384896544409869,
+        "q5": 0.37200517519506493,
+        "q75": 1.2196248041810793,
+        "q95": 1.6834104849814504
+      }
+    },
+    "formula": "r_i = sqrt(log(2*31/0.025)/(2*n_i)); eps_hi = tv_hat + coeff*r_a + coeff*r_b",
+    "log_term": 7.8160138391590275,
+    "pair_count": 990
+  },
+  "m041_cross_check_2x2": {
+    "table": {
+      "q1_tv_hat": {
+        "with_c_q1": 340,
+        "with_c_q2": 81
+      },
+      "q2_tv_hat": {
+        "with_c_q1": 935,
+        "with_c_q2": 342
+      }
+    },
+    "constants_used": {
+      "c_q1": 4.30863,
+      "c_q2": 31.6299
+    },
+    "recomputed": true,
+    "recomputed_by": "Director, independently of the agent's hand transcription, on the same 990 joined pairs",
+    "matches_hand_transcription": true,
+    "diagonal": "340 vs 342 \u2014 diagonal only; carries no corroborative weight (see off_diagonal_spread 81-935)",
+    "off_diagonal_spread": {
+      "min": 81,
+      "max": 935
+    },
+    "constant_ratio": 7.341,
+    "root_cause": "The underlying statistics differ by about 2.7x (tv_hat median 0.5805 for Q1 vs 0.2157 for Q2) while the radius constants differ by about 7.34x. Two large differences in OPPOSITE DIRECTIONS cancel to the same fraction.",
+    "verdict": "340 vs 342 is NOT a cross-check. A numerical coincidence produced by opposite-direction cancellation carries no corroborative weight.",
+    "rule": "To call an agreement a cross-check, compute this 2x2 FIRST. Agreement that holds only where each side uses its OWN convention is CANCELLATION, not CONFIRMATION.",
+    "cell_935_status": "invalid-for-Q2",
+    "note_on_the_935_cell": "The (Q2 tv_hat, c_Q1) cell is NOT a third symmetric convention, and must not be presented as a legitimate counterfactual. Applying Q1's constant to Q2 IS IDENTICALLY applying the Weissman categorical form: 0.5*(sqrt(32) + sqrt(2 ln(2/0.025))) = 4.30863 is the same number. That bound was already refused as UNPROVEN for Q2's estimator (it assumes independent one-hot categorical observations, whereas Q2's estimator is a mean of correlated simplex vectors), and it yields 935/990 = 0.9444, matching this cell digit for digit. So the most extreme cell of the 2x2 corresponds to a bound already excluded for Q2 \u2014 which STRENGTHENS the cancellation conclusion rather than weakening it. A counterfactual table must label cells that are KNOWN-INVALID for one of the objects, or a reader will treat them as legitimate alternatives."
+  },
+  "radius_constants_by_object": {
+    "constants": [
+      {
+        "constant_over_sqrt_n": 4.309,
+        "expression": "0.5*(sqrt(m) + sqrt(2*ln(2/alpha)))",
+        "applies_to": "Q1's one-hot categorical prefix symbols (independent observations)",
+        "status": "correct"
+      },
+      {
+        "constant_over_sqrt_n": 31.63,
+        "expression": "16*sqrt(ln(2*31/alpha)/2)",
+        "applies_to": "Q2's mean of correlated 32-simplex vectors (coordinates sum to zero, so cell independence is unavailable)",
+        "status": "correct"
+      },
+      {
+        "constant_over_sqrt_n": 61.28,
+        "expression": "31*sqrt(ln(2*31/alpha)/2)",
+        "applies_to": "Q2 v3 as originally run",
+        "status": "SUPERSEDED \u2014 do not resurrect"
+      }
+    ],
+    "note": "Q1 can exploit one-hot cell independence; Q2 structurally cannot, because its coordinates sum to zero by construction. The different constants are therefore LEGITIMATE, not a convention conflict. State the object together with its constant, every time."
+  },
+  "c_q2_verified_note": "The constant self-check printed `verified: False` for c_Q2 and that flag is a TOLERANCE ARTEFACT, not a defect. The literal 31.6299 was compared against the full-precision expression 16*sqrt(ln(2*31/0.025)/2) = 31.629887312672416 under a tolerance tighter than the 4-decimal rounding of the literal, so a rounding difference of 1.269e-05 tripped the flag. Verified by rounding: 31.6299 matches the expression at its stated 4-decimal precision. The same holds for c_Q1 (4.30863 vs 4.30862712474619, difference 2.875e-06). READ `verified: False` HERE AS 'the literal is the expression rounded to four decimals', NOT as 'this constant is wrong'. The identical quantity appears as 31.63 in radius_constants_by_object.",
+  "source_tree": "LOCAL workspace copy (artifacts/_project/data/). The LOCAL tree is AUTHORITATIVE for this artifact; the server copy was made to MATCH it. Direction of sync: LOCAL -> SERVER.",
+  "tree_sync_note": "This artifact exists in TWO non-auto-syncing trees (local workspace and server). An earlier worker corrected the SERVER copy while a later one corrected the LOCAL copy, so the two diverged. The local copy is authoritative because it also carries the directly-counted lower-side fields. After this task the two are byte-identical, and their post-edit SHA-256 values are recorded in tree_sync_sha256 below.",
+  "tree_sync_sha256": {
+    "local_before": "6b59b8d121ae5011b8f15efb14d77b6310e51d5f18846cf31932336c3430144e",
+    "remote_before": "54e7931ffaea384a4b0a8322ff1887675a523134f8f411295a203262ea8aac34",
+    "local_after": "2366391e9d652536a5e730a53d3847d9bb83101b488279cfaa5182efc33acde3",
+    "remote_after": "2366391e9d652536a5e730a53d3847d9bb83101b488279cfaa5182efc33acde3"
+  },
+  "local_only": true,
+  "source_sha256": {
+    "q2_upper_bound_16r.json": "3c16c6be32fd4810f13eb7b5001ba1e926a2b98a1fb20a93ba6ed6f2d53c10f2",
+    "q1_gate_five_pairs_full_n.json": "91b3f5129d2e694789212907e19a0d380958393a993da8dcf1ebc26fdab96e32",
+    "q1_eps_lo_symbol_map.json": "aafe46afa9cde831f5576634c780021b63259815a012f717115b89639fccdf83",
+    "q2_phist_certificate_v3.json": "71a20309c2d12fbeb5f7204f312243c951e0259d6ae3550ea579fcf6cbb94840",
+    "q1_absolute_counts.json": "979c462e0638f624438fee2d8965f4c49140d8f975561b870c3af03144348094"
+  },
+  "sensitivity_statement": "The gate is 336 because exactly ONE boundary pair (21-23) crosses 0.05, and its capped value sat 0.0002 from the threshold (capped eps_lo 0.049781366 vs full-n 0.058780592). Report the gate as 336 WITH this sensitivity stated, not as a stable integer. Two companion readings must travel with it: (i) pair (35,49) moved the WRONG direction as n grew (0.043732229 -> 0.042724656), which shows that 'larger n gives a tighter lower bound' is a statistical TENDENCY, not a guarantee; (ii) pair (39,44) is bit-identical across runs because its full n (4624/5741) is BELOW the 20000 cap, so it was never capped at all -- 'no change' there means 'never bound', NOT 'stable'. This is a MEASURED sensitivity, not an unresolved assumption, and it is why the gate is reported as an integer with a named boundary pair rather than as a settled constant. [RETRACTED: this framing used the CAP margin of the boundary pair (0.0002), which belongs to the capped value -- a quantity the gate does not use. The measured full-n margins are +0.008781 (nearest passing pair) and -0.007275 (nearest failing pair), with within_0.005_count = 0. See gate_convention_sensitivity for the corrected statement. The structural fact that the gate flips 335 <-> 336 on this one pair is SEPARATE and still holds.]",
+  "boundary_pair": "(21,23): capped 0.04978136643060134 -> full-n 0.05878059224502068; margin from the 0.05 line at the capped value = 0.00021863356939866 [NOTE ON SCALE: the margin quoted above is measured on the CAPPED value. The gate does not use capped values; its own nearest in-gate margin is +0.008781.]",
+  "gate_convention_sensitivity": "The gate is 336 under the canonical (full-n) convention; it would be 335 under the capped convention; the entire difference is pair (21,23) crossing 0.05. All five boundary pairs lie in the upper set. The nearest in-gate margin is +0.008781 and the nearest upper-only margin is -0.007275, with within_0.005_count = 0 -- so UNDER THE CANONICAL CONVENTION no sample sits close to the line; the convention-dependence of the gate value is the separate matter described in the first clause.",
+  "sensitivity_statement_retracted_0002_scale": true,
+  "tree_sync_sha256_round2": {
+    "local_before": "b959863af56efc0c598e0a6f7aa984c11431490de011de964b993d56506ed4e0",
+    "remote_before": "682af2938c048188e3f3388eec2cd521afc50352fbe006900847723f356cc547",
+    "round": 2,
+    "note": "This supersedes tree_sync_sha256, which recorded an earlier sync and is now stale because the files changed twice afterwards. Both keys are kept: the earlier one as history, this one as current. Local is authoritative; direction LOCAL -> SERVER.",
+    "self_reference_caveat": "A JSON file cannot contain its own final SHA-256 without changing it, so local_after/remote_after cannot be embedded here. The definitive byte-identity proof is the pair of sha256sum outputs printed in the run report, not any value inside the file."
+  },
+  "tree_authority": "LOCAL (artifacts/_project/data/) is AUTHORITATIVE for this artifact. Direction of sync: LOCAL -> SERVER. This artifact exists in TWO trees that do NOT auto-sync; the server copy is a mirror. Any future edit must be made on the LOCAL side and then pushed. Do not edit the server copy directly."
+}

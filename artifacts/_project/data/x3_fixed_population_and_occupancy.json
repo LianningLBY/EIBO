@@ -1,0 +1,2004 @@
+{
+  "adjudication_rule": "X3's SUBLINEAR verdict is CONFIRMED only if BOTH hold:\n  (i)  it SURVIVES C2 on the fixed population, AND\n  (ii) the C1 control returns LINEAR (i.e. the estimator is CAPABLE of detecting linearity).\nOtherwise the verdict must be DOWNGRADED to INCONCLUSIVE, with the numbers.",
+  "composition_statement": "Original SUBLINEAR survives the fixed-population control.",
+  "final_adjudication": "DOWNGRADED-TO-INCONCLUSIVE",
+  "fixed_chunk_metadata": [
+    {
+      "end": 200,
+      "n_total": 820,
+      "start": 0
+    },
+    {
+      "end": 400,
+      "n_total": 820,
+      "start": 200
+    },
+    {
+      "end": 600,
+      "n_total": 820,
+      "start": 400
+    },
+    {
+      "end": 820,
+      "n_total": 820,
+      "start": 600
+    }
+  ],
+  "fixed_population_curve": {
+    "constant_pair_denominator": 820,
+    "rows": [
+      {
+        "D_k_mean": 1.8079718311621302,
+        "D_k_median": 1.2429739095119168,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 5,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 2.2079429298560833,
+        "D_k_median": 1.9960094849054513,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 6,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 2.4966643449597874,
+        "D_k_median": 2.465629409294128,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 7,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 2.848477066244873,
+        "D_k_median": 2.8108932830178097,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 8,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 3.1180382639535122,
+        "D_k_median": 3.133306847916999,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 9,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 3.384037799850827,
+        "D_k_median": 3.438251570388682,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 10,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 3.686112735430126,
+        "D_k_median": 3.738891943559697,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 11,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 3.984279085165283,
+        "D_k_median": 4.066043927511051,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 12,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 4.302082425495994,
+        "D_k_median": 4.39862126190882,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 13,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 4.592888723778545,
+        "D_k_median": 4.69952460168073,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 14,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 4.8718808428272,
+        "D_k_median": 4.98391964746613,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 15,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 5.146645457862411,
+        "D_k_median": 5.307197680348517,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 16,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 5.3994393197530615,
+        "D_k_median": 5.5828727931131255,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 17,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 5.645858994158956,
+        "D_k_median": 5.860384441431236,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 18,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 5.880387767631927,
+        "D_k_median": 6.108017369319343,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 19,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 6.116004894163939,
+        "D_k_median": 6.327486701133276,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 20,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 6.3524661220204,
+        "D_k_median": 6.543870286423733,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 21,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 6.587816556979523,
+        "D_k_median": 6.766667437144871,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 22,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 6.824807844453548,
+        "D_k_median": 7.003781540907846,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 23,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 7.0571233261450015,
+        "D_k_median": 7.234051244737838,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 24,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 7.2872368378027295,
+        "D_k_median": 7.452361014594517,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 25,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 7.51419325519802,
+        "D_k_median": 7.673083699057562,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 26,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 7.738462748522162,
+        "D_k_median": 7.89930667123387,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 27,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 7.959210727035293,
+        "D_k_median": 8.110189484340378,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 28,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 8.173491321765043,
+        "D_k_median": 8.308930702655019,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 29,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 8.384197516822736,
+        "D_k_median": 8.521791516095425,
+        "denominator": "fixed k=30 eligible pair set",
+        "k": 30,
+        "n_pairs": 820
+      }
+    ],
+    "set_definition": "flows and pairs eligible at k=30; same population used for every k=5..30"
+  },
+  "fixed_population_fit": {
+    "first_to_last_median_increment_ratio": 1.5026891790297523,
+    "increment_window": 8,
+    "linear": {
+      "aic": -70.12970315035014,
+      "intercept": 0.655833507024553,
+      "predicted": [
+        2.0253102903988345,
+        2.2992056470736904,
+        2.5731010037485467,
+        2.846996360423403,
+        3.1208917170982593,
+        3.3947870737731156,
+        3.668682430447972,
+        3.942577787122828,
+        4.216473143797685,
+        4.490368500472541,
+        4.764263857147397,
+        5.0381592138222535,
+        5.31205457049711,
+        5.585949927171966,
+        5.8598452838468225,
+        6.133740640521679,
+        6.407635997196535,
+        6.681531353871391,
+        6.955426710546248,
+        7.229322067221103,
+        7.5032174238959595,
+        7.777112780570816,
+        8.051008137245672,
+        8.324903493920528,
+        8.598798850595385,
+        8.872694207270241
+      ],
+      "rmse": 0.24037112053345933,
+      "rss": 1.5022351652492816,
+      "slope": 0.27389535667485626
+    },
+    "linear_model_aic_advantage_over_sqrt": -74.15160535941953,
+    "power": {
+      "aic": -87.64792750433763,
+      "coefficient": 0.49424788060196545,
+      "exponent_p": 0.8440000000000001,
+      "grid": {
+        "count": 1451,
+        "max": 1.5,
+        "min": 0.05,
+        "step": 0.001
+      },
+      "predicted": [
+        1.9225405087452208,
+        2.24235552492636,
+        2.5539216014290056,
+        2.8585958882926903,
+        3.157370112528842,
+        3.4509988588275715,
+        3.740074403422875,
+        4.025073241581342,
+        4.306386496800103,
+        4.584340611797521,
+        4.859211901998076,
+        5.131237081077596,
+        5.400621056032955,
+        5.667542819342116,
+        5.932159982804263,
+        6.19461232127799,
+        6.4550245812679625,
+        6.713508734630785,
+        6.970165807272356,
+        7.225087377982218,
+        7.478356818171116,
+        7.730050325871742,
+        7.980237794743058,
+        8.228983549540756,
+        8.476346972607466,
+        8.72238304073051
+      ],
+      "rmse": 0.17835156258908577,
+      "rss": 0.8270412768271831
+    },
+    "sqrt_model_aic_advantage_over_linear": 74.15160535941953,
+    "sqrt_sublinear": {
+      "aic": -144.28130850976967,
+      "intercept": -3.4373505242955855,
+      "predicted": [
+        1.4394607392666612,
+        1.9049285512010434,
+        2.3329703801750354,
+        2.7313820003525824,
+        3.1055783749615107,
+        3.459502105768015,
+        3.7961295386406992,
+        4.117772998253747,
+        4.426271355033286,
+        4.7231155580517505,
+        5.0095343631184015,
+        5.2865546747138765,
+        5.555045126552182,
+        5.8157482626766654,
+        6.069304764582249,
+        6.316272002828908,
+        6.557138458224326,
+        6.792335083864298,
+        7.022244365654739,
+        7.247207626697673,
+        7.467530974466243,
+        7.683490186825113,
+        7.895334759528414,
+        8.103291284645657,
+        8.307566290325285,
+        8.508348643289608
+      ],
+      "rmse": 0.05775394471337762,
+      "rss": 0.08672347137885286,
+      "sqrt_slope": 2.1809762997523654
+    },
+    "verdict": "SUBLINEAR"
+  },
+  "fixed_population_occupancy_by_k": [
+    {
+      "distinct_prefix_contexts": 710,
+      "effective_sample_per_context": 35619.7676056338,
+      "fraction_contexts_observed_fewer_than_5_times": 0.02535211267605634,
+      "k": 5,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 1388,
+      "effective_sample_per_context": 21864.58357348703,
+      "fraction_contexts_observed_fewer_than_5_times": 0.061239193083573486,
+      "k": 6,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 2677,
+      "effective_sample_per_context": 13226.017556966754,
+      "fraction_contexts_observed_fewer_than_5_times": 0.10160627568173328,
+      "k": 7,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 5073,
+      "effective_sample_per_context": 7976.356396609502,
+      "fraction_contexts_observed_fewer_than_5_times": 0.14488468361916026,
+      "k": 8,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 9453,
+      "effective_sample_per_context": 4815.620755315773,
+      "fraction_contexts_observed_fewer_than_5_times": 0.1903099545117952,
+      "k": 9,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 17339,
+      "effective_sample_per_context": 2917.1272853105716,
+      "fraction_contexts_observed_fewer_than_5_times": 0.23663417728819425,
+      "k": 10,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 31258,
+      "effective_sample_per_context": 1779.9627935248577,
+      "fraction_contexts_observed_fewer_than_5_times": 0.2814319534199245,
+      "k": 11,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 55323,
+      "effective_sample_per_context": 1097.122064963939,
+      "fraction_contexts_observed_fewer_than_5_times": 0.32883249281492327,
+      "k": 12,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 95984,
+      "effective_sample_per_context": 685.0526233538923,
+      "fraction_contexts_observed_fewer_than_5_times": 0.3826262710451742,
+      "k": 13,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 162829,
+      "effective_sample_per_context": 434.8862794711016,
+      "fraction_contexts_observed_fewer_than_5_times": 0.4435389273409528,
+      "k": 14,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 268591,
+      "effective_sample_per_context": 282.4744872315156,
+      "fraction_contexts_observed_fewer_than_5_times": 0.5068375336478139,
+      "k": 15,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 429299,
+      "effective_sample_per_context": 188.5122304035183,
+      "fraction_contexts_observed_fewer_than_5_times": 0.5668147375139472,
+      "k": 16,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 663716,
+      "effective_sample_per_context": 129.5525782111626,
+      "fraction_contexts_observed_fewer_than_5_times": 0.6202894008883317,
+      "k": 17,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 992487,
+      "effective_sample_per_context": 91.73331842129922,
+      "fraction_contexts_observed_fewer_than_5_times": 0.6663754789735281,
+      "k": 18,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 1437092,
+      "effective_sample_per_context": 66.87263793828092,
+      "fraction_contexts_observed_fewer_than_5_times": 0.7057258686291483,
+      "k": 19,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 2019714,
+      "effective_sample_per_context": 50.08636866407818,
+      "fraction_contexts_observed_fewer_than_5_times": 0.7391046455092156,
+      "k": 20,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 2762109,
+      "effective_sample_per_context": 38.455450889157525,
+      "fraction_contexts_observed_fewer_than_5_times": 0.7676840414335567,
+      "k": 21,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 3684279,
+      "effective_sample_per_context": 30.202966170585885,
+      "fraction_contexts_observed_fewer_than_5_times": 0.7923509593057421,
+      "k": 22,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 4804425,
+      "effective_sample_per_context": 24.213961296096826,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8136848842473345,
+      "k": 23,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 6135897,
+      "effective_sample_per_context": 19.783931835883163,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8323659931058165,
+      "k": 24,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 7687672,
+      "effective_sample_per_context": 16.448435235010027,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8489010717418746,
+      "k": 25,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 9462628,
+      "effective_sample_per_context": 13.897638372764945,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8634895084114054,
+      "k": 26,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 11459347,
+      "effective_sample_per_context": 11.917449484687042,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8762364033482886,
+      "k": 27,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 13670065,
+      "effective_sample_per_context": 10.360169904093361,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8873278217769996,
+      "k": 28,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 16085089,
+      "effective_sample_per_context": 9.119141522934688,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8969966532358011,
+      "k": 29,
+      "sampling": "fixed PPI_LEN >= 30"
+    },
+    {
+      "distinct_prefix_contexts": 18692427,
+      "effective_sample_per_context": 8.117737199134174,
+      "fraction_contexts_observed_fewer_than_5_times": 0.9054605375749227,
+      "k": 30,
+      "sampling": "fixed PPI_LEN >= 30"
+    }
+  ],
+  "fixed_population_verdict": "SUBLINEAR",
+  "occupancy_by_k": [
+    {
+      "distinct_prefix_contexts": 712,
+      "effective_sample_per_context": 64965.61797752809,
+      "fraction_contexts_observed_fewer_than_5_times": 0.01544943820224719,
+      "k": 5,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 1404,
+      "effective_sample_per_context": 39483.45299145299,
+      "fraction_contexts_observed_fewer_than_5_times": 0.03347578347578348,
+      "k": 6,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 2743,
+      "effective_sample_per_context": 23485.472110827563,
+      "fraction_contexts_observed_fewer_than_5_times": 0.06416332482683193,
+      "k": 7,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 5302,
+      "effective_sample_per_context": 13789.75028291211,
+      "fraction_contexts_observed_fewer_than_5_times": 0.1024141833270464,
+      "k": 8,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 10089,
+      "effective_sample_per_context": 8014.020517395183,
+      "fraction_contexts_observed_fewer_than_5_times": 0.1465953018138567,
+      "k": 9,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 18873,
+      "effective_sample_per_context": 4722.281036401208,
+      "fraction_contexts_observed_fewer_than_5_times": 0.19249721824829122,
+      "k": 10,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 34661,
+      "effective_sample_per_context": 2802.4230403046654,
+      "fraction_contexts_observed_fewer_than_5_times": 0.23773116759470297,
+      "k": 11,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 62447,
+      "effective_sample_per_context": 1675.8096946210387,
+      "fraction_contexts_observed_fewer_than_5_times": 0.282479542652169,
+      "k": 12,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 110324,
+      "effective_sample_per_context": 1014.0084841013742,
+      "fraction_contexts_observed_fewer_than_5_times": 0.3302635872520938,
+      "k": 13,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 190565,
+      "effective_sample_per_context": 622.2009498071524,
+      "fraction_contexts_observed_fewer_than_5_times": 0.3879883504316113,
+      "k": 14,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 320890,
+      "effective_sample_per_context": 389.9890616722241,
+      "fraction_contexts_observed_fewer_than_5_times": 0.45391567203714667,
+      "k": 15,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 523069,
+      "effective_sample_per_context": 250.90704285667857,
+      "fraction_contexts_observed_fewer_than_5_times": 0.5212448070904604,
+      "k": 16,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 821637,
+      "effective_sample_per_context": 165.97571677030123,
+      "fraction_contexts_observed_fewer_than_5_times": 0.5839610436238875,
+      "k": 17,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 1242440,
+      "effective_sample_per_context": 113.04208331991887,
+      "fraction_contexts_observed_fewer_than_5_times": 0.6393652812208236,
+      "k": 18,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 1806242,
+      "effective_sample_per_context": 79.63583506529025,
+      "fraction_contexts_observed_fewer_than_5_times": 0.6858876053153453,
+      "k": 19,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 2532150,
+      "effective_sample_per_context": 58.000252749639635,
+      "fraction_contexts_observed_fewer_than_5_times": 0.7247694646841617,
+      "k": 20,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 3433576,
+      "effective_sample_per_context": 43.629174947634766,
+      "fraction_contexts_observed_fewer_than_5_times": 0.7573931667742319,
+      "k": 21,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 4519968,
+      "effective_sample_per_context": 33.675161417071976,
+      "fraction_contexts_observed_fewer_than_5_times": 0.7850402923206536,
+      "k": 22,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 5789649,
+      "effective_sample_per_context": 26.671900489995163,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8084626546445216,
+      "k": 23,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 7240408,
+      "effective_sample_per_context": 21.514313558020486,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8284276245206071,
+      "k": 24,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 8859282,
+      "effective_sample_per_context": 17.721817072760523,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8457196644152427,
+      "k": 25,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 10632059,
+      "effective_sample_per_context": 14.804973712053329,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8609080329595613,
+      "k": 26,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 12530533,
+      "effective_sample_per_context": 12.482282278016426,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8742576233588787,
+      "k": 27,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 14525962,
+      "effective_sample_per_context": 10.695871846559973,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8859458671308654,
+      "k": 28,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 16589512,
+      "effective_sample_per_context": 9.266679815536467,
+      "fraction_contexts_observed_fewer_than_5_times": 0.8963196747438984,
+      "k": 29,
+      "sampling": "variable PPI_LEN >= k"
+    },
+    {
+      "distinct_prefix_contexts": 18692427,
+      "effective_sample_per_context": 8.117737199134174,
+      "fraction_contexts_observed_fewer_than_5_times": 0.9054605375749227,
+      "k": 30,
+      "sampling": "variable PPI_LEN >= k"
+    }
+  ],
+  "occupancy_scope": "variable population matching the original X3 sampling rule PPI_LEN >= k",
+  "original_variable_population_curve": [
+    {
+      "D_k_mean": 1.746931894121503,
+      "D_k_median": 1.3813736271298078,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 5,
+      "n_pairs": 990
+    },
+    {
+      "D_k_mean": 2.1550238987696244,
+      "D_k_median": 1.9982088350601748,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 6,
+      "n_pairs": 990
+    },
+    {
+      "D_k_mean": 2.5113861303094858,
+      "D_k_median": 2.469796269887515,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 7,
+      "n_pairs": 990
+    },
+    {
+      "D_k_mean": 2.8686035594139665,
+      "D_k_median": 2.841056831857115,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 8,
+      "n_pairs": 990
+    },
+    {
+      "D_k_mean": 3.1336726596679507,
+      "D_k_median": 3.145651959269183,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 9,
+      "n_pairs": 990
+    },
+    {
+      "D_k_mean": 3.4372063059868037,
+      "D_k_median": 3.4493236537679586,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 10,
+      "n_pairs": 990
+    },
+    {
+      "D_k_mean": 3.7516667190118502,
+      "D_k_median": 3.802143054344565,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 11,
+      "n_pairs": 990
+    },
+    {
+      "D_k_mean": 4.067996190713878,
+      "D_k_median": 4.140903953991263,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 12,
+      "n_pairs": 990
+    },
+    {
+      "D_k_mean": 4.388415411532041,
+      "D_k_median": 4.444433569299193,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 13,
+      "n_pairs": 990
+    },
+    {
+      "D_k_mean": 4.674606845962577,
+      "D_k_median": 4.734628498522778,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 14,
+      "n_pairs": 946
+    },
+    {
+      "D_k_mean": 4.964146113205807,
+      "D_k_median": 5.0526612622841,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 15,
+      "n_pairs": 946
+    },
+    {
+      "D_k_mean": 5.245110427240505,
+      "D_k_median": 5.3619206911951585,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 16,
+      "n_pairs": 946
+    },
+    {
+      "D_k_mean": 5.505743829128545,
+      "D_k_median": 5.61893458490173,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 17,
+      "n_pairs": 946
+    },
+    {
+      "D_k_mean": 5.745332204701507,
+      "D_k_median": 5.869289047126597,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 18,
+      "n_pairs": 946
+    },
+    {
+      "D_k_mean": 5.9722502388309895,
+      "D_k_median": 6.119020927854201,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 19,
+      "n_pairs": 946
+    },
+    {
+      "D_k_mean": 6.211281469744209,
+      "D_k_median": 6.357055609304329,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 20,
+      "n_pairs": 946
+    },
+    {
+      "D_k_mean": 6.424329422155903,
+      "D_k_median": 6.581796468928035,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 21,
+      "n_pairs": 903
+    },
+    {
+      "D_k_mean": 6.676976974361057,
+      "D_k_median": 6.826231866660139,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 22,
+      "n_pairs": 903
+    },
+    {
+      "D_k_mean": 6.921633686312327,
+      "D_k_median": 7.081363873289954,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 23,
+      "n_pairs": 861
+    },
+    {
+      "D_k_mean": 7.164521197513921,
+      "D_k_median": 7.3201806916422525,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 24,
+      "n_pairs": 861
+    },
+    {
+      "D_k_mean": 7.4002600553508096,
+      "D_k_median": 7.5612502801285295,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 25,
+      "n_pairs": 861
+    },
+    {
+      "D_k_mean": 7.6247006382179645,
+      "D_k_median": 7.810880575175564,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 26,
+      "n_pairs": 861
+    },
+    {
+      "D_k_mean": 7.793103587483369,
+      "D_k_median": 7.96672938297168,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 27,
+      "n_pairs": 820
+    },
+    {
+      "D_k_mean": 7.991187045461696,
+      "D_k_median": 8.152212725244452,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 28,
+      "n_pairs": 820
+    },
+    {
+      "D_k_mean": 8.187894292349341,
+      "D_k_median": 8.31620830603123,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 29,
+      "n_pairs": 820
+    },
+    {
+      "D_k_mean": 8.384197516822725,
+      "D_k_median": 8.52179151609541,
+      "denominator": "variable PPI_LEN >= k pair set",
+      "k": 30,
+      "n_pairs": 820
+    }
+  ],
+  "original_variable_population_fit": {
+    "adjudication_rule": "SUBLINEAR requires power p<0.90, AIC advantage of sqrt model over linear greater than 6, and first-to-last median increment ratio >1.10; LINEAR requires p>0.95, AIC advantage of linear over sqrt greater than 6, and ratio <=1.10; otherwise INCONCLUSIVE.",
+    "auditable_curve": [
+      {
+        "D_k_mean": 1.746931894121503,
+        "D_k_median": 1.3813736271298078,
+        "k": 5,
+        "n_pairs": 990
+      },
+      {
+        "D_k_mean": 2.1550238987696244,
+        "D_k_median": 1.9982088350601748,
+        "k": 6,
+        "n_pairs": 990
+      },
+      {
+        "D_k_mean": 2.5113861303094858,
+        "D_k_median": 2.469796269887515,
+        "k": 7,
+        "n_pairs": 990
+      },
+      {
+        "D_k_mean": 2.8686035594139665,
+        "D_k_median": 2.841056831857115,
+        "k": 8,
+        "n_pairs": 990
+      },
+      {
+        "D_k_mean": 3.1336726596679507,
+        "D_k_median": 3.145651959269183,
+        "k": 9,
+        "n_pairs": 990
+      },
+      {
+        "D_k_mean": 3.4372063059868037,
+        "D_k_median": 3.4493236537679586,
+        "k": 10,
+        "n_pairs": 990
+      },
+      {
+        "D_k_mean": 3.7516667190118502,
+        "D_k_median": 3.802143054344565,
+        "k": 11,
+        "n_pairs": 990
+      },
+      {
+        "D_k_mean": 4.067996190713878,
+        "D_k_median": 4.140903953991263,
+        "k": 12,
+        "n_pairs": 990
+      },
+      {
+        "D_k_mean": 4.388415411532041,
+        "D_k_median": 4.444433569299193,
+        "k": 13,
+        "n_pairs": 990
+      },
+      {
+        "D_k_mean": 4.674606845962577,
+        "D_k_median": 4.734628498522778,
+        "k": 14,
+        "n_pairs": 946
+      },
+      {
+        "D_k_mean": 4.964146113205807,
+        "D_k_median": 5.0526612622841,
+        "k": 15,
+        "n_pairs": 946
+      },
+      {
+        "D_k_mean": 5.245110427240505,
+        "D_k_median": 5.3619206911951585,
+        "k": 16,
+        "n_pairs": 946
+      },
+      {
+        "D_k_mean": 5.505743829128545,
+        "D_k_median": 5.61893458490173,
+        "k": 17,
+        "n_pairs": 946
+      },
+      {
+        "D_k_mean": 5.745332204701507,
+        "D_k_median": 5.869289047126597,
+        "k": 18,
+        "n_pairs": 946
+      },
+      {
+        "D_k_mean": 5.9722502388309895,
+        "D_k_median": 6.119020927854201,
+        "k": 19,
+        "n_pairs": 946
+      },
+      {
+        "D_k_mean": 6.211281469744209,
+        "D_k_median": 6.357055609304329,
+        "k": 20,
+        "n_pairs": 946
+      },
+      {
+        "D_k_mean": 6.424329422155903,
+        "D_k_median": 6.581796468928035,
+        "k": 21,
+        "n_pairs": 903
+      },
+      {
+        "D_k_mean": 6.676976974361057,
+        "D_k_median": 6.826231866660139,
+        "k": 22,
+        "n_pairs": 903
+      },
+      {
+        "D_k_mean": 6.921633686312327,
+        "D_k_median": 7.081363873289954,
+        "k": 23,
+        "n_pairs": 861
+      },
+      {
+        "D_k_mean": 7.164521197513921,
+        "D_k_median": 7.3201806916422525,
+        "k": 24,
+        "n_pairs": 861
+      },
+      {
+        "D_k_mean": 7.4002600553508096,
+        "D_k_median": 7.5612502801285295,
+        "k": 25,
+        "n_pairs": 861
+      },
+      {
+        "D_k_mean": 7.6247006382179645,
+        "D_k_median": 7.810880575175564,
+        "k": 26,
+        "n_pairs": 861
+      },
+      {
+        "D_k_mean": 7.793103587483369,
+        "D_k_median": 7.96672938297168,
+        "k": 27,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 7.991187045461696,
+        "D_k_median": 8.152212725244452,
+        "k": 28,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 8.187894292349341,
+        "D_k_median": 8.31620830603123,
+        "k": 29,
+        "n_pairs": 820
+      },
+      {
+        "D_k_mean": 8.384197516822725,
+        "D_k_median": 8.52179151609541,
+        "k": 30,
+        "n_pairs": 820
+      }
+    ],
+    "fit_target": "per-k median D_k over all usable service pairs at that k; the changing denominator is retained and reported rather than pooled away",
+    "increment_diagnostics": {
+      "first_to_last_increment_ratio": 1.5562111971225507,
+      "median_first_8_increment": 0.34579015011165204,
+      "median_last_8_increment": 0.22220001420823943
+    },
+    "linear": {
+      "aic": -71.46867467842796,
+      "intercept": 0.692722391181002,
+      "predicted": [
+        2.065406631744264,
+        2.3399434798569163,
+        2.6144803279695688,
+        2.889017176082221,
+        3.1635540241948736,
+        3.438090872307526,
+        3.7126277204201785,
+        3.9871645685328305,
+        4.261701416645483,
+        4.536238264758135,
+        4.810775112870788,
+        5.08531196098344,
+        5.359848809096093,
+        5.634385657208745,
+        5.908922505321398,
+        6.18345935343405,
+        6.4579962015467025,
+        6.732533049659355,
+        7.007069897772007,
+        7.281606745884659,
+        7.556143593997311,
+        7.830680442109964,
+        8.105217290222615,
+        8.379754138335269,
+        8.65429098644792,
+        8.928827834560574
+      ],
+      "rmse": 0.23426070335442203,
+      "rss": 1.4268300055388214,
+      "slope": 0.2745368481126524
+    },
+    "linear_model": "D_k = a + b*k",
+    "power": {
+      "aic": -90.73861363005392,
+      "coefficient": 0.5074355075783109,
+      "exponent_p": 0.8380000000000001,
+      "predicted": [
+        1.9548692586201872,
+        2.2775693059632967,
+        2.5916300744223264,
+        2.8984796970213544,
+        3.19916084987753,
+        3.494466275404272,
+        3.785017777849218,
+        4.07131530381848,
+        4.35376900002369,
+        4.632721013672582,
+        4.908460818390944,
+        5.181236293180164,
+        5.4512619237473325,
+        5.718724999226529,
+        5.983790378553621,
+        6.246604214625047,
+        6.507296904880711,
+        6.765985458196577,
+        7.022775414841884,
+        7.277762419658142,
+        7.531033522931934,
+        7.782668265100239,
+        8.032739588138904,
+        8.281314606718094,
+        8.528455264937286,
+        8.774218898974954
+      ],
+      "rmse": 0.16805988958142784,
+      "rss": 0.7343472886391645
+    },
+    "power_model": "D_k = q*k^p, p selected by numpy grid search over [0.05, 1.50]",
+    "sqrt_sublinear": {
+      "aic": -160.30805726018855,
+      "intercept": -3.4083672520231256,
+      "predicted": [
+        1.4789434539061257,
+        1.9454133863247711,
+        2.3743767601917463,
+        2.7736461334416043,
+        3.1486481273490488,
+        3.5033338318332476,
+        3.840686000632665,
+        4.163021936698955,
+        4.472184469420986,
+        4.769667757782951,
+        5.056703203021653,
+        5.334319920473106,
+        5.603388413960518,
+        5.864652826173968,
+        6.118755217951982,
+        6.366254159835377,
+        6.607639184297732,
+        6.843342172247491,
+        7.073746433056668,
+        7.299194024672667,
+        7.519991713597165,
+        7.736415871425779,
+        7.948716531059997,
+        8.157120772406618,
+        8.361835568255117,
+        8.563050191944988
+      ],
+      "rmse": 0.04243548603773349,
+      "rss": 0.046820032356725536,
+      "sqrt_slope": 2.185671793124058
+    },
+    "sublinear_model": "D_k = c + d*sqrt(k)"
+  },
+  "runner_path": "/root/eibo/x3_controls.py",
+  "smoothing_sensitivity": {
+    "0.0": {
+      "curve": [
+        {
+          "D_k_mean": 2.0407777747299862,
+          "D_k_median": 1.4554057291542284,
+          "k": 5,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 2.692537039776408,
+          "D_k_median": 2.1932523553422785,
+          "k": 6,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.36606862554478,
+          "D_k_median": 2.7646494103296364,
+          "k": 7,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 4.362884362756734,
+          "D_k_median": 3.491122932172349,
+          "k": 8,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 5.423597629557332,
+          "D_k_median": 4.62409112451275,
+          "k": 9,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 6.82936791349518,
+          "D_k_median": 6.110363163917345,
+          "k": 10,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 8.328970191994086,
+          "D_k_median": 7.821193505518751,
+          "k": 11,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 9.950515057717409,
+          "D_k_median": 9.689289747828376,
+          "k": 12,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 11.851040023028318,
+          "D_k_median": 11.801426722015437,
+          "k": 13,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 13.534725177817677,
+          "D_k_median": 13.78195869524292,
+          "k": 14,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 15.495245556679457,
+          "D_k_median": 15.687960092222161,
+          "k": 15,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 17.34103710414837,
+          "D_k_median": 17.481572366614913,
+          "k": 16,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 19.183839765170642,
+          "D_k_median": 19.675739878213395,
+          "k": 17,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 20.83977802654006,
+          "D_k_median": 21.737336094679662,
+          "k": 18,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 22.368102888392645,
+          "D_k_median": 23.82886105453914,
+          "k": 19,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 23.786174952874124,
+          "D_k_median": 25.734992131410202,
+          "k": 20,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 24.85009770011695,
+          "D_k_median": 26.976582530830278,
+          "k": 21,
+          "n_pairs": 903
+        },
+        {
+          "D_k_mean": 25.90296239610249,
+          "D_k_median": 28.072133119001876,
+          "k": 22,
+          "n_pairs": 903
+        },
+        {
+          "D_k_mean": 26.723219181946686,
+          "D_k_median": 28.816214873687358,
+          "k": 23,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 27.470308802552672,
+          "D_k_median": 29.57029571901667,
+          "k": 24,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 28.07755506895262,
+          "D_k_median": 30.01094736113656,
+          "k": 25,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 28.586845771150212,
+          "D_k_median": 30.274458675992452,
+          "k": 26,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 28.96022400809521,
+          "D_k_median": 30.53292631364306,
+          "k": 27,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 29.31698625460882,
+          "D_k_median": 30.681826733928965,
+          "k": 28,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 29.61091025329828,
+          "D_k_median": 30.796218185823804,
+          "k": 29,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 29.848353968837298,
+          "D_k_median": 30.850991967382264,
+          "k": 30,
+          "n_pairs": 820
+        }
+      ],
+      "fit": {
+        "first_to_last_median_increment_ratio": 5.017903919626672,
+        "increment_window": 8,
+        "linear": {
+          "aic": 46.89157435870536,
+          "intercept": -5.840826135603276,
+          "predicted": [
+            1.1517374908785047,
+            2.5502502161748595,
+            3.948762941471216,
+            5.3472756667675725,
+            6.745788392063929,
+            8.144301117360286,
+            9.54281384265664,
+            10.941326567952995,
+            12.339839293249351,
+            13.738352018545708,
+            15.136864743842064,
+            16.53537746913842,
+            17.933890194434777,
+            19.332402919731134,
+            20.73091564502749,
+            22.129428370323847,
+            23.5279410956202,
+            24.926453820916556,
+            26.324966546212917,
+            27.723479271509266,
+            29.121991996805622,
+            30.52050472210198,
+            31.919017447398335,
+            33.31753017269469,
+            34.716042897991045,
+            36.1145556232874
+          ],
+          "rmse": 2.2815110585743907,
+          "rss": 135.33761047032814,
+          "slope": 1.398512725296356
+        },
+        "linear_model_aic_advantage_over_sqrt": -9.03271634851015,
+        "power": {
+          "aic": 54.62756717178432,
+          "coefficient": 0.5143710227219336,
+          "exponent_p": 1.25,
+          "grid": {
+            "count": 1451,
+            "max": 1.5,
+            "min": 0.05,
+            "step": 0.001
+          },
+          "predicted": [
+            3.845820409613781,
+            4.830204936591748,
+            5.8566469470321145,
+            6.920523985876174,
+            8.01825070765999,
+            9.146953988270774,
+            10.304272872095028,
+            11.488228155032349,
+            12.69713347035593,
+            13.92953243893911,
+            15.18415289872502,
+            16.459872727101875,
+            17.75569376959543,
+            19.070721582849725,
+            20.404149440725412,
+            21.75524552690824,
+            23.123342550079553,
+            24.507829228849857,
+            25.908143239412496,
+            27.323765321478103,
+            28.75421431155831,
+            30.199042926172922,
+            31.657834157067732,
+            33.13019817009519,
+            34.615769621801036,
+            36.11420532490597
+          ],
+          "rmse": 2.7512864421952026,
+          "rss": 196.80900426218554
+        },
+        "sqrt_model_aic_advantage_over_linear": 9.03271634851015,
+        "sqrt_sublinear": {
+          "aic": 37.85885801019521,
+          "intercept": -26.762709146006944,
+          "predicted": [
+            -1.8495613041512193,
+            0.5282769568841061,
+            2.7149249101079533,
+            4.750207199902029,
+            6.661786118727999,
+            8.469802413351427,
+            10.189460720705252,
+            11.83257353123724,
+            13.408534698494773,
+            14.924960722821769,
+            16.388128692562095,
+            17.80328454030632,
+            19.174865673812892,
+            20.506665372856506,
+            21.801956553270866,
+            23.063586537704506,
+            24.2940507261067,
+            25.495550638611856,
+            26.670040201137244,
+            27.819263059775157,
+            28.944782961884638,
+            30.048008716284098,
+            31.13021486985934,
+            32.19255896622285,
+            33.23609605262122,
+            34.26179095305952
+          ],
+          "rmse": 1.917710228107291,
+          "rss": 95.61792549367028,
+          "sqrt_slope": 11.141498421578316
+        },
+        "verdict": "INCONCLUSIVE"
+      },
+      "verdict": "INCONCLUSIVE"
+    },
+    "0.5": {
+      "curve": [
+        {
+          "D_k_mean": 1.746931894121503,
+          "D_k_median": 1.3813736271298076,
+          "k": 5,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 2.1550238987696244,
+          "D_k_median": 1.9982088350601774,
+          "k": 6,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 2.5113861303094853,
+          "D_k_median": 2.4697962698875147,
+          "k": 7,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 2.868603559413967,
+          "D_k_median": 2.841056831857115,
+          "k": 8,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.1336726596679507,
+          "D_k_median": 3.145651959269183,
+          "k": 9,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.437206305986804,
+          "D_k_median": 3.449323653767959,
+          "k": 10,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.7516667190118502,
+          "D_k_median": 3.8021430543445645,
+          "k": 11,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 4.0679961907138775,
+          "D_k_median": 4.140903953991259,
+          "k": 12,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 4.388415411532041,
+          "D_k_median": 4.444433569299194,
+          "k": 13,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 4.674606845962577,
+          "D_k_median": 4.734628498522778,
+          "k": 14,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 4.964146113205807,
+          "D_k_median": 5.0526612622841,
+          "k": 15,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.245110427240505,
+          "D_k_median": 5.361920691195158,
+          "k": 16,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.505743829128544,
+          "D_k_median": 5.618934584901731,
+          "k": 17,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.745332204701507,
+          "D_k_median": 5.8692890471266,
+          "k": 18,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.97225023883099,
+          "D_k_median": 6.1190209278542085,
+          "k": 19,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 6.21128146974421,
+          "D_k_median": 6.357055609304327,
+          "k": 20,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 6.424329422155902,
+          "D_k_median": 6.58179646892804,
+          "k": 21,
+          "n_pairs": 903
+        },
+        {
+          "D_k_mean": 6.676976974361056,
+          "D_k_median": 6.826231866660139,
+          "k": 22,
+          "n_pairs": 903
+        },
+        {
+          "D_k_mean": 6.921633686312331,
+          "D_k_median": 7.081363873289957,
+          "k": 23,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 7.164521197513925,
+          "D_k_median": 7.320180691642243,
+          "k": 24,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 7.4002600553508096,
+          "D_k_median": 7.561250280128544,
+          "k": 25,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 7.62470063821797,
+          "D_k_median": 7.8108805751755614,
+          "k": 26,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 7.793103587483359,
+          "D_k_median": 7.966729382971675,
+          "k": 27,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 7.991187045461693,
+          "D_k_median": 8.152212725244446,
+          "k": 28,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 8.18789429234935,
+          "D_k_median": 8.316208306031221,
+          "k": 29,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 8.384197516822736,
+          "D_k_median": 8.521791516095425,
+          "k": 30,
+          "n_pairs": 820
+        }
+      ],
+      "fit": {
+        "first_to_last_median_increment_ratio": 1.5562111971225074,
+        "increment_window": 8,
+        "linear": {
+          "aic": -71.46867467842792,
+          "intercept": 0.6927223911810012,
+          "predicted": [
+            2.0654066317442634,
+            2.3399434798569163,
+            2.6144803279695688,
+            2.889017176082221,
+            3.1635540241948736,
+            3.438090872307526,
+            3.7126277204201785,
+            3.9871645685328314,
+            4.261701416645484,
+            4.536238264758136,
+            4.810775112870789,
+            5.085311960983441,
+            5.359848809096094,
+            5.634385657208746,
+            5.9089225053213985,
+            6.183459353434051,
+            6.457996201546703,
+            6.732533049659356,
+            7.007069897772008,
+            7.281606745884662,
+            7.556143593997314,
+            7.8306804421099665,
+            8.105217290222619,
+            8.379754138335272,
+            8.654290986447924,
+            8.928827834560575
+          ],
+          "rmse": 0.23426070335442226,
+          "rss": 1.426830005538824,
+          "slope": 0.2745368481126525
+        },
+        "linear_model_aic_advantage_over_sqrt": -88.83938258176035,
+        "power": {
+          "aic": -90.7386136300539,
+          "coefficient": 0.5074355075783109,
+          "exponent_p": 0.8380000000000001,
+          "grid": {
+            "count": 1451,
+            "max": 1.5,
+            "min": 0.05,
+            "step": 0.001
+          },
+          "predicted": [
+            1.9548692586201872,
+            2.2775693059632967,
+            2.5916300744223264,
+            2.8984796970213544,
+            3.19916084987753,
+            3.494466275404272,
+            3.785017777849218,
+            4.07131530381848,
+            4.35376900002369,
+            4.632721013672582,
+            4.908460818390944,
+            5.181236293180164,
+            5.4512619237473325,
+            5.718724999226529,
+            5.983790378553621,
+            6.246604214625047,
+            6.507296904880711,
+            6.765985458196577,
+            7.022775414841884,
+            7.277762419658142,
+            7.531033522931934,
+            7.782668265100239,
+            8.032739588138904,
+            8.281314606718094,
+            8.528455264937286,
+            8.774218898974954
+          ],
+          "rmse": 0.16805988958142787,
+          "rss": 0.734347288639165
+        },
+        "sqrt_model_aic_advantage_over_linear": 88.83938258176035,
+        "sqrt_sublinear": {
+          "aic": -160.30805726018826,
+          "intercept": -3.408367252023127,
+          "predicted": [
+            1.4789434539061252,
+            1.9454133863247707,
+            2.374376760191746,
+            2.773646133441604,
+            3.148648127349049,
+            3.503333831833247,
+            3.8406860006326644,
+            4.163021936698956,
+            4.472184469420987,
+            4.769667757782952,
+            5.056703203021654,
+            5.334319920473107,
+            5.603388413960519,
+            5.864652826173969,
+            6.118755217951983,
+            6.3662541598353775,
+            6.6076391842977324,
+            6.843342172247492,
+            7.073746433056669,
+            7.299194024672668,
+            7.5199917135971655,
+            7.73641587142578,
+            7.948716531059998,
+            8.157120772406618,
+            8.36183556825512,
+            8.563050191944992
+          ],
+          "rmse": 0.042435486037733734,
+          "rss": 0.04682003235672607,
+          "sqrt_slope": 2.1856717931240586
+        },
+        "verdict": "SUBLINEAR"
+      },
+      "verdict": "SUBLINEAR"
+    },
+    "1.0": {
+      "curve": [
+        {
+          "D_k_mean": 1.735193856291267,
+          "D_k_median": 1.3770012933245532,
+          "k": 5,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 2.1365081513818116,
+          "D_k_median": 1.9780269545990041,
+          "k": 6,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 2.4852487863123653,
+          "D_k_median": 2.453475469131498,
+          "k": 7,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 2.8312414866969036,
+          "D_k_median": 2.7911721036723964,
+          "k": 8,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.08278253862673,
+          "D_k_median": 3.1091526861151912,
+          "k": 9,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.3686454954036216,
+          "D_k_median": 3.3905908239158413,
+          "k": 10,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.6631821422872686,
+          "D_k_median": 3.723124790037676,
+          "k": 11,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.9565550314825533,
+          "D_k_median": 4.008742999326535,
+          "k": 12,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 4.250683900489003,
+          "D_k_median": 4.299695999715835,
+          "k": 13,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 4.511587473086764,
+          "D_k_median": 4.587978296253038,
+          "k": 14,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 4.7704392378753715,
+          "D_k_median": 4.834197828781079,
+          "k": 15,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.020556951993461,
+          "D_k_median": 5.085485122812524,
+          "k": 16,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.246965529231204,
+          "D_k_median": 5.314999859180052,
+          "k": 17,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.451611861136544,
+          "D_k_median": 5.531942139443269,
+          "k": 18,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.641168753499945,
+          "D_k_median": 5.709551215285823,
+          "k": 19,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.8404223761668606,
+          "D_k_median": 5.904200463566424,
+          "k": 20,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 6.01918036048947,
+          "D_k_median": 6.0994470323612555,
+          "k": 21,
+          "n_pairs": 903
+        },
+        {
+          "D_k_mean": 6.22833754616669,
+          "D_k_median": 6.305864769441214,
+          "k": 22,
+          "n_pairs": 903
+        },
+        {
+          "D_k_mean": 6.4351079143026135,
+          "D_k_median": 6.518282709155654,
+          "k": 23,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 6.628743143564505,
+          "D_k_median": 6.7397423186298795,
+          "k": 24,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 6.813534882863064,
+          "D_k_median": 6.944192200100744,
+          "k": 25,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 6.983493425179755,
+          "D_k_median": 7.1281921283570515,
+          "k": 26,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 7.103464302912164,
+          "D_k_median": 7.228929816255116,
+          "k": 27,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 7.238481310896656,
+          "D_k_median": 7.358982399539182,
+          "k": 28,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 7.3711517161462305,
+          "D_k_median": 7.482542631544211,
+          "k": 29,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 7.500274421673278,
+          "D_k_median": 7.604982087221785,
+          "k": 30,
+          "n_pairs": 820
+        }
+      ],
+      "fit": {
+        "first_to_last_median_increment_ratio": 2.0713559823927756,
+        "increment_window": 8,
+        "linear": {
+          "aic": -62.781412830558935,
+          "intercept": 0.9819248727928878,
+          "predicted": [
+            2.1685232183440064,
+            2.40584288745423,
+            2.6431625565644534,
+            2.880482225674677,
+            3.1178018947849004,
+            3.355121563895125,
+            3.5924412330053483,
+            3.829760902115572,
+            4.067080571225795,
+            4.304400240336019,
+            4.541719909446243,
+            4.779039578556467,
+            5.01635924766669,
+            5.253678916776914,
+            5.490998585887138,
+            5.728318254997362,
+            5.965637924107585,
+            6.202957593217809,
+            6.440277262328032,
+            6.677596931438256,
+            6.91491660054848,
+            7.152236269658704,
+            7.389555938768927,
+            7.626875607879151,
+            7.864195276989374,
+            8.101514946099599
+          ],
+          "rmse": 0.2768559514153823,
+          "rss": 1.9928796636870296,
+          "slope": 0.23731966911022367
+        },
+        "linear_model_aic_advantage_over_sqrt": -60.625656619998935,
+        "power": {
+          "aic": -83.86000216535825,
+          "coefficient": 0.5852019372359865,
+          "exponent_p": 0.766,
+          "grid": {
+            "count": 1451,
+            "max": 1.5,
+            "min": 0.05,
+            "step": 0.001
+          },
+          "predicted": [
+            2.007783026512703,
+            2.308711216646849,
+            2.5980700338505645,
+            2.8778800273223895,
+            3.1496008382134213,
+            3.4143320529184757,
+            3.6729291583095316,
+            3.9260749811303746,
+            4.1743260008847365,
+            4.418143631640492,
+            4.6579160781440985,
+            4.893974045994139,
+            5.126602310377146,
+            5.356048414498808,
+            5.58252932969703,
+            5.806236636951037,
+            6.027340615502689,
+            6.245993510113861,
+            6.462332171754048,
+            6.6764802138593655,
+            6.888549789483875,
+            7.098643068472805,
+            7.306853474865555,
+            7.513266730872189,
+            7.7179617434762715,
+            7.921011361986974
+          ],
+          "rmse": 0.19182843237903832,
+          "rss": 0.9567518341939814
+        },
+        "sqrt_model_aic_advantage_over_linear": 60.625656619998935,
+        "sqrt_sublinear": {
+          "aic": -123.40706945055787,
+          "intercept": -2.5985754125412046,
+          "predicted": [
+            1.6456045905218981,
+            2.050690839038808,
+            2.4232060898502534,
+            2.769934831226721,
+            3.095589584815413,
+            3.40360150894332,
+            3.696560850994445,
+            3.9764799755267712,
+            4.244959210432647,
+            4.503296095415132,
+            4.752559989231923,
+            4.993644583934286,
+            5.227305832057542,
+            5.454189953110681,
+            5.674854517900144,
+            5.889784593585,
+            6.099405294110369,
+            6.304091668337602,
+            6.504176585214379,
+            6.69995709061882,
+            6.891699583053159,
+            7.079644065838261,
+            7.26400766956076,
+            7.444987592241711,
+            7.62276357071946,
+            7.797499971487342
+          ],
+          "rmse": 0.08628185559981721,
+          "rss": 0.19355852374944044,
+          "sqrt_slope": 1.8980549991188727
+        },
+        "verdict": "SUBLINEAR"
+      },
+      "verdict": "SUBLINEAR"
+    }
+  },
+  "smoothing_stability_statement": "Verdict is not stable across smoothing values 0, 0.5, and 1.0.",
+  "status": "COMPLETE"
+}

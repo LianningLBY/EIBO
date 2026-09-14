@@ -1,0 +1,61 @@
+{
+  "assumed_pair_count": 0,
+  "measured_full_n_pair_count": 990,
+  "non_interchangeability": "This is a ONE-SIDED result for the PER-FLOW 32-VECTOR object, not for the marginal k-prefix symbol law. The two objects consume different aspects of the flow -- prefix order/length versus whole-flow size and timing histograms -- and they have NO data-processing order in either direction (M055). The observed medians on this corpus order as vector 0.8673875578391307 > k-prefix marginal 0.5349447174554081, but that is an EMPIRICAL ordering, not a guarantee: the per-pair comparison INVERTS on 78 of 990 pairs, largest gap 0.3415 at pair (29,38). The valid theorem is the pooled-cell one: TV(per-flow vector law) >= TV(pooled cell law), because pooling within a service is a deterministic map of the same flows and channel. This figure must NEVER be reported as a better bound on Q1's or Q2's object. One-hot encoding was adopted precisely to put both sides of the bracket on ONE object, and the vector structure it discards is reported here as a SEPARATE, independent result.",
+  "pairs_source": "q1_eps_lo_symbol_map.json rows",
+  "prior_capped_reference": "An earlier capped reference (median 0.8585373202534684) existed inside q1_eps_lo_symbol_map.json under vector_level_independent_one_sided, computed with a 20,000-flow-per-service cap from q2_phist_certificate_v2.json. This run replaces it with a full-n measurement. Report THIS run's quantiles; cite the old value only as the capped predecessor.",
+  "relationship_to_marginal": "RETRACTED CLAIM, REPLACED IN PLACE. An earlier version of this field asserted \"TV(vector) >= TV(marginal)\". That inequality is NOT a theorem for these two objects -- the vector law and the k-prefix symbol law consume different aspects of the flow and have no data-processing order in either direction (M055) -- and the per-pair comparison inverts on 78 of 990 pairs. The k-prefix marginal result's eps_lo median is 0.5349447174554081 (pair set and object as declared in q1_eps_lo_symbol_map.json); this run's value is the vector-level counterpart. The two are reported as SEPARATE, coexisting results. Neither ranks or supersedes the other, and the vector figure must not be read as a better bound on the marginal object.",
+  "vector_level_one_sided": {
+    "alpha": 0.025,
+    "cap_is_none": true,
+    "eps_lo_max": 0.9963109497130209,
+    "eps_lo_mean": 0.8226024312313195,
+    "eps_lo_min": 0.10531548567491701,
+    "eps_lo_quantiles": {
+      "max": 0.9963109497130209,
+      "median": 0.8673875578391307,
+      "min": 0.10531548567491701,
+      "q25": 0.7383670417083631,
+      "q5": 0.4959739903592185,
+      "q75": 0.9578527666076553,
+      "q95": 0.9858218464175719
+    },
+    "fraction_eps_lo_positive": 1.0,
+    "guarantee": "asymptotic HPLB estimate, not an exact finite-sample certificate",
+    "method": "michel",
+    "object_bounded": "TV(per-flow normalized 32-vector law)",
+    "object_composition": "Concatenation of PHIST_SRC_SIZES, PHIST_DST_SIZES, PHIST_SRC_IPT, PHIST_DST_IPT; four separate marginal histograms, 32 coordinates total; NOT a joint 8x8x2 object.",
+    "pair_count": 990,
+    "preprocessing": "Per flow: concatenate the four 8-bin marginal histograms into a 32-vector and normalize to sum 1; pool flows within each APP service by averaging the normalized vectors.",
+    "random_state": 0,
+    "sample_cap_per_service": null,
+    "sample_seed": 20260913,
+    "sampling_unit": "flow"
+  },
+  "pooled_cell_law_theorem_check": {
+    "status": "NOT_PERFORMABLE",
+    "pairs_where_vector_ge_pooled": null,
+    "total_pairs": 990,
+    "reason": "No per-pair pooled cell law values were found in any existing artifact or project file under /root/eibo. The only pooled text match was an unrelated source-code phrase about not pooling away a median; substituting q1_eps_lo_symbol_map.json k-prefix values would test a different object and would be invalid.",
+    "theorem_scope": "The valid theorem is TV(per-flow vector law) >= TV(pooled cell law), where pooling within a service is a deterministic map of the same flows and channel."
+  },
+  "empirical_k_prefix_comparison": {
+    "status": "OBSERVED_ORDERING_ON_THIS_CORPUS_NOT_A_PER_PAIR_GUARANTEE",
+    "pair_count": 990,
+    "vector_median": 0.8673875578391307,
+    "k_prefix_marginal_median": 0.5349447174554081,
+    "k_prefix_marginal_median_rounded_6dp": 0.534945,
+    "per_pair_guarantee": false,
+    "per_pair_violation_is_object_mismatch": false,
+    "interpretation": "The corpus medians show vector 0.8673875578391307 > k-prefix marginal 0.534945, but this is empirical only; a per-pair inversion is not anomalous."
+  },
+  "theorem_not_asserted_here": "No per-pair inequality is asserted between TV(per-flow 32-vector law) and the k-prefix symbol law. Those two objects consume different aspects of the flow -- prefix order/length versus whole-flow size and inter-packet-timing histograms -- and this project's framework states explicitly that they have NO data-processing order in either direction. Their medians on this corpus (vector 0.8673875578391307 vs k-prefix marginal 0.534945) are reported as an EMPIRICAL ordering, not as a guarantee, and a per-pair inversion would be expected rather than anomalous.",
+  "spec_correction_no_dpi_order": "An earlier instruction of ours told this task to assert TV(vector) >= TV(k-prefix marginal) per pair and to treat a violation as an object-mismatch bug. That instruction was WRONG on two counts: the inequality is not a theorem for those two objects, and a violation would therefore not indicate any mismatch. It is recorded here because a silent removal would leave a reader holding the earlier claim, and because the claim directly contradicted the framework's own 'no DPI order in either direction' statement. The relational word 'marginal' names different distributions depending on what it is marginal to, and conflating them is what caused the error.",
+  "pooled_cell_law_is_the_theorem_case": "The PHIST-side POOLED CELL LAW -- the distribution obtained by averaging the per-flow 32-vectors within a service -- IS a deterministic function of the per-flow vector law (same flows, same channel, pooling is a deterministic map). Therefore TV(vector law) >= TV(pooled cell law) IS a theorem, and that is the inequality worth asserting per pair. It is a different comparison from the k-prefix one and must not be conflated with it.",
+  "vector_side_quantity_type": "lower_bound",
+  "pairs_where_the_check_can_falsify": 0,
+  "check_is_sanity_not_detector": true,
+  "check_is_sanity_not_detector_note": "Passing means no contradiction was observed; failing would NOT indicate a mismatch, because a lower bound may sit below the other quantity's value even when the data-processing inequality holds. With a lower bound on both sides the comparison cannot falsify anything, so it is a one-sided sanity check rather than a detector. Recorded explicitly, as a zero falsifiable count, so that a 'pass' cannot be read as 'the theorem has been verified'.",
+  "not_performable_verdict_corrected": "An earlier run recorded the pooled-cell-law comparison as NOT_PERFORMABLE, giving the reason that no per-pair pooled-cell-law values exist. That reason was FALSE: q2_phist_certificate_v3.json declares its probability_parameter as p_service = E[per-flow normalized 32-vector], which IS the pooled cell law, and its 990 rows each carry tv_hat, which is that law's TV per pair. The check was therefore performable all along. Recorded because a 'cannot be done' verdict is itself a claim that must be checked against the artifacts, and this one was wrong. The correction is added rather than substituted, so the earlier verdict remains readable as history.",
+  "detector_qualification_rule": "An assertion may be called a detector, or a self-failing check, only if BOTH hold: (a) the inequality is a theorem for the two objects actually NAMED, and (b) the quantity types on the two sides permit a contradiction -- at least one side must be an upper bound or a point estimate. Two lower bounds compared to each other can never falsify, no matter how the inequality is stated."
+}

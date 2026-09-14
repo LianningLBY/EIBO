@@ -1,0 +1,268 @@
+{
+  "coverage_by_k": {
+    "10": {
+      "aggregate_flow_fraction": 0.8919443037771991,
+      "eligible_flow_count": 8912361,
+      "selected_flow_count": 9992060,
+      "services_usable": 45,
+      "total_pair_count": 990,
+      "usable_pair_count": 990,
+      "usable_pair_fraction": 1.0
+    },
+    "15": {
+      "aggregate_flow_fraction": 0.8349535531211782,
+      "eligible_flow_count": 8342906,
+      "selected_flow_count": 9992060,
+      "services_usable": 44,
+      "total_pair_count": 990,
+      "usable_pair_count": 946,
+      "usable_pair_fraction": 0.9555555555555556
+    },
+    "30": {
+      "aggregate_flow_fraction": 0.506202624884158,
+      "eligible_flow_count": 5058007,
+      "selected_flow_count": 9992060,
+      "services_usable": 41,
+      "total_pair_count": 990,
+      "usable_pair_count": 820,
+      "usable_pair_fraction": 0.8282828282828283
+    },
+    "5": {
+      "aggregate_flow_fraction": 0.925845521343947,
+      "eligible_flow_count": 9251104,
+      "selected_flow_count": 9992060,
+      "services_usable": 45,
+      "total_pair_count": 990,
+      "usable_pair_count": 990,
+      "usable_pair_fraction": 1.0
+    }
+  },
+  "metadata_header_path": "/root/eibo/artifacts/q1_absolute_counts.meta.json",
+  "pair_counts": {
+    "expected": 990,
+    "formula": "(#retained_services choose 2) * 5",
+    "rows_per_rung": 990,
+    "total_table_rows": 4950
+  },
+  "per_rung": [
+    {
+      "M": 1,
+      "T_n_median": 0.06714052310689379,
+      "alphabet_cardinality": 32,
+      "gate_fraction_both": 0.2919191919191919,
+      "gate_pairs_both": 289,
+      "lower_side_fraction": 0.996969696969697,
+      "lower_side_pairs": 987,
+      "pairs": 990,
+      "radius_median": 0.10047173035741769,
+      "saturation_fraction_tv_ge_0_99": 0.0,
+      "saturation_label": "INFORMATIVE",
+      "upper_side_fraction": 0.29494949494949496,
+      "upper_side_pairs": 292
+    },
+    {
+      "M": 2,
+      "T_n_median": 0.06714052310689379,
+      "alphabet_cardinality": 1024,
+      "gate_fraction_both": 0.02727272727272727,
+      "gate_pairs_both": 27,
+      "lower_side_fraction": 1.0,
+      "lower_side_pairs": 990,
+      "pairs": 990,
+      "radius_median": 0.40761613621814385,
+      "saturation_fraction_tv_ge_0_99": 0.10505050505050505,
+      "saturation_label": "INFORMATIVE",
+      "upper_side_fraction": 0.02727272727272727,
+      "upper_side_pairs": 27
+    },
+    {
+      "M": 4,
+      "T_n_median": 0.06714052310689379,
+      "alphabet_cardinality": 32768,
+      "gate_fraction_both": 0.0,
+      "gate_pairs_both": 0,
+      "lower_side_fraction": 1.0,
+      "lower_side_pairs": 990,
+      "pairs": 990,
+      "radius_median": 2.145087273719205,
+      "saturation_fraction_tv_ge_0_99": 0.23939393939393938,
+      "saturation_label": "INFORMATIVE",
+      "upper_side_fraction": 0.0,
+      "upper_side_pairs": 0
+    },
+    {
+      "M": 8,
+      "T_n_median": 0.06714052310689379,
+      "alphabet_cardinality": 1048576,
+      "gate_fraction_both": 0.0,
+      "gate_pairs_both": 0,
+      "lower_side_fraction": 1.0,
+      "lower_side_pairs": 990,
+      "pairs": 990,
+      "radius_median": 11.973708261262443,
+      "saturation_fraction_tv_ge_0_99": 0.33636363636363636,
+      "saturation_label": "INFORMATIVE",
+      "upper_side_fraction": 0.0,
+      "upper_side_pairs": 0
+    },
+    {
+      "M": 16,
+      "T_n_median": 0.06714052310689379,
+      "alphabet_cardinality": 33554432,
+      "gate_fraction_both": 0.0,
+      "gate_pairs_both": 0,
+      "lower_side_fraction": 1.0,
+      "lower_side_pairs": 990,
+      "pairs": 990,
+      "radius_median": 67.57278466129641,
+      "saturation_fraction_tv_ge_0_99": 0.39090909090909093,
+      "saturation_label": "INFORMATIVE",
+      "upper_side_fraction": 0.0,
+      "upper_side_pairs": 0
+    }
+  ],
+  "run": {
+    "chunk_size": 100000,
+    "cwd_actual": "/root/eibo",
+    "cwd_required": "/root/eibo",
+    "finalized_utc": "2026-09-13T18:00:18.620619+00:00",
+    "metadata_elapsed_seconds": 90.2751579284668,
+    "output_paths": {
+      "counts_csv": "/root/eibo/artifacts/q1_absolute_counts.csv",
+      "counts_json": "/root/eibo/artifacts/q1_absolute_counts.json",
+      "dense_m1_m2": "/root/eibo/artifacts/q1_absolute_dense_counts_m1_m2.json",
+      "metadata": "/root/eibo/artifacts/q1_absolute_counts.meta.json",
+      "summary": "/root/eibo/artifacts/q1_absolute_summary.json"
+    },
+    "python": "/root/miniconda3/bin/python3",
+    "source_h5": {
+      "bytes": 3544625537,
+      "path": "/root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5",
+      "row_count": 10000000,
+      "sha256": "6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab",
+      "subset_note": "10M-flow BUDGET SUBSET; month coverage measured from TIME_FIRST"
+    },
+    "subsampled_for_tv": false,
+    "timestamp_utc": "2026-09-13T17:51:23.442771+00:00"
+  },
+  "self_checks": {
+    "M_order_gate_fraction": [
+      0.2919191919191919,
+      0.02727272727272727,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M_order_lower_fraction": [
+      0.996969696969697,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "M_order_upper_fraction": [
+      0.29494949494949496,
+      0.02727272727272727,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "binding_side_by_rung": [
+      {
+        "M": 1,
+        "binding_side": "upper"
+      },
+      {
+        "M": 2,
+        "binding_side": "upper"
+      },
+      {
+        "M": 4,
+        "binding_side": "upper"
+      },
+      {
+        "M": 8,
+        "binding_side": "upper"
+      },
+      {
+        "M": 16,
+        "binding_side": "upper"
+      }
+    ],
+    "lower_side_ever_passes": true,
+    "lower_side_zero_at_every_rung": false,
+    "pair_row_count_matches_formula": true,
+    "saturation_threshold": 0.99
+  },
+  "service_counts": {
+    "after_PPI_LEN_ge_5_threshold": 45,
+    "after_total_flow_threshold": 45,
+    "all_distinct_service_labels": 53,
+    "dropped_by_PPI_LEN_ge_5_threshold": 0,
+    "dropped_by_total_flow_threshold": 8
+  },
+  "split": {
+    "TIME_FIRST_max": 1748725200.0,
+    "TIME_FIRST_max_utc": "2025-05-31T21:00:00+00:00",
+    "TIME_FIRST_min": 1717189200.0,
+    "TIME_FIRST_min_utc": "2024-05-31T21:00:00+00:00",
+    "deviation_label": null,
+    "flow_unit": "one H5 table row is one flow; no packet-level split was used",
+    "policy": "flow-disjoint AND time-disjoint; packet-level PROHIBITED",
+    "span_days": 365.0,
+    "time_granularity_achieved": "day-level (/flows/DYYYYMMDD daily tables)"
+  },
+  "per_rung_upper_fraction_eps_hi_lt_0_5_ref_radius": {
+    "1": 0.3434343434343434,
+    "2": 0.04747474747474747,
+    "4": 0.0030303030303030303,
+    "8": 0.0,
+    "16": 0.0
+  },
+  "per_rung_upper_count_eps_hi_lt_0_5_ref_radius": {
+    "1": 340,
+    "2": 47,
+    "4": 3,
+    "8": 0,
+    "16": 0
+  },
+  "per_rung_gate_ref_radius": {
+    "1": 0.3393939393939394,
+    "2": null,
+    "4": null,
+    "8": null,
+    "16": null
+  },
+  "per_rung_gate_count_ref_radius": {
+    "1": 336,
+    "2": null,
+    "4": null,
+    "8": null,
+    "16": null
+  },
+  "radius_convention": "Columns WITHOUT a `_ref_radius` suffix (everything inside `per_rung`) use the WRONG inlined radius `(sqrt(m) + 2.9604)/sqrt(n)`, which omits BOTH 0.5 factors and is exactly 2x the reference implementation src/eibo/statcore.py::tv_upper_bound. Those values are UNDERSTATED and MUST NOT be cited; at M=1 they read 292/990 (upper_side_fraction) and 289/990 (gate_fraction_both). Columns WITH a `_ref_radius` suffix use the reference radius `0.5*sqrt(m/n) + 0.5*2.9604/sqrt(n)` and are the ones to cite: at M=1 the upper side is 340/990 and the gate is 336/990.",
+  "per_rung_note": "READ THIS BEFORE QUOTING ANY M=1 NUMBER FROM THIS FILE. Two different quantities circulate and have ALREADY been confused once in this project: (a) 289/990 is the `per_rung` M=1 value (`gate_fraction_both`), computed with a PROXY lower-side criterion (`tv_hat > T(n)`, the band's lower EDGE) AND an understated 2x radius -- it is NOT the gate under any correct convention; (b) 336/990 is the GATE under the canonical full-n convention (lower side `eps_lo > 0.05` measured for all 990 pairs, upper side on the reference radius). A third figure, 292/990, is the same understated-radius upper side as (a) but without the proxy. Do NOT treat 289 as 'the old-convention gate' -- no artifact ever contained such a value.",
+  "joint_gate_cross_reference": {
+    "full_n_lower_set_size": 986,
+    "gate_count": 336,
+    "gate_count_if_upper_set_is_as_recorded": 336,
+    "gate_fraction": 0.3393939393939394,
+    "intersection_size": 336,
+    "upper_condition": "tv_hat + 0.5*sqrt(m/n_a) + 0.5*2.9604/sqrt(n_a) + (same for b) < 0.5, m=32",
+    "upper_condition_row_recomputation_count": 990,
+    "upper_condition_row_recomputation_pass_count": 340,
+    "upper_set_size_as_recorded": 340,
+    "upper_set_size_recomputed": 340
+  },
+  "joint_gate_cross_reference_source": "q1_lower_side_full_n.json -- the full-n run that measured the lower side for ALL 990 pairs with the 20,000-flow cap removed. This is the authoritative gate.",
+  "full_n_measurement_status": "FULLY MEASURED. The lower side was recomputed at full n for all 990 pairs with the cap removed (measured_full_n_pair_count = 990, assumed_pair_count = 0), and the upper condition was recomputed row-by-row through the repository function (340 pass, 0 internal mismatches). The gate is 336. An earlier [333, 336] range is SUPERSEDED -- it belonged to a half-measured state in which 282 pairs' lower side was assumed; no part of the gate is assumed now.",
+  "gate_convention_sensitivity": "The gate is 336 under the canonical (full-n) convention; it would be 335 under the capped convention; the entire difference is pair (21,23) crossing 0.05. All five boundary pairs lie in the upper set. The nearest in-gate margin is +0.008781 and the nearest upper-only margin is -0.007275, with within_0.005_count = 0 -- so UNDER THE CANONICAL CONVENTION no sample sits close to the line; the convention-dependence of the gate value is the separate matter described in the first clause.",
+  "tree_sync_sha256_round2": {
+    "local_before": "0b654e840523d7999c2b3cbca68dcaaa8a39e91b2fd4fedb1dcd724eb022746f",
+    "remote_before": "d7eeb0c1189b5c963e712d7e6b9cf7d0f866680b40a3483a47215bbb23dd2934",
+    "round": 2,
+    "note": "This supersedes tree_sync_sha256, which recorded an earlier sync and is now stale because the files changed twice afterwards. Both keys are kept: the earlier one as history, this one as current. Local is authoritative; direction LOCAL -> SERVER.",
+    "self_reference_caveat": "A JSON file cannot contain its own final SHA-256 without changing it, so local_after/remote_after cannot be embedded here. The definitive byte-identity proof is the pair of sha256sum outputs printed in the run report, not any value inside the file."
+  },
+  "tree_authority": "LOCAL (artifacts/_project/data/) is AUTHORITATIVE for this artifact. Direction of sync: LOCAL -> SERVER. This artifact exists in TWO trees that do NOT auto-sync; the server copy is a mirror. Any future edit must be made on the LOCAL side and then pushed. Do not edit the server copy directly."
+}

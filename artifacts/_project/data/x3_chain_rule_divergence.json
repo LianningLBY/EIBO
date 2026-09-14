@@ -1,0 +1,790 @@
+{
+  "alpha": 0.025,
+  "alpha_convention": "per-law alpha/2 = 0.025 on both sides; union bound over the two laws => joint 0.95 for EACH side. Numbers without a stated split are NOT citable.",
+  "chain_rule_joint_divergence": {
+    "adjudication": "SUBLINEAR",
+    "estimator": "For the fixed M=1 direction-size grid, estimate each conditional binary law P(x_i|x_<i) and Q(x_i|x_<i) from the observed prefix-context transition counts with Jeffreys add-0.5 smoothing, sum the conditional KL terms in both directions, and report their symmetric average as D_k.",
+    "growth_fit": {
+      "adjudication_rule": "SUBLINEAR requires power p<0.90, AIC advantage of sqrt model over linear greater than 6, and first-to-last median increment ratio >1.10; LINEAR requires p>0.95, AIC advantage of linear over sqrt greater than 6, and ratio <=1.10; otherwise INCONCLUSIVE.",
+      "auditable_curve": [
+        {
+          "D_k_mean": 1.746931894121503,
+          "D_k_median": 1.3813736271298078,
+          "k": 5,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 2.1550238987696244,
+          "D_k_median": 1.9982088350601748,
+          "k": 6,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 2.5113861303094858,
+          "D_k_median": 2.469796269887515,
+          "k": 7,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 2.8686035594139665,
+          "D_k_median": 2.841056831857115,
+          "k": 8,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.1336726596679507,
+          "D_k_median": 3.145651959269183,
+          "k": 9,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.4372063059868037,
+          "D_k_median": 3.4493236537679586,
+          "k": 10,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 3.7516667190118502,
+          "D_k_median": 3.802143054344565,
+          "k": 11,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 4.067996190713878,
+          "D_k_median": 4.140903953991263,
+          "k": 12,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 4.388415411532041,
+          "D_k_median": 4.444433569299193,
+          "k": 13,
+          "n_pairs": 990
+        },
+        {
+          "D_k_mean": 4.674606845962577,
+          "D_k_median": 4.734628498522778,
+          "k": 14,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 4.964146113205807,
+          "D_k_median": 5.0526612622841,
+          "k": 15,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.245110427240505,
+          "D_k_median": 5.3619206911951585,
+          "k": 16,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.505743829128545,
+          "D_k_median": 5.61893458490173,
+          "k": 17,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.745332204701507,
+          "D_k_median": 5.869289047126597,
+          "k": 18,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 5.9722502388309895,
+          "D_k_median": 6.119020927854201,
+          "k": 19,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 6.211281469744209,
+          "D_k_median": 6.357055609304329,
+          "k": 20,
+          "n_pairs": 946
+        },
+        {
+          "D_k_mean": 6.424329422155903,
+          "D_k_median": 6.581796468928035,
+          "k": 21,
+          "n_pairs": 903
+        },
+        {
+          "D_k_mean": 6.676976974361057,
+          "D_k_median": 6.826231866660139,
+          "k": 22,
+          "n_pairs": 903
+        },
+        {
+          "D_k_mean": 6.921633686312327,
+          "D_k_median": 7.081363873289954,
+          "k": 23,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 7.164521197513921,
+          "D_k_median": 7.3201806916422525,
+          "k": 24,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 7.4002600553508096,
+          "D_k_median": 7.5612502801285295,
+          "k": 25,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 7.6247006382179645,
+          "D_k_median": 7.810880575175564,
+          "k": 26,
+          "n_pairs": 861
+        },
+        {
+          "D_k_mean": 7.793103587483369,
+          "D_k_median": 7.96672938297168,
+          "k": 27,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 7.991187045461696,
+          "D_k_median": 8.152212725244452,
+          "k": 28,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 8.187894292349341,
+          "D_k_median": 8.31620830603123,
+          "k": 29,
+          "n_pairs": 820
+        },
+        {
+          "D_k_mean": 8.384197516822725,
+          "D_k_median": 8.52179151609541,
+          "k": 30,
+          "n_pairs": 820
+        }
+      ],
+      "fit_target": "per-k median D_k over all usable service pairs at that k; the changing denominator is retained and reported rather than pooled away",
+      "increment_diagnostics": {
+        "first_to_last_increment_ratio": 1.5562111971225507,
+        "median_first_8_increment": 0.34579015011165204,
+        "median_last_8_increment": 0.22220001420823943
+      },
+      "linear": {
+        "aic": -71.46867467842796,
+        "intercept": 0.692722391181002,
+        "predicted": [
+          2.065406631744264,
+          2.3399434798569163,
+          2.6144803279695688,
+          2.889017176082221,
+          3.1635540241948736,
+          3.438090872307526,
+          3.7126277204201785,
+          3.9871645685328305,
+          4.261701416645483,
+          4.536238264758135,
+          4.810775112870788,
+          5.08531196098344,
+          5.359848809096093,
+          5.634385657208745,
+          5.908922505321398,
+          6.18345935343405,
+          6.4579962015467025,
+          6.732533049659355,
+          7.007069897772007,
+          7.281606745884659,
+          7.556143593997311,
+          7.830680442109964,
+          8.105217290222615,
+          8.379754138335269,
+          8.65429098644792,
+          8.928827834560574
+        ],
+        "rmse": 0.23426070335442203,
+        "rss": 1.4268300055388214,
+        "slope": 0.2745368481126524
+      },
+      "linear_model": "D_k = a + b*k",
+      "power": {
+        "aic": -90.73861363005392,
+        "coefficient": 0.5074355075783109,
+        "exponent_p": 0.8380000000000001,
+        "predicted": [
+          1.9548692586201872,
+          2.2775693059632967,
+          2.5916300744223264,
+          2.8984796970213544,
+          3.19916084987753,
+          3.494466275404272,
+          3.785017777849218,
+          4.07131530381848,
+          4.35376900002369,
+          4.632721013672582,
+          4.908460818390944,
+          5.181236293180164,
+          5.4512619237473325,
+          5.718724999226529,
+          5.983790378553621,
+          6.246604214625047,
+          6.507296904880711,
+          6.765985458196577,
+          7.022775414841884,
+          7.277762419658142,
+          7.531033522931934,
+          7.782668265100239,
+          8.032739588138904,
+          8.281314606718094,
+          8.528455264937286,
+          8.774218898974954
+        ],
+        "rmse": 0.16805988958142784,
+        "rss": 0.7343472886391645
+      },
+      "power_model": "D_k = q*k^p, p selected by numpy grid search over [0.05, 1.50]",
+      "sqrt_sublinear": {
+        "aic": -160.30805726018855,
+        "intercept": -3.4083672520231256,
+        "predicted": [
+          1.4789434539061257,
+          1.9454133863247711,
+          2.3743767601917463,
+          2.7736461334416043,
+          3.1486481273490488,
+          3.5033338318332476,
+          3.840686000632665,
+          4.163021936698955,
+          4.472184469420986,
+          4.769667757782951,
+          5.056703203021653,
+          5.334319920473106,
+          5.603388413960518,
+          5.864652826173968,
+          6.118755217951982,
+          6.366254159835377,
+          6.607639184297732,
+          6.843342172247491,
+          7.073746433056668,
+          7.299194024672667,
+          7.519991713597165,
+          7.736415871425779,
+          7.948716531059997,
+          8.157120772406618,
+          8.361835568255117,
+          8.563050191944988
+        ],
+        "rmse": 0.04243548603773349,
+        "rss": 0.046820032356725536,
+        "sqrt_slope": 2.185671793124058
+      },
+      "sublinear_model": "D_k = c + d*sqrt(k)"
+    },
+    "per_k": {
+      "10": {
+        "D_k_mean": 3.4372063059868037,
+        "D_k_median": 3.4493236537679586,
+        "D_k_q25": 1.8538434388188025,
+        "D_k_q75": 4.585412348941595,
+        "D_k_spread": {
+          "iqr": 2.731568910122793,
+          "max": 10.305509910937378,
+          "min": 0.15999407288248446,
+          "q05": 0.7013959402377442,
+          "q95": 6.688951419623539
+        },
+        "n_pairs": 990
+      },
+      "11": {
+        "D_k_mean": 3.7516667190118502,
+        "D_k_median": 3.802143054344565,
+        "D_k_q25": 2.14465456013319,
+        "D_k_q75": 4.94264456168557,
+        "D_k_spread": {
+          "iqr": 2.7979900015523795,
+          "max": 11.120544718929251,
+          "min": 0.19321701132398747,
+          "q05": 0.8506446288944549,
+          "q95": 7.019099870369228
+        },
+        "n_pairs": 990
+      },
+      "12": {
+        "D_k_mean": 4.067996190713878,
+        "D_k_median": 4.140903953991263,
+        "D_k_q25": 2.397647170725781,
+        "D_k_q75": 5.312354072006088,
+        "D_k_spread": {
+          "iqr": 2.914706901280307,
+          "max": 11.603235663040653,
+          "min": 0.24190785135822915,
+          "q05": 1.029828281810058,
+          "q95": 7.355570331571199
+        },
+        "n_pairs": 990
+      },
+      "13": {
+        "D_k_mean": 4.388415411532041,
+        "D_k_median": 4.444433569299193,
+        "D_k_q25": 2.678666875487465,
+        "D_k_q75": 5.741168249351958,
+        "D_k_spread": {
+          "iqr": 3.062501373864493,
+          "max": 12.138894947827291,
+          "min": 0.2641924786184475,
+          "q05": 1.1809718728041378,
+          "q95": 7.732561902891468
+        },
+        "n_pairs": 990
+      },
+      "14": {
+        "D_k_mean": 4.674606845962577,
+        "D_k_median": 4.734628498522778,
+        "D_k_q25": 2.880484780998729,
+        "D_k_q75": 6.08722752777099,
+        "D_k_spread": {
+          "iqr": 3.206742746772261,
+          "max": 12.520983535767071,
+          "min": 0.32698191438137575,
+          "q05": 1.297039955917926,
+          "q95": 8.202440341762545
+        },
+        "n_pairs": 946
+      },
+      "15": {
+        "D_k_mean": 4.964146113205807,
+        "D_k_median": 5.0526612622841,
+        "D_k_q25": 3.149454130354474,
+        "D_k_q75": 6.396083192180144,
+        "D_k_spread": {
+          "iqr": 3.24662906182567,
+          "max": 13.016125875294552,
+          "min": 0.4086357404939882,
+          "q05": 1.4663259069644874,
+          "q95": 8.549106824862022
+        },
+        "n_pairs": 946
+      },
+      "16": {
+        "D_k_mean": 5.245110427240505,
+        "D_k_median": 5.3619206911951585,
+        "D_k_q25": 3.42187093202143,
+        "D_k_q75": 6.728459704262516,
+        "D_k_spread": {
+          "iqr": 3.306588772241086,
+          "max": 13.267022389822834,
+          "min": 0.5041415089570582,
+          "q05": 1.6246778953738557,
+          "q95": 8.90006280453861
+        },
+        "n_pairs": 946
+      },
+      "17": {
+        "D_k_mean": 5.505743829128545,
+        "D_k_median": 5.61893458490173,
+        "D_k_q25": 3.673209673618179,
+        "D_k_q75": 7.041208737704196,
+        "D_k_spread": {
+          "iqr": 3.3679990640860167,
+          "max": 13.53643886725926,
+          "min": 0.6350267041563623,
+          "q05": 1.7522261725256456,
+          "q95": 9.263872693648086
+        },
+        "n_pairs": 946
+      },
+      "18": {
+        "D_k_mean": 5.745332204701507,
+        "D_k_median": 5.869289047126597,
+        "D_k_q25": 3.8977278952272867,
+        "D_k_q75": 7.33684599311346,
+        "D_k_spread": {
+          "iqr": 3.4391180978861735,
+          "max": 13.69183016731936,
+          "min": 0.7675215985660139,
+          "q05": 1.874518433367625,
+          "q95": 9.567716943257375
+        },
+        "n_pairs": 946
+      },
+      "19": {
+        "D_k_mean": 5.9722502388309895,
+        "D_k_median": 6.119020927854201,
+        "D_k_q25": 4.127248444072539,
+        "D_k_q75": 7.568577546412818,
+        "D_k_spread": {
+          "iqr": 3.441329102340279,
+          "max": 13.865708023778836,
+          "min": 0.9129010986149313,
+          "q05": 2.0627772330992706,
+          "q95": 9.839112461251545
+        },
+        "n_pairs": 946
+      },
+      "20": {
+        "D_k_mean": 6.211281469744209,
+        "D_k_median": 6.357055609304329,
+        "D_k_q25": 4.353662615389088,
+        "D_k_q75": 7.844814528602818,
+        "D_k_spread": {
+          "iqr": 3.49115191321373,
+          "max": 14.033554593274634,
+          "min": 1.0810510472967223,
+          "q05": 2.2562963963816673,
+          "q95": 10.086016563010823
+        },
+        "n_pairs": 946
+      },
+      "21": {
+        "D_k_mean": 6.424329422155903,
+        "D_k_median": 6.581796468928035,
+        "D_k_q25": 4.540935733182044,
+        "D_k_q75": 8.130285217575608,
+        "D_k_spread": {
+          "iqr": 3.589349484393564,
+          "max": 14.16716185736217,
+          "min": 1.264014114165623,
+          "q05": 2.435026085862039,
+          "q95": 10.296593482539402
+        },
+        "n_pairs": 903
+      },
+      "22": {
+        "D_k_mean": 6.676976974361057,
+        "D_k_median": 6.826231866660139,
+        "D_k_q25": 4.784991688396135,
+        "D_k_q75": 8.395188991539769,
+        "D_k_spread": {
+          "iqr": 3.610197303143633,
+          "max": 14.300409109633314,
+          "min": 1.4485125479308838,
+          "q05": 2.6299091585733554,
+          "q95": 10.62978442668294
+        },
+        "n_pairs": 903
+      },
+      "23": {
+        "D_k_mean": 6.921633686312327,
+        "D_k_median": 7.081363873289954,
+        "D_k_q25": 4.868063636596007,
+        "D_k_q75": 8.704338405342707,
+        "D_k_spread": {
+          "iqr": 3.8362747687466996,
+          "max": 14.608862104080801,
+          "min": 1.6033093386670885,
+          "q05": 2.8127947532156874,
+          "q95": 11.012323887606174
+        },
+        "n_pairs": 861
+      },
+      "24": {
+        "D_k_mean": 7.164521197513921,
+        "D_k_median": 7.3201806916422525,
+        "D_k_q25": 5.104047142622665,
+        "D_k_q75": 8.958203602005833,
+        "D_k_spread": {
+          "iqr": 3.8541564593831676,
+          "max": 14.886843441640313,
+          "min": 1.6603742228822127,
+          "q05": 2.987394375540198,
+          "q95": 11.317562958205375
+        },
+        "n_pairs": 861
+      },
+      "25": {
+        "D_k_mean": 7.4002600553508096,
+        "D_k_median": 7.5612502801285295,
+        "D_k_q25": 5.3296632668471435,
+        "D_k_q75": 9.187311774299818,
+        "D_k_spread": {
+          "iqr": 3.8576485074526747,
+          "max": 15.14291969604307,
+          "min": 1.7659649906756067,
+          "q05": 3.1488044668403408,
+          "q95": 11.589890714713606
+        },
+        "n_pairs": 861
+      },
+      "26": {
+        "D_k_mean": 7.6247006382179645,
+        "D_k_median": 7.810880575175564,
+        "D_k_q25": 5.545952616899429,
+        "D_k_q75": 9.428742857936772,
+        "D_k_spread": {
+          "iqr": 3.882790241037343,
+          "max": 15.58382804831874,
+          "min": 1.8769769964107401,
+          "q05": 3.2990325476137565,
+          "q95": 11.873538847376949
+        },
+        "n_pairs": 861
+      },
+      "27": {
+        "D_k_mean": 7.793103587483369,
+        "D_k_median": 7.96672938297168,
+        "D_k_q25": 5.591841704058772,
+        "D_k_q75": 9.664070794681429,
+        "D_k_spread": {
+          "iqr": 4.072229090622657,
+          "max": 15.958623653164834,
+          "min": 2.0012308269270607,
+          "q05": 3.420893767382852,
+          "q95": 12.140168088898575
+        },
+        "n_pairs": 820
+      },
+      "28": {
+        "D_k_mean": 7.991187045461696,
+        "D_k_median": 8.152212725244452,
+        "D_k_q25": 5.81423545974381,
+        "D_k_q75": 9.886537426883692,
+        "D_k_spread": {
+          "iqr": 4.0723019671398815,
+          "max": 16.326439766950784,
+          "min": 2.0954253593495435,
+          "q05": 3.6010463793305783,
+          "q95": 12.320676375220867
+        },
+        "n_pairs": 820
+      },
+      "29": {
+        "D_k_mean": 8.187894292349341,
+        "D_k_median": 8.31620830603123,
+        "D_k_q25": 5.993696407661243,
+        "D_k_q75": 10.134151828419384,
+        "D_k_spread": {
+          "iqr": 4.1404554207581405,
+          "max": 16.69072175799668,
+          "min": 2.2229705447241437,
+          "q05": 3.7747122673155427,
+          "q95": 12.567598756311193
+        },
+        "n_pairs": 820
+      },
+      "30": {
+        "D_k_mean": 8.384197516822725,
+        "D_k_median": 8.52179151609541,
+        "D_k_q25": 6.209904998899013,
+        "D_k_q75": 10.33027546289843,
+        "D_k_spread": {
+          "iqr": 4.120370463999416,
+          "max": 17.06153691426949,
+          "min": 2.33568748114365,
+          "q05": 3.939134396860114,
+          "q95": 12.821772538464707
+        },
+        "n_pairs": 820
+      },
+      "5": {
+        "D_k_mean": 1.746931894121503,
+        "D_k_median": 1.3813736271298078,
+        "D_k_q25": 0.5648876630112701,
+        "D_k_q75": 2.5302188791606164,
+        "D_k_spread": {
+          "iqr": 1.9653312161493464,
+          "max": 7.465908492538789,
+          "min": 0.02076376713748089,
+          "q05": 0.17749364872187642,
+          "q95": 4.642920907860922
+        },
+        "n_pairs": 990
+      },
+      "6": {
+        "D_k_mean": 2.1550238987696244,
+        "D_k_median": 1.9982088350601748,
+        "D_k_q25": 0.7493151763859365,
+        "D_k_q75": 2.9892003216303764,
+        "D_k_spread": {
+          "iqr": 2.2398851452444397,
+          "max": 8.708636757135405,
+          "min": 0.03735532047330886,
+          "q05": 0.23234909984211624,
+          "q95": 5.286789993065105
+        },
+        "n_pairs": 990
+      },
+      "7": {
+        "D_k_mean": 2.5113861303094858,
+        "D_k_median": 2.469796269887515,
+        "D_k_q25": 0.9425866115037635,
+        "D_k_q75": 3.353445662957373,
+        "D_k_spread": {
+          "iqr": 2.4108590514536092,
+          "max": 9.806393973087884,
+          "min": 0.051913512281103025,
+          "q05": 0.3238815634494887,
+          "q95": 5.817691349183257
+        },
+        "n_pairs": 990
+      },
+      "8": {
+        "D_k_mean": 2.8686035594139665,
+        "D_k_median": 2.841056831857115,
+        "D_k_q25": 1.3894817872598577,
+        "D_k_q75": 3.8036437592157792,
+        "D_k_spread": {
+          "iqr": 2.4141619719559215,
+          "max": 10.291474188316535,
+          "min": 0.07211963410385325,
+          "q05": 0.49201150646592673,
+          "q95": 6.143561927563854
+        },
+        "n_pairs": 990
+      },
+      "9": {
+        "D_k_mean": 3.1336726596679507,
+        "D_k_median": 3.145651959269183,
+        "D_k_q25": 1.5699515547329583,
+        "D_k_q75": 4.174329563773831,
+        "D_k_spread": {
+          "iqr": 2.604378009040873,
+          "max": 9.937847225130335,
+          "min": 0.11109607931758021,
+          "q05": 0.5882390189892407,
+          "q95": 6.386009496278461
+        },
+        "n_pairs": 990
+      }
+    }
+  },
+  "estimator_validated_on_certifiable_subset": {
+    "by_k": {
+      "10": {
+        "D_vs_tv_correlation_pearson": 0.8788490445078749,
+        "D_vs_tv_spearman": 0.95512005636289,
+        "cross_check_keys_read": [
+          "M",
+          "n_a",
+          "n_b",
+          "service_a",
+          "service_b",
+          "tv_k10_masked"
+        ],
+        "independent_quantity": "tv_k10_masked from /root/eibo/artifacts/q1_absolute_counts_k10.json, M=1 rows",
+        "inequality_violation_count": 0,
+        "inequality_violation_pairs": [],
+        "pair_rows_compared": 990,
+        "status": "VALIDATED"
+      },
+      "5": {
+        "D_vs_tv_correlation_pearson": 0.8819701750330354,
+        "D_vs_tv_spearman": 0.9444675765129107,
+        "cross_check_keys_read": [
+          "M",
+          "n_a",
+          "n_b",
+          "service_a",
+          "service_b",
+          "tv_k5_masked"
+        ],
+        "independent_quantity": "tv_k5_masked from /root/eibo/artifacts/q1_absolute_counts.json, M=1 rows",
+        "inequality_violation_count": 0,
+        "inequality_violation_pairs": [],
+        "pair_rows_compared": 990,
+        "status": "VALIDATED"
+      }
+    },
+    "certifiable_subset_definition": "k=5 and marginal k=10 M=1 pair rows present in the independent q1 count artifacts; the lower-side eps_lo is not reused as an input",
+    "certifiable_subset_pair_count_by_k": {
+      "10": 990,
+      "5": 990
+    },
+    "inequality_asserted_per_item": true,
+    "inequality_violation_count_total": 0,
+    "known_inequality": "Pinsker with natural-log KL: D_sym(P,Q) >= 2*TV(P,Q)^2",
+    "note": "The validation compares the chain-rule estimator against independently produced same-pair empirical TV quantities. It does not restrict or adjudicate the growth fit.",
+    "status": "VALIDATED"
+  },
+  "execution": {
+    "commands_produced_numbers": [
+      "scan",
+      "merge",
+      "compute 5..30 in checkpointed k batches",
+      "finalize",
+      "sha256sum"
+    ],
+    "smoothing": 0.5,
+    "status": "complete",
+    "temporary_checkpoint_dir": "/dev/shm/eibo_x3_chain_rule"
+  },
+  "full_k_range_used": {
+    "k": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "per_k_pair_denominator": {
+      "10": 990,
+      "11": 990,
+      "12": 990,
+      "13": 990,
+      "14": 946,
+      "15": 946,
+      "16": 946,
+      "17": 946,
+      "18": 946,
+      "19": 946,
+      "20": 946,
+      "21": 903,
+      "22": 903,
+      "23": 861,
+      "24": 861,
+      "25": 861,
+      "26": 861,
+      "27": 820,
+      "28": 820,
+      "29": 820,
+      "30": 820,
+      "5": 990,
+      "6": 990,
+      "7": 990,
+      "8": 990,
+      "9": 990
+    }
+  },
+  "inconclusive_is_a_valid_result": "If the estimator cannot separate sublinear from linear across the full k range, the honest output is INCONCLUSIVE, reported with the numbers. A fabricated direction is worse than an inconclusive test.",
+  "non_interference": "This is a growth-rate test of the dependent-prefix estimator. It does NOT supersede and must not be conflated with the certificate claims of X1/X2.",
+  "pre_registered_adjudication": [
+    "Quantity: D_k = the CHAIN-RULE joint divergence over the DEPENDENT packet prefix, D_k = sum_{i=1..k} D( P(x_i | x_{<i}) || ... ) \u2014 i.e. the divergence accumulated position-by-position with the prefix conditioning held, NOT an i.i.d. tensor product. State the exact estimator you use in one sentence, including how conditionals are estimated at each position.",
+    "Null hypothesis: D_k grows LINEARLY in k (the i.i.d. behaviour).",
+    "Predicted direction: SUBLINEAR (within-flow dependence saturates).",
+    "Adjudication window: the FULL k range 5..30. Do NOT bind the growth claim to the certification claim. Use the certifiable subset only to VALIDATE the estimator (see below), not to restrict the k range."
+  ],
+  "source": {
+    "channel": "PPI[1] direction and PPI[2] size only; PPI[0] inter-packet timing excluded",
+    "count_k10_path": "/root/eibo/artifacts/q1_absolute_counts_k10.json",
+    "count_k10_rows_M1_read": 990,
+    "count_path": "/root/eibo/artifacts/q1_absolute_counts.json",
+    "count_rows_M1_read": 990,
+    "h5_path": "/root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5",
+    "h5_sha256": "6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab",
+    "numpy_only": true,
+    "pair_path": "/root/eibo/artifacts/q1_eps_lo_symbol_map.json",
+    "pair_row_count_asserted": 990,
+    "sampling": "all flows in the H5 satisfying PPI_LEN >= k for the corresponding per-k estimate; no cap or subsampling",
+    "size_grid": "M=1 single fixed size bin, so the one-step symbol is the normalized direction bit; the fixed k=5 alphabet has 2^5=32 cells",
+    "tables_reader": "PyTables"
+  }
+}

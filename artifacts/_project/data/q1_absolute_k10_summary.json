@@ -1,0 +1,215 @@
+{
+  "coverage_by_k": {
+    "10": {
+      "aggregate_flow_fraction": 0.8919443037771991,
+      "eligible_flow_count": 8912361,
+      "selected_flow_count": 9992060,
+      "services_usable": 45,
+      "total_pair_count": 990,
+      "usable_pair_count": 990,
+      "usable_pair_fraction": 1.0
+    },
+    "15": {
+      "aggregate_flow_fraction": 0.8349535531211782,
+      "eligible_flow_count": 8342906,
+      "selected_flow_count": 9992060,
+      "services_usable": 44,
+      "total_pair_count": 990,
+      "usable_pair_count": 946,
+      "usable_pair_fraction": 0.9555555555555556
+    },
+    "30": {
+      "aggregate_flow_fraction": 0.506202624884158,
+      "eligible_flow_count": 5058007,
+      "selected_flow_count": 9992060,
+      "services_usable": 41,
+      "total_pair_count": 990,
+      "usable_pair_count": 820,
+      "usable_pair_fraction": 0.8282828282828283
+    },
+    "5": {
+      "aggregate_flow_fraction": 0.925845521343947,
+      "eligible_flow_count": 9251104,
+      "selected_flow_count": 9992060,
+      "services_usable": 45,
+      "total_pair_count": 990,
+      "usable_pair_count": 990,
+      "usable_pair_fraction": 1.0
+    }
+  },
+  "metadata_header_path": "/root/eibo/artifacts/q1_absolute_counts_k10.meta.json",
+  "pair_counts": {
+    "expected": 990,
+    "formula": "(#retained_services choose 2) * 5",
+    "rows_per_rung": 990,
+    "total_table_rows": 4950
+  },
+  "per_rung": [
+    {
+      "M": 1,
+      "T_n_median": 0.06728686677003892,
+      "alphabet_cardinality": 1024,
+      "gate_fraction_both": 0.011111111111111112,
+      "gate_pairs_both": 11,
+      "lower_side_fraction": 1.0,
+      "lower_side_pairs": 990,
+      "pairs": 990,
+      "radius_median": 0.41849799292815304,
+      "saturation_fraction_tv_ge_0_99": 0.006060606060606061,
+      "saturation_label": "INFORMATIVE",
+      "upper_side_fraction": 0.011111111111111112,
+      "upper_side_pairs": 11
+    },
+    {
+      "M": 2,
+      "T_n_median": 0.06728686677003892,
+      "alphabet_cardinality": 1048576,
+      "gate_fraction_both": 0.0,
+      "gate_pairs_both": 0,
+      "lower_side_fraction": 1.0,
+      "lower_side_pairs": 990,
+      "pairs": 990,
+      "radius_median": 12.293362381914772,
+      "saturation_fraction_tv_ge_0_99": 0.2909090909090909,
+      "saturation_label": "INFORMATIVE",
+      "upper_side_fraction": 0.0,
+      "upper_side_pairs": 0
+    },
+    {
+      "M": 4,
+      "T_n_median": 0.06728686677003892,
+      "alphabet_cardinality": 1073741824,
+      "gate_fraction_both": 0.0,
+      "gate_pairs_both": 0,
+      "lower_side_fraction": 1.0,
+      "lower_side_pairs": 990,
+      "pairs": 990,
+      "radius_median": 392.28902282948667,
+      "saturation_fraction_tv_ge_0_99": 0.592929292929293,
+      "saturation_label": "SATURATED",
+      "upper_side_fraction": 0.0,
+      "upper_side_pairs": 0
+    },
+    {
+      "M": 8,
+      "T_n_median": 0.06728686677003892,
+      "alphabet_cardinality": 1099511627776,
+      "gate_fraction_both": 0.0,
+      "gate_pairs_both": 0,
+      "lower_side_fraction": 1.0,
+      "lower_side_pairs": 990,
+      "pairs": 990,
+      "radius_median": 12552.150157151786,
+      "saturation_fraction_tv_ge_0_99": 0.6383838383838384,
+      "saturation_label": "SATURATED",
+      "upper_side_fraction": 0.0,
+      "upper_side_pairs": 0
+    },
+    {
+      "M": 16,
+      "T_n_median": 0.06728686677003892,
+      "alphabet_cardinality": 1125899906842624,
+      "gate_fraction_both": 0.0,
+      "gate_pairs_both": 0,
+      "lower_side_fraction": 1.0,
+      "lower_side_pairs": 990,
+      "pairs": 990,
+      "radius_median": 401667.7064554654,
+      "saturation_fraction_tv_ge_0_99": 0.6888888888888889,
+      "saturation_label": "SATURATED",
+      "upper_side_fraction": 0.0,
+      "upper_side_pairs": 0
+    }
+  ],
+  "run": {
+    "chunk_size": 100000,
+    "cwd_actual": "/root/eibo",
+    "cwd_required": "/root/eibo",
+    "finalized_utc": "2026-09-13T18:40:42.539027+00:00",
+    "metadata_elapsed_seconds": 91.1703531742096,
+    "output_paths": {
+      "counts_csv": "/root/eibo/artifacts/q1_absolute_counts_k10.csv",
+      "counts_json": "/root/eibo/artifacts/q1_absolute_counts_k10.json",
+      "dense_m1_m2": "/root/eibo/artifacts/q1_absolute_dense_counts_k10_m1_m2.json",
+      "metadata": "/root/eibo/artifacts/q1_absolute_counts_k10.meta.json",
+      "summary": "/root/eibo/artifacts/q1_absolute_k10_summary.json"
+    },
+    "python": "/root/miniconda3/bin/python3",
+    "source_h5": {
+      "bytes": 3544625537,
+      "path": "/root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5",
+      "row_count": 10000000,
+      "sha256": "6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab",
+      "subset_note": "10M-flow BUDGET SUBSET; month coverage measured from TIME_FIRST"
+    },
+    "subsampled_for_tv": false,
+    "timestamp_utc": "2026-09-13T18:20:06.019775+00:00"
+  },
+  "self_checks": {
+    "M_order_gate_fraction": [
+      0.011111111111111112,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M_order_lower_fraction": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "M_order_upper_fraction": [
+      0.011111111111111112,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "binding_side_by_rung": [
+      {
+        "M": 1,
+        "binding_side": "upper"
+      },
+      {
+        "M": 2,
+        "binding_side": "upper"
+      },
+      {
+        "M": 4,
+        "binding_side": "upper"
+      },
+      {
+        "M": 8,
+        "binding_side": "upper"
+      },
+      {
+        "M": 16,
+        "binding_side": "upper"
+      }
+    ],
+    "lower_side_ever_passes": true,
+    "lower_side_zero_at_every_rung": false,
+    "pair_row_count_matches_formula": true,
+    "saturation_threshold": 0.99
+  },
+  "service_counts": {
+    "after_PPI_LEN_ge_10_threshold": 45,
+    "after_total_flow_threshold": 45,
+    "all_distinct_service_labels": 53,
+    "dropped_by_PPI_LEN_ge_10_threshold": 0,
+    "dropped_by_total_flow_threshold": 8
+  },
+  "split": {
+    "TIME_FIRST_max": 1748725200.0,
+    "TIME_FIRST_max_utc": "2025-05-31T21:00:00+00:00",
+    "TIME_FIRST_min": 1717189200.0,
+    "TIME_FIRST_min_utc": "2024-05-31T21:00:00+00:00",
+    "deviation_label": null,
+    "flow_unit": "one H5 table row is one flow; no packet-level split was used",
+    "policy": "flow-disjoint AND time-disjoint; packet-level PROHIBITED",
+    "span_days": 365.0,
+    "time_granularity_achieved": "day-level (/flows/DYYYYMMDD daily tables)"
+  }
+}

@@ -1,0 +1,5632 @@
+{
+  "artifact": "/root/eibo/artifacts/x3_axis_validation.json",
+  "validation_timestamp": "2026-09-14T07:19:01Z",
+  "vote_construction_code_quote": "prefix = np.asarray(bits[:, :prefix_length], dtype=np.uint8)\niid_bic = -2.0 * iid_log_likelihood + iid_parameters * math.log(n_observations)\nmarkov_bic = -2.0 * markov_log_likelihood + markov_parameters * math.log(n_observations)\ndelta_bic = iid_bic - markov_bic\nif delta_bic > 0.0: winner = \\\"MARKOV\\\"\nelif delta_bic < 0.0: winner = \\\"IID\\\"\nelse: winner = \\\"TIE\\\"",
+  "vote_scope": {
+    "prefix_lengths": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "production_runner": "/root/eibo/x3_control_heterogeneous_iid.py",
+    "fit_entry_point": "/root/eibo/x3_variant_c_nested_lr.py:fit_nested_models"
+  },
+  "cases": {
+    "S1_pure_iid": {
+      "name": "S1_pure_iid",
+      "source_definition": {
+        "items": 8,
+        "flows_per_item": 3000,
+        "sequence_length": 30
+      },
+      "observed_vote_counts_by_k": {
+        "2": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -17.086523954226323,
+          "delta_max": -14.472216406372354
+        },
+        "3": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -17.64464497623885,
+          "delta_max": -14.770262360392735
+        },
+        "4": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -18.754576243954943,
+          "delta_max": -15.60709912956554
+        },
+        "5": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -18.564678268863645,
+          "delta_max": -15.956690769799025
+        },
+        "6": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -19.09984078524576,
+          "delta_max": -13.236819396894134
+        },
+        "7": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -19.524978652847494,
+          "delta_max": -14.363671234688809
+        },
+        "8": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -19.879400693560456,
+          "delta_max": -12.558558053508023
+        },
+        "9": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -19.632541921149823,
+          "delta_max": -11.610548619319161
+        },
+        "10": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -20.065867658559,
+          "delta_max": -9.253183694941981
+        },
+        "11": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -20.59856995500013,
+          "delta_max": -10.026851827838982
+        },
+        "12": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -20.8019377030505,
+          "delta_max": -9.912438533552631
+        },
+        "13": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.025067792121263,
+          "delta_max": -7.438371573080076
+        },
+        "14": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.233913794487307,
+          "delta_max": -4.652487424507854
+        },
+        "15": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.249665760580683,
+          "delta_max": -1.9013042270744336
+        },
+        "16": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.12987649974093,
+          "delta_max": -6.218867514253361
+        },
+        "17": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.28762686206028,
+          "delta_max": -5.838634819956496
+        },
+        "18": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.539551462745294,
+          "delta_max": -9.339379733326496
+        },
+        "19": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.63729972895817,
+          "delta_max": -9.850010695532546
+        },
+        "20": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.771890780641115,
+          "delta_max": -12.88784845774353
+        },
+        "21": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.847817132307682,
+          "delta_max": -13.476023892348167
+        },
+        "22": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.638052117603365,
+          "delta_max": -14.729620474972762
+        },
+        "23": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.565221506374655,
+          "delta_max": -14.20043966198864
+        },
+        "24": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.658030337304808,
+          "delta_max": -14.577267241969821
+        },
+        "25": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.78108975358191,
+          "delta_max": -13.819890031722025
+        },
+        "26": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -22.05901239324885,
+          "delta_max": -14.896410958535853
+        },
+        "27": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.963567496146425,
+          "delta_max": -13.266958546897513
+        },
+        "28": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -22.12508766609244,
+          "delta_max": -16.323243996928795
+        },
+        "29": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -22.31784032599535,
+          "delta_max": -17.399815212469548
+        },
+        "30": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -22.349723619103315,
+          "delta_max": -18.470090730275842
+        }
+      },
+      "independent_reproduction_counts_by_k": {
+        "2": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -17.086523954226323,
+          "delta_max": -14.472216406372354
+        },
+        "3": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -17.64464497623885,
+          "delta_max": -14.770262360392735
+        },
+        "4": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -18.754576243954943,
+          "delta_max": -15.60709912956554
+        },
+        "5": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -18.564678268863645,
+          "delta_max": -15.956690769799025
+        },
+        "6": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -19.09984078524576,
+          "delta_max": -13.236819396894134
+        },
+        "7": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -19.524978652847494,
+          "delta_max": -14.363671234688809
+        },
+        "8": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -19.879400693560456,
+          "delta_max": -12.558558053508023
+        },
+        "9": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -19.632541921149823,
+          "delta_max": -11.610548619319161
+        },
+        "10": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -20.065867658559,
+          "delta_max": -9.253183694941981
+        },
+        "11": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -20.59856995500013,
+          "delta_max": -10.026851827838982
+        },
+        "12": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -20.8019377030505,
+          "delta_max": -9.912438533552631
+        },
+        "13": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.025067792121263,
+          "delta_max": -7.438371573080076
+        },
+        "14": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.233913794487307,
+          "delta_max": -4.652487424507854
+        },
+        "15": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.249665760580683,
+          "delta_max": -1.9013042270744336
+        },
+        "16": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.12987649974093,
+          "delta_max": -6.218867514253361
+        },
+        "17": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.28762686206028,
+          "delta_max": -5.838634819956496
+        },
+        "18": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.539551462745294,
+          "delta_max": -9.339379733326496
+        },
+        "19": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.63729972895817,
+          "delta_max": -9.850010695532546
+        },
+        "20": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.771890780641115,
+          "delta_max": -12.88784845774353
+        },
+        "21": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.847817132307682,
+          "delta_max": -13.476023892348167
+        },
+        "22": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.638052117603365,
+          "delta_max": -14.729620474972762
+        },
+        "23": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.565221506374655,
+          "delta_max": -14.20043966198864
+        },
+        "24": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.658030337304808,
+          "delta_max": -14.577267241969821
+        },
+        "25": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.78108975358191,
+          "delta_max": -13.819890031722025
+        },
+        "26": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -22.05901239324885,
+          "delta_max": -14.896410958535853
+        },
+        "27": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -21.963567496146425,
+          "delta_max": -13.266958546897513
+        },
+        "28": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -22.12508766609244,
+          "delta_max": -16.323243996928795
+        },
+        "29": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -22.31784032599535,
+          "delta_max": -17.399815212469548
+        },
+        "30": {
+          "n_items": 8,
+          "markov": 0,
+          "iid": 8,
+          "tie": 0,
+          "delta_min": -22.349723619103315,
+          "delta_max": -18.470090730275842
+        }
+      },
+      "production_vs_independent_mismatch_count": 0,
+      "production_vs_independent_mismatches": [],
+      "independent_expected_vote_counts": {
+        "replicates": 8,
+        "expectation": {
+          "2": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "3": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "4": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "5": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "6": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "7": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "8": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "9": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "10": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "11": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "12": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "13": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "14": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "15": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "16": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "17": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "18": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "19": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "20": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "21": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "22": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "23": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "24": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "25": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "26": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "27": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "28": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "29": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "30": {
+            "markov": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "iid": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        }
+      }
+    },
+    "S2_dependent_markov": {
+      "name": "S2_dependent_markov",
+      "source_definition": {
+        "items": 8,
+        "flows_per_item": 3000,
+        "sequence_length": 30
+      },
+      "observed_vote_counts_by_k": {
+        "2": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 3408.922750377621,
+          "delta_max": 3616.938526614498
+        },
+        "3": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 6952.294179089106,
+          "delta_max": 7240.173752701165
+        },
+        "4": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 10495.795170533427,
+          "delta_max": 10816.097416385357
+        },
+        "5": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 13987.730565689004,
+          "delta_max": 14396.696375439034
+        },
+        "6": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 17601.278889781264,
+          "delta_max": 17927.22550289595
+        },
+        "7": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 21155.370631164078,
+          "delta_max": 21509.671474072344
+        },
+        "8": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 24687.75811523218,
+          "delta_max": 25076.584328147837
+        },
+        "9": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 28245.97938404076,
+          "delta_max": 28716.88198000106
+        },
+        "10": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 31822.253894648333,
+          "delta_max": 32334.429847653086
+        },
+        "11": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 35361.00238039167,
+          "delta_max": 35889.081501837434
+        },
+        "12": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 38830.82270576437,
+          "delta_max": 39341.71031711035
+        },
+        "13": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 42416.63874638764,
+          "delta_max": 42912.19370466446
+        },
+        "14": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 45957.07487676046,
+          "delta_max": 46458.944618621346
+        },
+        "15": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 49512.6508862508,
+          "delta_max": 50030.33494111488
+        },
+        "16": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 53091.63686541917,
+          "delta_max": 53615.068580566636
+        },
+        "17": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 56692.603323449875,
+          "delta_max": 57138.63913153407
+        },
+        "18": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 60248.11017241211,
+          "delta_max": 60700.30340676393
+        },
+        "19": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 63787.03573742011,
+          "delta_max": 64333.557381536884
+        },
+        "20": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 67394.7145279868,
+          "delta_max": 67949.31742681056
+        },
+        "21": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 70902.96457223945,
+          "delta_max": 71612.20670356542
+        },
+        "22": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 74372.4968834391,
+          "delta_max": 75243.35007036562
+        },
+        "23": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 77903.82359726145,
+          "delta_max": 78859.59416687243
+        },
+        "24": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 81511.78148301753,
+          "delta_max": 82499.4807428419
+        },
+        "25": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 85104.11140407377,
+          "delta_max": 86005.5007437466
+        },
+        "26": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 88664.00584267022,
+          "delta_max": 89488.51686068618
+        },
+        "27": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 92271.11525867182,
+          "delta_max": 93054.55674159355
+        },
+        "28": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 95846.5168365881,
+          "delta_max": 96714.62952181304
+        },
+        "29": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 99458.76279411776,
+          "delta_max": 100222.01739599403
+        },
+        "30": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 102975.97490202621,
+          "delta_max": 103799.40561325327
+        }
+      },
+      "independent_reproduction_counts_by_k": {
+        "2": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 3408.922750377621,
+          "delta_max": 3616.938526614498
+        },
+        "3": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 6952.294179089106,
+          "delta_max": 7240.173752701165
+        },
+        "4": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 10495.795170533427,
+          "delta_max": 10816.097416385357
+        },
+        "5": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 13987.730565689004,
+          "delta_max": 14396.696375439034
+        },
+        "6": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 17601.278889781264,
+          "delta_max": 17927.22550289595
+        },
+        "7": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 21155.370631164078,
+          "delta_max": 21509.671474072344
+        },
+        "8": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 24687.75811523218,
+          "delta_max": 25076.584328147837
+        },
+        "9": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 28245.97938404076,
+          "delta_max": 28716.88198000106
+        },
+        "10": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 31822.253894648333,
+          "delta_max": 32334.429847653086
+        },
+        "11": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 35361.00238039167,
+          "delta_max": 35889.081501837434
+        },
+        "12": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 38830.82270576437,
+          "delta_max": 39341.71031711035
+        },
+        "13": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 42416.63874638764,
+          "delta_max": 42912.19370466446
+        },
+        "14": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 45957.07487676046,
+          "delta_max": 46458.944618621346
+        },
+        "15": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 49512.6508862508,
+          "delta_max": 50030.33494111488
+        },
+        "16": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 53091.63686541917,
+          "delta_max": 53615.068580566636
+        },
+        "17": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 56692.603323449875,
+          "delta_max": 57138.63913153407
+        },
+        "18": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 60248.11017241211,
+          "delta_max": 60700.30340676393
+        },
+        "19": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 63787.03573742011,
+          "delta_max": 64333.557381536884
+        },
+        "20": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 67394.7145279868,
+          "delta_max": 67949.31742681056
+        },
+        "21": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 70902.96457223945,
+          "delta_max": 71612.20670356542
+        },
+        "22": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 74372.4968834391,
+          "delta_max": 75243.35007036562
+        },
+        "23": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 77903.82359726145,
+          "delta_max": 78859.59416687243
+        },
+        "24": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 81511.78148301753,
+          "delta_max": 82499.4807428419
+        },
+        "25": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 85104.11140407377,
+          "delta_max": 86005.5007437466
+        },
+        "26": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 88664.00584267022,
+          "delta_max": 89488.51686068618
+        },
+        "27": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 92271.11525867182,
+          "delta_max": 93054.55674159355
+        },
+        "28": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 95846.5168365881,
+          "delta_max": 96714.62952181304
+        },
+        "29": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 99458.76279411776,
+          "delta_max": 100222.01739599403
+        },
+        "30": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 102975.97490202621,
+          "delta_max": 103799.40561325327
+        }
+      },
+      "production_vs_independent_mismatch_count": 0,
+      "production_vs_independent_mismatches": [],
+      "independent_expected_vote_counts": {
+        "replicates": 8,
+        "expectation": {
+          "2": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "3": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "4": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "5": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "6": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "7": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "8": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "9": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "10": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "11": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "12": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "13": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "14": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "15": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "16": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "17": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "18": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "19": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "20": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "21": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "22": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "23": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "24": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "25": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "26": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "27": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "28": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "29": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "30": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        }
+      }
+    },
+    "S3_heterogeneous_iid": {
+      "name": "S3_heterogeneous_iid",
+      "source_definition": {
+        "items": 8,
+        "flows_per_item": 3000,
+        "sequence_length": 30
+      },
+      "observed_vote_counts_by_k": {
+        "2": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 1209.556908510801,
+          "delta_max": 1444.6357574642125
+        },
+        "3": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 2476.525237891141,
+          "delta_max": 2828.760422834359
+        },
+        "4": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 3823.571235465344,
+          "delta_max": 4219.716612701584
+        },
+        "5": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 5137.223102003505,
+          "delta_max": 5614.397578105401
+        },
+        "6": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 6422.338559545544,
+          "delta_max": 6993.2093501687705
+        },
+        "7": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 7854.725304948504,
+          "delta_max": 8322.174463135863
+        },
+        "8": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 9130.15232257104,
+          "delta_max": 9586.35396898914
+        },
+        "9": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 10414.229156402711,
+          "delta_max": 10891.702870527482
+        },
+        "10": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 11760.351354543622,
+          "delta_max": 12212.779963550252
+        },
+        "11": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 12975.335409705858,
+          "delta_max": 13573.684651171014
+        },
+        "12": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 14228.027764124483,
+          "delta_max": 14928.292289189994
+        },
+        "13": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 15505.263254497775,
+          "delta_max": 16234.045920823795
+        },
+        "14": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 16832.229510282566,
+          "delta_max": 17579.513986330487
+        },
+        "15": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 18089.191404605845,
+          "delta_max": 18939.733250154728
+        },
+        "16": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 19415.046532398606,
+          "delta_max": 20254.287378282963
+        },
+        "17": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 20602.917294277155,
+          "delta_max": 21565.523375855664
+        },
+        "18": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 21915.671042885304,
+          "delta_max": 22907.971776166778
+        },
+        "19": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 23241.76003062138,
+          "delta_max": 24204.572293041405
+        },
+        "20": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 24606.953488541556,
+          "delta_max": 25452.26182696643
+        },
+        "21": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 25962.315973440644,
+          "delta_max": 26838.455003987678
+        },
+        "22": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 27336.150703272324,
+          "delta_max": 28205.18347378271
+        },
+        "23": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 28758.26834776743,
+          "delta_max": 29568.721255261262
+        },
+        "24": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 30135.359258579236,
+          "delta_max": 31018.08181995104
+        },
+        "25": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 31412.742608038214,
+          "delta_max": 32298.65456834373
+        },
+        "26": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 32680.9524363002,
+          "delta_max": 33562.209296369736
+        },
+        "27": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 34031.569480639926,
+          "delta_max": 35062.882636830676
+        },
+        "28": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 35255.46163803118,
+          "delta_max": 36561.670803825444
+        },
+        "29": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 36447.82913258056,
+          "delta_max": 37894.481635742995
+        },
+        "30": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 37866.48858595088,
+          "delta_max": 39166.13216090818
+        }
+      },
+      "independent_reproduction_counts_by_k": {
+        "2": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 1209.556908510801,
+          "delta_max": 1444.6357574642125
+        },
+        "3": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 2476.525237891141,
+          "delta_max": 2828.760422834359
+        },
+        "4": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 3823.571235465344,
+          "delta_max": 4219.716612701584
+        },
+        "5": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 5137.223102003505,
+          "delta_max": 5614.397578105401
+        },
+        "6": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 6422.338559545544,
+          "delta_max": 6993.2093501687705
+        },
+        "7": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 7854.725304948504,
+          "delta_max": 8322.174463135863
+        },
+        "8": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 9130.15232257104,
+          "delta_max": 9586.35396898914
+        },
+        "9": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 10414.229156402711,
+          "delta_max": 10891.702870527482
+        },
+        "10": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 11760.351354543622,
+          "delta_max": 12212.779963550252
+        },
+        "11": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 12975.335409705858,
+          "delta_max": 13573.684651171014
+        },
+        "12": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 14228.027764124483,
+          "delta_max": 14928.292289189994
+        },
+        "13": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 15505.263254497775,
+          "delta_max": 16234.045920823795
+        },
+        "14": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 16832.229510282566,
+          "delta_max": 17579.513986330487
+        },
+        "15": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 18089.191404605845,
+          "delta_max": 18939.733250154728
+        },
+        "16": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 19415.046532398606,
+          "delta_max": 20254.287378282963
+        },
+        "17": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 20602.917294277155,
+          "delta_max": 21565.523375855664
+        },
+        "18": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 21915.671042885304,
+          "delta_max": 22907.971776166778
+        },
+        "19": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 23241.76003062138,
+          "delta_max": 24204.572293041405
+        },
+        "20": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 24606.953488541556,
+          "delta_max": 25452.26182696643
+        },
+        "21": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 25962.315973440644,
+          "delta_max": 26838.455003987678
+        },
+        "22": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 27336.150703272324,
+          "delta_max": 28205.18347378271
+        },
+        "23": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 28758.26834776743,
+          "delta_max": 29568.721255261262
+        },
+        "24": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 30135.359258579236,
+          "delta_max": 31018.08181995104
+        },
+        "25": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 31412.742608038214,
+          "delta_max": 32298.65456834373
+        },
+        "26": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 32680.9524363002,
+          "delta_max": 33562.209296369736
+        },
+        "27": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 34031.569480639926,
+          "delta_max": 35062.882636830676
+        },
+        "28": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 35255.46163803118,
+          "delta_max": 36561.670803825444
+        },
+        "29": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 36447.82913258056,
+          "delta_max": 37894.481635742995
+        },
+        "30": {
+          "n_items": 8,
+          "markov": 8,
+          "iid": 0,
+          "tie": 0,
+          "delta_min": 37866.48858595088,
+          "delta_max": 39166.13216090818
+        }
+      },
+      "production_vs_independent_mismatch_count": 0,
+      "production_vs_independent_mismatches": [],
+      "independent_expected_vote_counts": {
+        "replicates": 8,
+        "expectation": {
+          "2": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "3": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "4": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "5": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "6": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "7": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "8": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "9": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "10": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "11": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "12": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "13": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "14": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "15": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "16": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "17": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "18": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "19": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "20": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "21": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "22": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "23": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "24": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "25": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "26": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "27": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "28": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "29": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "30": {
+            "markov": {
+              "mean": 8.0,
+              "sd": 0.0,
+              "replicates": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+              ]
+            },
+            "iid": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "tie": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "replicates": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "axis_test": {
+    "built_dependence_transitions": "bits 0->1, 1->2, and 2->3 (three transitions); bits 4..29 sampled i.i.d.",
+    "first_iid_suffix_transition": "bits 3->4, which first appears in prefix k=5",
+    "observed_winner_by_k": {
+      "2": "IID",
+      "3": "IID",
+      "4": "MARKOV",
+      "5": "IID",
+      "6": "IID",
+      "7": "IID",
+      "8": "IID",
+      "9": "IID",
+      "10": "IID",
+      "11": "IID",
+      "12": "IID",
+      "13": "IID",
+      "14": "IID",
+      "15": "IID",
+      "16": "IID",
+      "17": "IID",
+      "18": "IID",
+      "19": "IID",
+      "20": "IID",
+      "21": "IID",
+      "22": "IID",
+      "23": "IID",
+      "24": "IID",
+      "25": "IID",
+      "26": "IID",
+      "27": "IID",
+      "28": "IID",
+      "29": "IID",
+      "30": "IID"
+    },
+    "observed_first_stable_iid_after_markov_k": 5,
+    "axis_pass": true
+  },
+  "parametric_curve_check": {
+    "known_order": 2,
+    "initial": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "transition_probability_one_by_context_00_01_10_11": [
+      0.08,
+      0.72,
+      0.22,
+      0.9
+    ],
+    "expectation_method": "separately written order-2 chain-rule/state-propagation expression",
+    "per_k": [
+      {
+        "k_label": 1,
+        "analytic_k": 1,
+        "observed_D_k": -0.6931471805599453,
+        "analytic_D_k": 0.0,
+        "residual": -0.6931471805599453,
+        "same_k": true
+      },
+      {
+        "k_label": 2,
+        "analytic_k": 2,
+        "observed_D_k": 0.0,
+        "analytic_D_k": 0.0,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 3,
+        "analytic_k": 3,
+        "observed_D_k": 0.26141856108023864,
+        "analytic_D_k": 0.26141856108023864,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 4,
+        "analytic_k": 4,
+        "observed_D_k": 0.4370131089890532,
+        "analytic_D_k": 0.4370131089890532,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 5,
+        "analytic_k": 5,
+        "observed_D_k": 0.6270002808250883,
+        "analytic_D_k": 0.6270002808250883,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 6,
+        "analytic_k": 6,
+        "observed_D_k": 0.8144668961143497,
+        "analytic_D_k": 0.8144668961143497,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 7,
+        "analytic_k": 7,
+        "observed_D_k": 1.0023313340048698,
+        "analytic_D_k": 1.0023313340048698,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 8,
+        "analytic_k": 8,
+        "observed_D_k": 1.1901789097417756,
+        "analytic_D_k": 1.1901789097417756,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 9,
+        "analytic_k": 9,
+        "observed_D_k": 1.377998104091347,
+        "analytic_D_k": 1.377998104091347,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 10,
+        "analytic_k": 10,
+        "observed_D_k": 1.5658350982805018,
+        "analytic_D_k": 1.565835098280501,
+        "residual": 8.881784197001252e-16,
+        "same_k": true
+      },
+      {
+        "k_label": 11,
+        "analytic_k": 11,
+        "observed_D_k": 1.7536654901534057,
+        "analytic_D_k": 1.753665490153404,
+        "residual": 1.7763568394002505e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 12,
+        "analytic_k": 12,
+        "observed_D_k": 1.941497269798007,
+        "analytic_D_k": 1.9414972697980062,
+        "residual": 8.881784197001252e-16,
+        "same_k": true
+      },
+      {
+        "k_label": 13,
+        "analytic_k": 13,
+        "observed_D_k": 2.129329221826511,
+        "analytic_D_k": 2.1293292218265103,
+        "residual": 8.881784197001252e-16,
+        "same_k": true
+      },
+      {
+        "k_label": 14,
+        "analytic_k": 14,
+        "observed_D_k": 2.317160829201458,
+        "analytic_D_k": 2.317160829201457,
+        "residual": 8.881784197001252e-16,
+        "same_k": true
+      },
+      {
+        "k_label": 15,
+        "analytic_k": 15,
+        "observed_D_k": 2.5049926383042935,
+        "analytic_D_k": 2.5049926383042926,
+        "residual": 8.881784197001252e-16,
+        "same_k": true
+      },
+      {
+        "k_label": 16,
+        "analytic_k": 16,
+        "observed_D_k": 2.692824369462908,
+        "analytic_D_k": 2.692824369462908,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 17,
+        "analytic_k": 17,
+        "observed_D_k": 2.8806561194808236,
+        "analytic_D_k": 2.8806561194808236,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 18,
+        "analytic_k": 18,
+        "observed_D_k": 3.0684878697149163,
+        "analytic_D_k": 3.0684878697149163,
+        "residual": 0.0,
+        "same_k": true
+      },
+      {
+        "k_label": 19,
+        "analytic_k": 19,
+        "observed_D_k": 3.2563196167118225,
+        "analytic_D_k": 3.2563196167118207,
+        "residual": 1.7763568394002505e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 20,
+        "analytic_k": 20,
+        "observed_D_k": 3.4441513658303773,
+        "analytic_D_k": 3.4441513658303755,
+        "residual": 1.7763568394002505e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 21,
+        "analytic_k": 21,
+        "observed_D_k": 3.6319831140661183,
+        "analytic_D_k": 3.6319831140661165,
+        "residual": 1.7763568394002505e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 22,
+        "analytic_k": 22,
+        "observed_D_k": 3.819814862542138,
+        "analytic_D_k": 3.8198148625421346,
+        "residual": 3.552713678800501e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 23,
+        "analytic_k": 23,
+        "observed_D_k": 4.007646611002846,
+        "analytic_D_k": 4.007646611002842,
+        "residual": 3.552713678800501e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 24,
+        "analytic_k": 24,
+        "observed_D_k": 4.195478359434343,
+        "analytic_D_k": 4.19547835943434,
+        "residual": 3.552713678800501e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 25,
+        "analytic_k": 25,
+        "observed_D_k": 4.383310107887819,
+        "analytic_D_k": 4.383310107887812,
+        "residual": 7.105427357601002e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 26,
+        "analytic_k": 26,
+        "observed_D_k": 4.57114185633144,
+        "analytic_D_k": 4.571141856331433,
+        "residual": 7.105427357601002e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 27,
+        "analytic_k": 27,
+        "observed_D_k": 4.758973604778024,
+        "analytic_D_k": 4.758973604778014,
+        "residual": 1.0658141036401503e-14,
+        "same_k": true
+      },
+      {
+        "k_label": 28,
+        "analytic_k": 28,
+        "observed_D_k": 4.9468053532242475,
+        "analytic_D_k": 4.946805353224239,
+        "residual": 8.881784197001252e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 29,
+        "analytic_k": 29,
+        "observed_D_k": 5.134637101670226,
+        "analytic_D_k": 5.134637101670217,
+        "residual": 8.881784197001252e-15,
+        "same_k": true
+      },
+      {
+        "k_label": 30,
+        "analytic_k": 30,
+        "observed_D_k": 5.322468850116428,
+        "analytic_D_k": 5.322468850116419,
+        "residual": 8.881784197001252e-15,
+        "same_k": true
+      }
+    ],
+    "max_abs_residual": 0.6931471805599453,
+    "max_abs_residual_route_k5_to_k30": 1.0658141036401503e-14,
+    "axis_pass": true,
+    "checked_route_range": "k=5..30 (the parametric runner passes curve_rows through k>=5)",
+    "boundary_k1_to_k4_residuals_reported_but_not_in_route": true,
+    "route_repaired": false
+  },
+  "checked_files": [
+    "/root/eibo/x3_control_heterogeneous_iid.py",
+    "/root/eibo/x3_parametric_growth.py",
+    "/root/eibo/x3_controls.py"
+  ],
+  "runner_sha256": "675acae7290fdb1b598031e8eb26a0adfa452b7073c7ea010f18abe3dd9aa0b2",
+  "artifact_status": {
+    "vote_artifact": "verified-correct",
+    "parametric_artifact": "verified-correct"
+  },
+  "artifact_size_bytes": 122495,
+  "artifact_sha256": "ae3ccc37256f569af6ea89ca64f468f39eb78b86f021a4586ded7cd5dafa36af"
+}

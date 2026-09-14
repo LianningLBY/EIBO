@@ -1,0 +1,117 @@
+{
+  "accept_flag": {
+    "all_rows_accepted": true,
+    "detector": "lightgbm",
+    "json_key": "metrics.lightgbm.holdouts.*.per_service.*.accepted_rate"
+  },
+  "agreement": {
+    "detectors": {
+      "lightgbm": {
+        "accepted_true": 1493995,
+        "different": 768257,
+        "equal": 725738,
+        "pred_range": {
+          "distinct_count": 53,
+          "max": 52,
+          "min": 0
+        },
+        "total": 1493995
+      },
+      "prototype": {
+        "accepted_true": 1485612,
+        "different": 1291898,
+        "equal": 202097,
+        "pred_range": {
+          "distinct_count": 53,
+          "max": 52,
+          "min": 0
+        },
+        "total": 1493995
+      },
+      "ronetc": {
+        "accepted_true": 1455114,
+        "different": 625969,
+        "equal": 868026,
+        "pred_range": {
+          "distinct_count": 29,
+          "max": 52,
+          "min": 0
+        },
+        "total": 1493995
+      }
+    },
+    "rows": 1493995,
+    "true_label_range": {
+      "distinct_count": 53,
+      "max": 52,
+      "min": 0
+    }
+  },
+  "classes": {
+    "key": "service_labels_common_to_both_sides",
+    "length": 53,
+    "list": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52
+    ],
+    "max": 52,
+    "max_equals_length_minus_one": true,
+    "min": 0
+  },
+  "commands": [
+    "stat /root/eibo/artifacts/x12_detector_validation.json /root/eibo/artifacts/x12_detector_validation_per_pair.csv",
+    "head -n 1 /root/eibo/artifacts/x12_detector_validation_per_pair.csv",
+    "cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x12_label_space_check.py"
+  ]
+}

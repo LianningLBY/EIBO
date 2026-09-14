@@ -1,0 +1,4123 @@
+{
+  "h5_read": {
+    "bytes": 3544625537,
+    "expected_sha256": "6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab",
+    "path": "/root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5",
+    "schema": [
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 768,
+        "path": "/flows/D20240601"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 790,
+        "path": "/flows/D20240602"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 1816,
+        "path": "/flows/D20240603"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 1855,
+        "path": "/flows/D20240604"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 1748,
+        "path": "/flows/D20240605"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 1619,
+        "path": "/flows/D20240606"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 4189,
+        "path": "/flows/D20240607"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 14924,
+        "path": "/flows/D20240608"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 16061,
+        "path": "/flows/D20240609"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37498,
+        "path": "/flows/D20240610"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37349,
+        "path": "/flows/D20240611"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 30912,
+        "path": "/flows/D20240612"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35296,
+        "path": "/flows/D20240613"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 31404,
+        "path": "/flows/D20240614"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 14206,
+        "path": "/flows/D20240615"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 14776,
+        "path": "/flows/D20240616"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 36412,
+        "path": "/flows/D20240617"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35821,
+        "path": "/flows/D20240618"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35264,
+        "path": "/flows/D20240619"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 33328,
+        "path": "/flows/D20240620"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 28411,
+        "path": "/flows/D20240621"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12898,
+        "path": "/flows/D20240622"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13645,
+        "path": "/flows/D20240623"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 33016,
+        "path": "/flows/D20240624"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 32316,
+        "path": "/flows/D20240625"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 31064,
+        "path": "/flows/D20240626"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 29621,
+        "path": "/flows/D20240627"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 23258,
+        "path": "/flows/D20240628"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10169,
+        "path": "/flows/D20240629"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10358,
+        "path": "/flows/D20240630"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 22502,
+        "path": "/flows/D20240701"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 21651,
+        "path": "/flows/D20240702"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 21129,
+        "path": "/flows/D20240703"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 18882,
+        "path": "/flows/D20240704"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9707,
+        "path": "/flows/D20240705"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9159,
+        "path": "/flows/D20240706"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9124,
+        "path": "/flows/D20240707"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20912,
+        "path": "/flows/D20240708"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 21666,
+        "path": "/flows/D20240709"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20662,
+        "path": "/flows/D20240710"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20091,
+        "path": "/flows/D20240711"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 17685,
+        "path": "/flows/D20240712"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 8993,
+        "path": "/flows/D20240713"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9075,
+        "path": "/flows/D20240714"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20466,
+        "path": "/flows/D20240715"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20653,
+        "path": "/flows/D20240716"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20627,
+        "path": "/flows/D20240717"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19677,
+        "path": "/flows/D20240718"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 17160,
+        "path": "/flows/D20240719"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9235,
+        "path": "/flows/D20240720"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9237,
+        "path": "/flows/D20240721"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20651,
+        "path": "/flows/D20240722"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20647,
+        "path": "/flows/D20240723"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20485,
+        "path": "/flows/D20240724"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19564,
+        "path": "/flows/D20240725"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 17125,
+        "path": "/flows/D20240726"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9066,
+        "path": "/flows/D20240727"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 8899,
+        "path": "/flows/D20240728"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19844,
+        "path": "/flows/D20240729"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20006,
+        "path": "/flows/D20240730"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19603,
+        "path": "/flows/D20240731"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19068,
+        "path": "/flows/D20240801"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 17246,
+        "path": "/flows/D20240802"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 8808,
+        "path": "/flows/D20240803"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9185,
+        "path": "/flows/D20240804"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20439,
+        "path": "/flows/D20240805"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20359,
+        "path": "/flows/D20240806"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19997,
+        "path": "/flows/D20240807"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19717,
+        "path": "/flows/D20240808"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 17130,
+        "path": "/flows/D20240809"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 8903,
+        "path": "/flows/D20240810"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9061,
+        "path": "/flows/D20240811"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20148,
+        "path": "/flows/D20240812"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20448,
+        "path": "/flows/D20240813"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19916,
+        "path": "/flows/D20240814"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19592,
+        "path": "/flows/D20240815"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 17098,
+        "path": "/flows/D20240816"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9203,
+        "path": "/flows/D20240817"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9617,
+        "path": "/flows/D20240818"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 21672,
+        "path": "/flows/D20240819"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 22246,
+        "path": "/flows/D20240820"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 21723,
+        "path": "/flows/D20240821"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 22144,
+        "path": "/flows/D20240822"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 18888,
+        "path": "/flows/D20240823"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9500,
+        "path": "/flows/D20240824"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9927,
+        "path": "/flows/D20240825"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 24171,
+        "path": "/flows/D20240826"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 24058,
+        "path": "/flows/D20240827"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 23820,
+        "path": "/flows/D20240828"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19649,
+        "path": "/flows/D20240829"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 18450,
+        "path": "/flows/D20240830"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9395,
+        "path": "/flows/D20240831"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10556,
+        "path": "/flows/D20240901"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 28990,
+        "path": "/flows/D20240902"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 33724,
+        "path": "/flows/D20240903"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 31877,
+        "path": "/flows/D20240904"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 33253,
+        "path": "/flows/D20240905"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 28804,
+        "path": "/flows/D20240906"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10725,
+        "path": "/flows/D20240907"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11736,
+        "path": "/flows/D20240908"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 36063,
+        "path": "/flows/D20240909"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37433,
+        "path": "/flows/D20240910"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 36680,
+        "path": "/flows/D20240911"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 36882,
+        "path": "/flows/D20240912"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 33855,
+        "path": "/flows/D20240913"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13890,
+        "path": "/flows/D20240914"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 16158,
+        "path": "/flows/D20240915"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 45325,
+        "path": "/flows/D20240916"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 44942,
+        "path": "/flows/D20240917"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 44759,
+        "path": "/flows/D20240918"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 43478,
+        "path": "/flows/D20240919"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 36985,
+        "path": "/flows/D20240920"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 15698,
+        "path": "/flows/D20240921"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19272,
+        "path": "/flows/D20240922"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50703,
+        "path": "/flows/D20240923"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50213,
+        "path": "/flows/D20240924"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 51510,
+        "path": "/flows/D20240925"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 46736,
+        "path": "/flows/D20240926"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 38114,
+        "path": "/flows/D20240927"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 17549,
+        "path": "/flows/D20240928"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20812,
+        "path": "/flows/D20240929"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 51944,
+        "path": "/flows/D20240930"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 52538,
+        "path": "/flows/D20241001"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50921,
+        "path": "/flows/D20241002"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 48970,
+        "path": "/flows/D20241003"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 41046,
+        "path": "/flows/D20241004"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 18374,
+        "path": "/flows/D20241005"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 22132,
+        "path": "/flows/D20241006"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 49979,
+        "path": "/flows/D20241007"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 52720,
+        "path": "/flows/D20241008"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 47356,
+        "path": "/flows/D20241009"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 45224,
+        "path": "/flows/D20241010"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 40771,
+        "path": "/flows/D20241011"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 18889,
+        "path": "/flows/D20241012"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 22398,
+        "path": "/flows/D20241013"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50436,
+        "path": "/flows/D20241014"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 51868,
+        "path": "/flows/D20241015"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50960,
+        "path": "/flows/D20241016"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 49880,
+        "path": "/flows/D20241017"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 41488,
+        "path": "/flows/D20241018"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19988,
+        "path": "/flows/D20241019"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 22864,
+        "path": "/flows/D20241020"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50957,
+        "path": "/flows/D20241021"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 53234,
+        "path": "/flows/D20241022"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 52727,
+        "path": "/flows/D20241023"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 49580,
+        "path": "/flows/D20241024"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 41051,
+        "path": "/flows/D20241025"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 18122,
+        "path": "/flows/D20241026"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19110,
+        "path": "/flows/D20241027"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 38227,
+        "path": "/flows/D20241028"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 52122,
+        "path": "/flows/D20241029"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 4106,
+        "path": "/flows/D20241030"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 7611,
+        "path": "/flows/D20241101"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 18757,
+        "path": "/flows/D20241102"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 22745,
+        "path": "/flows/D20241103"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 43523,
+        "path": "/flows/D20241104"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 51365,
+        "path": "/flows/D20241105"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 53560,
+        "path": "/flows/D20241106"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50705,
+        "path": "/flows/D20241107"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 44846,
+        "path": "/flows/D20241108"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 23766,
+        "path": "/flows/D20241109"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 29411,
+        "path": "/flows/D20241110"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 64104,
+        "path": "/flows/D20241111"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 56902,
+        "path": "/flows/D20241112"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 49864,
+        "path": "/flows/D20241113"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 51042,
+        "path": "/flows/D20241114"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 42665,
+        "path": "/flows/D20241115"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20267,
+        "path": "/flows/D20241116"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 23927,
+        "path": "/flows/D20241117"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50673,
+        "path": "/flows/D20241118"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50363,
+        "path": "/flows/D20241119"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50374,
+        "path": "/flows/D20241120"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 48019,
+        "path": "/flows/D20241121"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 41695,
+        "path": "/flows/D20241122"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 21229,
+        "path": "/flows/D20241123"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 24334,
+        "path": "/flows/D20241124"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 52181,
+        "path": "/flows/D20241125"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 52114,
+        "path": "/flows/D20241126"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 54006,
+        "path": "/flows/D20241127"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 52104,
+        "path": "/flows/D20241128"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 43370,
+        "path": "/flows/D20241129"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20837,
+        "path": "/flows/D20241130"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 23422,
+        "path": "/flows/D20241201"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 51135,
+        "path": "/flows/D20241202"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 51376,
+        "path": "/flows/D20241203"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 56951,
+        "path": "/flows/D20241204"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 52135,
+        "path": "/flows/D20241205"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 36760,
+        "path": "/flows/D20241206"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19873,
+        "path": "/flows/D20241207"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 22575,
+        "path": "/flows/D20241208"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 47585,
+        "path": "/flows/D20241209"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 4386,
+        "path": "/flows/D20241210"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11217,
+        "path": "/flows/D20241215"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 42085,
+        "path": "/flows/D20241216"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 44252,
+        "path": "/flows/D20241217"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 42511,
+        "path": "/flows/D20241218"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 45641,
+        "path": "/flows/D20241219"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 28335,
+        "path": "/flows/D20241220"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11254,
+        "path": "/flows/D20241221"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10058,
+        "path": "/flows/D20241222"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11061,
+        "path": "/flows/D20241223"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 8612,
+        "path": "/flows/D20241224"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 8274,
+        "path": "/flows/D20241225"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9109,
+        "path": "/flows/D20241226"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10631,
+        "path": "/flows/D20241227"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9411,
+        "path": "/flows/D20241228"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9455,
+        "path": "/flows/D20241229"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12797,
+        "path": "/flows/D20241230"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11116,
+        "path": "/flows/D20241231"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10401,
+        "path": "/flows/D20250101"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 20684,
+        "path": "/flows/D20250102"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 22162,
+        "path": "/flows/D20250103"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 14787,
+        "path": "/flows/D20250104"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 17282,
+        "path": "/flows/D20250105"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 41373,
+        "path": "/flows/D20250106"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 48336,
+        "path": "/flows/D20250107"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 54355,
+        "path": "/flows/D20250108"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 52262,
+        "path": "/flows/D20250109"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 43885,
+        "path": "/flows/D20250110"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19760,
+        "path": "/flows/D20250111"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 21314,
+        "path": "/flows/D20250112"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 51905,
+        "path": "/flows/D20250113"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 52904,
+        "path": "/flows/D20250114"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 50866,
+        "path": "/flows/D20250115"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 47687,
+        "path": "/flows/D20250116"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 39485,
+        "path": "/flows/D20250117"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 17612,
+        "path": "/flows/D20250118"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 18850,
+        "path": "/flows/D20250119"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 49239,
+        "path": "/flows/D20250120"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 49524,
+        "path": "/flows/D20250121"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 48543,
+        "path": "/flows/D20250122"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 46280,
+        "path": "/flows/D20250123"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37895,
+        "path": "/flows/D20250124"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 15960,
+        "path": "/flows/D20250125"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 16611,
+        "path": "/flows/D20250126"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 44579,
+        "path": "/flows/D20250127"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 43805,
+        "path": "/flows/D20250128"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 40895,
+        "path": "/flows/D20250129"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37084,
+        "path": "/flows/D20250130"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 26694,
+        "path": "/flows/D20250131"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12402,
+        "path": "/flows/D20250201"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13083,
+        "path": "/flows/D20250202"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35363,
+        "path": "/flows/D20250203"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35699,
+        "path": "/flows/D20250204"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 34266,
+        "path": "/flows/D20250205"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 30514,
+        "path": "/flows/D20250206"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 24661,
+        "path": "/flows/D20250207"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11165,
+        "path": "/flows/D20250208"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12245,
+        "path": "/flows/D20250209"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35609,
+        "path": "/flows/D20250210"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 36027,
+        "path": "/flows/D20250211"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 34754,
+        "path": "/flows/D20250212"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 32308,
+        "path": "/flows/D20250213"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 24252,
+        "path": "/flows/D20250214"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10982,
+        "path": "/flows/D20250215"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13466,
+        "path": "/flows/D20250216"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 40299,
+        "path": "/flows/D20250217"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 44639,
+        "path": "/flows/D20250218"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 43170,
+        "path": "/flows/D20250219"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 38268,
+        "path": "/flows/D20250220"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 25379,
+        "path": "/flows/D20250221"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10949,
+        "path": "/flows/D20250222"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12741,
+        "path": "/flows/D20250223"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37254,
+        "path": "/flows/D20250224"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 40079,
+        "path": "/flows/D20250225"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 38950,
+        "path": "/flows/D20250226"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 38460,
+        "path": "/flows/D20250227"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 24544,
+        "path": "/flows/D20250228"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12221,
+        "path": "/flows/D20250301"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13796,
+        "path": "/flows/D20250302"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 43820,
+        "path": "/flows/D20250303"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 46419,
+        "path": "/flows/D20250304"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 31029,
+        "path": "/flows/D20250305"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 33608,
+        "path": "/flows/D20250306"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 23641,
+        "path": "/flows/D20250307"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10625,
+        "path": "/flows/D20250308"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12526,
+        "path": "/flows/D20250309"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 39022,
+        "path": "/flows/D20250310"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 40616,
+        "path": "/flows/D20250311"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37615,
+        "path": "/flows/D20250312"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 17823,
+        "path": "/flows/D20250313"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12142,
+        "path": "/flows/D20250314"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 2299,
+        "path": "/flows/D20250315"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 2623,
+        "path": "/flows/D20250316"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 8352,
+        "path": "/flows/D20250317"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 8843,
+        "path": "/flows/D20250318"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 32916,
+        "path": "/flows/D20250319"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 33578,
+        "path": "/flows/D20250320"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 21812,
+        "path": "/flows/D20250321"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10362,
+        "path": "/flows/D20250322"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12037,
+        "path": "/flows/D20250323"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37787,
+        "path": "/flows/D20250324"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 34034,
+        "path": "/flows/D20250325"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 38140,
+        "path": "/flows/D20250326"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 28373,
+        "path": "/flows/D20250327"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 26688,
+        "path": "/flows/D20250328"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11962,
+        "path": "/flows/D20250329"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13060,
+        "path": "/flows/D20250330"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 42504,
+        "path": "/flows/D20250331"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 44977,
+        "path": "/flows/D20250401"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 42873,
+        "path": "/flows/D20250402"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37742,
+        "path": "/flows/D20250403"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 26198,
+        "path": "/flows/D20250404"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11706,
+        "path": "/flows/D20250405"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13232,
+        "path": "/flows/D20250406"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 40653,
+        "path": "/flows/D20250407"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 42311,
+        "path": "/flows/D20250408"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 38610,
+        "path": "/flows/D20250409"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37759,
+        "path": "/flows/D20250410"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 25532,
+        "path": "/flows/D20250411"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11757,
+        "path": "/flows/D20250412"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13374,
+        "path": "/flows/D20250413"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 39263,
+        "path": "/flows/D20250414"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 42210,
+        "path": "/flows/D20250415"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37937,
+        "path": "/flows/D20250416"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 24060,
+        "path": "/flows/D20250417"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 9484,
+        "path": "/flows/D20250418"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 8160,
+        "path": "/flows/D20250419"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 7965,
+        "path": "/flows/D20250420"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 10452,
+        "path": "/flows/D20250421"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 33542,
+        "path": "/flows/D20250422"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 38928,
+        "path": "/flows/D20250423"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 38291,
+        "path": "/flows/D20250424"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 27785,
+        "path": "/flows/D20250425"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12560,
+        "path": "/flows/D20250426"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13827,
+        "path": "/flows/D20250427"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 40176,
+        "path": "/flows/D20250428"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 41400,
+        "path": "/flows/D20250429"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35695,
+        "path": "/flows/D20250430"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13495,
+        "path": "/flows/D20250501"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19387,
+        "path": "/flows/D20250502"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11479,
+        "path": "/flows/D20250503"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13627,
+        "path": "/flows/D20250504"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 37074,
+        "path": "/flows/D20250505"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 39894,
+        "path": "/flows/D20250506"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35563,
+        "path": "/flows/D20250507"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 14421,
+        "path": "/flows/D20250508"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 19135,
+        "path": "/flows/D20250509"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 11354,
+        "path": "/flows/D20250510"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13518,
+        "path": "/flows/D20250511"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35439,
+        "path": "/flows/D20250512"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 36487,
+        "path": "/flows/D20250513"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35866,
+        "path": "/flows/D20250514"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35258,
+        "path": "/flows/D20250515"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 26628,
+        "path": "/flows/D20250516"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13317,
+        "path": "/flows/D20250517"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 15179,
+        "path": "/flows/D20250518"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 35704,
+        "path": "/flows/D20250519"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 34321,
+        "path": "/flows/D20250520"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 32477,
+        "path": "/flows/D20250521"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 31359,
+        "path": "/flows/D20250522"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 24902,
+        "path": "/flows/D20250523"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 12152,
+        "path": "/flows/D20250524"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13043,
+        "path": "/flows/D20250525"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 31953,
+        "path": "/flows/D20250526"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 33487,
+        "path": "/flows/D20250527"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 34080,
+        "path": "/flows/D20250528"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 32764,
+        "path": "/flows/D20250529"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 27840,
+        "path": "/flows/D20250530"
+      },
+      {
+        "PPI_LEN_dtype": "uint16",
+        "PPI_LEN_shape_per_row": [],
+        "PPI_dtype": "int32",
+        "PPI_shape_per_row": [
+          3,
+          30
+        ],
+        "nrows": 13885,
+        "path": "/flows/D20250531"
+      }
+    ],
+    "sha256": "6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab",
+    "sha256_matches_expected": true
+  },
+  "helpers_reused": {
+    "collect_padding_samples": true,
+    "direction_bits": true,
+    "pack_variable_masked_30": true,
+    "pack_variable_masked_30_validation_code_count": 128,
+    "size_bins": true,
+    "source": "/root/eibo/scripts/xs_compression_early_readout.py",
+    "tv": true
+  },
+  "k5_retention_after_masking": {
+    "services_dropping_below_threshold_at_k5": 0,
+    "threshold_flow_count_per_service": 2000,
+    "total_pairs": 990,
+    "total_services_at_threshold": 45,
+    "usable_pair_fraction": 1.0,
+    "usable_pairs": 990,
+    "usable_services_at_k5_after_masking": 45
+  },
+  "masked_vs_unmasked_k30_tv": {
+    "abs_difference_summary": {
+      "count": 990,
+      "max": 0.0018372107355026923,
+      "mean": 7.216248698041993e-05,
+      "median": 0.0,
+      "min": 0.0,
+      "q25": 0.0,
+      "q5": 0.0,
+      "q75": 4.982896998664832e-05,
+      "q95": 0.0004094192407153026
+    },
+    "definition": "M=16 direction-crossed size-bin symbols at k=30; masked code uses only slots < PPI_LEN and unmasked code uses all 30 slots including padding; timing row 0 excluded",
+    "masked_tv_summary": {
+      "count": 990,
+      "max": 1.0,
+      "mean": 0.995135476826676,
+      "median": 0.9998330347573148,
+      "min": 0.8368192063998768,
+      "q25": 0.9950889943016309,
+      "q5": 0.9760790377453898,
+      "q75": 1.0,
+      "q95": 1.0
+    },
+    "max_abs_difference_pair": {
+      "abs_difference": 0.0018372107355026923,
+      "masked_tv": 0.8368192063998768,
+      "service_a": "8",
+      "service_b": "20",
+      "unmasked_minus_masked": -0.0018372107355026923,
+      "unmasked_tv": 0.8349819956643741
+    },
+    "pair_count": 990,
+    "same_flows_held_fixed": true,
+    "service_count": 45,
+    "threshold_flow_count_per_service": 2000,
+    "unmasked_minus_masked_summary": {
+      "count": 990,
+      "max": 1.1102230246251565e-16,
+      "mean": -7.216248698041971e-05,
+      "median": 0.0,
+      "min": -0.0018372107355026923,
+      "q25": -4.982896998664832e-05,
+      "q5": -0.000409419240715303,
+      "q75": 0.0,
+      "q95": 0.0
+    },
+    "unmasked_tv_summary": {
+      "count": 990,
+      "max": 1.0,
+      "mean": 0.9950633143396956,
+      "median": 0.9998210771157632,
+      "min": 0.8349819956643741,
+      "q25": 0.9950555631991846,
+      "q5": 0.9755296272030144,
+      "q75": 1.0,
+      "q95": 1.0
+    }
+  },
+  "padding_value_distribution": {
+    "histogram_all_tail_values_all_channels": {
+      "0": 3805365
+    },
+    "histogram_by_ppi_row": {
+      "row0": {
+        "0": 1268455
+      },
+      "row1": {
+        "0": 1268455
+      },
+      "row2": {
+        "0": 1268455
+      }
+    },
+    "random_seed": 20260913,
+    "sampled_flow_count": 200000,
+    "sampled_tail_flow_count": 99187,
+    "sampled_tail_scalar_slot_count_all_channels": 3805365,
+    "sampling_method": "uniform random sample without replacement over global h5 row indices"
+  },
+  "ppi_len_distribution": {
+    "fraction_ppi_len_ge_15": 0.8348841,
+    "histogram_exact_length_counts": {
+      "10": 82157,
+      "11": 109790,
+      "12": 115637,
+      "13": 136310,
+      "14": 127329,
+      "15": 140500,
+      "16": 181117,
+      "17": 219570,
+      "18": 232295,
+      "19": 227519,
+      "2": 656189,
+      "20": 209948,
+      "21": 214989,
+      "22": 204872,
+      "23": 223562,
+      "24": 210553,
+      "25": 226139,
+      "26": 261358,
+      "27": 244235,
+      "28": 247934,
+      "29": 243118,
+      "3": 20327,
+      "30": 5061132,
+      "4": 64559,
+      "5": 11979,
+      "6": 36186,
+      "7": 63835,
+      "8": 155470,
+      "9": 71391
+    },
+    "max": 30,
+    "median": 30,
+    "min": 2,
+    "q1": 2,
+    "q100": 30,
+    "q25": 19,
+    "q5": 2,
+    "q75": 30,
+    "q95": 30,
+    "q99": 30,
+    "row_count": 10000000
+  },
+  "run": {
+    "cwd_required": "/root/eibo",
+    "elapsed_seconds": 471.9136598110199,
+    "output_path": "/root/eibo/artifacts/masking_verification.json",
+    "python": "/root/miniconda3/bin/python3",
+    "real_h5_full_scan_rows": 10000000,
+    "subsampled_for_tv": false,
+    "timestamp_utc": "2026-09-13T16:39:11Z"
+  }
+}

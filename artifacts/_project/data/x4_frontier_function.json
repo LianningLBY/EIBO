@@ -1,0 +1,303 @@
+{
+  "anchor_check": {
+    "computed": {
+      "tv_hat=0.00": 7,
+      "tv_hat=0.10": 7,
+      "tv_hat=0.20": 6,
+      "tv_hat=0.30": 5,
+      "tv_hat=0.40": 4,
+      "tv_hat=0.45": 3,
+      "tv_hat=0.48": 2
+    },
+    "expected": {
+      "tv_hat=0.00": 7,
+      "tv_hat=0.10": 7,
+      "tv_hat=0.20": 6,
+      "tv_hat=0.30": 5,
+      "tv_hat=0.40": 4,
+      "tv_hat=0.45": 3,
+      "tv_hat=0.48": 2
+    },
+    "k": 5,
+    "matches_reported_anchor": true,
+    "n": 3900000.0
+  },
+  "frontier_as_function": {
+    "alpha": 0.05,
+    "alpha_convention": "alpha=0.05, per-law alpha/2=0.025, and the union bound over the two laws gives joint 0.95 for each side",
+    "alpha_law": 0.025,
+    "formula": "M_max_real(k,n,tv_hat)=0.5*(n*B^2)^(1/k); reported integer M_max=floor(M_max_real); B=0.5-tv_hat-sqrt(2*ln(2/alpha_law)/n)",
+    "reason_it_is_a_function_not_a_number": "The earlier unpinned report of M_max ~ 2-4 is unfalsifiable because M_max is a function of k, n, and tv_hat."
+  },
+  "m8_crossover_in_n": {
+    "M_target": 8,
+    "achieved_tolerance_abs_real_M_minus_target": 1.7763568394002505e-15,
+    "k": 5,
+    "method": "analytic closed form from n*(0.5-tv_hat-sqrt(C/n))^2=(2M)^k with C=2*ln(2/alpha_law)",
+    "n_crossover": 4218590.770769814,
+    "per_service_scope": "This is a per-service/per-law effective-n threshold at k=5 and tv_hat=0.00: services with n below 4218590.770770 cannot reach integer M_max >= 8 under this certificate, including the stated largest service at about 1.93e+06 flows and the stated corpus mean slice at about 3.90e+06; it does not exclude services or aggregates with effective n at or above the threshold, nor different tv_hat or k.",
+    "tv_hat": 0.0
+  },
+  "main_table": {
+    "integer_M_max_floor_of_real_frontier": {
+      "k=10": {
+        "tv_hat=0.00": 1,
+        "tv_hat=0.10": 1,
+        "tv_hat=0.20": 1,
+        "tv_hat=0.30": 1,
+        "tv_hat=0.40": 1,
+        "tv_hat=0.45": 1,
+        "tv_hat=0.48": 1
+      },
+      "k=5": {
+        "tv_hat=0.00": 7,
+        "tv_hat=0.10": 7,
+        "tv_hat=0.20": 6,
+        "tv_hat=0.30": 5,
+        "tv_hat=0.40": 4,
+        "tv_hat=0.45": 3,
+        "tv_hat=0.48": 2
+      },
+      "k=8": {
+        "tv_hat=0.00": 2,
+        "tv_hat=0.10": 2,
+        "tv_hat=0.20": 2,
+        "tv_hat=0.30": 2,
+        "tv_hat=0.40": 1,
+        "tv_hat=0.45": 1,
+        "tv_hat=0.48": 1
+      }
+    },
+    "n": 3900000.0,
+    "real_frontier_values": {
+      "k=10": {
+        "tv_hat=0.00": 1.984310637890649,
+        "tv_hat=0.10": 1.8974150201414082,
+        "tv_hat=0.20": 1.7908763631485347,
+        "tv_hat=0.30": 1.6505511092633594,
+        "tv_hat=0.40": 1.4347113579663318,
+        "tv_hat=0.45": 1.245163807720034,
+        "tv_hat=0.48": 1.0268693820344952
+      },
+      "k=5": {
+        "tv_hat=0.00": 7.874977415291988,
+        "tv_hat=0.10": 7.200367517316441,
+        "tv_hat=0.20": 6.414476296168245,
+        "tv_hat=0.30": 5.448637928581013,
+        "tv_hat=0.40": 4.1167933613551915,
+        "tv_hat=0.45": 3.100865816111708,
+        "tv_hat=0.48": 2.108921455519812
+      },
+      "k=8": {
+        "tv_hat=0.00": 2.8007192390791347,
+        "tv_hat=0.10": 2.6482587545726997,
+        "tv_hat=0.20": 2.4637095360677894,
+        "tv_hat=0.30": 2.224814057223742,
+        "tv_hat=0.40": 1.8672960110376196,
+        "tv_hat=0.45": 1.5641939795844055,
+        "tv_hat=0.48": 1.229281950350334
+      }
+    }
+  },
+  "saturation_cross_check": {
+    "agree_in_shape": true,
+    "closed_form_shape": "At fixed n=3.9e6, the integer certified M_max is below 8 even at k=5,tv_hat=0.00 and decreases as tv_hat rises; increasing k to 8 or 10 further lowers the frontier.",
+    "measured_monotone_non_decreasing_with_M": true,
+    "measured_saturation_fraction_tv_ge_0_99": {
+      "M=1": 0.0,
+      "M=16": 0.39090909090909093,
+      "M=2": 0.10505050505050505,
+      "M=4": 0.23939393939393938,
+      "M=8": 0.33636363636363636
+    },
+    "reasoning": "Measured saturation rises monotonically as M increases, while the closed form allows only small M and shrinks with larger k or tv_hat; both point against rescue by finer alphabets at this n."
+  },
+  "table_k10": {
+    "integer_M_max_floor_of_real_frontier": {
+      "tv_hat=0.00": 1,
+      "tv_hat=0.10": 1,
+      "tv_hat=0.20": 1,
+      "tv_hat=0.30": 1,
+      "tv_hat=0.40": 1,
+      "tv_hat=0.45": 1,
+      "tv_hat=0.48": 1
+    },
+    "n": 3900000.0,
+    "real_frontier_values": {
+      "tv_hat=0.00": 1.984310637890649,
+      "tv_hat=0.10": 1.8974150201414082,
+      "tv_hat=0.20": 1.7908763631485347,
+      "tv_hat=0.30": 1.6505511092633594,
+      "tv_hat=0.40": 1.4347113579663318,
+      "tv_hat=0.45": 1.245163807720034,
+      "tv_hat=0.48": 1.0268693820344952
+    }
+  },
+  "table_k8": {
+    "integer_M_max_floor_of_real_frontier": {
+      "tv_hat=0.00": 2,
+      "tv_hat=0.10": 2,
+      "tv_hat=0.20": 2,
+      "tv_hat=0.30": 2,
+      "tv_hat=0.40": 1,
+      "tv_hat=0.45": 1,
+      "tv_hat=0.48": 1
+    },
+    "n": 3900000.0,
+    "real_frontier_values": {
+      "tv_hat=0.00": 2.8007192390791347,
+      "tv_hat=0.10": 2.6482587545726997,
+      "tv_hat=0.20": 2.4637095360677894,
+      "tv_hat=0.30": 2.224814057223742,
+      "tv_hat=0.40": 1.8672960110376196,
+      "tv_hat=0.45": 1.5641939795844055,
+      "tv_hat=0.48": 1.229281950350334
+    }
+  },
+  "tv_hat_pinned": true,
+  "tv_hat_values": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.45,
+    0.48
+  ],
+  "why_finer_alphabet_cannot_help": "Increasing alphabet resolution cannot rescue the certificate at these k and n because M_max scales only as (n B^2)^(1/k), so the k-th-root penalty and squared margin B suppress any gain structurally.",
+  "certifiability_crossover": {
+    "status": "PRIMARY",
+    "primary": true,
+    "criterion": "eps_hi = tv_hat + radius_sum < 0.5 for M=8 and k=5",
+    "M_target": 8,
+    "k": 5,
+    "alpha_law": 0.025,
+    "grid": {
+      "0.00": {
+        "n_crossover": 4218590.770769814,
+        "method": "PRIMARY direct solve of eps_hi = tv_hat + radius_sum = 0.5, cross-checked by the closed-form M_max = 8 solve",
+        "n_direct_eps_hi": 4218590.770769814,
+        "n_mmax_closed_form": 4218590.770769814,
+        "routes_agree": true,
+        "route_abs_difference": 0.0,
+        "achieved_tolerance_abs_eps_hi_minus_0.5": 0.0,
+        "achieved_tolerance_abs_real_M_minus_8": 1.7763568394002505e-15,
+        "direct_eps_hi": 0.5,
+        "real_M_max": 8.000000000000002
+      },
+      "0.10": {
+        "n_crossover": 6591548.079327833,
+        "method": "PRIMARY direct solve of eps_hi = tv_hat + radius_sum = 0.5, cross-checked by the closed-form M_max = 8 solve",
+        "n_direct_eps_hi": 6591548.079327833,
+        "n_mmax_closed_form": 6591548.079327833,
+        "routes_agree": true,
+        "route_abs_difference": 0.0,
+        "achieved_tolerance_abs_eps_hi_minus_0.5": 1.1102230246251565e-16,
+        "achieved_tolerance_abs_real_M_minus_8": 1.7763568394002505e-15,
+        "direct_eps_hi": 0.5000000000000001,
+        "real_M_max": 8.000000000000002
+      },
+      "0.20": {
+        "n_crossover": 11718307.69658282,
+        "method": "PRIMARY direct solve of eps_hi = tv_hat + radius_sum = 0.5, cross-checked by the closed-form M_max = 8 solve",
+        "n_direct_eps_hi": 11718307.69658282,
+        "n_mmax_closed_form": 11718307.69658282,
+        "routes_agree": true,
+        "route_abs_difference": 0.0,
+        "achieved_tolerance_abs_eps_hi_minus_0.5": 0.0,
+        "achieved_tolerance_abs_real_M_minus_8": 1.7763568394002505e-15,
+        "direct_eps_hi": 0.5,
+        "real_M_max": 8.000000000000002
+      },
+      "0.30": {
+        "n_crossover": 26366192.31731133,
+        "method": "PRIMARY direct solve of eps_hi = tv_hat + radius_sum = 0.5, cross-checked by the closed-form M_max = 8 solve",
+        "n_direct_eps_hi": 26366192.31731133,
+        "n_mmax_closed_form": 26366192.31731133,
+        "routes_agree": true,
+        "route_abs_difference": 0.0,
+        "achieved_tolerance_abs_eps_hi_minus_0.5": 0.0,
+        "achieved_tolerance_abs_real_M_minus_8": 1.7763568394002505e-15,
+        "direct_eps_hi": 0.5,
+        "real_M_max": 8.000000000000002
+      },
+      "0.40": {
+        "n_crossover": 105464769.2692454,
+        "method": "PRIMARY direct solve of eps_hi = tv_hat + radius_sum = 0.5, cross-checked by the closed-form M_max = 8 solve",
+        "n_direct_eps_hi": 105464769.2692454,
+        "n_mmax_closed_form": 105464769.2692454,
+        "routes_agree": true,
+        "route_abs_difference": 0.0,
+        "achieved_tolerance_abs_eps_hi_minus_0.5": 0.0,
+        "achieved_tolerance_abs_real_M_minus_8": 1.7763568394002505e-15,
+        "direct_eps_hi": 0.5,
+        "real_M_max": 8.000000000000002
+      },
+      "0.45": {
+        "n_crossover": 421859077.0769816,
+        "method": "PRIMARY direct solve of eps_hi = tv_hat + radius_sum = 0.5, cross-checked by the closed-form M_max = 8 solve",
+        "n_direct_eps_hi": 421859077.0769816,
+        "n_mmax_closed_form": 421859077.0769816,
+        "routes_agree": true,
+        "route_abs_difference": 0.0,
+        "achieved_tolerance_abs_eps_hi_minus_0.5": 0.0,
+        "achieved_tolerance_abs_real_M_minus_8": 1.7763568394002505e-15,
+        "direct_eps_hi": 0.5,
+        "real_M_max": 8.000000000000002
+      },
+      "0.48": {
+        "n_crossover": 2636619231.7311296,
+        "method": "PRIMARY direct solve of eps_hi = tv_hat + radius_sum = 0.5, cross-checked by the closed-form M_max = 8 solve",
+        "n_direct_eps_hi": 2636619231.7311296,
+        "n_mmax_closed_form": 2636619231.7311296,
+        "routes_agree": true,
+        "route_abs_difference": 0.0,
+        "achieved_tolerance_abs_eps_hi_minus_0.5": 0.0,
+        "achieved_tolerance_abs_real_M_minus_8": 1.7763568394002505e-15,
+        "direct_eps_hi": 0.5,
+        "real_M_max": 8.000000000000002
+      }
+    },
+    "derivation_routes": {
+      "direct_eps_hi_equals_0.5": "n=((sqrt((2M)^k)+sqrt(C))/(0.5-tv_hat))^2 with C=2*ln(2/alpha_law)",
+      "m_max_equals_8": "M_max=0.5*(n*B^2)^(1/k), B=0.5-tv_hat-sqrt(C/n); solving M_max=8 gives the same n",
+      "all_routes_agree": true
+    }
+  },
+  "radius_only_is_necessary_not_sufficient": "The radius-only condition radius_sum < 0.5 is NECESSARY BUT NOT SUFFICIENT for certifiability. The binding criterion is eps_hi = tv_hat + radius_sum < 0.5. The two coincide ONLY at tv_hat = 0.00 and diverge thereafter; at tv_hat = 0.30 the certifiability crossover is about 6.2x the radius-only one. This exact substitution has occurred once before in this project and produced opposite verdicts at k=5/M=1, so a radius-only threshold must never be presented as a certifiability threshold.",
+  "understates_by_about_6x": "Citing the radius-only crossover as the certifiability threshold understates the requirement by roughly 6x at tv_hat = 0.30.",
+  "superseded_2x_form_value": "An earlier record gave the M=8 crossover as 4,218,591 from the 2x-inflated radius form (1024 + 2.9604)/sqrt(n), whose own note said the statement must be RE-DERIVED before being quoted under the corrected radius. That value belongs to a SUPERSEDED convention and must not be quoted as the M=8 crossover. The radius-only crossover happens to coincide numerically at tv_hat = 0.00, which is why the old figure looks right; it is right ONLY there.",
+  "criterion_naming_rule": "Whenever a criterion is a CONJUNCTION of conditions, any threshold, crossover or feasibility boundary must NAME which condition it uses, and must DEFAULT to the binding (composite) one. Reporting a necessary-only condition's threshold as THE threshold is the failure mode this field exists to prevent.",
+  "n_scale": {
+    "corpus_mean_n_input": "full-corpus projection (194.3M/50)",
+    "largest_service_n": "full-corpus projection (194.3M/50)",
+    "anchor_check.n": "full-corpus projection (194.3M/50)",
+    "m8_crossover_in_n.n_crossover": "full-corpus projection (194.3M/50)",
+    "main_table.n": "full-corpus projection (194.3M/50)",
+    "table_k10.n": "full-corpus projection (194.3M/50)",
+    "table_k8.n": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.00.n_crossover": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.00.n_direct_eps_hi": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.00.n_mmax_closed_form": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.10.n_crossover": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.10.n_direct_eps_hi": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.10.n_mmax_closed_form": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.20.n_crossover": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.20.n_direct_eps_hi": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.20.n_mmax_closed_form": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.30.n_crossover": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.30.n_direct_eps_hi": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.30.n_mmax_closed_form": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.40.n_crossover": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.40.n_direct_eps_hi": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.40.n_mmax_closed_form": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.45.n_crossover": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.45.n_direct_eps_hi": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.45.n_mmax_closed_form": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.48.n_crossover": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.48.n_direct_eps_hi": "full-corpus projection (194.3M/50)",
+    "certifiability_crossover.grid.0.48.n_mmax_closed_form": "full-corpus projection (194.3M/50)"
+  },
+  "scale_mismatch_17_5x": "The frontier is evaluated at full-corpus projection scale (about 3.886e6 mean n), while the brackets themselves are XS-scale (about 2.22e5 mean n). The two differ by about 17.5x and MUST NOT be compared directly. A reader who compares the frontier crossover to the XS mean will see a large gap that reflects only the scale difference, not feasibility.",
+  "certifiability_gap_in_both_scales": "At tv_hat = 0.30 the M=8 certifiability crossover is 26,366,192. That is about 6.8x the full-corpus projection mean and about 119x the XS measured mean. Combined with the radius-only substitution error, two different readings that each 'look close' understate the requirement by one to two orders of magnitude: one takes the necessary-but-not-sufficient condition, the other compares across scales."
+}
