@@ -666,6 +666,7 @@ created and removed only when it fires and is verified, so an empty-looking entr
 | `X3_D056` point 3 — the X6 label audit must be re-run once X6 lands, and must not pass silently | X6 artifact lands | **FIRED AND CLOSED** — registry records `X6_LABEL_AUDIT_RE-RUN_RESULT`: *"THE AUDIT RAN AFTER X6'S ARTIFACT LANDED AND X6 IS VERIFIED-CORRECT -- THE CHECK DID NOT PASS SILENTLY."* Seeded as the first entry **to show the list starts accurate rather than empty** |
 | `x3_parametric_growth.json` — the stored artifact still carries the D057-withdrawn sentence | the fixed runner is re-run on the server tree | **OPEN** — the source is fixed (both runner copies emit the non-diagnostic wording + `d057_caution`); the stored bytes must NOT be hand-edited because their sha is quoted in the registry as this defect's fingerprint |
 | `x3_axis_validation.json` — the stored artifact predates the synced fix | the fixed runner is re-run and the output pulled | **RE-RUN DONE, PULL OUTSTANDING** — the server now holds **123,295 B / `4061258e…`** with the D057 wording and both notes, and all computed values unchanged; **the local copy is still 122,617 B / `9f7578be…`**. Re-register once pulled (D070) |
+| axis-validator SNAPSHOT STALE after the re-run (M120, DIAGNOSIS CORRECTED) | after any re-run | **OPEN** — the sync and re-run are REAL (server top-level `artifacts/x3_axis_validation.json` = 123,295 B / `4061258e…`, computed values unchanged), but the **registered snapshot** at `artifacts/X3/data/` still holds the old 122,617 B / `9f7578be…`. **⇒ The action is RE-REGISTER so the snapshot is refreshed, then pull.** **⚠ MY FIRST DIAGNOSIS WAS WRONG and is retracted (D092): I called it a "path split" and proposed moving bytes or changing the runner constant. A systematic check showed 18 of 18 runners write to top-level `artifacts/` while the manifest cites `artifacts/<EXPID>/data/` — a UNIVERSAL pattern is the MECHANISM, not 18 defects. D070 already documented it: `register_artifact` itself snapshots into `<EXPID>/`. Moving bytes would put unregistered data where the manifest claims a registration exists; changing the constant would bypass the snapshot step. DO NOT DO EITHER.** |
 | `max_tpr` / `maximum_pair_tpr` — computed wrong, not merely mis-named (M115) | the numerator is constrained to the service's own positives | **OPEN** — fix `(correct & positive).sum() / n_positive`, add the `0 <= value <= 1` assertion, re-run, and re-measure whether the containment cell count is still 9 or has dropped to 6 |
 | git push — the framework credential is not readable from a plain shell | a credential channel exists | **BLOCKED (cause known, not an action)** — remote is at `4242dd7`; local is 12 commits ahead; both shells get the identical `could not read Username`. **Report once; do not retry each round.** |
 
@@ -680,6 +681,7 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D079 | 2026-09-14 | Three instances of "the change was made but not pr | X3 |
 | D078 | 2026-09-14 | k=5 containment completed and the floor is NOT fal | X12_k5, X1 |
 | D077 | 2026-09-14 | Reviewer's three points accepted and acted on: wid | X12_k5 |
 | D076 | 2026-09-14 | X11 measured 0.1608 vs the primary corpus's 0.3434 | X11, X1 |
@@ -689,5 +691,4 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 | D072 | 2026-09-14 | RULED: k=5 goes via create-entry-then-allocate (no | X12, X3 |
 | D071 | 2026-09-14 | CONFIRMED structurally: X6's validity gate cannot  | X6 |
 | D070 | 2026-09-14 | CONFIRMED the root cause: register_artifact itself | X3 |
-| D069 | 2026-09-14 | FIXED a labelling hazard at its source: the axis-v | X3 |
 
