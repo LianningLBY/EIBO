@@ -267,6 +267,23 @@
 > **⇒ ⇒ THE RUN IS UNBLOCKED.** ⇒ Remaining sequence only: three synthetic cases → both-side `AST OK` → upload →
 > **verify server == local on all four numbers** → `submit_on_allocated` + `register_cron` → report PID, log path, and the
 > **server file's sha at submit time.** ⇒ **The design was never changed; every one of these is a labelling or binding addition.**
+>
+> **★ D095 — A VERIFICATION THAT ABORTS BECAUSE THE WORKING TREE LACKS A FILE CAN OFTEN BE COMPLETED FROM THE OBJECT STORE.**
+> A worker correctly STOPPED when asked to confirm a stray file was a byte-identical duplicate, because the file was
+> already gone from the working tree. **The STOP was right — it could not verify, so it did not act.** But the check WAS
+> completable: **`git cat-file blob HEAD:<path>` returns the content from the object store even when the working tree no
+> longer has it.** Verified this turn: the canonical artifact recovered from the object store hashes `7f6edd6b…`, identical
+> to the working-tree copy. **⇒ So the duplicate comparison could have been made, and the deletion shown lossless, without
+> the working tree.**
+> **⇒ This is the SECOND instance in this session of the same shape** (the Reviewer also cites a `findings.md` case):
+> **a check blocked by a missing working-tree file, where git still held the content.** ⇒ **Recorded because the failure
+> mode is subtle: the abort LOOKS like caution — and it is — but it silently converts a completable verification into an
+> unverifiable one, and the difference is `git cat-file`.**
+> **⇒ RULE: before declaring a file-based verification impossible, ask where else the bytes live.** For a tracked file that
+> is the object store (`git cat-file blob <ref>:<path>`); for an artifact it is the manifest-bound path. **"The working tree
+> does not have it" is a statement about one of several places bytes can be.**
+> **⇒ Same discipline as the rest of the session: the object under claim (the bytes) still existed; only one of its
+> locations did not.**
 > stating that the artifact and D076 settle this experiment, and that its non-terminal `status` reflects **an unmanaged
 > worker run, not unfinished work.** **⇒ And the same for `X9_C`** — withdrawn, never run; its `conclusion: killed` is
 > defensible, its `PREPARING` status is not.
