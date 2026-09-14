@@ -1224,7 +1224,7 @@
     exists; the artifact declares large-k entries EXPLORATORY because the plug-in
     upper side is lost.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X6/data/x6_divisibility_lower_bound.json
-  content_sha256: d9e17986066e7db7fee0d84eebaf602920dd1048743871908c5a1b39f4406ce0
+  content_sha256: 617db1f7ea65e7f3d97a4f3acfcf6964ce8fe2aa995d85c623a36ce1fe6aec85
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X6
