@@ -1,0 +1,412 @@
+{
+  "guard_check": {
+    "by_detector": {
+      "lightgbm": {
+        "0.05": {
+          "can_fire_at_or_below_0.01": false,
+          "corrected_maximum_pair_tpr": 0.8258662015996701
+        },
+        "0.1": {
+          "can_fire_at_or_below_0.01": false,
+          "corrected_maximum_pair_tpr": 0.8602826445570404
+        },
+        "0.2": {
+          "can_fire_at_or_below_0.01": false,
+          "corrected_maximum_pair_tpr": 0.8745962850350462
+        }
+      },
+      "prototype": {
+        "0.05": {
+          "can_fire_at_or_below_0.01": false,
+          "corrected_maximum_pair_tpr": 0.8165931085212514
+        },
+        "0.1": {
+          "can_fire_at_or_below_0.01": false,
+          "corrected_maximum_pair_tpr": 0.8132658220533637
+        },
+        "0.2": {
+          "can_fire_at_or_below_0.01": false,
+          "corrected_maximum_pair_tpr": 0.8264074436117447
+        }
+      },
+      "ronetc": {
+        "0.05": {
+          "can_fire_at_or_below_0.01": false,
+          "corrected_maximum_pair_tpr": 0.788798900558519
+        },
+        "0.1": {
+          "can_fire_at_or_below_0.01": false,
+          "corrected_maximum_pair_tpr": 0.7778569835235887
+        },
+        "0.2": {
+          "can_fire_at_or_below_0.01": false,
+          "corrected_maximum_pair_tpr": 0.7757736664555321
+        }
+      }
+    },
+    "threshold": 0.01
+  },
+  "informative_positive_fraction": {
+    "lightgbm": {
+      "0.05": {
+        "fraction": 0.9882352941176471,
+        "informative_pair_count": 340,
+        "positive_pair_count": 336
+      },
+      "0.1": {
+        "fraction": 0.9970588235294118,
+        "informative_pair_count": 340,
+        "positive_pair_count": 339
+      },
+      "0.2": {
+        "fraction": 0.9970588235294118,
+        "informative_pair_count": 340,
+        "positive_pair_count": 339
+      }
+    },
+    "prototype": {
+      "0.05": {
+        "fraction": 0.5823529411764706,
+        "informative_pair_count": 340,
+        "positive_pair_count": 198
+      },
+      "0.1": {
+        "fraction": 0.6176470588235294,
+        "informative_pair_count": 340,
+        "positive_pair_count": 210
+      },
+      "0.2": {
+        "fraction": 0.7,
+        "informative_pair_count": 340,
+        "positive_pair_count": 238
+      }
+    },
+    "ronetc": {
+      "0.05": {
+        "fraction": 0.6411764705882353,
+        "informative_pair_count": 340,
+        "positive_pair_count": 218
+      },
+      "0.1": {
+        "fraction": 0.6411764705882353,
+        "informative_pair_count": 340,
+        "positive_pair_count": 218
+      },
+      "0.2": {
+        "fraction": 0.6411764705882353,
+        "informative_pair_count": 340,
+        "positive_pair_count": 218
+      }
+    }
+  },
+  "method": {
+    "acceptance_assumption": "accepted=True for all three payloads because accepted arrays and detector-specific acceptance thresholds are not stored; this is exact for LightGBM and the requested payload-only convention for prototype and RoNeTC.",
+    "description": "CPU-only post-hoc recomputation from saved per-class score payloads; no retraining or full pipeline run.",
+    "pair_aggregation": "pair_max_tpr=0.5*(service_a_max_tpr+service_b_max_tpr), then maximum over the 340 informative pairs.",
+    "prediction": "pred = class_labels[argmax(scores, axis=1)].",
+    "threshold_sweep": "The corrected value is max(tprs) from the script sweep. Since selected sets are nested as the threshold decreases, the maximum is the endpoint count(pred==label and true_label==label)/count(true_label==label), with tprs initialized at 0.0; no threshold values or score magnitudes are needed for this maximum."
+  },
+  "payloads": {
+    "lightgbm": {
+      "alignment_key": "flow_token",
+      "arrays": {
+        "alignment_key": {
+          "dtype": "<U10",
+          "shape": []
+        },
+        "class_labels": {
+          "dtype": "int64",
+          "shape": [
+            53
+          ]
+        },
+        "dates": {
+          "dtype": "<U8",
+          "shape": [
+            4268367
+          ]
+        },
+        "flow_tokens": {
+          "dtype": "uint64",
+          "shape": [
+            4268367
+          ]
+        },
+        "row_ids": {
+          "dtype": "uint64",
+          "shape": [
+            4268367
+          ]
+        },
+        "score_kind": {
+          "dtype": "<U13",
+          "shape": []
+        },
+        "scores": {
+          "dtype": "float32",
+          "shape": [
+            4268367,
+            53
+          ]
+        },
+        "true_labels": {
+          "dtype": "int64",
+          "shape": [
+            4268367
+          ]
+        }
+      },
+      "file": "/root/eibo/artifacts/x12_detector_validation_k5__per_class_scores__lightgbm.npz",
+      "score_kind": "predict_proba"
+    },
+    "prototype": {
+      "alignment_key": "flow_token",
+      "arrays": {
+        "alignment_key": {
+          "dtype": "<U10",
+          "shape": []
+        },
+        "class_labels": {
+          "dtype": "int64",
+          "shape": [
+            53
+          ]
+        },
+        "dates": {
+          "dtype": "<U8",
+          "shape": [
+            4268367
+          ]
+        },
+        "flow_tokens": {
+          "dtype": "uint64",
+          "shape": [
+            4268367
+          ]
+        },
+        "row_ids": {
+          "dtype": "uint64",
+          "shape": [
+            4268367
+          ]
+        },
+        "score_kind": {
+          "dtype": "<U28",
+          "shape": []
+        },
+        "scores": {
+          "dtype": "float32",
+          "shape": [
+            4268367,
+            53
+          ]
+        },
+        "true_labels": {
+          "dtype": "int64",
+          "shape": [
+            4268367
+          ]
+        }
+      },
+      "file": "/root/eibo/artifacts/x12_detector_validation_k5__per_class_scores__prototype.npz",
+      "score_kind": "inverse_distance_class_score"
+    },
+    "ronetc": {
+      "alignment_key": "flow_token",
+      "arrays": {
+        "alignment_key": {
+          "dtype": "<U10",
+          "shape": []
+        },
+        "class_labels": {
+          "dtype": "int64",
+          "shape": [
+            53
+          ]
+        },
+        "dates": {
+          "dtype": "<U8",
+          "shape": [
+            4268367
+          ]
+        },
+        "flow_tokens": {
+          "dtype": "uint64",
+          "shape": [
+            4268367
+          ]
+        },
+        "row_ids": {
+          "dtype": "uint64",
+          "shape": [
+            4268367
+          ]
+        },
+        "score_kind": {
+          "dtype": "<U18",
+          "shape": []
+        },
+        "scores": {
+          "dtype": "float32",
+          "shape": [
+            4268367,
+            53
+          ]
+        },
+        "true_labels": {
+          "dtype": "int64",
+          "shape": [
+            4268367
+          ]
+        }
+      },
+      "file": "/root/eibo/artifacts/x12_detector_validation_k5__per_class_scores__ronetc.npz",
+      "score_kind": "mean_predict_proba"
+    }
+  },
+  "per_service_holdout_0.05": {
+    "prototype": {
+      "23": {
+        "correct_numerator": 3,
+        "corrected": 0.006507592190889371,
+        "defective_numerator": 184,
+        "n_positive": 461,
+        "old_defective": 0.39913232104121477
+      },
+      "34": {
+        "correct_numerator": 61,
+        "corrected": 0.61,
+        "defective_numerator": 38538,
+        "n_positive": 100,
+        "old_defective": 385.38
+      }
+    }
+  },
+  "range_check": {
+    "lightgbm": {
+      "0.05": {
+        "all_corrected_pair_values_in_[0,1]": true,
+        "max_corrected_pair_tpr": 0.8258662015996701,
+        "min_corrected_pair_tpr": 0.0
+      },
+      "0.1": {
+        "all_corrected_pair_values_in_[0,1]": true,
+        "max_corrected_pair_tpr": 0.8602826445570404,
+        "min_corrected_pair_tpr": 0.0
+      },
+      "0.2": {
+        "all_corrected_pair_values_in_[0,1]": true,
+        "max_corrected_pair_tpr": 0.8745962850350462,
+        "min_corrected_pair_tpr": 0.0
+      }
+    },
+    "prototype": {
+      "0.05": {
+        "all_corrected_pair_values_in_[0,1]": true,
+        "max_corrected_pair_tpr": 0.8165931085212514,
+        "min_corrected_pair_tpr": 0.0
+      },
+      "0.1": {
+        "all_corrected_pair_values_in_[0,1]": true,
+        "max_corrected_pair_tpr": 0.8132658220533637,
+        "min_corrected_pair_tpr": 0.0
+      },
+      "0.2": {
+        "all_corrected_pair_values_in_[0,1]": true,
+        "max_corrected_pair_tpr": 0.8264074436117447,
+        "min_corrected_pair_tpr": 0.0
+      }
+    },
+    "ronetc": {
+      "0.05": {
+        "all_corrected_pair_values_in_[0,1]": true,
+        "max_corrected_pair_tpr": 0.788798900558519,
+        "min_corrected_pair_tpr": 0.0
+      },
+      "0.1": {
+        "all_corrected_pair_values_in_[0,1]": true,
+        "max_corrected_pair_tpr": 0.7778569835235887,
+        "min_corrected_pair_tpr": 0.0
+      },
+      "0.2": {
+        "all_corrected_pair_values_in_[0,1]": true,
+        "max_corrected_pair_tpr": 0.7757736664555321,
+        "min_corrected_pair_tpr": 0.0
+      }
+    }
+  },
+  "reproduction_check": {
+    "absolute_differences": {
+      "pair_max_tpr": 0.0,
+      "service_a_max_tpr": 0.0,
+      "service_b_max_tpr": 0.0
+    },
+    "computed": {
+      "pair_max_tpr": 192.88956616052062,
+      "service_a_max_tpr": 0.39913232104121477,
+      "service_b_max_tpr": 385.38
+    },
+    "detector": "prototype",
+    "expected": {
+      "pair_max_tpr": 192.88956616052062,
+      "service_a_max_tpr": 0.39913232104121477,
+      "service_b_max_tpr": 385.38
+    },
+    "holdout": 0.05,
+    "reproduced": true
+  },
+  "table": {
+    "lightgbm": {
+      "0.05": {
+        "corrected_maximum_pair_tpr": 0.8258662015996701,
+        "informative_pair_count": 340,
+        "old_defective": 170.5411183074266
+      },
+      "0.1": {
+        "corrected_maximum_pair_tpr": 0.8602826445570404,
+        "informative_pair_count": 340,
+        "old_defective": 169.61675389034986
+      },
+      "0.2": {
+        "corrected_maximum_pair_tpr": 0.8745962850350462,
+        "informative_pair_count": 340,
+        "old_defective": 167.1506074467762
+      }
+    },
+    "prototype": {
+      "0.05": {
+        "corrected_maximum_pair_tpr": 0.8165931085212514,
+        "informative_pair_count": 340,
+        "old_defective": 192.88956616052062
+      },
+      "0.1": {
+        "corrected_maximum_pair_tpr": 0.8132658220533637,
+        "informative_pair_count": 340,
+        "old_defective": 191.54195788933814
+      },
+      "0.2": {
+        "corrected_maximum_pair_tpr": 0.8264074436117447,
+        "informative_pair_count": 340,
+        "old_defective": 187.53650517661637
+      }
+    },
+    "ronetc": {
+      "0.05": {
+        "corrected_maximum_pair_tpr": 0.788798900558519,
+        "informative_pair_count": 340,
+        "old_defective": 2.1044219227020156
+      },
+      "0.1": {
+        "corrected_maximum_pair_tpr": 0.7778569835235887,
+        "informative_pair_count": 340,
+        "old_defective": 2.1036354806408943
+      },
+      "0.2": {
+        "corrected_maximum_pair_tpr": 0.7757736664555321,
+        "informative_pair_count": 340,
+        "old_defective": 2.10167346447739
+      }
+    }
+  },
+  "timestamp": "2026-09-14T10:58:11Z"
+}
