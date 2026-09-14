@@ -361,6 +361,30 @@
 > **⇒ Same discipline as the rest of the session, turned on myself: I verified the neighbour (`read_registry`) and
 > reported it as the object under claim (`submit_on_allocated`).**
 >
+> **🔴 D097 — X9_E FAILED: AN INFRASTRUCTURE FAULT, AND THE PROJECT HAS TWO COEXISTING ARTIFACT LAYOUTS.**
+> **NOT a science failure.** Measured: **all 12 split-points completed** (train 6 + test 6 ladder points, 703 pairs each),
+> then **`EXIT_CODE=1`** with a `FileNotFoundError` at `x9_dose_response_channels.py:494` —
+> **`/root/eibo/artifacts/X9/data/x9_sni_channel_delta.json` does not exist on the server.**
+> **⇒ THE CAUSE, confirmed locally: the runner READS a NESTED path and WRITES a FLAT one.**
+> line 493 (read, calibration) `artifacts/X9/data/x9_sni_channel_delta.json` **vs** line 39 (write)
+> `artifacts/x9_dose_response_channels.json`. **Two conventions coexist in one project:**
+> **`register_artifact` creates `<EXPID>/data/` (the manifest binds exactly that path — `art_20260914_7836e1`),
+> while runners write flat `artifacts/*.json`.** **The server copy was placed flat by an earlier direct transfer, so the
+> nested path the runner expects was never created there.**
+> **⇒ ⇒ AND THE CLASS IS BROADER THAN ONE FILE:** four of the five artifact-reading runners reference hardcoded
+> artifact paths (`x6` 4 refs, `x9_sni` 2, `x11` 2, `x3_axis` 1). **⇒ A hardcoded single path is not a defect until the
+> tree it names differs from the tree it runs in — and that is exactly what this project's two-tree structure guarantees.**
+> **⇒ ⇒ RULING: fix BOTH ways, and fix the CLASS not the instance.**
+> **(a) Make the runner resolve the input the way the MANIFEST does** — try the manifest-bound nested path, fall back to
+> the flat path, and **fail with a message that names BOTH paths tried**. **A missing input must never report a path the
+> author guessed; it must list every path it looked in.**
+> **(b) Place the bytes where the manifest says they are** — the nested path — since that is the layout the project's own
+> registry-of-record actually binds. **⇒ (b) alone would fix this run; (a) alone would fix the class.** **⇒ Do both.**
+> **⇒ ⇒ RERUN IS CHEAP AND CORRECT: this cost ~9.5 minutes of CPU to the crash point, GPU 0% throughout, no G1 violation.
+> The 12 split-points are recomputable. ⇒ This is one failure, well inside the 5-consecutive-failure cap.**
+> **⇒ Same discipline as the rest of the session: the runner asserted a path; nothing verified the path existed before
+> 9.5 minutes of computation depended on it — a precondition checked LAST instead of first.**
+>
 > **✓✓ D096 CLOSED BY DIRECT MEASUREMENT — THE RUN LOADED THE GATED FILE. No longer inference.**
 > The decisive server-side check (`ps lstart` + `stat`, read-only, pid 728753) settles it:
 > **`/root/eibo/x9_dose_response_channels.py  mtime = 2026-09-14 23:53:27 +0800` (= `15:53:27 UTC`, 34,554 B)
