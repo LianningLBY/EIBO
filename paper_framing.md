@@ -187,10 +187,10 @@ rule alone is **uncovered**.
 |---|---|---|
 | **RC1** | "This is one dataset's number, not a generalizable limit." | X4 (frontier as a function), X11 (QUIC22 replication) |
 | **RC2** | "Your certificate covers only ~34% of pairs — what about the rest?" | X1 (stratum scoping), X4 (the certificate provably does not exist there) |
-| **RC3** | "The lower side is asymptotic — what does it actually certify?" | **was prose-only ⇒ add X12 (detector validation on the informative stratum)**, X6 (**the large-k side, ⚠ ASSUMPTION-LADEN / realizability-conditional — NOT distribution-free**) |
+| **RC3** | "The lower side is asymptotic — what does it actually certify?" | **X12 — MEASURED, see §X12 below** (detector validation on the informative stratum), X6 (**the large-k side, ⚠ ASSUMPTION-LADEN / realizability-conditional — NOT distribution-free**) |
 | **RC4** | "Single subset with unknown month coverage." | X10 (closes Step-0), X11 |
 | **RC5** | "Side channels / the declared channel is a choice." | X9 (SNI/ECH price, measured), X7 (masking as a precondition) |
-| **RC6** | "Do the brackets predict anything about real detectors?" | **was absent ⇒ add X12** |
+| **RC6** | "Do the brackets predict anything about real detectors?" | **X12 — MEASURED: the floor is NOT falsified on the informative stratum, 9/9 cells** |
 | **RC7** | "Open-set framing ignores the unknown-class mass." | **was absent ⇒ add X13 (Good-Toulmin missing-mass, deployment-site scoped)** |
 
 **Two components of the original brief were missing from my first plan and are restored above:**
@@ -211,6 +211,29 @@ rule alone is **uncovered**.
   *"if the informative stratum is empty at some k, that k contributes NO validation evidence and this is
   stated."* **⇒ The run must be at k=5** (the populated stratum, and C1's headline cell); k=10 is an optional
   secondary.
+- **★ X12 — MEASURED (D078). THE FLOOR IS NOT FALSIFIED.** The pre-registered one-sided binomial test ran on
+  the informative stratum at k=5 (the populated stratum and C1's headline cell): **3 detectors × 3 holdout
+  levels, all nine cells `reject_null = false`.**
+  lightgbm 8/8/10 violations of 340 (rates 0.0235/0.0235/0.0294, p 0.9954/0.9954/0.9765);
+  prototype 3/4/4 (0.0088/0.0118/0.0118, p ≈1.0); ronetc 3/3/2 (0.0088/0.0088/0.0059, p ≈1.0).
+  Observed violation rates sit **below** the 0.05 null, so there is **no excess** and the pre-registered
+  falsification condition (*"an excess of floor violations falsifies either the TV estimate or the declared
+  channel model and MUST be reported"*) **does not fire**. Strata **340 / 540 / 110 = 990**, exactly X1's pair
+  denominator. **This answers RC3 and RC6: the lower side does predict something about real detectors — no
+  detector breaches the certificate at more than chance rate on the pairs where a certificate exists.**
+  **⚠ THREE CAVEATS THAT MUST TRAVEL WITH IT — none may be dropped in drafting:**
+  **(a) OBJECT SUBSTITUTION.** The compared quantity is a **pair-level MACRO-AVERAGE surrogate**, and it is
+  **CLOSED-SET** classification error while the floor is an **OPEN-SET** error lower bound. **The citable
+  sentence is "per-pair macro-average closed-set error stays above the floor on the informative stratum"** —
+  never the stronger open-set reading.
+  **(b) `max_tpr` / `maximum_pair_tpr` MUST NOT BE QUOTED (M115).** Those fields are computed **wrong**, not
+  merely mis-named: the numerator counts correct predictions over **all flows** while the denominator counts
+  only that service's positives, so values exceed 1 (up to 341; 22 of 53 services). Fix pending:
+  `(correct & positive).sum()`. **The containment verdict does not consume these fields and is unaffected.**
+  **(c) NO INFORMATION IS NOT A PASS.** `pcap_encoder` is `not_run` and reads `NO INFORMATION`; it contributes
+  nothing and is **not** counted as a pass. Only the three executed detectors carry evidence.
+  **⚠ And the `near_zero_tpr_threshold = 0.01` branch can never fire — it is dead code and must not be
+  described as a guard.**
 - **X13 — Good-Toulmin missing-service mass**, scoped as a **deployment-site quantity** (never a universal
   unknown prior), with Eriksson-type prediction intervals and a **mandatory 1:100-sampling sensitivity
   analysis**. Without it the open-set framing loses its unknown-class component.
