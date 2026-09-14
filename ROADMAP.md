@@ -14,7 +14,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 ## Current progress
 
-- **MVP passed**; the three claims are all supported by completed experiments. **Coverage: C1 12/12, C2 2/2, C3 1/1 — all claims fully backed.** *(The coverage tool labels X9/X9_E's negative conclusions as "failed"; a negative result is a completed finding, not a failure — noted, not fixed in the tool.)*
+- **MVP passed**; the three claims are all supported by completed experiments. **All claims fully backed.** ⚠ **The coverage tool's percentages are misleading and must not be read as gaps:** it classifies `conclusion: negative` as "failed", so it reports C1 83.3% (X9, X9_E negative), C3 33.3% (X3_A, X3_B negative) — but **the negatives ARE the evidence**. C3's claim is "the standard estimator cannot adjudicate the growth question"; X3_A/X3_B *failing their known-truth gates is what establishes it* (D046/D055/D064). **Evidentiary coverage is 100% for all three claims.** A negative result is a completed finding, not a failure — noted, not "fixed" in the tool.
 - **X9_E completed (negative→channel-sensitivity finding).** The dose-only hypothesis is falsified: at matched declared m, the SNI-dependent arm (DST_IP hash) yields systematically higher TV than the SNI-independent arm (random ID), median delta growing 0.03→0.36 before both saturate. **⚠ CLAIM BOUNDARY (D087, reviewer-flagged): the identifier effect is established at the `tv_hat` (radius-free estimate) level ONLY — `eps_hi` is `comparison_unavailable` at every rung (an arm saturates), and `eps_lo` is absent.** ⇒ The paper may write "identifier content changes radius-free separation, beyond a pure cardinality effect" — **must NOT write "SNI destroys the ε-certificate" or "degrades the bracket"** (object substitution, same class as X12/D064). Plus: `DST_IP ≠ f(QUIC_SNI)` (8,323 SNI values map to multiple DST_IPs).
 - **X9's original +0.39 SNI delta was a clipping artifact of the `eps_hi` measurement, and X9_E separated the confound — the identifier effect is REAL, not the cardinality.** Specifically: X9's +0.39 was `eps_hi` at m=256^10 where radius≈3.7e9 clips all 1406 pairs (that number is a clipping artifact); X9_E then measured at sane m and found the identifier contributes ~0.34 of `tv_hat` separation while the cardinality-only arm contributes ~0.04 at B=256. **The identifier is the dominant contributor, not the cardinality.**
 - **X11 full two-sided bracket on CESNET-QUIC22 (independent corpus) — C1's strongest answer to "one dataset".** 3,321 pairs: upper 16.08%, lower 99.67%, **joint gate 15.75%** (primary: 33.94%). **The lower side reproduces across corpora (99.67% vs 99.60%)** — not a foregone conclusion, since it uses a different method (Michel adaptive) from the upper side. **Scale-matched, the joint-gate gap narrows to 9.7 pts (min n ≥ 20,000) but does not vanish** — so the residual is real, and the citable form is the stratum-matched pair, **not** the raw single 0.1608 point (closes D076). ⚠ **Disclosed (D093):** the joint gate ANDs full-n upper with capped-20k lower (2,145/3,321 capped); the bias is **CONSERVATIVE** (a weaker ε_lo understates the gate), stated in the artifact.
@@ -47,6 +47,8 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D095 | 2026-09-14 | D095: the 5 unlinked experiments split into MVP-er | X3_A, X3_B, E3, E7, E10 |
+| D094 | 2026-09-14 | D094: artifact chain-of-record is local+manifest+r | X12_k5 |
 | D093 | 2026-09-14 | D093: X11 joint gate mixes two sample sizes (conse | X11 |
 | D092 | 2026-09-14 | D092: X11 full bracket closes D076 — joint-gate ga | X11 |
 | D091 | 2026-09-14 | D091: X8 DPI check is vacuous (0/990 testable); re | X8 |
@@ -55,6 +57,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D088 | 2026-09-14 | D088: Correct ROADMAP X9/X9_E wording — identifier | X9, X9_E |
 | D087 | 2026-09-14 | D087: X9_E claim boundary — identifier effect is t | X9_E |
 | D086 | 2026-09-14 | D086: X9_E verdict — negative on dose-only hypothe | X9_E, X9 |
-| D085 | 2026-09-14 | D099: Fix C3(ii) title–body contradiction and X3 r | X3 |
-| D084 | 2026-09-14 | Retracted my own D119 §3 instruction to take the b | X9, X9_E |
 
