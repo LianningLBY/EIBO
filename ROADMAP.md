@@ -23,9 +23,9 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 ## Near-term tasks
 
 - [x] **x3_parametric_growth re-run + pull** — DONE; withdrawn sentence gone from both trees, sha 1a6f9f65 matches manifest.
-- [ ] **x3_axis_validation pull + re-register** — server holds 123,295 B / 4061258e… with the fix; local is stale.
-- [ ] **X13 manifest consolidation** — one live entry, canonical path clean, sha computed; retire the duplicate suffixed entries. (In flight.)
-- [ ] **X8 DPI relabel** — D091: relabel the DPI check as a smoke-test, drop "holds per pair"/"990/990" wording; do not cite dpi_violations:0 as theorem verification.
+- [x] **x3_axis_validation pull + re-register** — DONE; art_20260914_de3248, 123,295 B, sha 4061258e.
+- [x] **X13 manifest consolidation + pointer fix** — DONE; single live entry art_20260914_0c143b, sha 430ebed6; two retired; spec.artifact_id now resolves to the live entry.
+- [x] **X8 DPI relabel** — DONE; sha 0f8b83bb, 0/0 testable, smoke-test label, empirical claim note recorded.
 - [ ] **X12 k=5 violations/trials backfill** — the artifact's binomial p-values are real (9/9 reject_null=false) but the per-holdout violations/trials fields are None; persist them.
 - [ ] **Paper: channel-sensitivity section** — X9_E dose-response finding, scoped to `tv_hat` per D087 (Paper Agent territory, later).
 
