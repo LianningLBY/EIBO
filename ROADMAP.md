@@ -342,6 +342,17 @@
 > `ALLOCATED` cited a registry mtime of `15:57`; the actual mtime is `16:00:13` and the row is **`RUNNING`, pid 728753**.
 > **⇒ ⇒ RULE, now thrice-earned: state the OBSERVATION TIME with any status claim, so a reader can tell a current reading
 > from a superseded one.**
+>
+> **✓✓ D096 CLOSED BY DIRECT MEASUREMENT — THE RUN LOADED THE GATED FILE. No longer inference.**
+> The decisive server-side check (`ps lstart` + `stat`, read-only, pid 728753) settles it:
+> **`/root/eibo/x9_dose_response_channels.py  mtime = 2026-09-14 23:53:27 +0800` (= `15:53:27 UTC`, 34,554 B)
+> `process start = Tue Sep 15 00:00:06 2026` (= `16:00:06 UTC`) ⇒ THE PROCESS STARTED 399 s AFTER THE FILE WAS IN PLACE.**
+> **⇒ And the file's hash AT THE TIME OF THE CHECK is `34554 / 0137df32ccacb4dd…` — the fully-gated runner.**
+> `cwd = /root/eibo`; command line is the expected invocation; **artifact not yet written at 9.6 min elapsed.**
+> **⇒ ⇒ So the concern I raised and then had to walk back is now RESOLVED THE OTHER WAY: the run is executing the
+> gated runner.** **⇒ The check took one command and settled what three witnesses could not** — which is the lesson, not
+> the answer: **a process start time is a fact you can measure, and a file's mtime is not a substitute for it.**
+> **⇒ Same discipline as the rest of the session, now with a positive result: state what was measured, by whom, and when.**
 > stating that the artifact and D076 settle this experiment, and that its non-terminal `status` reflects **an unmanaged
 > worker run, not unfinished work.** **⇒ And the same for `X9_C`** — withdrawn, never run; its `conclusion: killed` is
 > defensible, its `PREPARING` status is not.
