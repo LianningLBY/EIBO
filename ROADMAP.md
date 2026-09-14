@@ -343,6 +343,24 @@
 > **⇒ ⇒ RULE, now thrice-earned: state the OBSERVATION TIME with any status claim, so a reader can tell a current reading
 > from a superseded one.**
 >
+> **⚠ D096 CORRECTED — I NAMED A CAUSE FOR A TOOL I NEVER TESTED.** My D096 said the worker's `submit_on_allocated`
+> `not found in registry` was the same caller-side filter bug the Reviewer found on `read_registry(filters={"exp_id":…})`.
+> **That transfer was not verified, and the evidence points elsewhere:**
+> **⇒ (i) I DID verify the `read_registry` filter behaves as the Reviewer described** (the registry is keyed by id and has
+> no `exp_id` field) — **and that finding is sound.**
+> **⇒ (ii) But the worker's failure was on `submit_on_allocated`, a DIFFERENT tool.** I carried the diagnosis across by
+> analogy. **⇒ The direct evidence points the other way:** the SAME `submit_on_allocated`, called with an explicit
+> `project=` scope, **SUCCEEDED** (`pid 728753`, `cron_registered: true`) — same `exp_id`, different arguments.
+> **⇒ ⇒ So the likely cause is a MISSING PROJECT SCOPE in the delegated call, not a filter bug in the lookup** — and the
+> agent's own conclusion reaches the same place, and it named the task-book defect: **the delegation did not pass a
+> parameter the tool resolves from session context, and a worker is a separate process whose context is not mine.**
+> **⇒ ⇒ AND THE PATTERN IS NOW FOUR-FOLD, with this one MY OWN:** `type`, `conclusion`, the state transition, and now
+> `project` scope — **each a parameter a tool resolves or constrains, each time the failure looked like a defect in the
+> OBJECT rather than in the CALL.** **⇒ Rule: state which tool produced an error before diagnosing it, and never carry a
+> cause from one tool to another without testing it there.**
+> **⇒ Same discipline as the rest of the session, turned on myself: I verified the neighbour (`read_registry`) and
+> reported it as the object under claim (`submit_on_allocated`).**
+>
 > **✓✓ D096 CLOSED BY DIRECT MEASUREMENT — THE RUN LOADED THE GATED FILE. No longer inference.**
 > The decisive server-side check (`ps lstart` + `stat`, read-only, pid 728753) settles it:
 > **`/root/eibo/x9_dose_response_channels.py  mtime = 2026-09-14 23:53:27 +0800` (= `15:53:27 UTC`, 34,554 B)
