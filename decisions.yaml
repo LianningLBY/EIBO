@@ -3704,9 +3704,12 @@ decisions:
   - D046
 - id: D065
   date: 2026-09-14 07:46 UTC
+  superseded_by: 'D071'
+  superseded_note: 'The "0/120 violations" validity figure in this record was SUPERSEDED by D071. The zero count was an artifact of an undersized validity sample (VALIDITY_SAMPLE_SIZE was 400 at the time of this record and was later raised). D071 restates the outcome in terms of TESTABLE replications and breaks out a separate set of vacuously-non-violating replications. The corrected figures must be read from D071 and from the X6 artifact, not from this record. DO NOT CITE THE 0/120 FIGURE.'
   summary: 'X6 COMPLETED and delivers what C2 needed: the divisibility lower bound
     is non-empty exactly where the plug-in certificate is lost (100% nontrivial at
-    k=15-30, informative 0.9989-1.0), validity 0/120 at alpha 0.05, repo function
+    k=15-30, informative 0.9989-1.0), validity 0/120 at alpha 0.05 -- SUPERSEDED, DO NOT CITE THIS FIGURE (see
+    superseded_note): the corrected form is 96/96 TESTABLE rows comply -- repo function
     called not reimplemented. It was being recorded as not-run on three surfaces;
     registered now. I also fixed the framing''s banned "assumption-free" wording myself.'
   rationale: 'X6 -- the plan''s only MECHANISM-NOVELTY track and the P1 line I restarted
@@ -3723,7 +3726,7 @@ decisions:
 
     - VALIDITY PASSES at the declared rate: alpha 0.05, 120 synthetic replications
     (20 per k over k in {5,10,15,20,25,30}), 70/30 stratified, analytic truth known
-    -- 0/120 violations, violation_rate 0.0, falsified false.
+    -- 0/120 violations, violation_rate 0.0, falsified false — SUPERSEDED, DO NOT CITE THIS FIGURE (see superseded_note): this count was an artifact of VALIDITY_SAMPLE_SIZE being 400; the corrected form is 96/96 TESTABLE rows comply with 24 vacuous rows all at requested_tv 0.00.
 
     - THE PAYOFF, large-k is non-empty: the divisibility lower bound is nontrivial
     (>0) on 100% of pairs at k=15/20/25/30, informative (>0.05) at 0.9989/1.0/1.0/1.0,
