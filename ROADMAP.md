@@ -327,6 +327,21 @@
 > `both_arms_nonclipped` + `no_rows` ⇒ gated; none of them ⇒ original).
 > **⇒ Current best reading: the run most likely DID load the gated file.** **⇒ Same discipline as the rest of the session:
 > assemble the strongest available evidence, state its residual weakness, and name the one measurement that would close it.**
+>
+> **★ D096 — THE WORKER'S `not found in registry` WAS A CALLER-SIDE FILTER BUG, NOT A MISSING ENTRY.**
+> Verified: the registry is a **DICT KEYED BY experiment id** — `X9_E` is a **top-level key**, and the row carries **no
+> `exp_id` field** (its fields are `account, allocation_id, created_at, exp_type, gpu, hypothesis, log_path, parent, pid,
+> process_identity, reproduce, retry_count, server, spec, status, tmux_session, updated_at`).
+> **⇒ A query filtered on `exp_id` therefore matches NOTHING, for EVERY experiment — it is not X9_E-specific.**
+> **⇒ ⇒ The correct lookup is by the KEY (or `read_registry()` unfiltered, which returns all 21 rows including X9_E).**
+> **⇒ AND THE PRACTICAL CONSEQUENCE, which is the real lesson: the worker's submit failed for a reason that had nothing to
+> do with the experiment, and the run came up anyway by another path — so a caller-side filter bug looked like a
+> registry-integrity problem and nearly triggered a SECOND submission.** ⇒ **Same family as everything else today: the
+> error message named the wrong object.**
+> **⇒ ALSO CORRECTED: a status reading that was TRUE WHEN TAKEN can be STALE WHEN RELAYED.** The report that `X9_E` is
+> `ALLOCATED` cited a registry mtime of `15:57`; the actual mtime is `16:00:13` and the row is **`RUNNING`, pid 728753**.
+> **⇒ ⇒ RULE, now thrice-earned: state the OBSERVATION TIME with any status claim, so a reader can tell a current reading
+> from a superseded one.**
 > stating that the artifact and D076 settle this experiment, and that its non-terminal `status` reflects **an unmanaged
 > worker run, not unfinished work.** **⇒ And the same for `X9_C`** — withdrawn, never run; its `conclusion: killed` is
 > defensible, its `PREPARING` status is not.
