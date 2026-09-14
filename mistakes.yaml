@@ -1,4 +1,4 @@
-_next_id: 111
+_next_id: 114
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -5310,3 +5310,169 @@ mistakes:
     signal.'
   related_decisions:
   - D078
+- id: M111
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: medium
+  summary: Wrote wrong decision ids into two constraints (C028 referenced a nonexistent
+    D077 instead of D075; C030 the same for D078 vs D077) by guessing the tool-assigned
+    number instead of reading it back. Both caught only by an explicit post-hoc check.
+  root_cause: The decision numbering is assigned by the log_decision tool at call
+    time, so the next id is not knowable before the call returns. I composed the constraint
+    text - including the decision_id reference - before or independently of reading
+    that return value, so I wrote the plausible next number instead of the actual
+    one. Neither error was visible to any validator, because both ids were well-formed
+    and the referenced decisions simply did not exist yet.
+  prevention: 'Never write a sequential id that a tool assigns. Read the id from the
+    tool''s return value and use that literal string. This applies to decision ids,
+    mistake ids, constraint ids, experiment ids, and artifact ids alike. After creating
+    any cross-reference between two files (a constraint pointing at a decision, a
+    mistake pointing at a decision, a registry entry pointing at an artifact), read
+    the referencing file back and confirm the id resolves - because a guessed id is
+    syntactically valid and semantically dead, which means no parser catches it and
+    only an explicit lookup does. The general form, and it matches this session''s
+    other recurring lesson: I asserted a value I did not measure. The id existed in
+    the tool output; I did not read it.'
+  status: active
+  context: Twice now I have written a decision id into a constraint's decision_id
+    field by guessing the next number rather than reading it back from the tool result.
+    (1) Constraint C028 was created with decision_id D077, but the log_decision call
+    had returned D075 - the D077 reference did not exist. (2) Constraint C030 was
+    created with decision_id D078, but that log_decision call returned D077. Both
+    times I noticed only because I checked the reference afterwards, and both times
+    the fix was a one-character edit. The failure mode is that the numbering is assigned
+    by the tool, not by me, so any id I write before reading back the tool's response
+    is a guess - and a plausible-looking guess, which is why it is not caught by inspection.
+  fix: 'Corrected both references to the ids the tools actually returned (C028 to
+    D075, C030 to D077) and verified by reading the constraint file back. Added the
+    rule to my own working method: never cite a decision, mistake, or constraint id
+    that I composed myself - always take it from the tool''s returned result, and
+    after any cross-reference between two artifacts, read the referencing file back
+    to confirm the id resolves.'
+  related_decisions:
+  - D075
+  - D077
+- id: M112
+  date: '2026-09-14'
+  category: code_bug
+  severity: high
+  summary: Broke artifacts/manifest.yaml three times in one turn by line-index insertion
+    into multi-line YAML scalars, then committed the broken version without re-parsing
+    so HEAD itself became unparseable. Recovered by testing each recent commit for
+    parseability and restoring from bf542ce.
+  root_cause: I located the insertion point by line arithmetic in a file containing
+    multi-line folded scalars, whose boundaries that arithmetic cannot see, so the
+    new line landed outside the scalar. I then committed without re-parsing the file,
+    converting a working-copy breakage into a history breakage. The root cause is
+    not the indent slip -- it is that I treated the edit tool's success return as
+    evidence of a valid file, in a session whose governing lesson is precisely that
+    a success return is not evidence about the artifact.
+  prevention: 'Two rules. FIRST: after ANY text edit to a structured file (YAML, JSON,
+    TOML), parse that exact file BEFORE committing or relying on it -- a successful
+    edit call is not evidence the file is valid, and committing an invalid file makes
+    the breakage part of history, which is strictly worse than an invalid working
+    copy. Do this in the same step as the edit, never at the next use. SECOND: do
+    not locate insertion points in a structured file by line-index arithmetic. A multi-line
+    folded or block scalar has boundaries that index arithmetic does not see, which
+    is why the same edit failed three times in one turn in three different ways. Use
+    the Edit tool with a matched anchor string instead, or insert relative to a line
+    whose full text has been read. When a scalar''s end is genuinely ambiguous, the
+    safe move is to append to the KEY''s own line only if the key''s value is a single
+    quoted string -- checking that condition first, rather than assuming it. The general
+    form, matching this session''s recurring lesson: "the command succeeded" is not
+    the property I care about; the property is "the artifact is valid", and those
+    are different facts that must be checked separately.'
+  status: active
+  context: 'While adding a note to a manifest entry''s folded description scalar,
+    I inserted the new line AFTER the closing quote of the scalar rather than inside
+    it, producing a bare four-space-indented line at mapping depth. The file stopped
+    parsing. Critically, I then committed it without re-parsing: the commit succeeded
+    and HEAD held a manifest that could not be load, so the breakage was one commit
+    deep before I noticed. I caught it only because my next edit''s own validation
+    step failed.
+
+
+    This happened in the same turn in which I had twice already broken the same file
+    the same way (an inserted line inheriting the wrong indent, and a colon-space
+    inside a folded scalar being read as a mapping key) and fixed both. The pattern
+    is consistent: I edited a structured text file by line-index arithmetic, where
+    the boundary of a multi-line scalar is not visible to the arithmetic, and I treated
+    the edit as done because the edit call returned success.
+
+
+    Recovery: I tested each of the last four commits for parseability rather than
+    assuming the previous one was good -- HEAD a3521d4 BROKEN, HEAD~1 bf542ce OK with
+    47 entries, so I restored from bf542ce. The bad commit had added exactly one line
+    (git diff --stat showed 1 insertion), so restoring lost nothing: both RETIRED_pre_
+    renames and all 47 entries survived, and the source fix in x3_parametric_growth.py
+    was in a different file and unaffected.'
+  fix: Restored artifacts/manifest.yaml from the last parseable commit (bf542ce) after
+    empirically checking each recent commit for parseability, confirmed 47 entries
+    and both retire markers intact, and committed the revert. Verified all six knowledge/manifest
+    files parse.
+  related_decisions:
+  - D069
+- id: M113
+  date: '2026-09-14'
+  category: experiment_design
+  severity: medium
+  summary: The k=5 artifact's maximum_pair_tpr (170.5 / 192.9 / 2.10) and the per-service
+    max_tpr (up to 341, 22 of 53 above 1.0) cannot be rates, so the field name and
+    value disagree - the third instance of this project's 'field that cannot equal
+    what its name claims' class. The containment verdict itself is unaffected since
+    it comes from binomial_test, but the field must be renamed before citation.
+  root_cause: The field was named for the intent (a maximum TPR) while the computation
+    aggregated differently (apparently summed or accumulated across a pair, and likewise
+    per-service). No range or identity assertion guarded the name, so the mismatch
+    was invisible at production time and only surfaced when a reviewer noticed a value
+    outside the possible range. The same absence of a name-claim assertion produced
+    the two earlier instances of this class.
+  prevention: 'Before a computed field is emitted under a name that asserts a range
+    or a semantic identity (a rate, a fraction, a maximum, a size, a hash), assert
+    the name''s claim in code: for anything named as a probability or rate, assert
+    0 <= value <= 1; for a field named maximum, assert it is >= every element it summarises
+    and equal to one of them; for a field named to identify the file''s own bytes,
+    assert it cannot be written before those bytes exist. A range assertion is one
+    line and it converts a silently mis-named aggregate into a hard failure at the
+    point of production. The wider rule, which this session has now demonstrated at
+    least eight times in different guises: a field is part of the evidence chain,
+    and a field whose name and value disagree is a defect even when every number in
+    it is arithmetically correct, because the name is what a reader will cite.'
+  status: active
+  context: 'The completed k=5 detector-validation artifact (artifacts/X12_k5/data/x12_detector_validation_k5.json,
+    191,867 B) carries a field named maximum_pair_tpr whose values cannot be probabilities:
+    lightgbm 170.54, prototype 192.89, ronetc 2.10. The same defect exists one level
+    down, in metrics.<detector>.holdouts[''0.05''].per_service[*].max_tpr, whose 53
+    values span 0.0022 to 341.06 with 22 of them exceeding 1.0. A field named max_tpr
+    asserts a true-positive RATE, which by definition lies in [0,1]; a value of 341
+    cannot equal what the name claims. The pair-level value near 2.10 is consistent
+    with something summed or accumulated across the two services of a pair rather
+    than maximised, and the per-service spread shows the same conflation.
+
+
+    This is the third instance in this project of the same defect class, which the
+    project had already named and recorded: a field whose value cannot equal what
+    its name claims. The prior two were the retired lower_side_fraction name (which
+    turned out to name two different objects) and the self-referential artifact_size_bytes/artifact_sha256
+    pair (which record a pre-write snapshot and so can never match the file''s own
+    bytes).
+
+
+    Critically, the defect does NOT contaminate the headline result. The containment
+    verdict comes from the binomial_test block (violation counts, observed rates,
+    p-values, reject_null), not from maximum_pair_tpr, which is reported alongside
+    the test rather than consumed by it. All nine cells return reject_null: false,
+    so the pre-registered one-sided floor check passes. The risk is purely at citation
+    time: a reader lifting maximum_pair_tpr = 170 as evidence of detector sensitivity
+    would be quoting a mis-named aggregate.'
+  fix: 'Recorded the defect and its class, and separated in writing what is established
+    from what is not: the containment result stands (nine cells, no rejection, floor
+    not falsified on the informative stratum), while maximum_pair_tpr must not be
+    quoted and needs a rename to what it actually computes, with its definition stated,
+    before the paper cites this artifact. The fix is a source-level change to x12_detector_validation.py,
+    deferred because the same runner is adjacent to work in flight. Sent the trace
+    to the Reviewer with the artifact hash so the finding is attached to the same
+    bytes they inspected.'
+  related_decisions:
+  - D069
+  - D074

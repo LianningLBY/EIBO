@@ -1,4 +1,4 @@
-_next_id: 30
+_next_id: 31
 constraints:
 - id: C001
   added: 2026-09-13 11:37 UTC
@@ -423,30 +423,25 @@ constraints:
     one - /tmp is volatile - so the repository commit, not a temporary copy, is the
     backup of record.
   decision_id: D075
-- id: C029
-  added: 2026-09-14 09:47 UTC
-  summary: registry.yaml has exactly ONE writer at a time. Never dispatch two workers
-    that may both write it, and never let a worker write it from a snapshot it read
-    earlier in its own run. Every registry write must be preceded by a fresh read
-    whose timestamp is reported; if the file changed since the read, abort and report
-    rather than writing. Edits must be text-level anchored splices, never serializer
-    round-trips. Any worker that would produce a registry write must verify FIRST
-    that the file is stable (no write in the preceding interval) and must report the
-    pre-write mtime and the exact base it used.
+- id: C030
+  added: 2026-09-14 10:02 UTC
+  summary: 'Every append-only knowledge file (registry.yaml, mistakes.yaml, decisions.yaml)
+    has exactly ONE writer at a time. Never dispatch two workers that may both write
+    the same one. Every write must begin from a FRESH read whose timestamp is reported,
+    and must ABORT AND REPORT if the file changed since that read, rather than writing
+    a result computed from a stale base. Id allocation is not self-protecting: a shared
+    _next_id field read concurrently can yield the same id twice, so after appending,
+    re-read and confirm your own id is unique. Edits are text-level anchored splices,
+    never serializer round-trips. Registry repair is the Director''s alone.'
   scope: all
-  reason: 'The registry was found in a regressed state at 09:38:58: X12_k5 reverted
-    from RUNNING to PREPARING and lost its PID, the X3 metrics union I had just restored
-    was reverted from 34 keys to 6, the X11 entry disappeared entirely, and X6 reverted
-    from DONE to PREPARING. This was not a single overwrite but the result of MULTIPLE
-    concurrent workers each performing read-modify-whole-file-write against the same
-    registry, with at least one holding a stale snapshot taken before those updates.
-    The recovery worker dispatched to fix the metrics damage restored FROM a source
-    that was already worse than the live file, and its own pre-write backup has the
-    same regressed shape, showing the file was already degraded between 09:35 and
-    09:38. Earlier in the same period the X6 status update propagated a stale snapshot.
-    Every individual writer was local and reasonable; the failures are purely from
-    concurrency and from accepting whatever bytes were on disk as the base. This is
-    the eighth instance of this family this session and the first where the mechanism
-    is concurrency rather than a single bad write, so the countermeasure must be structural
-    rather than another per-incident discipline.'
-  decision_id: D078
+  reason: 'Concurrent writers destroyed registry.yaml at 09:38:58 (X12_k5 RUNNING+pid
+    lost, X3.metrics 34 to 6, X6 DONE to PREPARING, X11 entry gone) while the job
+    kept running. The same race was then shown to affect mistakes.yaml: M109 and M110
+    were appended by two concurrent writers, each reading _next_id in the 109-110
+    range, and the ids happened not to collide only by luck - the reviewer verified
+    zero duplicates by uniq -d, which is fortune rather than mechanism. The defect
+    is identical in kind across all append-only files: a derived index field (_next_id)
+    read by multiple writers is not a lock, and a write computed from a snapshot is
+    not a merge. The earlier version of this constraint covered registry.yaml only,
+    which leaves the mistakes/decisions id race unaddressed.'
+  decision_id: D077

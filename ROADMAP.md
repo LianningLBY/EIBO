@@ -29,6 +29,40 @@
 > that is where C2's measurement lives. **4th instance today of a check that cannot fail.**
 > **⚠ Paper caveat: 20,000-flow/service subsample vs C1's full-n upper.** **⚠ I fixed the framing's banned
 > "assumption-free" wording myself — the claim-binding source was the one surface that was wrong.**
+> **★★★ D078 — k=5 CONTAINMENT RESULT: THE FLOOR IS NOT FALSIFIED. C1's MISSING PIECE HAS LANDED.**
+> `X12_k5` COMPLETED 18:12; artifact 191,867 B (sha `14f0f581…`), GPU released. **I read all 9 cells myself.**
+> **Design:** 3 detectors × 3 holdout levels on the **informative stratum (340 pairs)** — a pre-registered,
+> ONE-SIDED binomial test (`scipy.stats.binomtest`, α=0.05 **unsplit**, `alternative='greater'`) of whether
+> per-pair detector error breaches the theoretical floor `(1 − eps_hi)/2` more often than chance.
+>
+> | detector | holdout | n | violations | rate | p | reject |
+> |---|---|---|---|---|---|---|
+> | lightgbm | 0.05 / 0.10 / 0.20 | 340 each | 8 / 8 / 10 | 0.0235 / 0.0235 / 0.0294 | 0.9954 / 0.9954 / 0.9765 | **False** |
+> | prototype | 0.05 / 0.10 / 0.20 | 340 each | 3 / 4 / 4 | 0.0088 / 0.0118 / 0.0118 | ≈1.0 | **False** |
+> | ronetc | 0.05 / 0.10 / 0.20 | 340 each | 3 / 3 / 2 | 0.0088 / 0.0088 / 0.0059 | ≈1.0 | **False** |
+>
+> **⇒ ALL NINE CELLS FAIL TO REJECT. The bound is NOT falsified on the informative stratum**, at every detector
+> and every holdout level. Strata **informative 340 / secondary 540 / excluded 110 = 990** — exactly X1's pair
+> denominator. `floor_violation_test.status = computed`, `previously_deferred: true`. The pre-registered
+> falsification condition was "an excess of floor violations falsifies either the TV estimate or the declared
+> channel model and MUST be reported"; **there is no excess, so there is no falsification.**
+> **⚠ TWO CAVEATS THAT MUST TRAVEL WITH THIS, NOT BE DROPPED LATER:**
+> **(a) OBJECT SUBSTITUTION (proxy):** the "error" compared is a **pair-level MACRO-AVERAGE surrogate**, and it
+> is **CLOSED-SET** classification error while the floor is an **OPEN-SET** error lower bound. **⇒ The citable
+> sentence is "per-pair macro-average closed-set error stays above the floor on the informative stratum" —
+> NOT "per-pair open-set error never beats the certificate".**
+> **(b) `maximum_pair_tpr` CANNOT BE QUOTED (M113).** Its values (170.5 / 192.9 / 2.10) cannot be rates, and the
+> per-service `max_tpr` beneath it spans **0.0022–341.06 with 22 of 53 services above 1.0**. **Third instance of
+> this project's "field whose value cannot equal what its name claims" class** (after the retired
+> `lower_side_fraction` and the self-referential `artifact_size_bytes`). **The containment verdict is NOT
+> affected — it comes from the `binomial_test` block, and this field is reported alongside the test, not
+> consumed by it — but the field must be RENAMED before the paper cites this artifact.**
+> **✓ `pcap_encoder` is honestly recorded `not_run` (`ModuleNotFoundError`), listed as `NO INFORMATION` in the
+> CSV rather than silently dropped** — which is why the CSV is 990 × 3 holdout × 4 slots.
+> **✓ Liveness lesson (third instance, D048/D054 precedent):** the status probe read the bash WRAPPER
+> (PID 683446, `do_wait`, CPU 0) and judged BLOCKED, while the python CHILD (683452) held the CUDA and was
+> computing; the run finished on its own. **Probes must sample the process that holds the work, identified by
+> CUDA ownership or real command line, never the first PID in the tree.**
 > **★★ D076 — X11 CROSS-CORPUS RESULT: AN ARGUMENT AGAINST OUR OWN HEADLINE, AND ITS CAUSE IS MEASURED.**
 > On **CESNET-QUIC22** (independent, public, same protocol: k=5 · M=1 · alpha=0.025 · channel (direction,size),
 > timing excluded · service threshold 2,000 · **no tuning**, `tuning_performed: false`) the upper certifiable
@@ -601,6 +635,8 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D078 | 2026-09-14 | k=5 containment completed and the floor is NOT fal | X12_k5, X1 |
+| D077 | 2026-09-14 | Reviewer's three points accepted and acted on: wid | X12_k5 |
 | D076 | 2026-09-14 | X11 measured 0.1608 vs the primary corpus's 0.3434 | X11, X1 |
 | D075 | 2026-09-14 | Three rulings settled by measurement: (1) the k=5  | X12, X3 |
 | D074 | 2026-09-14 | The D063 freeze guard works but its boolean output | X3 |
@@ -609,6 +645,4 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 | D071 | 2026-09-14 | CONFIRMED structurally: X6's validity gate cannot  | X6 |
 | D070 | 2026-09-14 | CONFIRMED the root cause: register_artifact itself | X3 |
 | D069 | 2026-09-14 | FIXED a labelling hazard at its source: the axis-v | X3 |
-| D068 | 2026-09-14 | RETRACTED my own D063 over-reach: the 0.608 exclud | X3 |
-| D067 | 2026-09-14 | CLOSED: 0.651-vs-0.539 is three settings of ONE co | X3 |
 

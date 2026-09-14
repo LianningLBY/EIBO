@@ -1,4 +1,4 @@
-_next_id: 77
+_next_id: 79
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -4660,6 +4660,157 @@ decisions:
   - exp_id: X1
     result: primary corpus per-pair n distribution (990 pairs, median min-n 13,049)
       used as the matching reference; frac 0.3434 and median tv 0.5805
+    role: reference
+  depends_on:
+  - D072
+  - D075
+- id: D077
+  date: 2026-09-14 10:02 UTC
+  summary: 'Reviewer''s three points accepted and acted on: widened the one-writer
+    constraint from registry-only to all append-only files (C030) because _next_id
+    is not a lock and M109/M110 escaped collision only by luck; moved Rule A/B out
+    of a mistake entry into the global reviewer-audit-checklist skill the Reviewer
+    actually loads, since this lesson has now repeated twice; and re-verified the
+    GPU state myself (k=5 resident, PID 683452) confirming the reviewer''s self-correction
+    that idle observations are time-varying and must not be carried forward.'
+  rationale: 'The reviewer''s three points were each correct and each addressed rather
+    than acknowledged.
+
+
+    (1) THE COUNTS DISCREPANCY IS THE SAME DEFECT IN THE RECORDING LAYER. The worker
+    reported mistakes.yaml as 108 to 109 entries; the reviewer measured 110. Both
+    are right - the worker''s count was correct within its own operation window, and
+    a second concurrent writer appended M110 during it. This is not a worker error,
+    and the reviewer said so. But it demonstrates that _next_id is NOT a lock: M109
+    and M110 were appended by two writers who each read _next_id in the 109-110 range,
+    and the ids did not collide only by luck (the reviewer verified zero duplicates
+    by uniq -d, which is fortune rather than mechanism). I therefore REPLACED the
+    earlier registry-only constraint with C030, which covers every append-only knowledge
+    file, treats id allocation as not self-protecting (append, then re-read and confirm
+    your own id is unique), and requires every write to begin from a fresh timestamped
+    read that aborts if the file changed since. The scope change is the substantive
+    part: the previous version left the mistakes/decisions id race unaddressed.
+
+
+    (2) THE REPEATED RULE IS NOW WHERE THE REVIEWER ACTUALLY READS IT. Rule A (falsifiability:
+    what would this have to output for the hypothesis to be false; if the answer is
+    "nothing", it is not a test) and Rule B (audit scope is set by anomaly signals
+    - actually scan printed values for constants, repeats, boundary values, constant
+    tails, exactly-zero increments and non-monotone jumps, and explain such passages
+    rather than listing them) existed only inside the M109 mistake entry, which means
+    they depended on someone remembering to read M109. This is the second time the
+    project has repeated this lesson (the reviewer noted the D063 audit printed k=20
+    and k=30 with identical values and passed them; the X6 audit printed twelve rows
+    all at bound 0.0 and passed them), so relying on recall is not acceptable. I EDITED
+    the global reviewer-audit-checklist skill itself - the artifact the Reviewer loads
+    - adding the falsifiability question to section 2 (design compliance) and the
+    non-falsifiable-check pattern plus Rule B to section 4 (common pitfalls). The
+    rule is now loaded by the role that must apply it, not remembered.
+
+
+    (3) THE GPU-IDLE OBSERVATION IS TIME-VARYING AND MUST BE RE-MEASURED, NOT CARRIED
+    FORWARD. The reviewer corrected its own earlier "GPU idle 0% / 2 MiB" report,
+    noting it was accurate when taken but is now stale, and that repeating it would
+    commit exactly the error M110 warns about. I verified independently: list_available_gpus
+    shows PID 683452, /root/miniconda3/bin/python3, cwd /root/eibo, 654 MB on cuda:0,
+    so k=5 is resident and running and the card is NOT idle. I added this as a general
+    audit rule in the same skill edit: state that changes with time must be re-measured
+    when cited, never carried forward, and a shared mutable record can be written
+    concurrently and may not reflect the resource at all. This is the operative lesson
+    from M110 - the false idle signal came from reading a clobbered registry instead
+    of querying the resource.
+
+
+    ALSO RECORDED, NOT ACTED ON: the reviewer noted that floor_violation_test is currently
+    ABSENT from the in-flight k=5 artifact (10,840 B, status MEASURING, per-pair CSV
+    header written, 254 threads) and correctly cautioned that this is expected because
+    the statistic is written at completion, and must not be read as "Stage 2 was not
+    implemented" - that was source-verified complete under D072. I concur and am recording
+    it so that when the artifact is read at completion, the absence is not misdiagnosed.'
+  related_experiments:
+  - exp_id: X12_k5
+    result: RUNNING and GPU-resident (PID 683452, 654 MB); artifact at status MEASURING
+      with floor_violation_test correctly absent until completion
+    role: subject
+  depends_on:
+  - D078
+- id: D078
+  date: 2026-09-14 10:27 UTC
+  summary: 'k=5 containment completed and the floor is NOT falsified: all nine cells
+    (3 detectors x 3 holdout levels) return reject_null=false on the 340-pair informative
+    stratum, via the pre-registered one-sided binomial test. C1''s chain now has its
+    containment evidence. Two caveats must travel with it: the error is a closed-set
+    macro-average surrogate against an open-set floor, and maximum_pair_tpr (170.5/192.9/2.10)
+    is a name/value defect that must be renamed before citation (M113).'
+  rationale: 'X12 k=5 COMPLETED at 18:12. This is the first containment evidence in
+    the project and the last piece of C1''s chain.
+
+
+    WHAT I VERIFIED MYSELF from artifacts/X12_k5/data/x12_detector_validation_k5.json
+    (191,867 B, sha 14f0f581...), reading all nine cells directly rather than accepting
+    a relayed table: three detectors (lightgbm, prototype, ronetc) x three holdout
+    levels (0.05, 0.10, 0.20), all on the informative stratum of 340 pairs. lightgbm
+    8/8/10 violations (rates 0.0235/0.0235/0.0294, p 0.9954/0.9954/0.9765); prototype
+    3/4/4 (0.0088/0.0118/0.0118, p approx 1.0); ronetc 3/3/2 (0.0088/0.0088/0.0059,
+    p approx 1.0). ALL NINE CELLS reject_null = false.
+
+
+    THE TEST IS THE PRE-REGISTERED ONE: a one-sided binomial test (scipy.stats.binomtest,
+    alpha 0.05 UNSplit, alternative ''greater'') of whether per-pair detector error
+    breaches the theoretical floor (1 - eps_hi)/2 more often than the null rate 0.05.
+    floor_violation_test.status = computed, previously_deferred = true. The pre-registered
+    falsification condition was that an EXCESS of floor violations would falsify either
+    the TV estimate or the declared channel model and must be reported. There is no
+    excess at any detector or holdout level, so there is no falsification: the bound
+    is not falsified on the informative stratum. Strata are informative 340 / secondary
+    540 / excluded 110 = 990, exactly X1''s pair denominator, which ties this evidence
+    to C1''s headline cell.
+
+
+    TWO CAVEATS THAT MUST TRAVEL WITH THIS RESULT RATHER THAN BE DROPPED LATER. (a)
+    OBJECT SUBSTITUTION: the error compared is a pair-level MACRO-AVERAGE surrogate,
+    and it is CLOSED-SET classification error while the floor is an OPEN-SET error
+    lower bound. The citable sentence is therefore "per-pair macro-average closed-set
+    error stays above the floor on the informative stratum", NOT "per-pair open-set
+    error never beats the certificate". This is the same class of substitution the
+    project has flagged before. (b) maximum_pair_tpr MUST NOT BE QUOTED: its values
+    (170.54 lightgbm, 192.89 prototype, 2.10 ronetc) cannot be rates, and the per-service
+    max_tpr beneath it spans 0.0022 to 341.06 with 22 of 53 services above 1.0. This
+    is the third instance of the project''s "field whose value cannot equal what its
+    name claims" class, after the retired lower_side_fraction name and the self-referential
+    artifact_size_bytes. The containment verdict is NOT affected, because it comes
+    from the binomial_test block and maximum_pair_tpr is reported alongside the test
+    rather than consumed by it; but the field must be renamed to what it actually
+    computes, with its definition stated, before the paper cites this artifact. Recorded
+    as M113.
+
+
+    ALSO WORTH RECORDING: pcap_encoder is honestly recorded as not_run with the literal
+    ModuleNotFoundError, and appears as NO INFORMATION in the per-pair CSV rather
+    than being silently dropped, which is why the CSV has 990 x 3 holdout x 4 detector-slot
+    rows. And the liveness misjudgement (the status probe sampled the bash wrapper
+    PID 683446 in do_wait with CPU 0 and declared BLOCKED while the python child 683452
+    held the CUDA and was computing, finishing on its own) is the third instance of
+    wrapper-level probing misreading a child process, after the D048/D054 precedent.
+    Standing rule: a liveness probe must sample the process that actually holds the
+    work, identified by CUDA ownership or the real command line, never the first PID
+    in the tree.
+
+
+    STATUS OF THE THREE CLAIMS AFTER THIS RESULT: C1''s chain now has its containment
+    evidence, with the caveats above attached. C2 and C1''s cross-corpus sensitivity
+    remain as previously ruled (X11 does not reproduce the upper fraction at 16.08
+    vs 34.34 percent, but 64.7 percent of that gap is per-pair evidence volume and
+    service granularity, so it must not be cited as single-corpus non-extrapolability).
+    C3 remains a methods/limits contribution.'
+  related_experiments:
+  - exp_id: X12_k5
+    result: 'COMPLETED: 9 cells (3 detectors x 3 holdouts), all reject_null=false;
+      floor (1-eps_hi)/2 not falsified on the 340-pair informative stratum'
+    role: headline
+  - exp_id: X1
+    result: 990-pair denominator and 340 informative stratum shared; ties the containment
+      evidence to C1's headline cell
     role: reference
   depends_on:
   - D072

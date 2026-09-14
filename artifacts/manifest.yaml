@@ -1,7 +1,3 @@
-# The manifest, not any directory, is the authority for artifact location.
-# artifacts/_project/ and artifacts/<EXPID>/ are both tool-produced layouts with no canonical claim.
-# Invariant: exactly one live entry per artifact, whose path resolves to existing bytes.
-# A second live entry is a defect, and a broken resolver is a defect.
 - id: art_20260913_04f411
   name: Blocked dispatch packages
   type: report
@@ -576,8 +572,8 @@
     and only the WEIGHTS are the blocker. Conclusion: decision = three_of_four, so
     the evaluated baseline set is three of the four planned detectors. Retains no_substitution_statement
     (no substitute probe was used and the planned baseline set was not silently reduced)
-    and false_negative_risk. NOTE ON ABSENCE OF A PRIOR REGISTERED LOCAL COPY: the only local
-    copy previously was a STALE top-level file (artifacts/pcap_encoder_availability.json,
+    and false_negative_risk. NOTE ON ABSENCE OF A PRIOR REGISTERED LOCAL COPY: the
+    only local copy previously was a STALE top-level file (artifacts/pcap_encoder_availability.json,
     15,236 B, sha256 f815676e..., carrying the OLD weaker reason); this registration
     records the corrected bytes at the manifest-registered data-artifact path.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/pcap_encoder_availability.json
@@ -655,7 +651,12 @@
   created_at: '2026-09-14T04:30:57.464762+00:00'
   superseded_by: art_20260914_0118c2
   retirement_note: Described the pre-fix support-conditioning table; the later D063
-    artifact supersedes it and this entry must not be cited. The superseded BYTES are retained at artifacts/_project/data/x3_variant_b_support_conditioning.RETIRED_pre_freeze_do_not_cite.json (109,361 B / sha256 29f9bcab3e0b92a5...), renamed so a path- or filename-based reader cannot mistake the pre-freeze table for the live one. The rename left the bytes and sha256 unchanged, so the registry X3_B checkpoint_path sha binding still resolves.
+    artifact supersedes it and this entry must not be cited. The superseded BYTES
+    are retained at artifacts/_project/data/x3_variant_b_support_conditioning.RETIRED_pre_freeze_do_not_cite.json
+    (109,361 B / sha256 29f9bcab3e0b92a5...), renamed so a path- or filename-based
+    reader cannot mistake the pre-freeze table for the live one. The rename left the
+    bytes and sha256 unchanged, so the registry X3_B checkpoint_path sha binding still
+    resolves.
   tags:
   - x3-repair
   - variant-b
@@ -1017,8 +1018,12 @@
   created_at: '2026-09-14T07:02:14.721114+00:00'
   superseded_by: art_20260914_fc478a
   retirement_note: Described the D056-fixed occupancy dose-response table; the later
-    D063 artifact supersedes it and this entry must not be cited.
-    The superseded BYTES are retained at artifacts/_project/data/x3_control_occupancy_dose_response.RETIRED_pre_guard_do_not_cite.json (291,163 B / sha256 88625bbacbe95984...), renamed so a path- or filename-based reader cannot mistake the pre-guard table for the live one. Those bytes predate the D063 freeze guard, where joint_tracks_thinning reads True in them, which is the SEMANTIC error D074 ruled on. The rename left the bytes and sha256 unchanged.
+    D063 artifact supersedes it and this entry must not be cited. The superseded BYTES
+    are retained at artifacts/_project/data/x3_control_occupancy_dose_response.RETIRED_pre_guard_do_not_cite.json
+    (291,163 B / sha256 88625bbacbe95984...), renamed so a path- or filename-based
+    reader cannot mistake the pre-guard table for the live one. Those bytes predate
+    the D063 freeze guard, where joint_tracks_thinning reads True in them, which is
+    the SEMANTIC error D074 ruled on. The rename left the bytes and sha256 unchanged.
   supersedes: art_20260914_b9b161
   tags:
   - X3
@@ -1294,3 +1299,30 @@
   - corpus-dependence
   - did not reproduce
   - feasibility confirmed
+- id: art_20260914_082a7f
+  name: x12_detector_validation_k5.json
+  type: data
+  description: 'k=5 detector-validation artifact — COMPLETED SUCCESSFULLY (EXIT_CODE=0).
+    Contains the containment statistic (Stage 2: joins the rebuilt X1 per-pair eps_hi
+    values to explicitly labeled per-service detector-error surrogates) plus the OSCR/FPR95
+    detector metrics. Log ends: ''CHECKPOINT 2026-09-14T10:12:25'', ''ARTIFACT_JSON
+    path=/root/eibo/artifacts/x12_detector_validation_k5.json bytes=191867'', ''ARTIFACT_CSV
+    ... bytes=2579853 rows=11880'', ''ADDRESS_RANDOMIZATION status=computed delta=0.0'',
+    ''CONTAINMENT_STATISTIC Stage 2 joins ...'', ''EXIT_CODE=0''. THE THREE-STATE
+    READING OF THE CONTAINMENT OUTCOME MUST BE CHECKED IN THE FILE: an empty informative
+    stratum yields NO VALIDATION EVIDENCE and a near-zero-TPR detector yields NO INFORMATION
+    — neither is ever a pass. AND TWO OBJECT SUBSTITUTIONS TRAVEL WITH ANY READING:
+    the pair-level error is a PROXY (macro-average of two single-service classification
+    errors), and classification_error is CLOSED-SET while the floor is OPEN-SET.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X12_k5/data/x12_detector_validation_k5.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X12_k5
+  skill: ''
+  created_at: '2026-09-14T10:17:41.198203+00:00'
+  tags:
+  - X12_k5
+  - k=5
+  - containment
+  - detector validation
+  - EXIT_CODE=0

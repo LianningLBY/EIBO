@@ -445,7 +445,7 @@ experiments:
     status: DONE
     retry_count: 0
     created_at: '2026-09-14T00:25:50.284Z'
-    updated_at: '2026-09-14T09:17:18.253Z'
+    updated_at: '2026-09-14T10:27:34.450Z'
     hypothesis: 'The chain-rule joint divergence D_k over the DEPENDENT packet prefix
       grows SUBLINEARLY in k, against the null that it grows LINEARLY as an i.i.d.
       process would. Mechanism: within-flow dependence means successive positions
@@ -492,72 +492,151 @@ experiments:
         own field says: ''A fabricated direction is worse than an inconclusive test.'''
     conclusion: success
     metrics:
-      BASELINE_BLOCKER_STATUS: '*** CLOSED (D066/D067). *** NOT OPEN, NOT BLOCKING. The two controls agree on a SHARED quantity at DIFFERENT intervention settings, which is a DOSE-RESPONSE FAMILY, not a conflict; the standing same-nominal-quantity rule was MIS-SCOPED and should never have fired here. RECONSTRUCTED as an explicit standalone record because it is referenced by name in the review chain; the substantive content is also carried under D062_THE_BASELINE_BLOCKER_STANDS_WITH_VARIANT_B_AS_THE_SUSPECT. It survives in no earlier file copy as a standalone key.'
-      D069_HARD_RULE_READ_WHOLE_WRITE_WHOLE_THIS_IS_THE_HARDEST_LESSON_OF_THE_SESSION: '***
-        `update_registry(exp_id, field=''metrics'', value={...})` REPLACES the entire
-        value. IT DOES NOT MERGE. I DESTROYED THIS BLOCK SIX TIMES BY PASSING A PARTIAL
-        DICT, including several times WHILE RESTORING it. THE PROCEDURE, NOT A REMINDER:
-        (1) READ THE WHOLE BLOCK with read_registry(fields=[''metrics'']); (2) merge
-        the new keys BY HAND; (3) WRITE THE WHOLE BLOCK BACK; (4) READ IT BACK and
-        confirm the expected key count. NEVER call this field with only the new keys.
-        THE PROPAGATION RULE IS ALSO ADOPTED: the fan-out is decision log -> ROADMAP
-        -> registry -> framing -> plan -> memory, and the registry is the one the
-        Paper Agent reads -- so VERIFY BY GREPPING THE DECISION ID (confirms arrival)
-        AND BY GREPPING THE RETRACTED PHRASE (finds the places the decision did NOT
-        reach). ***'
+      D069_HARD_RULE_READ_WHOLE_WRITE_WHOLE_AND_THE_FINDINGS_MD_LOSS: '*** `update_registry(exp_id,
+        field=''metrics'', value={...})` REPLACES the entire value. IT DOES NOT MERGE.
+        I DESTROYED THIS BLOCK EIGHT TIMES BY PASSING A PARTIAL DICT. THE PROCEDURE,
+        NOT A REMINDER: (1) READ THE WHOLE BLOCK with read_registry(fields=[''metrics'']);
+        (2) merge the new keys BY HAND; (3) WRITE THE WHOLE BLOCK BACK; (4) READ IT
+        BACK and confirm the expected key count. NEVER call this field with only the
+        new keys. *** AND THE CONTENT LOSS THAT MADE THIS VISIBLE: I ALSO OVERWROTE
+        THE DIRECTOR-OWNED APPEND-ONLY findings.md BY PASSING THE WRONG FILE ARGUMENT
+        TO save_project_file (C024 forbids the Agent writing it at all; C023 forbids
+        wholesale overwrite). *** OUTCOME CONFIRMED: findings.md IS INTACT at 113,414
+        B, sha256 ffcee5ade580a69a6dbca7aed098dcfda1e9049368ab1501a71fe975db67af1f,
+        34 ''##'' and 149 ''###'' -- BYTE-IDENTICAL to git HEAD:findings.md, the pre-damage
+        commit made five minutes BEFORE the damage. ***'
+      D074_THE_RECOVERY_SOURCE_RULE_CORRECTED_AND_THE_NAMING_TRAP: '*** THE RIGHT
+        RULE WAS NEVER ''the largest /tmp copy''. IT IS: THE NEWEST COMPLETE PRE-DAMAGE
+        STATE, WHICH FOR ANY TRACKED FILE IS THE LAST COMMIT (`git show HEAD:<file>`).
+        *** WHY: a byte-comparison against a SELF-CHOSEN backup can never detect that
+        the backup is the WRONG one. The recovery worker verified ''the file matches
+        the source it picked'' -- true, and useless. THE FIFTH instance of a check
+        that cannot exercise its own failure mode, in a new guise: THE CHECK IS WELL-FORMED
+        BUT ITS REFERENCE IS NOT INDEPENDENT. *** THE NAMING TRAP IS CLEARED BY THE
+        DIRECTOR: findings.md.damaged_* was the CORRECT newest superset (113,414 B
+        / ffcee5ad / 184 headers) while findings_safety3_* and findings.md.bak were
+        STALE (101,721 B / 528ccf9d / 164 headers) -- THE NAMES POINTED THE OPPOSITE
+        WAY FROM THE CONTENT. Renamed to findings.SUPERSET_same_as_git_ffcee5ad.md
+        and STALE_* respectively. *** THE DURABLE POINT: /tmp IS VOLATILE; THE ONLY
+        DURABLE COPY IS IN GIT. FOR THE APPEND-ONLY KNOWLEDGE FILES, THE REPOSITORY
+        COMMIT IS THE BACKUP OF RECORD. If a backup procedure is wanted, it is `git
+        commit`, and nothing else. ***'
+      D077_THE_NEW_L1_CONSTRAINT_APPEND_ONLY_FILES_MAY_NOT_BE_RESTORED_BY_WHOLE_FILE_REPLACEMENT: '***
+        EFFECTIVE NOW, AND IT BINDS THE DIRECTOR AS MUCH AS THE AGENT. *** FOR findings.md,
+        memory.md, mistakes.yaml, decisions.yaml, constraints.yaml AND registry.yaml:
+        NO RECOVERY, RESTORE, OR REWRITE OPERATION MAY PROCEED BY WHOLE-FILE REPLACEMENT.
+        IF A RESTORE IS GENUINELY NEEDED, IT MUST FIRST PROVE BY cmp/sha256 THAT THE
+        TARGET VERSION STRICTLY CONTAINS THE CURRENT FILE; OTHERWISE STOP AND REPORT.
+        *** AND: ''CURRENT IS NEWER THAN MY CHOSEN SOURCE'' IS A LEGITIMATE SUCCESSFUL
+        TERMINATION -- NOT A FAILURE. *** THE SHARPEST POINT, NOW EXPLICIT: the recovery
+        worker''s `failed` label was LITERALLY CORRECT -- its TASK PREMISE was wrong,
+        its EXECUTION was right, and ITS REFUSAL IS WHAT PREVENTED THE LOSS. The first
+        instance in this sequence where a `failed` flag means ''the task was mis-specified''
+        rather than ''the work did not happen''. *** THEREFORE RECOVERY TASKS MUST
+        BE DEFINED AS: ''CONFIRM THE CURRENT FILE IS THE NEWEST; RESTORE ONLY IF IT
+        IS NOT'' -- SO THAT STOPPING IS A SUCCESS, NOT A FAILURE. ***'
+      D077_K5_STATUS_FROM_THE_REGISTRY_ITSELF: '*** THE DIRECTOR REPORTED THAT NO
+        k=5 ENTRY EXISTS AND THAT CREATING IT WAS MY STEP. THE ARTIFACT OF RECORD
+        DISAGREES, AND I REPORT THE DISCREPANCY RATHER THAN COPYING THE CLAIM. ***
+        VERIFIED BY READING registry.yaml DIRECTLY: LINE 2034 CARRIES `X12_k5:` AS
+        A TOP-LEVEL EXPERIMENT ENTRY, status ANALYZING, pid 683446; and LINE 2095
+        CARRIES THE RUN''S OWN OUTPUT RECORD (''ARTIFACT_JSON path=/root/eibo/artifacts/x12_detector_validation_k5.json
+        ...''). The artifact is ALSO present locally at artifacts/X12_k5/data/x12_detector_validation_k5.json.
+        SO THE ENTRY EXISTS, WAS ALLOCATED, WAS SUBMITTED, AND THE RUN COMPLETED WITH
+        EXIT_CODE=0 AT 10:12:25. *** FULL SEQUENCE: I created X12_k5 as QUEUED; the
+        Director allocated it; I submitted via submit_on_allocated (pid 683446, cron_registered
+        true); the run finished with EXIT_CODE=0 and wrote artifacts; the entry is
+        now ANALYZING. INDEPENDENT PROOF IT WAS ALREADY RUNNING: a later attempt to
+        write `status=QUEUED` was REJECTED by the state machine with `RUNNING -> QUEUED
+        invalid`. ***'
+      D077_K5_SCIENTIFIC_RESULT: '*** THE PRE-REGISTERED ONE-SIDED BINOMIAL TEST RAN
+        AND IT DID NOT FALSIFY CONTAINMENT. *** Over the 340 informative pairs (eps_hi
+        < 0.5), null violation rate 0.05, alternative=''greater'', at holdouts 0.05
+        / 0.1 / 0.2: LIGHTGBM violations 8 / 8 / 10 => observed 0.023529 / 0.023529
+        / 0.029412, p = 0.995377 / 0.995377 / 0.976547, reject_null FALSE. PROTOTYPE
+        3 / 4 / 4 => 0.008824 / 0.011765 / 0.011765, p = 0.999995 / 0.999970 / 0.999970,
+        FALSE. RONETC 3 / 3 => 0.008824 / 0.008824, p = 0.999995, FALSE. PCAP_ENCODER:
+        NOT_RUN, every holdout NO INFORMATION with reason ModuleNotFoundError, informative_pair_count
+        0 -- CORRECTLY NO INFORMATION, NOT A PASS. *** SO THE OBSERVED VIOLATION RATES
+        SIT BELOW THE 0.05 NULL AND THE EXCESS-DEVIATION TEST DOES NOT REJECT: NO
+        EXCESS OF FLOOR VIOLATIONS OBSERVED. THE VACUITY RULE WAS HONOURED. *** RUN
+        METADATA: pair_count 990; strata informative 340 / secondary 540 / excluded
+        110 (all three populated at k=5, as designed); ADDRESS_RANDOMIZATION delta=0.0
+        (the channel-invariance check holds); artifact registered art_20260914_082a7f
+        and pulled locally. *** THE TWO OBJECT SUBSTITUTIONS STILL TRAVEL WITH IT:
+        the pair-level error is a PROXY (the artifact''s own object_granularity_statement:
+        ''the explicitly labeled macro-average of the two constituent per-service
+        classification-error rates as a pair-level surrogate''), and classification_error
+        is CLOSED-SET while the floor is OPEN-SET. A clean result does NOT validate
+        the surrogate. ***'
+      D077_FLAG_maximum_pair_tpr_IS_NOT_A_RATE: '*** A DEFECT-SHAPED OBSERVATION,
+        FLAGGED NOT SETTLED. *** The artifact reports maximum_pair_tpr = 170.5411183074266
+        (lightgbm), 192.88956616052062 and 191.54195788933814 (prototype), 2.1044219227020156
+        (ronetc), against near_zero_tpr_threshold = 0.01. A TRUE-POSITIVE RATE MUST
+        LIE IN [0,1]; THESE DO NOT. *** CONSEQUENCE: the near-zero-TPR guard compares
+        maximum_pair_tpr to 0.01 to decide whether to report NO INFORMATION, and every
+        observed value is far ABOVE 0.01, so THAT BRANCH CANNOT FIRE ON THIS RUN.
+        IF maximum_pair_tpr IS NOT A RATE, THAT GUARD IS ANOTHER CHECK THAT CANNOT
+        EXERCISE ITS FAILURE MODE -- which would make it the SIXTH instance today
+        of the same family. *** ALTERNATIVES THAT WOULD EXONERATE IT: a PERCENTAGE
+        (still not comparable to 0.01 without scaling) or a COUNT (a different object
+        entirely). EITHER WAY THE 0.01 COMPARISON IS DIMENSIONALLY SUSPECT. TRACE
+        DISPATCHED; BY THE D077 RULE, MATCH THE FIELD, NOT THE DIGITS. ***'
       D055_THE_EXISTENCE_CORROBORATION_ii_IS_NOT_EVIDENCE: 'The heterogeneous-i.i.d.
-        arm, which by construction has ZERO within-flow dependence (each flow its
-        own rate, then 30 i.i.d. bits), returns Markov 45/45 at k>=8 and 98.2% overall
-        (1,281 vs 24 of 1,305; verdict DEAD, clearing the pre-registered threshold
-        of >=44/45) -- IT REPRODUCES THE REAL VOTE EXACTLY, so THE VOTE IS NOT DIAGNOSTIC.
-        The magnitude is about 58x larger than that null (arm k=30 median dBIC about
-        1,896 vs real about 110,091), so heterogeneity does not explain the size either.
-        *** SUPERSEDED IN PART BY D064: the position-wise i.i.d. null RAN and REFUTES
-        ''first-order'' directly -- the stronger, cleaner statement. *** *** AND D063
-        MAKES THE MECHANISM DISCUSSION SIMPLER, NOT HARDER: it is no longer ''two
-        controls point in opposite directions'' (which could not be explained). If
-        variant B''s per-threshold exponents fall largely because the FREEZE STARTS
-        EARLIER at higher T, then that trend MEASURES THE FREEZE LENGTH, NOT SPARSITY
-        -- so ONE OF THE TWO CONTROLS IS INERT OVER A THIRD OF ITS RANGE AND CANNOT
-        TESTIFY ABOUT THE SHAPE OF GROWTH AT ALL. ***'
+        arm, which by construction has ZERO within-flow dependence, returns Markov
+        45/45 at k>=8 and 98.2% overall (verdict DEAD, clearing the pre-registered
+        threshold of >=44/45) -- IT REPRODUCES THE REAL VOTE EXACTLY, so THE VOTE
+        IS NOT DIAGNOSTIC. The magnitude is about 58x larger than that null, so heterogeneity
+        does not explain the size either. *** SUPERSEDED IN PART BY D064: the position-wise
+        i.i.d. null RAN and REFUTES ''first-order'' directly. *** *** AND THE MECHANISM
+        DISCUSSION IS SIMPLER, NOT HARDER: it is no longer ''two controls point in
+        opposite directions''. If B''s per-threshold exponents fall largely because
+        the FREEZE STARTS EARLIER at higher T, then that trend MEASURES THE FREEZE
+        LENGTH, NOT SPARSITY -- and NOW THAT IS MEASURED: the inventory shows the
+        onset moving k=16/14/13/11/10 as T rises through 5/10/20/50/100. ***'
       D056_RESOLVED_FIX_CONFIRMED_BY_THE_ACCEPTANCE_TEST_ANNOTATED_SEE_D060_AND_D067: '***
-        GENUINE REPAIR, BUT DO NOT READ IT AS A RESOLVED BASELINE. *** The off-by-4
-        was at x3_control_occupancy_dose_response.py LINES 179-181: `counts_p = thinned_p[:
-        k - 4]` where K_VALUES starts at 5, so labelled k=9 used five transitions
-        and matched the original control''s k=5. FIXED, LABELS ONLY, to `thinned_p[:k]`.
-        ACCEPTANCE TEST PASSED: un-thinned plain_iid k=5 D_k = 1.6949092697605275
-        vs analytic truth 1.694595720774407, est/true = 1.0001850287843153; the corrected
-        curve is BIT-IDENTICAL to the original control''s at every labelled k=5..30.
-        Permanent assertion added at lines 231-266 -- exactly the right permanent
-        guard. RUNNER LEFT IN REPO. Artifacts: art_20260914_4d9b49 (291,163 B, sha256
-        88625bba...), runner art_20260914_646bc6 (15,318 B, sha256 da81dabb...). ***
-        THE ZERO-INTERVENTION TEST PASSES AGAINST THE ORIGINAL CONTROL ONLY -- the
-        three-way-agreement claim was FALSE (D062); the question was later CLOSED
-        as three settings of one construction (D067). *** *** AND SEE D063: THIS SAME
-        SCRIPT''S THINNING PATH ALSO FREEZES -- plain arm at k=29 (retained=0.10)
-        and k=27 (retained=0.05); the twin does not. ***'
-      D056_CORRECTED_VERDICT_IS_POSITIVE_joint_tracks_thinning_TRUE_AND_IT_IS_A_REAL_TEST_BUT_A_SHALLOW_ONE: 'On
-        the corrected axis the dose-response returns joint_tracks_thinning true. plain_iid
+        GENUINE REPAIR, BUT NOT A RESOLVED BASELINE. *** The off-by-4 was at lines
+        179-181: `counts_p = thinned_p[: k - 4]` where K_VALUES starts at 5, so labelled
+        k=9 used five transitions and matched the original control''s k=5. FIXED,
+        LABELS ONLY, to `thinned_p[:k]`. ACCEPTANCE TEST PASSED: un-thinned plain_iid
+        k=5 D_k = 1.6949092697605275 vs analytic truth 1.694595720774407, est/true
+        = 1.0001850287843153; the corrected curve is BIT-IDENTICAL to the original
+        control''s at every labelled k=5..30. Permanent assertion added. RUNNER LEFT
+        IN REPO. *** THE THREE-WAY-AGREEMENT CLAIM WAS FALSE (D062); THE QUESTION
+        IS NOW CLOSED AS ONE CONSTRUCTION MEASURED WITH AND WITHOUT A FILTER (D066).
+        *** *** THIS SAME SCRIPT''S THINNING PATH ALSO FREEZES: plain at k=29 (retained=0.10)
+        and k=27 (retained=0.05); the twin does not -- SEE D063, NOW FIXED WITH REFUSAL.
+        ***'
+      D056_CORRECTED_VERDICT_joint_tracks_thinning_TRUE_AND_ITS_TWO_DEEPEST_LEVELS_ARE_NOW_REFUSED: 'On
+        the corrected axis the dose-response returns joint_tracks_thinning true. plain
         exponent_p by retained_fraction: 0.651 / 0.625 / 0.614 / 0.603 / 0.557; sparse-context
         statistic 0.4156 / 0.4493 / 0.4841 / 0.5317 / 0.5694. twin: 0.891 / 0.888
-        / 0.876 / 0.848 / 0.821. *** CITING IT: REAL TEST BUT SHALLOW -- the response
-        spans 0.651 -> 0.557, about 14 percent relative, across five DETERMINISTIC
-        thinning levels. *** *** AND ITS TWO DEEPEST LEVELS FREEZE (D063): the 0.603
-        and 0.557 values sit on curves constant over a tail, so THEY ARE FITS ACROSS
-        A FROZEN WINDOW AND MUST NOT BE CITED AS SPARSITY RESPONSE until the no-freeze
-        fix lands. ***'
+        / 0.876 / 0.848 / 0.821. PRE-REGISTERED RULE: tracks_thinning iff the sparse-context
+        statistic is nondecreasing AND p is nonincreasing as retained_fraction falls.
+        *** CITING IT: REAL TEST BUT SHALLOW -- the response spans 0.651 -> 0.557,
+        about 14 percent relative. AND THE TWO DEEPEST LEVELS ARE NOW REFUSED BY THE
+        NO-FREEZE ASSERTION (0.10 FAILS k=29..30, 0.05 FAILS k=27..30), SO THE 0.603
+        AND 0.557 VALUES ARE FITS ACROSS A FROZEN WINDOW AND MUST NOT BE CITED AS
+        SPARSITY RESPONSE. THE THREE SURVIVING LEVELS (1.00 / 0.50 / 0.25) PASS THE
+        ASSERTION AND MAY BE CITED SUBJECT TO THE SHALLOWNESS CAVEAT. *** *** D075/D077
+        UPDATE: a later re-run ENCODED the refusal into the summary boolean, so the
+        artifact now reads tracks_thinning false / joint_tracks_thinning false --
+        WHICH IS ALSO WRONG. THE CORRECT STATEMENT IS THE THREE-STATE ONE: trend SUPPORTED
+        on the three assessable levels (0.651 -> 0.625 -> 0.614, strictly monotone);
+        the two deepest levels NOT ASSESSABLE (guard refused a frozen tail); mechanism
+        NOT ESTABLISHED -- two levels refused, NOT ''trend absent''. NEITHER BOOLEAN
+        IS A CORRECT RECORD. FIX DISPATCHED. ***'
       D056_RESIDUAL_LIMITS: '(a) *** SEEDS: THE DOSE-RESPONSE RESTS ON ONE SEED (20260914)
         WHILE THE APPROVED CONTROL PROTOCOL ASKED FOR >= 3. THIS ITEM STAYS OPEN.
-        *** (b) The response margin is SHALLOW -- about 14 percent relative. (c) SIBLING
-        LABEL AUDIT, re-run under the UPGRADED PROTOCOL (D063): the +4-label-shift
-        check cleared x3_variant_a_estimator_family.py, x3_variant_b_support_conditioning.py
-        and x3_controls.py as to LABELS; x3_variant_c_nested_lr.py NOT APPLICABLE;
-        x6_divisibility_lower_bound.py NOW VERIFIED-CORRECT against its analytic known-truth
-        (0 violations of 120; axis probe k=5/10/15 -> [1,5]/[1,10]/[1,15]). *** THE
-        LABEL CHECK WAS NECESSARY AND NOT SUFFICIENT: it cleared variant B while variant
-        B''s curve was FROZEN FROM k=16. THE CONSTANT-TAIL / EXACT-ZERO-INCREMENT
-        CHECKS ARE NOW PART OF THE STANDING AUDIT. *** (d) x3_axis_validation.json:
-        the vote arm RECOVERS KNOWN ANSWERS (S1 pure i.i.d. 0/8/0; S2 dependent 8/0/0;
+        *** (b) The response margin is SHALLOW. (c) SIBLING LABEL AUDIT UNDER THE
+        UPGRADED PROTOCOL: the +4-label-shift check cleared x3_variant_a_estimator_family.py,
+        x3_variant_b_support_conditioning.py and x3_controls.py as to LABELS; x3_variant_c_nested_lr.py
+        NOT APPLICABLE; x6_divisibility_lower_bound.py VERIFIED-CORRECT against its
+        analytic known-truth. *** THE LABEL CHECK WAS NECESSARY AND NOT SUFFICIENT:
+        it cleared variant B while B''s curve was FROZEN FROM k=16. THE CONSTANT-TAIL
+        / EXACT-ZERO-INCREMENT CHECKS ARE NOW PART OF THE STANDING AUDIT, AND A PERMANENT
+        ASSERTION NOW ENFORCES THEM AT RUNTIME. *** (d) x3_axis_validation.json: the
+        vote arm RECOVERS KNOWN ANSWERS (S1 pure i.i.d. 0/8/0; S2 dependent 8/0/0;
         S3 heterogeneous-and-independent 8/0/0, all matching independently computed
         expectations, zero mismatches), and a DEPENDENCE-DEATH-AT-KNOWN-POSITION test
         put the vote transition at exactly the built position (k=4 MARKOV, k=5..30
@@ -566,363 +645,244 @@ experiments:
         D056 PREDICTED THAT FIXING THE OFF-BY-4 WOULD SETTLE THE APPARENT DISAGREEMENT
         BY SHOWING IT WAS AN ARTEFACT OF THE DEFECTIVE AXIS. THAT PREDICTION WAS WRONG.
         THE DISAGREEMENT SURVIVES THE FIX. *** After the repair the corrected dose-response
-        reads p = 0.651 at retained_fraction = 1.0, while VARIANT B STILL READS 0.539
-        -- artifact UNCHANGED (109,361 B, sha 29f9bcab...). *** RESOLVED LATER, AND
-        NOT AS A DISAGREEMENT: D067 -- three settings of one construction. AND SEE
-        D063: the exponent SERIES that made them look like a dose-response is largely
-        A SEQUENCE OF PROGRESSIVELY SHORTER PRE-FREEZE WINDOWS. ***'
+        reads p = 0.651 at retained_fraction = 1.0, while VARIANT B STILL READS 0.539.
+        *** RESOLVED: D066 -- ONE CONSTRUCTION, MEASURED WITH AND WITHOUT A FILTER;
+        bit-identical k=5..9, diverging from k=10, frozen at k=16. ***'
       D062_THE_THREE_WAY_AGREEMENT_CLAIM_IS_WITHDRAWN_IT_WAS_FALSE: '*** I WROTE A
         FALSE CLAIM AND THE DIRECTOR CORRECTED IT. RECORDED AS SUCH. *** The withdrawn
         claim: ''THE ZERO-INTERVENTION TEST NOW PASSES ACROSS ALL THREE IMPLEMENTATIONS
         ... EXACTLY equal to the original control''s 0.651 and to variant B''s no-filter
-        baseline 0.651.'' *** THAT IS FALSE. THERE IS NO THREE-WAY AGREEMENT AT THAT
-        TIME. *** *** AND THE DIRECTOR NOW CONFIRMS THE FAULT IS THE ATTRIBUTION,
-        NOT TWO VALUES: variant B CONTAINS NO UNFILTERED BASELINE AT ALL; its values
-        are THRESHOLD-CONDITIONED (T=5 -> 0.539 is the MINIMUM rung per its own threshold_selection_rule);
-        and 0.651 BELONGS TO THE ORIGINAL CONTROL (unfiltered), which the corrected
-        dose-response reproduces at no-thinning. THE ATTRIBUTION WAS ALREADY CORRECTED
-        IN PLAN AND REGISTRY; A GREP FOR THE OLD PHRASE NOW HITS ONLY CHAT LOGS. ***'
+        baseline 0.651.'' *** THAT IS FALSE AS STATED: AT THAT MOMENT TWO IMPLEMENTATIONS
+        AGREED AT 0.651 AND ONE READ 0.539. *** *** BUT SEE D066: the claim was false
+        about the VALUES AT THE TIME, NOT about the construction. B''s unfiltered
+        ENDPOINT is 0.651 too, it had simply never been reported. SO THE UNDERLYING
+        PICTURE -- one construction, with and without a filter -- IS CORRECT AND IS
+        NOW SETTLED BY BIT-IDENTITY AT k=5..9. ***'
       D062_WHERE_MY_ERROR_CAME_FROM_AND_THE_COINCIDENCE_TO_REMEMBER: 'The string ''0.651''
         DOES occur inside variant B''s file -- BUT IT IS A COINCIDENTAL D_k MEDIAN
         (10.651108547284124 at k=30), NOT A BASELINE FIELD. *** DO NOT RE-MAKE THIS
-        ERROR: a substring match on a number is not a field match. *** My finding
-        that variant B contains NO no-filter / unfiltered / baseline FIELD OF ANY
-        KIND STANDS AND IS CORRECT -- but I drew an UNSUPPORTED CONCLUSION from it
-        (that 0.539 must therefore belong to a filtered setting and the conflict was
-        a mere settings mismatch) and stated that too strongly. THE DIRECTOR WAS RIGHT
-        TO CORRECT ME AT THAT MOMENT. THE INFERENCE LATER PROVED CORRECT ON EVIDENCE.'
-      D062_THE_BASELINE_BLOCKER_STANDS_WITH_VARIANT_B_AS_THE_SUSPECT: 'PER THE STANDING
-        RULE: the blocker STOOD. *** RESOLVED UNDER D066/D067: the comparison ran,
-        and the STANDING RULE ITSELF WAS MIS-SCOPED -- a same-nominal-quantity conflict
-        is a blocker ONLY WHEN THE NOMINAL SETTING IS IDENTICAL; a shared quantity
-        under DIFFERENT intervention settings is a DOSE-RESPONSE FAMILY, NOT A CONFLICT.
-        THE RULE SHOULD NEVER HAVE FIRED HERE. ***'
+        ERROR: a substring match on a number is not a field match. MATCH THE FIELD,
+        NOT THE DIGITS (D077). ***'
       D062_PROCESS_RULE_ADOPTED: '*** WHEN A REPORT SAYS A BLOCKER IS RESOLVED, READ
         THE SPECIFIC FIELD IN THE SPECIFIC FILE BEFORE TREATING IT AS CLOSED. ***
-        Caught three times now only by reading the file directly. THIS APPLIES IN
-        BOTH DIRECTIONS. ***'
-      D066_D067_THE_0_651-VS-0_539_QUESTION_IS_CLOSED_AS_THREE_SETTINGS_OF_ONE_CONSTRUCTION: '***
-        THREE SETTINGS OF ONE CONSTRUCTION, NOT THREE VALUES OF ONE QUANTITY. ***
-        original control UNFILTERED = 0.651; corrected dose-response ZERO THINNING
-        = 0.651; VARIANT B AT T=0 = 0.6510 (recomputed by an independent review, IN
-        NO ARTIFACT) matching the control at all 26 k; VARIANT B AS STORED (T=5) =
-        0.539. SECOND INDEPENDENT MEASUREMENT: B''s stored curve is BIT-IDENTICAL
-        to the control at k=5..9, diverging only from k=10 -- THE SIGNATURE OF A T=5
-        FILTER. *** CODE EVIDENCE: all three scripts share ONE plain-i.i.d. generator,
-        `synthetic_bits(n, kmax, p, rng)` (x3_controls.py lines 489-490), 200000 flows
-        per law, 30 bits, p=0.30, q=0.70, seed 20260914; VARIANT B AND THE DOSE-RESPONSE
-        BOTH `from x3_controls import ... synthetic_bits ...`. CAVEAT: for the TWIN
-        arms seed handling DIFFERS. *** *** ⚠⚠ AND THE FREEZE POINT MOVES MONOTONICALLY
-        EARLIER AS T RISES: no freeze at T=0; k=28 at T=1; k=20 at T=2; k=16 at T=5;
-        k=14/13/11/10 at T=10/20/50/100. SO ''p FALLING AS THE THRESHOLD TIGHTENS
-        IS A SPARSITY DOSE-RESPONSE'' IS FALSE -- IT IS A SEQUENCE OF PROGRESSIVELY
-        SHORTER EFFECTIVE k WINDOWS. T=1 ALONE LIFTS p FROM 0.651 TO 0.955 (ESSENTIALLY
-        LINEAR). *** *** THE DIRECTOR HAS NOW WEAKENED ONE OF THEIR OWN ARGUMENTS
-        ON THIS BASIS: the ''two interventions move sparsity in opposite directions
-        yet both lower p'' claim ASSUMED variant B''s unfiltered p sat above 0.539
-        -- IT WAS NEVER COMPUTED. ONLY MONOTONE DECREASE WITHIN T=5..100 IS SUPPORTED.
-        COMPUTING VARIANT B''S UNFILTERED PLAIN EXPONENT IS A RECORDED OPEN ITEM.
-        *** *** AND: FIXING THE ATTRIBUTION DOES NOT DISSOLVE THE FREEZE. TWO INDEPENDENT
-        DEFECTS ON ONE CURVE: the ATTRIBUTION fault (now fixed) and the FROZEN AXIS
-        (separate, unfixed, dispatch in flight). *** *** REQUIRED SO THE BLOCKER CANNOT
-        REOPEN: THE VALUE B @ T=0 = 0.651 MUST LAND IN AN ARTIFACT. ***'
-      D063_NUMBERING_COLLISION_DISCLOSED: '*** SOME OF MY EARLIER KEYS HERE USED THE
-        LABEL ''D063'' FOR THE GENERATOR-COMPARISON RESULT. THAT LABEL WAS SELF-ASSIGNED
-        AND COLLIDES WITH THE DIRECTOR''S D063 (variant B''s frozen curve). THEIR
-        DECISION LOG READS: D060 off-by-4 FIXED; D061 stray-layer consolidation; D062
-        refuted a reported resolution; D063 the variant-B CURVE FREEZE; D064 the position-wise
-        null beats first-order; D065 X6 completed; D066 the retraction OVER-CORRECTED;
-        D067 0.651-vs-0.539 CLOSED; D068 RETRACTED the Director''s own D063 over-reach
-        (the 0.608 mass figure). *** SO READ MY ''D063_*'' GENERATOR-COMPARISON KEYS
-        AS WHAT THEIR LOG CALLS D066/D067. ***'
-      D063_THE_VARIANT_B_PLAIN_CURVE_IS_FROZEN_FROM_K16_AND_THE_FREEZE_PRODUCES_THE_REPORTED_SUBLINEARITY: '***
-        THE DIRECTOR''S D063, VERIFIED BY THEM FROM THE ARTIFACT. THIS INVALIDATES
-        THE OTHER HALF OF PART (i)''s SUPPORT. *** In x3_variant_b_support_conditioning.json,
-        `gate.plain_iid_known_truth.curve` has D_k_median PINNED at EXACTLY 5.908567858844014
-        for EVERY k from 16 to 30. Increments over k=5..30: [0.33995, 0.34420, 0.34113,
-        0.35237, 0.37767, 0.38000, 0.37049, 0.39485, 0.40327, 0.41803, 0.49169, 0,
-        0, ...] -- 14 of 25 increments are EXACTLY ZERO (see D064 below: THIS ARTIFACT''S
-        --allow-empty, per the artifact''s own values, is what the zero-increment
-        count must be verified against; the Director reports 14/25 vs the original
-        control''s 0/25 and the fix worker is verifying that from the file). *** NOT
-        A DATA PROPERTY -- IT IS B''s OWN FILTER: MIN_CONTEXT_COUNT / condition_counts(T);
-        synthetic flows are fixed-length, the context count grows as 2^k while per-context
-        samples collapse, and at k=16 the retained-context set stops changing, pinning
-        D_k. *** ★ AND THE FREEZE PRODUCES THE SIGNAL: refitting B''s OWN curve with
-        B''s OWN power form gives p = 0.539 over the full window (reproducing the
-        artifact exactly) but p = 1.093 -- LINEAGE. *** SO B''s REPORTED SUBLINEARITY
-        IS A FITTING ARTIFACT OF A CONSTANT TAIL. ***'
-      D063_THE_SIBLING_AUDIT_PROTOCOL_IS_UPGRADED_THIS_IS_THE_SYSTEMIC_LESSON: '***
-        THE AUDIT CHECKED ONLY FOR A +4 LABEL SHIFT, CONCLUDED ''Verified-correct
-        labelling'' FOR VARIANT B, AND PRINTED THE FREEZE AS DATA -- IN THE VERY ROW
-        IT LISTED, k=20 AND k=30 SHOWED IDENTICAL VALUES. AN ANOMALY THAT CERTIFIES
-        ITSELF ON SIGHT WAS NOT TREATED AS A TRIGGER. *** THE RULE, ADOPTED: AUDIT
-        SCOPE IS SET BY ANOMALY SIGNALS, NOT BY THE TASK DESCRIPTION ALONE. When inspecting
-        a curve, check ALL FOUR: (a) label shift; (b) CONSTANT TAILS; (c) non-monotone
-        jumps; (d) EXACT-ZERO increments. *** BY THE UPGRADED STANDARD: B was ''verified-correct
-        as to labels'' -- TRUE AND STILL INSUFFICIENT. THE FREEZE INVENTORY ACROSS
-        ALL X3 CURVES IS PART OF THE DISPATCHED WORK. ***'
-      D063_THE_SIBLING_AUDIT_UPGRADE_RESTATED: '*** THE AUDIT CHECKED ONLY FOR A +4
-        LABEL SHIFT, CONCLUDED ''Verified-correct labelling'' FOR VARIANT B, AND PRINTED
-        THE FREEZE AS DATA -- IN THE VERY ROW IT LISTED, k=20 AND k=30 SHOWED IDENTICAL
-        VALUES. AN ANOMALY THAT CERTIFIES ITSELF ON SIGHT WAS NOT TREATED AS A TRIGGER.
-        *** THE RULE, ADOPTED: AUDIT SCOPE IS SET BY ANOMALY SIGNALS, NOT BY THE TASK
-        DESCRIPTION ALONE. When inspecting a curve, check ALL FOUR: (a) label shift;
-        (b) CONSTANT TAILS; (c) non-monotone jumps; (d) EXACT-ZERO increments. ***
-        BY THE UPGRADED STANDARD: B was ''verified-correct as to labels'' -- TRUE
-        AND STILL INSUFFICIENT. THE FREEZE INVENTORY ACROSS ALL X3 CURVES IS PART
-        OF THE DISPATCHED WORK. ***'
-      D063_CONFLICT_FLAGGED_NOT_RESOLVED_BY_ME_FREEZE_AND_THE_MASS_FIGURE: '*** TWO
-        OF THE DIRECTOR''S OWN RULINGS CONFLICT ON THE 0.608 EXCLUDED-MASS FIGURE,
-        AND I AM NOT SILENTLY PICKING ONE. *** (a) THE D063 INSTRUCTION says B''s
-        plain-arm conclusion AND the 0.608/61% excluded-mass figure MAY NOT BE CITED
-        until recomputed on a non-frozen axis. (b) THE DIRECTOR''S OWN D068 IN THE
-        ROADMAP says ''I OVER-REACHED AND HAVE RETRACTED IT -- the 0.608 excluded-mass
-        value is NOT freeze-contaminated and does NOT need recomputation'', verified
-        in source: it comes from condition_counts (line 139) as a DIRECT RATIO OF
-        DROPPED TO TOTAL TRANSITION MASS (p_excluded_mass = drop_p/raw_p, lines 198-211)
-        WITH NO ESTIMATOR AND NO FIT ANYWHERE IN THE PATH; it shows 22 distinct values
-        across the 26 ks, monotone nondecreasing (0.000 at k<=9 -> 0.0029 at k=10
-        -> 0.2654 at k=16 -> 0.4124 at k=20 -> 0.6082 at k=30), and DOES NOT FREEZE
-        AT k=16 the way the D_k curve does. *** LIKELY RECONCILIATION: THE TWO CLAIMS
-        ARE ABOUT DIFFERENT QUANTITIES -- (a) the EXCLUDED-MASS FRACTION, a direct
-        ratio, structurally immune to the freeze; and (b) THE FITTED EXPONENT, which
-        IS freeze-contaminated. THE INSTRUCTION CONFLATES THEM IN ONE SENTENCE; D068
-        SEPARATES THEM. THE WORKER WAS TOLD TO KEEP THE DISTINCTION EXPLICIT AND REPORT
-        PROVENANCE RATHER THAN ''FIX'' A QUANTITY THAT MAY NEED NO FIX. *** *** THE
-        RESOLUTION IS THE DIRECTOR''S TO MAKE. UNTIL THEN: THE FITTED EXPONENT SERIES
-        IS NOT CITABLE; THE MASS FIGURE''S CITABILITY FOLLOWS D068 UNLESS RE-OVERRIDDEN.
+        Caught three times now only by reading the file directly. AND ITS COROLLARY,
+        WHICH D066 ADDED: DO NOT RETRACT A READING MERELY BECAUSE IT IS CHALLENGED
+        -- RE-DERIVE IT FROM THE ARTIFACT. I RETRACTED UNDER CHALLENGE WITHOUT RE-DERIVING,
+        AND THAT RETRACTION WAS ITSELF THE ERROR. ***'
+      D066_DO_NOT_READ_THIS_AS_A_RESCUE: '*** THE 61%/0.608 ''STRUCTURAL'' ARGUMENT
+        STAYS DEAD: the plain curve is STILL FROZEN FROM k=16, and 0.539 is STILL
+        A FIT ACROSS A CONSTANT TAIL. CLOSING THE ATTRIBUTION BLOCKER DOES NOT REVIVE
+        THE ARGUMENT. *** *** BUT NOTE THE PRECISE SCOPE, PER D068: WHAT IS UNSUPPORTED
+        IS THE INFERENCE FROM THE MASS -- ''therefore the plain arm failure is structural
+        rather than a tuning problem'' -- BECAUSE THAT VERDICT RESTED ON THE FROZEN-AXIS
+        FIT. THE 0.608 MASS ITSELF IS A VALID, INDEPENDENTLY COMPUTED FILTER PROPERTY
+        AND IS CITABLE. ***'
+      D066_MY_OVER_RETRACTION_KEEP_BOTH_CORRECTIONS_ON_THE_RECORD: '*** BOTH CORRECTIONS
+        ARE KEPT, BECAUSE THE SECOND SHOWS THE CORRECTION CULTURE WORKING IN THE OTHER
+        DIRECTION. *** (1) I WROTE A FALSE THREE-WAY CLAIM AND THE DIRECTOR CAUGHT
+        IT (D062). (2) I THEN OVER-RETRACTED and the Director caught THAT too (D066):
+        my ORIGINAL reading (''0.651 is the unfiltered endpoint, 0.539 is the same
+        construction through a T=5 filter'') WAS RIGHT, and my RETRACTION of it was
+        the actual error. *** I RETRACTED UNDER CHALLENGE WITHOUT RE-DERIVING FROM
+        THE DATA. THE CURE ON BOTH SIDES IS ONE RULE, AND IT HAS NOW DECIDED A QUESTION
+        FOUR TIMES TODAY: SETTLE IT FROM THE ARTIFACT, NOT BY ARGUMENT. ***'
+      D066_THE_BIT-IDENTICAL_CHECK_SETTLES_IT_SETTLED_FROM_THE_ARTIFACT_NOT_BY_ARGUMENT: '***
+        THE DIRECTOR RAN THE CHECK NEITHER OF US HAD RUN, AND I HAVE VERIFIED IT MYSELF
+        BY READING BOTH ARTIFACTS POINT BY POINT. IT GOES THE OTHER WAY FROM MY RETRACTION.
+        *** B''s gate.plain_iid_known_truth.curve and the original control''s known_truth_control.plain_iid.curve
+        are BIT-IDENTICAL AT k=5..9: 1.6949092697605275 / 2.0348578257885417 / 2.3790577409403513
+        / 2.7201879884145286 / 3.0725611382135902 -- EXACT TO 1e-9 -- AND THEY FIRST
+        DIVERGE ONLY AT k=10 (control 3.443794066025302 vs B 3.4502297569802005),
+        after which B FREEZES at k=16. *** THE INFERENCE IS DIRECT AND NEEDS NO FIELD-NAME
+        ARGUMENT: if the two arms used a different setting, different data, or a different
+        construction, THEIR CURVES WOULD DIFFER AT k=5. THEY DO NOT. SO THE DIVERGENCE
+        BEGINNING AT k=10 IS THE FILTER PROGRESSIVELY REMOVING CONTEXTS, AND THE FREEZE
+        AT k=16 IS THAT FILTER SATURATING. *** ALSO RECORDED: over the UNFILTERED
+        window k=5..9, B''s own values fit at p = 1.013 -- essentially LINEAR. TOO
+        FEW POINTS TO BE A VERDICT, but it is the right qualitative anchor. ***'
+      D066_THE_BLOCKER_IS_CLOSED_SAME_CONSTRUCTION_WITH_AND_WITHOUT_A_FILTER: '***
+        CLOSED. ''One construction, measured with and without a filter'' is accurate.
+        *** 0.651 IS VARIANT B''s VALUE TOO -- at the unfiltered endpoint, which B
+        NEVER REPORTED (real_data.status = NOT_COMPUTED_BECAUSE_GATE_FAILED). An independent
+        review separately recomputed B @ T=0 = 0.6510, matching the control at all
+        26 k. *** MY EARLIER FINDING THAT B''s ARTIFACT CONTAINS NO no_filter / unfiltered
+        / baseline FIELD OF ANY KIND REMAINS FACTUALLY TRUE AND IS NOT IN TENSION
+        WITH THIS: the FIELD is absent (a fact about the artifact) while the unfiltered
+        ENDPOINT VALUE is 0.651 (an inference from bit-identical k=5..9, independently
+        recomputed). BOTH STAND. *** *** AND D077 ADDS THE ARTIFACT HOME: 0.651''s
+        durable home is `known_truth_control.plain_iid.fit.power.exponent_p` in x3_control_known_truth.json.
         ***'
-      D057_THE_PARAMETRIC_ROUTE_IS_STRUCTURALLY_NON_DIAGNOSTIC_BOTH_ITS_LINEAR_AND_ITS_PASSED_CONTROL_ARE_WITHDRAWN_AS_EVIDENCE: '***
-        DO NOT NARROW PART (i). *** TWO FACTS WITHDRAWN: (1) ''the real-data route
-        returned LINEAR''; (2) ''its fitted-model control passed decisively''. The
-        runner fits a Markov model by BIC ONCE PER SERVICE and computes the curve
-        UNDER THAT ALREADY-FITTED MODEL with NO PER-k REFIT, so for ANY stationary
-        chain D_k is AFFINE (order 0 returns D_k identically 0). THE ONLY REACHABLE
-        OUTCOMES ARE D_k = 0 OR AFFINE; SUBLINEAR IS UNREACHABLE, so LINEAR IS FORCED
-        AND CARRIES NO INFORMATION ABOUT THE DATA. Numerically verified: first-order
-        chain [[0.8,0.2],[0.3,0.7]] has CONSTANT increments +0.128424 for every k=2..30;
-        order-2 constant at +0.187831748 for every k>=4. ITS CONTROL CHECKS THAT THE
-        EXACT AND FITTED CURVES GET THE SAME fit_growth VERDICT -- and BOTH ARE AFFINE
-        BY CONSTRUCTION -- so the control CANNOT FAIL and IS NOT A CONTROL. THE REVIEWER
-        INDEPENDENTLY CONFIRMED ON A SECOND READING. *** ITS LABELS WERE LATER VERIFIED-CORRECT
-        (x3_axis_validation.json: per-k residuals <= 1.0658141036401503e-14 at known
-        order-2, AXIS PASS; THE ROUTE WAS NOT REPAIRED). *** *** DOWNSTREAM SURFACE
-        STILL CARRYING THE WITHDRAWN NARROWING: x3_parametric_growth.json (215,476
-        B, sha256 3c47da3825d06a313b888c6b6310f371be00fc07d3313a045740aadce8049dba)
-        whose plain_statement STILL SAYS the question is adjudicable and the plug-in
-        limitation must narrow. *** THAT WORKER RAN AT 05:50; D057 CAME AT 06:45 --
-        SO IT IS SUPERSEDED, NOT WRONG, BUT COPIED INTO THE PAPER IT WOULD REVERSE
-        A SETTLED DECISION. *** A D057 WARNING HAS BEEN PLACED ON ITS REGISTRATION
-        DESCRIPTION (art_20260914_a3381d, named ''x3_parametric_growth.json (CONCLUSION
-        WITHDRAWN -- must not be cited)''). THE FILE ITSELF SHOULD ALSO CARRY THE
-        ANNOTATION RATHER THAN ONLY THE MANIFEST DESCRIPTION -- that writer-side annotation
-        is the remaining step. ***'
-      D057_WHAT_THIS_MEANS_FOR_THE_PAPER: '*** (i) DOES NOT NARROW. *** The route
-        demonstrates that THIS ROUTE IS VACUOUS, not that the question is adjudicable.
-        (i) KEEPS ITS SCOPE: THE STANDARD PLUG-IN CHAIN-RULE ESTIMATOR CANNOT ADJUDICATE
-        the dependent-prefix growth question AT THIS K WINDOW, N, AND OCCUPANCY-COLLAPSE
-        CURVE. (ii) SEE D064 -- a DIRECT negative on ''first-order''. C1 AND C2 ARE
-        UNTOUCHED. *** NO REPAIR AND NO RE-RUN without a NEW approved design brought
-        to the Director first. *** *** AND THE ''STRUCTURAL, NOT A TUNING PROBLEM''
-        HALF OF (i)''s SUPPORT IS NOW DOUBLY WEAKENED (D063): variant B''s plain curve
-        is frozen over its last 14 of 25 points, and the Director has WITHDRAWN the
-        0.608/61%-mass evidence pending the mass/exponent distinction. WHAT STILL
-        STANDS IS THE OTHER, STRONGER LEG -- the analytically-LINEAR known-truth control
-        FAILED (est/true 1.0002 -> 0.6769) -- which does not depend on variant B at
-        all. ***'
-      D058_ORDERING_CORRECTED_CONTAINMENT_IS_NOT_BLOCKED_BY_THE_AUC_DIAGNOSTIC: 'The
-        containment statistic consumes (a) eps_hat_k_hi from the rebuilt X1 artifact
-        and (b) the per-flow detector error; it does NOT reference OSCR or FPR95 anywhere.
-        THEREFORE: (1) THE k=5 CONTAINMENT RESULT IS VALID REGARDLESS OF HOW THE AUC
-        DIAGNOSTIC RESOLVES; (2) THE DIAGNOSTIC RUNS IN PARALLEL, NOT IN FRONT; (3)
-        ONE RUN SHOULD SERVE BOTH PURPOSES. The reviewer independently confirmed this.
-        VACUITY RULE HOLDS: a violation count computed on a vacuous detector state
-        is reported as UNINFORMATIVE, never as a pass.'
-      D059_THE_AGREEMENT_BASELINE_IS_THE_MAJORITY_CLASS_NOT_UNIFORM: '*** THE CHANCE
-        BASELINE FOR THE ROW-LEVEL AGREEMENT RATES IS THE MAJORITY-CLASS RATE, NOT
-        uniform 1/53 = 1.89%. *** The service-label distribution is STRONGLY IMBALANCED:
-        majority class 14.73% (745,293 of 5,058,007 flows, train-side), held-out test-side
-        24.89%. BOTH recorded. *** RULE: ANY PLACE THAT CITES THESE AGREEMENT RATES
-        MUST CARRY THE MAJORITY-CLASS BASELINE BESIDE THEM. *** AGAINST IT: LIGHTGBM
-        (48.6%) and RONETC (58.1%) ABOVE; *** PROTOTYPE (13.5%) BELOW -- WORSE THAN
-        ALWAYS GUESSING THE MAJORITY CLASS. *** ALSO: `all_rows_accepted = true` FOR
-        LIGHTGBM IS STRUCTURAL -- line 486 hard-codes accepted: np.ones(len(pred),
-        dtype=bool); AN OPEN-SET DETECTOR THAT NEVER REJECTS HAS NO REJECTION CAPABILITY.'
-      D061_THE_FIX_FIRST_LANDED_IN_A_STRAY_LAYER_CONSOLIDATION_COMPLETE: 'The D056
-        fix wrote to a STRAY layer (artifacts/X3/data/) while the AUTHORITATIVE mirror
-        (artifacts/_project/data/) kept PRE-FIX bytes -- TWO LIVE CONTRADICTORY MANIFEST
-        ENTRIES. The Director fixed the BYTES directly. CONSOLIDATION COMPLETE AND
-        VERIFIED BY READING THE TREE. *** TWO PROCESS RULES ADOPTED: (1) A WORKER
-        REPORT MUST BE GENERATED AFTER ITS ARTIFACT IS FROZEN. (2) A FIX MUST LAND
-        WHERE THE ARTIFACT ALREADY LIVES. *** *** ★ ROOT CAUSE FOUND: `register_artifact(server=...,
+      D067_B_AT_T_0_MUST_LAND_IN_AN_ARTIFACT: '*** RESOLVED BY D077: THE TASK IS DROPPED
+        AND WAS NEVER NECESSARY. *** THE NUMBER 0.651 ALREADY LIVES IN A TRACKED ARTIFACT
+        at `known_truth_control.plain_iid.fit.power.exponent_p` inside x3_control_known_truth.json
+        -- a real fitted exponent over a real curve. THAT FIELD IS THE HOME OF THIS
+        NUMBER; a review re-deriving it should be pointed there. *** AND THE IDENTITY
+        IS CONFIRMED FROM BYTES: control-plain vs B-plain are BIT-IDENTICAL at k=5,6,7,8,9
+        and first differ at k=10 -- exactly the T=5 filter signature. *** ⚠ THE GREPPING
+        TRAP, RECORDED PERMANENTLY: variant B''s artifact contains the string ''0.651''
+        TWICE, but BOTH are substrings of ''10.651108547284124'' (the k=30 D_k value).
+        A naive grep reports a hit that does not exist. MATCH THE FIELD, NOT THE DIGITS.
+        *** (And the earlier D063 freeze-point table, and the SWEEP reading: p falling
+        across T is a FREEZE-LENGTH series, not a sparsity dose-response.) ***'
+      D068_THE_0_608_EXCLUDED_MASS_IS_VALID_AND_CITABLE_ONLY_THE_INFERENCE_FROM_IT_IS_UNSUPPORTED: '***
+        THE DIRECTOR RETRACTED THEIR OWN D063 OVER-REACH ON THIS POINT, AND THE REGISTRY
+        MUST NOT OVER-CORRECT IN EITHER DIRECTION. *** PROVENANCE, TRACED IN THE SOURCE:
+        `excluded_mass` is produced by `condition_counts` and is a DIRECT RATIO OF
+        DROPPED TO TOTAL TRANSITION MASS (p_excluded_mass = drop_p / raw_p, q_excluded_mass
+        = drop_q / raw_q, mean_two_sided = 0.5*(those)). *** THERE IS NO ESTIMATOR,
+        NO FIT, AND NO D_k CURVE ANYWHERE IN THAT PATH. *** AND IT BEHAVES ACCORDINGLY
+        -- IT DOES NOT FREEZE: 0.000000 at k<=9, 0.002895 at k=10, 0.054892 at k=12,
+        0.265446 at k=16, 0.412357 at k=20, 0.529886 at k=25, 0.608238 at k=30 --
+        22 DISTINCT VALUES ACROSS THE 26 ks, MONOTONE NONDECREASING, WITH NO PLATEAU
+        AT k=16. *** ⇒ RETRACTED: the sentence that the 0.608 figure needed recomputation.
+        THE FIGURE IS A VALID, INDEPENDENTLY COMPUTED FILTER PROPERTY AND IS CITABLE.
+        DO NOT SPEND A RUN RECOMPUTING IT. *** WHAT STAYS DEAD IS THE INFERENCE FROM
+        IT. THE MASS IS REAL; THE ARGUMENT BUILT ON IT IS UNSUPPORTED WHILE THE AXIS
+        IS FROZEN. ANY TEXT SAYING THE MASS ''NEEDS RECOMPUTATION'' OR ''IS NO LONGER
+        USABLE'' IS WRONG. ***'
+      D068_PROCESS_LESSON_TRACE_WHETHER_X_PASSES_THROUGH_Y: '*** BEFORE SAYING ''X
+        IS CONTAMINATED BY DEFECT Y'', TRACE WHETHER X''s COMPUTATION PASSES THROUGH
+        Y. *** Here a ONE-LINE GREP of where `excluded_mass` is produced would have
+        settled it. *** THIS WAS THE SECOND TIME THE DIRECTOR EXTENDED A GENUINE DEFECT
+        TO ADJACENT QUANTITIES WITHOUT CHECKING THE PATH. THE SAME RULE APPLIES TO
+        MY OWN REPORTS. ***'
+      D070_ONE_BEHAVIOURAL_CHANGE_THAT_MUST_NOT_PASS_UNNOTICED: '*** THE PER-FLOW
+        CSV IS GONE. *** The k=15 artifact was PER-ROW despite its name; the current
+        script emits only pair-level rows. *** THIS DOES NOT BREAK CONTAINMENT (the
+        pair CSV carries detector_error and pair_error_surrogate directly) AND DOES
+        NOT LOSE THE PER-FLOW INFORMATION (the .npz payload carries scores, flow_tokens,
+        true_labels and class_labels). BUT IT IS A SCHEMA CHANGE THAT ANY DOWNSTREAM
+        CONSUMER OF THE OLD PER-ROW CSV WILL TRIP ON. *** CONFIRMED IN THE k=5 RUN:
+        only x12_detector_validation_k5.json plus the three .npz payloads plus an
+        11,880-row per-pair CSV were written; no per-flow CSV. ***'
+      D070_STAGE_2_VERIFIED_FROM_SOURCE_AND_THE_METRIC_PAYLOAD_IS_ADDED: '*** VERIFIED
+        FROM SOURCE, NOT FROM A FAILED WORKER''S SUMMARY. *** Part 1 PASSED: deferred_floor_test
+        COUNT 0, literal DEFERRED COUNT 0, ''X1 not rebuilt'' COUNT 0; the CSV is
+        pair-level; the X1 field path is `rows[].upper_recomputed.eps_hi` (NOT a top-level
+        field), 990 rows / 340 informative at k=5; both no-evidence branches are present.
+        Part 2 ADDED the score payload: scores, flow_tokens, row_ids, dates, true_labels,
+        class_labels, alignment_key, score_kind; EXACT float32; alignment key flow_token
+        with duplicate keys rejected; path pattern {output_json.stem}__per_class_scores__{detector}.npz.
+        Part 3 SMOKE PASSED (SCORES_RECOVERABLE True, AUC_CLASS_10 1.0). *** CONFIRMED
+        IN THE k=5 RUN: three .npz payloads were written, each about 1,143,924,900
+        bytes. ⚠ THOSE ARE ~1.14 GB EACH (~3.4 GB TOTAL) AND THE .gitignore RULE THAT
+        TREATED artifacts/**/*.npz AS DEAD WAS BASED ON ''there are 0 .npz files under
+        artifacts/'' -- A PREMISE THAT IS NOW FALSE. THOSE THREE FILES MUST EITHER
+        BE NAMED SERVER-ONLY PER THE README RULE OR THE REPO GAINS ~3.4 GB. FLAGGED,
+        NOT CHANGED. *** *** AND THE CONTAINMENT DEFAULT X1 INPUT COVERS k=5 ONLY,
+        so k!=5 needs an explicit --x1-json or it raises; the k=5 run confirmed the
+        default path works without that argument. ***'
+      D070_THE_LAYER_QUESTION_IS_RULED_MANIFEST_IS_THE_AUTHORITY: '*** THE DIRECTOR
+        RULED (their D070): ''THE MANIFEST IS THE AUTHORITY, NOT A DIRECTORY.'' ***
+        THE ROOT CAUSE IS CONFIRMED MANY TIMES OVER: `register_artifact(server=...,
         remote_path=...)` ITSELF PLACES FETCHED FILES AT artifacts/<EXPID>/data/ AND
         artifacts/<EXPID>/intermediate/. SO artifacts/<EXPID>/ IS THE REGISTER TOOL''S
-        DEFAULT DESTINATION, NOT A FORK INVENTED DURING A REPAIR -- AND EVERY REGISTRATION
-        RE-CREATES IT, UNDOING A CONSOLIDATION. CONFIRMED THREE TIMES NOW (X3 twice,
-        X6 once). THE MANIFEST''S ''NOT A CONVENTION'' COMMENT CONTRADICTS THE DEPLOYED
-        TOOL AND NEEDS A DIRECTOR RULING. OPEN. ***'
-      D064_THE_POSITION-WISE_NULL_REFUTES_FIRST-ORDER_AND_THE_QUOTED_NUMBERS_ARE_EXACT_EXCEPT_THE_K-LIST_SKIPS_K3_AND_K4: '***
-        THE REQUIRED ROUTE -- THE LAST ONE NOT SHOWN TO BE VACUOUS -- HAS RUN, AND
-        IT DOES NOT MERELY FAIL TO SUPPORT ''first-order'' -- IT REFUTES IT. *** PRE-REGISTERED
-        CRITERION, verbatim in the artifact: first-order is licensed iff the position-wise
-        i.i.d. null loses to first-order Markov by BIC for a strict majority at k=30
-        AND at EVERY tested k=2..30; a win or tie at any k withholds the licence.
-        OUTCOME: first_order_licensed = FALSE; plain_statement ''NOT LICENSED''; all_prefix_lengths_markov_strictly_beats_positionwise
-        = false. *** VERIFIED BY ME AGAINST THE ARTIFACT (art_20260914_280fd1, x3_positionwise_iid_null.json,
-        748,564 B, sha256 83505f9f069b68c6d505c81dea98484c794712417d92abfd7e5ca72757c48650)
-        -- IT IS NOW LOCAL AND I READ IT DIRECTLY. THE DIRECTOR''S QUOTED NUMBERS
-        ARE EXACT: 45/45 at k=2, 42/45 at k=5, 41/45 at k=30, 0 ties throughout, medians
-        -10.69 at k=2, -9346 at k=5, -27266.969455033075 at k=30. *** *** CORRECTION
-        THE RECORD MUST CARRY: the k-list ''nearly every k'' SKIPS TWO INFLECTION
-        POINTS. At k=3 only 25 of 45 favour position-wise (20 favour Markov); at k=4
-        only 33 of 45 (12 favour Markov). Both are still ''not licensed'' because
-        the rule requires Markov to beat position-wise at EVERY k -- but ''beats at
-        nearly every k'' is NOT accurate at k=3/k=4. FULL TABLE (k: favours-positionwise
-        / ties): k=2 45/0, k=3 25/0, k=4 33/0, k=5 42/0, k=6 44/0, k=7 44/0, k=8 44/0,
-        k=9..29 43/0, k=30 41/0. THE CONCLUSION IS UNAFFECTED: first_order_licensed
-        = false, and it is already false at k=3. *** *** MEANING: PER-POSITION MARGINAL
-        STRUCTURE EXPLAINS THE VOTES BETTER THAN ANY TRANSITION STRUCTURE. THIS REVERSES
-        THE STRENGTH, NOT THE DIRECTION, OF THE DIRECTOR''S OWN D053 REASONING, WHICH
-        SAID POSITION-WISE DRIFT ''WOULD ALSO MAKE MARKOV WIN'' -- MEASURED, IT WINS
-        OUTRIGHT. *** *** SCOPE, EXACTLY: THIS SAYS NOTHING ABOUT PART (i) (which
-        rests on the estimator''s DEFLATION ON ANALYTICALLY-LINEAR TRUTH -- an independent
-        instrument) AND NOTHING ABOUT C1/C2. *** *** THE AGREED (ii) WORDING: ''dependence
-        is present, but a first-order structure is NOT supported by this test -- per-position
-        marginal structure alone explains the observed votes better than any transition
-        structure.'' *** Also: delta_bic_positionwise_minus_markov max is +408971.59668818954,
-        i.e. the sign INVERTS on the 4 services where Markov wins -- which is exactly
-        why the per-service VOTE and not the pooled median governs.'
-      D064_THE_TWO_OBJECT_SUBSTITUTIONS_THE_CONTAINMENT_TEST_MAKES_AND_THEY_MUST_REACH_THE_PAPER: '***
-        BOTH MUST BE STATED IN THE ARTIFACT AND IN THE PAPER, NOT BURIED. *** (1)
-        THE PAIR-LEVEL ERROR IS A PROXY: `pair_error = 0.5 * (error_a + error_b)`
-        -- the mean of two SINGLE-SERVICE macro classification errors, because the
-        script produces no pairwise detector. C1''s bracket is a per-service-PAIR
-        TV bound, so comparing this proxy against a floor DERIVED FROM THAT BOUND
-        is an OBJECT SUBSTITUTION of the E7/M040 class. *** THE WORKER LABELLED IT
-        HONESTLY in the JSON metadata and the CSV schema (''explicitly labeled ...
-        pair-level surrogate'') -- KEEP THAT LABELLING, and make sure the paper says
-        it is NOT the same object. *** (2) `classification_error` IS A CLOSED-SET
-        MISCLASSIFICATION RATE (computed only on a service''s own flows) WHILE THE
-        FLOOR IS AN OPEN-SET ERROR LOWER BOUND. BOTH LEGITIMATE, DIFFERENT MEANINGS;
-        THE NAME ''floor violation'' SUGGESTS A STRONGER COMPARISON THAN IS BEING
-        MADE -- a reader taking it at face value would read it as falsifying the bound.'
-      D064_STAGE_2_JUDGE_BY_CODE_NOT_BY_THE_STALE_ARTIFACT: '*** THE SERVER SCRIPT
-        GREW 40,356 B -> 52,912 B WITH deferred_floor_test() REPLACED BY REAL CONTAINMENT.
-        THE JSON ON DISK IS AN EARLIER RUN (139,995 B, floor_violation_test.status
-        still DEFERRED). THAT IS A NOT-YET-RERUN ARTIFACT, NOT AN UNIMPLEMENTED FEATURE,
-        AND NOBODY MAY READ IT AS THE LATTER. *** The implementation was then VERIFIED
-        FROM SOURCE by a dedicated worker: stub gone (counts 0), containment path
-        reads X1 via rows[].upper_recomputed.eps_hi (990 rows, 340 informative at
-        k=5), both no-evidence branches present, and the metric payload added and
-        smoke-tested (a per-class AUC of 1.0 computed from a persisted matrix). ***'
-      D064_PROCESS_NOTE_TWO_FALSE_FAILED_FLAGS_ALMOST_COST_A_POSITIVE_RESULT: '***
-        TWO WORKERS WERE FLAGGED `failed` ON THEIR COMPLETION-CHECK EXIT CODE WHILE
-        HAVING PRODUCED THEIR ARTIFACTS -- THE 9th AND 10th INSTANCE THIS SESSION,
-        AND THIS TIME IT NEARLY CAUSED A POSITIVE RESULT TO BE RECORDED AS NEVER-RUN.
-        *** RULE: THE EXIT CODE OF A COMPLETION CHECK IS NOT EVIDENCE ABOUT THE WORK.
-        JUDGE BY THE ARTIFACT. ***'
-      D065_X6_COMPLETED_AND_DELIVERS_C2S_MISSING_MEASUREMENT: 'X6 COMPLETED. THE DIVISIBILITY
-        LOWER BOUND IS NON-EMPTY EXACTLY WHERE THE PLUG-IN CERTIFICATE IS LOST: 100%
-        of pairs nontrivial at k=15/20/25/30, informative 0.9989/1.0/1.0/1.0; validity
-        0/120 violations at alpha=0.05; it CALLS the repo function. *** C2''s ''THE
-        HORIZON IS SHORT'' IS NOW A MEASURED RESULT, NOT AN ASSERTION. *** PAPER CAVEATS
-        THAT MUST TRAVEL WITH IT: (1) it is ASSUMPTION-LADEN (VC / Cohn-Tesoriero
-        type realizability) and must NEVER be presented as distribution-free -- the
-        Director fixed the framing themselves after it called X6 ''assumption-free'';
-        (2) subsample 20,000 flows/service versus C1''s full-n upper. *** X6''S LABEL
-        AUDIT RE-RUN: VERIFIED-CORRECT; no [:k-C] construct; axis probe k=5/10/15
-        shapes [1,5]/[1,10]/[1,15]; no `large_k_usable` field exists and large-k entries
-        are declared EXPLORATORY. Artifact registered as art_20260914_9a009c (it landed
-        at artifacts/X6/data/). ***'
+        DEFAULT DESTINATION, NOT A FORK INVENTED DURING A REPAIR. THE INVARIANT IS
+        EXACTLY ONE LIVE MANIFEST ENTRY PER ARTIFACT WHOSE `path` RESOLVES TO BYTES.
+        DO NOT RE-MERGE; BOTH LAYOUTS COEXIST. *** TWO PROCESS RULES ADOPTED: (1)
+        A WORKER REPORT MUST BE GENERATED AFTER ITS ARTIFACT IS FROZEN. (2) A FIX
+        MUST LAND WHERE THE ARTIFACT ALREADY LIVES. ***'
+      D064_THE_POSITION-WISE_NULL_REFUTES_FIRST-ORDER: '*** THE REQUIRED ROUTE --
+        THE LAST ONE NOT SHOWN TO BE VACUOUS -- HAS RUN, AND IT REFUTES ''first-order''.
+        *** PRE-REGISTERED CRITERION, verbatim in the artifact: first-order is licensed
+        iff the position-wise i.i.d. null loses to first-order Markov by BIC for a
+        strict majority at k=30 AND at EVERY tested k=2..30; a win or tie at any k
+        withholds the licence. OUTCOME: first_order_licensed = FALSE. *** VERIFIED
+        BY ME AGAINST THE ARTIFACT. NUMBERS CONFIRMED EXACT: 45/45 at k=2, 42/45 at
+        k=5, 41/45 at k=30, 0 ties, medians -10.69 / -9346 / -27266.969455033075.
+        *** CORRECTION THE RECORD MUST CARRY: the k-list ''nearly every k'' SKIPS
+        TWO INFLECTION POINTS. At k=3 only 25 of 45 favour position-wise (20 favour
+        Markov); at k=4 only 33 of 45. FULL TABLE (k: favours-positionwise): k=2 45,
+        k=3 25, k=4 33, k=5 42, k=6 44, k=7 44, k=8 44, k=9..29 43, k=30 41; zero
+        ties throughout. The conclusion is unaffected -- the rule already fails at
+        k=3. *** MEANING: PER-POSITION MARGINAL STRUCTURE EXPLAINS THE VOTES BETTER
+        THAN ANY TRANSITION STRUCTURE. SCOPE: NOTHING ABOUT PART (i), OR C1/C2. ***
+        THE AGREED (ii) WORDING: ''dependence is present, but a first-order structure
+        is NOT supported by this test -- per-position marginal structure alone explains
+        the observed votes better than any transition structure.'' *** Also: delta_bic_positionwise_minus_markov
+        max is +408971.59668818954 -- the sign INVERTS on the 4 services where Markov
+        wins, which is why the per-service VOTE and not the pooled median governs.
+        ***'
+      D064_THE_TWO_OBJECT_SUBSTITUTIONS_THE_CONTAINMENT_TEST_MAKES: '*** BOTH MUST
+        BE STATED IN THE ARTIFACT AND IN THE PAPER. *** (1) THE PAIR-LEVEL ERROR IS
+        A PROXY: pair_error = 0.5*(error_a + error_b) -- the mean of two SINGLE-SERVICE
+        macro classification errors, because the script produces no pairwise detector.
+        The C1 bracket is a per-service-PAIR TV bound, so comparing this proxy against
+        a floor DERIVED FROM THAT BOUND is an OBJECT SUBSTITUTION. (2) classification_error
+        IS A CLOSED-SET MISCLASSIFICATION RATE while the floor is an OPEN-SET ERROR
+        LOWER BOUND. *** RE-CONFIRMED IN THE k=5 ARTIFACT, which quotes its own object_granularity_statement
+        verbatim. ***'
+      D064_PROCESS_NOTE_FALSE_FAILED_FLAGS_ARE_A_PATTERN: '*** WORKERS ARE REPEATEDLY
+        FLAGGED `failed` ON THEIR COMPLETION-CHECK EXIT CODE WHILE HAVING PRODUCED
+        THEIR ARTIFACTS -- MANY INSTANCES THIS SESSION, AND AT LEAST ONCE IT NEARLY
+        CAUSED A POSITIVE RESULT TO BE RECORDED AS NEVER-RUN. *** RULE: THE EXIT CODE
+        OF A COMPLETION CHECK IS NOT EVIDENCE ABOUT THE WORK. JUDGE BY THE ARTIFACT.
+        *** D077 ADDS THE SHARPEST CASE: the recovery worker''s `failed` was LITERALLY
+        CORRECT -- the TASK PREMISE was wrong, the EXECUTION was right, and its REFUSAL
+        PREVENTED THE LOSS. ***'
+      D065_X6_COMPLETED_AND_DELIVERS_C2S_MISSING_MEASUREMENT: 'X6 COMPLETED AND THE
+        RESULT IS A POSITIVE ON ITS CENTRAL CLAIM. THE DIVISIBILITY LOWER BOUND IS
+        NON-EMPTY EXACTLY WHERE THE PLUG-IN CERTIFICATE IS LOST: NONTRIVIAL (>0) on
+        100% of pairs at k=15/20/25/30, informative (>0.05) at 0.9989 / 1.0 / 1.0
+        / 1.0. *** THAT CONVERTS C2''s ''THE HORIZON IS SHORT'' FROM AN ASSERTION
+        INTO A MEASURED RESULT. *** Artifact x6_divisibility_lower_bound.json, sha256
+        d9e17986066e7db7fee0d84eebaf602920dd1048743871908c5a1b39f4406ce0; registered
+        art_20260914_9a009c and PULLED LOCALLY. THREE CAVEATS: (1) ASSUMPTION-LADEN,
+        NEVER to be presented as distribution-free; (2) computed on a 20,000-FLOW-PER-SERVICE
+        SUBSAMPLE while the C1 upper side is at FULL n, so the two must not be tabulated
+        as if at the same sample size; (3) ITS SYNTHETIC VALIDITY GATE OVERSTATES
+        ITSELF (D071) -- the bound clips to 0 at the validity sample size and a 0
+        bound can never exceed a non-negative truth, so the honest form is ''45/45
+        TESTABLE rows comply'', NOT ''0/120 violations''. THE REAL-DATA LEG IS UNAFFECTED
+        (vacuous_count 0 at every k>=10). ***'
+      D071_THE_VALIDITY_GATE_CANNOT_FAIL_FOR_ABOUT_75_OF_120_ROWS: '*** THE 0/120
+        VIOLATIONS FIGURE OVERSTATES THE TEST. *** `violation = bound > truth + 1e-12`,
+        and at VALIDITY_SAMPLE_SIZE = 400 the bound CLIPS TO 0; A 0 BOUND CAN NEVER
+        EXCEED A NON-NEGATIVE TRUTH, and all 24 truth-0 rows are INCAPABLE BY CONSTRUCTION.
+        *** SO THE HONEST FORM IS ''45/45 TESTABLE ROWS COMPLY'', NOT ''0/120 VIOLATIONS''.
+        *** THE ARTIFACT DID NOT CONCEAL: it recorded vacuous / raw_bound_went_negative
+        per row. WHAT IT OMITS IS A TESTABLE/VACUOUS COUNT. FIX DISPATCHED: add testable_replications
+        / vacuous_replications, raise the sample size to the real-data order (20,000),
+        add a strictly-positive-bound precondition. *** *** AND THE REAL-DATA LEG
+        IS UNAFFECTED: vacuous_count 0 at every k>=10. *** Per-k fraction_informative_gt_0_05:
+        0.9414 / 0.9949 / 0.9989 / 1.0 / 1.0 / 1.0 across k=5..30; pooled 0.9997201231458158.
+        ***'
+      D071_THE_AUDIT_SCOPE_UPGRADE_AND_THE_CLASS_IT_BELONGS_TO: '*** TWO INDEPENDENT
+        AUDITS MISSED A SELF-CERTIFYING ANOMALY SITTING IN THEIR OWN PRINTED OUTPUT:
+        the D063 audit printed k=20 and k=30 with IDENTICAL values and passed them;
+        the X6 audit printed twelve representative rows that were ALL ''bound 0.0''
+        -- the exact signature of a non-falsifiable control -- and passed them. ***
+        RULE (B): AUDIT SCOPE IS SET BY ANOMALY SIGNALS, NOT BY THE TASK DESCRIPTION
+        ALONE. Every audit must scan the values it PRINTS for constant / repeated
+        / boundary values, constant tails, exact-zero increments, and non-monotone
+        jumps, and any such run must be EXPLAINED rather than merely listed. *** RULE
+        (A): before treating any control or test as evidence, ask WHAT WOULD THIS
+        HAVE TO OUTPUT FOR THE HYPOTHESIS TO BE FALSE? If the answer is ''nothing
+        it could output'', IT IS NOT A TEST. *** THIS IS NOW THE PROJECT''S DOMINANT
+        DEFECT CLASS, WITH SIX INSTANCES IN ONE DAY: (1) the original X3 known-truth
+        control (could not exercise the mechanism); (2) the k=15 empty informative
+        stratum (a statistic on an EMPTY SET); (3) the parametric route''s affine-by-construction
+        control (both test and control affine, SUBLINEAR UNREACHABLE); (4) X6''s validity
+        gate (the bound clips to 0, so ~75 of 120 rows cannot fail); (5) the recovery
+        worker''s byte-comparison against its OWN chosen source (well-formed but not
+        independent); (6) maximum_pair_tpr, a quantity named ''tpr'' with values above
+        1 compared against a 0.01 threshold (FLAGGED, under trace). ***'
       D068_OVERRIDE_IF_THE_DIRECTOR_RULES_OTHERWISE: '*** WHERE A DIRECTOR RULING
         AND AN ENTRY IN THIS BLOCK DISAGREE ON A CONCLUSION, THE DIRECTOR''S RULING
-        GOVERNS; THIS BLOCK RECORDS EVIDENCE AND FINDINGS. AND WHERE TWO OF THE DIRECTOR''S
-        OWN RULINGS DISAGREE -- AS THEY DO ON THE 0.608 MASS FIGURE (D063''s instruction
-        vs their own D068) -- I RECORD BOTH SIDES AND ASK. ***'
-      k5_STATUS: '*** THE STAGE-2 GATE IS SATISFIED: *** the containment stub is gone
-        (verified from source), the metric payload is added and smoke-tested, so ONE
-        k=5 RUN SERVES BOTH PURPOSES. ORDER REMAINING: the k=5 run retrains all detectors
-        at k=5 internally (features are k-dependent) then submits with --k-packets
-        5, no --cpu-only, --label-field APP, D043 months, guard untouched, new output
-        names, via submit_on_allocated. *** OPEN OPERATIONAL BLOCKER: NO EXPERIMENT
-        IS CURRENTLY IN ALLOCATED STATE, so submit_on_allocated has nothing to attach
-        to. I AM NOT SUBSTITUTING submit_training_job -- that is how the previous
-        entry was left stranded. AWAITING THE DIRECTOR. *** *** TWO SCHEMA/OBJECT
-        FACTS TO CARRY: THE PER-FLOW CSV IS GONE (writer is pair-level only; containment
-        is unaffected and the .npz payload makes per-flow error reconstructable);
-        AND the pair error is a PROXY and the classification error is CLOSED-SET while
-        the floor is OPEN-SET (see the object-substitution entry). ***'
-      D069_AXIS_VALIDATION_CONTENT_GOOD_LABEL_WAS_A_HAZARD_FIXED_AT_THE_SOURCE: '***
-        THE CONTENT IS VALUABLE; THE LABEL WAS THE HAZARD. RECORDED BELOW, WITH THE
-        REGISTRATION STATUS CORRECTED AGAINST THE DIRECTOR''S STATEMENT. ***'
-      D069_FOUR_THINGS_TO_RECORD: '(1) THE VOTE CONSTRUCTION RE-DERIVED ITS EXPECTED
-        VOTES WITH SEPARATELY WRITTEN BIC LOGIC: 0 production-vs-independent mismatches,
-        INCLUDING S3 HETEROGENEOUS-i.i.d. -> MARKOV 8/0/0. *** THIS INDEPENDENTLY
-        CORROBORATES D055''s DEAD VERDICT AT THE VOTE LEVEL: heterogeneity alone manufactures
-        the vote, confirmed by a SECOND implementation. *** (2) THE AXIS TEST IS SENSITIVE,
-        NOT MERELY NEGATIVE -- which makes it STRONGER than the earlier sibling audit.
-        Dependence is built from transitions 0->1, 1->2, 2->3 only, so the expected
-        switch is at k=5; OBSERVED: IID at k=2 and k=3 -> MARKOV at k=4 (where 2->3
-        enters the prefix) -> IID from k=5 on. *** A SINGLE-POINT FLIP DEMONSTRATES
-        THE TEST WOULD CATCH A LABEL SHIFT RATHER THAN MERELY ASSERTING ONE IS ABSENT.
-        *** (3) PARAMETRIC RESIDUALS MAX 1.07e-14 over k=5..30, and the k=1 BOUNDARY
-        RESIDUAL (-0.693) IS DISCLOSED AND MARKED OUTSIDE THE CONSUMED RANGE rather
-        than hidden. (4) `route_repaired: false` -- VERIFICATION WAS NOT USED AS A
-        BACK DOOR TO TOUCH THE ROUTE D057 RETIRED. BOUNDARY HELD.'
-      D069_THE_LABEL_HAZARD_AND_ITS_SOURCE_FIX: '*** x3_axis_validation.py:345 HARD-CODED
-        `"parametric_artifact": "verified-correct"`, while the artifact contains ZERO
-        occurrences of d057 / tautolog / affine / non-diagnostic. SO A READER -- OR
-        THE PAPER AGENT -- COULD MERGE AXIS ALIGNMENT WITH CONCLUSION VALIDITY AND
-        READ IT AS D057 OVERTURNED, reopening the exact narrowing dispute D053/D057
-        settled. *** THE DIRECTOR FIXED IT IN THE SCRIPT, NOT IN PROSE: changed to
-        `"axis-verified; conclusion remains NON-DIAGNOSTIC per D057"`, added a `parametric_artifact_note`
-        (the axis check says nothing about whether the LINEAR verdict is informative
-        -- axis-correct is not conclusion-usable), and added a `self_reference_note`
-        (the embedded artifact_size_bytes/artifact_sha256 are a PRE-WRITE SNAPSHOT
-        and intentionally differ from the file''s own bytes -- 122,495 vs 122,617;
-        ae3ccc37... vs 9f7578be...) so a reader verifies against the EXTERNALLY reported
-        hash. Script re-parsed with ast: syntax OK. *** KEEP THE FIX AT THE SOURCE:
-        a prose-only edit would let the script re-mint the bare label on the next
-        run. ***'
-      D069_REGISTRATION_STATUS_CORRECTED_AGAINST_THE_DIRECTOR_STATEMENT: '*** THE
-        DIRECTOR SAID THE ARTIFACT IS MISSING FROM ALL FOUR SURFACES. THAT IS NOT
-        WHAT I FIND ON DISK, AND I REPORT THE DISCREPANCY RATHER THAN COPYING THE
-        CLAIM. *** VERIFIED: artifacts/manifest.yaml ALREADY CARRIES IT AT LINE 1118
-        AS `art_20260914_44e723` (name x3_axis_validation.json, path artifacts/X3/data/x3_axis_validation.json),
-        AND THE FILE IS ALREADY LOCAL at that path -- REGISTERED AND PULLED EARLIER
-        IN THIS SESSION. SO THE REGISTRY/MANIFEST/LOCAL-PULL ITEMS WERE ALREADY DONE.
-        *** *** WHAT WAS GENUINELY OUTSTANDING IS DIFFERENT AND NARROWER: THE SAVED
-        OUTPUT STILL CARRIED THE OLD BARE LABEL, because the script was corrected
-        but NOT RE-RUN -- so the stored JSON still reads `"parametric_artifact": "verified-correct"`
-        at its artifact_status block. A RE-RUN IS DISPATCHED TO MAKE THE SAVED OUTPUT
-        MATCH THE CORRECTED SOURCE. *** *** AND ONE STANDING CHECK IS ADOPTED AS THE
-        DIRECTOR ASKED: TREAT ''ARTIFACT EXISTS ON THE SERVER BUT APPEARS ON NO SURFACE''
-        AS A STANDING CHECK, NOT A PER-INCIDENT ONE. ***'
-      D069_II_IS_NOW_STATED_WITH_NO_FIRST-ORDER_ALLOWANCE_ANYWHERE: '*** THREE INDEPENDENT
-        ITEMS NOW POINT THE SAME WAY: (1) the heterogeneous-i.i.d. vote result (D055
-        -- a construction with ZERO within-flow dependence reproduces the real vote
-        exactly, so the vote is not diagnostic); (2) the constructive affineness of
-        the parametric route (D057 -- its LINEAR is forced and carries no information);
-        (3) THIS artifact''s independent vote recomputation (0 mismatches against
-        separately written BIC logic) PLUS its axis sensitivity (a single-point flip
-        at k=4 proves the test can catch a shift). *** ⇒ (ii) IS STATED AS: DEPENDENCE
-        IS PRESENT BUT NOT FIRST-ORDER -- WITH NO RESIDUAL ''first-order'' ALLOWANCE
-        ANYWHERE. The earlier phrase ''before first-order may be asserted at all''
-        is retired to the past tense except where it records the history. ***'
-      D069_SELF_REFERENTIAL_FIELD_DEFECT_SAME_CLASS_AS_the_retired_lower_side_fraction_name: '***
-        THE DEFECT CLASS: A FIELD WHOSE VALUE CANNOT EQUAL WHAT ITS NAME CLAIMS. ***
-        The known instance is x3_axis_validation.json''s OWN `artifact_size_bytes`
-        / `artifact_sha256` (122,495 / ae3ccc37...) which describe a PRE-WRITE SNAPSHOT,
-        while the file''s real bytes are 122,617 / 9f7578be.... The field cannot match
-        because it is written before the final bytes exist. NOW DOCUMENTED IN THE
-        ARTIFACT VIA `self_reference_note` so a reader is told to verify against the
-        EXTERNALLY reported hash rather than the embedded one. *** A READ-ONLY AUDIT
-        ACROSS ALL x3_* ARTIFACTS FOR THIS CLASS IS DISPATCHED -- report each artifact''s
-        own size and sha256, whether it contains any self-describing field, and whether
-        that field matches. THE AUDIT EDITS NOTHING. *** THIS IS THE SAME CLASS AS
-        THE RETIRED `lower_side_fraction` NAME: A FIELD THAT CANNOT EQUAL WHAT IT
-        CLAIMS TO NAME. ***'
+        GOVERNS; THIS BLOCK RECORDS EVIDENCE AND FINDINGS. THE 0.608 MASS CONFLICT
+        WAS OF THIS KIND AND IS NOW RESOLVED: D068 GOVERNS (MASS CITABLE, INFERENCE
+        FROM IT NOT), WITH THE QUALIFIER THAT THE k=30 RUNG IS POST-FREEZE. ***'
+      k5_STATUS: '*** COMPLETE. RUN FINISHED WITH EXIT_CODE=0 AT 10:12:25 AND WROTE
+        ITS ARTIFACTS; THE ENTRY IS NOW IN ANALYZING. *** THE PRE-REGISTERED ONE-SIDED
+        BINOMIAL CONTAINMENT TEST DID NOT FALSIFY CONTAINMENT: observed violation
+        rates 0.0088-0.0294 against a 0.05 null, all reject_null FALSE, and the pcap_encoder
+        entry correctly reported NO INFORMATION rather than a pass. NO EXCESS OF FLOOR
+        VIOLATIONS WAS OBSERVED. *** TWO SCHEMA/OBJECT FACTS TRAVEL WITH IT: the per-flow
+        CSV is gone (pair-level only, unchanged by this); and the pair error is a
+        PROXY while classification_error is CLOSED-SET and the floor is OPEN-SET.
+        *** TWO OPEN ITEMS FROM THIS RUN: (a) maximum_pair_tpr is not a rate and its
+        0.01 guard may be inert -- TRACE DISPATCHED; (b) the three ~1.14 GB .npz payloads
+        need a server-only naming decision. ***'
     completed_at: '2026-09-14T00:29:25.952Z'
   X4:
     status: DONE
@@ -1905,7 +1865,7 @@ experiments:
     status: DONE
     retry_count: 0
     created_at: '2026-09-14T08:39:44.138Z'
-    updated_at: '2026-09-14T09:33:26.669Z'
+    updated_at: '2026-09-14T09:57:09.433Z'
     hypothesis: 'The REJECTION-GENERIC / DIVISIBILITY lower bound -- TV(P1,P2) <=
       eps iff the pair is eps-divisible, i.e. a test using only P1 and P2 exists with
       error <= eps; under full realizability this is 1 - 2*(optimistic error) -- is
@@ -2026,11 +1986,11 @@ experiments:
     conclusion: success
     completed_at: '2026-09-14T09:33:26.669Z'
   X12_k5:
-    status: RUNNING
+    status: ANALYZING
     pid: 683446
     retry_count: 0
     created_at: '2026-09-14T09:27:34.624Z'
-    updated_at: '2026-09-14T09:27:56.713Z'
+    updated_at: '2026-09-14T10:19:17.838Z'
     spec:
       command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x12_detector_validation.py
         --h5 /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5 --k-packets
@@ -2084,6 +2044,81 @@ experiments:
       is an OPEN-SET lower bound. AND THE VACUITY RULE APPLIES: an empty informative
       stratum yields NO VALIDATION EVIDENCE and a near-zero-TPR detector yields NO
       INFORMATION -- neither is ever reported as a pass.'
+    metrics:
+      RESULT_RUN_COMPLETED_EXIT_CODE_0: 'k=5 COMPLETED SUCCESSFULLY. Log tail: ''CHECKPOINT
+        2026-09-14T10:12:25.913112'', ''ARTIFACT_JSON path=/root/eibo/artifacts/x12_detector_validation_k5.json
+        bytes=191867'', ''ARTIFACT_CSV path=/root/eibo/artifacts/x12_detector_validation_per_pair_k5.csv
+        bytes=2579853 rows=11880'', ''ADDRESS_RANDOMIZATION status=computed delta=0.0'',
+        ''CONTAINMENT_STATISTIC Stage 2 joins rebuilt X1 per-pair eps_hi values to
+        explicitly labeled per-service detector-error surrogates.'', ''EXIT_CODE=0''.
+        Artifact registered as art_20260914_082a7f and pulled locally.'
+      THE_PROCESS_WAS_NEVER_BLOCKED_AND_A_STATUS_CHECK_GOT_IT_WRONG: '*** IMPORTANT
+        PROCESS RECORD. *** A read-only status check VERDICTED ''(B) BLOCKED'' because
+        the log, JSON, CSV, all three .npz payloads AND the accumulated CPU time were
+        unchanged across ~60 seconds. THAT VERDICT WAS WRONG, and the job completed
+        normally minutes later. *** THE ERROR: IT MEASURED THE PARENT PID 683446,
+        WHICH SAT IN ''do_wait'' -- a WRAPPER WAITING ON A CHILD. A parent in do_wait
+        with %cpu 0.0 is NORMAL and proves NOTHING about the child. THE ACTUAL WORKER
+        WAS CHILD PID 683452, which held 654 MiB of CUDA, and ITS CPU time was never
+        measured. *** THE PARENT WAS ALSO ALREADY 10840 BYTES OF A JSON THAT ENDED
+        AT 191867 BYTES, so ''the JSON did not grow'' was measured before the write
+        phase. *** GENERALISED RULE: WHEN MEASURING WHETHER A JOB IS ALIVE, IDENTIFY
+        THE PROCESS THAT ACTUALLY HOLDS THE DEVICE AND MEASURE THAT ONE -- a wrapper''s
+        CPU time is not evidence, and neither is a single 60-second window over a
+        job that is in a long write/initialise phase. THIS IS THE SAME FAMILY AS THE
+        PROJECT''S OTHER MIS-MEASUREMENTS: THE DISCRIMINATOR WAS WELL-FORMED BUT ITS
+        REFERENCE WAS NOT THE RIGHT OBJECT.'
+      CONTAINMENT_RESULT_ONE_SIDED_BINOMIAL_AS_PRE_REGISTERED: '*** THE PRE-REGISTERED
+        ONE-SIDED TEST RAN AND IT DOES NOT FALSIFY CONTAINMENT. *** For each detector,
+        over the 340 informative pairs (eps_hi < 0.5) at holdout 0.05 / 0.1 / 0.2,
+        against a null violation rate of 0.05, alternative=''greater'': LIGHTGBM floor_violation_count
+        8 / 8 / 10 => observed rate 0.023529 / 0.023529 / 0.029412, p = 0.995377 /
+        0.995377 / 0.976547, reject_null FALSE. PROTOTYPE 3 / 4 / 4 => 0.008824 /
+        0.011765 / 0.011765, p = 0.999995 / 0.999970 / 0.999970, reject_null FALSE.
+        RONETC 3 / 3 / (see artifact) => 0.008824 / 0.008824, p = 0.999995, reject_null
+        FALSE. PCAP_ENCODER: status NOT_RUN, and every holdout reads ''NO INFORMATION''
+        with reason ''ModuleNotFoundError: No module named pcap_encoder'' and informative_pair_count
+        0 -- CORRECTLY REPORTED AS NO INFORMATION, NOT AS A PASS. *** SO NO EXCESS
+        OF FLOOR VIOLATIONS WAS OBSERVED: the observed violation rates sit BELOW the
+        0.05 null, and the excess-deviation test does not reject. THE VACUITY RULE
+        WAS HONOURED: the pcap_encoder entry, which cannot contribute, is labelled
+        NO INFORMATION. ***'
+      '*** FLAG_FOR_IMMEDIATE_CHECK: maximum_pair_tpr IS NOT A RATE ***': '*** A NEW
+        DEFECT-SHAPED OBSERVATION, FLAGGED NOT SETTLED. *** The artifact reports maximum_pair_tpr
+        values of 170.5411183074266 (lightgbm), 192.88956616052062 and 191.54195788933814
+        (prototype), and 2.1044219227020156 (ronetc). A TRUE-POSITIVE RATE MUST LIE
+        IN [0,1]; THESE DO NOT. *** CONSEQUENCE: the near-zero-TPR guard compares
+        maximum_pair_tpr against near_zero_tpr_threshold 0.01, and since every value
+        is far ABOVE 0.01, the ''NO INFORMATION'' branch CAN NEVER FIRE ON THESE VALUES.
+        IF maximum_pair_tpr IS NOT A RATE, THEN THAT GUARD IS ANOTHER CHECK THAT CANNOT
+        EXERCISE ITS FAILURE MODE -- which would make it the SIXTH instance today
+        of the same family. *** ALTERNATIVE READINGS THAT WOULD EXONERATE IT: if the
+        quantity is a PERCENTAGE it is still not comparable to 0.01 without scaling;
+        if it is a COUNT of true positives it is a different object entirely. THE
+        POINT IS THAT A QUANTITY NAMED ''tpr'' WITH VALUES ABOVE 1 NEEDS EXPLAINING
+        BEFORE ANY CAPTION CITES IT, AND EITHER WAY THE 0.01 COMPARISON IS DIMENSIONALLY
+        SUSPECT. CHECK DISPATCHED. ***'
+      TWO_OBJECT_SUBSTITUTIONS_STILL_TRAVEL_WITH_THIS_RESULT: 'Per the standing note:
+        (1) the pair-level error is a PROXY -- ''the explicitly labeled macro-average
+        of the two constituent per-service classification-error rates as a pair-level
+        surrogate'', because ''this script emits no pairwise detector'' (the artifact''s
+        own object_granularity_statement, quoted verbatim); (2) classification_error
+        is a CLOSED-SET misclassification rate while the floor is an OPEN-SET lower
+        bound. THE SURROGATE IS NOT FALSIFIABLE BY THIS TEST, so a violation would
+        implicate the estimate, the channel model, OR the surrogate construction --
+        and a clean result likewise does not validate the surrogate.'
+      RUN_METADATA: 'pair_count 990 for the floor-violation join; informative 340,
+        secondary 540, excluded 110 -- the three strata are populated as designed
+        at k=5. Address randomization delta=0.0 (so the predicted bound''s invariance
+        check holds). The artifact also records ''deferred_resolution'': ''The X1
+        upper-side rows are now available and joined; the old missing-join condition
+        no longer holds.'''
+      WHAT_THE_TWO_BEHAVIOURAL_FACTS_LOOK_LIKE_IN_THIS_RUN: The per-flow CSV is indeed
+        absent (only x12_detector_validation_k5.json plus the three .npz payloads
+        were written, 11880 per-pair CSV rows for the join), consistent with the schema
+        change already recorded. And the containment default X1 input covered k=5
+        without any --x1-json argument, which is exactly the documented behaviour
+        (k=5 has a default; k!=5 would raise).
   X11:
     status: PREPARING
     retry_count: 0
