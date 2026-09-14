@@ -86,8 +86,12 @@
 > sentence is "per-pair macro-average closed-set error stays above the floor on the informative stratum" —
 > NOT "per-pair open-set error never beats the certificate".**
 > **✅ THE 9-CELL COUNT IS RESOLVED — IT STAYS AT 9 (D081).** The `max_tpr` fix (`(correct & positive).sum()`)
-> ran, and the acceptance gate PASSED: it reproduced the known-wrong values from the stored payloads FIRST
+> ran, and **I READ THE ARTIFACT MYSELF rather than relying on the worker's account** — the acceptance gate is
+> **`reproduction_check.reproduced = true` with `absolute_differences` of 0.0** on all three known-wrong values; the
+> acceptance gate PASSED: it reproduced the known-wrong values from the stored payloads FIRST
 > (`a=0.39913232104121477`, `b=385.38`, `0.5*(a+b)=192.88956616052062`) before deriving any correction.
+> **Verified from the artifact: `range_check.all_corrected_pair_values_in_[0,1] = true` for every detector×holdout, and
+> `guard_check.can_fire_at_or_below_0.01 = false` in every cell.**
 > **Corrected `max_tpr` = lightgbm 0.826/0.860/0.875 · prototype 0.817/0.813/0.826 · ronetc 0.789/0.778/0.776
 > — every value inside [0.776, 0.875], far above the 0.01 guard.** ⇒ **the `near_zero_tpr` guard does NOT fire,
 > so no cell moves from `computed` to `NO INFORMATION` and ALL NINE CELLS STAND.**
@@ -712,6 +716,7 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D082 | 2026-09-14 | X9 measured a +0.38 SNI-inclusion delta, but the t | X9, X4 |
 | D081 | 2026-09-14 | The max_tpr re-measurement produced its answer and | X12_k5, X12 |
 | D080 | 2026-09-14 | M108 repeated on a second runner: the parametric r | X3, X6 |
 | D079 | 2026-09-14 | Three instances of "the change was made but not pr | X3 |
@@ -721,5 +726,4 @@ completed work is CPU-only* does not imply *no GPU work is available*.
 | D075 | 2026-09-14 | Three rulings settled by measurement: (1) the k=5  | X12, X3 |
 | D074 | 2026-09-14 | The D063 freeze guard works but its boolean output | X3 |
 | D073 | 2026-09-14 | Fixed .gitignore so artifacts/ (the evidence chain | — |
-| D072 | 2026-09-14 | RULED: k=5 goes via create-entry-then-allocate (no | X12, X3 |
 
