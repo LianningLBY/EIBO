@@ -259,6 +259,14 @@
 > an allocation and a tmux session that never existed** — **fabricating exactly the monitoring state the worker correctly
 > refused to invent when it declined to register a cron without a real PID.** **⇒ Do NOT force the transition.**
 > **⇒ THE RIGHT FIX: record the truth in a field that CAN express it** (the `note`/`metrics` channel D088/D093 already use),
+>
+> **✓✓ X9_E GATE FULLY CLEAR — all four items verified on the current file (`0137df32…`, 34,554 B, 730 lines, `AST OK`).**
+> **①** stdout emits the captured `RUNNER_SHA256` — **no recomputation anywhere** (line 718); **②** `arithmetically_forced_to_clip`
+> present (3 refs); **③** `both_arms_nonclipped` (5 refs) gating the delta with `comparison_unavailable` (2 refs);
+> **④** `no_rows` for the empty case (3 refs). **Capture order intact: `def` line 29 → capture line 41; artifact field line 652.**
+> **⇒ ⇒ THE RUN IS UNBLOCKED.** ⇒ Remaining sequence only: three synthetic cases → both-side `AST OK` → upload →
+> **verify server == local on all four numbers** → `submit_on_allocated` + `register_cron` → report PID, log path, and the
+> **server file's sha at submit time.** ⇒ **The design was never changed; every one of these is a labelling or binding addition.**
 > stating that the artifact and D076 settle this experiment, and that its non-terminal `status` reflects **an unmanaged
 > worker run, not unfinished work.** **⇒ And the same for `X9_C`** — withdrawn, never run; its `conclusion: killed` is
 > defensible, its `PREPARING` status is not.
