@@ -432,6 +432,23 @@
 > **⇒ Same discipline as the rest of the session: the correction was worth more than the fix — it stopped a change that
 > would have put TWO layouts on one machine, which is the divergence this project has already paid for repeatedly.**
 >
+> **⚠ D097 CLASS AUDIT CORRECTED — "THE CLASS IS ELIMINATED" OVERSTATES WHAT WAS SHOWN.**
+> The audit is otherwise valuable and its positive finding is sound: **`x3_axis_validation`, `x11_feasibility_probe`,
+> `x9_sni_channel_delta` and `x12_detector_validation` do NOT read an artifact as input** — their artifact-path constants are
+> **outputs**. I verified each independently. **⇒ So X9_E was the only RUNNER-to-RUNNER case where the read happened at all.**
+> **⇒ BUT ONE INPUT-READING RUNNER REMAINS, AND IT HAS THE SAME SHAPE:** `x6_divisibility_lower_bound` reads **four inputs
+> as single hardcoded paths** — `q1_eps_lo_symbol_map.json`, `x1_headline_table.json`, `x4_frontier_function.json`,
+> `x6_divisibility_lower_bound.state.pkl` — **with no resolver** (`resolve_existing_path` count: **0**).
+> **⇒ ⇒ AND THE RISK IS LATENT, NOT ABSENT: `x6` works because its FLAT paths resolve where it runs (the server).
+> ⇒ ⇒ I tested the other direction: run x6 anywhere else and **three of those four inputs are MISSING** at the hardcoded
+> path (they exist only nested locally). **⇒ `x6` is not runnable in the local tree today for exactly the reason X9_E
+> just failed on the server.**
+> **⇒ ⇒ ⇒ ACCURATE STATEMENT: ONE INSTANCE CAUSED A FAILURE AND IS FIXED; FOUR INPUTS ACROSS ONE OTHER RUNNER HAVE THE
+> IDENTICAL SHAPE AND HAPPEN TO RESOLVE WHERE THAT RUNNER CURRENTLY RUNS.** **⇒ "Eliminated" is the wrong word —
+> "**characterised, with one live instance fixed and a latent one identified**" is the right one.**
+> **⇒ Same discipline as the rest of the session: an audit that stops at "the others are fine" has tested only the tree the
+> audit was run in. The check that closes it is "would this resolve in the OTHER tree", and it was not run.**
+>
 > **✓✓ D096 CLOSED BY DIRECT MEASUREMENT — THE RUN LOADED THE GATED FILE. No longer inference.**
 > The decisive server-side check (`ps lstart` + `stat`, read-only, pid 728753) settles it:
 > **`/root/eibo/x9_dose_response_channels.py  mtime = 2026-09-14 23:53:27 +0800` (= `15:53:27 UTC`, 34,554 B)
