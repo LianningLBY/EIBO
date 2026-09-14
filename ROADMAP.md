@@ -227,6 +227,22 @@
 > an earlier operation rides along silently. **The working tree was clean of surprises; the INDEX was not, and I checked
 > the wrong one** — the same class as everything else today: **I verified the neighbour of the thing under claim.**
 >
+> **✓ D090 / D091 / D092 ALL LANDED** — verified in the runner (`0137df32…`):
+> **D090** — `arithmetically_forced_to_clip: radius_sum >= 1.0` computed **per pair**, aggregated per rung (line 427/434).
+> **D091** — `both_arms_nonclipped` per pair and per rung (469/479), and **`delta_eps_hi` is quoted ONLY when it is true**,
+>   otherwise the literal string **`comparison_unavailable`** (line 481), with a `delta_eps_hi_validity` sentence stating the rule.
+> **D092** — `delta_summary` now returns **`status="no_rows"`** for an empty list instead of `informative`.
+> **⇒ All four gate items except the residual are now in the file.** ⇒ Same discipline as the rest of the session: the labels
+> that stop an empty or saturated comparison from reading as a measurement are now IN the artifact, not in a review note.
+>
+> **⚠ AND A NEW CONTRADICTION, of the D088/D093 family: `X9_C` now reads `status: PREPARING` WITH `conclusion: killed`.**
+> It is the **only** row in the registry with that combination (all 19 others pair a terminal status with a terminal
+> conclusion, or a non-terminal status with `None`). **⇒ `killed` IS in the `conclusion` vocabulary** (
+> `failed`/`killed`/`negative`/`success`), so the conclusion is honest — **but a `PREPARING` status beside a terminal
+> conclusion still tells a reader filtering on `status` that the design is queued.** **⇒ Same fix as D088: move the
+> status, keep the note.** ⇒ Recorded because it is the THIRD instance of the same defect today, and the second on this
+> one row.
+>
 > **★ D093 — `X11` IS RECORDED AS COMPLETE IN THE DECISION LOG AND AS `PREPARING` IN THE REGISTRY.**
 > Measured: the artifact (`x11_feasibility.json`) reports **`protocol.status = completed`**, **3,321 per-pair rows**,
 > `upper_fraction_eps_hi_lt_0_5 = 0.16079494128274616` (= 534/3321). **D076 already logged that result and I recomputed it
