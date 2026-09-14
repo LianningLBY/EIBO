@@ -132,6 +132,25 @@
 > that binds a snapshot must say so, or a reader will cite the wrong bytes.**
 >
 > **⇒ Same discipline as the rest of the session: a binding that RESOLVES is not the same as a binding that is RIGHT.**
+>
+> **★ D086 — REGISTRATION IS NOT PROVENANCE: AN ENTRY THAT RESOLVES ONLY IN THE WORKING TREE.**
+> The four runners are now **registered correctly** (type `intermediate`, sha matching the file on disk,
+> including the two that matter: `x6_divisibility_lower_bound.py` at **7810326c…** — **the exact sha the X6 artifact
+> self-reports** — and `x9_sni_channel_delta.py` at **63f2a356…**, the sha X9's run logged). **The content is right.**
+> **⇒ BUT ALL FOUR ARE UNTRACKED.** Measured: every one resolves on disk, sha OK, **`tracked=False`.** So a fresh
+> checkout still cannot reproduce the artifacts whose bindings we just recorded. **⇒ The entry proves the bytes
+> exist on THIS disk, not that they are in the repository.**
+> **⇒ ⇒ RULE: a manifest entry for a runner is complete only when the file is TRACKED. `exists + sha OK` is
+> necessary and NOT sufficient — the check must name `tracked` explicitly, or it will pass on a file we could lose.**
+> **⇒ Same family as everything else today: a green check that verifies the wrong thing.**
+>
+> **★ ALSO OPEN, and it is the same defect one level down:** the four MODIFIED top-level runners
+> (`x11_feasibility_probe`, `x3_control_occupancy_dose_response`, `x3_variant_b_support_conditioning`,
+> `x6_divisibility_lower_bound`) carry fixes that exist only in the working tree — `x6`'s artifact says
+> `7810326c…` while **HEAD holds `9b5c2d4d…`.** **⇒ Both halves must land in the same commit, or the bindings stay
+> half-true: registered but unpushed, or pushed but stale.**
+> **⇒ Same discipline as the rest of the session: a binding that RESOLVES is not the same as a binding that is RIGHT —
+> and neither is the same as a binding that SURVIVES.**
 > **⇒ Same discipline as the rest of the session: turn a load-bearing assumption into a measurement.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
