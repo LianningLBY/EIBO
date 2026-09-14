@@ -283,9 +283,22 @@ def main() -> int:
         verdict = real["median_growth_fit"]["verdict"]
         payload["outcome"] = verdict
         payload["plain_statement"] = (
-            "The question is adjudicable by the fitted-model route; the plug-in estimator limitation must be narrowed to the plug-in estimator only."
+            # D057 RETRACTED the "adjudicable / must be narrowed" reading: D_k is affine by
+            # construction for any fitted order >= 1 and identically 0 for order 0, so this
+            # route cannot distinguish the hypotheses however LINEAR its exponent looks.
+            # Fixed at the SOURCE, not only in the stored artifact -- the D069 precedent:
+            # a prose-only fix lets the next run re-mint the withdrawn wording.
+            "NON-DIAGNOSTIC (D057): the fitted exponent reads LINEAR, but that is a "
+            "constructive tautology of this route, not a finding. The route cannot "
+            "adjudicate the question, so the plug-in limitation must NOT be narrowed. "
+            "The earlier wording (adjudicable / narrow the limitation) is WITHDRAWN."
             if verdict == "LINEAR"
             else "The fitted-model route did not return LINEAR; the existing cannot-adjudicate wording may stand."
+        )
+        payload["d057_caution"] = (
+            "D057: this route's LINEAR verdict is a mathematical tautology (D_k affine by "
+            "construction for any fitted order >= 1, identically 0 for order 0). The result "
+            "is NON-DIAGNOSTIC and MUST NOT be cited as evidence in either direction."
         )
     atomic_write_json(ARTIFACT_PATH, payload)
     print(json.dumps({"artifact": str(ARTIFACT_PATH), "artifact_bytes": ARTIFACT_PATH.stat().st_size, "artifact_sha256": sha256_file(ARTIFACT_PATH), "runner": str(RUNNER_PATH), "runner_sha256": sha256_file(RUNNER_PATH), "outcome": payload["outcome"]}, sort_keys=True))

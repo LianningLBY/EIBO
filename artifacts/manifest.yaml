@@ -1098,6 +1098,7 @@
     must not be cited. The Director''s D063 verified variant B has a critical known-truth
     curve defect; the position-wise null (D064) supersedes both as the direct negative
     on ''first-order''.'
+    SOURCE FIXED (not only this file): the runner x3_parametric_growth.py now emits the D057 non-diagnostic wording and a d057_caution field, in both the working tree copy and the tracked artifacts/X3/intermediate/ copy, so a re-run cannot re-mint the withdrawn narrowing. This stored artifact still carries the old sentence because editing its bytes would invalidate the sha256 3c47da38... that the registry quotes verbatim as the fingerprint of this defect; the correct way to refresh it is to re-run the fixed runner on the server tree.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_parametric_growth.json
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
