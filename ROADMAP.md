@@ -162,6 +162,22 @@
 > plus registry/constraints/plan/report bookkeeping. **⇒ Recorded so the next reader does not mistake the remaining
 > dirty set for an unfinished binding** — the binding is done; what is left is bookkeeping with its own writer.
 > **⇒ Same discipline as the rest of the session: turn a load-bearing assumption into a measurement.**
+>
+> **★ D087 — THE X9_E RUNNER BINDS ITS OWN HASH FROM DISK *AFTER* THE RUN, AND ONLY ON STDOUT.**
+> The hold on submitting was CORRECT and its stated reason verifies: `x9_dose_response_channels.py:486` computes
+> `runner_sha256 = sha256_file(RUNNER_PATH)` **after** `write_json_atomic`, while the interpreter already holds the
+> compiled module. **⇒ Replacing the file mid-run makes the artifact record the NEW hash for OLD logic** — the exact
+> false binding this session has spent the day removing. **⇒ Credited: the hold avoided manufacturing one.**
+>
+> **★ BUT THE DEEPER DEFECT, found while checking that one: THE HASH IS NOT IN THE ARTIFACT AT ALL.**
+> It goes to **stdout only** — verified: `runner_sha256` inside the artifact dict **False**, printed **True**.
+> **⇒ So the binding lives in a LOG LINE, not in the bytes we register.** Artifacts that bind properly (`X6`,
+> `X3_axis`) carry `runner_sha256` **as a field**; X9_E would not. **⇒ A log line is not provenance:** it dies with
+> the log, `content_sha256` does not cover it, and a reader of the registered artifact cannot see it.
+> **⇒ ⇒ REQUIRED BEFORE SUBMIT: `runner_sha256` and `runner_path` go INSIDE the artifact dict, and the hash is
+> captured at MODULE IMPORT — before any work — not after the run.**
+> **⇒ Same discipline as the rest of the session: a binding must live in the bytes we ship, and be taken before the
+> thing it describes — otherwise it is a claim about a file that may no longer be the file that ran.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
 > `excluded_arm_mean_eps_hi = 0.6102972071320967`, `aggregate_delta_eps_hi = 0.3897027928679033`, and
