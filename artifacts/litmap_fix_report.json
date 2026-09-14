@@ -1,0 +1,173 @@
+{
+  "backup_path": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/literature_map.yaml.bak",
+  "backup_bytes": 16208,
+  "entries_submitted": 20,
+  "added": [
+    "cherubin2017bayes",
+    "liu2026inevitability",
+    "liu2026rate",
+    "michel2020high",
+    "tao2024discriminative",
+    "orlitsky2016optimal",
+    "eriksson2026unseen",
+    "zhao2025sweet",
+    "zhao2026shortcutcatcher",
+    "wang2026bias",
+    "luxemburk2023cesnet",
+    "cesnet2025cesnet",
+    "kuhlewind2022rfc",
+    "smith2021website",
+    "fang2021learning",
+    "garov2025closer",
+    "scheirer2013toward",
+    "qu2026sepspace",
+    "wang2025reliable",
+    "shamsimukhametov2023indistinguishability"
+  ],
+  "merged": [],
+  "rejected": [],
+  "total_reported_by_reader": 20,
+  "entries_in_reader_summary": 20,
+  "competitors_count": 3,
+  "key_list": [
+    "cherubin2017bayes",
+    "liu2026inevitability",
+    "liu2026rate",
+    "michel2020high",
+    "tao2024discriminative",
+    "orlitsky2016optimal",
+    "eriksson2026unseen",
+    "zhao2025sweet",
+    "zhao2026shortcutcatcher",
+    "wang2026bias",
+    "luxemburk2023cesnet",
+    "cesnet2025cesnet",
+    "kuhlewind2022rfc",
+    "smith2021website",
+    "fang2021learning",
+    "garov2025closer",
+    "scheirer2013toward",
+    "qu2026sepspace",
+    "wang2025reliable",
+    "shamsimukhametov2023indistinguishability"
+  ],
+  "role_mapping_applied": {
+    "mapping": {
+      "theory-foundation": "foundation",
+      "dataset": "evaluation",
+      "context": "background",
+      "hygiene-shortcut": "background",
+      "positioning-competitor": "background",
+      "method-component": "method-component",
+      "direct-competitor": "direct-competitor"
+    },
+    "per_entry": {
+      "cherubin-bayes-not-naive": {
+        "from": "theory-foundation",
+        "to": "foundation"
+      },
+      "liu-side-channel-leakage": {
+        "from": "theory-foundation",
+        "to": "foundation"
+      },
+      "liu-rate-distortion-side-channel": {
+        "from": "theory-foundation",
+        "to": "foundation"
+      },
+      "michel-high-probability-tv": {
+        "from": "method-component",
+        "to": "method-component"
+      },
+      "tao-discriminative-tv": {
+        "from": "method-component",
+        "to": "method-component"
+      },
+      "orlitsky-unseen-species": {
+        "from": "theory-foundation",
+        "to": "foundation"
+      },
+      "eriksson-unseen-species-revisited": {
+        "from": "theory-foundation",
+        "to": "foundation"
+      },
+      "zhao-sweet-danger-sugar": {
+        "from": "context",
+        "to": "background"
+      },
+      "zhao-shortcutcatcher": {
+        "from": "context",
+        "to": "background"
+      },
+      "wang-bias-in-the-shadows": {
+        "from": "context",
+        "to": "background"
+      },
+      "luxemburk-cesnet-quic22": {
+        "from": "dataset",
+        "to": "evaluation"
+      },
+      "cesnet-quicext-25": {
+        "from": "dataset",
+        "to": "evaluation"
+      },
+      "ietf-rfc9312": {
+        "from": "context",
+        "to": "background"
+      },
+      "smith-website-fingerprinting-quic": {
+        "from": "context",
+        "to": "background"
+      },
+      "fang-learning-bounds-open-set": {
+        "from": "context",
+        "to": "background"
+      },
+      "garov-ood-learnability": {
+        "from": "context",
+        "to": "background"
+      },
+      "scheirer-toward-open-set": {
+        "from": "context",
+        "to": "background"
+      },
+      "qu-sepspace": {
+        "from": "direct-competitor",
+        "to": "direct-competitor"
+      },
+      "wang-ronetc": {
+        "from": "direct-competitor",
+        "to": "direct-competitor"
+      },
+      "shamsimukhametov-ech-indistinguishability": {
+        "from": "direct-competitor",
+        "to": "direct-competitor"
+      }
+    }
+  },
+  "notes_appended_to_relevance": [
+    "cherubin-bayes-not-naive",
+    "liu-side-channel-leakage",
+    "liu-rate-distortion-side-channel",
+    "michel-high-probability-tv",
+    "tao-discriminative-tv",
+    "orlitsky-unseen-species",
+    "eriksson-unseen-species-revisited",
+    "zhao-sweet-danger-sugar",
+    "zhao-shortcutcatcher",
+    "wang-bias-in-the-shadows",
+    "luxemburk-cesnet-quic22",
+    "cesnet-quicext-25",
+    "ietf-rfc9312",
+    "smith-website-fingerprinting-quic",
+    "fang-learning-bounds-open-set",
+    "garov-ood-learnability",
+    "scheirer-toward-open-set",
+    "qu-sepspace",
+    "wang-ronetc",
+    "shamsimukhametov-ech-indistinguishability"
+  ],
+  "section_fix_applied": true,
+  "section_fix_entry": "liu-side-channel-leakage",
+  "schema_valid": true,
+  "blockers": []
+}

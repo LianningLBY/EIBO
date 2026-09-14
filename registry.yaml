@@ -1,0 +1,1832 @@
+baseline: null
+experiments:
+  E1:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-13T18:50:09.475Z'
+    updated_at: '2026-09-13T18:52:46.032Z'
+    hypothesis: The XS h5 carries APP service labels plus both environment axes densely
+      enough that >=15 of ~50 services are fully crossed, so the full paired environment
+      design is available rather than the two-axis fallback.
+    conclusion: success
+    checkpoint_path: artifacts/_project/data/step0_occupancy.json
+    spec:
+      command: /root/miniconda3/bin/python3 /root/eibo/scripts/step0_occupancy_xs.py
+      server: '111'
+      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
+      data_count: 10000000
+      model_name: Step-0 occupancy (APP x QUIC_CLIENT_VERSION x DST_COUNTRY x month
+        of TIME_FIRST) + DST_ASN confound audit
+      seed: 0
+      compute_class: CPU-only aggregation over h5 columns; no GPU used
+      log_path: logs/workers/worker_E1_Step-0_environment-cell_occupancy_on_XS_h5_20260913T173919.log
+      checkpoint_path: artifacts/_project/data/step0_occupancy.json
+      artifact_id: step0_occupancy.json 46050 bytes sha256 5bbfd722bd0fab4dfcd21b6752bf1bc1cb87317ed723bb39b53152ce151e70be
+      retrospective_registration: This run executed as a Worker and was never entered
+        into the registry; it is being registered retrospectively for provenance.
+        The status chain was walked forward with no re-execution.
+    metrics:
+      artifact_bytes: 46050
+      artifact_path: /root/eibo/artifacts/step0_occupancy.json
+      artifact_sha256: 5bbfd722bd0fab4dfcd21b6752bf1bc1cb87317ed723bb39b53152ce151e70be
+      distinct_services: 53
+      full_crossing_gate_all_services: 39
+      full_crossing_gate_at_threshold: 36
+      gate_verdict: PASS_XS_SUBSET_full_paired_design
+      rows_scanned: 10000000
+      services_at_threshold: 45
+      single_asn_services_all: 32
+      single_asn_services_at_threshold: 27
+      status_note: NOT_CLOSED_full_corpus_confirmation_pending
+      time_first_span_utc: 2024-05-31T21:00:00Z_to_2025-05-31T21:00:00Z
+      two_axis_gate_all_services: 43
+      two_axis_gate_at_threshold: 39
+    completed_at: '2026-09-13T18:52:46.032Z'
+  E3:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-13T18:50:11.276Z'
+    updated_at: '2026-09-13T19:41:08.016Z'
+    hypothesis: At k=5 with masking, the absolute channel TV between service pairs
+      exceeds the lower-side threshold on most pairs while the finite-sample upper-side
+      condition holds only at the coarsest rung M=1, so the feasible set is one-sided
+      in M rather than a band in M.
+    conclusion: success
+    spec:
+      artifact_ids:
+      - q1_absolute_summary.json 6434 bytes sha256 d7eeb0c1189b5c963e712d7e6b9cf7d0f866680b40a3483a47215bbb23dd2934
+      - q1_absolute_counts.json 782927 bytes sha256 979c462e0638f624438fee2d8965f4c49140d8f975561b870c3af03144348094
+      - q1_absolute_counts.csv 198851 bytes sha256 388495382742723461212b0384a8d997dcc66b72fa053feee1bd81b0c132b15b
+      - q1_absolute_counts.meta.json 7356 bytes sha256 f4e8609e4722a28feda129bb2092ec4379785992ccf82c223b10fc71ee3f7a4e
+      - q1_absolute_dense_counts_m1_m2.json 533766 bytes sha256 479571b55bae30c6d09846f004969759365f92c21e8b67274b09f2ecf612a099
+      checkpoint_path: artifacts/_project/data/q1_absolute_counts.json
+      command: /root/miniconda3/bin/python3 /root/eibo/scripts/run_q1_absolute_e3.py
+      compute_class: CPU-only h5 aggregation; no GPU used
+      data_count: 10000000
+      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
+      k: 5
+      log_path: logs/workers/worker_E3_Q1_absolute_window_across_ladder___count_table_20260913T173845.log
+      model_name: Q1 absolute-quantity window over the pre-registered channel ladder,
+        masked, k=5, 45 services / 990 pairs
+      note_eps_lo: THIS RUN DID NOT COMPUTE eps_lo. The field named lower_side_fraction
+        is the BAND'S LOWER-EDGE CONSTRAINT tv_hat > T(n), a detection threshold,
+        NOT a proven lower bound; it has been renamed band_lower_edge_satisfied_fraction
+        (Rev 14). A true eps_lo on one-hot symbol draws was dispatched separately.
+      retrospective_registration: Executed as a Worker and never entered into the
+        registry; registered retrospectively for provenance. The status chain was
+        walked forward with no re-execution.
+      rows: 4950
+      seed: 0
+      server: '111'
+    metrics:
+      binding_side_every_rung: upper
+      coverage_k10_pairs: 990
+      coverage_k15_pairs: 946
+      coverage_k30_pairs: 820
+      coverage_k5_pairs: 990
+      k: 5
+      pair_count: 990
+      per_rung_band_lower_edge_fraction:
+        '1': 0.996969696969697
+        '16': 1.0
+        '2': 1.0
+        '4': 1.0
+        '8': 1.0
+      per_rung_both_point_estimate_and_upper:
+        '1': 0.2919191919191919
+        '16': 0.0
+        '2': 0.02727272727272727
+        '4': 0.0
+        '8': 0.0
+      per_rung_both_point_estimate_and_upper_ref_radius:
+        '1': 0.3434343434343434
+        '16': 0.0
+        '2': 0.04747474747474747
+        '4': 0.0030303030303030303
+        '8': 0.0
+      per_rung_saturation_tv_ge_0_99:
+        '1': 0.0
+        '16': 0.39090909090909093
+        '2': 0.10505050505050505
+        '4': 0.23939393939393938
+        '8': 0.33636363636363636
+      per_rung_upper_fraction_eps_hi_lt_0_5:
+        '1': 0.29494949494949496
+        '16': 0.0
+        '2': 0.02727272727272727
+        '4': 0.0
+        '8': 0.0
+      per_rung_upper_fraction_eps_hi_lt_0_5_ref_radius:
+        '1': 0.3434343434343434
+        '16': 0.0
+        '2': 0.04747474747474747
+        '4': 0.0030303030303030303
+        '8': 0.0
+      radius_convention: TWO CONVENTIONS COEXIST IN THIS RECORD. Columns WITHOUT a
+        _ref_radius suffix use the WRONG inlined radius (sqrt((2M)^5) + 2.9604)/sqrt(n),
+        which omits BOTH 0.5 factors and is exactly 2x the reference implementation
+        src/eibo/statcore.py::tv_upper_bound; they are UNDERSTATED and MUST NOT be
+        quoted. Columns WITH the _ref_radius suffix use the reference radius 0.5*sqrt((2M)^5/n_i)
+        + 0.5*2.9604/sqrt(n_i) and are the ones to cite. The reference values are
+        a per-row recomputation over all 990 rows (a measurement), not an analytic
+        extrapolation. They are pending confirmation by a run that itself emits the
+        reference radius (the original E3 run emitted the 2x form).
+      radius_convention_correctness: 'TV = 0.5 * L1, so a TV radius must carry TWO
+        0.5 factors. Reference: src/eibo/statcore.py::tv_upper_bound lines 406-411,
+        docstring 375-378.'
+      rows: 4950
+      service_count: 45
+      subsampled_for_tv: false
+      upper_side_counts_ref_radius:
+        '1': 340
+        '16': 0
+        '2': 47
+        '4': 3
+        '8': 0
+    completed_at: '2026-09-13T18:54:38.204Z'
+  E7:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-13T18:50:12.789Z'
+    updated_at: '2026-09-13T18:54:39.124Z'
+    hypothesis: The rectified 32-coordinate PHIST object yields a non-empty two-sided
+      bracket for service pairs above the 2000-flow threshold, because PHIST is immune
+      to both the k-prefix coverage bias and padding.
+    conclusion: failed
+    spec:
+      artifact_ids:
+      - q2_phist_certificate.json 887700 bytes sha256 2d9d1bbd0d805ce01b8a05d14635661c1294b0ef703414e27bde6366e2c87204
+        (v1, 53 services / 1378 pairs, superseded)
+      - q2_phist_certificate_v2.json 1536452 bytes sha256 655ab121bae2a2b7441e4f94383a74d4143f522f8a1f91b27729a3b9c8eabb95
+        (v2, 45 services / 990 pairs, in which BOTH sides are computable)
+      checkpoint_path: artifacts/_project/data/q2_phist_certificate.json
+      command: /root/miniconda3/bin/python3 /root/eibo/e7_phist_certificate.py (v1);
+        v2 additionally imported /root/eibo/src/eibo/statcore.py:599 tv_lower_bound
+      compute_class: CPU-only h5 reads; no GPU used
+      data_count: 10000000
+      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
+      failure_reason: 'TWO-OBJECT MISMATCH (M035/D027): the UPPER side bounded the
+        MEAN / lattice-law object with an m=32 CATEGORICAL radius, while the LOWER
+        side (Michel HPLB) ran on the CONTINUOUS-support matrix of per-flow 32-vectors.
+        The two sides therefore bound different objects, and eps_lo > eps_hi on 988/990
+        pairs -- a mathematically impossible configuration for two bounds on ONE object,
+        which is how the defect was caught. Synthetic reproduction: A = half the flows
+        e_0 / half e_1, B = every flow (0.5,0.5,0,...); mean vectors differ by 0.00e+00
+        so tv_hat = 0.0000, yet the true flow-level TV is 1.0 and Michel returned
+        0.1168.'
+      log_path: logs/workers/worker_E7_Q2_PHIST_two-sided_certificate_on_XS_h5_20260913T163946.log
+      model_name: Q2 rectified PHIST two-sided certificate (32-coordinate object,
+        m=32, alpha_law=0.025)
+      note: 'This is registered as failED, deliberately NOT as negative: it is an
+        OBJECT-MISMATCH implementation/design defect, not a scientific finding that
+        the method does not work. Recording it as negative would pollute later judgement.
+        Superseded by E9_Q2v3 (single declared object).'
+      retrospective_registration: Executed as a Worker and never entered into the
+        registry; registered retrospectively. The status chain was walked forward
+        with no re-execution.
+      seed: 0
+      server: '111'
+      superseded_by: E9_Q2v3
+    completed_at: '2026-09-13T18:54:39.124Z'
+  E8:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-13T18:50:14.273Z'
+    updated_at: '2026-09-13T18:57:51.790Z'
+    hypothesis: The zero padding beyond PPI_LEN is exactly zero and drops no services
+      at k=5, so the k=5 gate denominator is clean and unmasked estimates are the
+      only hazard; BUT a two-arm comparison that requires both arms to use the SAME
+      flow set is structurally incapable of measuring the masking effect, because
+      then min(PPI_LEN,k) == k and the prefixes are identical by construction.
+    conclusion: success
+    spec:
+      artifact_ids:
+      - masking_verification.json 92947 bytes sha256 f7cbab76f4261839d60118612a97fb73913e8a0acf9e37caab2258b6bb3b679f
+      - masking_regime_sweep.json 832121 bytes sha256 453ac98df4afca9834034b7e2ddce93a719b5789d8b2637c25797d5d3f11094e
+      checkpoint_path: artifacts/_project/data/masking_verification.json
+      command: /root/miniconda3/bin/python3 /root/eibo/scripts/verify_ppi_masking_xs.py
+        (E8); masking_regime_sweep.py (E8b)
+      compute_class: CPU-only h5 reads; no GPU used
+      data_count: 10000000
+      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
+      log_path: logs/workers/worker_E8_PPI_masking_verification_on_XS_h5_20260913T163911.log
+      model_name: PPI masking verification (padding distribution, k=30 comparison)
+        + informative-regime sweep over k in {5,10} x M in {1,2,4,8,16}
+      retrospective_registration: Executed as a Worker and never entered into the
+        registry; registered retrospectively. The status chain was walked forward
+        with no re-execution.
+      seed: 20260913
+      server: '111'
+    metrics:
+      k10_M4_saturation_fraction: 0.592929293
+      k10_M4_tv_masked_median: 0.996689567
+      k5_M1_saturation_fraction: 0.0
+      k5_M1_tv_masked_median: 0.580531549
+      k5_post_mask_pairs_usable: 990
+      k5_post_mask_total_pairs: 990
+      k5_services_dropped_by_ppi_len_filter: 0
+      padding_histogram:
+        '0': 3805365
+      padding_sample_flows: 200000
+      padding_tail_slots_sampled: 3805365
+      ppi_len_ge_15_fraction: 0.8348841
+      ppi_len_max: 30
+      ppi_len_median: 30
+      ppi_len_min: 2
+      ppi_len_q25: 19
+      ppi_len_q5: 2
+      rows_scanned: 10000000
+      same_flow_set_both_arms: true
+      signed_difference_all_rungs: 0.0
+    completed_at: '2026-09-13T18:54:38.643Z'
+  E9_Q2v3:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-13T18:50:15.774Z'
+    updated_at: '2026-09-13T19:37:51.085Z'
+    hypothesis: Declaring ONE certified object (the lattice law at k=5, M=1) and bounding
+      BOTH sides on that same object yields eps_lo <= eps_hi per row by construction,
+      and a non-empty two-sided bracket on the surviving service pairs.
+    parent: E7
+    spec:
+      checkpoint_path: artifacts/_project/data/q2_phist_certificate_v3.json
+      checkpoint_source: Recomputation from the raw h5, not from E7's checkpoint;
+        E7's artifacts are the failing predecessor and are not a source of numbers
+        for v3.
+      command: /root/miniconda3/bin/python3 /root/eibo/q2_phist_certificate_v3.py
+      compute_class: CPU-only h5 reads; no GPU used
+      data_count: 10000000
+      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
+      eval_data: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5 (10M
+        flows; same corpus as E7, re-scanned independently)
+      in_flight: true
+      log_path: logs/workers/worker_Q2_v3_single-object_recalculation_with_eps_lo__eps_hi_invari_20260913T181359.log
+      model_name: 'Q2 v3: single declared certified object (lattice law, k=5, M=1),
+        both sides on it, per-row invariant eps_lo <= eps_hi'
+      origin: 'The Director''s diagnosis of E7: the two sides bounded DIFFERENT objects.
+        v3 declares ONE object so the invariant holds by construction.'
+      parent: E7
+      seed: 20260913
+      server: '111'
+      threshold: 2000 flows/service (D025)
+    metrics:
+      band_lower_edge_satisfied_fraction: 0.996969696969697
+      cap_flows_per_service: 20000
+      caveat_informativeness: Under D033 the PASS criterion is eps_hi < 0.5. This
+        run's eps_hi quantiles bracket the informative fraction between ~5% and ~25%
+        (q5 = 0.372005 is below 0.5 while q25 = 0.638490 is above it). The exact fraction
+        was NOT computed in this run and is NOT fabricated here. THE DIRECTOR'S INDEPENDENT
+        NUMBER places Q2's informativeness in the (0.05, 0.25) range.
+      caveat_object: eps_lo <= eps_hi violations 0/990, but that was measured against
+        this run's own 31x-Hoeffding radius and MUST be re-confirmed after the tolerance/radius
+        work; also see the 2x radius defect affecting other artifacts.
+      eps_hi_max: 2.285121
+      eps_hi_median: 0.925919
+      eps_hi_min: 0.183261
+      eps_hi_q25: 0.63849
+      eps_hi_q5: 0.372005
+      eps_hi_q75: 1.219624
+      eps_hi_q95: 1.68341
+      eps_lo_max: 0.837952
+      eps_lo_median: 0.161513
+      eps_lo_min: 0.00122
+      eps_lo_q25: 0.110293
+      eps_lo_q5: 0.057705
+      eps_lo_q75: 0.233195
+      eps_lo_q95: 0.428943
+      invariant_violations: 0
+      lattice_cell_seed: 20260914
+      object: 'lattice law: draw a flow uniformly, then one cell from its normalized
+        32-cell PHIST distribution'
+      pair_count: 990
+      reservoir_seed: 20260913
+      services: 45
+      slack_note: The v3 upper radius uses a 31x Hoeffding construction (constant
+        61.28/sqrt(n)) versus the tightest valid L1 form (4.31/sqrt(n)) -- VALID but
+        14.2x LOOSER. Q2 looks weak because of this slack, NOT because of the PHIST
+        object. A tight-form rerun is a SEPARATE experiment.
+      upper_radius_form: r_i = sqrt(log(2*31/0.025)/(2*n_i)); eps_hi = tv_hat + 31*r_a
+        + 31*r_b
+    conclusion: success
+    completed_at: '2026-09-13T19:37:51.085Z'
+  E10:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-13T20:04:19.689Z'
+    updated_at: '2026-09-13T22:54:45.671Z'
+    hypothesis: 'Q1 gate MEASURED at 336/990 = 0.3393939394, and now FULLY MEASURED
+      (no assumed pairs). PREDICTION vs MEASUREMENT: the prediction was that all 5
+      capped lower-side failures would recover at full n, giving 340/990; MEASURED,
+      only 1 of 5 recovered, giving 336/990. THE BRACKET [335, 340] WAS CORRECT; THE
+      POINT VALUE DID NOT HOLD. The earlier [333, 336] range is SUPERSEDED -- it belonged
+      to a half-measured state in which 282 pairs'' lower side was assumed; the full-n
+      run removed that assumption (measured_full_n_pair_count = 990, assumed_pair_count
+      = 0). CONVENTION SENSITIVITY: the gate is 336 under the canonical full-n convention
+      and would be 335 under the capped convention, the entire difference being pair
+      (21,23) crossing 0.05; all five boundary pairs lie in the upper set, and the
+      nearest in-gate margin is +0.008781 with within_0.005_count = 0 -- so UNDER
+      THE CANONICAL CONVENTION no sample sits close to the line; the convention-dependence
+      of the gate value is the separate matter described in the first clause. Cause
+      of the failed point prediction: ''larger n gives a tighter lower bound'' is
+      a statistical TENDENCY, not a guarantee. The GENUINE non-monotonicity evidence
+      is pair 35-49, whose eps_lo FELL (0.043732 -> 0.042725) while its n_a grew 8x
+      (20000 -> 159842); that pair carries the lesson alone. The other three rose
+      with more data, consistent with tightening. NOTE (M050, RETRACTED): an earlier
+      version of this field claimed 11-51 ''had IDENTICAL n on both sides yet moved
+      +0.0104'' and attributed the movement to seed noise. BOTH halves were wrong
+      -- only 11-51''s n_a was unchanged (13049) while its n_b went 20000 -> 1399495
+      (70x), so an n effect was never excluded; and there is no seed noise to appeal
+      to, because 39-44 had BOTH sides unchanged and its eps_lo is identical to the
+      digit (delta = 0.000000000), i.e. for fixed input the estimator is DETERMINISTIC.
+      A claim that conditions are identical must be checked PER SIDE, and ''randomness''
+      must not be invoked before confirming the estimator is non-deterministic.'
+    spec:
+      artifact_id: q1_gate_five_pairs_full_n.json 21840 bytes sha256 91b3f5129d2e694789212907e19a0d380958393a993da8dcf1ebc26fdab96e32
+      checkpoint_path: artifacts/_project/data/q1_gate_five_pairs_full_n.json
+      command: /root/miniconda3/bin/python3 /root/eibo/.tmp_q1_gate_measure.py
+      compute_class: CPU-only h5 reads; no GPU used
+      data_count: 10000000
+      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
+      log_path: logs/workers/worker_Q1_gate__full-n_eps_lo_for_5_pairs___reference-radius_upper__20260913T193903.log
+      model_name: 'Q1 joint gate closure: full-n eps_lo on the 5 lower-side failures
+        + whole-table upper-side recompute on the reference radius'
+      note_on_k: The prefix length is k = 5 (the gate is defined there). The count
+        of rebuilt pairs is a DIFFERENT quantity and is recorded as recovered_pair_count
+        = 1, never as 'k'.
+      result: 'recovered_pair_count = 1 (only pair 21-23 recovers: eps_lo 0.0587805922).
+        Gate = 336/990 = 0.3393939394. The 4 non-recovering pairs'' full-n eps_lo:
+        11-51 0.0226071321, 39-44 0.0150712160, 27-29 0.0287054878, 35-49 0.0427246558.'
+      seed: 20260913
+      server: '111'
+    conclusion: success
+    metrics:
+      c016_violations_reference_radius: 0
+      full_n_run_artifact: q1_lower_side_full_n.json sha256 bbf5aa4e2cbf84be2c4544fa393c7518588940888e0d712114f4cc570d386467,
+        990 rows; artifact id art_20260913_e5ebac
+      full_n_run_discharges: 'The ''half-measured'' caveat and the [333, 336] range
+        are DISCHARGED: lower side measured at full n for ALL 990 pairs, assumed_pair_count
+        = 0. Gate remains 336.'
+      gate_convention_sensitivity: 'The gate is 336 under the canonical (full-n) convention;
+        it would be 335 under the capped convention; the entire difference is pair
+        (21,23) crossing 0.05. All five boundary pairs lie in the upper set. The nearest
+        in-gate margin is +0.008781 and the nearest upper-only margin is -0.007275,
+        with within_0.005_count = 0 -- so UNDER THE CANONICAL CONVENTION no sample
+        sits close to the line; the convention-dependence of the gate value is the
+        separate matter described in the first clause. NOTE: an earlier ''fragility_statement''
+        citing a 0.0002 margin is RETRACTED -- that margin belongs to the CAPPED value,
+        which the gate does not use.'
+      gate_count: 336
+      gate_definition: (eps_lo > 0.05) AND (eps_hi < 0.5) on ONE object, at k = 5.
+        336 is the JOINT gate; 340 is the UPPER SIDE ALONE; the 4-pair difference
+        is exactly the pairs passing the upper side and failing the lower (11-51,
+        27-29, 35-49, 39-44).
+      gate_denominator: 990
+      gate_fraction: 0.3393939394
+      gate_is_half_measured: false
+      gate_measurement_breakdown: 'FULLY MEASURED: upper side recomputed row-by-row
+        through statcore.tv_upper_bound for all 990 pairs (340 pass, 0 internal mismatches);
+        lower side recomputed at full n, 20,000-flow cap REMOVED, all 990 pairs (986
+        pass). measured_full_n_pair_count = 990, assumed_pair_count = 0. eps_lo >
+        eps_hi violations 0.'
+      lower_side_capped_count: 985
+      lower_side_full_n_count: 986
+      lower_side_full_n_fail_count: 4
+      m041_note: Q2's 342/990 and Q1's 340/990 are numerically close, but the cause
+        is opposite-direction cancellation (statistics differ ~2.7x while radius constants
+        differ ~7.34x), NOT cross-validation.
+      m050_retraction: 'An earlier version of the hypothesis field claimed 11-51 ''had
+        IDENTICAL n on both sides yet moved +0.0104'' and attributed it to seed noise.
+        BOTH halves were wrong: only 11-51''s n_a was unchanged (13049) while its
+        n_b went 20000 -> 1399495 (70x), so an n effect was never excluded; and 39-44
+        had BOTH sides unchanged with eps_lo identical to the digit (delta = 0.000000000),
+        i.e. for fixed input the estimator is DETERMINISTIC. The genuine non-monotonicity
+        evidence is pair 35-49 alone (n_a grew 8x while eps_lo fell). RETRACTED.'
+      pending_vector_level_switching_condition: 'The vector-level full-n one-sided
+        run is NOT cancelled but carries a PRE-COMMITTED SWITCH CONDITION: if it records
+        ANOTHER ''0 committed rows'' after its third checkpoint design (per-pair ledger
+        + immutable 1.28 GB vector state), switch to STAGED mode instead of attempting
+        a fifth version. STAGED MODE: reuse the existing 1.28 GB vector state (do
+        NOT rescan the h5) and run only ~50 pairs to obtain a real per-pair timing,
+        then decide whether to cover all 990. CRITICAL: the ~50 pairs MUST be chosen
+        by STRATIFIED sampling across the service-size distribution, NOT as the first
+        50 pairs -- service n spans 2,791 to 1,927,343, so ''first 50'' would likely
+        be all small services and extrapolate optimistically. WHOLE-RUN ETA IS UNKNOWN
+        AND MUST NOT BE INVENTED: zero batches committed, so steady_state evidence
+        is zero; the event that makes it measurable is the first per-pair ledger commit.
+        An arithmetic floor of ~8-10 hours exists if 8-10 pairs exceed 300s, but that
+        is ARITHMETIC FROM A CEILING HIT, NOT A MEASUREMENT, and must not be quoted
+        as an ETA.'
+      pending_wording_fix_four_files: The closing clause 'so no single sample sits
+        close to the line' over-generalises in FOUR artefact copies (q1_gate_five_pairs_full_n.json,
+        q1_absolute_summary.json, q2_upper_bound_16r.json, q1_lower_side_full_n.json).
+        A separate local-only write has been dispatched to replace it with 'so UNDER
+        THE CANONICAL CONVENTION no sample sits close to the line; the convention-dependence
+        of the gate value is the separate matter described in the first clause.' This
+        registry copy is already fixed.
+      radius_convention: Reference radius 0.5*sqrt(m/n_i) + 0.5*2.9604/sqrt(n_i).
+        The full-n run's upper recomputation returned the repo radius constant as
+        2.9604143746015965 (2.9604 rounded), matching.
+      recovered_pair_count: 1
+      superseded_984: An earlier report of 984/990 was an ARITHMETIC SIGN ERROR (985
+        - 1 instead of 985 + 1). Must not appear in any record.
+      ten_smallest_positive_margins_full_n:
+        (15,16): 0.019696514200913923
+        (16,20): 0.03575850751894177
+        (21,23): 0.008780592245020674
+        (25,39): 0.03993443430101615
+        (27,38): 0.02912228557709025
+        (29,38): 0.026916456535371253
+        (38,44): 0.031632565772626534
+        (4,13): 0.03785426332795759
+        (5,21): 0.036556258638680464
+        (5,23): 0.029047249488066876
+    completed_at: '2026-09-13T20:21:59.228Z'
+  X3:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-14T00:25:50.284Z'
+    updated_at: '2026-09-14T08:34:50.309Z'
+    hypothesis: 'The chain-rule joint divergence D_k over the DEPENDENT packet prefix
+      grows SUBLINEARLY in k, against the null that it grows LINEARLY as an i.i.d.
+      process would. Mechanism: within-flow dependence means successive positions
+      are predictable from the prefix, so the divergence accumulated per added position
+      DECREASES with k rather than staying constant. This is the only test in the
+      project that can FALSIFY the dependent-prefix framing -- if D_k grew linearly,
+      i.i.d. theory would have sufficed and the framing would be wrong.'
+    spec:
+      command: server-side runner, deleted after the run (see provenance gap below)
+      compute_class: CPU-only h5 reads; no GPU used
+      data_count: 10000000
+      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
+      h5_sha256: 6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab
+      checkpoint_path: artifacts/_project/data/x3_chain_rule_divergence.json
+      artifact_sha256: c19d73926f4e51d64b22af06a1f1f939f971176bb24d4a662db542c16a3d5605
+      log_path: logs/workers/worker_X3__P0___chain-rule_joint_divergence_vs_the_linear_i_i_d__nu_20260913T230240.log
+      model_name: chain-rule joint divergence D_k over the dependent packet prefix,
+        M=1 direction x 1 size bin, Jeffreys add-0.5 smoothing, symmetric conditional
+        KL
+      seed: not recorded by the run
+      server: '111'
+      completed_at_note: Run completed 2026-09-14 00:05; registered retrospectively
+        on the Director's instruction.
+      PROVENANCE_GAP: The runner was deleted after the run, so the estimator is NOT
+        reproducible from the repo. A controls pass must RE-DERIVE it from the artifact's
+        estimator sentence and PROVE identity by reproducing the published per-k medians
+        (k=5 1.3813736271298078, k=10 3.4493236537679586, k=20 6.357055609304329,
+        k=30 8.52179151609541). If a reimplementation does not reproduce those, its
+        control results are INADMISSIBLE. The controls run has been told to leave
+        its runner in the repo (/root/eibo/x3_controls.py).
+      channel: PPI[1] direction and PPI[2] size only; PPI[0] inter-packet timing EXCLUDED
+      sampling: all flows in the h5 satisfying PPI_LEN >= k; no cap or subsampling.
+        The flow set therefore CHANGES AT EVERY k, and the pair denominator shrinks
+        990 -> 946 -> 903 -> 861 -> 820.
+      temporary_checkpoint_dir: /dev/shm/eibo_x3_chain_rule (volatile; lost on restart)
+      SCIENTIFIC_VERDICT: 'SUBLINEAR -- PROVISIONAL PENDING CONTROLS. This is deliberately
+        NOT in the conclusion field: the RUN succeeded, and the scientific verdict
+        is what remains open. Controls in flight: (C1) a known-truth control whose
+        analytic truth is exactly LINEAR, where the estimator MUST return LINEAR or
+        it cannot distinguish the hypotheses; (C2) a fixed-population recompute, since
+        the flow set changes at every k; (C3) occupancy and smoothing sensitivity.
+        CONFIRMED requires BOTH (i) survival on the fixed population and (ii) the
+        C1 control returning LINEAR. Otherwise DOWNGRADE TO INCONCLUSIVE. The artifact''s
+        own field says: ''A fabricated direction is worse than an inconclusive test.'''
+    conclusion: success
+    metrics:
+      D069_HARD_RULE_READ_WHOLE_WRITE_WHOLE_THIS_IS_THE_HARDEST_LESSON_OF_THE_SESSION: '***
+        `update_registry(exp_id, field=''metrics'', value={...})` REPLACES the entire
+        value. IT DOES NOT MERGE. I DESTROYED THIS BLOCK SIX TIMES BY PASSING A PARTIAL
+        DICT, including several times WHILE RESTORING it. THE PROCEDURE, NOT A REMINDER:
+        (1) READ THE WHOLE BLOCK with read_registry(fields=[''metrics'']); (2) merge
+        the new keys BY HAND; (3) WRITE THE WHOLE BLOCK BACK; (4) READ IT BACK and
+        confirm the expected key count. NEVER call this field with only the new keys.
+        THE PROPAGATION RULE IS ALSO ADOPTED: the fan-out is decision log -> ROADMAP
+        -> registry -> framing -> plan -> memory, and the registry is the one the
+        Paper Agent reads -- so VERIFY BY GREPPING THE DECISION ID (confirms arrival)
+        AND BY GREPPING THE RETRACTED PHRASE (finds the places the decision did NOT
+        reach). ***'
+      D055_THE_EXISTENCE_CORROBORATION_ii_IS_NOT_EVIDENCE: 'The heterogeneous-i.i.d.
+        arm, which by construction has ZERO within-flow dependence (each flow its
+        own rate, then 30 i.i.d. bits), returns Markov 45/45 at k>=8 and 98.2% overall
+        (1,281 vs 24 of 1,305; verdict DEAD, clearing the pre-registered threshold
+        of >=44/45) -- IT REPRODUCES THE REAL VOTE EXACTLY, so THE VOTE IS NOT DIAGNOSTIC.
+        The magnitude is about 58x larger than that null (arm k=30 median dBIC about
+        1,896 vs real about 110,091), so heterogeneity does not explain the size either.
+        *** SUPERSEDED IN PART BY D064: the position-wise i.i.d. null RAN and REFUTES
+        ''first-order'' directly -- the stronger, cleaner statement. *** *** AND D063
+        MAKES THE MECHANISM DISCUSSION SIMPLER, NOT HARDER: it is no longer ''two
+        controls point in opposite directions'' (which could not be explained). If
+        variant B''s per-threshold exponents fall largely because the FREEZE STARTS
+        EARLIER at higher T, then that trend MEASURES THE FREEZE LENGTH, NOT SPARSITY
+        -- so ONE OF THE TWO CONTROLS IS INERT OVER A THIRD OF ITS RANGE AND CANNOT
+        TESTIFY ABOUT THE SHAPE OF GROWTH AT ALL. ***'
+      D056_RESOLVED_FIX_CONFIRMED_BY_THE_ACCEPTANCE_TEST_ANNOTATED_SEE_D060_AND_D067: '***
+        GENUINE REPAIR, BUT DO NOT READ IT AS A RESOLVED BASELINE. *** The off-by-4
+        was at x3_control_occupancy_dose_response.py LINES 179-181: `counts_p = thinned_p[:
+        k - 4]` where K_VALUES starts at 5, so labelled k=9 used five transitions
+        and matched the original control''s k=5. FIXED, LABELS ONLY, to `thinned_p[:k]`.
+        ACCEPTANCE TEST PASSED: un-thinned plain_iid k=5 D_k = 1.6949092697605275
+        vs analytic truth 1.694595720774407, est/true = 1.0001850287843153; the corrected
+        curve is BIT-IDENTICAL to the original control''s at every labelled k=5..30.
+        Permanent assertion added at lines 231-266 -- exactly the right permanent
+        guard. RUNNER LEFT IN REPO. Artifacts: art_20260914_4d9b49 (291,163 B, sha256
+        88625bba...), runner art_20260914_646bc6 (15,318 B, sha256 da81dabb...). ***
+        THE ZERO-INTERVENTION TEST PASSES AGAINST THE ORIGINAL CONTROL ONLY -- the
+        three-way-agreement claim was FALSE (D062); the question was later CLOSED
+        as three settings of one construction (D067). *** *** AND SEE D063: THIS SAME
+        SCRIPT''S THINNING PATH ALSO FREEZES -- plain arm at k=29 (retained=0.10)
+        and k=27 (retained=0.05); the twin does not. ***'
+      D056_CORRECTED_VERDICT_IS_POSITIVE_joint_tracks_thinning_TRUE_AND_IT_IS_A_REAL_TEST_BUT_A_SHALLOW_ONE: 'On
+        the corrected axis the dose-response returns joint_tracks_thinning true. plain_iid
+        exponent_p by retained_fraction: 0.651 / 0.625 / 0.614 / 0.603 / 0.557; sparse-context
+        statistic 0.4156 / 0.4493 / 0.4841 / 0.5317 / 0.5694. twin: 0.891 / 0.888
+        / 0.876 / 0.848 / 0.821. *** CITING IT: REAL TEST BUT SHALLOW -- the response
+        spans 0.651 -> 0.557, about 14 percent relative, across five DETERMINISTIC
+        thinning levels. *** *** AND ITS TWO DEEPEST LEVELS FREEZE (D063): the 0.603
+        and 0.557 values sit on curves constant over a tail, so THEY ARE FITS ACROSS
+        A FROZEN WINDOW AND MUST NOT BE CITED AS SPARSITY RESPONSE until the no-freeze
+        fix lands. ***'
+      D056_RESIDUAL_LIMITS: '(a) *** SEEDS: THE DOSE-RESPONSE RESTS ON ONE SEED (20260914)
+        WHILE THE APPROVED CONTROL PROTOCOL ASKED FOR >= 3. THIS ITEM STAYS OPEN.
+        *** (b) The response margin is SHALLOW -- about 14 percent relative. (c) SIBLING
+        LABEL AUDIT, re-run under the UPGRADED PROTOCOL (D063): the +4-label-shift
+        check cleared x3_variant_a_estimator_family.py, x3_variant_b_support_conditioning.py
+        and x3_controls.py as to LABELS; x3_variant_c_nested_lr.py NOT APPLICABLE;
+        x6_divisibility_lower_bound.py NOW VERIFIED-CORRECT against its analytic known-truth
+        (0 violations of 120; axis probe k=5/10/15 -> [1,5]/[1,10]/[1,15]). *** THE
+        LABEL CHECK WAS NECESSARY AND NOT SUFFICIENT: it cleared variant B while variant
+        B''s curve was FROZEN FROM k=16. THE CONSTANT-TAIL / EXACT-ZERO-INCREMENT
+        CHECKS ARE NOW PART OF THE STANDING AUDIT. *** (d) x3_axis_validation.json:
+        the vote arm RECOVERS KNOWN ANSWERS (S1 pure i.i.d. 0/8/0; S2 dependent 8/0/0;
+        S3 heterogeneous-and-independent 8/0/0, all matching independently computed
+        expectations, zero mismatches), and a DEPENDENCE-DEATH-AT-KNOWN-POSITION test
+        put the vote transition at exactly the built position (k=4 MARKOV, k=5..30
+        IID).'
+      D060_THE_DIRECTOR_CORRECTED_THE_D056_PREDICTION_THE_TWO-CONTROLS_DISAGREEMENT_SURVIVES_THE_FIX: '***
+        D056 PREDICTED THAT FIXING THE OFF-BY-4 WOULD SETTLE THE APPARENT DISAGREEMENT
+        BY SHOWING IT WAS AN ARTEFACT OF THE DEFECTIVE AXIS. THAT PREDICTION WAS WRONG.
+        THE DISAGREEMENT SURVIVES THE FIX. *** After the repair the corrected dose-response
+        reads p = 0.651 at retained_fraction = 1.0, while VARIANT B STILL READS 0.539
+        -- artifact UNCHANGED (109,361 B, sha 29f9bcab...). *** RESOLVED LATER, AND
+        NOT AS A DISAGREEMENT: D067 -- three settings of one construction. AND SEE
+        D063: the exponent SERIES that made them look like a dose-response is largely
+        A SEQUENCE OF PROGRESSIVELY SHORTER PRE-FREEZE WINDOWS. ***'
+      D062_THE_THREE_WAY_AGREEMENT_CLAIM_IS_WITHDRAWN_IT_WAS_FALSE: '*** I WROTE A
+        FALSE CLAIM AND THE DIRECTOR CORRECTED IT. RECORDED AS SUCH. *** The withdrawn
+        claim: ''THE ZERO-INTERVENTION TEST NOW PASSES ACROSS ALL THREE IMPLEMENTATIONS
+        ... EXACTLY equal to the original control''s 0.651 and to variant B''s no-filter
+        baseline 0.651.'' *** THAT IS FALSE. THERE IS NO THREE-WAY AGREEMENT AT THAT
+        TIME. *** *** AND THE DIRECTOR NOW CONFIRMS THE FAULT IS THE ATTRIBUTION,
+        NOT TWO VALUES: variant B CONTAINS NO UNFILTERED BASELINE AT ALL; its values
+        are THRESHOLD-CONDITIONED (T=5 -> 0.539 is the MINIMUM rung per its own threshold_selection_rule);
+        and 0.651 BELONGS TO THE ORIGINAL CONTROL (unfiltered), which the corrected
+        dose-response reproduces at no-thinning. THE ATTRIBUTION WAS ALREADY CORRECTED
+        IN PLAN AND REGISTRY; A GREP FOR THE OLD PHRASE NOW HITS ONLY CHAT LOGS. ***'
+      D062_WHERE_MY_ERROR_CAME_FROM_AND_THE_COINCIDENCE_TO_REMEMBER: 'The string ''0.651''
+        DOES occur inside variant B''s file -- BUT IT IS A COINCIDENTAL D_k MEDIAN
+        (10.651108547284124 at k=30), NOT A BASELINE FIELD. *** DO NOT RE-MAKE THIS
+        ERROR: a substring match on a number is not a field match. *** My finding
+        that variant B contains NO no-filter / unfiltered / baseline FIELD OF ANY
+        KIND STANDS AND IS CORRECT -- but I drew an UNSUPPORTED CONCLUSION from it
+        (that 0.539 must therefore belong to a filtered setting and the conflict was
+        a mere settings mismatch) and stated that too strongly. THE DIRECTOR WAS RIGHT
+        TO CORRECT ME AT THAT MOMENT. THE INFERENCE LATER PROVED CORRECT ON EVIDENCE.'
+      D062_THE_BASELINE_BLOCKER_STANDS_WITH_VARIANT_B_AS_THE_SUSPECT: 'PER THE STANDING
+        RULE: the blocker STOOD. *** RESOLVED UNDER D066/D067: the comparison ran,
+        and the STANDING RULE ITSELF WAS MIS-SCOPED -- a same-nominal-quantity conflict
+        is a blocker ONLY WHEN THE NOMINAL SETTING IS IDENTICAL; a shared quantity
+        under DIFFERENT intervention settings is a DOSE-RESPONSE FAMILY, NOT A CONFLICT.
+        THE RULE SHOULD NEVER HAVE FIRED HERE. ***'
+      D062_PROCESS_RULE_ADOPTED: '*** WHEN A REPORT SAYS A BLOCKER IS RESOLVED, READ
+        THE SPECIFIC FIELD IN THE SPECIFIC FILE BEFORE TREATING IT AS CLOSED. ***
+        Caught three times now only by reading the file directly. THIS APPLIES IN
+        BOTH DIRECTIONS. ***'
+      D066_D067_THE_0_651-VS-0_539_QUESTION_IS_CLOSED_AS_THREE_SETTINGS_OF_ONE_CONSTRUCTION: '***
+        THREE SETTINGS OF ONE CONSTRUCTION, NOT THREE VALUES OF ONE QUANTITY. ***
+        original control UNFILTERED = 0.651; corrected dose-response ZERO THINNING
+        = 0.651; VARIANT B AT T=0 = 0.6510 (recomputed by an independent review, IN
+        NO ARTIFACT) matching the control at all 26 k; VARIANT B AS STORED (T=5) =
+        0.539. SECOND INDEPENDENT MEASUREMENT: B''s stored curve is BIT-IDENTICAL
+        to the control at k=5..9, diverging only from k=10 -- THE SIGNATURE OF A T=5
+        FILTER. *** CODE EVIDENCE: all three scripts share ONE plain-i.i.d. generator,
+        `synthetic_bits(n, kmax, p, rng)` (x3_controls.py lines 489-490), 200000 flows
+        per law, 30 bits, p=0.30, q=0.70, seed 20260914; VARIANT B AND THE DOSE-RESPONSE
+        BOTH `from x3_controls import ... synthetic_bits ...`. CAVEAT: for the TWIN
+        arms seed handling DIFFERS. *** *** ⚠⚠ AND THE FREEZE POINT MOVES MONOTONICALLY
+        EARLIER AS T RISES: no freeze at T=0; k=28 at T=1; k=20 at T=2; k=16 at T=5;
+        k=14/13/11/10 at T=10/20/50/100. SO ''p FALLING AS THE THRESHOLD TIGHTENS
+        IS A SPARSITY DOSE-RESPONSE'' IS FALSE -- IT IS A SEQUENCE OF PROGRESSIVELY
+        SHORTER EFFECTIVE k WINDOWS. T=1 ALONE LIFTS p FROM 0.651 TO 0.955 (ESSENTIALLY
+        LINEAR). *** *** THE DIRECTOR HAS NOW WEAKENED ONE OF THEIR OWN ARGUMENTS
+        ON THIS BASIS: the ''two interventions move sparsity in opposite directions
+        yet both lower p'' claim ASSUMED variant B''s unfiltered p sat above 0.539
+        -- IT WAS NEVER COMPUTED. ONLY MONOTONE DECREASE WITHIN T=5..100 IS SUPPORTED.
+        COMPUTING VARIANT B''S UNFILTERED PLAIN EXPONENT IS A RECORDED OPEN ITEM.
+        *** *** AND: FIXING THE ATTRIBUTION DOES NOT DISSOLVE THE FREEZE. TWO INDEPENDENT
+        DEFECTS ON ONE CURVE: the ATTRIBUTION fault (now fixed) and the FROZEN AXIS
+        (separate, unfixed, dispatch in flight). *** *** REQUIRED SO THE BLOCKER CANNOT
+        REOPEN: THE VALUE B @ T=0 = 0.651 MUST LAND IN AN ARTIFACT. ***'
+      D063_NUMBERING_COLLISION_DISCLOSED: '*** SOME OF MY EARLIER KEYS HERE USED THE
+        LABEL ''D063'' FOR THE GENERATOR-COMPARISON RESULT. THAT LABEL WAS SELF-ASSIGNED
+        AND COLLIDES WITH THE DIRECTOR''S D063 (variant B''s frozen curve). THEIR
+        DECISION LOG READS: D060 off-by-4 FIXED; D061 stray-layer consolidation; D062
+        refuted a reported resolution; D063 the variant-B CURVE FREEZE; D064 the position-wise
+        null beats first-order; D065 X6 completed; D066 the retraction OVER-CORRECTED;
+        D067 0.651-vs-0.539 CLOSED; D068 RETRACTED the Director''s own D063 over-reach
+        (the 0.608 mass figure). *** SO READ MY ''D063_*'' GENERATOR-COMPARISON KEYS
+        AS WHAT THEIR LOG CALLS D066/D067. ***'
+      D063_THE_VARIANT_B_PLAIN_CURVE_IS_FROZEN_FROM_K16_AND_THE_FREEZE_PRODUCES_THE_REPORTED_SUBLINEARITY: '***
+        THE DIRECTOR''S D063, VERIFIED BY THEM FROM THE ARTIFACT. THIS INVALIDATES
+        THE OTHER HALF OF PART (i)''s SUPPORT. *** In x3_variant_b_support_conditioning.json,
+        `gate.plain_iid_known_truth.curve` has D_k_median PINNED at EXACTLY 5.908567858844014
+        for EVERY k from 16 to 30. Increments over k=5..30: [0.33995, 0.34420, 0.34113,
+        0.35237, 0.37767, 0.38000, 0.37049, 0.39485, 0.40327, 0.41803, 0.49169, 0,
+        0, ...] -- 14 of 25 increments are EXACTLY ZERO (see D064 below: THIS ARTIFACT''S
+        --allow-empty, per the artifact''s own values, is what the zero-increment
+        count must be verified against; the Director reports 14/25 vs the original
+        control''s 0/25 and the fix worker is verifying that from the file). *** NOT
+        A DATA PROPERTY -- IT IS B''s OWN FILTER: MIN_CONTEXT_COUNT / condition_counts(T);
+        synthetic flows are fixed-length, the context count grows as 2^k while per-context
+        samples collapse, and at k=16 the retained-context set stops changing, pinning
+        D_k. *** ★ AND THE FREEZE PRODUCES THE SIGNAL: refitting B''s OWN curve with
+        B''s OWN power form gives p = 0.539 over the full window (reproducing the
+        artifact exactly) but p = 1.093 -- LINEAGE. *** SO B''s REPORTED SUBLINEARITY
+        IS A FITTING ARTIFACT OF A CONSTANT TAIL. ***'
+      D063_THE_SIBLING_AUDIT_PROTOCOL_IS_UPGRADED_THIS_IS_THE_SYSTEMIC_LESSON: '***
+        THE AUDIT CHECKED ONLY FOR A +4 LABEL SHIFT, CONCLUDED ''Verified-correct
+        labelling'' FOR VARIANT B, AND PRINTED THE FREEZE AS DATA -- IN THE VERY ROW
+        IT LISTED, k=20 AND k=30 SHOWED IDENTICAL VALUES. AN ANOMALY THAT CERTIFIES
+        ITSELF ON SIGHT WAS NOT TREATED AS A TRIGGER. *** THE RULE, ADOPTED: AUDIT
+        SCOPE IS SET BY ANOMALY SIGNALS, NOT BY THE TASK DESCRIPTION ALONE. When inspecting
+        a curve, check ALL FOUR: (a) label shift; (b) CONSTANT TAILS; (c) non-monotone
+        jumps; (d) EXACT-ZERO increments. *** BY THE UPGRADED STANDARD: B was ''verified-correct
+        as to labels'' -- TRUE AND STILL INSUFFICIENT. THE FREEZE INVENTORY ACROSS
+        ALL X3 CURVES IS PART OF THE DISPATCHED WORK. ***'
+      D063_THE_SIBLING_AUDIT_UPGRADE_RESTATED: '*** THE AUDIT CHECKED ONLY FOR A +4
+        LABEL SHIFT, CONCLUDED ''Verified-correct labelling'' FOR VARIANT B, AND PRINTED
+        THE FREEZE AS DATA -- IN THE VERY ROW IT LISTED, k=20 AND k=30 SHOWED IDENTICAL
+        VALUES. AN ANOMALY THAT CERTIFIES ITSELF ON SIGHT WAS NOT TREATED AS A TRIGGER.
+        *** THE RULE, ADOPTED: AUDIT SCOPE IS SET BY ANOMALY SIGNALS, NOT BY THE TASK
+        DESCRIPTION ALONE. When inspecting a curve, check ALL FOUR: (a) label shift;
+        (b) CONSTANT TAILS; (c) non-monotone jumps; (d) EXACT-ZERO increments. ***
+        BY THE UPGRADED STANDARD: B was ''verified-correct as to labels'' -- TRUE
+        AND STILL INSUFFICIENT. THE FREEZE INVENTORY ACROSS ALL X3 CURVES IS PART
+        OF THE DISPATCHED WORK. ***'
+      D063_CONFLICT_FLAGGED_NOT_RESOLVED_BY_ME_FREEZE_AND_THE_MASS_FIGURE: '*** TWO
+        OF THE DIRECTOR''S OWN RULINGS CONFLICT ON THE 0.608 EXCLUDED-MASS FIGURE,
+        AND I AM NOT SILENTLY PICKING ONE. *** (a) THE D063 INSTRUCTION says B''s
+        plain-arm conclusion AND the 0.608/61% excluded-mass figure MAY NOT BE CITED
+        until recomputed on a non-frozen axis. (b) THE DIRECTOR''S OWN D068 IN THE
+        ROADMAP says ''I OVER-REACHED AND HAVE RETRACTED IT -- the 0.608 excluded-mass
+        value is NOT freeze-contaminated and does NOT need recomputation'', verified
+        in source: it comes from condition_counts (line 139) as a DIRECT RATIO OF
+        DROPPED TO TOTAL TRANSITION MASS (p_excluded_mass = drop_p/raw_p, lines 198-211)
+        WITH NO ESTIMATOR AND NO FIT ANYWHERE IN THE PATH; it shows 22 distinct values
+        across the 26 ks, monotone nondecreasing (0.000 at k<=9 -> 0.0029 at k=10
+        -> 0.2654 at k=16 -> 0.4124 at k=20 -> 0.6082 at k=30), and DOES NOT FREEZE
+        AT k=16 the way the D_k curve does. *** LIKELY RECONCILIATION: THE TWO CLAIMS
+        ARE ABOUT DIFFERENT QUANTITIES -- (a) the EXCLUDED-MASS FRACTION, a direct
+        ratio, structurally immune to the freeze; and (b) THE FITTED EXPONENT, which
+        IS freeze-contaminated. THE INSTRUCTION CONFLATES THEM IN ONE SENTENCE; D068
+        SEPARATES THEM. THE WORKER WAS TOLD TO KEEP THE DISTINCTION EXPLICIT AND REPORT
+        PROVENANCE RATHER THAN ''FIX'' A QUANTITY THAT MAY NEED NO FIX. *** *** THE
+        RESOLUTION IS THE DIRECTOR''S TO MAKE. UNTIL THEN: THE FITTED EXPONENT SERIES
+        IS NOT CITABLE; THE MASS FIGURE''S CITABILITY FOLLOWS D068 UNLESS RE-OVERRIDDEN.
+        ***'
+      D057_THE_PARAMETRIC_ROUTE_IS_STRUCTURALLY_NON_DIAGNOSTIC_BOTH_ITS_LINEAR_AND_ITS_PASSED_CONTROL_ARE_WITHDRAWN_AS_EVIDENCE: '***
+        DO NOT NARROW PART (i). *** TWO FACTS WITHDRAWN: (1) ''the real-data route
+        returned LINEAR''; (2) ''its fitted-model control passed decisively''. The
+        runner fits a Markov model by BIC ONCE PER SERVICE and computes the curve
+        UNDER THAT ALREADY-FITTED MODEL with NO PER-k REFIT, so for ANY stationary
+        chain D_k is AFFINE (order 0 returns D_k identically 0). THE ONLY REACHABLE
+        OUTCOMES ARE D_k = 0 OR AFFINE; SUBLINEAR IS UNREACHABLE, so LINEAR IS FORCED
+        AND CARRIES NO INFORMATION ABOUT THE DATA. Numerically verified: first-order
+        chain [[0.8,0.2],[0.3,0.7]] has CONSTANT increments +0.128424 for every k=2..30;
+        order-2 constant at +0.187831748 for every k>=4. ITS CONTROL CHECKS THAT THE
+        EXACT AND FITTED CURVES GET THE SAME fit_growth VERDICT -- and BOTH ARE AFFINE
+        BY CONSTRUCTION -- so the control CANNOT FAIL and IS NOT A CONTROL. THE REVIEWER
+        INDEPENDENTLY CONFIRMED ON A SECOND READING. *** ITS LABELS WERE LATER VERIFIED-CORRECT
+        (x3_axis_validation.json: per-k residuals <= 1.0658141036401503e-14 at known
+        order-2, AXIS PASS; THE ROUTE WAS NOT REPAIRED). *** *** DOWNSTREAM SURFACE
+        STILL CARRYING THE WITHDRAWN NARROWING: x3_parametric_growth.json (215,476
+        B, sha256 3c47da3825d06a313b888c6b6310f371be00fc07d3313a045740aadce8049dba)
+        whose plain_statement STILL SAYS the question is adjudicable and the plug-in
+        limitation must narrow. *** THAT WORKER RAN AT 05:50; D057 CAME AT 06:45 --
+        SO IT IS SUPERSEDED, NOT WRONG, BUT COPIED INTO THE PAPER IT WOULD REVERSE
+        A SETTLED DECISION. *** A D057 WARNING HAS BEEN PLACED ON ITS REGISTRATION
+        DESCRIPTION (art_20260914_a3381d, named ''x3_parametric_growth.json (CONCLUSION
+        WITHDRAWN -- must not be cited)''). THE FILE ITSELF SHOULD ALSO CARRY THE
+        ANNOTATION RATHER THAN ONLY THE MANIFEST DESCRIPTION -- that writer-side annotation
+        is the remaining step. ***'
+      D057_WHAT_THIS_MEANS_FOR_THE_PAPER: '*** (i) DOES NOT NARROW. *** The route
+        demonstrates that THIS ROUTE IS VACUOUS, not that the question is adjudicable.
+        (i) KEEPS ITS SCOPE: THE STANDARD PLUG-IN CHAIN-RULE ESTIMATOR CANNOT ADJUDICATE
+        the dependent-prefix growth question AT THIS K WINDOW, N, AND OCCUPANCY-COLLAPSE
+        CURVE. (ii) SEE D064 -- a DIRECT negative on ''first-order''. C1 AND C2 ARE
+        UNTOUCHED. *** NO REPAIR AND NO RE-RUN without a NEW approved design brought
+        to the Director first. *** *** AND THE ''STRUCTURAL, NOT A TUNING PROBLEM''
+        HALF OF (i)''s SUPPORT IS NOW DOUBLY WEAKENED (D063): variant B''s plain curve
+        is frozen over its last 14 of 25 points, and the Director has WITHDRAWN the
+        0.608/61%-mass evidence pending the mass/exponent distinction. WHAT STILL
+        STANDS IS THE OTHER, STRONGER LEG -- the analytically-LINEAR known-truth control
+        FAILED (est/true 1.0002 -> 0.6769) -- which does not depend on variant B at
+        all. ***'
+      D058_ORDERING_CORRECTED_CONTAINMENT_IS_NOT_BLOCKED_BY_THE_AUC_DIAGNOSTIC: 'The
+        containment statistic consumes (a) eps_hat_k_hi from the rebuilt X1 artifact
+        and (b) the per-flow detector error; it does NOT reference OSCR or FPR95 anywhere.
+        THEREFORE: (1) THE k=5 CONTAINMENT RESULT IS VALID REGARDLESS OF HOW THE AUC
+        DIAGNOSTIC RESOLVES; (2) THE DIAGNOSTIC RUNS IN PARALLEL, NOT IN FRONT; (3)
+        ONE RUN SHOULD SERVE BOTH PURPOSES. The reviewer independently confirmed this.
+        VACUITY RULE HOLDS: a violation count computed on a vacuous detector state
+        is reported as UNINFORMATIVE, never as a pass.'
+      D059_THE_AGREEMENT_BASELINE_IS_THE_MAJORITY_CLASS_NOT_UNIFORM: '*** THE CHANCE
+        BASELINE FOR THE ROW-LEVEL AGREEMENT RATES IS THE MAJORITY-CLASS RATE, NOT
+        uniform 1/53 = 1.89%. *** The service-label distribution is STRONGLY IMBALANCED:
+        majority class 14.73% (745,293 of 5,058,007 flows, train-side), held-out test-side
+        24.89%. BOTH recorded. *** RULE: ANY PLACE THAT CITES THESE AGREEMENT RATES
+        MUST CARRY THE MAJORITY-CLASS BASELINE BESIDE THEM. *** AGAINST IT: LIGHTGBM
+        (48.6%) and RONETC (58.1%) ABOVE; *** PROTOTYPE (13.5%) BELOW -- WORSE THAN
+        ALWAYS GUESSING THE MAJORITY CLASS. *** ALSO: `all_rows_accepted = true` FOR
+        LIGHTGBM IS STRUCTURAL -- line 486 hard-codes accepted: np.ones(len(pred),
+        dtype=bool); AN OPEN-SET DETECTOR THAT NEVER REJECTS HAS NO REJECTION CAPABILITY.'
+      D061_THE_FIX_FIRST_LANDED_IN_A_STRAY_LAYER_CONSOLIDATION_COMPLETE: 'The D056
+        fix wrote to a STRAY layer (artifacts/X3/data/) while the AUTHORITATIVE mirror
+        (artifacts/_project/data/) kept PRE-FIX bytes -- TWO LIVE CONTRADICTORY MANIFEST
+        ENTRIES. The Director fixed the BYTES directly. CONSOLIDATION COMPLETE AND
+        VERIFIED BY READING THE TREE. *** TWO PROCESS RULES ADOPTED: (1) A WORKER
+        REPORT MUST BE GENERATED AFTER ITS ARTIFACT IS FROZEN. (2) A FIX MUST LAND
+        WHERE THE ARTIFACT ALREADY LIVES. *** *** ★ ROOT CAUSE FOUND: `register_artifact(server=...,
+        remote_path=...)` ITSELF PLACES FETCHED FILES AT artifacts/<EXPID>/data/ AND
+        artifacts/<EXPID>/intermediate/. SO artifacts/<EXPID>/ IS THE REGISTER TOOL''S
+        DEFAULT DESTINATION, NOT A FORK INVENTED DURING A REPAIR -- AND EVERY REGISTRATION
+        RE-CREATES IT, UNDOING A CONSOLIDATION. CONFIRMED THREE TIMES NOW (X3 twice,
+        X6 once). THE MANIFEST''S ''NOT A CONVENTION'' COMMENT CONTRADICTS THE DEPLOYED
+        TOOL AND NEEDS A DIRECTOR RULING. OPEN. ***'
+      D064_THE_POSITION-WISE_NULL_REFUTES_FIRST-ORDER_AND_THE_QUOTED_NUMBERS_ARE_EXACT_EXCEPT_THE_K-LIST_SKIPS_K3_AND_K4: '***
+        THE REQUIRED ROUTE -- THE LAST ONE NOT SHOWN TO BE VACUOUS -- HAS RUN, AND
+        IT DOES NOT MERELY FAIL TO SUPPORT ''first-order'' -- IT REFUTES IT. *** PRE-REGISTERED
+        CRITERION, verbatim in the artifact: first-order is licensed iff the position-wise
+        i.i.d. null loses to first-order Markov by BIC for a strict majority at k=30
+        AND at EVERY tested k=2..30; a win or tie at any k withholds the licence.
+        OUTCOME: first_order_licensed = FALSE; plain_statement ''NOT LICENSED''; all_prefix_lengths_markov_strictly_beats_positionwise
+        = false. *** VERIFIED BY ME AGAINST THE ARTIFACT (art_20260914_280fd1, x3_positionwise_iid_null.json,
+        748,564 B, sha256 83505f9f069b68c6d505c81dea98484c794712417d92abfd7e5ca72757c48650)
+        -- IT IS NOW LOCAL AND I READ IT DIRECTLY. THE DIRECTOR''S QUOTED NUMBERS
+        ARE EXACT: 45/45 at k=2, 42/45 at k=5, 41/45 at k=30, 0 ties throughout, medians
+        -10.69 at k=2, -9346 at k=5, -27266.969455033075 at k=30. *** *** CORRECTION
+        THE RECORD MUST CARRY: the k-list ''nearly every k'' SKIPS TWO INFLECTION
+        POINTS. At k=3 only 25 of 45 favour position-wise (20 favour Markov); at k=4
+        only 33 of 45 (12 favour Markov). Both are still ''not licensed'' because
+        the rule requires Markov to beat position-wise at EVERY k -- but ''beats at
+        nearly every k'' is NOT accurate at k=3/k=4. FULL TABLE (k: favours-positionwise
+        / ties): k=2 45/0, k=3 25/0, k=4 33/0, k=5 42/0, k=6 44/0, k=7 44/0, k=8 44/0,
+        k=9..29 43/0, k=30 41/0. THE CONCLUSION IS UNAFFECTED: first_order_licensed
+        = false, and it is already false at k=3. *** *** MEANING: PER-POSITION MARGINAL
+        STRUCTURE EXPLAINS THE VOTES BETTER THAN ANY TRANSITION STRUCTURE. THIS REVERSES
+        THE STRENGTH, NOT THE DIRECTION, OF THE DIRECTOR''S OWN D053 REASONING, WHICH
+        SAID POSITION-WISE DRIFT ''WOULD ALSO MAKE MARKOV WIN'' -- MEASURED, IT WINS
+        OUTRIGHT. *** *** SCOPE, EXACTLY: THIS SAYS NOTHING ABOUT PART (i) (which
+        rests on the estimator''s DEFLATION ON ANALYTICALLY-LINEAR TRUTH -- an independent
+        instrument) AND NOTHING ABOUT C1/C2. *** *** THE AGREED (ii) WORDING: ''dependence
+        is present, but a first-order structure is NOT supported by this test -- per-position
+        marginal structure alone explains the observed votes better than any transition
+        structure.'' *** Also: delta_bic_positionwise_minus_markov max is +408971.59668818954,
+        i.e. the sign INVERTS on the 4 services where Markov wins -- which is exactly
+        why the per-service VOTE and not the pooled median governs.'
+      D064_THE_TWO_OBJECT_SUBSTITUTIONS_THE_CONTAINMENT_TEST_MAKES_AND_THEY_MUST_REACH_THE_PAPER: '***
+        BOTH MUST BE STATED IN THE ARTIFACT AND IN THE PAPER, NOT BURIED. *** (1)
+        THE PAIR-LEVEL ERROR IS A PROXY: `pair_error = 0.5 * (error_a + error_b)`
+        -- the mean of two SINGLE-SERVICE macro classification errors, because the
+        script produces no pairwise detector. C1''s bracket is a per-service-PAIR
+        TV bound, so comparing this proxy against a floor DERIVED FROM THAT BOUND
+        is an OBJECT SUBSTITUTION of the E7/M040 class. *** THE WORKER LABELLED IT
+        HONESTLY in the JSON metadata and the CSV schema (''explicitly labeled ...
+        pair-level surrogate'') -- KEEP THAT LABELLING, and make sure the paper says
+        it is NOT the same object. *** (2) `classification_error` IS A CLOSED-SET
+        MISCLASSIFICATION RATE (computed only on a service''s own flows) WHILE THE
+        FLOOR IS AN OPEN-SET ERROR LOWER BOUND. BOTH LEGITIMATE, DIFFERENT MEANINGS;
+        THE NAME ''floor violation'' SUGGESTS A STRONGER COMPARISON THAN IS BEING
+        MADE -- a reader taking it at face value would read it as falsifying the bound.'
+      D064_STAGE_2_JUDGE_BY_CODE_NOT_BY_THE_STALE_ARTIFACT: '*** THE SERVER SCRIPT
+        GREW 40,356 B -> 52,912 B WITH deferred_floor_test() REPLACED BY REAL CONTAINMENT.
+        THE JSON ON DISK IS AN EARLIER RUN (139,995 B, floor_violation_test.status
+        still DEFERRED). THAT IS A NOT-YET-RERUN ARTIFACT, NOT AN UNIMPLEMENTED FEATURE,
+        AND NOBODY MAY READ IT AS THE LATTER. *** The implementation was then VERIFIED
+        FROM SOURCE by a dedicated worker: stub gone (counts 0), containment path
+        reads X1 via rows[].upper_recomputed.eps_hi (990 rows, 340 informative at
+        k=5), both no-evidence branches present, and the metric payload added and
+        smoke-tested (a per-class AUC of 1.0 computed from a persisted matrix). ***'
+      D064_PROCESS_NOTE_TWO_FALSE_FAILED_FLAGS_ALMOST_COST_A_POSITIVE_RESULT: '***
+        TWO WORKERS WERE FLAGGED `failed` ON THEIR COMPLETION-CHECK EXIT CODE WHILE
+        HAVING PRODUCED THEIR ARTIFACTS -- THE 9th AND 10th INSTANCE THIS SESSION,
+        AND THIS TIME IT NEARLY CAUSED A POSITIVE RESULT TO BE RECORDED AS NEVER-RUN.
+        *** RULE: THE EXIT CODE OF A COMPLETION CHECK IS NOT EVIDENCE ABOUT THE WORK.
+        JUDGE BY THE ARTIFACT. ***'
+      D065_X6_COMPLETED_AND_DELIVERS_C2S_MISSING_MEASUREMENT: 'X6 COMPLETED. THE DIVISIBILITY
+        LOWER BOUND IS NON-EMPTY EXACTLY WHERE THE PLUG-IN CERTIFICATE IS LOST: 100%
+        of pairs nontrivial at k=15/20/25/30, informative 0.9989/1.0/1.0/1.0; validity
+        0/120 violations at alpha=0.05; it CALLS the repo function. *** C2''s ''THE
+        HORIZON IS SHORT'' IS NOW A MEASURED RESULT, NOT AN ASSERTION. *** PAPER CAVEATS
+        THAT MUST TRAVEL WITH IT: (1) it is ASSUMPTION-LADEN (VC / Cohn-Tesoriero
+        type realizability) and must NEVER be presented as distribution-free -- the
+        Director fixed the framing themselves after it called X6 ''assumption-free'';
+        (2) subsample 20,000 flows/service versus C1''s full-n upper. *** X6''S LABEL
+        AUDIT RE-RUN: VERIFIED-CORRECT; no [:k-C] construct; axis probe k=5/10/15
+        shapes [1,5]/[1,10]/[1,15]; no `large_k_usable` field exists and large-k entries
+        are declared EXPLORATORY. Artifact registered as art_20260914_9a009c (it landed
+        at artifacts/X6/data/). ***'
+      D068_OVERRIDE_IF_THE_DIRECTOR_RULES_OTHERWISE: '*** WHERE A DIRECTOR RULING
+        AND AN ENTRY IN THIS BLOCK DISAGREE ON A CONCLUSION, THE DIRECTOR''S RULING
+        GOVERNS; THIS BLOCK RECORDS EVIDENCE AND FINDINGS. AND WHERE TWO OF THE DIRECTOR''S
+        OWN RULINGS DISAGREE -- AS THEY DO ON THE 0.608 MASS FIGURE (D063''s instruction
+        vs their own D068) -- I RECORD BOTH SIDES AND ASK. ***'
+      k5_STATUS: '*** THE STAGE-2 GATE IS SATISFIED: *** the containment stub is gone
+        (verified from source), the metric payload is added and smoke-tested, so ONE
+        k=5 RUN SERVES BOTH PURPOSES. ORDER REMAINING: the k=5 run retrains all detectors
+        at k=5 internally (features are k-dependent) then submits with --k-packets
+        5, no --cpu-only, --label-field APP, D043 months, guard untouched, new output
+        names, via submit_on_allocated. *** OPEN OPERATIONAL BLOCKER: NO EXPERIMENT
+        IS CURRENTLY IN ALLOCATED STATE, so submit_on_allocated has nothing to attach
+        to. I AM NOT SUBSTITUTING submit_training_job -- that is how the previous
+        entry was left stranded. AWAITING THE DIRECTOR. *** *** TWO SCHEMA/OBJECT
+        FACTS TO CARRY: THE PER-FLOW CSV IS GONE (writer is pair-level only; containment
+        is unaffected and the .npz payload makes per-flow error reconstructable);
+        AND the pair error is a PROXY and the classification error is CLOSED-SET while
+        the floor is OPEN-SET (see the object-substitution entry). ***'
+    completed_at: '2026-09-14T00:29:25.952Z'
+  X4:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-14T00:25:51.420Z'
+    updated_at: '2026-09-14T02:21:11.745Z'
+    hypothesis: 'The certification frontier is a FUNCTION of (k, n, tv_hat), not a
+      single number: M_max = 0.5*(n*B^2)^(1/k) with B = 0.5 - tv_hat - sqrt(2*ln(2/alpha_law)/n).
+      Mechanism -- CORRECTED (M051): the earlier clause ''a finer alphabet multiplies
+      the number of cells without adding separation'' was WRONG. A finer alphabet
+      resolves MORE, not less: measured tv medians at k=5 rise monotonically with
+      M (0.5805 -> 0.8833 -> 0.9248 -> 0.9462 -> 0.9673). What fails as M rises is
+      CERTIFIABILITY, not resolution: the certified floor is (1 - eps_hi)/2, so an
+      easily-distinguished pair has a SMALL floor, and when eps_hi = tv + radius >
+      0.5 the certificate is lost; the radius also grows with the alphabet. The (1/k)
+      exponent and the B^2 term then drive M_max down as k rises. And because the
+      criterion is a CONJUNCTION (eps_hi = tv_hat + radius < 0.5), the binding feasibility
+      boundary is the certifiability crossover, not the radius-only one.'
+    spec:
+      command: /root/miniconda3/bin/python3 (closed-form arithmetic on the server)
+      compute_class: CPU-only closed-form arithmetic; no h5 access, no GPU
+      checkpoint_path: artifacts/_project/data/x4_frontier_function.json
+      artifact_sha256: 3fd919a41bf5e599ded3cff5524029e07f31372805ab1f59602f961200e3113b
+        (after the certifiability + n_scale edits)
+      log_path: logs/workers/worker_X4_certifiability_crossover_as_primary__X8__replace_a_false__20260913T231935.log
+        (certifiability crossover as primary) + logs/workers/worker_Retry__write-early___mark_the_pooled-cell_check_as_sanity-no_20260913T234404.log
+        (n_scale labelling + 17.5x caveat)
+      model_name: certification frontier M_max(k, n, tv_hat) as a pinned function,
+        with the M=8 certifiability crossover in n
+      server: '111'
+      data_path: none -- this entry reads NO data; it is closed-form arithmetic on
+        the formula M_max = 0.5*(n*B^2)^(1/k)
+      data_count: 0
+      data_count_note: '0 rows read: no h5 access at all. Do not read this as a data-backed
+        entry.'
+      seed: not applicable -- deterministic closed-form arithmetic, no sampling
+      completed_at_note: Completed 2026-09-14; registered retrospectively on the Director's
+        instruction.
+      tv_grid: '[0.00, 0.10, 0.20, 0.30, 0.40, 0.45, 0.48]'
+      k_reported: '[5, 8, 10]'
+      anchor_check: 'n=3.9e6, k=5: M_max = 7/7/6/5/4/3/2 for tv = 0.00/0.10/0.20/0.30/0.40/0.45/0.48
+        -- reproduced exactly'
+      certifiability_crossovers_M8_k5: 4,218,590.770769814 / 6,591,548.079327833 /
+        11,718,307.69658282 / 26,366,192.31731133 / 105,464,769.2692454 / 421,859,077.0769816
+        / 2,636,619,231.7311296 for tv = 0.00/0.10/0.20/0.30/0.40/0.45/0.48. Two derivation
+        routes (direct eps_hi = 0.5 solve and closed-form M_max = 8 solve) agree at
+        EVERY grid point with absolute n difference 0.0.
+      radius_only_preserved: The radius-only crossover (4,218,591, tv-independent)
+        is retained but LABELLED necessary-not-sufficient. It coincides with the certifiability
+        value only at tv = 0.00; at tv = 0.30 the certifiability requirement is 6.25x
+        larger.
+      n_scale_caveat: The frontier is evaluated at FULL-CORPUS PROJECTION scale (~3.886e6
+        mean n) while the measured brackets are XS-scale (~2.22e5 mean n) -- a ~17.5x
+        gap. The two must not be compared directly. At tv=0.30 the M=8 certifiability
+        crossover 26,366,192 is ~6.8x the full-corpus mean and ~119x the XS mean.
+      LOCAL_TREE_STATUS: This artifact previously existed ONLY on the server while
+        the declared authority is the LOCAL tree. A pull to local was dispatched;
+        verify it landed before citing the local copy.
+    metrics:
+      CERTIFIABILITY_CROSSOVER_M8_K5:
+        '0.0': 4218590.770769814
+        '0.1': 6591548.079327833
+        '0.2': 11718307.69658282
+        '0.3': 26366192.31731133
+        '0.4': 105464769.2692454
+        '0.45': 421859077.0769816
+        '0.48': 2636619231.7311296
+      CERTIFIABILITY_CROSSOVER_IS_PRIMARY: The M=8 crossing must be reported on the
+        CERTIFIABILITY criterion eps_hi = tv_hat + radius < 0.5, not on radius_sum
+        < 0.5. radius-only is NECESSARY but NOT SUFFICIENT; the two coincide ONLY
+        at tv_hat = 0.00 and diverge thereafter (~6.25x at tv=0.30, ~600x at tv=0.48).
+      CONJUNCTION_NAMING_RULE: Whenever a criterion is a CONJUNCTION of conditions,
+        any threshold, crossover or feasibility boundary must NAME which condition
+        it uses and must DEFAULT to the binding (composite) one. Reporting a necessary-only
+        condition's boundary as THE boundary is the failure mode this entry exists
+        to prevent.
+      M8_CROSSOVER_RADIUS_ONLY: 4218590.770769814
+      M8_CROSSOVER_RADIUS_ONLY_NOTE: TV-INDEPENDENT (the radius does not involve tv_hat
+        at all), so it is the same at every tv. It coincides with the certifiability
+        value only at tv=0.00, which is why the superseded 4,218,591 figure looks
+        correct -- it is right ONLY there.
+      M_max_anchor_n3.9e6_k5:
+        tv_0.00: 7
+        tv_0.10: 7
+        tv_0.20: 6
+        tv_0.30: 5
+        tv_0.40: 4
+        tv_0.45: 3
+        tv_0.48: 2
+      M_max_main_table_k10_n3.9e6:
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      M_max_main_table_k8_n3.9e6:
+      - 2
+      - 2
+      - 2
+      - 2
+      - 1
+      - 1
+      - 1
+      SATURATION_CROSS_CHECK:
+        agree_in_shape: true
+        closed_form_note: the (1/k) exponent and the B^2 term drive M_max down as
+          k rises, consistent with the measured monotone saturation increase in M
+        measured_saturation_fraction_tv_ge_0_99:
+          '1': 0
+          '2': 0.10505050505050505
+          '4': 0.23939393939393938
+          '8': 0.33636363636363636
+          '16': 0.39090909090909093
+      SCOPE_STATEMENT: 'This is a per-service / per-law effective-n threshold: services
+        with n below the crossover cannot reach the stated M under this certificate.
+        It does NOT exclude services or aggregates with effective n at or above the
+        threshold, nor different tv_hat or k. A claim like ''M>=8 is impossible''
+        would be an ABSOLUTE that a reviewer could kill by pointing at one large service.'
+      SUPERSEDED_2X_FORM_VALUE: An earlier record gave the M=8 crossover as 4,218,591
+        from the 2x-inflated radius form (1024 + 2.9604)/sqrt(n), whose own note said
+        the statement must be RE-DERIVED before being quoted under the corrected radius.
+        It must not be mixed with reference-radius numbers.
+      TWO_ROUTES_AGREE: The direct eps_hi = 0.5 solve and the closed-form M_max =
+        8 solve give absolute n difference 0.0 at EVERY grid point -- self-consistency
+        evidence, not a fit.
+      artifact: q4_frontier_function.json corrected; sha256 3fd919a41bf5e599ded3cff5524029e07f31372805ab1f59602f961200e3113b
+        (server, after certifiability + n_scale edits)
+      n_scale_caveat: FRONTIER IS AT FULL-CORPUS PROJECTION SCALE (~3.886e6 mean n);
+        the MEASURED BRACKETS ARE XS-SCALE (~2.22e5 mean n). ~17.5x apart -- MUST
+        NOT be compared directly. A reader comparing the crossover to the XS mean
+        sees a gap that reflects only the scale difference, not feasibility.
+      radius_only_label: necessary-not-sufficient
+      scale_ratio_DOUBLE_CHECK: At tv=0.30 the certifiability crossover 26,366,192
+        is ~6.8x the full-corpus projection mean and ~119x the XS measured mean. Combined
+        with the radius-only substitution, two readings that each 'look close' understate
+        the requirement by one to two orders of magnitude.
+      why_finer_alphabet_cannot_help: 'CORRECTED (M051 -- the earlier version of this
+        field carried the mechanism BACKWARDS). Increasing alphabet resolution cannot
+        rescue the certificate at these k and n, but NOT because a finer alphabet
+        resolves less. It resolves MORE: measured tv medians at k=5 rise monotonically
+        with M (0.5805 -> 0.8833 -> 0.9248 -> 0.9462 -> 0.9673). What fails as M rises
+        is CERTIFIABILITY, not resolution. The certified floor is (1 - eps_hi)/2,
+        so an easily-distinguished pair has a SMALL floor; once eps_hi = tv + radius
+        > 0.5 the certificate is lost, and the radius itself also grows with the alphabet.
+        So the coarse channel wins BECAUSE IT RESOLVES LESS, leaving pairs close enough
+        to certify. The limit is structural, not a matter of more data or a better
+        estimator -- but the reason is certifiability, not resolving power.'
+    conclusion: success
+    completed_at: '2026-09-14T00:31:38.555Z'
+  X12:
+    status: DONE
+    retry_count: 2
+    created_at: '2026-09-14T01:07:10.652Z'
+    updated_at: '2026-09-14T08:15:15.654Z'
+    hypothesis: 'Open-set detectors trained on the DECLARED (direction, size) channel
+      will respect the predicted one-sided error floor (1 - eps_hi)/2 on the informative
+      stratum. Mechanism: if the certified upper bound on the channel TV is sound,
+      then no detector consuming only that channel can beat the floor it implies,
+      because the bound is a property of the channel itself rather than of any particular
+      classifier. The test is FALSIFIABLE: an excess of floor violations on pairs
+      where the bound is informative would falsify either the TV estimate or the declared
+      channel model. WITHOUT the informative-stratum restriction the test can be passed
+      by saying nothing, because trivial coverage on well-separated pairs dilutes
+      it. Stage 1 tests only the detectors and their per-pair errors; the containment
+      statistic itself is deferred until the X1 upper side is rebuilt.'
+    reproduce:
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x12_detector_validation.py
+        --h5 /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5 --label-field
+        APP --train-months 202406 202407 202408 202409 202410 202411 --test-months
+        202501 202502 202503 202504 202505 --cpu-only --output-json /root/eibo/artifacts/x12_detector_validation.json
+        --output-csv /root/eibo/artifacts/x12_detector_validation_per_pair.csv
+      code_commit: 0b7d7cc9bcef53d32c608a868d3a7bf6152c3777
+      label_field_corrected_from: CATEGORY (provider axis) to APP (service axis) --
+        the earlier command validated on provider groups, which is an OBJECT-MISMATCH
+        with the per-service bracket it tests
+      guard_demonstrations: 'label guard rejects CATEGORY: ''LABEL_AXIS field=CATEGORY
+        full_month_class_count=9'' then RuntimeError; split guard rejects a reversed
+        pair: ''RuntimeError: time-disjoint invariant failed''; smoke passes with
+        field=APP full_month_class_count=53'
+      finished_at: '2026-09-14T05:00:57.760Z'
+    extra:
+      previous_failure:
+        conclusion: failed
+        metrics:
+          run2_failure_mode: GUARD-TRIGGERED REFUSAL on the DEFAULT split path --
+            but the LABEL fix is CONFIRMED WORKING
+          exit_code: 1
+          error: 'RuntimeError: time-disjoint invariant failed: train TIME_FIRST is
+            not earlier than test'
+          log_full:
+          - PREREGISTRATION_WRITTEN path=/root/eibo/artifacts/x12_detector_validation_full.json
+            timestamp=2026-09-14T03:10:06.791033+00:00
+          - OPEN_H5 path=/root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
+          - LABEL_AXIS field=APP full_month_class_count=53
+          - 'FAILED RuntimeError: time-disjoint invariant failed: train TIME_FIRST
+            is not earlier than test'
+          - EXIT_CODE=1
+          what_this_proves: 'TWO things, and the first is progress. (1) THE LABEL
+            FIX WORKS: the run resolved field=APP with full_month_class_count=53 --
+            the SERVICE range, not the ~9-class CATEGORY range -- so the object-mismatch
+            is closed and the class-count guard evaluated on the right population.
+            (2) THE SPLIT DEFAULT IS STILL UNFIXED: with no explicit months, the auto-derived
+            split still violates the strict ordering. The stripe that was cancelled
+            mid-work (stuck on a patch-strip-level problem) was the one that was to
+            insert the buffer month; only the guard CHECK landed (hash 05fbef85 ->
+            b0b8a2c5 -> 8dc56046), NOT the default DERIVATION.'
+          diagnosis: 'The guard is correct and must not be weakened. The defect is
+            the default derivation: it must either (a) resolve the pre-registered
+            split explicitly -- train=202406..202411, buffer=202412 UNUSED, test=202501..202505
+            per decision D043 -- or (b) refuse to run without explicit months rather
+            than silently deriving a leaky one.'
+          what_did_not_happen: no detector trained again; only the pre-registration
+            exists. X12 has STILL produced no detector numbers.
+          gpu_usage: 0 -- died before any CUDA work again; the card never loaded
+          preregistration: written again at 03:10:06 before the failure, so the ordering
+            discipline held on this failing path too
+          label_fix_evidence_from_the_smoke: smoke passed with field=APP count=53;
+            and the guard REJECTED CATEGORY with count=9, both demonstrated before
+            this submission
+        notes: 'Failure cause: RuntimeError "time-disjoint invariant failed: train
+          TIME_FIRST is not earlier than test" raised by the STRICT raw-UTC guard
+          on the script''s DEFAULT (auto-derived) split path. Exit code 1, ~20s in,
+          before any CUDA work (GPU never loaded). error_type=infrastructure. ROOT
+          CAUSE: the guard is CORRECT; the DEFAULT DERIVATION is the defect. The h5
+          month buckets are LOCAL-time (UTC+3) buckets spanning 2024-05-31T21:00Z..2025-05-31T21:00Z,
+          so ADJACENT month buckets SHARE TIME_FIRST boundary values; a strict raw-timestamp
+          inequality cannot be satisfied by any clean adjacent-month split. Both the
+          old explicit D003 split and the auto-derived default raise it. This is the
+          SECOND failure at this same guard. PROGRESS ON THIS FAILING PATH: the pre-registration
+          was written again at 03:10:06 before the failure, so ordering discipline
+          held; and the label-axis fix is CONFIRMED WORKING (field=APP full_month_class_count=53,
+          the SERVICE range, not the 9-class CATEGORY range). NOT YET DONE: no detector
+          has trained; X12 has still produced no detector numbers. REMEDY (pre-approved
+          as D043 at 02:51Z, NOT a new decision): resolve the pre-registered split
+          explicitly with one UNUSED buffer month -- train=202406..202411, buffer=202412
+          UNUSED, test=202501..202505. This is STRICTER than D003 (strictly time-ordered
+          where D003 was only bucket-disjoint), and the guard is preserved untouched
+          (no <= relaxation, no --no-check, no try/except). The first attempt at this
+          fix was CANCELLED mid-work, so the remedy has never actually been applied
+          -- this failure is not a blind retry. fix_worker_id: worker_X12_fix__implement_the_D043_default_time-disjoint_split_deri_20260914T032307
+          (code; also must demonstrate the guard still REJECTS a reversed window).
+          doc_worker_id: worker_Append_the_X12_split-derivation_failure_pattern_to_memory_md_20260914T032141
+          (memory.md append). ESCALATION RULE: if a THIRD run fails at this same guard,
+          stop and report to the Director rather than attempting another fix. COST
+          NOTE: D043 requires reporting the corpus reduction (training 8 months ->
+          6) with BOTH sides'' flow counts so it is visible rather than silent.'
+      hook_events:
+      - event: on_failed
+        action: agent
+        ts: '2026-09-14T03:13:09.464236+00:00'
+      - event: on_complete
+        action: agent
+        ts: '2026-09-14T05:01:00.161106+00:00'
+    failure_reason: EXIT_CODE=1 (generic error — check log tail)
+    notes: 'RUN COMPLETED CLEANLY (exit 0, 04:59:32) on the third attempt. The D043
+      buffer-month split fix WORKS: SPLIT_RESOLVED train=[''202406'',''202407'',''202408'',''202409'',''202410'',''202411'']
+      buffer=[''202412''] test=[''202501'',''202502'',''202503'',''202504'',''202505''],
+      train_flows=5039616 test_flows=4268367, flow_disjoint=True time_disjoint=True
+      -- the strict guard PASSED rather than fired. The two earlier failures at that
+      guard are resolved by fixing the DERIVATION, not the invariant; the guard was
+      never weakened. Label axis confirmed on a completed run: field=APP, 53 classes
+      common to train AND test (the earlier 9-class CATEGORY object-mismatch is closed).
+      DETECTORS: 3 of the 4 pre-registered detectors completed on CPU -- lightgbm
+      (device=cpu, after LIGHTGBM_GPU_FALLBACK ''No OpenCL device found''), prototype
+      (cpu), ronetc (cpu, 5/5 epochs, loss 2645.85 -> 2110.82). THE FOURTH DID NOT
+      RUN: pcap_encoder -- ''PCAP_ENCODER_NOT_RUN ModuleNotFoundError: No module named
+      pcap_encoder''. COMPUTE: the run is CPU-ONLY (explicit --cpu-only flag); the
+      allocated GPU was never used, so an idle GPU reading during this window is EXPLAINED,
+      not a stall. ARTIFACTS: x12_detector_validation.json (139995 B) and x12_detector_validation_per_pair.csv
+      (286728978 B, 1493995 rows). ADDRESS_RANDOMIZATION delta=0.0. CONTAINMENT_STATISTIC
+      DEFERRED by design (''depends on the rebuilt X1 upper side''). CORPUS REDUCTION
+      per D043, stated visibly: training is 6 months / 5039616 flows versus the withdrawn
+      D003 8-month split; buffer 202412 fed neither side. OPEN CONCERN BLOCKING THE
+      CONCLUSION: the run used --k-packets 15, and X1 measured ZERO informative pairs
+      (eps_hi < 0.5) at k=15, so the PRIMARY informative stratum may be EMPTY and
+      the primary statistic vacuous. Per the experiment''s own pre-registered discipline,
+      an empty stratum at a given k contributes NO validation evidence and must be
+      stated rather than papered over. An extraction worker (worker_X12_artifact_extraction__detector_metrics_and_the_k_15_infor_20260914T050302)
+      is reading the artifact; CONCLUSION IS DELIBERATELY NOT SET UNTIL IT LANDS.
+      SEPARATE NOTE: a worker titled ''Stop the X12 k=15 run'' was dispatched BEFORE
+      this completion was observed and may still be running; its premise is superseded
+      by this clean exit. REGISTRATION: the run went through submit_training_job rather
+      than submit_on_allocated, so the registry carries the spec/command/pid but the
+      ALLOCATED->RUNNING managed transition was not published.'
+    server: '111'
+    gpu: cuda:0
+    spec:
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x12_detector_validation.py
+        --h5 /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5 --label-field
+        APP --train-months 202406 202407 202408 202409 202410 202411 --test-months
+        202501 202502 202503 202504 202505 --cpu-only --output-json /root/eibo/artifacts/x12_detector_validation.json
+        --output-csv /root/eibo/artifacts/x12_detector_validation_per_pair.csv
+      server: '111'
+      gpu:
+      - cuda:0
+      log_path: ~/runs/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/X12.log
+      submitted_at: '2026-09-14T03:51:33.993Z'
+      submitted_via: submit_training_job
+      backend: tmux
+      server_id: 2bf74c35-2d17-4f5a-90d6-d89ab97959b6
+      tmux_session: X12
+      account: root
+      pid: '626935'
+      process_identity: 5e68e8c3-d682-417f-9d47-e47c05a92a7e:283937218
+      checkpoint_path: artifacts/_project/data/x12_detector_validation.json
+      checkpoint_path_note: k=15 run. The server artifact is /root/eibo/artifacts/x12_detector_validation.json
+        (139,995 B), with per-pair CSV x12_detector_validation_per_pair.csv (286,728,978
+        B / 1,493,995 rows). LABELLED k=15, STRATUM EMPTY, NO VALIDATION EVIDENCE.
+      test_command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x12_detector_validation.py
+        --h5 /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5 --k-packets
+        5 --label-field APP --train-months 202406 202407 202408 202409 202410 202411
+        --test-months 202501 202502 202503 202504 202505 --output-json /root/eibo/artifacts/x12_detector_validation_k5.json
+        --output-csv /root/eibo/artifacts/x12_detector_validation_per_pair_k5.csv
+      test_command_note: 'PLANNED k=5 containment run. Differences from this run:
+        --k-packets 5 (explicit; now REQUIRED, the default was deleted), NO --cpu-only
+        (so ronetc can use cuda:0), and NEW output names so nothing collides with
+        the k=15 products. MUST be submitted via submit_on_allocated (this run used
+        submit_training_job, which is why the ALLOCATED->RUNNING transition was never
+        published and the entry was left stranded). Panel must be REBUILT -- features
+        are k-dependent (k = min(k_packets, ppi.shape[2])).'
+      preregistration_for_the_k5_run: 'The k=5 containment test must be pre-registered
+        BEFORE running: stratum definition (eps_hi < 0.5), predicted floor (1 - eps_hi)/2,
+        the one-sided binomial violation test, and what would falsify. k=10 (28 pairs)
+        is a DECLARED SECONDARY stratum with the multiplicity stated plainly. COMMITTED:
+        if k=5 yields a null or negative containment result, that is the reported
+        result -- no grinding.'
+      why_k5_is_not_post_hoc_selection: 'Two independent reasons. (1) FEASIBILITY,
+        NOT OUTCOME: the pre-registration made the informative stratum MANDATORY;
+        at k=15 it is EMPTY (0/946), so the pre-registered test is not merely unfavourable
+        there, it is UNDEFINED. Choosing the k at which a pre-registered test is DEFINED
+        is not choosing the k at which it PASSES. (2) K=5 HAS AN INDEPENDENT PRIOR
+        CLAIM: it is C1''s pre-registered headline cell -- the rung the paper already
+        reports -- so it is not a fresh choice invented to rescue a null.'
+      pcap_encoder_formally_dropped: 'The Pcap-Encoder probe is FORMALLY DROPPED from
+        the pre-registration, not provisioned. The omission is BY DESIGN: the authors
+        report the pretraining model at ~800 GB (SIGCOMM 2025 Q&A -- authors'' testimony,
+        not our measurement), beyond this project''s resource envelope independently
+        of any network condition. The pre-registration is amended to THREE detectors,
+        and ''three detectors'' must be written everywhere; ''four-detector panel''
+        must never appear unqualified. A pre-registration silently under-run is a
+        defect; one formally amended with a stated reason is honest.'
+      wall_clock_seconds: 5224.2
+      gpu_hours: 1.45
+    pid: '626935'
+    process_identity: 5e68e8c3-d682-417f-9d47-e47c05a92a7e:283937218
+    tmux_session: X12
+    log_path: ~/runs/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/X12.log
+    metrics:
+      D070_STAGE_2_VERIFIED_FROM_SOURCE_AND_THE_METRIC_PAYLOAD_IS_ADDED: '*** THE
+        STAGE-2 LANDED STATE WAS VERIFIED FROM THE SOURCE, NOT FROM THE FAILED WORKER''S
+        SUMMARY, AND IT PASSES. *** Part 1 PASSED, each item established by reading
+        the file: (1) `deferred_floor_test` COUNT 0, literal `DEFERRED` COUNT 0, `X1
+        not rebuilt` COUNT 0 -- no stub and no forbidden CSV literal remains. (2)
+        The CSV schema is now PAIR-LEVEL, quoted from the writer: pair_id, service_a,
+        service_b, holdout_level, detector, detector_status, detector_error, service_a_error,
+        service_b_error, pair_error_surrogate, service_a_max_tpr, service_b_max_tpr,
+        pair_max_tpr, service_a_accepted_rate, service_b_accepted_rate, pair_accepted_rate,
+        eps_hat_k_hi, informative_stratum, secondary_stratum, excluded_stratum, predicted_floor,
+        floor_violation, validation_eligible. (3) The primary statistic is PER UNORDERED
+        SERVICE PAIR, and the detector error is EXPLICITLY A SURROGATE: `pair_error
+        = 0.5 * (float(error_a) + float(error_b))`, the source stating floor_violation
+        uses the ''explicitly labeled macro-average of the two constituent per-service
+        classification-error rates as a pair-level surrogate''. (4) X1 input CONFIRMED
+        BY READING THE FILE: the field path is `rows[].upper_recomputed.eps_hi` (NOT
+        a top-level upper_recomputed -- the top-level presence test returned False),
+        990 rows at k=5, 990 rows carrying the field, 340 informative with eps_hi
+        < 0.5. (5) The three strata are implemented as specified and BOTH no-evidence
+        branches are present and quoted: `if strata[''informative''] == 0: status
+        = ''NO VALIDATION EVIDENCE''` and `elif near_zero_tpr: status = ''NO INFORMATION''`.
+        (6) Pre-edit identity: 52,912 B, sha256 cca85793e143748a8018491cc584f9d30afa670c9486fa851517351d83a178bf.'
+      D070_THE_METRIC_PAYLOAD_IS_ADDED_AND_SMOKE-TESTED: 'Part 2 ADDED `score_matrix_path()`
+        and `persist_score_matrix()`. The payload carries: scores, flow_tokens, row_ids,
+        dates, true_labels, class_labels, alignment_key, score_kind. Arrays are EXACT
+        float32 (as specified -- float16 rejected because it can create ranking ties
+        and is not strictly exact for AUC). The alignment key is `flow_token`, and
+        DUPLICATE KEYS ARE REJECTED. Path pattern: `{output_json.stem}__per_class_scores__{detector}.npz`.
+        Disk checked BEFORE writing: 28G on the project volume, 499G on the data disk.
+        THE EXISTING PAIR-CSV BEHAVIOUR AND THE THREE-WAY STRATUM LOGIC ARE UNCHANGED.
+        Matrices persisted for completed LightGBM, prototype and RoNeTC; pcap_encoder
+        produces no scores so its payload is `not_written`. PART 3 SMOKE TEST: py_compile
+        succeeded; --help and import succeeded; a synthetic persistence/AUC check
+        returned PERSIST_STATUS written, PAYLOAD_SHAPE (4,2), SCORES_RECOVERABLE True,
+        AUC_CLASS_10 1.0, AUC_FINITE_IN_01 True -- *** THE PAYLOAD IS SUFFICIENT TO
+        COMPUTE A PER-CLASS AUC, WHICH IS THE ACCEPTANCE EVIDENCE REQUIRED. *** NO
+        FULL OR GPU RUN WAS LAUNCHED. File after: 56,236 B, sha256 aab36d169d2edac68a01f58fccbf0ab65bcfd3ae0ec3f5266180ceb9e39ec636.
+        Probe: /root/eibo/x12_containment_payload_patch.py, 8,658 B, sha256 21538cbfb199c0d3d01facf49da92a9f23b109325734b4961564774c93f7b29f.'
+      D070_ONE_BEHAVIOURAL_CHANGE_THAT_MUST_NOT_PASS_UNNOTICED: '*** THE PER-FLOW
+        CSV IS GONE. *** ''The writer is pair-level only. The 1,493,995-row per-flow
+        detector CSV is no longer emitted by this script.'' The previous k=15 artifact
+        x12_detector_validation_per_pair.csv (286,728,978 B, 1,493,995 rows) was PER-ROW
+        despite its name; the current script emits only pair-level rows. *** THIS
+        DOES NOT BREAK CONTAINMENT: the pair CSV carries `detector_error` and `pair_error_surrogate`
+        directly, and the containment join needs only eps_hat_k_hi plus the pair-level
+        error. AND IT DOES NOT LOSE THE PER-FLOW INFORMATION: the .npz payload carries
+        scores, flow_tokens, true_labels and class_labels, so a per-flow error is
+        RECONSTRUCTABLE. *** BUT IT IS A SCHEMA CHANGE THAT ANY DOWNSTREAM CONSUMER
+        OF THE OLD PER-ROW CSV WILL TRIP ON, AND IT MUST BE STATED RATHER THAN DISCOVERED.
+        A per-flow CSV would be an explicit ADDITION to request.'
+      containment_statistic: '*** IMPLEMENTED AND VERIFIED FROM SOURCE. NO LONGER
+        A STUB. *** Loads X1 via `rows[].upper_recomputed.eps_hi` (990 rows, 340 informative
+        at k=5), applies the three strata (informative eps_hi < 0.5 / secondary 0.5
+        <= eps_hi < 0.9 / excluded >= 0.9), reuses the repository floor via TVUpperBoundResult.error_floor_lower_bound,
+        forms the PAIR-LEVEL error as the MACRO-AVERAGE OF THE TWO CONSTITUENT PER-SERVICE
+        ERROR RATES (explicitly labelled a SURROGATE -- a scientific limitation that
+        must travel with any containment number), and runs an exact one-sided binomial
+        test (alpha=0.05, nominal coverage 0.95, ''one-sided; alpha is not split'').
+        BOTH no-evidence branches prevent a pass: an empty informative stratum yields
+        NO VALIDATION EVIDENCE and a near-zero maximum pair TPR (threshold 0.01) yields
+        NO INFORMATION -- NEITHER IS EVER REPORTED AS CONTAINMENT-HELD. *** THE VACUITY
+        RULE STANDS: an empty set is not a pass, and a vacuous count is not evidence.
+        *** ONE LIMITATION TO CARRY INTO THE RUN: because the pair error is a surrogate,
+        a containment violation is evidence that either the estimate, the channel
+        model, OR the surrogate construction is wrong -- the surrogate itself is not
+        falsifiable by this test.'
+      k5_STATUS: '*** THE STAGE-2 GATE IS NOW SATISFIED. *** Stage 2 is implemented
+        and verified from source, the containment statistic is no longer a stub, and
+        the metric payload is added and smoke-tested, so ONE k=5 RUN NOW SERVES BOTH
+        PURPOSES as the Director required. ORDER REMAINING: rebuild the panel (features
+        are k-dependent, so the k=5 run retrains all detectors at k=5 -- INTERNAL
+        to the same run, not a separate dispatch) -> submit k=5 with --k-packets 5,
+        no --cpu-only, --label-field APP, D043 months, guard untouched, new output
+        names, via submit_on_allocated. *** OPEN OPERATIONAL QUESTION FOR THE DIRECTOR:
+        there is currently NO EXPERIMENT IN `ALLOCATED` STATE, so submit_on_allocated
+        has nothing to attach to. The project-level GPU binding exists (1/1 at 111)
+        but no experiment entry is ALLOCATED. A submission therefore needs the Director
+        to allocate an entry first, or to confirm the mechanism by which the k=5 run
+        should be created and driven to ALLOCATED. ***'
+      D059_BASELINE_CORRECTION_CORRECTS_D054_AND_MUST_REACH_EVERY_SURFACE_QUOTING_THESE_AGREEMENT_RATES: 'The
+        chance baseline for the row-level agreement rates is NOT uniform 1/53 = 1.89%
+        -- THAT BASELINE IS WRONG because the true service-label distribution is STRONGLY
+        IMBALANCED. Verified independently two ways: (a) the Director''s arithmetic
+        from the cached TRAIN-side per-service flow counts (45 services, 5,058,007
+        flows) gives majority class 745,293 = 14.73%, with top-5 = 14.73 / 14.64 /
+        10.10 / 7.47 / 6.79; (b) the reviewer''s figure from the HELD-OUT TEST distribution
+        is 24.89%. THE TWO COME FROM DIFFERENT POPULATIONS SO BOTH ARE RECORDED --
+        but the qualitative conclusion is stable across them. *** RULE, APPLY EVERYWHERE:
+        ANY PLACE THAT CITES THESE AGREEMENT RATES MUST CARRY THE MAJORITY-CLASS BASELINE
+        BESIDE THEM, or the numbers read stronger than they are. ***'
+      D059_CONSEQUENCE_FOR_EACH_DETECTOR: 'Against the majority-class baseline: LIGHTGBM
+        (48.58%) and RONETC (58.10%) are ABOVE it; PROTOTYPE (13.53%) is BELOW it.
+        ** THE EARLIER SENTENCE ''THE DETECTORS PREDICT FAR ABOVE CHANCE'' OVER-CLAIMED
+        FOR PROTOTYPE: prototype is WORSE THAN ALWAYS GUESSING THE MAJORITY CLASS.
+        ** An independent recount also confirmed the three equal/different/total triples
+        exactly, and that service_label == true_label holds on all 1,493,995 rows.'
+      D059_VERIFICATION_STATUS_OF_THE_LOW_TPR_EXPLANATION: 'KEPT UNCHANGED BUT NOW
+        RE-SCOPED: the accept gate CANNOT explain a low TPR for lightgbm -- but that
+        is now known to be because lightgbm has NO gate at all (structural all_rows_accepted),
+        NOT because its gate was measured to pass everything. For prototype and ronetc
+        the genuine ~0.994 / ~0.974 acceptance rates are measured facts.'
+      D059_ALL_ROWS_ACCEPTED_FOR_LIGHTGBM_IS_STRUCTURAL_NOT_MEASURED: 'CONFIRMED IN
+        SOURCE: line 486 hard-codes "accepted": np.ones(len(pred), dtype=bool), INDEPENDENT
+        OF THE DATA. The other two compute acceptance genuinely (prototype: nearest_distance
+        <= radius_array; ronetc: score >= threshold). JSON evidence: lightgbm''s accepted_rate
+        has 1 DISTINCT VALUE (all 1.0) against 3 for each of the others. CONSEQUENCE
+        THAT MUST BE STATED, NOT BURIED: AN OPEN-SET DETECTOR THAT NEVER REJECTS HAS
+        NO REJECTION CAPABILITY, so lightgbm''s OSCR/FPR95 are computed in a DEGENERATE
+        NEVER-REJECT STATE and accepted_rate = 1.0 is a DESIGN RESIDUE, NOT A MEASUREMENT.
+        MARK IT STRUCTURAL IN THE ARTIFACT AND IN ANY CAPTION.'
+      D059_THE_AGREEMENT_BASELINE_IS_THE_MAJORITY_CLASS_NOT_UNIFORM: '*** THE CHANCE
+        BASELINE FOR THE ROW-LEVEL AGREEMENT RATES IS THE MAJORITY-CLASS RATE, NOT
+        uniform 1/53 = 1.89%. *** The service-label distribution is STRONGLY IMBALANCED:
+        majority class 14.73% (745,293 of 5,058,007 flows, train-side; top-5 = 14.73
+        / 14.64 / 10.10 / 7.47 / 6.79), held-out test-side 24.89%. BOTH populations
+        are recorded. *** RULE: ANY PLACE THAT CITES THESE AGREEMENT RATES MUST CARRY
+        THE MAJORITY-CLASS BASELINE BESIDE THEM. *** AGAINST IT: LIGHTGBM (48.6%)
+        and RONETC (58.1%) are ABOVE; *** PROTOTYPE (13.5%) IS BELOW IT -- WORSE THAN
+        ALWAYS GUESSING THE MAJORITY CLASS. *** The earlier sentence ''the detectors
+        predict far above chance'' OVER-CLAIMED for prototype.'
+      D059_REVIEWER_CONFIRMATIONS_RECORDED: The reviewer independently confirmed the
+        ordering correction. It also independently re-read marginal_and_entropy_curve,
+        found the same single-fit-no-per-k-refit structure, and measured CONSTANT
+        TAIL INCREMENTS (0.187832 on the known second-order control; 0.04012438 on
+        the real-data median curve, constant across the last 20 points) -- so the
+        rejection of the parametric LINEAR stands on two independent readings. It
+        ACCEPTED the heterogeneity verdict and RETRACTED ITS OWN 47x FRAMING; per-service
+        ratio median 33.8 (range 16.2-91.4).
+      D058_CONTAINMENT_DOES_NOT_USE_OSCR_OR_FPR95_SO_k5_NO_LONGER_WAITS_ON_THE_METRIC_DIAGNOSTIC: 'The
+        containment statistic consumes ONLY (a) eps_hat_k_hi from the rebuilt X1 artifact
+        and (b) the per-flow detector error. IT NEVER REFERENCES OSCR OR FPR95 --
+        a grep for those terms hits only the metric function itself. CONSEQUENCES:
+        (1) THE k=5 CONTAINMENT RESULT IS VALID REGARDLESS OF HOW THE AUC DIAGNOSTIC
+        RESOLVES; the metric question affects the REPORTED DETECTOR PERFORMANCE, not
+        the containment test. (2) CONTAINMENT IS UNBLOCKED ONCE STAGE 2 LANDS; the
+        AUC diagnostic runs IN PARALLEL, not in front of it. The diagnostic is NOT
+        withdrawn -- it still decides whether the reported detector numbers are honest.
+        (3) ONE RUN SHOULD SERVE BOTH PURPOSES: this is NOW DONE via the .npz payload
+        (see D070). MEASURED COST: 4,268,367 held-out rows x 53 classes; float32 =
+        904,893,804 B ~ 0.905 GB per detector (float16 ~ 0.452 GB; savez_compressed
+        measured ratio ~0.903 so ~0.817 GB); four detectors ~ 3.62 GB against 28 GB
+        free, SO IT FITS COMFORTABLY. The reviewer independently confirmed this reading.'
+      L0_STATUS_UNDER_DETERMINATION: The at-or-below-chance framing is WITHDRAWN (D053/D054)
+        and remains withdrawn. OSCR reads about 1e-3. The row-level agreement rates
+        are 48.6% / 13.5% / 58.1% against a MAJORITY-CLASS baseline of 14.73% (train-side)
+        / 24.89% (test-side) -- NOT against 1.89% uniform. WHETHER THE METRIC OR THE
+        DETECTOR IS AT FAULT IS UNDER DETERMINATION by the per-class-AUC comparison,
+        which the k=5 payload now makes possible post hoc. No performance claim may
+        be made from OSCR until that is settled.
+      D054_RETRACTS_THE_at_or_below_chance_FRAMING: 'The earlier claim that the detector
+        panel is AT OR BELOW CHANCE is RETRACTED. It depended on treating OSCR''s
+        0.5 as the chance line, which only holds if OSCR is a standard AUC. A code
+        reading says it is NOT: the per-row score is the ARGMAX CONFIDENCE and the
+        scored set is built as class_score = np.where((pred == label) & accepted,
+        score, -np.inf), i.e. ONLY ROWS THE DETECTOR ALREADY LABELLED AS THAT SERVICE
+        ARE SCORED. The curve CANNOT REACH (1,1), and for a PERFECT one-vs-rest classifier
+        it would be a vertical line at FPR=0 with an integral of ZERO. So near-zero
+        OSCR is consistent with GOOD discrimination. THIS IS A CODE READING, NOT A
+        SETTLED FACT -- the per-class-AUC comparison settles it.'
+      D054_REFUTES_THE_INDEX_VS_LABEL_PRIME_SUSPECT_BY_MEASUREMENT: 'The prime suspect
+        (pred is an index into np.unique(y_train) while the evaluator compares against
+        raw service ids) is REFUTED BY MEASUREMENT: service_labels_common_to_both_sides
+        is EXACTLY [0..52], so the index space and the raw label space COINCIDE and
+        there is NO alignment defect. This hypothesis must NOT be carried further.'
+      D054_what_SUPERSEDES_what: 'SUPERSEDED: ''the detector panel is at or below
+        chance'' and ''three families failing identically indicates a shared-path
+        defect''. KEPT: the near-zero OSCR and undefined FPR95 are still FACTS under
+        investigation, and the rule that a violation count computed on a vacuous detector
+        state must be reported as UNINFORMATIVE rather than as a pass.'
+      D054_DIAGNOSTIC_SPECIFIED_PENDING_DISPATCH: 'ONE comparison settles it: a STANDARD
+        one-vs-rest AUC using PER-CLASS PROBABILITIES so the sweep covers ALL rows
+        and the curve CAN reach (1,1), 0.5 = chance and 1.0 = perfect, placed beside
+        the recorded OSCR for the SAME services and holdouts. PRE-REGISTERED DECISION
+        RULE: high standard AUC (about 0.9+) with OSCR about 1e-3 means the METRIC
+        is the artifact; standard AUC also near 0.5 or below means the detectors really
+        rank near chance. *** THE PAYLOAD THAT MAKES THIS POSSIBLE POST HOC IS NOW
+        SAVED (D070). THE DIAGNOSTIC RUNS IN PARALLEL AND DOES NOT GATE THE k=5 CONTAINMENT
+        RUN. ***'
+      the_numbers:
+        class_list: '[0,1,...,52] -- length 53, min 0, max 52, max == len-1 YES'
+        row_level_agreement_over_1_493_995_rows:
+          lightgbm: 725,738 equal / 768,257 different = 48.6% -- ABOVE the majority
+            baseline
+          prototype: 202,097 / 1,291,898 = 13.5% -- BELOW the majority baseline
+          ronetc: 868,026 / 625,969 = 58.1% -- ABOVE the majority baseline
+          chance_on_53_classes_UNIFORM_WRONG: about 1.9% -- DO NOT USE; superseded
+            by the majority-class baseline
+          majority_class_baseline: 14.73% train-side (745,293 of 5,058,007); 24.89%
+            held-out test-side
+        prediction_value_ranges:
+          lightgbm_pred: 0..52, 53 distinct
+          prototype_pred: 0..52, 53 distinct
+          ronetc_pred: 0..52, only 29 distinct
+          note_on_ronetc: one detector's predictions cover fewer than half the class
+            space; this is recorded as a fact, not interpreted
+        accept_flag: 'accepted_true is essentially all rows for every detector. FOR
+          LIGHTGBM THIS IS STRUCTURAL AND MEASURED NOWHERE: line 486 hard-codes np.ones(len(pred),
+          dtype=bool), so lightgbm NEVER REJECTS and its OSCR/FPR95 live in a degenerate
+          never-reject state. Prototype and ronetc compute acceptance genuinely. The
+          accept gate CANNOT explain a low TPR for lightgbm because it has no gate
+          at all.'
+        artifact: x12_label_space_check.json, art_20260914_104088, sha256 f884df70034661652accc260714b4b706c02e9458c19f73fb3fed9a64bbbbe15,
+          2,068 B
+      X6_LABEL_AUDIT_RE-RUN_RESULT: '*** THE AUDIT RAN AFTER X6''S ARTIFACT LANDED
+        AND X6 IS VERIFIED-CORRECT -- THE CHECK DID NOT PASS SILENTLY. *** (1) PREFIX_LENGTHS
+        = (5, 10, 15, 20, 25, 30) (script lines 44, 50); prefix construction `bits_from_codes(codes,
+        lens, k, seed)`: `eligible = lens >= k`, `shifts = np.arange(29, 29 - k, -1)`,
+        returning exactly k bit positions. *** NO `[:k-C]`, `[k-C:]`, or equivalent
+        constant-offset construct is present. *** (2) Artifact per-k row counts: k=5
+        990, 10 990, 15 946, 20 946, 25 861, 30 820. (3) THE DECISIVE TEST USED THE
+        ANALYTICALLY KNOWN SYNTHETIC TRUE TV: 0 violations out of 120 replications,
+        violation rate 0.0, declared alpha 0.05, falsified false, outcome PASS. Axis
+        probe: labelled k=5 gave encoded shape [1,5]; k=10 gave [1,10]; k=15 gave
+        [1,15] -- labelling matches the accumulation. VERDICT: verified-correct. (4)
+        THE `large_k_usable` QUESTION: no `large_k_usable` field or text is present
+        at all; the artifact instead says ''All large-k entries are EXPLORATORY because
+        the plug-in upper side is lost'' and defines ''large k means k >= 15; each
+        k retains its own eligible pair denominator'' -- that distinction is applied
+        to the REAL-DATA per-k summaries, and the synthetic validity block makes no
+        such claim. *** Script sha256 9b5c2d4de2d6ddfeabe7af3fc447c2f68586e3ac8ebbc3920fce1a8ac524ab25
+        (34,450 B); artifact sha256 d9e17986066e7db7fee0d84eebaf602920dd1048743871908c5a1b39f4406ce0
+        (1,998,647 B). ***'
+    conclusion: success
+    completed_at: '2026-09-14T05:18:38.200Z'
+  X1:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-14T01:46:29.252Z'
+    updated_at: '2026-09-14T02:20:31.241Z'
+    hypothesis: 'The joint gate (eps_lo > 0.05) AND (eps_hi < 0.5) is achievable on
+      a real, non-trivial fraction of service pairs at the coarsest rung (M=1), and
+      NOT at finer rungs. Mechanism for the rung-ordering -- CORRECTED (M051): the
+      earlier explanation was WRONG IN BOTH PARTS. WRONG (a): ''a finer alphabet multiplies
+      cells without adding separation''. A finer alphabet resolves MORE, not less
+      -- measured tv medians at k=5 RISE monotonically with M: 0.5805 -> 0.8833 ->
+      0.9248 -> 0.9462 -> 0.9673. WRONG (b): ''M=1 has the LOWEST k_cert''. M=1 has
+      the HIGHEST k_cert, not the lowest -- computed at n=3.9e6, tv=0.30: M=1 -> 17,
+      M=2 -> 8, M=4 -> 5, M=8 -> 4, M=16 -> 3. WHAT ACTUALLY FAILS AS M RISES IS CERTIFIABILITY,
+      NOT RESOLUTION: the certified floor is (1 - eps_hi)/2, so an easily-distinguished
+      pair has a SMALL floor, and when eps_hi = tv + radius > 0.5 the certificate
+      is lost; the radius also grows with the alphabet. The coarse channel therefore
+      wins BECAUSE IT RESOLVES LESS, leaving pairs close enough to certify -- the
+      opposite direction from the original text. The channel is (direction, size)
+      only; inter-packet timing is deliberately excluded. Measured: gate 336/990 =
+      0.339394 at M=1, upper side 340/990, lower side 986/990 at FULL n, and zero
+      at M>=8.'
+    spec:
+      command: 'assembler re-run at the canonical alpha: /root/miniconda3/bin/python3
+        /root/eibo/scripts/.x1_assemble.py with tv_upper_bound(..., alpha=0.025)'
+      compute_class: 'CPU-only: the per-pair TVs live in the surviving k=15/k=30 intermediates,
+        so this is an ASSEMBLER re-run, not an h5 rescan'
+      data_count: 10000000
+      data_path: /root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5
+      h5_sha256: 6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab
+      checkpoint_path: artifacts/_project/data/x1_headline_table.json
+      artifact_sha256: c9f840a94644687e50e672f6cdd3c65fd0469a9045ca55d1881d11a8afd41c9c
+        (server); pulled to local as art_20260914_443901
+      log_path: logs/workers/worker_X1_rebuild__sole_writer___all_20_cells_at_alpha_2___full-n_l_20260914T005845.log
+      model_name: Headline bracket table over the pre-registered rung ladder M in
+        {1,2,4,8,16} x k in {5,10,15,30}, joint gate as a proportion of pairs
+      seed: 0
+      server: '111'
+      two_conventions_corrected: '(S1) the assembler applied alpha=0.05 INSIDE the
+        per-cell loop (constant 2.7162) instead of the declared per-law alpha_law
+        = 0.025 (constant 2.9604) -- this affected ALL 20 cells, not one. (S2) the
+        M=1/k=5 lower side used a CAPPED value (985) instead of full n (986). The
+        two errors point in OPPOSITE directions and nearly cancel: upper alone would
+        give 338 (+2), lower alone 335 (-1), together 337 (+1) -- so ''337 vs 336,
+        close enough'' masked two independent convention defects.'
+      reproduction_verified_independently: upper_count_alpha_0.05 = 342 vs upper_count_alpha_0.025
+        = 340 on the same 990 rows; the two pairs that flip are (22,36) (0.5001374762401128
+        vs 0.4990250024134905) and (32,52) (0.5001827229175758 vs 0.4990955444187268);
+        the lower flip pair is (21,23) (0.05878059224502068 full-n PASS vs 0.04978136643060134
+        capped FAIL).
+      scope: 'nonzero upper cells only; the corrected radius is strictly LARGER so
+        a cell reporting 0 under the wrong alpha must still be 0. The 0-cells are
+        stated explicitly, not omitted: M=1 k=15=0 and k=30=0; M=2 k=10/k=15/k=30=0;
+        M=4 k=10/k=15/k=30=0; M=8 all four k=0; M=16 all four k=0.'
+      dead_numbers_quarantined: 'under superseded_dead_numbers: 292 (2x inlined radius,
+        understated), 342 (unsplit alpha), 987 (proxy tv_hat > T(n), not a bound),
+        985 (capped lower side, retained NON-CANONICAL). Live surface carries exactly
+        one upper and one lower value per cell.'
+      effective_alpha_read_from_code_path: 0.025, taken from TVUpperBoundResult.alpha
+        at the assembler call site -- printed from the executing path, not declared
+        in prose. This was the THIRD declared-vs-executed mismatch in this artifact
+        family.
+      claim_sentence_unchanged: the claim (33.9%) was correct; the erroneous field
+        was gate_fraction_both_ref_radius, corrected 0.34040404040404043 -> 0.3393939393939394
+      regression_guard: 'tests/test_q1_thresholds.py::TestUpperRadius::test_under_split_guard
+        -- passes at alpha/2 and REJECTS the unsplit alpha=0.05 form. Local suite:
+        22 tests, OK (43.65 s), 1 passed / 15 deselected for the guard itself.'
+      server_suite_note: 'pytest is NOT installed on the server interpreter (/root/miniconda3/bin/python3:
+        No module named pytest), so the guard was demonstrated locally and mirrored
+        to /root/eibo/tests/. The server unittest run also exposed a missing /root/eibo/scripts/evaluate_q1_absolute.py,
+        which was mirrored, but the server suite could not be re-run within the connector
+        session.'
+    metrics:
+      claim_sentence_supported: at k=5/M=1, 33.9% of service pairs admit a two-sided
+        interval whose upper side is finite-sample strict and whose lower side is
+        an asymptotic lower bound exceeding 0.05
+      conventions_corrected:
+      - 'upper: per-law alpha_law=0.025 (constant 2.9604), applied to ALL 20 cells,
+        replacing the under-split alpha=0.05 (2.7162)'
+      - 'lower: M=1/k=5 switched from capped (985) to full-n (986)'
+      effective_alpha_from_code_path: 0.025
+      gate_count: 336
+      gate_fraction: 0.3393939394
+      headline_cell_m1_k5:
+        constituents_lower_count: 986
+        constituents_upper_count: 340
+        gate_pairs_both: 336
+        gate_fraction_both: 0.3393939393939394
+      k_coverage_denominators:
+        k10: 990
+        k15: 946
+        k30: 820
+        k5: 990
+      lower_side_capped_nonc_variant: 985
+      lower_side_full_n_count: 986
+      other_19_cells: lower_side_measured=false, lower_side_pairs=null, NO gate fields
+        emitted
+      upper_side_table_20_cells:
+        M_1:
+          k10: 28
+          k15: 0
+          k30: 0
+          k5: 340
+        M_16:
+          k10: 0
+          k15: 0
+          k30: 0
+          k5: 0
+        M_2:
+          k10: 0
+          k15: 0
+          k30: 0
+          k5: 47
+        M_4:
+          k10: 0
+          k15: 0
+          k30: 0
+          k5: 3
+        M_8:
+          k10: 0
+          k15: 0
+          k30: 0
+          k5: 0
+      zero_cells_stated_explicitly: M=1 k15=0, k30=0; M=2 k10=k15=k30=0; M=4 k10=k15=k30=0;
+        M=8 all 0; M=16 all 0 -- 16 of the 20 cells are zero and are listed, not omitted
+      reproduction:
+        flipped_pairs_lower:
+        - - 21
+          - 23
+        flipped_pairs_upper:
+        - - 22
+          - 36
+        - - 32
+          - 52
+        lower_full_n_pass: true
+        upper_count_alpha_0.025: 340
+        upper_count_alpha_0.05: 342
+    conclusion: success
+    completed_at: '2026-09-14T01:59:18.314Z'
+  X5:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-14T02:04:47.352Z'
+    updated_at: '2026-09-14T04:56:00.269Z'
+    hypothesis: 'The reported brackets are properties of the DATA and CHANNEL, not
+      artefacts of the estimator implementation. Mechanism: on synthetic categorical
+      pairs whose TV is known in closed form, tv_hat converges to the true TV, and
+      the certified upper bound holds at the DECLARED per-law alpha/2 rate (not at
+      bare alpha -- a bare-alpha check would test a different guarantee than the bracket
+      uses and could pass while proving nothing about the declared one). Falsifiable:
+      if the estimator were biased, tv_hat would not converge; if the radius were
+      mis-derived, the coverage rate at alpha/2 would fall below nominal; if the plug-in
+      were inverted, eps_lo <= eps_hi would be violated. LIMITATION TO BE STATED IN
+      THE ARTIFACT: this validates a SYNTHETIC ensemble, NOT real channels, and the
+      existing lower-side falsification result concerns that same synthetic ensemble
+      rather than measured traffic.'
+    spec:
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x5_estimator_ground_truth.py
+      server: '111'
+      compute_class: CPU-only synthetic; NO GPU used, none requested
+      driver_worker: worker_X5__estimator_correctness_against_analytically-known_TV__wri_20260914T020415
+        (worker-driven, NOT a scheduler allocation -- this is why the entry read PREPARING
+        with no pid while the worker was running; recorded here so a later reader
+        does not mistake worker-in-progress for an allocated-but-unstarted job)
+      data_path: none -- synthetic distributions generated in-process; no h5 access
+      data_count: 0
+      model_name: 'five-check estimator validation: tv_hat convergence, alpha/2 coverage,
+        eps_lo<=eps_hi, weak-vs-strong monotonicity, identical-distribution shrinkage'
+      seed: per-check seeds recorded inside the artifact
+      checkpoint_path: artifacts/_project/data/x5_estimator_ground_truth.json
+      artifact_sha256: 31bbee3f4d3a8d89ed2606485fd481e543ae233a1aadac0640c4e839942a08e9
+      artifact_bytes: 135979
+      log_path: logs/workers/worker_X5__estimator_correctness_against_analytically-known_TV__wri_20260914T020415.log
+      SUPERSEDED_COPY_NOTE: 'Two earlier values in this field are SUPERSEDED and must
+        not be cited as current: (a) the prose string ''local pull as art_20260914_9fb96b''
+        -- a registration id, not a hash, and its artifact was the SUPERSEDED pre-correction
+        copy; (b) ''server file 86391 bytes'' -- that was the PRE-CORRECTION run''s
+        size. The current canonical artifact is 135979 bytes with the hash above,
+        produced by the server-authoritative re-run; both retired duplicates of the
+        pre-correction copy were byte-identical to each other and are now deleted.'
+      alpha_provenance: per_law_alpha_returned_from_tv_upper_bound=[0.025], READ FROM
+        THE RETURNED OBJECT of eibo.statcore.tv_upper_bound at every call -- not a
+        constant typed into the script. This is the remedy for the three prior declared-vs-executed
+        mismatches in this project.
+      ground_truth_provenance: closed-form by construction (truth values 0.000/0.300/0.800
+        written down analytically); ground truth was NOT computed with the estimator
+        under test, because two runs of one implementation agreeing defines nothing.
+      observed_asymmetry: 'check_3_alpha_values records upper=[0.025] and lower=[0.05]
+        in the ORIGINAL run; the CORRECTED run evaluates both sides at the per-law
+        alpha and RETAINS the original 0.05 lower numbers beside the canonical 0.025
+        ones. Not a defect: the lower side is an asymptotic HPLB whose 0.05 constant
+        has OPEN alpha-dependence per project memory. Recorded as an observed fact;
+        if the paper ever claims equal confidence on both sides, this must be settled
+        first.'
+      check_2_power_caveat: 'check_2 PASSED (violation_count 0, coverage 1.0) but
+        the test HAD NO POWER at these n: the bound is very loose (mean_eps_hi 0.99970
+        at n=32, 0.41532 at n=2048, for truth 0.300), so it could not have failed.
+        Must be worded ''no contradiction observed'', never ''verified''.'
+      limitation: SYNTHETIC ONLY. Validates the estimator and the finite-sample categorical
+        upper-bound implementation on the specified synthetic distributions; it provides
+        NO evidence about real channels or the real-traffic results. The existing
+        lower-side falsification result concerns a synthetic ensemble sharing the
+        same assumed factors, not real channels.
+    conclusion: success
+    completed_at: '2026-09-14T02:38:54.599Z'
+  X3_A:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-14T05:39:49.015Z'
+    updated_at: '2026-09-14T05:58:40.364Z'
+    hypothesis: 'Repair attempt A on X3''s blocked growth-rate estimator: replacing
+      the Jeffreys add-0.5 plug-in with a DIFFERENT ESTIMATOR FAMILY (Laplace alpha=1
+      smoothing + a two-sample delete-one jackknife bias correction + projection to
+      the nonnegative half-line) should let the estimator recover exactly-LINEAR known
+      truth, and so restore the ability to adjudicate the D_k growth question. Mechanism
+      under test: the previous estimator''s failure was a bias in the ESTIMATOR FAMILY,
+      so a family with characterized finite-sample bias should not deflate large-k
+      divergence. FALSIFIABLE, and it was falsified: the pre-registered known-truth
+      gate (recover LINEAR iff power exponent p > 0.95, linear-over-sqrt AIC advantage
+      > 6, first-to-last increment ratio <= 1.10, on BOTH the plain-iid and real-occupancy
+      twin arms) FAILED ON BOTH ARMS, so the runner stopped before real data. PLAIN-IID:
+      exponent 0.552, AIC advantage NEGATIVE -19.457, increment ratio 5.305. TWIN:
+      exponent 0.837, AIC advantage NEGATIVE -38.649, increment ratio 1.987. OUTCOME:
+      a genuine negative -- a bias-corrected estimator family does NOT fix the deflation.
+      PARENT: X3. This is a variant/repair attempt on X3, NOT a re-run of X3; the
+      original x3_chain_rule_divergence.json was left byte-unchanged (sha256 c19d73926f4e51d64b22af06a1f1f939f971176bb24d4a662db542c16a3d5605).'
+    exp_type: debug
+    spec:
+      checkpoint_path: artifacts/_project/data/x3_variant_a_estimator_family.json
+      checkpoint_path_note: 'server: /root/eibo/artifacts/x3_variant_a_estimator_family.json,
+        27,841 B, sha256 ee01233bd8271243d8a67f00689caec63de89a14bbfdfa03c472be7c8c287d3e;
+        runner /root/eibo/x3_variant_a_estimator_family.py, sha256 37ad36a9765e99913184dbdc91925cb2d76d2de3859b62c3607fb785f40d74cf'
+      log_path: logs/workers/worker_X3-repair__A___estimator-FAMILY_change_with_finite-support_b_20260914T041031.log
+      server: '111'
+      compute_class: CPU-only; synthetic known-truth controls plus a cached-state
+        read; NO GPU used and none requested
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x3_variant_a_estimator_family.py
+      data_path: reused cache /dev/shm/eibo_x3_chain_rule (360 .npz parts, merged.pkl,
+        results.pkl, ledger.json; 121,179,291 B) -- NO h5 rescan
+      data_count: 0
+      model_name: 'estimator-FAMILY variant: Laplace alpha=1 smoothing + two-sample
+        delete-one jackknife bias correction + projection to the nonnegative half-line'
+      seed: per-arm seeds recorded in the artifact
+      exp_type_note: 'Registered as exp_type=debug: this is a REPAIR ATTEMPT on X3,
+        not an independent experiment. It carries parent=X3 and is excluded from the
+        lineage graph, but its negative result is load-bearing for C3 part (i) and
+        is cited in the framing.'
+    conclusion: negative
+    completed_at: '2026-09-14T05:58:40.364Z'
+  X3_B:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-14T05:40:03.961Z'
+    updated_at: '2026-09-14T05:58:41.121Z'
+    hypothesis: 'Repair attempt B on X3''s blocked growth-rate estimator: fixing the
+      EXPOSURE rather than the formula -- restricting estimation to contexts with
+      n_P, n_Q >= T and renormalizing over the retained mass -- should let the estimator
+      recover exactly-LINEAR known truth, if the deflation is caused by SPARSE CONTEXTS.
+      Mechanism under test: the estimator''s k-dependent deflation comes from per-position
+      smoothing bias accumulating where contexts are sparse, so removing sparse contexts
+      should restore linearity. Threshold T was selected ONLY from known-truth controls
+      (tested ascending over T in {5,10,20,50,100}; the first T where BOTH arms pass).
+      FALSIFIABLE, and it was falsified: the known-truth gate FAILED because the PLAIN
+      arm never passed at ANY threshold (T=5/10/20/50/100 all False), while the TWIN
+      arm passed all (True). At T=5: plain returned SUBLINEAR (p=0.539, AIC advantage
+      NEGATIVE -10.607, increment ratio +inf internally, encoded null in strict JSON);
+      twin returned LINEAR (p=1.042, AIC advantage 88.570, ratio 0.865). EXCLUDED
+      MASS reported explicitly and never silently dropped: mean two-sided excluded
+      mass on known-truth plain rises 0.000 (T<=9) to 0.608 at T=30; on the twin 0.000
+      (T<=10) to 0.318 at T=30. OUTCOME: a genuine negative with teeth -- you cannot
+      drop the sparse contexts without discarding over half the data at k=30, so the
+      repair is not a tuning problem. OPEN CONCERN UNDER D052: B''s own threshold
+      sweep CONTRADICTS the causal attribution to sparse occupancy -- the plain arm''s
+      exponent DECREASES monotonically as T tightens (0.539/0.420/0.372/0.260/0.210
+      vs no-filter 0.651) while the twin moves the OPPOSITE way (1.042/1.027/1.016/1.011/1.007
+      vs baseline 0.897), so removing sparse contexts pushes the plain arm FURTHER
+      sublinear, the opposite of the prediction. D052 downgrades ''sparse occupancy
+      is the cause'' from MEASURED to NOT ESTABLISHED, and a dose-response control
+      is running. PARENT: X3. Not a re-run of X3; the original artifact was left byte-unchanged.'
+    exp_type: debug
+    spec:
+      checkpoint_path: artifacts/_project/data/x3_variant_b_support_conditioning.json
+      checkpoint_path_note: 'server: /root/eibo/artifacts/x3_variant_b_support_conditioning.json,
+        109,361 B, sha256 29f9bcab3e0b92a534912f50756140354f9562cd87af0609900de8447149aa0b;
+        runner /root/eibo/x3_variant_b_support_conditioning.py, 24,885 B, sha256 c2de06e0ec1530aac641b280de70f6189953ed601562affc3d801c9de21b95df'
+      log_path: logs/workers/worker_X3-repair__B___support_conditioning_change__occupancy-aware__20260914T041115.log
+      server: '111'
+      compute_class: CPU-only; known-truth threshold sweep plus a cached-state read;
+        NO GPU used and none requested
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x3_variant_b_support_conditioning.py
+      data_path: reused cache /dev/shm/eibo_x3_chain_rule (360 .npz parts, merged.pkl,
+        results.pkl, ledger.json) -- NO h5 rescan
+      data_count: 0
+      model_name: 'EXPOSURE-conditioning variant: restrict to contexts with n_P, n_Q
+        >= T and renormalize over retained mass, T chosen only from known-truth controls'
+      seed: per-arm seeds recorded in the artifact
+      exp_type_note: 'Registered as exp_type=debug: a REPAIR ATTEMPT on X3, not an
+        independent experiment. parent=X3. Its EXCLUDED-MASS curve (0.608 at k=30)
+        is the artifact that earns ''structural, not a tuning problem'' for C3 part
+        (i), and its own threshold sweep is the evidence that the causal attribution
+        to sparse occupancy is NOT ESTABLISHED.'
+    conclusion: negative
+    completed_at: '2026-09-14T05:58:41.121Z'
+  X3_C:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-14T05:40:20.992Z'
+    updated_at: '2026-09-14T06:21:06.932Z'
+    hypothesis: 'A DIFFERENT ROUTE to X3''s framing question, NOT a repair of the
+      blocked estimator: a nested-model comparison (first-order Markov vs i.i.d. under
+      BIC) asking whether the packet direction sequence is DEPENDENT, rather than
+      estimating the GROWTH RATE of D_k. *** D055 -- THE CORROBORATION IS NOT EVIDENCE.
+      THIS REVERSES THE D053 READING. *** The heterogeneous-i.i.d. control arm has
+      now run and returns VERDICT `DEAD`: it gives each flow its OWN rate drawn from
+      the pooled empirical per-flow distribution (5,058,007 flows), then 30 i.i.d.
+      bits per flow -- ZERO within-flow dependence BY CONSTRUCTION -- and yet reproduces
+      the real data''s vote almost exactly: 45/45 Markov at k>=8, 45/45 down to k=8,
+      98.2% overall (1,281 Markov vs 24 IID out of 1,305 item-prefix comparisons),
+      clearing the pre-registered >=44/45 = 0.977778 threshold. *** A ZERO-WITHIN-FLOW-DEPENDENCE
+      NULL REPRODUCES THE REAL VOTE. *** So this route''s ''Markov 45/45 at every
+      k'' is NOT evidence for within-flow dependence: the vote is NOT DIAGNOSTIC,
+      because a heterogeneity-only process produces the same vote. *** (ii) IS DEMOTED
+      FROM SANITY CORROBORATION TO NOT EVIDENCE. *** *** WHAT DOES SURVIVE, AND IT
+      IS ONLY A MAGNITUDE FACT: *** heterogeneity does NOT explain the MAGNITUDE.
+      The arm''s k=30 median Delta_BIC is about 1,896 against the real data''s about
+      110,091 -- about 58x LARGER (the same phenomenon as the review''s ~47x on the
+      per-observation advantage, measured differently). So the earlier ''~47x'' stands
+      AS A MAGNITUDE MEASUREMENT but NO LONGER SUPPORTS ''the dependence is real''.
+      *** THE HONEST RECONCILIATION, AND IT IS THE WORDING TO USE: *** the vote is
+      not diagnostic, and the magnitude exceeds the null but does NOT establish ''first-order''
+      -- because the i.i.d. null in this test is a SINGLE GLOBAL p across all positions,
+      so any position-wise marginal drift would suffice. NEITHER ''the dependence
+      is real and first-order'' NOR ''heterogeneity explains it'' is correct. ***
+      DO NOT WRITE EITHER. *** A position-wise i.i.d. null (independent across positions,
+      free marginal rate per position) is required to license the word ''first-order''
+      and has NOT yet run. It may NOT be used to restore, confirm, or rescue any SUBLINEAR
+      growth verdict (C027). PARENT: X3 (different route, not a re-run). The original
+      x3_chain_rule_divergence.json was left byte-unchanged (sha256 c19d73926f4e51d64b22af06a1f1f939f971176bb24d4a662db542c16a3d5605).'
+    exp_type: debug
+    spec:
+      checkpoint_path: artifacts/_project/data/x3_variant_c_nested_lr.json
+      checkpoint_path_note: 'server: /root/eibo/artifacts/x3_variant_c_nested_lr.json,
+        748,847 B, sha256 81000d21f0d021c6ab0a90a52c17826d3bbfe728199ccb2db984bafae33a8f01;
+        runner /root/eibo/x3_variant_c_nested_lr.py, sha256 35581cefa00219271ef6040c32a65c317adfceadd14146c8e21bf9184b8905fb'
+      log_path: logs/workers/worker_X3-repair__C___nested-model_likelihood-ratio_route_to_the_sa_20260914T041153.log
+      server: '111'
+      compute_class: CPU-only; nested-model fits over cached state; NO GPU used and
+        none requested
+      command: cd /root/eibo && /root/miniconda3/bin/python3 /root/eibo/x3_variant_c_nested_lr.py
+      data_path: reused cache /dev/shm/eibo_x3_chain_rule (513 files incl. 360 .npz
+        parts, merged.pkl, results.pkl, ledger.json; 383,660,740 B) -- NO h5 rescan
+      data_count: 0
+      model_name: 'nested-model comparison: first-order Markov (pi + one shared transition
+        matrix) vs i.i.d. under BIC = -2logL + d log N, Delta_BIC = BIC_IID - BIC_Markov'
+      seed: per-arm seeds recorded in the artifact
+      exp_type_note: 'Registered as exp_type=debug: a DIFFERENT-ROUTE exploration
+        on X3, not an independent experiment. parent=X3. Its heterogeneity confound
+        was raised in D052 and WITHDRAWN in D053 on measurement; (ii) is narrowed
+        to ''far from globally i.i.d.'' and the position-wise null (dispatched) must
+        license ''first-order'' before that word may be used.'
+    conclusion: success
+    completed_at: '2026-09-14T05:58:41.877Z'
+  X3_D056:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-14T07:04:10.916Z'
+    updated_at: '2026-09-14T07:09:50.068Z'
+    spec:
+      command: 'fixed runner /root/eibo/x3_control_occupancy_dose_response.py re-executed
+        with /root/miniconda3/bin/python3 (labels-only fix at lines 179-181: thinned_p[:
+        k - 4] -> thinned_p[:k])'
+      server: '111'
+      delegated_to_worker: worker_X3_D056__fix_the_off-by-4_k-axis_in_the_dose-response_contro_20260914T063641
+      compute_class: CPU-only; no GPU used
+      data_path: 'SYNTHETIC ONLY -- no corpus consumed. Construction: 200,000 synthetic
+        30-bit flows at p=0.30 / q=0.70, thinning grid retained_fraction in {1.00,
+        0.50, 0.25, 0.10, 0.05}, both a plain and a twin (real-occupancy-profile)
+        arm.'
+      data_count: 200000
+      model_name: chain-rule divergence D_k, Jeffreys add-0.5 smoothing, same estimator
+        as the original control (unchanged by the fix)
+      seed: not recorded by the run
+      checkpoint_path: artifacts/_project/data/x3_control_occupancy_dose_response.json
+      artifact_id: art_20260914_4d9b49
+      artifact_sha256: 88625bbacbe9598477448f6865241ad4f6748316e51f8ff5c7fa4fc0a77d5613
+      artifact_bytes: 291163
+      runner_artifact_id: art_20260914_646bc6
+      runner_sha256: da81dabb4fb4289194cf5ef46cbfea45b04a4e60c73855634607a43a6a7b2e7a
+      runner_bytes: 15318
+      log_path: logs/workers/worker_X3_D056__fix_the_off-by-4_k-axis_in_the_dose-response_contro_20260914T063641.log
+      provenance_note: Runner is LEFT IN THE REPO (art_20260914_646bc6), unlike the
+        original X3 chain-rule run whose runner was deleted and which therefore carries
+        a provenance gap. The two artifacts this entry supersedes are art_20260914_b9b161
+        (defective axis) and its runner.
+    hypothesis: 'MECHANISM TEST, REPAIRED: with the off-by-4 k-axis corrected, the
+      dose-response control asks whether the sublinearity of the chain-rule divergence
+      D_k tracks synthetic thinning of the observable context. PREDICTION: if sparse
+      occupancy is the causal mechanism, the fitted exponent p should FALL monotonically
+      as retained_fraction falls (more thinning => more sparse contexts => more sublinear).
+      FALSIFIED IF p does not fall, or the arm fails to track thinning. NOTE THIS
+      ENTRY REPAIRS A DEFECT, IT DOES NOT TEST A NEW IDEA: the hypothesis is unchanged
+      from the withdrawn control; only the k axis is corrected.'
+    conclusion: success
+    completed_at: '2026-09-14T07:09:50.068Z'

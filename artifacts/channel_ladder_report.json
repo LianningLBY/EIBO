@@ -1,0 +1,2165 @@
+{
+  "report_metadata": {
+    "generated_at_utc": "2026-09-13 12:48:04 UTC",
+    "project_root": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade",
+    "calculation_library": "NumPy plus SciPy; lower side calls src/eibo/statcore.py::tv_lower_bound",
+    "prior_report_read": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/ak_derivation_report.json",
+    "prior_report_generated_at_utc": "2026-09-13 12:24:50 UTC",
+    "alpha": 0.05,
+    "k_search_range": [
+      1,
+      30
+    ]
+  },
+  "algebra": {
+    "fixed_grid": "m=(2M)^k; m is the a-priori reachable-set superset and never realized support",
+    "per_law_radius": "radius_i=0.5*sqrt(m/n_i)+0.5*sqrt(2*log(2/alpha)/n_i)",
+    "equal_n_criterion": "tv_hat+sqrt((2M)^k/n)+sqrt(2*log(2/alpha)/n)<0.5",
+    "upper_guarantee": "finite-sample only under a fixed a-priori alphabet and the sampling assumptions",
+    "lower_guarantee": "tv_lower_bound(method='michel') is an asymptotic HPLB, not an exact finite-sample certificate"
+  },
+  "ladder": [
+    {
+      "rung": 0,
+      "channel": "direction only",
+      "M": 1,
+      "symbol_alphabet": 2,
+      "grid_formula": "2^k",
+      "k_cert_by_n_and_tv": {
+        "1000": {
+          "0.05": 7,
+          "0.1": 6,
+          "0.2": 5,
+          "0.3": 3,
+          "0.4": 0,
+          "0.5": 0
+        },
+        "10000": {
+          "0.05": 10,
+          "0.1": 10,
+          "0.2": 9,
+          "0.3": 8,
+          "0.4": 5,
+          "0.5": 0
+        },
+        "100000": {
+          "0.05": 14,
+          "0.1": 13,
+          "0.2": 13,
+          "0.3": 11,
+          "0.4": 9,
+          "0.5": 0
+        },
+        "1000000": {
+          "0.05": 17,
+          "0.1": 17,
+          "0.2": 16,
+          "0.3": 15,
+          "0.4": 13,
+          "0.5": 0
+        },
+        "3900000": {
+          "0.05": 19,
+          "0.1": 19,
+          "0.2": 18,
+          "0.3": 17,
+          "0.4": 15,
+          "0.5": 0
+        },
+        "10000000": {
+          "0.05": 20,
+          "0.1": 20,
+          "0.2": 19,
+          "0.3": 18,
+          "0.4": 16,
+          "0.5": 0
+        }
+      }
+    },
+    {
+      "rung": 1,
+      "channel": "direction x 2 size classes {<=1200, >1200}",
+      "M": 2,
+      "symbol_alphabet": 4,
+      "grid_formula": "4^k",
+      "k_cert_by_n_and_tv": {
+        "1000": {
+          "0.05": 3,
+          "0.1": 3,
+          "0.2": 2,
+          "0.3": 1,
+          "0.4": 0,
+          "0.5": 0
+        },
+        "10000": {
+          "0.05": 5,
+          "0.1": 5,
+          "0.2": 4,
+          "0.3": 4,
+          "0.4": 2,
+          "0.5": 0
+        },
+        "100000": {
+          "0.05": 7,
+          "0.1": 6,
+          "0.2": 6,
+          "0.3": 5,
+          "0.4": 4,
+          "0.5": 0
+        },
+        "1000000": {
+          "0.05": 8,
+          "0.1": 8,
+          "0.2": 8,
+          "0.3": 7,
+          "0.4": 6,
+          "0.5": 0
+        },
+        "3900000": {
+          "0.05": 9,
+          "0.1": 9,
+          "0.2": 9,
+          "0.3": 8,
+          "0.4": 7,
+          "0.5": 0
+        },
+        "10000000": {
+          "0.05": 10,
+          "0.1": 10,
+          "0.2": 9,
+          "0.3": 9,
+          "0.4": 8,
+          "0.5": 0
+        }
+      }
+    },
+    {
+      "rung": 2,
+      "channel": "direction x 4 size classes",
+      "M": 4,
+      "symbol_alphabet": 8,
+      "grid_formula": "8^k",
+      "k_cert_by_n_and_tv": {
+        "1000": {
+          "0.05": 2,
+          "0.1": 2,
+          "0.2": 1,
+          "0.3": 1,
+          "0.4": 0,
+          "0.5": 0
+        },
+        "10000": {
+          "0.05": 3,
+          "0.1": 3,
+          "0.2": 3,
+          "0.3": 2,
+          "0.4": 1,
+          "0.5": 0
+        },
+        "100000": {
+          "0.05": 4,
+          "0.1": 4,
+          "0.2": 4,
+          "0.3": 3,
+          "0.4": 3,
+          "0.5": 0
+        },
+        "1000000": {
+          "0.05": 5,
+          "0.1": 5,
+          "0.2": 5,
+          "0.3": 5,
+          "0.4": 4,
+          "0.5": 0
+        },
+        "3900000": {
+          "0.05": 6,
+          "0.1": 6,
+          "0.2": 6,
+          "0.3": 5,
+          "0.4": 5,
+          "0.5": 0
+        },
+        "10000000": {
+          "0.05": 6,
+          "0.1": 6,
+          "0.2": 6,
+          "0.3": 6,
+          "0.4": 5,
+          "0.5": 0
+        }
+      }
+    },
+    {
+      "rung": 3,
+      "channel": "direction x 8 size classes",
+      "M": 8,
+      "symbol_alphabet": 16,
+      "grid_formula": "16^k",
+      "k_cert_by_n_and_tv": {
+        "1000": {
+          "0.05": 1,
+          "0.1": 1,
+          "0.2": 1,
+          "0.3": 0,
+          "0.4": 0,
+          "0.5": 0
+        },
+        "10000": {
+          "0.05": 2,
+          "0.1": 2,
+          "0.2": 2,
+          "0.3": 2,
+          "0.4": 1,
+          "0.5": 0
+        },
+        "100000": {
+          "0.05": 3,
+          "0.1": 3,
+          "0.2": 3,
+          "0.3": 2,
+          "0.4": 2,
+          "0.5": 0
+        },
+        "1000000": {
+          "0.05": 4,
+          "0.1": 4,
+          "0.2": 4,
+          "0.3": 3,
+          "0.4": 3,
+          "0.5": 0
+        },
+        "3900000": {
+          "0.05": 4,
+          "0.1": 4,
+          "0.2": 4,
+          "0.3": 4,
+          "0.4": 3,
+          "0.5": 0
+        },
+        "10000000": {
+          "0.05": 5,
+          "0.1": 5,
+          "0.2": 4,
+          "0.3": 4,
+          "0.4": 4,
+          "0.5": 0
+        }
+      }
+    },
+    {
+      "rung": 4,
+      "channel": "direction x 16 size classes",
+      "M": 16,
+      "symbol_alphabet": 32,
+      "grid_formula": "32^k",
+      "k_cert_by_n_and_tv": {
+        "1000": {
+          "0.05": 1,
+          "0.1": 1,
+          "0.2": 1,
+          "0.3": 0,
+          "0.4": 0,
+          "0.5": 0
+        },
+        "10000": {
+          "0.05": 2,
+          "0.1": 2,
+          "0.2": 1,
+          "0.3": 1,
+          "0.4": 1,
+          "0.5": 0
+        },
+        "100000": {
+          "0.05": 2,
+          "0.1": 2,
+          "0.2": 2,
+          "0.3": 2,
+          "0.4": 1,
+          "0.5": 0
+        },
+        "1000000": {
+          "0.05": 3,
+          "0.1": 3,
+          "0.2": 3,
+          "0.3": 3,
+          "0.4": 2,
+          "0.5": 0
+        },
+        "3900000": {
+          "0.05": 3,
+          "0.1": 3,
+          "0.2": 3,
+          "0.3": 3,
+          "0.4": 3,
+          "0.5": 0
+        },
+        "10000000": {
+          "0.05": 4,
+          "0.1": 4,
+          "0.2": 3,
+          "0.3": 3,
+          "0.4": 3,
+          "0.5": 0
+        }
+      }
+    }
+  ],
+  "k_cert_tables": {
+    "columns": [
+      "n1_equals_n2",
+      "tv_hat",
+      "rung_0_M_1",
+      "rung_1_M_2",
+      "rung_2_M_4",
+      "rung_3_M_8",
+      "rung_4_M_16"
+    ],
+    "rows": [
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.05,
+        "rung_0_M_1": 7,
+        "rung_1_M_2": 3,
+        "rung_2_M_4": 2,
+        "rung_3_M_8": 1,
+        "rung_4_M_16": 1
+      },
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.1,
+        "rung_0_M_1": 6,
+        "rung_1_M_2": 3,
+        "rung_2_M_4": 2,
+        "rung_3_M_8": 1,
+        "rung_4_M_16": 1
+      },
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.2,
+        "rung_0_M_1": 5,
+        "rung_1_M_2": 2,
+        "rung_2_M_4": 1,
+        "rung_3_M_8": 1,
+        "rung_4_M_16": 1
+      },
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.3,
+        "rung_0_M_1": 3,
+        "rung_1_M_2": 1,
+        "rung_2_M_4": 1,
+        "rung_3_M_8": 0,
+        "rung_4_M_16": 0
+      },
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.4,
+        "rung_0_M_1": 0,
+        "rung_1_M_2": 0,
+        "rung_2_M_4": 0,
+        "rung_3_M_8": 0,
+        "rung_4_M_16": 0
+      },
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.5,
+        "rung_0_M_1": 0,
+        "rung_1_M_2": 0,
+        "rung_2_M_4": 0,
+        "rung_3_M_8": 0,
+        "rung_4_M_16": 0
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.05,
+        "rung_0_M_1": 10,
+        "rung_1_M_2": 5,
+        "rung_2_M_4": 3,
+        "rung_3_M_8": 2,
+        "rung_4_M_16": 2
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.1,
+        "rung_0_M_1": 10,
+        "rung_1_M_2": 5,
+        "rung_2_M_4": 3,
+        "rung_3_M_8": 2,
+        "rung_4_M_16": 2
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.2,
+        "rung_0_M_1": 9,
+        "rung_1_M_2": 4,
+        "rung_2_M_4": 3,
+        "rung_3_M_8": 2,
+        "rung_4_M_16": 1
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.3,
+        "rung_0_M_1": 8,
+        "rung_1_M_2": 4,
+        "rung_2_M_4": 2,
+        "rung_3_M_8": 2,
+        "rung_4_M_16": 1
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.4,
+        "rung_0_M_1": 5,
+        "rung_1_M_2": 2,
+        "rung_2_M_4": 1,
+        "rung_3_M_8": 1,
+        "rung_4_M_16": 1
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.5,
+        "rung_0_M_1": 0,
+        "rung_1_M_2": 0,
+        "rung_2_M_4": 0,
+        "rung_3_M_8": 0,
+        "rung_4_M_16": 0
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.05,
+        "rung_0_M_1": 14,
+        "rung_1_M_2": 7,
+        "rung_2_M_4": 4,
+        "rung_3_M_8": 3,
+        "rung_4_M_16": 2
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.1,
+        "rung_0_M_1": 13,
+        "rung_1_M_2": 6,
+        "rung_2_M_4": 4,
+        "rung_3_M_8": 3,
+        "rung_4_M_16": 2
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.2,
+        "rung_0_M_1": 13,
+        "rung_1_M_2": 6,
+        "rung_2_M_4": 4,
+        "rung_3_M_8": 3,
+        "rung_4_M_16": 2
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.3,
+        "rung_0_M_1": 11,
+        "rung_1_M_2": 5,
+        "rung_2_M_4": 3,
+        "rung_3_M_8": 2,
+        "rung_4_M_16": 2
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.4,
+        "rung_0_M_1": 9,
+        "rung_1_M_2": 4,
+        "rung_2_M_4": 3,
+        "rung_3_M_8": 2,
+        "rung_4_M_16": 1
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.5,
+        "rung_0_M_1": 0,
+        "rung_1_M_2": 0,
+        "rung_2_M_4": 0,
+        "rung_3_M_8": 0,
+        "rung_4_M_16": 0
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.05,
+        "rung_0_M_1": 17,
+        "rung_1_M_2": 8,
+        "rung_2_M_4": 5,
+        "rung_3_M_8": 4,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.1,
+        "rung_0_M_1": 17,
+        "rung_1_M_2": 8,
+        "rung_2_M_4": 5,
+        "rung_3_M_8": 4,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.2,
+        "rung_0_M_1": 16,
+        "rung_1_M_2": 8,
+        "rung_2_M_4": 5,
+        "rung_3_M_8": 4,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.3,
+        "rung_0_M_1": 15,
+        "rung_1_M_2": 7,
+        "rung_2_M_4": 5,
+        "rung_3_M_8": 3,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.4,
+        "rung_0_M_1": 13,
+        "rung_1_M_2": 6,
+        "rung_2_M_4": 4,
+        "rung_3_M_8": 3,
+        "rung_4_M_16": 2
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.5,
+        "rung_0_M_1": 0,
+        "rung_1_M_2": 0,
+        "rung_2_M_4": 0,
+        "rung_3_M_8": 0,
+        "rung_4_M_16": 0
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.05,
+        "rung_0_M_1": 19,
+        "rung_1_M_2": 9,
+        "rung_2_M_4": 6,
+        "rung_3_M_8": 4,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.1,
+        "rung_0_M_1": 19,
+        "rung_1_M_2": 9,
+        "rung_2_M_4": 6,
+        "rung_3_M_8": 4,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.2,
+        "rung_0_M_1": 18,
+        "rung_1_M_2": 9,
+        "rung_2_M_4": 6,
+        "rung_3_M_8": 4,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.3,
+        "rung_0_M_1": 17,
+        "rung_1_M_2": 8,
+        "rung_2_M_4": 5,
+        "rung_3_M_8": 4,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.4,
+        "rung_0_M_1": 15,
+        "rung_1_M_2": 7,
+        "rung_2_M_4": 5,
+        "rung_3_M_8": 3,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.5,
+        "rung_0_M_1": 0,
+        "rung_1_M_2": 0,
+        "rung_2_M_4": 0,
+        "rung_3_M_8": 0,
+        "rung_4_M_16": 0
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.05,
+        "rung_0_M_1": 20,
+        "rung_1_M_2": 10,
+        "rung_2_M_4": 6,
+        "rung_3_M_8": 5,
+        "rung_4_M_16": 4
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.1,
+        "rung_0_M_1": 20,
+        "rung_1_M_2": 10,
+        "rung_2_M_4": 6,
+        "rung_3_M_8": 5,
+        "rung_4_M_16": 4
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.2,
+        "rung_0_M_1": 19,
+        "rung_1_M_2": 9,
+        "rung_2_M_4": 6,
+        "rung_3_M_8": 4,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.3,
+        "rung_0_M_1": 18,
+        "rung_1_M_2": 9,
+        "rung_2_M_4": 6,
+        "rung_3_M_8": 4,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.4,
+        "rung_0_M_1": 16,
+        "rung_1_M_2": 8,
+        "rung_2_M_4": 5,
+        "rung_3_M_8": 4,
+        "rung_4_M_16": 3
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.5,
+        "rung_0_M_1": 0,
+        "rung_1_M_2": 0,
+        "rung_2_M_4": 0,
+        "rung_3_M_8": 0,
+        "rung_4_M_16": 0
+      }
+    ]
+  },
+  "rungs_achieving_floor": {
+    "criterion": "k_cert >= 5; no upper bound on k_cert; k search is 1..30",
+    "by_n_and_tv": [
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.05,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 7
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.1,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 6
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.2,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.3,
+        "rungs": []
+      },
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.4,
+        "rungs": []
+      },
+      {
+        "n1_equals_n2": 1000,
+        "tv_hat": 0.5,
+        "rungs": []
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.05,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 10
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.1,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 10
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.2,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 9
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.3,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 8
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.4,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 10000,
+        "tv_hat": 0.5,
+        "rungs": []
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.05,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 14
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 7
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.1,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 13
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 6
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.2,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 13
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 6
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.3,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 11
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.4,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 9
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 100000,
+        "tv_hat": 0.5,
+        "rungs": []
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.05,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 17
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 8
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.1,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 17
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 8
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.2,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 16
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 8
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.3,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 15
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 7
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.4,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 13
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 6
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 1000000,
+        "tv_hat": 0.5,
+        "rungs": []
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.05,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 19
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 9
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 6
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.1,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 19
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 9
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 6
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.2,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 18
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 9
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 6
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.3,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 17
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 8
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.4,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 15
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 7
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 3900000,
+        "tv_hat": 0.5,
+        "rungs": []
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.05,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 20
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 10
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 6
+          },
+          {
+            "rung": 3,
+            "M": 8,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.1,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 20
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 10
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 6
+          },
+          {
+            "rung": 3,
+            "M": 8,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.2,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 19
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 9
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 6
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.3,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 18
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 9
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 6
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.4,
+        "rungs": [
+          {
+            "rung": 0,
+            "M": 1,
+            "k_cert": 16
+          },
+          {
+            "rung": 1,
+            "M": 2,
+            "k_cert": 8
+          },
+          {
+            "rung": 2,
+            "M": 4,
+            "k_cert": 5
+          }
+        ]
+      },
+      {
+        "n1_equals_n2": 10000000,
+        "tv_hat": 0.5,
+        "rungs": []
+      }
+    ]
+  },
+  "max_certifiable_tv": {
+    "general_bound": "For equal n and any admissible k>=1, tv_hat < 0.5 - sqrt((2M)^k/n) - sqrt(2*log(2/alpha)/n) < 0.5.",
+    "global_best_over_registered_ladder_at_each_n": {
+      "1000": 0.3693847587806567,
+      "10000": 0.45869583406145664,
+      "100000": 0.48693847587806566,
+      "1000000": 0.4958695834061457,
+      "3900000": 0.49790848225647405,
+      "10000000": 0.49869384758780655
+    },
+    "per_rung_at_k_1": {
+      "0": {
+        "1000": 0.3693847587806567,
+        "10000": 0.45869583406145664,
+        "100000": 0.48693847587806566,
+        "1000000": 0.4958695834061457,
+        "3900000": 0.49790848225647405,
+        "10000000": 0.49869384758780655
+      },
+      "1": {
+        "1000": 0.3508605651272849,
+        "10000": 0.4528379696851876,
+        "100000": 0.48508605651272846,
+        "1000000": 0.49528379696851876,
+        "3900000": 0.4976118577634298,
+        "10000000": 0.49850860565127286
+      },
+      "2": {
+        "1000": 0.3246633992306609,
+        "10000": 0.4445536984377257,
+        "100000": 0.4824663399230661,
+        "1000000": 0.4944553698437726,
+        "3900000": 0.4971923673824346,
+        "10000000": 0.4982466339923066
+      },
+      "3": {
+        "1000": 0.2876150119239173,
+        "10000": 0.4328379696851876,
+        "100000": 0.4787615011923917,
+        "1000000": 0.49328379696851876,
+        "3900000": 0.4965991183963462,
+        "10000000": 0.4978761501192392
+      },
+      "4": {
+        "1000": 0.23522068013066932,
+        "10000": 0.4162694271902638,
+        "100000": 0.4735220680130669,
+        "1000000": 0.4916269427190264,
+        "3900000": 0.4957601376343558,
+        "10000000": 0.4973522068013067
+      }
+    },
+    "tv_0.50_confirmation": {
+      "k_cert_is_zero_for_every_rung_and_every_n": true,
+      "reason": "The two concentration radii are strictly positive, so tv_hat=0.50 cannot satisfy tv_hat+radius_1+radius_2<0.5."
+    }
+  },
+  "synthetic_ensemble": {
+    "purpose": "Mechanism quantification only; not a corpus result",
+    "pair_definition": "For each rung/pair and selected k, P=(1-tv, tv, 0), Q=(1-tv, 0, tv) on three fixed cells of that k-prefix grid, hence true channel TV=tv.",
+    "latent_tv_values": [
+      0.001,
+      0.01,
+      0.05,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.45,
+      0.48,
+      0.5
+    ],
+    "compression_factors_by_rung": {
+      "0": 0.02,
+      "1": 0.1,
+      "2": 0.35,
+      "3": 0.7,
+      "4": 1.0
+    },
+    "true_channel_tv_values_by_rung": {
+      "0": [
+        2e-05,
+        0.0002,
+        0.001,
+        0.002,
+        0.004,
+        0.006,
+        0.008,
+        0.009,
+        0.0096,
+        0.01
+      ],
+      "1": [
+        0.0001,
+        0.001,
+        0.005,
+        0.01,
+        0.02,
+        0.03,
+        0.04,
+        0.045,
+        0.048,
+        0.05
+      ],
+      "2": [
+        0.00035,
+        0.0035,
+        0.0175,
+        0.035,
+        0.07,
+        0.105,
+        0.14,
+        0.1575,
+        0.168,
+        0.175
+      ],
+      "3": [
+        0.0007,
+        0.007,
+        0.035,
+        0.07,
+        0.14,
+        0.21,
+        0.28,
+        0.315,
+        0.336,
+        0.35
+      ],
+      "4": [
+        0.001,
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.45,
+        0.48,
+        0.5
+      ]
+    },
+    "sample_size_per_law": 10000,
+    "held_out_test_fraction": 0.3,
+    "lower_bound_michel_grid_points": 201,
+    "upper_point_estimate": "known true channel TV is used in the design-stage eps_hi arithmetic to isolate channel/coarsening effects; real data must supply empirical tv_hat",
+    "lower_features": "three-dimensional one-hot cell identity, sampled from the exact synthetic distributions"
+  },
+  "distributions": [
+    {
+      "rung": 0,
+      "channel": "direction only",
+      "M": 1,
+      "compression_factor": 0.02,
+      "true_channel_tv_values": [
+        2e-05,
+        0.0002,
+        0.001,
+        0.002,
+        0.004,
+        0.006,
+        0.008,
+        0.009,
+        0.0096,
+        0.01
+      ],
+      "reference_k_cert": 8,
+      "reference_k_cert_definition": "k_cert at n=10000, tv_hat=0.3; per-pair upper calculations use each pair's known true channel TV",
+      "k": {
+        "5": {
+          "k": 5,
+          "a_priori_alphabet_m": 32,
+          "eps_hi_spread": {
+            "min": 0.0837305728097362,
+            "q25": 0.0848555728097362,
+            "median": 0.0892805728097362,
+            "q75": 0.09208057280973624,
+            "max": 0.09563057280973619
+          },
+          "eps_hi_clipped_spread": {
+            "min": 0.0837305728097362,
+            "q25": 0.0848555728097362,
+            "median": 0.0892805728097362,
+            "q75": 0.09208057280973624,
+            "max": 0.09563057280973619
+          },
+          "floor_spread": {
+            "min": 0.4521847135951319,
+            "q25": 0.4539597135951319,
+            "median": 0.45535971359513194,
+            "q75": 0.4575722135951319,
+            "max": 0.4581347135951319
+          },
+          "eps_hi_lt_0.5_fraction": 1.0,
+          "eps_lo_spread": {
+            "min": 0.0,
+            "q25": 0.0,
+            "median": 0.0004032525743969018,
+            "q75": 0.0025273306688904994,
+            "max": 0.004932206007943023
+          },
+          "eps_lo_gt_threshold_fraction": 0.0,
+          "eps_lo_threshold": 0.05,
+          "joint_fraction_eps_hi_lt_0.5_and_eps_lo_gt_threshold": 0.0,
+          "eps_lo_guarantee_type": "asymptotic Michel et al. HPLB; not an exact finite-sample certificate",
+          "eps_hi_guarantee_type": "finite-sample plug-in/concentration expression with fixed a-priori m"
+        },
+        "8": {
+          "k": 8,
+          "a_priori_alphabet_m": 256,
+          "eps_hi_spread": {
+            "min": 0.1871620303148124,
+            "q25": 0.18888703031481238,
+            "median": 0.19256203031481234,
+            "q75": 0.1964370303148124,
+            "max": 0.1979620303148124
+          },
+          "eps_hi_clipped_spread": {
+            "min": 0.1871620303148124,
+            "q25": 0.18888703031481238,
+            "median": 0.19256203031481234,
+            "q75": 0.1964370303148124,
+            "max": 0.1979620303148124
+          },
+          "floor_spread": {
+            "min": 0.4010189848425938,
+            "q25": 0.4017814848425938,
+            "median": 0.40371898484259383,
+            "q75": 0.4055564848425938,
+            "max": 0.4064189848425938
+          },
+          "eps_hi_lt_0.5_fraction": 1.0,
+          "eps_lo_spread": {
+            "min": 0.0,
+            "q25": 0.0,
+            "median": 0.00012061335924954619,
+            "q75": 0.003092015343245294,
+            "max": 0.0039002728293417027
+          },
+          "eps_lo_gt_threshold_fraction": 0.0,
+          "eps_lo_threshold": 0.05,
+          "joint_fraction_eps_hi_lt_0.5_and_eps_lo_gt_threshold": 0.0,
+          "eps_lo_guarantee_type": "asymptotic Michel et al. HPLB; not an exact finite-sample certificate",
+          "eps_hi_guarantee_type": "finite-sample plug-in/concentration expression with fixed a-priori m"
+        }
+      }
+    },
+    {
+      "rung": 1,
+      "channel": "direction x 2 size classes {<=1200, >1200}",
+      "M": 2,
+      "compression_factor": 0.1,
+      "true_channel_tv_values": [
+        0.0001,
+        0.001,
+        0.005,
+        0.01,
+        0.02,
+        0.03,
+        0.04,
+        0.045,
+        0.048,
+        0.05
+      ],
+      "reference_k_cert": 4,
+      "reference_k_cert_definition": "k_cert at n=10000, tv_hat=0.3; per-pair upper calculations use each pair's known true channel TV",
+      "k": {
+        "5": {
+          "k": 5,
+          "a_priori_alphabet_m": 1024,
+          "eps_hi_spread": {
+            "min": 0.34756203031481236,
+            "q25": 0.35361203031481236,
+            "median": 0.37266203031481243,
+            "q75": 0.39191203031481237,
+            "max": 0.39726203031481244
+          },
+          "eps_hi_clipped_spread": {
+            "min": 0.34756203031481236,
+            "q25": 0.35361203031481236,
+            "median": 0.37266203031481243,
+            "q75": 0.39191203031481237,
+            "max": 0.39726203031481244
+          },
+          "floor_spread": {
+            "min": 0.3013689848425938,
+            "q25": 0.3040439848425938,
+            "median": 0.31366898484259376,
+            "q75": 0.3231939848425938,
+            "max": 0.3262189848425938
+          },
+          "eps_hi_lt_0.5_fraction": 1.0,
+          "eps_lo_spread": {
+            "min": 0.0,
+            "q25": 0.0005355374123246292,
+            "median": 0.01741399711761915,
+            "q75": 0.03282514592312509,
+            "max": 0.037905000897008004
+          },
+          "eps_lo_gt_threshold_fraction": 0.0,
+          "eps_lo_threshold": 0.05,
+          "joint_fraction_eps_hi_lt_0.5_and_eps_lo_gt_threshold": 0.0,
+          "eps_lo_guarantee_type": "asymptotic Michel et al. HPLB; not an exact finite-sample certificate",
+          "eps_hi_guarantee_type": "finite-sample plug-in/concentration expression with fixed a-priori m"
+        },
+        "4": {
+          "k": 4,
+          "a_priori_alphabet_m": 256,
+          "eps_hi_spread": {
+            "min": 0.1873620303148124,
+            "q25": 0.19351203031481243,
+            "median": 0.21331203031481244,
+            "q75": 0.23261203031481245,
+            "max": 0.23866203031481237
+          },
+          "eps_hi_clipped_spread": {
+            "min": 0.1873620303148124,
+            "q25": 0.19351203031481243,
+            "median": 0.21331203031481244,
+            "q75": 0.23261203031481245,
+            "max": 0.23866203031481237
+          },
+          "floor_spread": {
+            "min": 0.3806689848425938,
+            "q25": 0.38369398484259376,
+            "median": 0.3933439848425938,
+            "q75": 0.40324398484259383,
+            "max": 0.40631898484259377
+          },
+          "eps_hi_lt_0.5_fraction": 1.0,
+          "eps_lo_spread": {
+            "min": 0.0,
+            "q25": 0.0006643899916525696,
+            "median": 0.016284542434805187,
+            "q75": 0.03647063893469749,
+            "max": 0.04248935762821929
+          },
+          "eps_lo_gt_threshold_fraction": 0.0,
+          "eps_lo_threshold": 0.05,
+          "joint_fraction_eps_hi_lt_0.5_and_eps_lo_gt_threshold": 0.0,
+          "eps_lo_guarantee_type": "asymptotic Michel et al. HPLB; not an exact finite-sample certificate",
+          "eps_hi_guarantee_type": "finite-sample plug-in/concentration expression with fixed a-priori m"
+        }
+      }
+    },
+    {
+      "rung": 2,
+      "channel": "direction x 4 size classes",
+      "M": 4,
+      "compression_factor": 0.35,
+      "true_channel_tv_values": [
+        0.00035,
+        0.0035,
+        0.0175,
+        0.035,
+        0.07,
+        0.105,
+        0.14,
+        0.1575,
+        0.168,
+        0.175
+      ],
+      "reference_k_cert": 2,
+      "reference_k_cert_definition": "k_cert at n=10000, tv_hat=0.3; per-pair upper calculations use each pair's known true channel TV",
+      "k": {
+        "5": {
+          "k": 5,
+          "a_priori_alphabet_m": 32768,
+          "eps_hi_spread": {
+            "min": 1.837955390152374,
+            "q25": 1.860005390152374,
+            "median": 1.925705390152374,
+            "q75": 1.993705390152374,
+            "max": 2.014355390152374
+          },
+          "eps_hi_clipped_spread": {
+            "min": 1.0,
+            "q25": 1.0,
+            "median": 1.0,
+            "q75": 1.0,
+            "max": 1.0
+          },
+          "floor_spread": {
+            "min": 0.0,
+            "q25": 0.0,
+            "median": 0.0,
+            "q75": 0.0,
+            "max": 0.0
+          },
+          "eps_hi_lt_0.5_fraction": 0.0,
+          "eps_lo_spread": {
+            "min": 0.0,
+            "q25": 0.01289630982286326,
+            "median": 0.0778351056607062,
+            "q75": 0.14429805636536908,
+            "max": 0.15336679947809898
+          },
+          "eps_lo_gt_threshold_fraction": 0.6,
+          "eps_lo_threshold": 0.05,
+          "joint_fraction_eps_hi_lt_0.5_and_eps_lo_gt_threshold": 0.0,
+          "eps_lo_guarantee_type": "asymptotic Michel et al. HPLB; not an exact finite-sample certificate",
+          "eps_hi_guarantee_type": "finite-sample plug-in/concentration expression with fixed a-priori m"
+        },
+        "2": {
+          "k": 2,
+          "a_priori_alphabet_m": 64,
+          "eps_hi_spread": {
+            "min": 0.10766203031481238,
+            "q25": 0.1297120303148124,
+            "median": 0.19811203031481237,
+            "q75": 0.2645870303148124,
+            "max": 0.2863620303148124
+          },
+          "eps_hi_clipped_spread": {
+            "min": 0.10766203031481238,
+            "q25": 0.1297120303148124,
+            "median": 0.19811203031481237,
+            "q75": 0.2645870303148124,
+            "max": 0.2863620303148124
+          },
+          "floor_spread": {
+            "min": 0.3568189848425938,
+            "q25": 0.36770648484259383,
+            "median": 0.40094398484259386,
+            "q75": 0.4351439848425938,
+            "max": 0.4461689848425938
+          },
+          "eps_hi_lt_0.5_fraction": 1.0,
+          "eps_lo_spread": {
+            "min": 0.0,
+            "q25": 0.012127253843755171,
+            "median": 0.07814150650752708,
+            "q75": 0.13884801277141381,
+            "max": 0.15851249744344378
+          },
+          "eps_lo_gt_threshold_fraction": 0.6,
+          "eps_lo_threshold": 0.05,
+          "joint_fraction_eps_hi_lt_0.5_and_eps_lo_gt_threshold": 0.6,
+          "eps_lo_guarantee_type": "asymptotic Michel et al. HPLB; not an exact finite-sample certificate",
+          "eps_hi_guarantee_type": "finite-sample plug-in/concentration expression with fixed a-priori m"
+        }
+      }
+    },
+    {
+      "rung": 3,
+      "channel": "direction x 8 size classes",
+      "M": 8,
+      "compression_factor": 0.7,
+      "true_channel_tv_values": [
+        0.0007,
+        0.007,
+        0.035,
+        0.07,
+        0.14,
+        0.21,
+        0.28,
+        0.315,
+        0.336,
+        0.35
+      ],
+      "reference_k_cert": 2,
+      "reference_k_cert_definition": "k_cert at n=10000, tv_hat=0.3; per-pair upper calculations use each pair's known true channel TV",
+      "k": {
+        "5": {
+          "k": 5,
+          "a_priori_alphabet_m": 1048576,
+          "eps_hi_spread": {
+            "min": 10.267762030314813,
+            "q25": 10.312362030314812,
+            "median": 10.443812030314813,
+            "q75": 10.572912030314814,
+            "max": 10.617862030314813
+          },
+          "eps_hi_clipped_spread": {
+            "min": 1.0,
+            "q25": 1.0,
+            "median": 1.0,
+            "q75": 1.0,
+            "max": 1.0
+          },
+          "floor_spread": {
+            "min": 0.0,
+            "q25": 0.0,
+            "median": 0.0,
+            "q75": 0.0,
+            "max": 0.0
+          },
+          "eps_hi_lt_0.5_fraction": 0.0,
+          "eps_lo_spread": {
+            "min": 0.0,
+            "q25": 0.035568532944453175,
+            "median": 0.1667025927350187,
+            "q75": 0.28006238832447705,
+            "max": 0.3265474604337941
+          },
+          "eps_lo_gt_threshold_fraction": 0.7,
+          "eps_lo_threshold": 0.05,
+          "joint_fraction_eps_hi_lt_0.5_and_eps_lo_gt_threshold": 0.0,
+          "eps_lo_guarantee_type": "asymptotic Michel et al. HPLB; not an exact finite-sample certificate",
+          "eps_hi_guarantee_type": "finite-sample plug-in/concentration expression with fixed a-priori m"
+        },
+        "2": {
+          "k": 2,
+          "a_priori_alphabet_m": 256,
+          "eps_hi_spread": {
+            "min": 0.18836203031481238,
+            "q25": 0.2320120303148124,
+            "median": 0.3663120303148124,
+            "q75": 0.4980870303148124,
+            "max": 0.5371620303148124
+          },
+          "eps_hi_clipped_spread": {
+            "min": 0.18836203031481238,
+            "q25": 0.2320120303148124,
+            "median": 0.3663120303148124,
+            "q75": 0.4980870303148124,
+            "max": 0.5371620303148124
+          },
+          "floor_spread": {
+            "min": 0.23141898484259382,
+            "q25": 0.2509564848425938,
+            "median": 0.3168439848425938,
+            "q75": 0.3839939848425938,
+            "max": 0.4058189848425938
+          },
+          "eps_hi_lt_0.5_fraction": 0.7,
+          "eps_lo_spread": {
+            "min": 0.0,
+            "q25": 0.030667132465277972,
+            "median": 0.16060700657544658,
+            "q75": 0.28718767131573264,
+            "max": 0.33542700657344554
+          },
+          "eps_lo_gt_threshold_fraction": 0.7,
+          "eps_lo_threshold": 0.05,
+          "joint_fraction_eps_hi_lt_0.5_and_eps_lo_gt_threshold": 0.4,
+          "eps_lo_guarantee_type": "asymptotic Michel et al. HPLB; not an exact finite-sample certificate",
+          "eps_hi_guarantee_type": "finite-sample plug-in/concentration expression with fixed a-priori m"
+        }
+      }
+    },
+    {
+      "rung": 4,
+      "channel": "direction x 16 size classes",
+      "M": 16,
+      "compression_factor": 1.0,
+      "true_channel_tv_values": [
+        0.001,
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.45,
+        0.48,
+        0.5
+      ],
+      "reference_k_cert": 1,
+      "reference_k_cert_definition": "k_cert at n=10000, tv_hat=0.3; per-pair upper calculations use each pair's known true channel TV",
+      "k": {
+        "5": {
+          "k": 5,
+          "a_priori_alphabet_m": 33554432,
+          "eps_hi_spread": {
+            "min": 57.954349545116784,
+            "q25": 58.01524954511678,
+            "median": 58.210599545116786,
+            "q75": 58.394874545116785,
+            "max": 58.46064954511679
+          },
+          "eps_hi_clipped_spread": {
+            "min": 1.0,
+            "q25": 1.0,
+            "median": 1.0,
+            "q75": 1.0,
+            "max": 1.0
+          },
+          "floor_spread": {
+            "min": 0.0,
+            "q25": 0.0,
+            "median": 0.0,
+            "q75": 0.0,
+            "max": 0.0
+          },
+          "eps_hi_lt_0.5_fraction": 0.0,
+          "eps_lo_spread": {
+            "min": 0.0,
+            "q25": 0.055491194406604334,
+            "median": 0.23699690429210024,
+            "q75": 0.4170065180017991,
+            "max": 0.48208105184996375
+          },
+          "eps_lo_gt_threshold_fraction": 0.7,
+          "eps_lo_threshold": 0.05,
+          "joint_fraction_eps_hi_lt_0.5_and_eps_lo_gt_threshold": 0.0,
+          "eps_lo_guarantee_type": "asymptotic Michel et al. HPLB; not an exact finite-sample certificate",
+          "eps_hi_guarantee_type": "finite-sample plug-in/concentration expression with fixed a-priori m"
+        },
+        "1": {
+          "k": 1,
+          "a_priori_alphabet_m": 32,
+          "eps_hi_spread": {
+            "min": 0.08503057280973617,
+            "q25": 0.1506055728097362,
+            "median": 0.3360305728097362,
+            "q75": 0.5285555728097362,
+            "max": 0.5872305728097361
+          },
+          "eps_hi_clipped_spread": {
+            "min": 0.08503057280973617,
+            "q25": 0.1506055728097362,
+            "median": 0.3360305728097362,
+            "q75": 0.5285555728097362,
+            "max": 0.5872305728097361
+          },
+          "floor_spread": {
+            "min": 0.20638471359513194,
+            "q25": 0.2357222135951319,
+            "median": 0.33198471359513193,
+            "q75": 0.4246972135951319,
+            "max": 0.45748471359513193
+          },
+          "eps_hi_lt_0.5_fraction": 0.7,
+          "eps_lo_spread": {
+            "min": 0.0,
+            "q25": 0.050792218568349215,
+            "median": 0.2366994984664052,
+            "q75": 0.4350062575925767,
+            "max": 0.48674389568739573
+          },
+          "eps_lo_gt_threshold_fraction": 0.7,
+          "eps_lo_threshold": 0.05,
+          "joint_fraction_eps_hi_lt_0.5_and_eps_lo_gt_threshold": 0.4,
+          "eps_lo_guarantee_type": "asymptotic Michel et al. HPLB; not an exact finite-sample certificate",
+          "eps_hi_guarantee_type": "finite-sample plug-in/concentration expression with fixed a-priori m"
+        }
+      }
+    }
+  ],
+  "side_by_side_summary": [
+    {
+      "rung": 0,
+      "channel": "direction only",
+      "reference_k_cert": 8,
+      "rows": [
+        {
+          "k": 5,
+          "eps_hi": {
+            "min": 0.0837305728097362,
+            "q25": 0.0848555728097362,
+            "median": 0.0892805728097362,
+            "q75": 0.09208057280973624,
+            "max": 0.09563057280973619
+          },
+          "eps_hi_lt_0.5_fraction": 1.0,
+          "eps_lo": {
+            "min": 0.0,
+            "q25": 0.0,
+            "median": 0.0004032525743969018,
+            "q75": 0.0025273306688904994,
+            "max": 0.004932206007943023
+          },
+          "eps_lo_gt_0.05_fraction": 0.0,
+          "joint_fraction": 0.0
+        },
+        {
+          "k": 8,
+          "eps_hi": {
+            "min": 0.1871620303148124,
+            "q25": 0.18888703031481238,
+            "median": 0.19256203031481234,
+            "q75": 0.1964370303148124,
+            "max": 0.1979620303148124
+          },
+          "eps_hi_lt_0.5_fraction": 1.0,
+          "eps_lo": {
+            "min": 0.0,
+            "q25": 0.0,
+            "median": 0.00012061335924954619,
+            "q75": 0.003092015343245294,
+            "max": 0.0039002728293417027
+          },
+          "eps_lo_gt_0.05_fraction": 0.0,
+          "joint_fraction": 0.0
+        }
+      ]
+    },
+    {
+      "rung": 1,
+      "channel": "direction x 2 size classes {<=1200, >1200}",
+      "reference_k_cert": 4,
+      "rows": [
+        {
+          "k": 5,
+          "eps_hi": {
+            "min": 0.34756203031481236,
+            "q25": 0.35361203031481236,
+            "median": 0.37266203031481243,
+            "q75": 0.39191203031481237,
+            "max": 0.39726203031481244
+          },
+          "eps_hi_lt_0.5_fraction": 1.0,
+          "eps_lo": {
+            "min": 0.0,
+            "q25": 0.0005355374123246292,
+            "median": 0.01741399711761915,
+            "q75": 0.03282514592312509,
+            "max": 0.037905000897008004
+          },
+          "eps_lo_gt_0.05_fraction": 0.0,
+          "joint_fraction": 0.0
+        },
+        {
+          "k": 4,
+          "eps_hi": {
+            "min": 0.1873620303148124,
+            "q25": 0.19351203031481243,
+            "median": 0.21331203031481244,
+            "q75": 0.23261203031481245,
+            "max": 0.23866203031481237
+          },
+          "eps_hi_lt_0.5_fraction": 1.0,
+          "eps_lo": {
+            "min": 0.0,
+            "q25": 0.0006643899916525696,
+            "median": 0.016284542434805187,
+            "q75": 0.03647063893469749,
+            "max": 0.04248935762821929
+          },
+          "eps_lo_gt_0.05_fraction": 0.0,
+          "joint_fraction": 0.0
+        }
+      ]
+    },
+    {
+      "rung": 2,
+      "channel": "direction x 4 size classes",
+      "reference_k_cert": 2,
+      "rows": [
+        {
+          "k": 5,
+          "eps_hi": {
+            "min": 1.837955390152374,
+            "q25": 1.860005390152374,
+            "median": 1.925705390152374,
+            "q75": 1.993705390152374,
+            "max": 2.014355390152374
+          },
+          "eps_hi_lt_0.5_fraction": 0.0,
+          "eps_lo": {
+            "min": 0.0,
+            "q25": 0.01289630982286326,
+            "median": 0.0778351056607062,
+            "q75": 0.14429805636536908,
+            "max": 0.15336679947809898
+          },
+          "eps_lo_gt_0.05_fraction": 0.6,
+          "joint_fraction": 0.0
+        },
+        {
+          "k": 2,
+          "eps_hi": {
+            "min": 0.10766203031481238,
+            "q25": 0.1297120303148124,
+            "median": 0.19811203031481237,
+            "q75": 0.2645870303148124,
+            "max": 0.2863620303148124
+          },
+          "eps_hi_lt_0.5_fraction": 1.0,
+          "eps_lo": {
+            "min": 0.0,
+            "q25": 0.012127253843755171,
+            "median": 0.07814150650752708,
+            "q75": 0.13884801277141381,
+            "max": 0.15851249744344378
+          },
+          "eps_lo_gt_0.05_fraction": 0.6,
+          "joint_fraction": 0.6
+        }
+      ]
+    },
+    {
+      "rung": 3,
+      "channel": "direction x 8 size classes",
+      "reference_k_cert": 2,
+      "rows": [
+        {
+          "k": 5,
+          "eps_hi": {
+            "min": 10.267762030314813,
+            "q25": 10.312362030314812,
+            "median": 10.443812030314813,
+            "q75": 10.572912030314814,
+            "max": 10.617862030314813
+          },
+          "eps_hi_lt_0.5_fraction": 0.0,
+          "eps_lo": {
+            "min": 0.0,
+            "q25": 0.035568532944453175,
+            "median": 0.1667025927350187,
+            "q75": 0.28006238832447705,
+            "max": 0.3265474604337941
+          },
+          "eps_lo_gt_0.05_fraction": 0.7,
+          "joint_fraction": 0.0
+        },
+        {
+          "k": 2,
+          "eps_hi": {
+            "min": 0.18836203031481238,
+            "q25": 0.2320120303148124,
+            "median": 0.3663120303148124,
+            "q75": 0.4980870303148124,
+            "max": 0.5371620303148124
+          },
+          "eps_hi_lt_0.5_fraction": 0.7,
+          "eps_lo": {
+            "min": 0.0,
+            "q25": 0.030667132465277972,
+            "median": 0.16060700657544658,
+            "q75": 0.28718767131573264,
+            "max": 0.33542700657344554
+          },
+          "eps_lo_gt_0.05_fraction": 0.7,
+          "joint_fraction": 0.4
+        }
+      ]
+    },
+    {
+      "rung": 4,
+      "channel": "direction x 16 size classes",
+      "reference_k_cert": 1,
+      "rows": [
+        {
+          "k": 5,
+          "eps_hi": {
+            "min": 57.954349545116784,
+            "q25": 58.01524954511678,
+            "median": 58.210599545116786,
+            "q75": 58.394874545116785,
+            "max": 58.46064954511679
+          },
+          "eps_hi_lt_0.5_fraction": 0.0,
+          "eps_lo": {
+            "min": 0.0,
+            "q25": 0.055491194406604334,
+            "median": 0.23699690429210024,
+            "q75": 0.4170065180017991,
+            "max": 0.48208105184996375
+          },
+          "eps_lo_gt_0.05_fraction": 0.7,
+          "joint_fraction": 0.0
+        },
+        {
+          "k": 1,
+          "eps_hi": {
+            "min": 0.08503057280973617,
+            "q25": 0.1506055728097362,
+            "median": 0.3360305728097362,
+            "q75": 0.5285555728097362,
+            "max": 0.5872305728097361
+          },
+          "eps_hi_lt_0.5_fraction": 0.7,
+          "eps_lo": {
+            "min": 0.0,
+            "q25": 0.050792218568349215,
+            "median": 0.2366994984664052,
+            "q75": 0.4350062575925767,
+            "max": 0.48674389568739573
+          },
+          "eps_lo_gt_0.05_fraction": 0.7,
+          "joint_fraction": 0.4
+        }
+      ]
+    }
+  ],
+  "joint_satisfiability_summary": {
+    "threshold": 0.05,
+    "nonzero_selected_cases": [
+      {
+        "rung": 2,
+        "channel": "direction x 4 size classes",
+        "k": 2,
+        "joint_fraction": 0.6
+      },
+      {
+        "rung": 3,
+        "channel": "direction x 8 size classes",
+        "k": 2,
+        "joint_fraction": 0.4
+      },
+      {
+        "rung": 4,
+        "channel": "direction x 16 size classes",
+        "k": 1,
+        "joint_fraction": 0.4
+      }
+    ],
+    "at_k_5": "No selected rung has a positive joint fraction at k=5 in this synthetic stress test.",
+    "interpretation": "Joint satisfiability appears only at shorter k values on the finer rungs in this design-stage ensemble; it is not evidence that any real-data rung passes."
+  },
+  "worked_numbers_verification": [
+    {
+      "label": "M=1, k=5, channel TV=0.001",
+      "M": 1,
+      "k": 5,
+      "tv": 0.001,
+      "n": 3900000,
+      "claimed_eps_hi": 0.0052,
+      "claimed_floor": 0.4974,
+      "computed_eps_hi_raw": 0.005239862365644255,
+      "computed_floor": 0.4973800688171779,
+      "eps_hi_match": true,
+      "floor_match": true,
+      "match_or_correction": "matches within rounding",
+      "note": "The raw expression is retained here so the >1 value 16.6 is visible; production APIs may clip eps_hi to [0,1]."
+    },
+    {
+      "label": "M=2, k=5, channel TV=0.001",
+      "M": 2,
+      "k": 5,
+      "tv": 0.001,
+      "n": 3900000,
+      "claimed_eps_hi": 0.0186,
+      "claimed_floor": 0.4907,
+      "computed_eps_hi_raw": 0.018579232742825188,
+      "computed_floor": 0.49071038362858743,
+      "eps_hi_match": true,
+      "floor_match": true,
+      "match_or_correction": "matches within rounding",
+      "note": "The raw expression is retained here so the >1 value 16.6 is visible; production APIs may clip eps_hi to [0,1]."
+    },
+    {
+      "label": "M=2, k=15, channel TV=0.001",
+      "M": 2,
+      "k": 15,
+      "tv": 0.001,
+      "n": 3900000,
+      "claimed_eps_hi": 16.6,
+      "claimed_floor": 0.0,
+      "computed_eps_hi_raw": 16.59509719316828,
+      "computed_floor": 0.0,
+      "eps_hi_match": true,
+      "floor_match": true,
+      "match_or_correction": "matches within rounding",
+      "note": "The raw expression is retained here so the >1 value 16.6 is visible; production APIs may clip eps_hi to [0,1]."
+    }
+  ],
+  "real_data_checklist": {
+    "a_priori_arithmetic_now": [
+      "registered ladder rungs M in {1,2,4,8,16}",
+      "symbol alphabet 2M and k-grid m=(2M)^k",
+      "alpha=0.05, n-specific concentration radius, and full strict k_cert criterion",
+      "all ladder k_cert tables over the requested n and tv_hat values",
+      "general strict upper bound tv_hat<0.5 and the tv_hat=0.50 zero-certification result",
+      "the fixed 1200-byte anchor for rung 1 as a protocol-specified design boundary, subject to corpus verification of implementation behavior"
+    ],
+    "requires_real_per_pair_channel_distributions": [
+      "per-service/per-pair sample counts n1 and n2 and held-out splits",
+      "empirical per-pair k-prefix symbol samples on the declared fixed grid",
+      "tv_hat and eps_hi/floor for every real pair, using the full a-priori m rather than realized support",
+      "held-out classifier scores and eps_lo for every real pair; eps_lo remains an asymptotic HPLB",
+      "the across-pair eps_hi, floor, eps_lo, and joint conjunct distributions",
+      "the real-data Q1 verdict and any separate rectified-PHIST Q2 result"
+    ],
+    "explicit_blocker": "The eps_lo and eps_hi distributions across real pairs cannot be produced from arithmetic alone; they require the corpus-derived per-pair channel distributions and independent held-out samples."
+  },
+  "headline_format": "at channel granularity Y, k_cert = X",
+  "honest_framing_sentence": "Each bracket describes a DELIBERATELY COARSENED observable channel at a stated granularity, NOT the full QUIC wire image; coarse-graining buys a smaller fixed alphabet and therefore a wider finite-sample certification region, but costs information and can collapse genuine service differences toward zero.",
+  "q1_statement": "Q1: on a pre-registered coarsened channel, can the k-prefix bracket be certified on real wire data, what is k_cert, and how wide are the eps_lo and eps_hi distributions?",
+  "q2_statement": "Q2: can the rectified PHIST object yield a non-empty two-sided certificate? A positive answer to Q1 does not support Q2, and a positive answer to Q2 does not support Q1.",
+  "known_limitations": [
+    "The synthetic rung compression factors are an explicit mechanism stress test, not measured estimates of real protocol coarse-graining.",
+    "The synthetic upper side uses known true TV rather than a sampled plug-in tv_hat; real-data eps_hi will include empirical estimation noise.",
+    "The synthetic distributions use only three reachable cells, but m remains the full fixed a-priori grid; realized support is never substituted for m.",
+    "The Michel lower side is asymptotic and assumption-laden, despite held-out evaluation; it is not a finite-sample certificate.",
+    "The 0.05 lower-bound threshold is descriptive for the requested gate statistic, not a universal scientific cutoff.",
+    "At fine rungs, k=5 can have a vacuous upper expression; it is retained as a diagnostic rather than silently omitted."
+  ],
+  "blockers": [
+    "No real corpus per-pair channel distributions were supplied to this local derivation task, so no real-data across-pair eps_lo/eps_hi result is claimed."
+  ]
+}

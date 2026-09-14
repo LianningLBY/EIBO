@@ -1,0 +1,48 @@
+{
+  "df_h_raw": "Filesystem       Size  Used Avail Use% Mounted on\noverlay           30G  1.7G   29G   6% /\ntmpfs             64M     0   64M   0% /dev\n/dev/md0         150M     0  150M   0% /init\nAutoFS:fswestb1   20T  1.6T   18T   9% /autodl-pub/data\nshm               45G     0   45G   0% /dev/shm\n/dev/sda2        879G   16G  818G   2% /usr/bin/nvidia-smi\ntmpfs             4.0K  4.0K     0 100% /run/nvidia-ctk-hook\ntmpfs            378G     0  378G   0% /proc/asound\ntmpfs            378G     0  378G   0% /proc/acpi\ntmpfs            378G     0  378G   0% /proc/scsi\ntmpfs            378G     0  378G   0% /sys/firmware\ntmpfs            378G     0  378G   0% /sys/devices/virtual/powercap",
+  "mount_table": [
+    {"mount": "/", "fstype": "overlay", "total_gb": 30.0, "avail_gb": 29.0},
+    {"mount": "/dev", "fstype": "tmpfs", "total_gb": 0.064, "avail_gb": 0.0},
+    {"mount": "/init", "fstype": "xfs", "total_gb": 0.150, "avail_gb": 0.150},
+    {"mount": "/autodl-pub/data", "fstype": "fuse.autofs", "total_gb": 20480.0, "avail_gb": 18432.0},
+    {"mount": "/dev/shm", "fstype": "tmpfs", "total_gb": 45.0, "avail_gb": 45.0},
+    {"mount": "/usr/bin/nvidia-smi", "fstype": "ext4", "total_gb": 879.0, "avail_gb": 818.0},
+    {"mount": "/root/autodl-tmp", "fstype": "xfs", "total_gb": 550.0, "avail_gb": 515.0}
+  ],
+  "data_disk_mount": "/root/autodl-tmp",
+  "data_disk_avail_gb": 515.0,
+  "system_disk_avail_gb": 29.0,
+  "dev_shm_avail_gb": 45.0,
+  "landed_file_verdict": {
+    "status": "complete",
+    "evidence": "Zenodo direct file endpoint https://zenodo.org/api/records/17249078/files/2024-06.zip/content returned HTTP 200 and Content-Length: 1747398591. /root/eibo/data/raw/2024-06.zip stat size was 1747398591 bytes, so the observed size matched the authoritative expected size exactly. The archive was then moved to the data disk and identified by file(1) as Zip archive data."
+  },
+  "move_evidence": {
+    "source_size": 1747398591,
+    "dest_size": 1747398591,
+    "sha256_source": null,
+    "sha256_dest": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b",
+    "note": "Cross-device mv performed a copy followed by source removal. The command verified the destination size and checksum after the copy, but did not capture a pre-removal source checksum; it is intentionally recorded as null."
+  },
+  "files_downloaded": [
+    {
+      "name": "2024-06.zip",
+      "bytes": 1747398591,
+      "expected_bytes": 1747398591,
+      "sha256": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b",
+      "is_valid_archive": true
+    }
+  ],
+  "sha256sums_file_contents": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b  /root/autodl-tmp/eibo/data/raw/2024-06.zip",
+  "cesnet_datazoo_cache": {
+    "installed": false,
+    "cache_param": "data_root (required positional constructor argument to CESNET_QUICEXT_25; the library appends the selected size, e.g. XS)",
+    "cache_dir_set_to": null,
+    "evidence": "command -v python/python3/pip/pip3 and pip show cesnet-datazoo found no executable or installed package. Official cesnet-datazoo source shows CesnetDataset.__init__(data_root: str, size: str = 'S') and constructs its storage below the caller-supplied data_root; no library-default cache directory or cache environment variable was found. The package is therefore not installed and no runtime cache setting was applied."
+  },
+  "blockers": [
+    "The managed SSH policy blocked launching nohup/background curl transfers through ssh_execute; no remaining month download was started, and no workaround bypassing the policy was used.",
+    "Zenodo record REST/API endpoints repeatedly timed out with HTTP 504 from the server, but the direct file endpoint provided authoritative Content-Length for 2024-06, 2024-07, 2024-08, 2024-09, and 2024-10. Exact expected sizes obtained: 2024-07.zip 1492444177, 2024-08.zip 1522431507, 2024-09.zip 2818547704, 2024-10.zip 3389907136.",
+    "The requested SHA256SUMS.txt was not created because the only completed archive is the pre-existing moved file and remote arbitrary file creation/deletion controls prevented completing the detached-download workflow."
+  ]
+}

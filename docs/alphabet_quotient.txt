@@ -1,0 +1,473 @@
+EIBO QUIC observable-alphabet and quotient report
+Research timestamp: 2026-09-13 11:39:24 UTC
+Project root: /efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+
+Scope
+-----
+The target object is the law of the first k observable datagram symbols, not
+the sender's internal packet process. The recommended MVP symbol is
+
+    Y_j = (direction_j, Q(size_j))
+
+where direction_j is in {0,1}, size_j is the UDP-payload or explicitly chosen
+capture-layer datagram size, and Q is a fixed a-priori quantizer. Timing can be
+added only after fixing a timing grid in advance; otherwise the same
+finite-alphabet warning applies.
+
+Important correction to the requested coalescing premise
+--------------------------------------------------------
+The RFCs do not say that coalescing hides all individual packet boundaries.
+RFC 9000 Section 12.2 says that Initial, 0-RTT, and Handshake packets contain a
+Length field that determines the end of each packet, and that this field is used
+to coalesce packets in one UDP datagram. RFC 9312 Section 2.2 states the same
+operationally: one or more long-header packets can be followed by at most one
+short-header packet, and the long-header Length fields are used to separate
+packets.
+
+Therefore:
+
+* A passive observer that parses the RFC 9000 wire image can recover the
+  boundaries of the long-header packets in a coalesced datagram, subject to
+  successful parsing of the visible header fields.
+* A short-header packet has no Length field and can only be the final packet in
+  a UDP datagram. Its end is the UDP datagram end; if it follows parsed
+  long-header packets, its start is the remaining offset.
+* The datagram total is observable, but it is not the only observable
+  coalescing information under a full QUIC parser.
+
+The size-only quotient requested by the project is still mathematically valid
+as an intentionally coarser feature map. For an ordered constituent-packet
+realization d = (p_1,...,p_r), define
+
+    g(d) = |d|_UDP_payload = sum_{ell=1}^r |p_ell|.
+    S(d) = (direction(d), Q(g(d))).
+
+For a k-datagram packet process X^(1:k), the reduced observable law is
+
+    P_i^obs = S_k# P_i^packet,
+
+the pushforward of the packet-process law through the per-datagram map S and
+the first-k projection. The TV quantity used by EIBO is then
+
+    epsilon_k = TV(S_k#P_1^packet, S_k#P_2^packet).
+
+Two packet-level configurations with the same first-k realizations under S
+are an exact equivalence class for this reduced channel. This equality is
+created by the project's chosen feature map; it must not be described as a
+protocol-forced loss of long-header boundaries. If the full parser retains
+long-header Length/type/version/CID metadata, the quotient is finer.
+
+(a) Initial padding
+-------------------
+RFC 9000 Section 14.1, paragraph 1, contains the load-bearing normative text:
+
+    "A client MUST expand the payload of all UDP datagrams carrying Initial
+    packets to at least the smallest allowed maximum datagram size of 1200
+    bytes by adding PADDING frames to the Initial packet or by coalescing the
+    Initial packet; see Section 12.2."
+
+The same paragraph continues:
+
+    "Similarly, a server MUST expand the payload of all UDP datagrams carrying
+    ack-eliciting Initial packets to at least the smallest allowed maximum
+    datagram size of 1200 bytes."
+
+Thus the exact normative levels are MUST for clients and MUST for
+ack-eliciting server Initial datagrams. The server statement is not a blanket
+requirement for every datagram containing an Initial packet: a server Initial
+datagram that is not ack-eliciting is not covered by that sentence. In the
+normal server first flight, Initial packets carry CRYPTO data and are therefore
+normally ack-eliciting, but "normally" is an implementation/protocol-state
+observation, not an additional unconditional RFC requirement.
+
+RFC 9000 Section 14.1, paragraph 2, gives the justification: the size helps
+ensure that the network path supports a reasonable PMTU in both directions and
+helps reduce amplification toward an unverified client address.
+
+RFC 9000 Section 14.1, paragraph 3, resolves the hard-constant question:
+
+    "Datagrams containing Initial packets MAY exceed 1200 bytes if the sender
+    believes that the network path and peer both support the size that it
+    chooses."
+
+The 1200 value is therefore a floor on the UDP payload of eligible datagrams,
+not a hard exact-size constant. It is not correct to model client packet 1 as
+having a specification-forced point mass at exactly 1200. A conforming sender
+may use a larger datagram because of the handshake payload, coalescing, or an
+implementation choice supported by its path/peer judgment. The RFC does not
+provide a universal upper bound for this Initial-specific choice; the ordinary
+path/PMTU constraints still apply elsewhere in Section 14.
+
+Direction asymmetry matters for observation. The first client Initial datagram
+is covered by the all-client-Initial rule and therefore has UDP payload at
+least 1200 bytes. A server Initial datagram is covered when it carries an
+ack-eliciting Initial. A server ACK-only Initial is not covered by that
+specific sentence and may have a smaller payload, subject to other packet
+validity rules. Consequently, a direction-aware observer sees a strong
+client-to-server lower truncation and a conditional server-to-client lower
+truncation, rather than a symmetric exact point mass.
+
+Implementation evidence and status
+----------------------------------
+1. uQUIC primary source (verified source-level evidence, not a deployment
+   measurement):
+
+   * The repository describes uQUIC as a low-level QUIC Initial-packet
+     mimicry implementation.
+   * u_initial_packet_spec.go exposes InitialPacketPlan.PacketSize and says it
+     forces the exact serialized QUIC packet size by padding. Its example
+     describes Chrome 146 as two 1200-byte Initials with a CRYPTO split at
+     offset 999.
+   * u_packet_packer.go implements exact-size in-payload PADDING when
+     PacketSize is set and otherwise applies a configurable minimum UDP
+     datagram size.
+
+   This verifies that an implementation can intentionally reproduce different
+   Initial-flight layouts and exact sizes. It does not, by itself, establish a
+   population distribution of deployed clients above 1200 bytes.
+
+   Sources:
+   https://github.com/refraction-networking/uquic
+   https://github.com/refraction-networking/uquic/blob/master/u_initial_packet_spec.go#L98-L121
+   https://github.com/refraction-networking/uquic/blob/master/u_packet_packer.go#L238-L294
+
+2. Smith, Mittal, and Perrig, PETS 2021 (verified qualitative evidence):
+
+   * Section 7.2/feature-importance discussion identifies the first outgoing
+     QUIC burst as highly informative and explains it using the 1200-byte
+     minimum.
+   * The discussion states that browsers may send multiple Initial handshake
+     packets to tolerate loss.
+   * The conclusion/limitations discussion says that chosen initial packet
+     sizes can expose the client and suggests constant MTU-sized handshake
+     packets as a mitigation.
+
+   This supports observability of Initial-flight size/count choices, but the
+   inspected paper does not provide a verified table of exact per-client
+   Initial-size distributions.
+
+   Source:
+   https://netsec.ethz.ch/publications/papers/smith2021website.pdf
+
+3. tlsfingerprint.io / QUIC campaign (unverified quantitative evidence):
+
+   The uQUIC repository links https://quic.tlsfingerprint.io as its project
+   homepage, which is relevant to the requested campaign source. The campaign
+   endpoint was not retrievable in this run (HTTP 403), so no numeric
+   per-client size histogram or exact campaign observation is asserted here.
+   Any claim such as "client X uses N bytes" from that campaign remains
+   unverified until the primary data or an accessible archived export is
+   inspected.
+
+4. Related QUIC fingerprinting work (verified but not a direct
+   implementation-size measurement):
+
+   Zhan et al., "Website Fingerprinting on Early QUIC Traffic" studies early
+   QUIC traffic and uses packet sequence features including packet direction
+   and inter-arrival timing; it reports high early-traffic classification
+   performance for IQUIC/GQUIC. The inspected paper is website/service
+   fingerprinting, not a controlled per-client implementation-size study.
+   It should be cited only for the fact that early QUIC packet features are
+   informative, not as evidence of a specific client Initial-size histogram.
+
+   Source:
+   https://arxiv.org/abs/2101.11871
+   https://arxiv.org/pdf/2101.11871
+
+Algebraic consequence
+---------------------
+The packet-1 size marginal is partially censored from below at 1200 UDP
+payload bytes for client Initial datagrams, and conditionally for server
+ack-eliciting Initial datagrams. It is not constant. If an analysis treats
+exact packet-1 size as service-informative without conditioning on client
+implementation and handshake layout, it may be exploiting a protocol floor
+or implementation artifact rather than service content. The correct statement
+is that packet-1 size remains observable but is constrained and potentially
+implementation-dependent.
+
+(b) Coalescing
+--------------
+RFC 9000 Section 12.2 gives these rules:
+
+* Initial, 0-RTT, and Handshake packets have a Length field that determines
+  the end of the packet.
+* A sender can use those Length fields to coalesce multiple packets into one
+  UDP datagram.
+* Coalescing in increasing encryption-level order (Initial, 0-RTT,
+  Handshake, 1-RTT) is recommended as an ordering that improves one-pass
+  processing.
+* A short-header packet has no Length field and can only be the last packet in
+  a UDP datagram.
+* Retry, Version Negotiation, and short-header packets do not contain a
+  Length field and cannot be followed by another packet in the same datagram.
+  RFC 9000 also says there is no situation in which Retry or Version
+  Negotiation is coalesced with another packet.
+* Packets with different connection IDs MUST NOT be coalesced by a sender.
+* Every coalesced packet remains separate and complete and MUST be processed
+  individually by the receiver.
+
+The full-wire reverse ambiguity is therefore limited, not total. Given a
+datagram total alone, there can be many partitions into packet lengths and
+types. Given the full parseable QUIC bytes, however, the visible Length fields
+and the variable-length connection-ID fields identify the end of each
+long-header packet; the terminal short-header packet, if present, is the
+remaining suffix. The encrypted payload contents and packet number values
+remain unavailable as semantic fields to a passive observer without keys.
+
+For the project's deliberately size-only channel, reverse recovery is
+intentionally discarded. Given only g(d), the observer cannot recover:
+
+* the number of constituent packets;
+* the individual packet lengths;
+* the packet-type sequence;
+* which bytes of the total came from padding versus encrypted frames.
+
+That is an exact many-to-one feature-map equivalence, not a statement that
+RFC-compliant packet parsing cannot recover long-header boundaries. The notes
+and paper should use "coarse datagram-size projection" or "analysis quotient"
+for this object.
+
+(c) 1-RTT short headers and protected fields
+---------------------------------------------
+RFC 9000 Section 17.3.1 shows the 1-RTT short-header structure:
+
+    Header Form, Fixed Bit, Spin Bit, Reserved Bits, Key Phase,
+    Packet Number Length, Destination Connection ID, Packet Number,
+    Packet Payload
+
+There is no Length field. RFC 9000 Section 17.3.1 says the Packet Number is
+1 to 4 bytes and is protected using header protection. RFC 9000 Section 17.2
+defines the long-header format with a Type-Specific Payload that includes the
+Length field for Initial, 0-RTT, and Handshake packets.
+
+RFC 9001 Section 5.4 says that header protection applies to the least
+significant bits of the first byte and the Packet Number field. For long
+headers, the four least significant first-byte bits are protected. For short
+headers, the five least significant first-byte bits are protected. This
+covers reserved bits and the Packet Number Length field in both forms and
+also the Key Phase bit in short headers. The spin bit at 0x20 is above those
+five low bits and is deliberately not included in the protected set.
+
+For the reduced per-datagram short-header observation, the passive observer
+can see:
+
+* the UDP datagram bytes/ciphertext and its total size;
+* direction, assuming the observer has the two flow directions;
+* packet/datagram arrival timing and inter-arrival timing;
+* the short-header form and fixed bit;
+* the Destination Connection ID bytes, with its length implicit from
+  connection context;
+* the spin bit when present, although it may be disabled or randomized.
+
+The observer cannot recover as parsed semantic fields:
+
+* the packet number value;
+* the Packet Number Length bits;
+* the reserved bits;
+* the Key Phase bit;
+* encrypted frame types, stream contents, and plaintext application data.
+
+The datagram boundary is observable at UDP. For a datagram containing only a
+short-header packet, the packet end is therefore implicit at the datagram end.
+For a datagram containing long-header packets followed by a short-header
+packet, the preceding long-header Length fields locate the short-header
+suffix. The claim "short headers have no length" must not be inflated into
+"the observer has no packet boundary information."
+
+Public fields explain why version-based conditioning is possible. RFC 9000
+Section 17.2 places the 32-bit Version field in the long header, and the
+Source and Destination Connection IDs and their lengths are also in the long
+header. RFC 9312 Section 2.1 identifies version and connection IDs as exposed
+header information. RFC 9312 Section 2.4 says the Client and Server Initial
+datagrams expose version and both connection IDs in clear; the Initial payload
+is protected, but Initial protection can be removed by an observer that knows
+the version-specific salt and the client Destination Connection ID. Thus
+QUIC_VERSION and the client version observed in a flow are public/derived
+wire-image variables, not hidden packet-number variables.
+
+Spin-bit treatment
+------------------
+RFC 9000 Section 17.4 defines the latency spin bit as an optional 1-RTT
+feature for passive RTT measurement. Endpoints must allow administrators to
+disable it, and endpoints must disable its use on a random selection of at
+least one in every 16 network paths or connection IDs. RFC 9312 Section 3.8.2
+summarizes the resulting behavior as random disabling for at least one eighth
+of connections, with a disabled endpoint allowed to use a fixed or random
+value.
+
+The spin bit is therefore an observable, deliberately exposed measurement
+signal, not an accidental content signal. It should be reported separately
+from the size/direction channel. Including it in the primary alphabet adds
+another binary coordinate and can also introduce an implementation/admin
+confound. A sensitivity analysis with spin excluded is recommended.
+
+(d) RFC 9312 manageability
+--------------------------
+RFC 9312 Section 2 defines the wire image as the information available in
+packet headers and their dynamics, emphasizing that QUIC is versioned.
+Section 2.1 identifies the exposed fields:
+
+* long-header version;
+* Source and Destination Connection IDs, with lengths on long headers;
+* header type;
+* long-header Length;
+* Initial/Retry token length/content where applicable;
+* the short-header initial flags byte, including the spin bit.
+
+It identifies as unavailable to on-path observers in version 1:
+
+* packet number values, whose offset may be decoded but whose value is
+  encrypted;
+* packet-number length;
+* the short-header Key Phase bit.
+
+RFC 9312 Section 2.2 confirms that long-header Length fields separate
+coalesced packets. Section 3.3 says ACK-only versus payload-carrying packets
+cannot be reliably distinguished from the encrypted QUIC payload and that
+size-based heuristics for this purpose are not recommended. Section 3.1 says
+there is no general passive method to distinguish all QUIC from arbitrary UDP,
+so port and fixed-bit heuristics are not universal identifiers. Section 3.2.3
+states that the handshake exposes which side is client and which is server.
+Section 3.4 says SNI may be visible from the ClientHello when it is not
+encrypted, and Section 3.4.1 describes deriving it from Initial packets.
+Section 3.6 says QUIC does not expose connection termination. Section 3.8
+permits passive RTT inference from handshake timing and, when enabled, the
+spin bit.
+
+The manageability guidance permits operators to inspect public headers,
+datagram dynamics, connection IDs, handshake progression, and timing for
+forwarding, load balancing, security, and measurement. It does not grant
+access to protected semantic fields. It also warns against treating
+connection IDs as stable flow keys because negotiated changes can be
+invisible, against relying on packet size to infer ACK-only content, and
+against attempting version downgrade; RFC 9312 Section 6.4 notes that Version
+Negotiation has no downgrade protection in this version and advises network
+nodes not to impact version selection.
+
+Spec-forced epsilon-zero classes
+--------------------------------
+No unconditional nontrivial equality of complete raw QUIC datagrams is forced
+by these RFCs: different encrypted plaintexts normally produce different
+ciphertexts even when a passive observer cannot interpret those ciphertexts.
+The following are exact epsilon-zero classes only for the project's reduced
+feature channel:
+
+1. Any two first-k datagram realizations with identical direction and
+   quantized UDP-payload-size sequence have identical symbols, hence identical
+   point-mass laws under that realization and TV zero. If timing is included,
+   timing bins must also match; if spin is included, spin values must match.
+   This is an analysis-defined equivalence, not a protocol-only theorem.
+
+2. Changes to encrypted frame/application contents or packet-number values
+   that leave the chosen public metadata, datagram sizes, directions, and
+   timing bins unchanged collapse to the same reduced symbols. Header
+   protection makes packet-number and related protected header values
+   unavailable as parsed fields, but the exact equality is still a property of
+   the reduced channel, not equality of raw ciphertext bytes.
+
+3. Different coalescing partitions that have the same reduced datagram-size
+   sequence are equivalent under the size-only map. They are not equivalent
+   under the full RFC-visible parser when their long-header Length/type/CID
+   metadata differ.
+
+Thus the paper should call these "epsilon-zero corollaries of the selected
+observable map" and reserve "spec-forced" for the protected-field facts and
+coalescing constraints that make the map admissible. QUIC alone does not force
+two services to have the same size/timing law.
+
+(e) Alphabet growth and plug-in-bound warning
+----------------------------------------------
+Fix an a-priori grid G = {g_1,...,g_M} of size bins, including an explicit
+overflow bin if needed. Then the per-datagram alphabet for
+(direction, quantized_size) has at most
+
+    m = 2M
+
+symbols, and the ordered k-datagram alphabet has at most
+
+    |A_k| <= (2M)^k.
+
+If timing is also quantized into T fixed bins, the corresponding upper count is
+(2MT)^k. The grid must be fixed before looking at the samples. A
+data-dependent grid makes m random and couples the alphabet with the sample;
+that invalidates the stated finite-alphabet concentration calculation unless
+the selection procedure is separately accounted for.
+
+There is no protocol reason to expect the observable alphabet to stay small
+as k grows. The RFC gives lower bounds and structural restrictions for early
+Initial traffic, plus public header constraints and a final-short-header rule.
+It does not bound the number of distinct later size/timing sequences. Encrypted
+payload lengths, frame aggregation, ACK behavior, congestion control, loss
+recovery, coalescing, application response size, and timing can all create new
+prefixes. Dependence may reduce realized entropy, but it does not provide a
+specification-level finite support bound independent of k.
+
+The honest worst-case support assessment is therefore approximately
+
+    realized_support_k = O(min((2M)^k, n))
+
+per class/sample pool, with early-prefix structural concentration potentially
+making the observed support smaller. This is the requested
+"min(grid^k, n)" regime, with the factor 2 for direction and any timing factor
+shown explicitly above.
+
+This creates a serious plug-in upper-bound warning. For example, even M=10
+gives 20^10 possible size/direction prefixes; M=50 gives 100^5 already at
+10^10 combinations. Millions of flows do not make the unrestricted
+joint-alphabet plug-in estimator reliable once the support grows exponentially.
+The small-k regime may still be useful because the first client Initial size is
+constrained and early handshake patterns are structured, but non-vacuity must
+be checked empirically by occupancy, missing mass, and confidence-width
+diagnostics before making a certified-floor claim.
+
+Conditioning on QUIC_CLIENT_VERSION is a reasonable hypothesis, not a verified
+fact. If an implementation family has stable packetization, Initial-flight,
+coalescing, and padding behavior, grouping by client version could reduce
+within-group support and make the early prefix alphabet more manageable.
+However, conditioning also reduces the sample size in each group and may
+worsen the concentration bound. This tradeoff must be tested on data, not
+assumed.
+
+Sources cited
+-------------
+RFC 9000, QUIC: A UDP-Based Multiplexed and Secure Transport:
+https://datatracker.ietf.org/doc/html/rfc9000
+Relevant sections: 8.1, 12.2, 14.1, 17.2, 17.3, 17.3.1, 17.4.
+
+RFC 9001, Using TLS to Secure QUIC:
+https://datatracker.ietf.org/doc/html/rfc9001
+Relevant section: 5.4.
+
+RFC 9312, Manageability of the QUIC Transport Protocol:
+https://datatracker.ietf.org/doc/html/rfc9312
+Relevant sections: 2, 2.1, 2.2, 2.4, 3.1, 3.2, 3.3, 3.4, 3.4.1, 3.6,
+3.8, 3.8.2, 6.4.
+
+Smith, Mittal, Perrig, "Website Fingerprinting in the Age of QUIC",
+Proceedings on Privacy Enhancing Technologies, 2021:
+https://netsec.ethz.ch/publications/papers/smith2021website.pdf
+
+uQUIC source repository and implementation files:
+https://github.com/refraction-networking/uquic
+https://github.com/refraction-networking/uquic/blob/master/u_initial_packet_spec.go
+https://github.com/refraction-networking/uquic/blob/master/u_packet_packer.go
+
+Zhan et al., "Website Fingerprinting on Early QUIC Traffic":
+https://arxiv.org/abs/2101.11871
+
+Requested but not quantitatively verified:
+https://quic.tlsfingerprint.io
+
+Bottom line
+-----------
+The 1200-byte value is a MUST floor on the relevant UDP payload, not a hard
+constant. Client and ack-eliciting server Initials are asymmetric. Long-header
+Length fields mean coalescing does not erase all packet boundaries; the
+size-only sum is a valid intentional pushforward but not the full protocol
+quotient. Short-header packet numbers, PN length, reserved bits, and Key Phase
+are protected; version and long-header connection IDs remain public; spin is an
+optional deliberate signal. For the MVP, use a fixed a-priori
+(direction, quantized_size) grid and expect support growth on the order of
+min((2M)^k, n), with a high risk that the unrestricted plug-in upper bound
+becomes vacuous beyond small k. Version-conditioned alphabets are a testable
+hypothesis, not a specification fact.

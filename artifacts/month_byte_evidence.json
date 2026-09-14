@@ -1,0 +1,173 @@
+{
+  "raw_dir_listing": {
+    "path": "/root/autodl-tmp/eibo/data/raw/",
+    "ls_command": "ls -la --time-style=full-iso /root/autodl-tmp/eibo/data/raw/",
+    "ls_output": "total 1711308\ndrwxr-xr-x 5 root root        169 2026-09-13 22:34:57.736062491 +0800 .\ndrwxr-xr-x 4 root root       4096 2026-09-13 22:05:45.127694450 +0800 ..\ndrwxr-xr-x 2 root root         10 2026-09-13 21:47:33.237711664 +0800 .2024-07.zip.parts\ndrwxr-xr-x 2 root root         10 2026-09-13 22:34:57.736062491 +0800 .2024-08.zip.parts\ndrwxr-xr-x 2 root root         10 2026-09-13 22:34:57.736062491 +0800 .2024-09.zip.parts\n-rw-r--r-- 1 root root 1747398591 2026-09-13 19:45:39.987728137 +0800 2024-06.zip\n-rw-r--r-- 1 root root    4973604 2026-09-13 20:32:10.829299490 +0800 2024-07.zip\n-rw-r--r-- 1 root root          0 2026-09-13 20:37:29.553350740 +0800 2024-08.zip\n",
+    "find_command": "find /root/autodl-tmp/eibo/data/raw/ -maxdepth 1 -printf \"%M %u %g %s %TY-%Tm-%TdT%TH:%TM:%TS%Tz %p\\n\"",
+    "find_output": "drwxr-xr-x root root 169 2026-09-13T22:34:57.7360624910+0800 /root/autodl-tmp/eibo/data/raw/\n-rw-r--r-- root root 1747398591 2026-09-13T19:45:39.9877281370+0800 /root/autodl-tmp/eibo/data/raw/2024-06.zip\n-rw-r--r-- root root 4973604 2026-09-13T20:32:10.8292994900+0800 /root/autodl-tmp/eibo/data/raw/2024-07.zip\n-rw-r--r-- root root 0 2026-09-13T20:37:29.5533507400+0800 /root/autodl-tmp/eibo/data/raw/2024-08.zip\ndrwxr-xr-x root root 10 2026-09-13T21:47:33.2377116640+0800 /root/autodl-tmp/eibo/data/raw/.2024-07.zip.parts\ndrwxr-xr-x root root 10 2026-09-13T22:34:57.7360624910+0800 /root/autodl-tmp/eibo/data/raw/.2024-08.zip.parts\ndrwxr-xr-x root root 10 2026-09-13T22:34:57.7360624910+0800 /root/autodl-tmp/eibo/data/raw/.2024-09.zip.parts\n"
+  },
+  "part_dirs": {
+    "/root/autodl-tmp/eibo/data/raw/.2024-07.zip.parts": {
+      "total_bytes": 10,
+      "file_count": 0,
+      "newest_mtime": null,
+      "per_file_bytes": [],
+      "ls_output": "total 0\ndrwxr-xr-x 2 root root  10 2026-09-13 21:47:33.237711664 +0800 .\ndrwxr-xr-x 5 root root 169 2026-09-13 22:34:57.736062491 +0800 ..\n",
+      "du_output": "10\t/root/autodl-tmp/eibo/data/raw/.2024-07.zip.parts/\n",
+      "find_files_output": "",
+      "newest_mtime_output": "",
+      "newest_mtime_reason": "directory contains no entries"
+    },
+    "/root/autodl-tmp/eibo/data/raw/.2024-08.zip.parts": {
+      "total_bytes": 10,
+      "file_count": 0,
+      "newest_mtime": null,
+      "per_file_bytes": [],
+      "ls_output": "total 0\ndrwxr-xr-x 2 root root  10 2026-09-13 22:34:57.736062491 +0800 .\ndrwxr-xr-x 5 root root 169 2026-09-13 22:34:57.736062491 +0800 ..\n",
+      "du_output": "10\t/root/autodl-tmp/eibo/data/raw/.2024-08.zip.parts/\n",
+      "find_files_output": "",
+      "newest_mtime_output": "",
+      "newest_mtime_reason": "directory contains no entries"
+    },
+    "/root/autodl-tmp/eibo/data/raw/.2024-09.zip.parts": {
+      "total_bytes": 10,
+      "file_count": 0,
+      "newest_mtime": null,
+      "per_file_bytes": [],
+      "ls_output": "total 0\ndrwxr-xr-x 2 root root  10 2026-09-13 22:34:57.736062491 +0800 .\ndrwxr-xr-x 5 root root 169 2026-09-13 22:34:57.736062491 +0800 ..\n",
+      "du_output": "10\t/root/autodl-tmp/eibo/data/raw/.2024-09.zip.parts/\n",
+      "find_files_output": "",
+      "newest_mtime_output": "",
+      "newest_mtime_reason": "directory contains no entries"
+    }
+  },
+  "processes": {
+    "matching_processes": [
+      {
+        "pid": 1206,
+        "command": "/root/miniconda3/bin/python /root/miniconda3/bin/tensorboard --host 0.0.0.0 --port 6007 --logdir /root/tf-logs"
+      },
+      {
+        "pid": 1208,
+        "command": "/root/miniconda3/bin/python /root/miniconda3/bin/jupyter-lab --allow-root --config=/init/jupyter/jupyter_config.py"
+      },
+      {
+        "pid": 1280,
+        "command": "/root/miniconda3/lib/python3.12/site-packages/tensorboard_data_server/bin/server --logdir=/root/tf-logs --reload=5 --samples-per-plugin= --port=0 --port-file=/tmp/tensorboard_data_server_a1ye0pow/port --die-after-stdin --error-file=/tmp/tensorboard_data_server_a1ye0pow/startup_error"
+      },
+      {
+        "pid": 276262,
+        "command": "/root/miniconda3/bin/python -c from huggingface_hub import snapshot_download; print(snapshot_download(repo_id='rigcor7/Debunk_Traffic_Representation', repo_type='dataset', allow_patterns=['packet-level-classification/per-flow-split/tls/*', 'packet-level-classification/per-flow-split/vpn-app/*'], local_dir='/root/autodl-tmp/no-robustness-without-identity-measuring-the-identity-free-ceiling-of-traffic-representations-and-pr/data/raw', cache_dir='/root/autodl-tmp/no-robustness-without-identity-measuring-the-identity-free-ceiling-of-traffic-representations-and-pr/hf_cache'))"
+      },
+      {
+        "pid": 512584,
+        "command": "/root/miniconda3/bin/python3 /root/autodl-tmp/eibo/tools/month_fetch.py --workers 8 --file-workers 3 2024-07.zip 2024-08.zip 2024-09.zip 2024-10.zip"
+      },
+      {
+        "pid": 514724,
+        "command": "/root/miniconda3/bin/python3 scripts/xs_compression_early_readout.py --chunk-size 50000 --max-seconds 170 --out /root/eibo/artifacts/xs_compression_early_readout.json --state /root/eibo/artifacts/xs_compression_early_readout_state.pkl"
+      },
+      {
+        "pid": 514848,
+        "command": "/root/miniconda3/bin/python3.12 /root/eibo/correct_schema_report.py"
+      }
+    ],
+    "ps_command": "ps auxww | grep -Ei \"zenodo|curl|wget|python|/root/(autodl-tmp/)?eibo/data/raw|\\.zip\\.parts|2024-(06|07|08|09)\\.zip\" | grep -v grep",
+    "ps_filtered_output": "root       1206  0.0  0.0 2549076 70976 ?       Sl   Sep06   4:13 /root/miniconda3/bin/python /root/miniconda3/bin/tensorboard --host 0.0.0.0 --port 6007 --logdir /root/tf-logs\nroot       1208  0.0  0.0 182300 91164 ?        S    Sep06   0:01 /root/miniconda3/bin/python /root/miniconda3/bin/jupyter-lab --allow-root --config=/init/jupyter/jupyter_config.py\nroot       1280  0.0  0.0 28341192 10492 ?      Sl   Sep06   9:01 /root/miniconda3/lib/python3.12/site-packages/tensorboard_data_server/bin/server --logdir=/root/tf-logs --reload=5 --samples-per-plugin= --port=0 --port-file=/tmp/tensorboard_data_server_a1ye0pow/port --die-after-stdin --error-file=/tmp/tensorboard_data_server_a1ye0pow/startup_error\nroot     276262 63.0  0.0  79032 66648 ?        Ss   Sep12 1734:27 /root/miniconda3/bin/python -c from huggingface_hub import snapshot_download; print(snapshot_download(repo_id='rigcor7/Debunk_Traffic_Representation', repo_type='dataset', allow_patterns=['packet-level-classification/per-flow-split/tls/*', 'packet-level-classification/per-flow-split/vpn-app/*'], local_dir='/root/autodl-tmp/no-robustness-without-identity-measuring-the-identity-free-ceiling-of-traffic-representations-and-pr/data/raw', cache_dir='/root/autodl-tmp/no-robustness-without-identity-measuring-the-identity-free-ceiling-of-traffic-representations-and-pr/hf_cache'))\nroot     512584  63.0  0.0 2020640 54712 ?       Ssl  22:34   0:24 /root/miniconda3/bin/python3 /root/autodl-tmp/eibo/tools/month_fetch.py --workers 8 --file-workers 3 2024-07.zip 2024-08.zip 2024-09.zip 2024-10.zip\nroot     514724 105.0  1.1 11718168 8871564 ?    Rsl  22:51   1:17 /root/miniconda3/bin/python3 scripts/xs_compression_early_readout.py --chunk-size 50000 --max-seconds 170 --out /root/eibo/artifacts/xs_compression_early_readout.json --state /root/eibo/artifacts/xs_compression_early_readout.pkl\nroot     514848 110.0  0.0 3462196 518496 ?      Rsl  22:52   0:57 /root/miniconda3/bin/python3.12 /root/eibo/correct_schema_report.py\n",
+    "detached_check": {
+      "command": "ps -o pid=,ppid=,stat=,tty=,etime=,lstart=,args= -p 512584",
+      "output": "512584 510472 Ssl  ?              19:51 Sun Sep 13 22:34:57 2026 /root/miniconda3/bin/python3 /root/autodl-tmp/eibo/tools/month_fetch.py --workers 8 --file-workers 3 2024-07.zip 2024-08.zip 2024-09.zip 2024-10.zip",
+      "interpretation": "month_fetch is alive, a session leader with no TTY; no literal nohup/setsid/screen/tmux/curl/wget wrapper was visible in the full ps -eo listing"
+    },
+    "detached_filter_blocker": "The direct ps -eo ... | grep detached/writer filter was rejected by the SSH guard; the full ps -eo listing and targeted PID probe were used instead.",
+    "diagnostic_process_excluded": true
+  },
+  "file_2024_06": {
+    "present": true,
+    "bytes": 1747398591,
+    "mtime": "2026-09-13 19:45:39.987728137 +0800",
+    "sha256": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b",
+    "sha256_matches_expected": true,
+    "expected_bytes": 1747398591,
+    "expected_sha256": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b",
+    "stat_command": "stat -c \"%n %s %y\" /root/autodl-tmp/eibo/data/raw/2024-06.zip",
+    "stat_output": "/root/autodl-tmp/eibo/data/raw/2024-06.zip 1747398591 2026-09-13 19:45:39.987728137 +0800",
+    "sha256_command": "sha256sum /root/autodl-tmp/eibo/data/raw/2024-06.zip",
+    "sha256_output": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b  /root/autodl-tmp/eibo/data/raw/2024-06.zip"
+  },
+  "df_data_disk": {
+    "command": "df -h /root/autodl-tmp",
+    "output": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/md0        550G   44G  507G   8% /root/autodl-tmp"
+  },
+  "free_h": {
+    "command": "free -h",
+    "output": "               total        used        free      shared  buff/cache   available\nMem:           754Gi        80Gi       108Gi       9.4Gi       565Gi       659Gi\nSwap:             0B          0B          0B"
+  },
+  "growth_check": {
+    "sample1_timestamp": "2026-09-13T14:53:45.685923145Z",
+    "sample2_timestamp": "2026-09-13T14:53:50.694823587Z",
+    "interval_seconds": 5.008900442,
+    "sampled_candidates": [
+      "/root/autodl-tmp/eibo/data/raw/.2024-07.zip.parts/",
+      "/root/autodl-tmp/eibo/data/raw/.2024-08.zip.parts/",
+      "/root/autodl-tmp/eibo/data/raw/.2024-09.zip.parts/",
+      "/root/autodl-tmp/eibo/data/raw/2024-07.zip",
+      "/root/autodl-tmp/eibo/data/raw/2024-08.zip"
+    ],
+    "sample1_output": "2026-09-13T14:53:45.685923145Z\n10\t/root/autodl-tmp/eibo/data/raw/.2024-07.zip.parts/\n10\t/root/autodl-tmp/eibo/data/raw/.2024-08.zip.parts/\n10\t/root/autodl-tmp/eibo/data/raw/.2024-09.zip.parts/\nsample1 /root/autodl-tmp/eibo/data/raw/2024-07.zip 4973604 2026-09-13 20:32:10.829299490 +0800\nsample1 /root/autodl-tmp/eibo/data/raw/2024-08.zip 0 2026-09-13 20:37:29.553350740 +0800",
+    "sample2_output": "2026-09-13T14:53:50.694823587Z\n10\t/root/autodl-tmp/eibo/data/raw/.2024-07.zip.parts/\n10\t/root/autodl-tmp/eibo/data/raw/.2024-08.zip.parts/\n10\t/root/autodl-tmp/eibo/data/raw/.2024-09.zip.parts/\nsample2 /root/autodl-tmp/eibo/data/raw/2024-07.zip 4973604 2026-09-13 20:32:10.829299490 +0800\nsample2 /root/autodl-tmp/eibo/data/raw/2024-08.zip 0 2026-09-13 20:37:29.553350740 +0800",
+    "deltas": [
+      {
+        "path": "/root/autodl-tmp/eibo/data/raw/.2024-07.zip.parts/",
+        "sample1_bytes": 10,
+        "sample2_bytes": 10,
+        "delta_bytes": 0
+      },
+      {
+        "path": "/root/autodl-tmp/eibo/data/raw/.2024-08.zip.parts/",
+        "sample1_bytes": 10,
+        "sample2_bytes": 10,
+        "delta_bytes": 0
+      },
+      {
+        "path": "/root/autodl-tmp/eibo/data/raw/.2024-09.zip.parts/",
+        "sample1_bytes": 10,
+        "sample2_bytes": 10,
+        "delta_bytes": 0
+      },
+      {
+        "path": "/root/autodl-tmp/eibo/data/raw/2024-07.zip",
+        "sample1_bytes": 4973604,
+        "sample2_bytes": 4973604,
+        "delta_bytes": 0
+      },
+      {
+        "path": "/root/autodl-tmp/eibo/data/raw/2024-08.zip",
+        "sample1_bytes": 0,
+        "sample2_bytes": 0,
+        "delta_bytes": 0
+      }
+    ],
+    "aggregate_delta_bytes": 0,
+    "statement": "All sampled part-directory and partial-file byte counts were unchanged over 5.008900442 seconds; all sampled mtimes were also unchanged."
+  },
+  "furthest_month_advanced": {
+    "month": "2024-09",
+    "evidence": "/root/autodl-tmp/eibo/data/raw/.2024-09.zip.parts/ exists, has mtime 2026-09-13 22:34:57.736062491 +0800, and is empty",
+    "next_requested_month_observed": "2024-10 was present in the live month_fetch command but no 2024-10.zip or .2024-10.zip.parts entry was present in the raw-directory listing",
+    "largest_single_part_file": null,
+    "largest_single_part_file_bytes": null,
+    "largest_partial_candidate": {
+      "path": "/root/autodl-tmp/eibo/data/raw/2024-07.zip",
+      "bytes": 4973604,
+      "mtime": "2026-09-13 20:32:10.829299490 +0800",
+      "note": "largest top-level partial-looking archive; no files exist inside any .zip.parts directory"
+    }
+  },
+  "verdict": "stalled",
+  "what_would_determine_it": "A positive byte delta on a .zip.parts directory or partial file over a longer read-only interval would establish progress. The current live month_fetch process could also be inspected through its read-only logs to distinguish waiting from a stalled transfer; no byte progress occurred during the 5.008900442-second sample.",
+  "blockers": [
+    "The direct detached/writer grep command was rejected by the SSH guard, so the full ps -eo listing plus targeted PID probe were used.",
+    "The current process is alive and detached/no-TTY, so the evidence establishes no byte progress during the sampled interval rather than the reason for the lack of progress."
+  ]
+}

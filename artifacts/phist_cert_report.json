@@ -1,0 +1,272 @@
+{
+  "phist_scheme": {
+    "size_buckets": 8,
+    "ipt_buckets": 8,
+    "directions": [
+      "SRC->DST",
+      "DST->SRC"
+    ],
+    "edges": {
+      "size_payload_bytes": [
+        "[0,16)",
+        "[16,32)",
+        "[32,64)",
+        "[64,128)",
+        "[128,256)",
+        "[256,512)",
+        "[512,1024)",
+        "[1024,infinity)"
+      ],
+      "ipt_milliseconds": [
+        "[0,16)",
+        "[16,32)",
+        "[32,64)",
+        "[64,128)",
+        "[128,256)",
+        "[256,512)",
+        "[512,1024)",
+        "[1024,infinity)"
+      ],
+      "implementation_rule": "value < 16 -> bin 1; value > 1023 -> bin 8; otherwise logarithmic bins 16-31, 32-63, ..., 512-1023",
+      "documentation_discrepancy": "The ipfixprobe README renders the final two intervals as 512-1023 and >1024, while CESNET DataZoo renders them as 512-1024 and >1024. The implementation is unambiguous for integer values: 1024 belongs to bin 8."
+    },
+    "theoretical_cells": {
+      "source_emitted_arrays": 4,
+      "source_emitted_scalar_bin_slots": 32,
+      "source_formula": "2 directions * (8 size bins + 8 IPT bins) = 32",
+      "hypothetical_joint_direction_size_ipt_cells": 128,
+      "joint_128_is_emitted": false,
+      "interpretation": "PHISTS emits four separate marginal histograms: source sizes, source IPT, destination sizes, and destination IPT. It does not emit a joint direction x size-bin x IPT-bin histogram. Therefore 128 is not the cell count of the current exporter. Also, 32 scalar slots are not automatically a categorical alphabet unless a sampling unit and normalization are declared."
+    },
+    "source": [
+      {
+        "name": "CESNET ipfixprobe PHISTS README",
+        "url": "https://github.com/CESNET/ipfixprobe/blob/ee200bcef5ae23648089bbf6c2fad90c3ae6a5b3/debian/README.Debian#L497-L521",
+        "evidence": "Eight logarithmic size/IPT bins and four directional histogram fields."
+      },
+      {
+        "name": "CESNET ipfixprobe PHISTS implementation",
+        "url": "https://github.com/CESNET/ipfixprobe/blob/ee200bcef5ae23648089bbf6c2fad90c3ae6a5b3/src/plugins/process/phists/src/phists.cpp#L83-L136",
+        "evidence": "Integer bucket rule, payload_len_wire input, per-direction updates, and IPT in milliseconds."
+      },
+      {
+        "name": "CESNET DataZoo feature documentation",
+        "url": "https://cesnet.github.io/cesnet-datazoo/features/#packet-histograms",
+        "evidence": "Histograms are binned counts over the entire flow; forward/reverse size and IPT arrays are separate; PPI covers the first 30 packets."
+      },
+      {
+        "name": "CESNET DataZoo dataset metadata",
+        "url": "https://github.com/CESNET/cesnet-datazoo/blob/85afe5613a9a1ea840d174d779042ee13f87b4e2/cesnet_datazoo/datasets/metadata/metadata.csv#L3",
+        "evidence": "CESNET-QUIC22 metadata lists PHIST_SRC_SIZES, PHIST_DST_SIZES, PHIST_SRC_IPT, and PHIST_DST_IPT."
+      },
+      {
+        "name": "CESNET-QUIC22 Data in Brief paper",
+        "url": "https://doi.org/10.1016/j.dib.2023.108888",
+        "evidence": "Primary provenance for the CESNET-QUIC22 dataset. The detailed PHIST bin semantics are supplied by the exporter and DataZoo documentation, not by the DOI landing metadata."
+      }
+    ],
+    "edges_data_adaptive": false
+  },
+  "fixed_alphabet_confirmed": {
+    "overall": "CONDITIONAL",
+    "exporter_partition_fixed_a_priori": true,
+    "raw_per_flow_histogram_vector_has_32_or_128_element_support": false,
+    "reason": "The bin edges and number of coordinates are constants in the exporter definition and do not depend on observed quantiles or training data. However, a whole-flow PHIST record is a vector of integer counts. Without a flow-length cap or per-flow normalization, its possible vector values are not limited to 32 or 128 categories. Fixed bins establish fixed dimension, not automatically a finite support for the distribution of raw count vectors.",
+    "valid_fixed_object_options": [
+      "Pool packet-level events into a declared fixed categorical object and use n equal to the number of independent packet-level observations, with m=32 for the four emitted marginal event types.",
+      "Normalize each flow's PHIST coordinates under a declared bounded normalization and compare the mean fixed-dimensional vector over n flows; the proof then uses bounded simplex/vector observations rather than an unqualified raw-count plug-in law.",
+      "Impose an a-priori maximum flow length and enumerate the resulting finite set of count vectors; the resulting m is combinatorial and much larger than 32."
+    ]
+  },
+  "fixed_alphabet_reasoning": "There is no data-adaptive edge problem in PHISTS: the exporter hard-codes the logarithmic edges. The load-bearing qualification is the statistical object. For a fixed packet-cell distribution, or a properly normalized fixed-coordinate PHIST vector, the dimension/alphabet is fixed before seeing the samples. For the distribution of unnormalized whole-flow histogram vectors, the support is not fixed by the number of bins. A claim using m=32 or m=128 for that raw vector law is therefore unsupported.",
+  "two_sided_certification_holds": {
+    "fixed_packet_cell_or_bounded_normalized_coordinate_object": true,
+    "raw_unnormalized_whole_flow_phist_vector_law": false,
+    "finite_sample_upper_side": "For fixed m and independent observations, the supplied bound ||P_hat-P||_1 <= sqrt(m/n) + sqrt(2*log(2/alpha)/n) is a finite-sample statement. Applying it to both services and the TV triangle inequality gives a finite-sample upper/lower plug-in bracket for that same fixed object.",
+    "guarantee_strength_warning": "If the lower side is supplied by a classifier HPLB, that lower guarantee is asymptotic unless a separate finite-sample theorem is proved. The PHIST plug-in side does not upgrade an asymptotic classifier lower bound into a finite-sample two-sided certificate.",
+    "bottom_line": "PHIST supports a two-sided finite-sample plug-in bracket only after the statistic and sampling unit are explicitly defined. The current exporter does not by itself justify a 128-cell per-flow PHIST law."
+  },
+  "sample_size_requirements": {
+    "rough_condition": "0.5*sqrt(m/n1) + 0.5*sqrt(m/n2) < epsilon",
+    "balanced_samples": "For n1=n2=n, the rough condition reduces to sqrt(m/n) < epsilon, so n > m/epsilon^2.",
+    "alpha": 0.05,
+    "conservative_union_bound_note": "For a joint 95% two-service statement using the supplied one-sample inequality and a union bound, use alpha/2 per service. The balanced radius is (sqrt(m)+sqrt(2*log(4/alpha)))/sqrt(n).",
+    "requirements": [
+      {
+        "m": 32,
+        "epsilon": 0.1,
+        "rough_n_each": 3201,
+        "conservative_n_each_for_joint_95_percent": 7427
+      },
+      {
+        "m": 32,
+        "epsilon": 0.05,
+        "rough_n_each": 12801,
+        "conservative_n_each_for_joint_95_percent": 29704
+      },
+      {
+        "m": 32,
+        "epsilon": 0.01,
+        "rough_n_each": 320001,
+        "conservative_n_each_for_joint_95_percent": 742575
+      },
+      {
+        "m": 128,
+        "epsilon": 0.1,
+        "rough_n_each": 12801,
+        "conservative_n_each_for_joint_95_percent": 20377
+      },
+      {
+        "m": 128,
+        "epsilon": 0.05,
+        "rough_n_each": 51201,
+        "conservative_n_each_for_joint_95_percent": 81502
+      },
+      {
+        "m": 128,
+        "epsilon": 0.01,
+        "rough_n_each": 1280001,
+        "conservative_n_each_for_joint_95_percent": 2037507
+      }
+    ]
+  },
+  "dpi_statement": {
+    "statement": "For deterministic PHIST T applied to a full flow, TV(T#P,T#Q) <= TV(P,Q).",
+    "meaning": "PHIST is a contraction of distinguishability. It can erase distinctions inside the preimages of a PHIST value, but it cannot create total variation distinguishability relative to the full-flow law."
+  },
+  "direction_of_implication": {
+    "large_phist": "TV_PHIST > epsilon implies TV_full_flow > epsilon. A large PHIST TV is a valid lower-style distinguishability certificate for the full-flow object.",
+    "small_phist": "TV_PHIST <= epsilon does not imply TV_full_flow <= epsilon. It is an indistinguishability statement only for PHIST.",
+    "k_prefix": "There is no direct PHIST-to-k-prefix DPI order here because PHIST is computed from the entire flow, while the k-prefix is computed from the first k packets. Both are functions of the full flow, but neither generally factors through the other.",
+    "large_k_prefix": "A large k-prefix TV does not force a large PHIST TV. PHIST can map the distinguishing prefix differences to the same rectified histogram.",
+    "bracket_direction_constrained": "DPI constrains the relation from the PHIST distinguishability value upward to the underlying full-flow value; it does not turn a small PHIST upper bound into an upper bound on k-prefix TV."
+  },
+  "conflation_found_in_proposal": {
+    "found": true,
+    "qualification": "The explicit warning that PHIST is not a k-prefix law is correct and avoids the conflation. The conflation remains present if the resulting PHIST bracket is described as replacing or certifying the large-k k-prefix bracket, or if a small PHIST TV is read as small k-prefix TV.",
+    "plain_finding": "A PHIST bracket is not a k-prefix bracket. Any such substitution is theoretically invalid without an additional reverse-direction theorem."
+  },
+  "reverse_direction_bound_available": false,
+  "reverse_direction_evidence": {
+    "general_case": "No distribution-free reverse inequality relating TV_PHIST to TV_kprefix is available from the CESNET exporter definition, DataZoo documentation, or the QUIC22 paper. DPI alone supplies only contraction in the PHIST direction.",
+    "why_not": "There are distinct flows with identical PHIST summaries but different packet order, exact payload values within bins, exact IPT values within bins, or differences outside the first 30 packets. Such pairs can have TV_PHIST=0 while TV_kprefix or TV_full_flow is positive, even equal to 1 for suitable point-mass laws.",
+    "special_cases": [
+      "If PHIST is injective on a restricted class of flows, TV is preserved on that class.",
+      "If the k-prefix is a deterministic function of PHIST on a restricted class, then TV_kprefix <= TV_PHIST by DPI, but this factorization is not true for general whole-flow PHIST.",
+      "A quantitative reverse bound would require extra assumptions such as an approximate reconstruction kernel, sufficiency, or a restricted flow family; none is established for this project."
+    ]
+  },
+  "epsilon_zero_corollaries": {
+    "phist_zero": "TV_PHIST=0 certifies exact equality of the PHIST laws only.",
+    "rectification_classes": "Yes. Coarse bins create genuine equivalence classes: flows with different payload sizes inside the same size bins, different IPT values inside the same IPT bins, and different packet orderings can have exactly the same four histogram arrays.",
+    "strong_counterexample": "Two disjoint full-flow or k-prefix point masses can map to the same PHIST value, giving TV_PHIST=0 but TV of the original object equal to 1.",
+    "not_kprefix_zero": "PHIST equality does not imply k-prefix equality, including for k<=30."
+  },
+  "framing_verdict": "STRONGER_AND_HONEST",
+  "framing_verdict_reasoning": "Reporting two distinct objects with their own explicitly scoped certificates is stronger and more honest than claiming one two-sided bracket for the k-prefix at large k. The verdict is conditional on repairing the PHIST definition: use the fixed 32-coordinate/marginal packet-cell object or a bounded normalized per-flow object, state the sampling unit, and do not use 128 unless a new joint direction-size-IPT statistic is actually emitted. The strongest argument against the unqualified proposal is that fixed bin edges do not make the raw whole-flow histogram-vector law a 32- or 128-element finite alphabet, and PHIST DPI gives no reverse implication to k-prefix TV.",
+  "numeric_check": {
+    "computed_with": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1"
+    },
+    "alpha": 0.05,
+    "interpretation": "The reported radius is the zero-empirical-TV upper radius for two equal-size services after a union bound. An upper confidence bound is strictly non-vacuous when empirical_TV + radius < 1; it is useful for an epsilon target only when empirical_TV + radius <= epsilon.",
+    "n_per_service": [
+      1000,
+      10000,
+      100000,
+      1000000,
+      10000000
+    ],
+    "m32_source_defined_flattened_coordinate_object": [
+      {
+        "n": 1000,
+        "single_side_radius_alpha_0.05": 0.26477932,
+        "two_sample_radius_joint_95_percent": 0.272501961,
+        "nonvacuous_at_empirical_tv_0": true,
+        "max_empirical_tv_for_upper_lt_1": 0.727498039
+      },
+      {
+        "n": 10000,
+        "single_side_radius_alpha_0.05": 0.083730573,
+        "two_sample_radius_joint_95_percent": 0.086172686,
+        "nonvacuous_at_empirical_tv_0": true,
+        "max_empirical_tv_for_upper_lt_1": 0.913827314
+      },
+      {
+        "n": 100000,
+        "single_side_radius_alpha_0.05": 0.026477932,
+        "two_sample_radius_joint_95_percent": 0.027250196,
+        "nonvacuous_at_empirical_tv_0": true,
+        "max_empirical_tv_for_upper_lt_1": 0.972749804
+      },
+      {
+        "n": 1000000,
+        "single_side_radius_alpha_0.05": 0.008373057,
+        "two_sample_radius_joint_95_percent": 0.008617269,
+        "nonvacuous_at_empirical_tv_0": true,
+        "max_empirical_tv_for_upper_lt_1": 0.991382731
+      },
+      {
+        "n": 10000000,
+        "single_side_radius_alpha_0.05": 0.002647793,
+        "two_sample_radius_joint_95_percent": 0.00272502,
+        "nonvacuous_at_empirical_tv_0": true,
+        "max_empirical_tv_for_upper_lt_1": 0.99727498
+      }
+    ],
+    "m128_hypothetical_joint_object": [
+      {
+        "n": 1000,
+        "single_side_radius_alpha_0.05": 0.443664758,
+        "two_sample_radius_joint_95_percent": 0.451387399,
+        "nonvacuous_at_empirical_tv_0": true,
+        "max_empirical_tv_for_upper_lt_1": 0.548612601
+      },
+      {
+        "n": 10000,
+        "single_side_radius_alpha_0.05": 0.140299115,
+        "two_sample_radius_joint_95_percent": 0.142741229,
+        "nonvacuous_at_empirical_tv_0": true,
+        "max_empirical_tv_for_upper_lt_1": 0.857258771
+      },
+      {
+        "n": 100000,
+        "single_side_radius_alpha_0.05": 0.044366476,
+        "two_sample_radius_joint_95_percent": 0.04513874,
+        "nonvacuous_at_empirical_tv_0": true,
+        "max_empirical_tv_for_upper_lt_1": 0.95486126
+      },
+      {
+        "n": 1000000,
+        "single_side_radius_alpha_0.05": 0.014029912,
+        "two_sample_radius_joint_95_percent": 0.014274123,
+        "nonvacuous_at_empirical_tv_0": true,
+        "max_empirical_tv_for_upper_lt_1": 0.985725877
+      },
+      {
+        "n": 10000000,
+        "single_side_radius_alpha_0.05": 0.004436648,
+        "two_sample_radius_joint_95_percent": 0.004513874,
+        "nonvacuous_at_empirical_tv_0": true,
+        "max_empirical_tv_for_upper_lt_1": 0.995486126
+      }
+    ],
+    "answer": "The radius is below 1 for every requested sample size for both m=32 and hypothetical m=128, so it is formally non-vacuous at empirical TV zero. At n=1000 it is not a tight epsilon=0.1 certificate: the joint-95-percent radius is about 0.273 for m=32 and 0.451 for m=128. The sample requirements above show when smaller epsilon targets become meaningful."
+  },
+  "known_limitations": [
+    "PHIST uses the entire flow, unlike the first-30-packet PPI/k-prefix object.",
+    "The current exporter stores separate size and IPT marginal histograms, not joint size-IPT counts.",
+    "The exporter uses payload length and excludes zero-payload packets by default unless includezeros is enabled; this changes the precise statistic and must be fixed before comparing laws.",
+    "For QUIC, CESNET DataZoo documents that acknowledgment packets are included in both PPI and packet histograms; TLS retransmission and zero-length handling differ.",
+    "A raw per-flow count-vector distribution requires an explicit finite support argument or a different concentration proof; fixed coordinate count alone is insufficient.",
+    "The plug-in upper/lower estimation bracket is finite-sample only for the fixed-object concentration step. A classifier-based HPLB lower bound must be labeled asymptotic unless independently finite-sample certified.",
+    "The displayed sample-size calculations ignore dependence between flows and any effective sample-size loss from repeated hosts, time blocks, or service grouping.",
+    "The reported upper radius does not include the observed empirical TV; high empirical TV can still make the upper confidence bound equal to or exceed 1."
+  ],
+  "blockers": [
+    "Before claiming a PHIST certificate, specify whether the law is pooled packet-cell mass, normalized per-flow PHIST vectors, or raw per-flow histogram vectors.",
+    "Use m=32 only for the current four-marginal-coordinate/event definition, and use m=128 only after implementing and documenting a true joint direction-size-IPT statistic.",
+    "Do not report PHIST indistinguishability as k-prefix indistinguishability without a new theorem relating the two objects."
+  ]
+}

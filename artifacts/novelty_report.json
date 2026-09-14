@@ -1,0 +1,78 @@
+{
+  "measured_bracket_exists": false,
+  "closest_prior_work": [
+    {
+      "citation": "Andreas Athanasiou, Konstantinos Chatzikokolakis, and Catuscia Palamidessi, \"Self-Defense: Optimal QIF Solutions and Application to Website Fingerprinting,\" 2025 IEEE 38th Computer Security Foundations Symposium (CSF), pp. 65-80, 2025.",
+      "category": "2",
+      "what_it_covers": "Uses real crawls of 200 news websites and constructs discrete page-size distributions from encrypted-response observations. The paper explicitly uses L1 distance between probability distributions, equal to twice total variation for its discrete setting, and optimizes a single site's distribution against the others. It therefore comes closest to an empirical pairwise-distribution-distance study in encrypted traffic.",
+      "what_it_does_not": "It does not report a pairwise, per-service or per-class two-sided TV confidence bracket with separately certified lower and upper sides. The experiment observes one encrypted response size per request, not joint k-packet QUIC/TLS prefixes; its reported outputs are leakage/capacity and attack accuracy rather than a certified interval on TV.",
+      "url": "https://arxiv.org/abs/2411.10059"
+    },
+    {
+      "citation": "Shuai Li, Huajun Guo, and Nicholas Hopper, \"Measuring Information Leakage in Website Fingerprinting Attacks and Defenses,\" Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications Security (CCS '18), 2018.",
+      "category": "2",
+      "what_it_covers": "Measures mutual-information leakage from real Tor website-fingerprinting traces over packet, timing, n-gram, burst, and related features. It reports bootstrap confidence intervals for the information-leakage estimates and explicitly studies why classification accuracy is not equivalent to leakage.",
+      "what_it_does_not": "The measured object is mutual information, not pairwise total variation between service/class observable laws. Its confidence intervals are not a two-sided TV bracket whose lower and upper sides have the EIBO certification meanings; it also does not target QUIC service recognition or k-prefix laws.",
+      "url": "https://arxiv.org/abs/1710.06080"
+    },
+    {
+      "citation": "Giovanni Cherubin, \"Bayes, not Naive: Security Bounds on Website Fingerprinting Defenses,\" Proceedings on Privacy Enhancing Technologies, 2017.",
+      "category": "1",
+      "what_it_covers": "On real Tor traces, estimates lower bounds on the Bayes error of a website-fingerprinting adversary and reports the resulting privacy metric for closed-world and one-versus-all settings. The paper states that the bound is an asymptotic lower bound on adversary error under iid data and validates it empirically.",
+      "what_it_does_not": "This is a classifier/Bayes-error lower-bound framework, not a measured two-sided TV interval. It supplies no distribution-free upper side capable of certifying an error floor, and it is not a per-service QUIC/TLS k-prefix bracket.",
+      "url": "https://arxiv.org/abs/1702.07707"
+    },
+    {
+      "citation": "Guangjie Liu, Guang Cheng, and Weiwei Liu, \"The Inevitability of Side-Channel Leakage in Encrypted Traffic,\" arXiv:2602.14055, 2026.",
+      "category": "3",
+      "what_it_covers": "Provides a theoretical positive lower bound on mutual information and a theorem-level lower bound on pairwise conditional-law TV under stated non-degeneracy, distinguishability, Lipschitz, and observation conditions. Section 4.1 states the conditional-independence/additivity result and the associated exponential error-decay conclusion for iid repeated observations; the paper also relates binary Bayes error to TV in its operational discussion.",
+      "what_it_does_not": "It is not a measurement of a two-sided TV bracket on captured QUIC/TLS traffic. Its theorem uses assumed constants and conditions; it does not estimate per-service distributions from a real traffic corpus or provide empirical per-side certification.",
+      "url": "https://arxiv.org/abs/2602.14055"
+    },
+    {
+      "citation": "Guangjie Liu, Guang Cheng, Weiwei Liu, and Yutong Wang, \"Rate-Distortion Function for Encrypted Traffic Side-Channel Defense,\" arXiv:2607.17889, 2026.",
+      "category": "3",
+      "what_it_covers": "Characterizes a side-channel rate-distortion function and exact leakage-cost Pareto frontier within the stationary-memoryless defense class Theta_iid, and places several published website-fingerprinting defenses relative to that theoretical curve.",
+      "what_it_does_not": "The leakage quantity is a rate/bit objective with Wasserstein-1 defense cost, not an empirically estimated pairwise TV bracket. The real-world defense comparisons do not establish a two-sided, per-class, certification-graded interval on captured encrypted traffic.",
+      "url": "https://arxiv.org/abs/2607.17889"
+    },
+    {
+      "citation": "Loris Michel, Jeffrey Naf, and Nicolai Meinshausen, \"High Probability Lower Bounds for the Total Variation Distance,\" arXiv:2005.06006, 2020.",
+      "category": "3",
+      "what_it_covers": "Provides a general method for high-probability lower bounds on TV using one-dimensional projections such as classifiers, with asymptotic detection-rate analysis.",
+      "what_it_does_not": "The cited application is a climate-data reanalysis, not encrypted network traffic. The work supplies a lower-bound method only; it does not itself publish a traffic-data two-sided bracket or a distribution-free upper TV certificate.",
+      "url": "https://arxiv.org/abs/2005.06006"
+    }
+  ],
+  "category_4_found": [],
+  "search_queries_used": [
+    "total variation encrypted traffic classification network traffic",
+    "total variation distance website fingerprinting traffic analysis",
+    "traffic indistinguishability TLS QUIC measurement distribution",
+    "epsilon-indistinguishability network traffic",
+    "website fingerprinting mutual information traffic leakage empirical",
+    "encrypted traffic mutual information traffic analysis measurement",
+    "total variation website fingerprinting Tor",
+    "total variation QUIC traffic",
+    "QUIC traffic distribution distance total variation measurement paper",
+    "encrypted traffic certification bound total variation classifier",
+    "Self-Defense Optimal QIF Solutions Application Website Fingerprinting",
+    "Indistinguishability of Traffic by Open TLS Parameters with Encrypted ClientHello",
+    "total variation network traffic paper empirical distributions",
+    "encrypted traffic confidence interval total variation"
+  ],
+  "novelty_verdict": "MEASURED_BRACKET_IS_NOVEL",
+  "recommended_framing": "Promote the measured bracket itself to the core novelty claim, but state it narrowly: no fetched prior was found that reports a pairwise, real-captured encrypted-traffic TV interval with an assumption-free lower side and a separately certified upper side. Position the i.i.d. or stationary-memoryless comparison as supporting theory, not as the primary novelty gap. Explicitly acknowledge Self-Defense as the strongest near-miss because it empirically constructs L1/TV-equivalent page-size distributions from real encrypted observations.",
+  "positioning_risk": "Do not say that existing theory is single-letter because of stationarity or memorylessness. For any joint distribution, data processing gives single-letter marginal bounds such as TV(P_Y,Q_Y) <= TV(P_{Y^(1:k)},Q_{Y^(1:k)}). The iid or stationary-memoryless restriction matters for achievability/defense results such as information additivity, tensorized observation models, and exponential error decay, not for the existence of a single-letter data-processing inequality.",
+  "defensible_gap_statement": "Prior work measures classifier error, mutual-information leakage, optimized distribution-distance objectives, or proves theoretical leakage bounds. In the fetched literature, no work was found that takes real captured encrypted network traffic and publishes a per-service or per-class two-sided TV bracket for an explicitly defined observable law, with the lower side certifying distinguishability and the upper side carrying an independently stated certification status sufficient for an error-floor claim. EIBO's defensible contribution is therefore the measurement and certification protocol for that bracket, not merely the use of TV or the observation that packet sequences can be dependent.",
+  "section_reference_correction": {
+    "paper": "arXiv 2602.14055",
+    "wrong": "5.1",
+    "correct": "4.1"
+  },
+  "blockers": [
+    "This is a strong scoped negative result, not a proof that no unpublished, inaccessible, or differently indexed paper exists.",
+    "The ECH-specific paper \"Indistinguishability of Traffic by Open TLS Parameters with Encrypted ClientHello\" was encountered in search metadata, but its primary record was not successfully fetched in this pass; treat its coverage as unverified and do not use it to support or defeat the category-4 verdict.",
+    "The fetched Cherubin PDF and existing project metadata expose inconsistent DOI suffixes; cite the arXiv record or reconcile the DOI before final bibliography lock."
+  ]
+}

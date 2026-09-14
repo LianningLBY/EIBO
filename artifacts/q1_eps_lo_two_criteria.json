@@ -1,0 +1,71 @@
+{
+  "status": "not_computed_missing_source_artifact",
+  "created_at_utc": "2026-09-13T18:30:40Z",
+  "source_artifact": "/root/eibo/artifacts/q1_eps_lo_symbol_map.json",
+  "source_artifact_sha256": null,
+  "waited_seconds": 120,
+  "metadata": {
+    "lower_side_criterion": "lower-side criterion = `eps_lo > 0.05`, not mediated by `T(n)`",
+    "old_proxy_role": "T(n) is retained only as a comparison口径",
+    "object_definition": "k-prefix symbol law at M=1, one-hot symbol draws, m=32, masked, per pair",
+    "m": 32,
+    "lower_bound": "Michel asymptotic HPLB estimate eps_lo; proven-side (asymptotic) lower bound exceeding 0.05; not a finite-sample certificate",
+    "old_proxy": "tv_hat > T(n_a) AND tv_hat > T(n_b), with T(n) = 0.05 + 1.958/sqrt(n)",
+    "upper_bound": "eps_hi = tv_hat + radius_a + radius_b < 0.5",
+    "alpha_and_split": "not computed; source artifact unavailable, so alpha and split could not be read from per-pair rows or metadata",
+    "asymptotic_caveat": "eps_lo here is the Michel asymptotic HPLB estimate and must not be described as a finite-sample certificate"
+  },
+  "source_artifact_inspection": {
+    "present": false,
+    "top_level_keys": null,
+    "sample_row": null,
+    "missing_fields": [
+      "source artifact missing; could not inspect per-pair rows",
+      "eps_lo unavailable",
+      "tv_hat unavailable",
+      "n_a unavailable",
+      "n_b unavailable",
+      "eps_hi unavailable"
+    ],
+    "literal_errors": [
+      "ls: cannot access '/root/eibo/artifacts/q1_eps_lo_symbol_map.json': No such file or directory"
+    ]
+  },
+  "criteria_results": {
+    "new_lower_fraction_eps_lo_gt_0_05": null,
+    "old_proxy_fraction_tv_hat_gt_T_na_and_T_nb": null,
+    "upper_fraction_eps_hi_lt_0_5": null,
+    "new_lower_AND_upper_fraction": null,
+    "old_lower_AND_upper_fraction": null,
+    "disagreement_count": null,
+    "disagreement_concentration": null,
+    "eps_lo_le_eps_hi_violation_count": null,
+    "offending_rows": []
+  },
+  "hard_invariant": {
+    "assertion": "eps_lo <= eps_hi per row",
+    "evaluated": false,
+    "reason": "source artifact missing"
+  },
+  "routines_executed": [
+    {
+      "path": "/bin/bash",
+      "command": "cd /root/eibo && detect_image",
+      "output_consumed_by_reported_numbers": false,
+      "literal_error": "bash: line 1: detect_image: command not found"
+    },
+    {
+      "path": "/usr/bin/ls",
+      "command": "cd /root/eibo && ls -la /root/eibo/artifacts/q1_eps_lo_symbol_map.json",
+      "output_consumed_by_reported_numbers": false,
+      "literal_error": "ls: cannot access '/root/eibo/artifacts/q1_eps_lo_symbol_map.json': No such file or directory"
+    }
+  ],
+  "reported_numbers_consumed_from": [],
+  "notes": [
+    "No Michel bound was recomputed.",
+    "No h5 file was read.",
+    "Existing artifacts were not modified or deleted.",
+    "The requested side-by-side fractions are unavailable because the required source artifact was absent after bounded re-checks."
+  ]
+}

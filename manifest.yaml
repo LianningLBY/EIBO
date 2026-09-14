@@ -1,0 +1,9 @@
+created_at: '2026-09-13T11:08:16.426942+00:00'
+description: 'Open-set encrypted-traffic recognition is empirical (SepSpace, RoNeTC
+  report AUROC/OSCR with no stated limits), while the relevant theory sits in two
+  disconnected pieces: Cherubin (PETS 2017) gives fe'
+layers: {}
+layout_version: 4
+name: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+ptype: paper
+version: '1.0'

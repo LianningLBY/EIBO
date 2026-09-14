@@ -1,0 +1,234 @@
+{
+  "convention_verification": {
+    "artifact": "/root/eibo/artifacts/x1_headline_table.json",
+    "top_level_keys": [
+      "alpha",
+      "alpha_convention",
+      "alpha_law",
+      "channel",
+      "claim_sentence_qualification",
+      "claim_sentence_supported",
+      "eps_lo_le_eps_hi_violation_rows",
+      "eps_lo_le_eps_hi_violations",
+      "fresh_pass_evidence",
+      "headline_table_unified_calibre",
+      "k_coverage",
+      "lower_side_guarantee",
+      "lower_side_summary_caveat",
+      "nearest_margins",
+      "new_compute_disclosure",
+      "number_of_table_cells",
+      "pair_source",
+      "per_rung",
+      "radius_convention",
+      "tv_hat_le_eps_hi_violation_rows",
+      "tv_hat_le_eps_hi_violations",
+      "tv_upper_bound_call",
+      "tv_upper_bound_module_path",
+      "tv_upper_bound_module_sha256"
+    ],
+    "table_claims": {
+      "alpha": 0.05,
+      "alpha_law": 0.025,
+      "alpha_convention": "alpha=0.05; per-law alpha/2=0.025 on both sides; union bound over the two laws gives joint 0.95 for EACH side. Numbers without a stated split are NOT citable.",
+      "tv_upper_bound_call": "sys.path.insert(0, '/root/eibo/src'); from eibo.statcore import tv_upper_bound; tv_upper_bound(sample1, sample2, alphabet_size=(2*M)**k, alpha=0.05)",
+      "lower_side_source_named": "q1_eps_lo_symbol_map.json",
+      "lower_side_guarantee": "Only k=5/M=1 carries the measured asymptotic HPLB from q1_eps_lo_symbol_map.json. k=5/M>1 and all k=10/15/30 cells do not carry a measured lower side in this artifact; no lower side was silently reused across k or M.",
+      "radius_convention": "Columns WITHOUT the _ref_radius suffix use the wrong inlined radius (exactly 2x, omits both 0.5s) and are UNDERSTATED and must not be cited. The _ref_radius columns come from statcore.tv_upper_bound.",
+      "records_ref_radius_labeling": true
+    },
+    "actual_usage": {
+      "upper_alpha_used_by_assembler": 0.05,
+      "upper_constant_used": 2.7162,
+      "lower_calibre_used_in_current_m1_k5_gate": "capped",
+      "claim_vs_execution": "The file claims the per-law split alpha_law=0.025 and labels the reference-radius columns, but the executed upper-bound call uses alpha=0.05; the M=1,k=5 gate uses the capped lower-side count rather than the full-n lower-side count."
+    }
+  },
+  "upper_side_constant_used": {
+    "repo_function_call": "tv_upper_bound(itertools.repeat(0, n), itertools.repeat(1, n), alphabet_size=32, alpha=0.05 or alpha=0.025)",
+    "repo_function_signature": "(sample1: 'Iterable[Any]', sample2: 'Iterable[Any]', *, alphabet_size: 'float | None' = None, scheme: 'str | None' = None, k: 'int | None' = None, alpha: 'float' = 0.05, exact_small_b: 'int' = 200, max_size: 'int' = 1500, large_bins: 'int' = 32, log_bins: 'int' = 32) -> 'TVUpperBoundResult'",
+    "repo_function_module": "eibo.statcore",
+    "repo_function_module_path": "/root/eibo/src/eibo/statcore.py",
+    "repo_function_module_sha256": "c8b1fd15365ef5f91d6c6f4296f72dc8f4df6e1f50c17408f7e42b76586b3bdb",
+    "rows_used": 990,
+    "constant_2.7162": {
+      "alpha": 0.05,
+      "pass_count": 342
+    },
+    "constant_2.9604": {
+      "alpha": 0.025,
+      "pass_count": 340
+    },
+    "constant_reproducing_table_342": 2.7162,
+    "alpha_reproducing_table_342": 0.05,
+    "real_row_checks": [
+      {
+        "pair": [11, 51],
+        "tv_hat": 0.04435248407432239,
+        "radius_sum_alpha_0.05": 0.04018818115370505,
+        "eps_hi_alpha_0.05": 0.08454066522802745,
+        "radius_sum_alpha_0.025": 0.041360322865838337,
+        "eps_hi_alpha_0.025": 0.08571280694016073,
+        "pass_alpha_0.05": true,
+        "pass_alpha_0.025": true
+      },
+      {
+        "pair": [21, 23],
+        "tv_hat": 0.09466462406802077,
+        "radius_sum_alpha_0.05": 0.04358096986943409,
+        "eps_hi_alpha_0.05": 0.13824559393745486,
+        "radius_sum_alpha_0.025": 0.04485206677336746,
+        "eps_hi_alpha_0.025": 0.13951669084138824,
+        "pass_alpha_0.05": true,
+        "pass_alpha_0.025": true
+      },
+      {
+        "pair": [27, 29],
+        "tv_hat": 0.04763866574293078,
+        "radius_sum_alpha_0.05": 0.05039229416611438,
+        "eps_hi_alpha_0.05": 0.09803095990904517,
+        "radius_sum_alpha_0.025": 0.051862052395188867,
+        "eps_hi_alpha_0.025": 0.09950071813811964,
+        "pass_alpha_0.05": true,
+        "pass_alpha_0.025": true
+      },
+      {
+        "pair": [35, 49],
+        "tv_hat": 0.12415239043539374,
+        "radius_sum_alpha_0.05": 0.08971690895555665,
+        "eps_hi_alpha_0.05": 0.2138692993909504,
+        "radius_sum_alpha_0.025": 0.09233362183609908,
+        "eps_hi_alpha_0.025": 0.21648601227149283,
+        "pass_alpha_0.05": true,
+        "pass_alpha_0.025": true
+      },
+      {
+        "pair": [39, 44],
+        "tv_hat": 0.07622427973617801,
+        "radius_sum_alpha_0.05": 0.11682016124453995,
+        "eps_hi_alpha_0.05": 0.19304444098071796,
+        "radius_sum_alpha_0.025": 0.12022737649743123,
+        "eps_hi_alpha_0.025": 0.19645165623360925,
+        "pass_alpha_0.05": true,
+        "pass_alpha_0.025": true
+      }
+    ]
+  },
+  "lower_side_calibre_used": {
+    "threshold": 0.05,
+    "current_table_nearest_failing_pair": [21, 23],
+    "current_table_nearest_failing_value": 0.04978136643060134,
+    "current_table_value_is": "capped",
+    "full_n_value_for_same_pair": 0.05878059224502068,
+    "capped_pass": false,
+    "full_n_pass": true,
+    "full_n_eps_lo_named_pairs": {
+      "11,51": 0.022607132080505833,
+      "21,23": 0.05878059224502068,
+      "27,29": 0.02870548780966783,
+      "35,49": 0.04272465583166922,
+      "39,44": 0.015071216032607481
+    },
+    "capped_eps_lo_named_pairs": {
+      "11,51": 0.012229618353594561,
+      "21,23": 0.04978136643060134,
+      "27,29": 0.026651054884598124,
+      "35,49": 0.04373222902539419,
+      "39,44": 0.015071216032607481
+    },
+    "canonical_source": "/root/eibo/artifacts/q1_lower_side_full_n.json"
+  },
+  "reconciliation_vs_canonical": {
+    "table_current_m1_k5_cell": {
+      "M": 1,
+      "k": 5,
+      "alphabet_cardinality": 32,
+      "alphabet_cardinality_ref_radius": 32,
+      "denominator": 990,
+      "eps_lo_le_eps_hi_violations_ref_radius": 0,
+      "gate_fraction_both": 0.2919191919191919,
+      "gate_fraction_both_ref_radius": 0.34040404040404043,
+      "gate_pairs_both": 289,
+      "gate_pairs_both_ref_radius": 337,
+      "lower_side_measured": true,
+      "lower_side_measured_pairs": 990,
+      "lower_side_pairs": 987,
+      "lower_side_pairs_ref_radius": 985,
+      "nearest_upper_margin_ref_radius": 0.0009044555812732225,
+      "pair_denominator": 990,
+      "pairs_computed": 990,
+      "saturation_fraction_tv_ge_0_99": 0.0,
+      "saturation_fraction_tv_ge_0_99_ref_radius": 0.0,
+      "tv_hat_le_eps_hi_violations_ref_radius": 0,
+      "upper_side_measured_pairs": 990,
+      "upper_side_pairs": 292,
+      "upper_side_pairs_ref_radius": 342
+    },
+    "corrected_m1_k5_cell": {
+      "M": 1,
+      "k": 5,
+      "alphabet_cardinality": 32,
+      "denominator": 990,
+      "upper_alpha_law": 0.025,
+      "upper_constant": 2.9604,
+      "upper_side_pairs": 340,
+      "lower_threshold": 0.05,
+      "lower_calibre": "full-n",
+      "lower_side_pairs": 986,
+      "gate_pairs_both": 336,
+      "gate_fraction_both": 0.3393939393939394
+    },
+    "canonical_joint_gate": {
+      "full_n_lower_set_size": 986,
+      "gate_count": 336,
+      "gate_count_if_upper_set_is_as_recorded": 336,
+      "gate_fraction": 0.3393939393939394,
+      "intersection_size": 336,
+      "upper_condition": "tv_hat + 0.5*sqrt(m/n_a) + 0.5*2.9604/sqrt(n_a) + (same for b) < 0.5, m=32",
+      "upper_condition_row_recomputation_count": 990,
+      "upper_condition_row_recomputation_pass_count": 340,
+      "upper_set_size_as_recorded": 340,
+      "upper_set_size_recomputed": 340
+    },
+    "equals_canonical_340_336": true
+  },
+  "scope_of_the_defect": {
+    "scope": "all 20 cells",
+    "cell_grid": {
+      "M_values": [1, 2, 4, 8, 16],
+      "k_values": [5, 10, 15, 30],
+      "cell_count": 20
+    },
+    "assembler_evidence": {
+      "path": "/root/eibo/scripts/.x1_assemble.py",
+      "loop_text": "for m in RUNGS: for k in KS:",
+      "rungs": [1, 2, 4, 8, 16],
+      "ks": [5, 10, 15, 30],
+      "upper_call_text": "tv_upper_bound(..., alphabet_size=alphabet, alpha=0.05)",
+      "application": "The alpha=0.05 call is inside radius_for_n, which is used while assembling every cell."
+    },
+    "fresh_runner_evidence": {
+      "path": "/root/eibo/scripts/.x1_fresh_runner.py",
+      "purpose": "Computes fresh masked raw TV rows for k=15 and k=30; it does not apply an upper radius.",
+      "intermediate_files": 10,
+      "intermediate_file_glob": "/root/eibo/artifacts/.x1_k15_m*.json and /root/eibo/artifacts/.x1_k30_m*.json",
+      "intermediate_top_keys": ["M", "eligible_counts", "fresh_h5_pass", "k", "masking", "pair_count", "rows", "source_h5", "source_tables", "usable_services"],
+      "intermediate_root_alpha_fields": {},
+      "intermediate_row_keys": ["M", "n_a", "n_b", "service_a", "service_b", "tv_masked"],
+      "interpretation": "The raw intermediates do not record alpha or a radius; the assembler applies the same wrong alpha to all 20 cells, including all fresh k=15 and k=30 cells."
+    },
+    "affected_quantity": "Every upper-side pass count in the 20-cell table; the measured lower-side gate is additionally affected by the capped-versus-full-n choice in M=1,k=5."
+  },
+  "rebuild_requirement": {
+    "required": true,
+    "scope": "Rebuild all 20 upper-side cells, not only M=1,k=5.",
+    "requirements": [
+      "Keep the existing raw pair inputs and fresh k=15/k=30 intermediates unchanged.",
+      "Call eibo.statcore.tv_upper_bound with alpha=0.025 per law for every cell, yielding constant 2.9604.",
+      "Recompute every upper-side pass count and every derived upper-dependent field, including intersections where a measured lower side exists.",
+      "Use the full-n lower-side values from q1_lower_side_full_n.json for the measured M=1,k=5 lower side.",
+      "Write a new replacement table artifact while preserving x1_headline_table.json as the audit record of the incorrect conventions."
+    ],
+    "not_rebuilt_in_this_task": true
+  }
+}

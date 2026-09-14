@@ -1,0 +1,80 @@
+{
+  "map_path": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/literature_map.yaml",
+  "sources_total": 20,
+  "sources_by_role": {
+    "direct-competitor": 3,
+    "method-component": 2,
+    "dataset": 2,
+    "theory-foundation": 5,
+    "hygiene-shortcut": 0,
+    "context": 8
+  },
+  "record_corrections": [
+    {
+      "id": "michel-high-probability-tv",
+      "field": "authors",
+      "brief_value": "(see arXiv record)",
+      "verified_value": "Loris Michel; Jeffrey Näf; Nicolai Meinshausen"
+    },
+    {
+      "id": "tao-discriminative-tv",
+      "field": "title",
+      "brief_value": "Discriminative Estimation of Total Variation Distance: A Fidelity Estimator for Generative Models",
+      "verified_value": "Discriminative Estimation of Total Variation Distance: A Fidelity Auditor for Generative Data"
+    },
+    {
+      "id": "tao-discriminative-tv",
+      "field": "authors",
+      "brief_value": "(see arXiv record)",
+      "verified_value": "Lan Tao; Shirong Xu; Chi-Hua Wang; Namjoon Suh; Guang Cheng"
+    },
+    {
+      "id": "zhao-shortcutcatcher",
+      "field": "authors",
+      "brief_value": "Yuqi Zhao et al.",
+      "verified_value": "Yuqi Zhao; Matteo Boffa; Luca Vassio; Marco Mellia"
+    },
+    {
+      "id": "luxemburk-cesnet-quic22",
+      "field": "title",
+      "brief_value": "CESNET-QUIC22: A large one-month QUIC network traffic dataset from backbone lines",
+      "verified_value": "CESNET-QUIC22: a large one-month QUIC network traffic dataset from backbone lines"
+    },
+    {
+      "id": "luxemburk-cesnet-quic22",
+      "field": "authors",
+      "brief_value": "Jan Luxemburk et al.",
+      "verified_value": "Jan Luxemburk; Karel Hynek; Tomáš Čejka; Andrej Lukačovič; Pavel Šiška"
+    },
+    {
+      "id": "qu-sepspace",
+      "field": "authors",
+      "brief_value": "Yanze Qu et al.",
+      "verified_value": "Yanze Qu; Chaofan Zheng; Minxi Liao; Hailong Ma; Yiming Jiang; Wenbo Wang"
+    },
+    {
+      "id": "wang-ronetc",
+      "field": "authors",
+      "brief_value": "(see IEEE record)",
+      "verified_value": "Xueman Wang; Yipeng Wang; Yingxu Lai; Zhiyu Hao; Alex X. Liu"
+    },
+    {
+      "id": "shamsimukhametov-ech-indistinguishability",
+      "field": "authors",
+      "brief_value": "(see Springer record)",
+      "verified_value": "D. R. Shamsimukhametov; A. A. Kurapov; M. V. Liubogoshchev; E. M. Khorov"
+    }
+  ],
+  "unresolved_ids": [],
+  "verification_summary": {
+    "verified-abstract": 12,
+    "verified-fulltext": 4,
+    "unverified": 4
+  },
+  "blockers": [
+    "ACM DOI landing page for 10.1145/3808671 returned an access error; metadata is retained but the entry remains unverified.",
+    "IEEE Xplore DOI landing page for 10.1109/tifs.2025.3544067 returned an access error; metadata is retained but the entry remains unverified.",
+    "Springer DOI landing page for 10.1134/s1064226923120173 was not directly fetchable; metadata was available only through search results, so the entry remains unverified.",
+    "IEEE DOI landing page for 10.1109/tpami.2012.256 was not directly fetchable; primary-record verification remains pending."
+  ]
+}

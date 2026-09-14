@@ -1,0 +1,163 @@
+{
+  "research_timestamp_utc": "2026-09-13T11:39:24Z",
+  "notes_path": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/docs/alphabet_quotient.txt",
+  "rfc_sections_cited": [
+    {
+      "rfc": "9000",
+      "section": "8.1",
+      "claim": "Clients send Initial packets before servers, and clients must use a 1200-byte UDP payload when sending an Initial on PTO without Handshake keys."
+    },
+    {
+      "rfc": "9000",
+      "section": "12.2",
+      "claim": "Initial, 0-RTT, and Handshake packets have Length fields; short-header packets do not and can only be last; Retry and Version Negotiation packets are not coalesced."
+    },
+    {
+      "rfc": "9000",
+      "section": "14.1",
+      "claim": "A client MUST expand all UDP datagrams carrying Initial packets to at least 1200 UDP-payload bytes; a server MUST do so for datagrams carrying ack-eliciting Initial packets; datagrams MAY exceed 1200 bytes."
+    },
+    {
+      "rfc": "9000",
+      "section": "17.2",
+      "claim": "Long headers contain the version, connection-ID lengths and IDs, and type-specific fields including Length for packet types that use it."
+    },
+    {
+      "rfc": "9000",
+      "section": "17.3",
+      "claim": "The short-header packet format is used for 1-RTT traffic and has no Length field."
+    },
+    {
+      "rfc": "9000",
+      "section": "17.3.1",
+      "claim": "The 1-RTT short-header fields include Spin Bit, Key Phase, Packet Number Length, Destination Connection ID, Packet Number, and protected Packet Payload; packet end is implicit from the datagram boundary."
+    },
+    {
+      "rfc": "9000",
+      "section": "17.4",
+      "claim": "The spin bit is an optional, deliberately exposed 1-RTT signal for passive RTT measurement and is administratively/randomly disabled."
+    },
+    {
+      "rfc": "9001",
+      "section": "5.4",
+      "claim": "Header protection covers the least significant first-byte bits and the Packet Number field; for short headers it covers reserved bits, Key Phase, and Packet Number Length, not the spin bit."
+    },
+    {
+      "rfc": "9312",
+      "section": "2",
+      "claim": "The QUIC wire image is the unencrypted header information and its dynamics, with version-specific interpretation."
+    },
+    {
+      "rfc": "9312",
+      "section": "2.1",
+      "claim": "Version, connection IDs, header type, long-header Length, token information, and the spin bit are exposed; packet-number values and Key Phase are cryptographically protected."
+    },
+    {
+      "rfc": "9312",
+      "section": "2.2",
+      "claim": "Long-header Length fields are used to separate coalesced packets; one or more long-header packets may precede at most one short-header packet."
+    },
+    {
+      "rfc": "9312",
+      "section": "2.4",
+      "claim": "Client and Server Initial datagrams expose version and Source/Destination Connection IDs in clear, while Initial payload is protected."
+    },
+    {
+      "rfc": "9312",
+      "section": "3.1",
+      "claim": "There is no general passive method to distinguish all QUIC traffic from arbitrary UDP, so port and fixed-bit heuristics are not universal."
+    },
+    {
+      "rfc": "9312",
+      "section": "3.2",
+      "claim": "The handshake exposes which endpoint is the client and which is the server."
+    },
+    {
+      "rfc": "9312",
+      "section": "3.3",
+      "claim": "ACK-only versus payload-carrying packets cannot be reliably inferred from encrypted QUIC payloads or packet size."
+    },
+    {
+      "rfc": "9312",
+      "section": "3.4.1",
+      "claim": "When ClientHello is not encrypted, an observer can derive SNI from Initial packets using the version and client Destination Connection ID."
+    },
+    {
+      "rfc": "9312",
+      "section": "3.6",
+      "claim": "QUIC does not expose connection termination; disappearance of packets is the only on-path indication."
+    },
+    {
+      "rfc": "9312",
+      "section": "3.8.2",
+      "claim": "The spin bit supports passive RTT measurement when both endpoints enable it, but endpoints randomly disable spinning for a subset of connections."
+    },
+    {
+      "rfc": "9312",
+      "section": "6.4",
+      "claim": "Network nodes should not impact version selection because Version Negotiation in this version lacks downgrade protection."
+    }
+  ],
+  "padding_floor_bytes": 1200,
+  "padding_is_hard_constant": false,
+  "client_vs_server_padding_asymmetry": "RFC 9000 Section 14.1 requires every client UDP datagram carrying an Initial packet to have at least 1200 UDP-payload bytes, while the server requirement applies to UDP datagrams carrying ack-eliciting Initial packets. A server Initial datagram that is not ack-eliciting is not covered by that sentence. Both directions may exceed 1200 under the RFC MAY, but the client rule is unconditional over client Initial datagrams and the server rule is conditional on ack elicitation.",
+  "implementation_deviation_evidence": [
+    {
+      "client": "Any conforming QUIC sender",
+      "finding": "RFC 9000 Section 14.1 explicitly permits Initial-containing datagrams to exceed 1200 bytes when the sender believes the path and peer support the chosen size. This proves 1200 is a floor, not an exact protocol constant; it is not a deployed-client measurement.",
+      "source": "https://datatracker.ietf.org/doc/html/rfc9000#section-14.1",
+      "status": "verified_normative_permission"
+    },
+    {
+      "client": "uQUIC / Chrome 146 mimicry configuration",
+      "finding": "The primary source exposes per-Initial-datagram PacketSize controls and documents an example with two exact 1200-byte Initials and a CRYPTO split at offset 999. The packer implements exact in-payload padding and a configurable minimum datagram size. This verifies implementation-specific Initial-flight layout control, but does not establish a production traffic histogram above 1200.",
+      "source": "https://github.com/refraction-networking/uquic/blob/master/u_initial_packet_spec.go#L98-L121 ; https://github.com/refraction-networking/uquic/blob/master/u_packet_packer.go#L238-L294",
+      "status": "verified_source_level_not_deployment_measurement"
+    },
+    {
+      "client": "Modern browser clients in Smith et al. PETS 2021",
+      "finding": "The paper reports that the first outgoing QUIC burst is highly informative, browsers may send multiple Initial handshake packets, and chosen initial packet sizes can expose the client; it suggests constant MTU-sized handshake packets as a mitigation. No exact per-client Initial-size table was verified in the inspected paper.",
+      "source": "https://netsec.ethz.ch/publications/papers/smith2021website.pdf",
+      "status": "verified_qualitative_only"
+    },
+    {
+      "client": "tlsfingerprint.io QUIC campaign",
+      "finding": "The requested campaign endpoint was not retrievable in this run (HTTP 403), so numeric per-client Initial-size findings remain unverified.",
+      "source": "https://quic.tlsfingerprint.io",
+      "status": "unverified"
+    },
+    {
+      "client": "QUIC early-traffic fingerprinting studies",
+      "finding": "Zhan et al. use early QUIC packet features including direction and timing and report high IQUIC/GQUIC website-fingerprinting performance, but the inspected work is not a controlled client-implementation Initial-size study.",
+      "source": "https://arxiv.org/abs/2101.11871",
+      "status": "verified_related_not_direct_size_evidence"
+    }
+  ],
+  "coalescing_quotient_formal_statement": "For an ordered constituent-packet realization d=(p_1,...,p_r) in one UDP datagram, define g(d)=|d|_UDP_payload=sum_l |p_l| and S(d)=(direction(d),Q(g(d))). For the first k datagrams, P_i^obs=S_k#P_i^packet and epsilon_k=TV(S_k#P_1^packet,S_k#P_2^packet). Under this intentionally size-only projection, packet-level configurations with the same direction and quantized datagram-size realization are exactly equivalent. This is not the full RFC-forced quotient: RFC 9000 Section 12.2 and RFC 9312 Section 2.2 say that visible long-header Length fields separate coalesced long-header packets, while a short-header packet has no Length field and can only be the final packet.",
+  "short_header_length_field_present": false,
+  "spin_bit_note": "The spin bit is a public, optional 1-RTT signal intentionally exposed for passive RTT measurement (RFC 9000 Sections 17.3.1 and 17.4; RFC 9312 Section 3.8.2). Administrators may disable it, endpoints randomly disable it for a subset of paths/connections, and a disabled endpoint may use a fixed or random value. Treat it as a separate measurement signal rather than service-content evidence.",
+  "spec_forced_eps_zero_classes": [
+    "No unconditional nontrivial equality of complete raw QUIC datagrams is forced: different encrypted plaintexts generally produce different ciphertexts even when their semantics are unavailable to a passive observer.",
+    "Under the selected reduced channel, any two first-k datagram realizations with identical direction and quantized UDP-payload-size sequences have identical symbols and TV zero; timing bins and spin values must also match if those coordinates are included. This is an analysis-defined equivalence, not a protocol-only theorem.",
+    "Under the reduced channel, changes only to encrypted frame/application contents or packet-number values that leave selected public metadata, datagram sizes, directions, and timing bins unchanged collapse to the same symbols. Header protection makes packet-number and related protected header values unavailable as parsed fields, but this is not equality of raw ciphertext bytes.",
+    "Different coalescing partitions with the same reduced datagram-size sequence are equivalent under the size-only projection, but not under a full parser that retains long-header Length/type/connection-ID metadata."
+  ],
+  "expected_alphabet_growth": "min(grid^k, n)",
+  "alphabet_vacuity_warning": "Use a fixed a-priori size grid with M bins, including overflow, so the per-datagram alphabet is at most 2M and the ordered k-datagram alphabet is at most (2M)^k. QUIC provides early lower-bound and structural constraints but no specification-level small-support bound as k grows. Later encrypted packet sizes, frame aggregation, ACK/loss recovery, coalescing, congestion control, application response sizes, and timing can create new prefixes. The honest worst-case realized support is therefore approximately min((2M)^k,n), with early-prefix concentration possibly reducing it. The unrestricted plug-in upper bound is at high risk of becoming vacuous beyond small k; even M=10 yields 20^10 possible prefixes. Conditioning on QUIC_CLIENT_VERSION may reduce within-group support if implementations have stable layouts, but it also reduces n and is only a hypothesis to test.",
+  "blockers": [
+    "The requested assertion that coalescing reveals only the sum of packet lengths is contradicted by RFC 9000 Section 12.2 and RFC 9312 Section 2.2: long-header Length fields are used to separate coalesced packets. The project brief/model should describe datagram-size-only processing as a deliberate coarsening, not a protocol-forced loss of all boundaries.",
+    "No numeric per-client Initial-size distribution was verified from the requested tlsfingerprint.io campaign because the campaign endpoint returned HTTP 403. Claims about exact client-specific deviations from 1200 remain unverified until the primary campaign data or an accessible archival export is inspected.",
+    "Smith et al. and the inspected related QUIC fingerprinting paper provide qualitative or service-fingerprinting evidence, not a verified table of deployed client-implementation Initial-size histograms."
+  ],
+  "source_urls": [
+    "https://datatracker.ietf.org/doc/html/rfc9000",
+    "https://datatracker.ietf.org/doc/html/rfc9001",
+    "https://datatracker.ietf.org/doc/html/rfc9312",
+    "https://netsec.ethz.ch/publications/papers/smith2021website.pdf",
+    "https://github.com/refraction-networking/uquic",
+    "https://github.com/refraction-networking/uquic/blob/master/u_initial_packet_spec.go",
+    "https://github.com/refraction-networking/uquic/blob/master/u_packet_packer.go",
+    "https://arxiv.org/abs/2101.11871",
+    "https://quic.tlsfingerprint.io"
+  ]
+}

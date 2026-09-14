@@ -1,0 +1,401 @@
+_next_id: 28
+constraints:
+- id: C001
+  added: 2026-09-13 11:37 UTC
+  summary: A reference cited as the theoretical basis for a claim must be verified
+    at the theorem level (statement + direction of the bound), not from its abstract
+    or title.
+  scope: all
+  reason: The boot audit found the project brief cited ref 5 (arXiv 2405.15337) as
+    the basis for the assumption-free eps^lo, where that paper is actually about TV
+    estimation via second-type error decay and is neither a lower bound nor about
+    train/test generative-model samples; the correct basis is ref 4. Reading an abstract
+    for a keyword match and then attributing a specific technical role to the paper
+    is exactly how this error class recurs. Any reference that carries theoretical
+    weight for a claim (a bound, an assumption, a proof direction) must be checked
+    at the level of the actual theorem statement, not the abstract or title.
+- id: C002
+  added: 2026-09-13 11:47 UTC
+  summary: On the bound server, large data goes to the data disk (autodl-tmp), never
+    to the 30 GB container root; a disk reading that shows only `/` is not a capacity
+    measurement.
+  scope: all
+  reason: A full-mount-table check showed the bound server has a ~550 GB data disk
+    (~517 GB free) plus a ~20 TiB shared store and a 45 GB /dev/shm. A disk probe
+    that surfaces only `/` is reading the container OS disk and must never be used
+    to conclude a capacity ceiling. Downloads therefore go to the data disk; Parquet
+    staging goes to /dev/shm; nothing large is written to the container root.
+- id: C003
+  added: 2026-09-13 11:50 UTC
+  summary: Every certification claim must state whether its guarantee is finite-sample
+    or asymptotic; an asymptotic bound may never be presented as a finite-sample certificate.
+  scope: all
+  reason: The bracket's two sides do not carry the same guarantee strength. The small-k
+    upper side (discrete plug-in bound plus finite-alphabet concentration) is a genuine
+    finite-sample certificate. The classifier-based lower side (Michel et al., arXiv
+    2005.06006) provides an asymptotic HPLB, not an exact finite-sample guarantee,
+    and its original R implementation is archived from CRAN, so the logic must be
+    inlined and unit-tested against the paper's formulas. If the paper says "certified"
+    without distinguishing these, a reviewer asking "certified in which sense" collapses
+    the central claim. Wording strength must track guarantee strength, not the desired
+    strength.
+- id: C004
+  added: 2026-09-13 11:52 UTC
+  summary: Any claim about a data file's schema or a resource's capacity must come
+    from reading the artifact itself (grep/stat on the actual file, full mount table),
+    never from another project's column list, a vendor description, a frozen extractor,
+    or a prior report.
+  scope: all
+  reason: 'Three separate assertions about data-file contents were made this session
+    by inferring schema from adjacent artifacts rather than reading the file: a claim
+    that the XS h5 lacks the environment-axis fields (wrong — inferred from another
+    study''s frozen column list, which records what that study read, not what the
+    file holds); a literature note that listed APP as canonical while denying its
+    existence; and a disk-capacity ceiling read off a probe that saw only the container
+    OS disk. Each propagated into the plan before being caught, and each cost a retraction.'
+- id: C005
+  added: 2026-09-13 12:12 UTC
+  summary: The alphabet cardinality m in the concentration bound must come from a
+    provable a-priori reachable set, never from realized support or any data-derived
+    quantity; a certificate built on a data-dependent m is invalid, not merely loose.
+  scope: all
+  reason: 'The concentration bound''s m is the alphabet the distribution lives on.
+    Substituting the *realized* support — the symbols actually observed in the sample
+    — makes m a random quantity, which invalidates the concentration inequality and
+    destroys the distribution-free property of the certificate. The temptation is
+    concrete and quantified: with the library''s default base-64 alphabet, k_cert
+    is ~2-3 and the MVP gate cannot pass; using realized support would make the gate
+    pass immediately while producing an invalid certificate. This is a validity failure,
+    not a tightness tradeoff, and a reviewer asking "where does your m come from"
+    would collapse the claim. The only admissible path is a provable a-priori superset
+    derived from the protocol specification. The same principle applies to any data-dependent
+    quantization grid on the k-prefix side: the grid must be fixed before seeing data.'
+- id: C006
+  added: 2026-09-13 12:17 UTC
+  summary: When revoking a premise, audit in-flight workers for pending destructive
+    actions (delete/overwrite/move) before letting them run; computation-only workers
+    can finish harmlessly, but writers must be stopped first.
+  scope: all
+  reason: When the reduced-scope premise was revoked, a download worker dispatched
+    under that premise was about to delete the already-completed month file as a "cancelled
+    partial" — the opposite of the instruction to move-and-verify. The file had finished
+    downloading and would have been lost. The near-miss was caught only because the
+    team inspected what the in-flight worker was about to DO, not merely what it was
+    computing.
+- id: C007
+  added: 2026-09-13 12:17 UTC
+  summary: In any spec, instruction, or report, a superseded conclusion must be deleted,
+    never left alongside the conclusion that replaced it.
+  scope: all
+  reason: A long instruction retracted a claim in one section while a stale closing
+    paragraph still asserted it, and the contradiction reached the executing team.
+    The same rule was already imposed on the spec documents (delete void entries rather
+    than annotating them) — a consistent rule applied only outward is half-applied.
+    memory.md is now declared the spec source of truth precisely so stale documents
+    cannot drift into Worker code.
+- id: C008
+  added: 2026-09-13 12:26 UTC
+  summary: Capacity on this server is read from `mount` or an explicit-path `df -h
+    /root/autodl-tmp`; `df -h` (bare or with `/`) omits the data disk by device deduplication
+    and must never be used as a capacity measurement.
+  scope: all
+  reason: 'On this host `/dev/md0` is mounted at both `/init` and `/root/autodl-tmp`
+    with XFS project quotas, and `df` deduplicates by device — it prints only the
+    150M `/init` quota view and silently omits the ~550 GB view at `/root/autodl-tmp`.
+    So `df -h /` shows the 30 GB container overlay, and even a full plain `df -h`
+    shows nothing useful. This is the third instance of the same error class in this
+    project: an incomplete probe read as a complete measurement. It has already produced
+    one withdrawn scope decision (D002/M001) and one remediation instruction that
+    would have reproduced it a fourth time.'
+- id: C009
+  added: 2026-09-13 14:09 UTC
+  summary: Every data path in a task spec or report must be written as an absolute
+    path; a bare "data/raw" resolves to an empty same-named directory on the container
+    root rather than the data disk.
+  scope: all
+  reason: 'Two same-named directories exist on the server: `/root/eibo/data/raw` (container
+    root, empty) and `/root/autodl-tmp/eibo/data/raw` (the data disk, holding the
+    verified 2024-06.zip at 2.0 GB). A worker told to find "the project''s data/raw"
+    queried the empty one and reported "no entries", which contradicted both my own
+    measurement and the recorded migration, and briefly raised the possibility that
+    the verified month file had been lost. Ambiguous data paths have now caused three
+    separate misjudgments this session (the h5 read, the probe artifact, and this
+    one), each time because a relative or partial path resolved to the wrong location.'
+- id: C010
+  added: 2026-09-13 15:26 UTC
+  summary: Tasks blocked by the dispatch guard must be reported with their literal
+    error text and NOT reworded to evade; the Director absorbs them or re-routes,
+    and the guard must not be treated as a per-task obstacle to work around.
+  scope: all
+  reason: 'A dispatch guard has now rejected eight task submissions with the message
+    "Paper writing is owned by the Director-dispatched Paper Agent", including tasks
+    with no manuscript content: the GPU detector smoke test (4 attempts), the k-aligned/absolute-quantity
+    compression analysis (3 attempts), and the month-fetch mirror repair (1 attempt).
+    Two of these are on the critical path — the month repair is the sole blocker on
+    both Q1 and Q2 — so the guard is now an execution blocker, not an inefficiency.
+    The trigger is undetermined: the hypothesis that wording or task_type causes it
+    has been weakened repeatedly, including by a near-identical retry that had previously
+    succeeded. Rewording to evade has been explicitly forbidden because it would defeat
+    the purpose of a content boundary.'
+- id: C011
+  added: 2026-09-13 15:49 UTC
+  summary: Long-running jobs must be launched with cwd inside the project scope (/root/eibo),
+    otherwise the platform cannot attribute them and they cannot be killed or cleanly
+    replaced.
+  scope: all
+  reason: The month fetcher (PID 512584) has been alive and failing for over an hour
+    and cannot be terminated by either available route. Raw SSH is blocked by policy;
+    the managed kill refused because attribution is by working directory, and this
+    process was launched with cwd=/root while the project scope is /root/eibo. The
+    practical consequence is that the process which most needs replacing is precisely
+    the one the platform cannot identify as belonging to the project — so it cannot
+    be killed, and a replacement cannot be launched without either contention or a
+    distinct endpoint and output path.
+- id: C012
+  added: 2026-09-13 16:20 UTC
+  summary: Statistical thresholds must be validated against an independent implementation
+    derived from the specification, never by re-running or re-deriving the same code;
+    and every reported confidence level must state its alpha and split convention.
+  scope: all
+  reason: A published threshold table was wrong because alpha/2 was passed into a
+    helper that halved alpha again, giving alpha/4 per law (a joint 1-alpha/2 statement)
+    instead of the standard alpha/2 per law. The error survived several rounds because
+    the executing team independently reproduced the same computation and reported
+    agreement — reproducing one implementation bounds nothing — and because my own
+    "out-of-sample validation" compared the closed form against the same mis-specified
+    code, confirming internal consistency rather than correctness. It was caught only
+    by writing a second implementation from the specification. A regression test now
+    pins the corrected values so the same slip cannot return silently.
+- id: C013
+  added: 2026-09-13 16:45 UTC
+  summary: The dispatch guard's behaviour was characterised from failures alone; two
+    subsequent computation tasks passed, so dispatch the intended task directly rather
+    than pre-emptively splitting it to route around a guard that may not block it.
+  scope: all
+  reason: Dispatch attempts were rejected roughly ten times across the session with
+    a paper-ownership message, including tasks with no manuscript content (the month-fetch
+    repair, the k-aligned analysis, and a GPU smoke test), and the failures were reported
+    as clustering on "computation specs" while read-only work passed. That characterisation
+    drove a workaround — splitting deliverables into raw count tables so the analysis
+    would happen on the Director side instead of in a dispatched worker. Two subsequently
+    dispatched tasks (the masking verification E8 and the Q2 PHIST readout E7), both
+    `run`-type and both reading the h5 with computation, were not blocked. So the
+    guard is not reliably blocking computation as such, and the earlier inference
+    about what it blocks is not supported. The workaround is therefore not needed,
+    and adding it would introduce a division of labour that costs a round trip for
+    no benefit.
+- id: C014
+  added: 2026-09-13 17:11 UTC
+  summary: 'Before concluding that a method or module is unavailable, verify it on
+    the host that will execute: an existing-but-empty directory is not proof of absence,
+    and "I did not find it" must be reported as an import failure with the literal
+    error, never as "the implementation does not exist".'
+  scope: all
+  reason: 'The remote project tree at /root/eibo contains an `src/` directory that
+    is empty, while the local workspace has the complete package at src/eibo/ (three
+    files, 971 lines, including tv_lower_bound in statcore.py:599 and tv_lower_bound_divisibility
+    in divisibility.py:130). An E7 run on the server concluded "the repository has
+    no tv_lower_bound implementation" and recorded the lower side as not_computed
+    for all 1,378 pairs — a verdict reported as unavailable for want of a package
+    that was already written, tested, and reviewed. The same asymmetry was confirmed
+    in both directions: remote src/ is empty while local is full, and artifacts produced
+    on the server do not appear in the local tree while locally-produced artifacts
+    do not exist on the server. So the two trees are genuinely separate, not a shared
+    mount.'
+- id: C015
+  added: 2026-09-13 17:25 UTC
+  summary: The dispatch guard is UNPREDICTABLE at this granularity — identical task
+    types both pass and block within minutes. Dispatch the intended task directly
+    (no pre-emptive splitting, no rewording); if blocked once, report the literal
+    text and stop after at most one verbatim retry.
+  scope: all
+  reason: 'C013 recorded that after two computation tasks passed, the guard "is not
+    reliably blocking computation as such", and advised dispatching directly rather
+    than pre-emptively splitting. That was correct as far as it went, but a third
+    data point arrived within minutes: E3 — the same `run` type, the same read-only
+    h5 reduction as the two that passed — was blocked. So the accurate model is not
+    "the guard does not block computation" but "the guard''s behaviour is unpredictable
+    at this granularity". Both readings agree on the action (dispatch the intended
+    task directly, do not pre-split), but they disagree on the expectation, and the
+    wrong expectation is what makes a single block look like a signal to change approach.
+    Recorded so the next attempt is a stability probe rather than a re-diagnosis,
+    and so a second block is treated as a routing matter rather than as evidence about
+    the task itself.
+
+
+    This supersedes only the expectation in C013; its instruction (do not pre-emptively
+    split) stands, and it remains consistent with C010 (never reword to evade — a
+    verbatim retry is not rewording).'
+- id: C016
+  added: 2026-09-13 18:13 UTC
+  summary: Every two-sided interval must assert eps_lo <= eps_hi per row as a HARD
+    invariant; any violation is a bug and may never be reported as a result. Every
+    bound must name which object's TV it bounds; an unnamed bound is not citable.
+    Never pair a categorical finite-alphabet radius (m fixed) with a continuous-support
+    object.
+  scope: all
+  reason: 'E7b produced eps_lo=0.4835 > eps_hi=0.2718 on 988/990 pairs (M035). The
+    two sides were valid bounds on two DIFFERENT objects: the upper side bounded the
+    TV of the mean-normalized-vector object while adding a categorical m=32 radius,
+    and the lower side bounded the per-flow 32-vector law. Nothing in the pipeline
+    asserted the crossing, so the violation reached a reported result and was reported
+    to the user as a finding.'
+  decision_id: D027
+- id: C017
+  added: 2026-09-13 18:32 UTC
+  summary: Any artifact whose fields report two or more proportions/statistics over
+    the SAME set of pairs must be automatically cross-checked for mutual consistency,
+    and the conflict count reported. A mathematically impossible combination of summary
+    fields is a measurement bug, never a finding.
+  scope: all
+  reason: 'The E7b error was discoverable WITHOUT reading code: `fraction_eps_lo_positive
+    = 1.0` and `fraction_bracket_nonempty = 0.002` simultaneously true on the same
+    990 pairs is already a contradiction, since two valid bounds on one quantity cannot
+    cross. The per-row `eps_lo <= eps_hi` assertion (C016) only fires after 990 rows
+    are computed, so a cheaper and earlier guard was missing. Raised by the Agent
+    and adopted.'
+  decision_id: D027
+- id: C018
+  added: 2026-09-13 18:55 UTC
+  summary: Never inline a formula that already exists in the repo. Import the reference
+    implementation, or print a side-by-side reconciliation against it on at least
+    one real row, and document which reference was used. When two implementations
+    of one quantity disagree by a clean power of 2, treat it as a dropped constant
+    factor and resolve against the repo reference before reporting any number.
+  scope: worker
+  reason: E3's runner reimplemented the concentration radius inline and dropped the
+    0.5 coefficients, making it exactly 2x the repo's own tv_upper_bound; the artifact's
+    metadata recorded the SAME wrong formula so the self-consistency check passed,
+    and the error direction was conservative so the number looked plausible. A power-of-2
+    discrepancy is the signature of a dropped constant factor, not of a different
+    statistical convention.
+  decision_id: D031
+- id: C019
+  added: 2026-09-13 19:10 UTC
+  summary: Every verdict criterion must be shown to FAIL when the hypothesis is false.
+    For two-sided intervals the verdict is `eps_hi < 0.5` on a stated fraction (an
+    informative floor); `eps_lo <= eps_hi` ("non-empty") is a consistency guard and
+    must never be reported as the verdict. Report consistent vs informative groups
+    separately.
+  scope: all
+  reason: 'Fourth occurrence of the same defect: a criterion that passes without testing
+    its hypothesis (k_cert-only gate; `radius < 0.5` alone; Q1''s `fraction_bracket_nonempty`;
+    and Q2''s registered "non-empty certificate" verdict). In Q2''s case the vacuous
+    condition WAS the registered PASS criterion, so it would have been the project''s
+    headline. For a two-sided interval, non-emptiness (`eps_lo <= eps_hi`) is guaranteed
+    by any sufficiently wide interval and says nothing about usefulness.'
+  decision_id: D033
+- id: C020
+  added: 2026-09-13 19:17 UTC
+  summary: A specification must never restate a formula that already exists in the
+    repo — write "call X.Y" instead, and require a side-by-side numeric diff against
+    the reference on real rows. Implementation-level independence does not protect
+    against a source-of-truth error in the shared spec.
+  scope: all
+  reason: 'The 2x radius error propagated into THREE specifications (E3, the independent
+    recompute, and the eps_lo run), so the "independent" recompute reproduced the
+    same wrong constant and reported max deviation 0. Independence at the implementation
+    level is defeated when both implementations inherit their formula from a shared
+    specification: the spec is the common ancestor, and a source-of-truth error is
+    invisible to reimplementation. This is a new failure mode of C012.'
+  decision_id: D031
+- id: C021
+  added: 2026-09-13 19:40 UTC
+  summary: When a formula or reported value is corrected, the ORIGINAL definitional
+    line must be corrected in place too, not only annotated elsewhere. Label the superseded
+    reported figures as understated so no reader reuses them.
+  scope: all
+  reason: E3's reported per-rung figures were produced with the 2x radius, but only
+    their correction and the gate bound were written into the plan; the plan's own
+    DEFINITION line still carried the wrong formula. In a project where the plan is
+    the source of truth, leaving the wrong formula beside its correction means the
+    next reader copies the error rather than the fix -- the same "superseded text
+    beside its replacement" pattern that has recurred all session, now in the spec
+    itself.
+  decision_id: D031
+- id: C022
+  added: 2026-09-13 20:04 UTC
+  summary: '`detect_image` failing is EXPECTED and non-blocking on server 111 — never
+    treat an environment probe as an availability gate; fall back to a real read (`ls`/`stat`/`sha256sum`
+    on a known path) and continue. Specs must contain only the steps the task needs:
+    do not mix environment probes or metadata/document edits into a numeric task,
+    and if a command you were NOT asked to run fails, ignore it and proceed.'
+  scope: all
+  reason: 'Fifth cost-bearing environment misread on this host. `detect_image` returns
+    the literal `SSH error: exit code 1` on server 111 for roughly twenty workers,
+    and every one that proceeded anyway completed successfully (E1, E3, E3b, E7, E7b,
+    E8, E8b, E9, E10, the independent recompute). One worker treated it as a blocking
+    prerequisite, stopped, and consumed a dispatch doing no work. The probe carries
+    no information about reachability. Separately, specs have accumulated non-essential
+    steps (an environment probe, a metadata edit) whose failure or classification
+    derails an otherwise pure task.'
+  decision_id: D037
+- id: C023
+  added: 2026-09-13 21:38 UTC
+  summary: findings.md and memory.md are APPEND-ONLY. Never overwrite them wholesale;
+    merge new content into the existing structure. After any write, grep the section
+    headers and compare the count against the pre-write count — a decrease is data
+    loss and the write must be redone. Back up before any consolidation pass.
+  scope: all
+  reason: findings.md was rewritten in full rather than appended to, dropping ~1,280
+    lines of accumulated working notes. The identical full-rewrite defect had already
+    dropped sections from memory.md three times earlier in the session — four occurrences
+    make it a class, not an accident. A cumulative log cannot be "consolidated" by
+    overwriting it.
+  decision_id: D037
+- id: C024
+  added: 2026-09-13 22:05 UTC
+  summary: The Agent must NOT write findings.md — it is Director-owned. Agent working
+    notes go to memory.md, report.md's handover tail, and artifact fields. Any write
+    to memory.md must be read-modify-write with the section count verified non-decreasing
+    before and after, and a /tmp backup taken first.
+  scope: agent
+  reason: findings.md is designated Director (PI) territory — the tool description
+    says the PI role maintains it — yet it appears in the save_project_file writable
+    whitelist, so the Agent can and did write it, using whole-file replacement. Five
+    separate content losses have now come from full-file writes (three on memory.md,
+    two on findings.md), plus one cache restore that reverted newer writes (M046).
+    Per-occurrence warnings have not worked; the collision needs to be removed structurally.
+  decision_id: D037
+- id: C025
+  added: 2026-09-13 23:03 UTC
+  summary: For any artifact set, dispatch all-remote or all-local — never a mix. After
+    any local edit to a synced artifact, either push it to the server in the same
+    task or record an explicit pending-sync entry; a declared canonical direction
+    is stale until a push accompanies it. Verify byte-identity on both sides after
+    every push.
+  scope: all
+  reason: The local/remote artifact fork has now recurred a fourth time, and this
+    instance spans TWO un-pushed rounds — including the radius_convention/per_rung_note
+    quarantine work that a reviewer depends on. Each local-only dispatch adds another
+    round of divergence. A stated canonical direction (LOCAL -> SERVER) is stale unless
+    a push accompanies the edits.
+  decision_id: D034
+- id: C026
+  added: 2026-09-13 23:29 UTC
+  summary: 'Before dispatching ANY task that touches artifacts, pass a fixed three-question
+    gate: (1) WHICH FILE — paste the real key inventory read from the target; (2)
+    WHICH SIDE — which tree, and which direction the edit flows; (3) CHECK DIRECTION
+    — any delete/replace assertion must state absence as `test $(grep -c ...) -eq
+    0`, never bare `grep -c`.'
+  scope: all
+  reason: 'Three separate instances this session where a rule was written down and
+    then broken by the very next dispatch: recalling a field name after recording
+    "read, never recall"; asserting a DPI inequality that is not a theorem after recording
+    "name the conjunct"; and dispatching server-side after recording "state which
+    tree". The common cause is that each rule was extracted from a lesson rather than
+    converted into a gate that every dispatch passes. Remembering has now failed three
+    times on rules personally just written.'
+  decision_id: D034
+- id: C027
+  added: 2026-09-14 04:06 UTC
+  summary: C3 may not be restated as SUBLINEAR unless the estimator FIRST recovers
+    LINEAR on the known-truth synthetic control (analytic truth D_k = k * 0.3389191441548814).
+    An estimator that has not passed that gate cannot adjudicate C3.
+  scope: all
+  reason: D044 downgraded X3 to INCONCLUSIVE because its estimator returns SUBLINEAR
+    on analytically LINEAR synthetic truth. Any future restatement of C3 must rest
+    on an estimator that first proves it can recover LINEAR on that same control.
+    Without this, C3 can be "confirmed" by estimator bias alone — the exact failure
+    just measured.
+  decision_id: D044

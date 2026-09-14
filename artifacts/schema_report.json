@@ -1,0 +1,224 @@
+{
+  "generated_at_utc": "2026-09-13T11:58:17Z",
+  "formats": {
+    "h5": {
+      "exists": true,
+      "path": "/root/autodl-tmp/RECAST-QUICEXT-25-2026-09-07/data/XS/CESNET-QUICEXT-25-XS.h5",
+      "rows": 10000000,
+      "columns": [
+        {"name": "ID", "dtype": "uint32"},
+        {"name": "DST_IP", "dtype": "|S10"},
+        {"name": "DST_IP_SUBNET", "dtype": "|S10"},
+        {"name": "DST_IP_VERSION", "dtype": "uint8"},
+        {"name": "DST_ASN", "dtype": "uint32"},
+        {"name": "DST_COUNTRY", "dtype": "|S2"},
+        {"name": "DST_PORT", "dtype": "uint16"},
+        {"name": "PROTOCOL", "dtype": "uint8"},
+        {"name": "TIME_FIRST", "dtype": "float64"},
+        {"name": "TIME_LAST", "dtype": "float64"},
+        {"name": "DURATION", "dtype": "float32"},
+        {"name": "FLOW_ENDREASON_IDLE", "dtype": "bool"},
+        {"name": "FLOW_ENDREASON_ACTIVE", "dtype": "bool"},
+        {"name": "FLOW_ENDREASON_OTHER", "dtype": "bool"},
+        {"name": "BYTES", "dtype": "uint64"},
+        {"name": "BYTES_REV", "dtype": "uint64"},
+        {"name": "PACKETS", "dtype": "uint32"},
+        {"name": "PACKETS_REV", "dtype": "uint32"},
+        {"name": "QUIC_VERSION", "dtype": "uint32"},
+        {"name": "QUIC_CLIENT_VERSION", "dtype": "uint32"},
+        {"name": "QUIC_TOKEN_LENGTH", "dtype": "uint16"},
+        {"name": "QUIC_MULTIPLEXED", "dtype": "uint8"},
+        {"name": "QUIC_ZERO_RTT", "dtype": "uint16"},
+        {"name": "QUIC_OCCID", "dtype": "|S40"},
+        {"name": "QUIC_OSCID", "dtype": "|S40"},
+        {"name": "QUIC_SCID", "dtype": "|S40"},
+        {"name": "QUIC_RETRY_SCID", "dtype": "|S40"},
+        {"name": "QUIC_SNI", "dtype": "|S50"},
+        {"name": "QUIC_USER_AGENT", "dtype": "|S75"},
+        {"name": "QUIC_TLS_EXT_LEN", "dtype": "('<i4',(20,))"},
+        {"name": "QUIC_TLS_EXT_TYPE", "dtype": "('<i4',(20,))"},
+        {"name": "QUIC_PACKETS", "dtype": "('<i2',(30,))"},
+        {"name": "PPI", "dtype": "('<i4',(3,30))"},
+        {"name": "PPI_LEN", "dtype": "uint16"},
+        {"name": "PPI_DURATION", "dtype": "float32"},
+        {"name": "PPI_ROUNDTRIPS", "dtype": "uint16"},
+        {"name": "PHIST_SRC_SIZES", "dtype": "('<u4',(8,))"},
+        {"name": "PHIST_DST_SIZES", "dtype": "('<u4',(8,))"},
+        {"name": "PHIST_SRC_IPT", "dtype": "('<u4',(8,))"},
+        {"name": "PHIST_DST_IPT", "dtype": "('<u4',(8,))"},
+        {"name": "APP", "dtype": "int16"},
+        {"name": "CATEGORY", "dtype": "int16"}
+      ]
+    },
+    "parquet": {
+      "exists": true,
+      "path": [
+        "/dev/shm/quicext_parquet/20240601.parquet", "/dev/shm/quicext_parquet/20240602.parquet", "/dev/shm/quicext_parquet/20240603.parquet", "/dev/shm/quicext_parquet/20240604.parquet", "/dev/shm/quicext_parquet/20240605.parquet", "/dev/shm/quicext_parquet/20240606.parquet", "/dev/shm/quicext_parquet/20240607.parquet", "/dev/shm/quicext_parquet/20240608.parquet", "/dev/shm/quicext_parquet/20240609.parquet", "/dev/shm/quicext_parquet/20240610.parquet", "/dev/shm/quicext_parquet/20240611.parquet", "/dev/shm/quicext_parquet/20240612.parquet", "/dev/shm/quicext_parquet/20240613.parquet", "/dev/shm/quicext_parquet/20240614.parquet", "/dev/shm/quicext_parquet/20240615.parquet", "/dev/shm/quicext_parquet/20240616.parquet", "/dev/shm/quicext_parquet/20240617.parquet", "/dev/shm/quicext_parquet/20240618.parquet", "/dev/shm/quicext_parquet/20240619.parquet", "/dev/shm/quicext_parquet/20240620.parquet", "/dev/shm/quicext_parquet/20240621.parquet", "/dev/shm/quicext_parquet/20240622.parquet", "/dev/shm/quicext_parquet/20240623.parquet", "/dev/shm/quicext_parquet/20240624.parquet", "/dev/shm/quicext_parquet/20240625.parquet", "/dev/shm/quicext_parquet/20240626.parquet", "/dev/shm/quicext_parquet/20240627.parquet", "/dev/shm/quicext_parquet/20240628.parquet", "/dev/shm/quicext_parquet/20240629.parquet", "/dev/shm/quicext_parquet/20240630.parquet"
+      ],
+      "files_audited": 30,
+      "rows": 11850145,
+      "schema_consistent_across_files": true,
+      "columns": [
+        {"name": "DST_IP", "dtype": "string"},
+        {"name": "DST_IP_SUBNET", "dtype": "string"},
+        {"name": "DST_IP_VERSION", "dtype": "int64"},
+        {"name": "DST_ASN", "dtype": "int64"},
+        {"name": "DST_COUNTRY", "dtype": "string"},
+        {"name": "DST_PORT", "dtype": "int64"},
+        {"name": "PROTOCOL", "dtype": "int64"},
+        {"name": "TIME_FIRST", "dtype": "timestamp[ns, tz=Europe/Prague]"},
+        {"name": "TIME_LAST", "dtype": "timestamp[ns, tz=Europe/Prague]"},
+        {"name": "DURATION", "dtype": "double"},
+        {"name": "FLOW_END_REASON", "dtype": "int64"},
+        {"name": "BYTES", "dtype": "int64"},
+        {"name": "BYTES_REV", "dtype": "int64"},
+        {"name": "PACKETS", "dtype": "int64"},
+        {"name": "PACKETS_REV", "dtype": "int64"},
+        {"name": "QUIC_VERSION", "dtype": "int64"},
+        {"name": "QUIC_CLIENT_VERSION", "dtype": "int64"},
+        {"name": "QUIC_TOKEN_LENGTH", "dtype": "uint64"},
+        {"name": "QUIC_MULTIPLEXED", "dtype": "int64"},
+        {"name": "QUIC_ZERO_RTT", "dtype": "int64"},
+        {"name": "QUIC_OCCID", "dtype": "string"},
+        {"name": "QUIC_OSCID", "dtype": "string"},
+        {"name": "QUIC_SCID", "dtype": "string"},
+        {"name": "QUIC_RETRY_SCID", "dtype": "string"},
+        {"name": "QUIC_SNI", "dtype": "string"},
+        {"name": "QUIC_USER_AGENT", "dtype": "string"},
+        {"name": "QUIC_TLS_EXT_LEN", "dtype": "list<int64>"},
+        {"name": "QUIC_TLS_EXT_TYPE", "dtype": "list<int64>"},
+        {"name": "QUIC_PACKETS", "dtype": "list<int64>"},
+        {"name": "PPI", "dtype": "list<list<int64>>"},
+        {"name": "PPI_LEN", "dtype": "int64"},
+        {"name": "PPI_DURATION", "dtype": "double"},
+        {"name": "PPI_ROUNDTRIPS", "dtype": "int64"},
+        {"name": "PHIST_SRC_SIZES", "dtype": "list<int64>"},
+        {"name": "PHIST_DST_SIZES", "dtype": "list<int64>"},
+        {"name": "PHIST_SRC_IPT", "dtype": "list<int64>"},
+        {"name": "PHIST_DST_IPT", "dtype": "list<int64>"}
+      ]
+    }
+  },
+  "field_audit": {
+    "QUIC_CLIENT_VERSION": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": true, "populated_count": 11850145}},
+    "DST_COUNTRY": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": true, "populated_count": 11850145}},
+    "DST_ASN": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": true, "populated_count": 11850145}},
+    "QUIC_SNI": {"h5": {"present": true, "populated_count": 9814837}, "parquet": {"present": true, "populated_count": 11661535}},
+    "TIME_FIRST": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": true, "populated_count": 11850145}},
+    "APP": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": false, "populated_count": null}},
+    "PPI": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": true, "populated_count": 11850145}},
+    "PPI_LEN": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": true, "populated_count": 11850145}},
+    "PHIST_SRC_SIZES": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": true, "populated_count": 11850145}},
+    "PHIST_DST_SIZES": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": true, "populated_count": 11850145}},
+    "CATEGORY": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": false, "populated_count": null}},
+    "PHIST_SRC_IPT": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": true, "populated_count": 11850145}},
+    "PHIST_DST_IPT": {"h5": {"present": true, "populated_count": 10000000}, "parquet": {"present": true, "populated_count": 11850145}}
+  },
+  "app_label": {
+    "exists_in_parquet": false,
+    "exists_in_h5": true,
+    "derivation_needed": "from_sni_for_parquet",
+    "evidence": {
+      "parquet_files_audited": 30,
+      "parquet_populated_count": null,
+      "h5_populated_count": 10000000,
+      "parquet_label_counts": "APP absent from the actual Parquet schemas; no Parquet APP population count is measurable.",
+      "h5_label_counts": "APP present and populated in all 10000000 H5 rows."
+    }
+  },
+  "ppi_len": {
+    "h5": {
+      "min": 2,
+      "max": 30,
+      "median": 30.0,
+      "quantiles": {"q1": 2.0, "q5": 2.0, "q25": 19.0, "q50": 30.0, "q75": 30.0, "q95": 30.0, "q99": 30.0, "q100": 30.0},
+      "frac_ge_15": 0.8348841,
+      "max_representable_k": 30,
+      "histogram": {"2": 656189, "3": 20327, "4": 64559, "5": 11979, "6": 36186, "7": 63835, "8": 155470, "9": 71391, "10": 82157, "11": 109790, "12": 115637, "13": 136310, "14": 127329, "15": 140500, "16": 181117, "17": 219570, "18": 232295, "19": 227519, "20": 209948, "21": 214989, "22": 204872, "23": 223562, "24": 210553, "25": 226139, "26": 261358, "27": 244235, "28": 247934, "29": 243118, "30": 5061132}
+    },
+    "parquet": {
+      "min": 2,
+      "max": 30,
+      "median": 29.0,
+      "quantiles": {"q1": 2.0, "q5": 7.0, "q25": 19.0, "q50": 29.0, "q75": 30.0, "q95": 30.0, "q99": 30.0, "q100": 30.0},
+      "frac_ge_15": 0.8546380656101676,
+      "max_representable_k": 30,
+      "histogram": {"2": 382651, "3": 15219, "4": 45430, "5": 17313, "6": 58915, "7": 98825, "8": 69087, "9": 109747, "10": 127831, "11": 174895, "12": 203137, "13": 221985, "14": 197525, "15": 205011, "16": 263620, "17": 345939, "18": 333776, "19": 333224, "20": 305695, "21": 285807, "22": 302805, "23": 307310, "24": 318960, "25": 289770, "26": 279694, "27": 254238, "28": 248211, "29": 236238, "30": 5817287}
+    },
+    "evidence": "Both actual PPI schemas store a length-limited PPI object with capacity 30; observed PPI_LEN has max 30 in both forms. PHIST is a whole-flow aggregate and does not extend the prefix horizon."
+  },
+  "phist": {
+    "binning_scheme": {
+      "size_buckets": 8,
+      "ipt_buckets": 8,
+      "directions": 2,
+      "emitted_arrays": 4,
+      "theoretical_cells": 32,
+      "bucket_edges": ["[0,16)", "[16,32)", "[32,64)", "[64,128)", "[128,256)", "[256,512)", "[512,1024)", "[1024,infinity)"],
+      "interpretation": "The exporter emits four separate marginal arrays: PHIST_SRC_SIZES, PHIST_SRC_IPT, PHIST_DST_SIZES, PHIST_DST_IPT. A 128-cell direction x size x IPT joint object is not emitted by these files."
+    },
+    "source": {
+      "repository": "https://github.com/CESNET/ipfixprobe",
+      "documentation": "https://github.com/CESNET/ipfixprobe/blob/ee200bcef5ae23648089bbf6c2fad90c3ae6a5b3/debian/README.Debian#L497-L521",
+      "implementation": "https://github.com/CESNET/ipfixprobe/blob/ee200bcef5ae23648089bbf6c2fad90c3ae6a5b3/src/plugins/process/phists/src/phists.cpp#L83-L136",
+      "datazoo_docs": "https://cesnet.github.io/cesnet-datazoo/features/#packet-histograms",
+      "units": "bytes for packet sizes; milliseconds for IPT"
+    },
+    "theoretical_cells": 32,
+    "realized_support": {
+      "definition": "A coordinate is occupied when the corresponding stored marginal histogram bin is nonzero in a flow; flow counts can overlap across coordinates.",
+      "h5": {
+        "rows_scanned": 10000000,
+        "rows_with_phist": 10000000,
+        "realized_support": 32,
+        "flow_count_per_cell": {
+          "PHIST_DST_IPT:bin=0": 9191058, "PHIST_DST_IPT:bin=1": 7187311, "PHIST_DST_IPT:bin=2": 6066039, "PHIST_DST_IPT:bin=3": 3914433, "PHIST_DST_IPT:bin=4": 2941713, "PHIST_DST_IPT:bin=5": 2421545, "PHIST_DST_IPT:bin=6": 2182122, "PHIST_DST_IPT:bin=7": 3541152,
+          "PHIST_DST_SIZES:bin=0": 6, "PHIST_DST_SIZES:bin=1": 7257072, "PHIST_DST_SIZES:bin=2": 4626775, "PHIST_DST_SIZES:bin=3": 8226022, "PHIST_DST_SIZES:bin=4": 6154092, "PHIST_DST_SIZES:bin=5": 5033448, "PHIST_DST_SIZES:bin=6": 8313408, "PHIST_DST_SIZES:bin=7": 9360145,
+          "PHIST_SRC_IPT:bin=0": 9089241, "PHIST_SRC_IPT:bin=1": 7346300, "PHIST_SRC_IPT:bin=2": 4807250, "PHIST_SRC_IPT:bin=3": 3309115, "PHIST_SRC_IPT:bin=4": 2528151, "PHIST_SRC_IPT:bin=5": 1668226, "PHIST_SRC_IPT:bin=6": 1388594, "PHIST_SRC_IPT:bin=7": 3012306,
+          "PHIST_SRC_SIZES:bin=0": 1, "PHIST_SRC_SIZES:bin=1": 5646316, "PHIST_SRC_SIZES:bin=2": 8895415, "PHIST_SRC_SIZES:bin=3": 7800512, "PHIST_SRC_SIZES:bin=4": 4194563, "PHIST_SRC_SIZES:bin=5": 4051048, "PHIST_SRC_SIZES:bin=6": 4088925, "PHIST_SRC_SIZES:bin=7": 9999993
+        }
+      },
+      "parquet": {
+        "rows_scanned": 11850145,
+        "rows_with_phist": 11850145,
+        "realized_support": 32,
+        "flow_count_per_cell": {
+          "PHIST_DST_IPT:bin=0": 11421917, "PHIST_DST_IPT:bin=1": 8792603, "PHIST_DST_IPT:bin=2": 7330299, "PHIST_DST_IPT:bin=3": 4337618, "PHIST_DST_IPT:bin=4": 3231073, "PHIST_DST_IPT:bin=5": 2443557, "PHIST_DST_IPT:bin=6": 2073243, "PHIST_DST_IPT:bin=7": 3657971,
+          "PHIST_DST_SIZES:bin=0": 2, "PHIST_DST_SIZES:bin=1": 9728149, "PHIST_DST_SIZES:bin=2": 5368369, "PHIST_DST_SIZES:bin=3": 10143715, "PHIST_DST_SIZES:bin=4": 7974127, "PHIST_DST_SIZES:bin=5": 6098482, "PHIST_DST_SIZES:bin=6": 10465847, "PHIST_DST_SIZES:bin=7": 11330133,
+          "PHIST_SRC_IPT:bin=0": 11172668, "PHIST_SRC_IPT:bin=1": 9455452, "PHIST_SRC_IPT:bin=2": 6162901, "PHIST_SRC_IPT:bin=3": 3973520, "PHIST_SRC_IPT:bin=4": 3011505, "PHIST_SRC_IPT:bin=5": 2007062, "PHIST_SRC_IPT:bin=6": 1637480, "PHIST_SRC_IPT:bin=7": 3587398,
+          "PHIST_SRC_SIZES:bin=0": 6, "PHIST_SRC_SIZES:bin=1": 7181383, "PHIST_SRC_SIZES:bin=2": 11123244, "PHIST_SRC_SIZES:bin=3": 9291505, "PHIST_SRC_SIZES:bin=4": 5488173, "PHIST_SRC_SIZES:bin=5": 4711582, "PHIST_SRC_SIZES:bin=6": 5295863, "PHIST_SRC_SIZES:bin=7": 11850145
+        }
+      }
+    }
+  },
+  "step0": {
+    "h5": {"status": "not_measurable", "reason": "The requested Step-0 occupancy is defined on Parquet only."},
+    "parquet": {
+      "status": "not_measurable",
+      "service_label_column": null,
+      "per_axis_service_counts": null,
+      "crossings": null,
+      "design": "not_measurable",
+      "occupancy_table": [],
+      "asn_audit": null,
+      "single_as_services": [],
+      "reason": "Parquet has no APP column and no validated SNI-to-service mapping was supplied. Raw QUIC_SNI hostnames were not treated as service labels. In addition, only June 2024 Parquet is present, so year-wide month occupancy is unavailable."
+    },
+    "decision_rule": ">=15 fully crossed services would select full_paired_design; otherwise client_version_x_month_two_axis_fallback. The rule is not evaluable from the audited Parquet because service labels are unavailable."
+  },
+  "blockers": [
+    "Only 2024-06.zip was valid and extracted into 30 daily Parquet files (11850145 rows). 2024-07.zip is not a ZIP archive (literal Python error: BadZipFile: File is not a zip file), 2024-08.zip is zero bytes, and the remaining monthly archives are absent from /root/autodl-tmp/eibo/data/raw. Year-wide occupancy and design selection are therefore not measurable.",
+    "APP is absent in Parquet but present and populated in H5. A validated Parquet-side SNI-to-service mapping is required before service crossings, occupancy, per-service DST_ASN entropy, per-ASN service entropy, or single-AS service flags can be reported.",
+    "The earlier raw-SNI Step-0 proxy result was discarded; raw hostnames are not service labels.",
+    "The H5 does contain QUIC_CLIENT_VERSION, DST_COUNTRY, DST_ASN, QUIC_SNI, TIME_FIRST, APP, and CATEGORY. The prior belief that H5 lacks the environment-axis fields is false according to the direct H5 read."
+  ],
+  "audit_evidence": {
+    "local_pwd": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade",
+    "remote_free_h": "               total        used        free      shared  buff/cache   available\nMem:           754Gi        68Gi       153Gi       9.4Gi       531Gi       671Gi\nSwap:             0B          0B          0B          0B",
+    "remote_raw_dir_listing": "2024-06.zip 1747398591 bytes; 2024-07.zip 4973604 bytes; 2024-08.zip 0 bytes",
+    "parquet_scan_scratch": "/dev/shm/quicext_parquet",
+    "h5_scan_command": "/root/miniconda3/bin/python3.12 /root/eibo/correct_schema_report.py",
+    "parquet_scan_batch_size": 100000,
+    "h5_scan_batch_size": 250000
+  }
+}

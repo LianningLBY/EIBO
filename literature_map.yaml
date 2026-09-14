@@ -1,0 +1,475 @@
+meta:
+  last_updated: '2026-09-13T12:53:51.508Z'
+  total_papers: 20
+  verification_level_note: 'verification_level: abstract | fulltext | unverified | unknown. Restored because C001 requires knowing whether a citation was checked at theorem level rather than abstract level; the boolean `verified` cannot express that. NB: the managed writer (core.tools.literature.add_to_literature_map) normalises entries to its own whitelist and will DROP verification_level and notes — re-add them after any writer-based update.'
+categories:
+- dataset
+- hygiene-shortcut
+- lower-bound-method
+- open-set
+- positioning-competitor
+- theory-foundation
+- tv-estimation
+papers:
+  cherubin2017bayes:
+    title: 'Bayes, not Naïve: Security Bounds on Website Fingerprinting Defenses'
+    authors:
+    - Giovanni Cherubin
+    year: 2017
+    venue: Proceedings on Privacy Enhancing Technologies, 2017
+    url: https://doi.org/10.1515/popets-2017-0046
+    doi: ''
+    bibtex_key: cherubin2017bayes
+    category: theory-foundation
+    role: foundation
+    relevance: Provides feature-set-conditional Bayes-error bounds for website fingerprinting. EIBO uses this as the closed-set information-limit precedent that motivates pairwise error floors.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: cherubin-bayes-not-naive
+    notes: The DOI landing page was not directly readable, but the PoPETs/arXiv record for the same paper was fetched and verified.
+    verification_level: verified-abstract
+  liu2026inevitability:
+    title: The Inevitability of Side-Channel Leakage in Encrypted Traffic
+    authors:
+    - Guangjie Liu
+    - Guang Cheng
+    - Weiwei Liu
+    year: 2026
+    venue: arXiv, 2026
+    url: https://arxiv.org/abs/2602.14055
+    doi: ''
+    bibtex_key: liu2026inevitability
+    category: theory-foundation
+    role: foundation
+    relevance: Establishes a positive mutual-information side-channel existence theorem for encrypted traffic under explicit non-degeneracy and distinguishability conditions. EIBO uses it as the single-letter/i.i.d. positioning baseline against which dependent packet-prefix laws are tested.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    arxiv_id: '2602.14055'
+    source_bibtex_key: liu-side-channel-leakage
+    notes: The abstract verifies the existence theorem and positive-information claim. Full HTML Section 4.1 verifies that additivity and exponential error decay require conditionally i.i.d. repeated observations; no broader multi-letter open-problem claim is used.
+    verification_level: verified-abstract
+  liu2026rate:
+    title: Rate-Distortion Function for Encrypted Traffic Side-Channel Defense
+    authors:
+    - Guangjie Liu
+    - Guang Cheng
+    - Weiwei Liu
+    - Yutong Wang
+    year: 2026
+    venue: arXiv, 2026
+    url: https://arxiv.org/abs/2607.17889
+    doi: ''
+    bibtex_key: liu2026rate
+    category: theory-foundation
+    role: foundation
+    relevance: Characterizes a side-channel rate-distortion function and an exact leakage-cost Pareto frontier within a stationary-memoryless defense class. EIBO uses this as the verified Theta_iid comparator, while extending attention to dependent QUIC prefixes.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    arxiv_id: '2607.17889'
+    source_bibtex_key: liu-rate-distortion-side-channel
+    notes: The abstract explicitly restricts the result to Theta_iid and states exact-frontier-within-Theta_iid. It does not need to support any claim about an open problem outside that class.
+    verification_level: verified-abstract
+  michel2020high:
+    title: High Probability Lower Bounds for the Total Variation Distance
+    authors:
+    - Loris Michel
+    - Jeffrey Näf
+    - Nicolai Meinshausen
+    year: 2020
+    venue: arXiv, 2020
+    url: https://arxiv.org/abs/2005.06006
+    doi: ''
+    bibtex_key: michel2020high
+    category: lower-bound-method
+    role: method-component
+    relevance: Develops classifier- and projection-based high-probability lower bounds on total variation distance. EIBO consumes the sup-over-cutoff construction for the assumption-free epsilon_k lower bracket, which certifies distinguishability rather than an error floor.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    arxiv_id: '2005.06006'
+    source_bibtex_key: michel-high-probability-tv
+    notes: The fetched arXiv record identifies an arXiv preprint; a peer-reviewed publication venue was not verified.
+    verification_level: verified-abstract
+  tao2024discriminative:
+    title: 'Discriminative Estimation of Total Variation Distance: A Fidelity Auditor for Generative Data'
+    authors:
+    - Lan Tao
+    - Shirong Xu
+    - Chi-Hua Wang
+    - Namjoon Suh
+    - Guang Cheng
+    year: 2024
+    venue: arXiv, 2024
+    url: https://arxiv.org/abs/2405.15337
+    doi: ''
+    bibtex_key: tao2024discriminative
+    category: tv-estimation
+    role: method-component
+    relevance: Relates discriminative estimation of total variation to Bayes classification risk and studies convergence under a specified hypothesis class, including Gaussian examples. EIBO uses it as a triangulation estimator between discrete plug-in bounds and larger-k model-based estimates.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    arxiv_id: '2405.15337'
+    source_bibtex_key: tao-discriminative-tv
+    notes: The fetched record says Fidelity Auditor for Generative Data, not the brief's Fidelity Estimator for Generative Models. Its abstract does not provide a distribution-free upper confidence bound for EIBO.
+    verification_level: verified-abstract
+  orlitsky2016optimal:
+    title: Optimal prediction of the number of unseen species
+    authors:
+    - Alon Orlitsky
+    - Ananda Theertha Suresh
+    - Yihong Wu
+    year: 2016
+    venue: Proceedings of the National Academy of Sciences, 2016
+    url: https://doi.org/10.1073/pnas.1607774113
+    doi: ''
+    bibtex_key: orlitsky2016optimal
+    category: theory-foundation
+    role: foundation
+    relevance: Provides the classical unseen-species framework for predicting future unseen mass from occupancy counts. EIBO uses it as the Good-Toulmin/missing-service-mass foundation for deployment-site open-set uncertainty.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: orlitsky-unseen-species
+    notes: The DOI-associated PNAS record was resolved through the web search/fetch workflow; the source is used for the unseen-species method, not as evidence for QUIC-specific sampling.
+    verification_level: verified-abstract
+  eriksson2026unseen:
+    title: The Unseen Species Problem Revisited
+    authors:
+    - Edward Eriksson
+    year: 2026
+    venue: arXiv, 2026
+    url: https://arxiv.org/abs/2602.08769
+    doi: ''
+    bibtex_key: eriksson2026unseen
+    category: theory-foundation
+    role: foundation
+    relevance: Develops prediction intervals and finite-sample guarantees for unseen-species prediction, including Good-Toulmin and incidence-data extensions. EIBO uses it to attach prediction intervals to the site-specific missing-service-mass term.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    arxiv_id: '2602.08769'
+    source_bibtex_key: eriksson-unseen-species-revisited
+    notes: The arXiv record shows v1 submitted 2026-02-09 and v4 revised 2026-09-09, matching the brief's v4 date.
+    verification_level: verified-abstract
+  zhao2025sweet:
+    title: 'The Sweet Danger of Sugar: Debunking Representation Learning for Encrypted Traffic Classification'
+    authors:
+    - Yuqi Zhao
+    - Giovanni Dettori
+    - Matteo Boffa
+    - Luca Vassio
+    - Marco Mellia
+    year: 2025
+    venue: ACM SIGCOMM, 2025
+    url: https://doi.org/10.1145/3718958.3750498
+    doi: ''
+    bibtex_key: zhao2025sweet
+    category: hygiene-shortcut
+    role: background
+    relevance: Shows that representation-learning performance in encrypted traffic classification can be driven by shortcut features and leakage-prone data organization. EIBO uses it to require flow- and time-disjoint evaluation and to prohibit packet-level splitting.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: zhao-sweet-danger-sugar
+    notes: An arXiv version of the paper was fetched; the ACM DOI landing page itself was not directly readable.
+    verification_level: verified-abstract
+  zhao2026shortcutcatcher:
+    title: 'ShortcutCatcher: Making Traffic Classification Reliable'
+    authors:
+    - Yuqi Zhao
+    - Matteo Boffa
+    - Luca Vassio
+    - Marco Mellia
+    year: 2026
+    venue: Proceedings of the ACM on Networking (CoNEXT), 2026
+    url: https://doi.org/10.1145/3808671
+    doi: ''
+    bibtex_key: zhao2026shortcutcatcher
+    category: hygiene-shortcut
+    role: background
+    relevance: Targets shortcut-induced unreliability in traffic classification and motivates systematic address-field randomization and shortcut audits. EIBO uses it for the mandated DST_IP, DST_ASN, DST_COUNTRY, and related ablations.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: false
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: zhao-shortcutcatcher
+    notes: The DOI and complete author list resolve in search metadata, but the ACM primary landing page was not fetchable; search snippets are not treated as abstract verification.
+    verification_level: unverified
+  wang2026bias:
+    title: 'Bias in the Shadows: Explore Shortcuts in Encrypted Network Traffic Classification'
+    authors:
+    - Chuyi Wang
+    - Xiaohui Xie
+    - Tongze Wang
+    - Yong Cui
+    year: 2026
+    venue: arXiv, 2026
+    url: https://arxiv.org/abs/2601.10180
+    doi: ''
+    bibtex_key: wang2026bias
+    category: hygiene-shortcut
+    role: background
+    relevance: Introduces a model-agnostic, data-driven framework for detecting dataset-specific shortcut features and environment-entangled correlations. EIBO uses it to motivate feature hygiene and explicit environment-confound diagnostics.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    arxiv_id: '2601.10180'
+    source_bibtex_key: wang-bias-in-the-shadows
+    notes: The fetched arXiv title uses Explore, matching the brief; the abstract emphasizes BiasSeeker and evaluation across 19 public datasets.
+    verification_level: verified-abstract
+  luxemburk2023cesnet:
+    title: 'CESNET-QUIC22: a large one-month QUIC network traffic dataset from backbone lines'
+    authors:
+    - Jan Luxemburk
+    - Karel Hynek
+    - Tomáš Čejka
+    - Andrej Lukačovič
+    - Pavel Šiška
+    year: 2023
+    venue: Data in Brief, 2023
+    url: https://doi.org/10.1016/j.dib.2023.108888
+    doi: ''
+    bibtex_key: luxemburk2023cesnet
+    category: dataset
+    role: evaluation
+    relevance: Provides the one-month CESNET QUIC traffic benchmark and service labels used for replication and scale comparison. EIBO consumes it for the QUIC22 replication of prefix statistics and open-set detector validation.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: luxemburk-cesnet-quic22
+    notes: The fetched CESNET dataset record uses lowercase a in the title; the Data in Brief article is the DOI target and is dated 2023.
+    verification_level: verified-fulltext
+  cesnet2025cesnet:
+    title: 'CESNET-QUICEXT-25: A year-long QUIC traffic dataset with EXTended attributes'
+    authors:
+    - CESNET
+    - 'associated paper cited by the record: Jan Mücke et al.'
+    year: 2025
+    venue: Zenodo, 2025
+    url: https://zenodo.org/records/17249078
+    doi: ''
+    bibtex_key: cesnet2025cesnet
+    category: dataset
+    role: evaluation
+    relevance: Releases a year-long QUIC dataset with extended flow attributes, including client-version, country, ASN, and timing-related metadata. EIBO uses it for the paired environment-content separability design and the primary bracket study.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: cesnet-quicext-25
+    notes: The Zenodo record was fetched directly. The record is the dataset source; it cites Mücke et al.'s associated CoNEXT 2025 measurement paper.
+    verification_level: verified-fulltext
+  kuhlewind2022rfc:
+    title: 'RFC 9312: Manageability of the QUIC Transport Protocol'
+    authors:
+    - Mirja Kühlewind
+    - Brian Trammell
+    year: 2022
+    venue: IETF RFC 9312, 2022
+    url: https://datatracker.ietf.org/doc/rfc9312/
+    doi: ''
+    bibtex_key: kuhlewind2022rfc
+    category: theory-foundation
+    role: background
+    relevance: Documents the QUIC wire image, coalesced packets, observable fields, and operationally visible information. EIBO uses it to define the protocol-quotiented admissible observable alphabet before empirical implementation conditioning.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: ietf-rfc9312
+    notes: The fetched RFC is Informational and was published in September 2022. It is protocol context, not a statistical lower-bound result.
+    verification_level: verified-fulltext
+  smith2021website:
+    title: Website Fingerprinting in the Age of QUIC
+    authors:
+    - Jean-Pierre Smith
+    - Prateek Mittal
+    - Adrian Perrig
+    year: 2021
+    venue: Proceedings on Privacy Enhancing Technologies, 2021
+    url: https://netsec.ethz.ch/publications/papers/smith2021website.pdf
+    doi: ''
+    bibtex_key: smith2021website
+    category: theory-foundation
+    role: background
+    relevance: Empirically studies QUIC website fingerprinting, cross-protocol generalization, and feature behavior. EIBO uses it as QUIC traffic-analysis context and as motivation for implementation-conditioned rather than purely spec-conditioned assumptions.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: smith-website-fingerprinting-quic
+    notes: The fetched PoPETs proceedings page verifies the title, authors, issue, pages, DOI, and abstract; the ETH PDF URL itself was not directly readable.
+    verification_level: verified-abstract
+  fang2021learning:
+    title: Learning Bounds for Open-Set Learning
+    authors:
+    - Zhen Fang
+    - Jie Lu
+    - Anjin Liu
+    - Feng Liu
+    - Guangquan Zhang
+    year: 2021
+    venue: Proceedings of Machine Learning Research (ICML), 2021
+    url: https://arxiv.org/abs/2106.15792
+    doi: ''
+    bibtex_key: fang2021learning
+    category: open-set
+    role: background
+    relevance: Provides a generalization bound for open-set learning and introduces auxiliary open-set risk. EIBO uses it for open-set learning context while targeting information-theoretic pairwise limits rather than a training-risk bound.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    arxiv_id: '2106.15792'
+    source_bibtex_key: fang-learning-bounds-open-set
+    notes: The fetched arXiv record verifies the five-author list and the ICML-era open-set-learning contribution.
+    verification_level: verified-abstract
+  garov2025closer:
+    title: A Closer Look at the Learnability of Out-of-Distribution (OOD) Detection
+    authors:
+    - Konstantin Garov
+    - Kamalika Chaudhuri
+    year: 2025
+    venue: arXiv, 2025
+    url: https://arxiv.org/abs/2501.08821
+    doi: ''
+    bibtex_key: garov2025closer
+    category: open-set
+    role: background
+    relevance: Separates uniform and non-uniform learnability for OOD detection and gives sample-complexity analyses. EIBO uses it to frame unknown-service rejection as a learnability problem without conflating learnability guarantees with a TV-based error floor.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    arxiv_id: '2501.08821'
+    source_bibtex_key: garov-ood-learnability
+    notes: The fetched arXiv record verifies the two-author list and the stated learnability focus.
+    verification_level: verified-abstract
+  scheirer2013toward:
+    title: Toward Open Set Recognition
+    authors:
+    - Walter J. Scheirer
+    - Anderson de Rezende Rocha
+    - Archana Sapkota
+    - Terrance E. Boult
+    year: 2013
+    venue: IEEE Transactions on Pattern Analysis and Machine Intelligence, 2013
+    url: https://doi.org/10.1109/tpami.2012.256
+    doi: ''
+    bibtex_key: scheirer2013toward
+    category: open-set
+    role: background
+    relevance: Introduces the open-set recognition framing and risk of novel classes at deployment. EIBO uses it as the classical recognition context for its zero-unknown-calibration formulation.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: false
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: scheirer-toward-open-set
+    notes: The DOI metadata was identified, but the IEEE primary landing page was not directly fetchable in this scan; author list is retained as verifiable bibliographic metadata with primary-page verification pending.
+    verification_level: unverified
+  qu2026sepspace:
+    title: 'SepSpace: payload-free open-set network traffic classification via supervised contrastive representation learning and prototype-radius rejection'
+    authors:
+    - Yanze Qu
+    - Chaofan Zheng
+    - Minxi Liao
+    - Hailong Ma
+    - Yiming Jiang
+    - Wenbo Wang
+    year: 2026
+    venue: Cybersecurity, 2026
+    url: https://doi.org/10.1186/s42400-026-00635-x
+    doi: ''
+    bibtex_key: qu2026sepspace
+    category: positioning-competitor
+    role: direct-competitor
+    relevance: Provides a payload-free open-set network traffic classifier using supervised contrastive representations and prototype-radius rejection. EIBO uses SepSpace as a deployed-detector baseline for per-service floor coverage validation.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: qu-sepspace
+    notes: The Springer article page was fetched directly and exposes the complete six-author list, abstract, venue, and 2026 publication metadata.
+    verification_level: verified-fulltext
+  wang2025reliable:
+    title: Reliable Open-Set Network Traffic Classification (RoNeTC)
+    authors:
+    - Xueman Wang
+    - Yipeng Wang
+    - Yingxu Lai
+    - Zhiyu Hao
+    - Alex X. Liu
+    year: 2025
+    venue: IEEE Transactions on Information Forensics and Security, 2025
+    url: https://doi.org/10.1109/tifs.2025.3544067
+    doi: ''
+    bibtex_key: wang2025reliable
+    category: positioning-competitor
+    role: direct-competitor
+    relevance: Represents uncertainty-aware reliable open-set network traffic classification. EIBO uses RoNeTC as a detector baseline and compares observed rejection errors with the independently estimated epsilon bracket.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: false
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: wang-ronetc
+    notes: The DOI and exact bibliographic metadata resolve in search results, but IEEE Xplore returned an access error for the primary page; search snippets are not treated as abstract verification.
+    verification_level: unverified
+  shamsimukhametov2023indistinguishability:
+    title: Indistinguishability of Traffic by Open TLS Parameters with Encrypted ClientHello
+    authors:
+    - D. R. Shamsimukhametov
+    - A. A. Kurapov
+    - M. V. Liubogoshchev
+    - E. M. Khorov
+    year: 2023
+    venue: Journal of Communications Technology and Electronics, 2023
+    url: https://doi.org/10.1134/s1064226923120173
+    doi: ''
+    bibtex_key: shamsimukhametov2023indistinguishability
+    category: positioning-competitor
+    role: direct-competitor
+    relevance: Studies traffic indistinguishability under open TLS parameters and Encrypted ClientHello. EIBO uses it as the closest protocol/privacy positioning comparator and motivates an SNI/ECH sensitivity analysis.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: false
+    added_by: ''
+    added_at: '2026-09-13T12:53:19.876Z'
+    source_bibtex_key: shamsimukhametov-ech-indistinguishability
+    notes: 'The DOI-associated title, venue, date, and author list resolve in search metadata, but the Springer primary landing page was not directly fetchable; the entry remains unverified under the primary-record rule.
+
+
+      Direct competitor, and the only one never fetched — its absence is load-bearing for "measured bracket is novel". A targeted title search (2026-09-13) surfaced the record: Shamsimukhametov, Kurapov, Liubogoshchev, Khorov, Journal of Communications Technology and Electronics 68(12):1523-1529, 2023, DOI 10.1134/S1064226923120173, from the Kharkevich Institute / MIPT group. The same group published "Is Encrypted ClientHello a Challenge for Traffic Classification?" (IEEE Access 2022) and related ECH classification work whose reported object is classifier accuracy (hRFTC / hC4.5 F-score), not a measured two-sided TV bracket. On that evidence this does not meet the category-4 definition, so the novelty boundary holds. CAVEAT: the paper itself was NOT fetched — this rests on the record plus the group''s adjacent work, so the verdict is metadata-level, and the entry stays verified=false. Fetch the full text before the novelty sentence is locked.'
+    verification_level: unverified

@@ -1,0 +1,94 @@
+{
+  "log_path": "/root/autodl-tmp/eibo/tools/month_fetch.log",
+  "log_bytes": 265618,
+  "log_lines": 1775,
+  "log_first_line": "2026-09-13T14:34:57+00:00 JOB_START endpoint=https://zenodo.org/api/records/17249078/files/ raw=/root/autodl-tmp/eibo/data/raw/ workers=8 file_workers=3",
+  "log_last_line": "2026-09-13T15:34:36+00:00 PART_RETRY name=2024-09.zip range=2264924160-2281701375 attempt=4 sleep_s=8 error=HTTPError:HTTP Error 504: Gateway Time-out",
+  "part_retry_count": 1764,
+  "part_ok_count": 0,
+  "http_error_histogram": {
+    "504: Gateway Time-out": 1764
+  },
+  "raw_http_error_histogram": {
+    "HTTPError:HTTP Error 504: Gateway Time-out": 1764
+  },
+  "first_attempt_ts": "2026-09-13T14:35:29+00:00",
+  "last_attempt_ts": "2026-09-13T15:34:36+00:00",
+  "elapsed_span": "00:59:07",
+  "any_success_found": {
+    "value": false,
+    "evidence": "grep -nE 'HTTP[[:space:]]+(200|206)|Content-Range' produced no output"
+  },
+  "retry_cadence": {
+    "attempt_timestamps": 1764,
+    "consecutive_intervals": 1763,
+    "min_interval_seconds": 0.0,
+    "median_interval_seconds": 0.0,
+    "mean_interval_seconds": 2.012,
+    "max_interval_seconds": 75.0,
+    "approx_interval": "About 2.0 seconds in the aggregate log; many adjacent records share a timestamp because workers run concurrently.",
+    "sleep_s_histogram": {
+      "1": 356,
+      "2": 356,
+      "4": 356,
+      "8": 356,
+      "16": 340
+    },
+    "tight_loop_or_spaced": "Spaced per part with exponential backoff (1, 2, 4, 8, 16 seconds); aggregate same-second bursts are concurrency effects, not a no-backoff tight loop."
+  },
+  "distinct_parts": 356,
+  "stuck_part_analysis": {
+    "unique_name_range_identifiers": 356,
+    "identifiers_repeated": 356,
+    "retry_lines_per_identifier_min": 4,
+    "retry_lines_per_identifier_max": 5,
+    "conclusion": "The same part/range identifiers are retried repeatedly; this is a stuck-part pattern, not a sequence of newly progressing parts."
+  },
+  "other_error_kinds": {},
+  "raw_dir_listing": "total 1711312\ndrwxr-xr-x 6 root root       4096 2026-09-13 23:18:02.663052127 +0800 .\ndrwxr-xr-x 4 root root       4096 2026-09-13 22:05:45.127694450 +0800 ..\ndrwxr-xr-x 2 root root         10 2026-09-13 21:47:33.237711664 +0800 .2024-07.zip.parts\ndrwxr-xr-x 2 root root         10 2026-09-13 22:34:57.736062491 +0800 .2024-08.zip.parts\ndrwxr-xr-x 2 root root         10 2026-09-13 22:34:57.736062491 +0800 .2024-09.zip.parts\ndrwxr-xr-x 2 root root         10 2026-09-13 23:18:02.663052127 +0800 .2024-10.zip.parts\n-rw-r--r-- 1 root root 1747398591 2026-09-13 19:45:39.987728137 +0800 2024-06.zip\n-rw-r--r-- 1 root root    4973604 2026-09-13 20:32:10.829299490 +0800 2024-07.zip\n-rw-r--r-- 1 root root          0 2026-09-13 20:37:29.553350740 +0800 2024-08.zip",
+  "part_dirs": [
+    {
+      "path": "/root/autodl-tmp/eibo/data/raw/.2024-07.zip.parts",
+      "ls_listing": "total 4\ndrwxr-xr-x 2 root root   10 2026-09-13 21:47:33.237711664 +0800 .\ndrwxr-xr-x 6 root root 4096 2026-09-13 23:18:02.663052127 +0800 ..",
+      "du_sb_bytes": 10,
+      "total_file_bytes": 0,
+      "file_count": 0
+    },
+    {
+      "path": "/root/autodl-tmp/eibo/data/raw/.2024-08.zip.parts",
+      "ls_listing": "total 4\ndrwxr-xr-x 2 root root   10 2026-09-13 22:34:57.736062491 +0800 .\ndrwxr-xr-x 6 root root 4096 2026-09-13 23:18:02.663052127 +0800 ..",
+      "du_sb_bytes": 10,
+      "total_file_bytes": 0,
+      "file_count": 0
+    },
+    {
+      "path": "/root/autodl-tmp/eibo/data/raw/.2024-09.zip.parts",
+      "ls_listing": "total 4\ndrwxr-xr-x 2 root root   10 2026-09-13 22:34:57.736062491 +0800 .\ndrwxr-xr-x 6 root root 4096 2026-09-13 23:18:02.663052127 +0800 ..",
+      "du_sb_bytes": 10,
+      "total_file_bytes": 0,
+      "file_count": 0
+    },
+    {
+      "path": "/root/autodl-tmp/eibo/data/raw/.2024-10.zip.parts",
+      "ls_listing": "total 4\ndrwxr-xr-x 2 root root   10 2026-09-13 23:18:02.663052127 +0800 .\ndrwxr-xr-x 6 root root 4096 2026-09-13 23:18:02.663052127 +0800 ..",
+      "du_sb_bytes": 10,
+      "total_file_bytes": 0,
+      "file_count": 0
+    }
+  ],
+  "pid_512584_alive": true,
+  "wchan": "futex_wait_queue_me",
+  "proc_state": "State:\tS (sleeping)",
+  "df_data_disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/md0        550G   44G  507G   8% /root/autodl-tmp",
+  "free_h": "               total        used        free      shared  buff/cache   available\nMem:           754Gi       174Gi        77Gi       9.4Gi       503Gi       565Gi\nSwap:             0B          0B          0B",
+  "intermittent_vs_permanent": {
+    "verdict": "Within this run, the failure is persistent rather than intermittently successful.",
+    "evidence": "The first PART_RETRY is already HTTP 504 at 2026-09-13T14:35:29+00:00; all 1764 PART_RETRY lines are HTTP 504; PART_OK count is 0; and no HTTP 200, HTTP 206, or Content-Range evidence appears. The log alone cannot determine whether a separate earlier run against the endpoint succeeded."
+  },
+  "blockers": [
+    "All 356 distinct name/range identifiers are stuck in repeated HTTP 504 retries.",
+    "No successful part response is recorded in this log.",
+    "PID 512584 remains alive and sleeping in futex_wait_queue_me.",
+    "The required detect_image probe returned: SSH error: exit code 1."
+  ]
+}

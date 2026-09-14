@@ -1,0 +1,41 @@
+# ============================================================
+# EIBO — repository scope
+# Tracked:     knowledge files, scripts, src/, docs/, tests/, artifacts/ (evidence)
+# Excluded:    runtime logs, caches, bulk data, credentials
+# Rationale:   the project's entire evidentiary chain is "every reported number
+#              maps to an artifact's bytes", so artifacts/ MUST be tracked.
+# ============================================================
+
+# --- Runtime output that is NOT evidence ---
+# logs/ also contains logs/chats/ (conversation transcripts) -> never publish.
+logs/
+checkpoints/
+data_snapshots/
+study-packages/
+
+# --- Tooling / environment state ---
+.agent-ml/
+.claude/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# --- Bulk data and weights: never track (corpora, checkpoints) ---
+data/
+*.h5
+*.pcap
+*.pt
+*.pth
+*.safetensors
+*.pkl
+
+# --- Bulk intermediates inside artifacts that are regenerable, not cited ---
+artifacts/tmp/
+artifacts/*.tmp
+artifacts/**/*.npz
+
+# --- Stale scaffolding from an earlier repo attempt (referenced by no script) ---
+.eibo_remote_gitignore
+.work/
+

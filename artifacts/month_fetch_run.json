@@ -1,0 +1,75 @@
+{
+  "stall_confirmation": {
+    "sample_1": {
+      "timestamp": null,
+      "command": "stat -c '%n %s %Y' /root/autodl-tmp/eibo/data/raw/2024-07.zip /root/autodl-tmp/eibo/data/raw/2024-08.zip",
+      "output": "/root/autodl-tmp/eibo/data/raw/2024-07.zip 4973604 1789302730\n/root/autodl-tmp/eibo/data/raw/2024-08.zip 0 1789303049",
+      "bytes": {"2024-07.zip": 4973604, "2024-08.zip": 0}
+    },
+    "sample_2": {
+      "timestamp": null,
+      "command": "stat -c '%n %s %Y' /root/autodl-tmp/eibo/data/raw/2024-07.zip /root/autodl-tmp/eibo/data/raw/2024-08.zip",
+      "output": "/root/autodl-tmp/eibo/data/raw/2024-07.zip 4973604 1789302730\n/root/autodl-tmp/eibo/data/raw/2024-08.zip 0 1789303049",
+      "bytes": {"2024-07.zip": 4973604, "2024-08.zip": 0}
+    },
+    "deltas": {"2024-07.zip": 0, "2024-08.zip": 0},
+    "wait_seconds": 60,
+    "verdict": "hung",
+    "timestamp_note": "The probe command did not print wall-clock timestamps; timestamps are intentionally left null rather than inferred."
+  },
+  "diagnosis": {
+    "wchan": "futex_wait_queue_me",
+    "status_excerpt": "State: S (sleeping); Threads: 28",
+    "sockets": "The process had a large set of socket descriptors under /proc/512584/fd.",
+    "log_findings": {
+      "path": "/root/autodl-tmp/eibo/tools/month_fetch.log",
+      "finding": "The log shows repeated HTTP 504 Gateway Time-out retries for 2024-07.zip, 2024-08.zip, and 2024-09.zip."
+    }
+  },
+  "process_stopped": {
+    "pid": 512584,
+    "kill_signal_used": null,
+    "evidence_it_is_gone": false,
+    "raw_ssh_kill_output": "Starting or terminating GPU processes through Worker SSH is blocked. Use managed GPU job tools so reservations and process ownership remain enforceable: kill 512584",
+    "managed_kill_output": "Orphan kill refused: live OS-user/cwd evidence does not uniquely attribute the process to this project.",
+    "live_identity": "5e68e8c3-d682-417f-9d47-e47c05a92a7e:279156861",
+    "live_cwd": "/root",
+    "project_scope": "/root/eibo"
+  },
+  "deleted_08": {
+    "deleted": false,
+    "bytes_before": 0,
+    "reason": "Deletion was not attempted while the existing fetcher remained alive and no permitted cleanup surface was available."
+  },
+  "resume_07": {
+    "starting_offset": 4973604,
+    "growth_log": [],
+    "stalls": ["Existing hung process; no replacement launched."]
+  },
+  "mechanism": {
+    "launch_method": null,
+    "concurrency": {"workers": 8, "file_workers": 3},
+    "endpoint": "https://zenodo.org/api/records/17249078/files/<name>/content",
+    "replacement_launched": false
+  },
+  "throughput_window": {
+    "duration_minutes": null,
+    "bytes": null,
+    "aggregate_mb_s": null,
+    "status": "UNESTABLISHED: replacement fetcher could not be launched while PID 512584 remained alive."
+  },
+  "projected_remaining_hours": null,
+  "files_completed": [
+    {"name": "2024-06.zip", "bytes": 1747398591, "expected": 1747398591, "sha256": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b", "valid": true},
+    {"name": "2024-07.zip", "bytes": 4973604, "expected": 1492444177, "sha256": null, "valid": false},
+    {"name": "2024-08.zip", "bytes": 0, "expected": 1522431507, "sha256": null, "valid": false}
+  ],
+  "sha256sums_file_contents": null,
+  "data_disk_avail_gb": 507,
+  "blockers": [
+    "PID 512584 is still alive.",
+    "Raw Worker SSH kill was refused verbatim.",
+    "Managed kill was refused because cwd=/root is outside the project scope /root/eibo.",
+    "No second fetcher was launched, no 2024-08 deletion was performed, and no >5-minute throughput was measured."
+  ]
+}

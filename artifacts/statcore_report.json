@@ -1,0 +1,689 @@
+{
+  "library_path": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/src/eibo/statcore.py",
+  "test_path": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/tests/test_statcore.py",
+  "tests_total": 6,
+  "tests_passed": 6,
+  "synthetic_recovery_table": [
+    {
+      "true_tv": 0.14999999999999997,
+      "eps_lo": 0.09275201967894099,
+      "tv_hat": 0.1562,
+      "eps_hi_point": 0.1562,
+      "eps_hi_upper_bound": 0.22289718290025873,
+      "covers": true
+    },
+    {
+      "true_tv": 0.14999999999999997,
+      "eps_lo": 0.08040764302326717,
+      "tv_hat": 0.1496,
+      "eps_hi_point": 0.1496,
+      "eps_hi_upper_bound": 0.21629718290025873,
+      "covers": true
+    },
+    {
+      "true_tv": 0.14999999999999997,
+      "eps_lo": 0.07365795920745587,
+      "tv_hat": 0.14400000000000002,
+      "eps_hi_point": 0.14400000000000002,
+      "eps_hi_upper_bound": 0.21069718290025874,
+      "covers": true
+    }
+  ],
+  "empirical_coverage_rate_alpha_0_05": 1.0,
+  "interval_sanity": {
+    "eps_lo": 0.16638834948098521,
+    "eps_hi": 0.3278197174363575,
+    "informative_fraction": 1.0,
+    "lower_bound_method": "michel_adaptive_sup_cutoff"
+  },
+  "cardinality_vs_k": [
+    {
+      "scheme": "exact",
+      "k": 1,
+      "theoretical_max": 3002.0000000000023,
+      "log_theoretical_max": 8.007034012193408,
+      "realized_support": 1,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 0.02,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 2,
+      "theoretical_max": 9012004.000000015,
+      "log_theoretical_max": 16.014068024386816,
+      "realized_support": 916,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 18.32,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 3,
+      "theoretical_max": 27054036008.000065,
+      "log_theoretical_max": 24.021102036580224,
+      "realized_support": 2486,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 49.72,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 4,
+      "theoretical_max": 81216216096016.25,
+      "log_theoretical_max": 32.02813604877363,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 5,
+      "theoretical_max": 2.43811080720241e+17,
+      "log_theoretical_max": 40.03517006096704,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 6,
+      "theoretical_max": 7.31920864322164e+20,
+      "log_theoretical_max": 48.04220407316045,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 7,
+      "theoretical_max": 2.197226434695138e+24,
+      "log_theoretical_max": 56.049238085353856,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 8,
+      "theoretical_max": 6.59607375695481e+27,
+      "log_theoretical_max": 64.05627209754726,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 9,
+      "theoretical_max": 1.9801413418378213e+31,
+      "log_theoretical_max": 72.06330610974067,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 10,
+      "theoretical_max": 5.944384308197187e+34,
+      "log_theoretical_max": 80.07034012193408,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 11,
+      "theoretical_max": 1.7845041693208096e+38,
+      "log_theoretical_max": 88.0773741341275,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 12,
+      "theoretical_max": 5.3570815163010364e+41,
+      "log_theoretical_max": 96.0844081463209,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 13,
+      "theoretical_max": 1.608195871193561e+45,
+      "log_theoretical_max": 104.0914421585143,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 14,
+      "theoretical_max": 4.827804005323108e+48,
+      "log_theoretical_max": 112.09847617070771,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact",
+      "k": 15,
+      "theoretical_max": 1.4493067623980084e+52,
+      "log_theoretical_max": 120.10551018290113,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 3002
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 1,
+      "theoretical_max": 465.99999999999983,
+      "log_theoretical_max": 6.144185634125646,
+      "realized_support": 1,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 0.02,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 2,
+      "theoretical_max": 217155.99999999985,
+      "log_theoretical_max": 12.288371268251291,
+      "realized_support": 389,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 7.78,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 3,
+      "theoretical_max": 101194696.0,
+      "log_theoretical_max": 18.432556902376938,
+      "realized_support": 2381,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 47.62,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 4,
+      "theoretical_max": 47156728335.99994,
+      "log_theoretical_max": 24.576742536502582,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 5,
+      "theoretical_max": 21975035404575.945,
+      "log_theoretical_max": 30.720928170628227,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 6,
+      "theoretical_max": 1.0240366498532414e+16,
+      "log_theoretical_max": 36.865113804753875,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 7,
+      "theoretical_max": 4.772010788316082e+18,
+      "log_theoretical_max": 43.009299438879516,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 8,
+      "theoretical_max": 2.2237570273552997e+21,
+      "log_theoretical_max": 49.153485073005164,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 9,
+      "theoretical_max": 1.036270774747572e+24,
+      "log_theoretical_max": 55.29767070713081,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 10,
+      "theoretical_max": 4.829021810323663e+26,
+      "log_theoretical_max": 61.441856341256454,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 11,
+      "theoretical_max": 2.2503241636108322e+29,
+      "log_theoretical_max": 67.5860419753821,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 12,
+      "theoretical_max": 1.0486510602426502e+32,
+      "log_theoretical_max": 73.73022760950775,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 13,
+      "theoretical_max": 4.886713940730761e+34,
+      "log_theoretical_max": 79.8744132436334,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 14,
+      "theoretical_max": 2.277208696380508e+37,
+      "log_theoretical_max": 86.01859887775903,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "k": 15,
+      "theoretical_max": 1.0611792525133192e+40,
+      "log_theoretical_max": 92.16278451188468,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 466
+    },
+    {
+      "scheme": "log",
+      "k": 1,
+      "theoretical_max": 63.99999999999998,
+      "log_theoretical_max": 4.1588830833596715,
+      "realized_support": 1,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 0.02,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 2,
+      "theoretical_max": 4095.999999999997,
+      "log_theoretical_max": 8.317766166719343,
+      "realized_support": 51,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 1.02,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 3,
+      "theoretical_max": 262143.99999999948,
+      "log_theoretical_max": 12.476649250079014,
+      "realized_support": 858,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 17.16,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 4,
+      "theoretical_max": 16777215.999999976,
+      "log_theoretical_max": 16.635532333438686,
+      "realized_support": 2243,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 44.86,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 5,
+      "theoretical_max": 1073741823.999999,
+      "log_theoretical_max": 20.79441541679836,
+      "realized_support": 2486,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 49.72,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 6,
+      "theoretical_max": 68719476735.999725,
+      "log_theoretical_max": 24.953298500158027,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 7,
+      "theoretical_max": 4398046511103.985,
+      "log_theoretical_max": 29.1121815835177,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 8,
+      "theoretical_max": 281474976710655.2,
+      "log_theoretical_max": 33.27106466687737,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 9,
+      "theoretical_max": 1.8014398509481878e+16,
+      "log_theoretical_max": 37.42994775023704,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 10,
+      "theoretical_max": 1.1529215046068448e+18,
+      "log_theoretical_max": 41.58883083359672,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 11,
+      "theoretical_max": 7.378697629483785e+19,
+      "log_theoretical_max": 45.747713916956386,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 12,
+      "theoretical_max": 4.722366482869608e+21,
+      "log_theoretical_max": 49.906597000316054,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 13,
+      "theoretical_max": 3.0223145490365615e+23,
+      "log_theoretical_max": 54.06548008367573,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 14,
+      "theoretical_max": 1.9342813113833934e+25,
+      "log_theoretical_max": 58.2243631670354,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "log",
+      "k": 15,
+      "theoretical_max": 1.2379400392853768e+27,
+      "log_theoretical_max": 62.383246250395075,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 64
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 1,
+      "theoretical_max": 68.00000000000001,
+      "log_theoretical_max": 4.219507705176107,
+      "realized_support": 1,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 0.02,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 2,
+      "theoretical_max": 4624.000000000003,
+      "log_theoretical_max": 8.439015410352214,
+      "realized_support": 51,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 1.02,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 3,
+      "theoretical_max": 314432.0000000005,
+      "log_theoretical_max": 12.658523115528322,
+      "realized_support": 858,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 17.16,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 4,
+      "theoretical_max": 21381376.000000022,
+      "log_theoretical_max": 16.878030820704428,
+      "realized_support": 2243,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 44.86,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 5,
+      "theoretical_max": 1453933568.0000007,
+      "log_theoretical_max": 21.097538525880534,
+      "realized_support": 2486,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 49.72,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 6,
+      "theoretical_max": 98867482624.00034,
+      "log_theoretical_max": 25.317046231056644,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 7,
+      "theoretical_max": 6722988818432.019,
+      "log_theoretical_max": 29.53655393623275,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 8,
+      "theoretical_max": 457163239653376.94,
+      "log_theoretical_max": 33.756061641408856,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 9,
+      "theoretical_max": 3.1087100296429612e+16,
+      "log_theoretical_max": 37.97556934658496,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 10,
+      "theoretical_max": 2.1139228201572124e+18,
+      "log_theoretical_max": 42.19507705176107,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 11,
+      "theoretical_max": 1.4374675177069036e+20,
+      "log_theoretical_max": 46.414584756937174,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 12,
+      "theoretical_max": 9.774779120407007e+21,
+      "log_theoretical_max": 50.63409246211329,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 13,
+      "theoretical_max": 6.64684980187676e+23,
+      "log_theoretical_max": 54.85360016728939,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 14,
+      "theoretical_max": 4.519857865276195e+25,
+      "log_theoretical_max": 59.0731078724655,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 68
+    },
+    {
+      "scheme": "initial_aware",
+      "k": 15,
+      "theoretical_max": 3.0735033483878104e+27,
+      "log_theoretical_max": 63.292615577641605,
+      "realized_support": 2500,
+      "n_samples": 2500,
+      "support_per_sqrt_n": 50.0,
+      "grid_size_one_datagram": 68
+    }
+  ],
+  "plugin_upper_bound_assessment": [
+    {
+      "scheme": "exact",
+      "n_per_service": 2500,
+      "alpha": 0.05,
+      "k_with_concentration_radius_below_0_5": [],
+      "judgment": "potentially non-vacuous only at the listed k; the full-grid plug-in upper bound is otherwise expected to clip to 1."
+    },
+    {
+      "scheme": "exact_small_log_large",
+      "n_per_service": 2500,
+      "alpha": 0.05,
+      "k_with_concentration_radius_below_0_5": [
+        1
+      ],
+      "judgment": "potentially non-vacuous only at the listed k; the full-grid plug-in upper bound is otherwise expected to clip to 1."
+    },
+    {
+      "scheme": "log",
+      "n_per_service": 2500,
+      "alpha": 0.05,
+      "k_with_concentration_radius_below_0_5": [
+        1
+      ],
+      "judgment": "potentially non-vacuous only at the listed k; the full-grid plug-in upper bound is otherwise expected to clip to 1."
+    },
+    {
+      "scheme": "initial_aware",
+      "n_per_service": 2500,
+      "alpha": 0.05,
+      "k_with_concentration_radius_below_0_5": [
+        1
+      ],
+      "judgment": "potentially non-vacuous only at the listed k; the full-grid plug-in upper bound is otherwise expected to clip to 1."
+    }
+  ],
+  "lower_bound_form": "Michel et al. adaptive sup-over-cutoff in-class-accuracy bound: inf{lambda: V_m(z) <= Q_alpha/3(z, lambda) for every cutoff z}, using Eq. 17 binomial trimming and Appendix B.1 iterated-log hypergeometric-process confidence band, on held-out classifier scores.",
+  "lower_bound_is_michel": true,
+  "known_limitations": [
+    "The exact scheme is finite only because sizes above max_size=1500 are mapped to a fixed catch-all token; sizes at or below 1500 remain exact.",
+    "The plug-in upper bound uses the full fixed grid cardinality, so it becomes vacuous quickly as k grows.",
+    "Michel et al.'s adaptive confidence constant is asymptotic; for small effective counts the implementation uses a conservative finite stabilization because the iterated-log expression is undefined.",
+    "The classifier lower bound is only as useful as held-out score separation; chance performance is not evidence of indistinguishability.",
+    "The empirical coverage experiment checks the stated bound on one finite synthetic regime and is not a universal proof of finite-sample calibration."
+  ],
+  "blockers": [],
+  "test_command": "PYTHONPATH=src /app/.venv/bin/python tests/test_statcore.py",
+  "test_output": "Cardinality exact: k=1:1/3e+03, k=2:916/9.01e+06, k=3:2486/2.71e+10, k=4:2500/8.12e+13, k=5:2500/2.44e+17, k=6:2500/7.32e+20, k=7:2500/2.2e+24, k=8:2500/6.6e+27, k=9:2500/1.98e+31, k=10:2500/5.94e+34, k=11:2500/1.78e+38, k=12:2500/5.36e+41, k=13:2500/1.61e+45, k=14:2500/4.83e+48, k=15:2500/1.45e+52\nCardinality exact_small_log_large: k=1:1/466, k=2:389/2.17e+05, k=3:2381/1.01e+08, k=4:2500/4.72e+10, k=5:2500/2.2e+13, k=6:2500/1.02e+16, k=7:2500/4.77e+18, k=8:2500/2.22e+21, k=9:2500/1.04e+24, k=10:2500/4.83e+26, k=11:2500/2.25e+29, k=12:2500/1.05e+32, k=13:2500/4.89e+34, k=14:2500/2.28e+37, k=15:2500/1.06e+40\nCardinality log: k=1:1/64, k=2:51/4.1e+03, k=3:858/2.62e+05, k=4:2243/1.68e+07, k=5:2486/1.07e+09, k=6:2500/6.87e+10, k=7:2500/4.4e+12, k=8:2500/2.81e+14, k=9:2500/1.8e+16, k=10:2500/1.15e+18, k=11:2500/7.38e+19, k=12:2500/4.72e+21, k=13:2500/3.02e+23, k=14:2500/1.93e+25, k=15:2500/1.24e+27\nCardinality initial_aware: k=1:1/68, k=2:51/4.62e+03, k=3:858/3.14e+05, k=4:2243/2.14e+07, k=5:2486/1.45e+09, k=6:2500/9.89e+10, k=7:2500/6.72e+12, k=8:2500/4.57e+14, k=9:2500/3.11e+16, k=10:2500/2.11e+18, k=11:2500/1.44e+20, k=12:2500/9.77e+21, k=13:2500/6.65e+23, k=14:2500/4.52e+25, k=15:2500/3.07e+27\nIdentical distributions: n=1e4 tv_hat=0.00730, eps_hi=0.05446; n=1e6 tv_hat=0.00128, eps_hi=0.00600\nInterval sanity: lo=0.1664, eps_hi=0.3278, informative_fraction=1.000\nLower-bound monotonicity: strong=0.8460, random/chance=0.0000\nTV coverage at alpha=0.05: 1.000; mean tv_hat=0.1492; true_tv=0.1500\ntest_cardinality_growth_across_schemes (__main__.TestStatcore.test_cardinality_growth_across_schemes) ... ok\ntest_identical_distributions_shrink_with_n (__main__.TestStatcore.test_identical_distributions_shrink_with_n) ... ok\ntest_interval_sanity_and_informative_fraction (__main__.TestStatcore.test_interval_sanity_and_informative_fraction) ... ok\ntest_lower_bound_monotonicity_and_degenerate_classifier (__main__.TestStatcore.test_lower_bound_monotonicity_and_degenerate_classifier) ... ok\ntest_quantization_is_fixed_and_stable (__main__.TestStatcore.test_quantization_is_fixed_and_stable) ... ok\ntest_tv_point_and_upper_bound_coverage (__main__.TestStatcore.test_tv_point_and_upper_bound_coverage) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 18.165s\n\nOK\n"
+}

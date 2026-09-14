@@ -1,0 +1,3204 @@
+dream_id: dream_20260913T223952620684
+project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+venue: ''
+focus: ''
+review_mode: full
+review_visible: false
+writing_visible: false
+what_if: []
+tier_definitions:
+  shared_research_constraints:
+  - 'Object set is fixed: the k-prefix chain-rule symbol law (X1) and the whole-flow
+    rectified PHIST lattice law (X2) remain two coexisting certified objects. Neither
+    is ranked against, substituted for, or summed with the other in any tier.'
+  - 'Declared channel is fixed: (direction, size) only. The exporter''s row-0 inter-packet-timing
+    channel stays deliberately excluded; no SNI, UA, TLS-extension, or CID data is
+    consumed in the declared channel. X9 reports the SNI-inclusive price as a measured
+    delta, never as a redefinition of the channel.'
+  - 'Evaluation identities are fixed: CESNET-QUICEXT-25 XS subset, 45 services at
+    the 2000-flow threshold, 990 service pairs, coverage 990 (k=5) / 990 (k=10) /
+    946 (k=15) / 820 (k=30). Pair set and service set do not change between tiers.
+    Replication target is fixed as CESNET-QUIC22 (one month, 102 labels), same protocol,
+    same channel, same split policy.'
+  - 'Split policy is fixed: flow- and time-disjoint splits; packet-level splitting
+    prohibited; month-level split for the corpus closure; the 69-flow 2024-05 fragment
+    is excluded unconditionally.'
+  - Rung ladder is fixed at M in {1,2,4,8,16}; k grid fixed at {5,10,15,30}. No tier
+    may add or drop a rung or a k point to rescue a claim.
+  - 'Alpha convention is fixed: per-law alpha/2 = 0.025 on each side, union bound
+    over the two laws, joint 0.95 per side. Unstated splits are not citable in any
+    tier.'
+  - 'Gate definition is fixed: (eps_lo > 0.05) AND (eps_hi < 0.5) on ONE named object
+    per cell, upper side finite-sample strict, lower side asymptotic. No tier may
+    relabel the lower side as proven or as a certificate.'
+  - 'Baseline set for X12 is fixed: LightGBM on k-packet features, SepSpace-style
+    prototype-radius rejector, RoNeTC-style uncertainty-quantified rejector, frozen
+    Pcap-Encoder probe; metrics OSCR and FPR95 per held-out service at 5/10/20 percent
+    label holdout.'
+  - 'Venue and goal are fixed: USENIX Security 2027 C2 retained in every tier. ''Not
+    met'' is a PI discussion, not a unilateral fallback; the worst tier is a reframe,
+    not a rescope of the venue.'
+  - 'Uncertainty recorded rather than resolved: the reference-radius values in the
+    X1 record are a per-row recomputation that is still pending confirmation by a
+    run that itself emits the reference radius. Every tier inherits this as an open
+    dependency, and no tier may quote the 2x-loose columns.'
+  - 'Uncertainty recorded rather than resolved: Step-0 occupancy PASS is provisional
+    on the XS subset with unknown month coverage; DST_ASN remains an audited confound
+    (32/53 services single-ASN), not an environment axis.'
+  - 'Uncertainty recorded rather than resolved: registry entry E7 is DONE/failed with
+    no metrics recorded; its scope is treated as a confound to be re-run, never as
+    a negative result.'
+  scientific_invariants:
+  - TV = 0.5 * L1, therefore any TV radius carries two 0.5 factors. The single reference
+    is src/eibo/statcore.py::tv_upper_bound (radius_i = 0.5*sqrt(m/n_i) + 0.5*sqrt(2*ln(2/alpha_law)/n_i));
+    the formula is never restated in a spec, in any tier.
+  - 'Per-row coherence: eps_lo <= eps_hi on every pair. A violation is a BUG to report,
+    not an anomaly to explain. X1 measured 0/990; X2 measured 0/990 against its own
+    radius and must be re-confirmed after the radius work.'
+  - 'Per-item data-processing inequality: TV(vector)_i >= TV(marginal)_i must hold
+    990/990 (X8). A failure means the two sides were not computed on the same flow
+    set, and is a BUG.'
+  - 'Monotonicity facts measured on the XS subset are preserved, not treated as outcomes:
+    tv medians at k=5 rise with M (0.5805 / 0.8833 / 0.9248 / 0.9462 / 0.9673); saturation
+    (tv >= 0.99) rises with M (0.0 / 0.105 / 0.239 / 0.336 / 0.391); the certifiable
+    fraction falls with M.'
+  - M=1 has the HIGHEST k_cert (17/8/5/4/3 at n=3.9e6, tv=0.30), not the lowest. This
+    is why M=1 is the only rung retaining a certificate at k=10 (11/990). The retracted
+    'smallest alphabet, lowest k_cert' parenthetical must not reappear.
+  - 'The mechanism direction is fixed: a finer alphabet RESOLVES MORE (higher channel
+    TV) and it is CERTIFIABILITY, not resolution, that fails, because eps_hi = tv
+    + radius > 0.5 kills the certificate for high-tv pairs. The inverted story would
+    be caught by any reviewer plotting tv against M.'
+  - The two certified objects must never be described as corroborating. Their own-radii
+    fractions (340/990 and 342/990) agree only under each object's own radius convention;
+    the 2x2 decomposition (common-radii 340 vs 935 and 81 vs 342; statistics differ
+    2.7x, constants 7.34x, opposite directions, cancelling) must travel with the fractions
+    in every tier.
+  - 'Superseded and prohibited artifacts: the 2x inlined radius columns, the 31r PHIST
+    form, the Weissman categorical form (935/990, unproven for a correlated-simplex-vector
+    estimator), and the retracted 984/990 arithmetic and 0.0002-margin fragility statement
+    must not be quoted in any tier.'
+  - 'Control-flow invariants: two masking arms must use DIFFERENT flow sets (requiring
+    min(PPI_LEN,k) == k on both sides makes the comparison structurally null, which
+    is what the recorded same_flow_set_both_arms = true run does); ''no change at
+    this k'' is a statement about that k only.'
+  - The M_max frontier is always reported as a closed-form FUNCTION pinned at tv (M_max
+    = 0.5*(n*B^2)^(1/k)), never as an unpinned absolute. The M=8 crossover in n (~4.2186e6
+    at k=5, only ~8 percent above the corpus mean) forbids any absolute 'M>=8 impossible'
+    claim.
+  - D_k is defined on the k-prefix law and is estimated over ALL 990 pairs across
+    the full k range 5..30, with the certified subset used only to validate the estimator.
+    Null (linear) and predicted direction (sublinear) are fixed before measurement,
+    and 'inconclusive' is a permitted outcome.
+  tier_varying_factors:
+  - Whether the pending reference-radius confirmation reproduces the headline and
+    which side of the convention gap the confirmed radius lands on.
+  - Realized certifiable fraction at each rung, and whether the k=10 rung survives
+    at all.
+  - Whether the chain-rule divergence exponent is measurably sublinear, indistinguishable
+    from linear, or linear (assumption truth value for C3).
+  - Informative fraction of the PHIST object under the tight-form L1 radius, versus
+    the 14.2x-looser 31r form actually run.
+  - Whether the lower side validates on real channels at full n (X5's stated limitation),
+    i.e. realized lower-side pass fraction.
+  - X12 floor-violation counts in the informative stratum, and how many of the four
+    detector families the containment holds for.
+  - X11 QUIC22 replication fidelity and X10 full-corpus month-level certifiability.
+  - Whether the assumption-laden divisibility bound (X6) is valid and non-vacuous
+    at large k.
+  - Measured SNI/ECH price and the outcome of a correctly-designed (disjoint-flow-set)
+    masking re-run.
+  tiers:
+    best:
+      tier: best
+      meaning: The original framing holds end to end. The XS headline is reproduced
+        by the confirming reference-radius run, every supporting pillar resolves in
+        the framed direction, and no claim sentence needs editing.
+      key_assumptions:
+      - 'HOLDS: the reference radius is confirmed exactly as recomputed; the 2x defect
+        is isolated and the corrected convention is the one cited, giving the joint
+        gate at or slightly above 336/990.'
+      - 'HOLDS: both sides are coherent on one object per cell (eps_lo <= eps_hi 990/990)
+        and the lower side validates on real channels, not only on the synthetic ensemble.'
+      - 'HOLDS: D_k grows sublinearly in k over all 990 pairs and the confidence treatment
+        excludes the linear i.i.d. null, making C3 a positive discriminating result.'
+      - 'HOLDS: X12 finds no excess floor violations on the informative stratum across
+        all four detector families, so the brackets predict real detector behaviour.'
+      - 'HOLDS: QUIC22 reproduces both monotone trends and the gate magnitude within
+        20 percent; the full corpus closes with month-level certifiability for a majority
+        of threshold services.'
+      - 'HOLDS: the tight-form PHIST rerun lifts the whole-flow object into the same
+        band as the chain object, reported side by side with the mandatory 2x2 decomposition
+        and no ranking.'
+      - 'HOLDS: the SNI/ECH price is small enough that exclusion is a quantified,
+        benign choice, and the corrected masking comparison shows no service-dependent
+        contamination.'
+      number_ranges:
+        joint_gate_fraction_k5_M1:
+        - 0.34
+        - 0.37
+        upper_side_only_fraction_k5_M1:
+        - 0.343
+        - 0.375
+        lower_side_pass_fraction_k5_M1:
+        - 0.996
+        - 1.0
+        joint_gate_fraction_k10_M1:
+        - 0.011
+        - 0.03
+        certifiable_fraction_by_rung_M:
+          M1:
+          - 0.34
+          - 0.37
+          M2:
+          - 0.05
+          - 0.09
+          M4:
+          - 0.003
+          - 0.012
+          M8:
+          - 0.0
+          - 0.002
+          M16:
+          - 0.0
+          - 0.0
+        m_max_frontier_tv0.30_k5_n3.9e6:
+        - 5
+        - 7
+        phist_informative_fraction_tight_radius:
+        - 0.3
+        - 0.4
+        dk_growth_exponent_alpha_vs_linear:
+        - 0.4
+        - 0.8
+        x12_floor_violations_informative_stratum:
+        - 0
+        - 1
+        x11_quic22_replication_fidelity:
+        - 0.8
+        - 1.0
+        x10_month_level_certifiable_service_fraction:
+        - 0.55
+        - 0.9
+        x6_large_k_lower_bound_coverage:
+        - 0.25
+        - 0.6
+        x9_sni_ech_price_delta:
+        - 0.0
+        - 0.03
+      narrative_direction: 'Abstract, C1, C2, C3 and the headline-result template
+        stand verbatim: 33.9 percent of 990 service pairs admit a two-sided bracket
+        whose upper side is finite-sample strict and whose lower side is asymptotic;
+        a finer alphabet strictly reduces the certifiable fraction because it resolves
+        more while eps_hi = tv + radius crosses 0.5; the certificate is lost entirely
+        beyond M=4; and the dependent-prefix chain-rule divergence is sublinear against
+        the linear i.i.d. null. X12 supplies the practitioner-facing containment and
+        X11/X10 close the external-validity questions. No claim is weakened, no section
+        is re-angled, and the guarantee asymmetry is presented as the claim, not as
+        a caveat.'
+    median:
+      tier: median
+      meaning: The headline number survives, but several supporting assumptions are
+        only partially verified. C1 stands at measured strength; C2 and C3 require
+        explicit reductions in claim strength plus additional experiments before the
+        deadline.
+      key_assumptions:
+      - 'HOLDS: the headline gate reproduces, but the confirming run lands in the
+        lower half of the convention gap (gate 310-336) and the nearest boundary pairs
+        sit within a few thousandths of the threshold.'
+      - 'HOLDS WITH CAVEAT: eps_lo <= eps_hi holds 990/990 and the lower side passes
+        on most but not all pairs; the lower side is reported per-pair with its CI,
+        and the gate is quoted with its convention sensitivity.'
+      - 'UNCERTAIN: D_k is weakly sublinear or the estimator cannot separate sublinear
+        from linear over the full k range within CI, so C3 is reported as inconclusive
+        by pre-registration rather than as a direction.'
+      - 'UNCERTAIN: X12 passes for two or three of the four detector families; the
+        floor violation in the remaining family is attributable to a named baseline
+        rather than to the channel model, but is reported in full.'
+      - 'UNCERTAIN: QUIC22 reproduces both monotone trends but the gate magnitude
+        shifts by more than 1.5x or one rung, so the generalization claim is carried
+        by the frontier function''s form, not by the numeric fraction.'
+      - 'FAILS: the tight-form PHIST rerun does not lift the whole-flow object; it
+        stays well below the chain object and is reported as a coexisting object with
+        no ranking and no corroboration language.'
+      - 'UNVERIFIED: the recorded masking comparison is structurally null (same flow
+        set both arms); a correctly disjoint re-run is required before it can be cited
+        as evidence of no contamination.'
+      - 'PARTIAL: X10 closes in aggregate but month-level certifiability holds only
+        for the highest-volume services; Step-0''s XS caveat keeps travelling with
+        every number.'
+      number_ranges:
+        joint_gate_fraction_k5_M1:
+        - 0.3
+        - 0.345
+        upper_side_only_fraction_k5_M1:
+        - 0.31
+        - 0.345
+        lower_side_pass_fraction_k5_M1:
+        - 0.97
+        - 0.996
+        joint_gate_fraction_k10_M1:
+        - 0.004
+        - 0.012
+        certifiable_fraction_by_rung_M:
+          M1:
+          - 0.3
+          - 0.345
+          M2:
+          - 0.03
+          - 0.055
+          M4:
+          - 0.0
+          - 0.005
+          M8:
+          - 0.0
+          - 0.0
+          M16:
+          - 0.0
+          - 0.0
+        m_max_frontier_tv0.30_k5_n3.9e6:
+        - 4
+        - 5
+        phist_informative_fraction_tight_radius:
+        - 0.15
+        - 0.3
+        dk_growth_exponent_alpha_vs_linear:
+        - 0.65
+        - 1.0
+        x12_floor_violations_informative_stratum:
+        - 0
+        - 3
+        x11_quic22_replication_fidelity:
+        - 0.5
+        - 0.8
+        x10_month_level_certifiable_service_fraction:
+        - 0.2
+        - 0.5
+        x6_large_k_lower_bound_coverage:
+        - 0.05
+        - 0.25
+        x9_sni_ech_price_delta:
+        - 0.03
+        - 0.1
+      narrative_direction: 'Keep C1 as measured: a two-sided bracket is computable
+        at k=5/M=1 on the coarsest pre-registered channel, upper side finite-sample
+        strict, lower side asymptotic, and the guarantee asymmetry is left exactly
+        as stated. Reduce C3 from a direction to a discriminating test that did not
+        resolve: report the sublinear estimate, the CI, and the inconclusive verdict,
+        and separate the growth claim from the certification claim so C1 is untouched.
+        Reduce C2''s scope to the measured rungs and state the M=8 n-crossover and
+        the pinned-tv frontier explicitly. X12''s claim is restricted to the detector
+        families that pass, with the informative stratum sized and the empty-stratum
+        case stated rather than papered over. X11 becomes a corpus-dependence paragraph.
+        The required additional experiments are the disjoint-flow-set masking re-run,
+        the tight-radius PHIST rerun, and the radius-convention confirmation run.'
+    worst:
+      tier: worst
+      meaning: 'Core assumptions fail: the dependence structure confers no measurable
+        advantage over i.i.d., the certificate is lost much earlier than framed, and
+        the brackets do not contain real detector floors. C1''s asymmetry survives
+        as the load-bearing claim, but the paper needs a new angle built on the existence
+        and horizon result rather than on the bracket-plus-validation story.'
+      key_assumptions:
+      - 'FAILS: the confirming radius run does not reproduce the reference convention;
+        the valid radius falls back toward or beyond the 2x-loose form, and the headline
+        joint gate lands at or below the 2x-loose value of 291/990.'
+      - 'FAILS: D_k grows linearly (alpha consistent with 1); the i.i.d. theory would
+        have sufficed and the dependent-prefix contribution is falsified by its own
+        pre-registered test.'
+      - 'FAILS: X12 finds systematic floor violations across three or more detector
+        families, so the channel model or the estimated floor is wrong rather than
+        merely slack.'
+      - 'FAILS OR VACUOUS: the divisibility lower bound (X6) either exceeds the true
+        TV more often than the declared alpha allows or is vacuous at k >= 10, so
+        the certificate horizon stays an assertion rather than a measured result.'
+      - 'FAILS: QUIC22 does not reproduce the M-ladder ordering, indicating corpus
+        dependence of the coarse-graining result itself.'
+      - 'STANDS: the guarantee asymmetry (upper side strict, lower side asymptotic,
+        the lower side never called proven) and the direction of the M-mechanism (finer
+        alphabet resolves more, certifiability is what dies) both survive, because
+        they are measured monotonicities rather than outcomes.'
+      - 'STANDS: per-row coherence and the DPI per-item inequality hold, so the failure
+        is scientific, not an implementation defect.'
+      number_ranges:
+        joint_gate_fraction_k5_M1:
+        - 0.12
+        - 0.29
+        upper_side_only_fraction_k5_M1:
+        - 0.16
+        - 0.3
+        lower_side_pass_fraction_k5_M1:
+        - 0.8
+        - 0.97
+        joint_gate_fraction_k10_M1:
+        - 0.0
+        - 0.005
+        certifiable_fraction_by_rung_M:
+          M1:
+          - 0.12
+          - 0.29
+          M2:
+          - 0.005
+          - 0.03
+          M4:
+          - 0.0
+          - 0.0
+          M8:
+          - 0.0
+          - 0.0
+          M16:
+          - 0.0
+          - 0.0
+        m_max_frontier_tv0.30_k5_n3.9e6:
+        - 1
+        - 4
+        phist_informative_fraction_tight_radius:
+        - 0.02
+        - 0.12
+        dk_growth_exponent_alpha_vs_linear:
+        - 0.95
+        - 1.35
+        x12_floor_violations_informative_stratum:
+        - 4
+        - 15
+        x11_quic22_replication_fidelity:
+        - 0.0
+        - 0.5
+        x10_month_level_certifiable_service_fraction:
+        - 0.0
+        - 0.15
+        x6_large_k_lower_bound_coverage:
+        - 0.0
+        - 0.03
+        x9_sni_ech_price_delta:
+        - 0.1
+        - 0.25
+      narrative_direction: 'Reframe around existence and horizon, at the same venue
+        and the same goal. The contribution becomes: a closed-form, generalizable
+        frontier M_max(k, n, tv) that says exactly when a certificate can exist; the
+        measured monotonic loss of certifiability in alphabet resolution with the
+        correct mechanism (finer resolves more, certifiability dies first); and a
+        finite-sample strict one-sided upper certificate that is the only side an
+        error-floor claim needs, stated as the sole surviving certification object.
+        The negative result is reported as a finding, not a limitation: on this channel
+        the i.i.d. single-letter theory suffices and the dependence-structure advantage
+        does not exist, so the practitioner-facing statement becomes ''no detector
+        can beat Y on this window, and here is the function that says no certificate
+        exists at all for the remaining pairs at k >= 10 and M >= 2.'' X12 is repurposed
+        as a boundary-condition check that identified where the channel model breaks,
+        and the paper is repositioned as a measured limit with an explicit non-existence
+        theorem-shaped claim. No venue downgrade, no reduction of the target, and
+        the two-object non-corroboration hygiene rule is retained unchanged.'
+scenarios:
+- tier: best
+  pdf_path: ''
+  imagined_experiments:
+  - name: X1
+    plan_id: X1
+    description: 'HEADLINE BRACKET TABLE (k-prefix chain-rule symbol law; BOTH sides
+      on that ONE object, named in one sentence: the k-prefix chain-rule symbol law
+      of the declared (direction, size) channel). Rung ladder M in {1,2,4,8,16} crossed
+      with k in {5,10,15,30}; the reported per-cell quantity is the joint gate (eps_lo
+      > 0.05) AND (eps_hi < 0.5) as a proportion of pairs, with the one-sided proportions
+      beside it so the binding side is visible, plus saturation (tv >= 0.99) and tv
+      medians. Radii are obtained only by CALLING src/eibo/statcore.py::tv_upper_bound;
+      the formula is not restated here, and the record quotes no inlined 2x columns.
+      Alpha on every number: per-law alpha/2 = 0.025 per side, union bound over the
+      two laws, joint 0.95 for EACH side; unstated splits are not citable. The confirming
+      run emits the reference radius natively and reproduces the headline: joint gate
+      339/990 = 0.3424 at k=5/M=1, at or slightly above the previously recorded 336.
+      Coverage is 990 (k=5) / 990 (k=10) / 946 (k=15) / 820 (k=30). Per-row eps_lo
+      <= eps_hi violations 0/990; per-item TV(vector) >= TV(marginal) 990/990. Nearest
+      margins to each threshold are reported so sensitivity is visible. The k=15 and
+      k=30 cells are the only new compute in this entry (one additional pass).'
+    expected_results:
+      joint_gate_count_k5_M1: 339
+      joint_gate_fraction_k5_M1: 0.3424
+      upper_side_count_k5_M1: 340
+      upper_side_only_fraction_k5_M1: 0.3434
+      lower_side_count_k5_M1: 987
+      lower_side_pass_fraction_k5_M1: 0.997
+      joint_gate_fraction_k10_M1: 0.0202
+      joint_gate_count_k10_M1: 20
+      joint_gate_fraction_k10_M_ge_2: 0
+      certifiable_fraction_by_rung_M_k5:
+      - M1=0.3424
+      - M2=0.0667
+      - M4=0.0071
+      - M8=0.0000
+      - M16=0.0000
+      per_rung_upper_fraction_k5:
+      - M1=0.3434
+      - M2=0.0667
+      - M4=0.0071
+      - M8=0.0000
+      - M16=0.0000
+      per_rung_lower_fraction_k5:
+      - M1=0.9970
+      - M2=1.0000
+      - M4=1.0000
+      - M8=1.0000
+      - M16=1.0000
+      per_rung_saturation_tv_ge_0_99_k5:
+      - M1=0.000
+      - M2=0.105
+      - M4=0.239
+      - M8=0.336
+      - M16=0.391
+      tv_median_by_rung_k5:
+      - M1=0.5805
+      - M2=0.8833
+      - M4=0.9248
+      - M8=0.9462
+      - M16=0.9673
+      binding_side_every_rung: upper
+      coverage_pairs_by_k:
+      - k5=990
+      - k10=990
+      - k15=946
+      - k30=820
+      joint_gate_count_by_k_M1:
+      - k5=339
+      - k10=20
+      - k15=5
+      - k30=0
+      eps_lo_le_eps_hi_violations: 0
+      dpi_tv_vector_ge_marginal_satisfied: 990
+      dpi_violations: 0
+      k_cert_by_M_at_n3.9e6_tv0.30:
+      - M1=17
+      - M2=8
+      - M4=5
+      - M8=4
+      - M16=3
+      m_max_frontier_tv0.30_k5_n3.9e6: 6
+      m8_crossover_n_at_k5: 4218600
+      radius_convention: reference only; confirming run emits the reference radius
+        natively
+      alpha_split: per-law 0.025 per side; union bound over two laws; 0.95 joint per
+        side
+      nearest_upper_pass_margin: 0.0063
+      nearest_upper_fail_margin: 0.0069
+      nearest_lower_pass_margin: 0.0181
+      nearest_lower_fail_margin_among_upper_pass: 0.0062
+    result_rationale: 'Best tier fixes the reference radius and closes the k=15/30
+      coverage, so every pillar lands in the framed direction. The confirming run
+      emits the reference radius natively, reproduces the upper-side count (340/990),
+      and — because the lower side is now measured at full n with no assumed pairs
+      — lifts the joint gate to 339/990: exactly one pair passes the upper side and
+      exits on the lower side, versus four in the earlier record. The certifiable
+      fraction falls monotonically in M (0.3424 / 0.0667 / 0.0071 / 0 / 0) while saturation
+      and tv medians rise monotonically, so the mechanism is the framed one: finer
+      M resolves MORE (higher tv), and it is CERTIFIABILITY that fails because eps_hi
+      crosses 0.5. Because the reference radius is the tighter convex-consistent form,
+      M=1 keeps a certificate at k=10 (20/990) and the new k=15 slice retains 5 pairs,
+      while k=30 retains none — exactly matching the fixed k_cert ordering with M=1
+      highest (17/8/5/4/3). Zero per-row coherence violations and 990/990 per-item
+      data-processing mean the two sides sit on one flow set per pair. No claim sentence
+      needs editing.'
+    tables:
+    - title: 'Headline joint-gate table at k=5 — object: k-prefix chain-rule symbol
+        law (reference radius; per-law alpha 0.025 per side, 0.95 joint per side)'
+      headers:
+      - M
+      - upper pass eps_hi<0.5 (/990)
+      - lower pass eps_lo>0.05 (/990)
+      - joint gate (/990)
+      - joint fraction
+      - saturation tv>=0.99
+      - tv median
+      rows:
+      - - 1
+        - 340
+        - 987
+        - 339
+        - 0.3424
+        - 0
+        - 0.5805
+      - - 2
+        - 66
+        - 990
+        - 66
+        - 0.0667
+        - 0.105
+        - 0.8833
+      - - 4
+        - 7
+        - 990
+        - 7
+        - 0.0071
+        - 0.239
+        - 0.9248
+      - - 8
+        - 0
+        - 990
+        - 0
+        - 0
+        - 0.336
+        - 0.9462
+      - - 16
+        - 0
+        - 990
+        - 0
+        - 0
+        - 0.391
+        - 0.9673
+    - title: Certificate horizon at M=1 across the fixed k grid (coverage varies by
+        k; one object, k-prefix chain)
+      headers:
+      - k
+      - pairs
+      - upper pass
+      - lower pass
+      - joint gate
+      - joint fraction
+      - saturation tv>=0.99
+      rows:
+      - - 5
+        - 990
+        - 340
+        - 987
+        - 339
+        - 0.3424
+        - 0
+      - - 10
+        - 990
+        - 20
+        - 990
+        - 20
+        - 0.0202
+        - 0.01
+      - - 15
+        - 946
+        - 5
+        - 944
+        - 5
+        - 0.0053
+        - 0.052
+      - - 30
+        - 820
+        - 0
+        - 820
+        - 0
+        - 0
+        - 0.201
+    - title: Nearest threshold margins (k=5, M=1; canonical convention) — sensitivity
+        made visible
+      headers:
+      - pair
+      - quantity
+      - value
+      - margin
+      - threshold
+      - verdict
+      rows:
+      - - 29-38
+        - eps_hi
+        - 0.4937
+        - 0.0063
+        - 0.5
+        - pass (closest)
+      - - 03-11
+        - eps_hi
+        - 0.5069
+        - 0.0069
+        - 0.5
+        - fail (closest)
+      - - 21-23
+        - eps_lo
+        - 0.0681
+        - 0.0181
+        - 0.05
+        - pass (closest in-gate)
+      - - 27-29
+        - eps_lo
+        - 0.0438
+        - 0.0062
+        - 0.05
+        - fail; upper passes -> sole exit from the joint gate
+    - title: Invariant and convention checks (990 pairs, k=5; split stated on every
+        number)
+      headers:
+      - check
+      - result
+      - required
+      rows:
+      - - eps_lo <= eps_hi per row
+        - '0'
+        - 0 (a violation is a BUG)
+      - - TV(vector) >= TV(marginal) per item
+        - '990'
+        - '990'
+      - - reference radius emitted natively
+        - 990/990 rows match the statcore entry point
+        - match
+      - - inlined 2x radius columns
+        - absent
+        - absent (prohibited)
+      - - k_cert at n=3.9e6, tv=0.30 (M=1..16)
+        - 17/8/5/4/3
+        - M=1 highest, not lowest
+      - - M=8 crossover in n at k=5
+        - '4218600'
+        - forbids any absolute 'M>=8 impossible'
+    figures_description:
+    - 'Joint-gate fraction versus rung M at k=5 (bars) with saturation fraction (tv>=0.99)
+      overlaid (line): the certificate collapses while resolution rises — the mechanism
+      is visible in one panel.'
+    - 'Upper-side versus lower-side pass fractions per rung at k=5: the upper side
+      is the binding side at every rung, and the lower side is retained everywhere.'
+    - 'Certificate horizon: joint-gate fraction versus k at M=1 across the fixed k
+      grid, annotated with per-k coverage (990/990/946/820) and the k_cert ceiling
+      of 17.'
+    - 'Threshold-margin plot: sorted eps_hi around 0.5 and eps_lo around 0.05 with
+      the four boundary pairs labelled; no sample sits at a hair''s-breadth margin.'
+    analysis: 'Object and radius. Both sides are computed on the ONE named object
+      — the k-prefix chain-rule symbol law of the declared (direction, size) channel.
+      The radius is the repo''s reference construction, obtained by calling the statcore
+      TV upper-bound entry point; the confirming run emits it natively, so the record
+      carries no inlined 2x column and no column is understated. TV = 0.5 * L1 is
+      the reason the reference carries two 0.5 factors, and that is why the corrected
+      convention is the one cited rather than re-derived in prose. Guarantee asymmetry
+      as the claim. The upper side is finite-sample strict, the lower side is an asymptotic
+      bound and is never called proven or a certificate; the upper side binds at every
+      rung (joint fraction equals the upper fraction wherever the lower side passes).
+      Mechanism direction. Finer M resolves MORE — tv medians rise 0.5805 -> 0.9673
+      and saturation rises 0.000 -> 0.391 — and it is CERTIFIABILITY that fails, because
+      eps_hi = tv + radius crosses 0.5 for high-tv pairs. The inverted story is excluded
+      by construction: the same table plots tv against M. Horizon. M=1 has the HIGHEST
+      k_cert (17/8/5/4/3 at n=3.9e6, tv=0.30), which is exactly why it is the only
+      rung retaining a certificate at k=10 (20/990). The new k=15 slice retains 5
+      pairs; k=30 retains none because k_cert(M=1) = 17 < 30 — not because of any
+      unpinned absolute. The frontier is therefore reported as the closed-form function
+      pinned at tv (M_max = 6 at tv=0.30, k=5, n=3.9e6, inside the pre-registered
+      [5,7]), and the M=8 crossover in n (~4.2186e6 at k=5, only ~8 percent above
+      the corpus mean) is stated so no absolute ''M>=8 impossible'' claim can be read
+      in. Invariants. eps_lo <= eps_hi holds 990/990 (0 violations), and TV(vector)
+      >= TV(marginal) holds 990/990 — the two sides are on the same flow set per pair,
+      and the pair check is a self-failing mismatch detector rather than a claim.
+      Margins. The nearest in-gate lower margin is +0.0181, the nearest upper pass
+      margin +0.0063 and the nearest upper failure margin +0.0069; the single joint-gate
+      exit sits at a lower margin of 0.0062. No fragility statement is made about
+      any of these, and no near-zero margin is quoted.'
+  - name: X2
+    plan_id: X2
+    description: 'SECOND CERTIFIED OBJECT (whole-flow rectified PHIST lattice law),
+      reported as a COEXISTING object that may NOT be ranked against, substituted
+      for, or summed with X1. Object in one sentence: draw a flow uniformly, then
+      one cell from its normalized 32-cell PHIST distribution; the packet-cell law
+      uses m=32 with the sum-to-zero coefficient 16 (sum(delta)=0 forces positive
+      and negative mass equal, so the positive part is capped at m/2 = 16). BOTH sides
+      are on this ONE object. The tight valid L1 upper radius (per-service constant
+      4.31/sqrt(n)) replaces the superseded, 14.2x-looser construction and lifts the
+      informative fraction to 342/990 = 0.3455. Alpha as in X1: per-law 0.025 per
+      side, union bound over the two laws, 0.95 joint per side. MANDATORY in the artifact:
+      (a) the object sentence above; (b) the Weissman categorical form is UNPROVEN
+      for a correlated-simplex-vector estimator and is never quoted as X2''s informative
+      fraction; (c) the superseded loose form is not resurrected. THE CLAIM THAT MUST
+      NOT BE MADE: X1''s 340/990 and X2''s 342/990 do NOT corroborate each other.
+      The 2x2 decomposition travels beside the two fractions: holding the radius convention
+      common separates the objects by 260-600 pairs, while the underlying statistics
+      differ ~2.7x and the radius constants ~7.34x in OPPOSITE directions, i.e. two
+      large differences cancelling. Records also: eps_lo <= eps_hi violations 0/990,
+      45 services, 990 pairs, 20,000-flow per-service cap.'
+    expected_results:
+      informative_count_tight_radius: 342
+      informative_fraction_tight_radius: 0.3455
+      lower_side_pass_count: 987
+      lower_side_pass_fraction: 0.997
+      joint_own_radii_count: 341
+      own_radii_counts:
+      - X1=340
+      - X2=342
+      common_radius_X1_convention_counts:
+      - X1=340
+      - X2=935
+      common_radius_X2_type_counts:
+      - X1=81
+      - X2=342
+      statistic_separation_factor: 2.7
+      constant_separation_factor: 7.34
+      separation_directions: opposite; cancelling
+      eps_lo_le_eps_hi_violations: 0
+      tight_form_upper_radius_constant: 4.31/sqrt(n)
+      cap_flows_per_service: 20000
+      services: 45
+      pair_count: 990
+      weissman_form_citable: false
+      superseded_loose_form_citable: false
+      ranking_vs_X1_permitted: false
+      coexisting_objects: true
+    result_rationale: 'Best tier applies the tight valid L1 form to the PHIST object,
+      and that is the one factor that moves X2 out of the previously bracketed low
+      range into the same band as the chain object: the informative fraction is 342/990
+      = 0.3455, inside the pre-registered [0.3,0.4] band, with the lower side at 987/990
+      and zero per-row coherence violations. Crucially, the tier does NOT convert
+      that into cross-confirmation. The mandatory 2x2 is reported beside the fractions:
+      under a common radius the counts separate to 340 vs 935 and 81 vs 342, with
+      the statistics differing ~2.7x and the constants ~7.34x in opposite directions
+      — cancellation, not agreement. Because the object set is fixed, X2 is presented
+      side by side with X1 and never ranked against or substituted for it, and the
+      superseded loose form and the unproven categorical form are recorded as non-citable.'
+    tables:
+    - title: 'X2 headline — object: whole-flow rectified PHIST lattice law (m=32,
+        sum-to-zero coefficient 16; tight L1 upper radius)'
+      headers:
+      - quantity
+      - value
+      rows:
+      - - object (one sentence)
+        - draw a flow uniformly, then one cell from its normalized 32-cell PHIST distribution
+      - - informative fraction (eps_hi<0.5), own radius
+        - 342/990 = 0.3455
+      - - lower-side pass (eps_lo>0.05)
+        - 987/990 = 0.9970
+      - - joint on own radii
+        - 341/990
+      - - eps_lo <= eps_hi violations
+        - 0/990
+      - - upper radius constant (tight valid L1 form)
+        - 4.31/sqrt(n)
+      - - cap flows per service
+        - '20000'
+      - - services / pairs
+        - 45 / 990
+    - title: Mandatory 2x2 radius-convention decomposition — beside the fractions,
+        never a ranking or a cross-check
+      headers:
+      - radius convention held common
+      - X1 k-prefix chain /990
+      - X2 PHIST /990
+      rows:
+      - - each object's own (citable) radius
+        - 340
+        - 342
+      - - X1 reference radius applied to both
+        - 340
+        - 935
+      - - X2-type radius applied to both
+        - 81
+        - 342
+      - - 'separation: statistics / constants'
+        - 2.7x / 7.34x
+        - 2.7x / 7.34x
+      - - direction
+        - opposite; cancelling
+        - opposite; cancelling
+      - - citable as a result
+        - own radius only
+        - own radius only
+      - - note
+        - 935 and 81 are decomposition-only counterfactuals; never cited as either
+          object's informative fraction
+        - same
+    - title: X2 tight-form eps_hi distribution (informative threshold 0.5; own radius
+        convention)
+      headers:
+      - quantile
+      - eps_hi
+      rows:
+      - - min
+        - 0.0102
+      - - q5
+        - 0.041
+      - - q25
+        - 0.32
+      - - median
+        - 0.78
+      - - q75
+        - 0.93
+      - - q95
+        - 0.995
+      - - max
+        - 1.782
+    figures_description:
+    - eps_hi distribution under the tight L1 form with the 0.5 informative threshold
+      marked; the shaded region is the 342/990 informative set.
+    - '2x2 cancellation diagram: own-radius counts versus common-radius counts for
+      X1 and X2, with arrows showing the two opposite-direction gaps that cancel.'
+    - Side-by-side, non-ranked presentation of the two coexisting objects' informative
+      and lower-side fractions, with the cancellation note attached to the panel rather
+      than to either bar.
+    analysis: 'Object discipline. X2 is a coexisting certified object — the whole-flow
+      rectified PHIST lattice law defined by drawing a flow uniformly and then one
+      cell from its normalized 32-cell PHIST distribution — and it is never ranked
+      against, substituted for, or summed with X1. Both of its sides are computed
+      on that one object, with the fixed alpha split. Coefficient. The packet-cell
+      law uses m=32 with the sum-to-zero coefficient 16, because sum(delta)=0 forces
+      positive and negative mass to be equal, capping the positive part at m/2 = 16;
+      the 31-valued form is superseded and is not resurrected. Radius. The tight valid
+      L1 upper radius (per-service constant 4.31/sqrt(n)) replaces the 14.2x-looser
+      construction, and under it the informative fraction is 342/990 = 0.3455 — inside
+      the pre-registered [0.3,0.4] band. The categorical Weissman form is unproven
+      for a correlated-simplex-vector estimator: per-coordinate variance bounds do
+      not give an L1 concentration inequality for correlated coordinates, so it is
+      never quoted as X2''s result. Non-corroboration is carried by the artifact,
+      not by prose alone. The 2x2 decomposition sits beside the two fractions: own
+      radii give 340/990 and 342/990, but holding the radius convention common gives
+      340 vs 935 and 81 vs 342. The underlying statistics differ ~2.7x and the radius
+      constants ~7.34x in OPPOSITE directions, so the two discrepancies cancel under
+      the own-radius convention and manufacture an apparent agreement. No reader can
+      therefore read 340/342 as a cross-check; the near-equality is a coincidence
+      of cancellation. Hygiene. eps_lo <= eps_hi holds 0/990 violations on this object''s
+      own radius, confirming coherence after the radius work; 45 services and 990
+      pairs match the fixed evaluation identity, and the 20,000-flow per-service cap
+      is stated. The side-by-side presentation is deliberately unranked: neither object
+      is the headline, and neither is allowed to borrow the other''s strength.'
+  - name: X3
+    plan_id: X3
+    description: 'Estimate the chain-rule joint divergence D_k on the X1 k-prefix
+      symbol law over the DEPENDENT packet prefix for all 990 service pairs across
+      k in {5,10,15,30} (pair coverage 990/990/946/820). Pre-registered before measurement:
+      null = linear i.i.d. growth (exponent 1), predicted direction = sublinear. Adjudication
+      uses the full k range; the certified subset (k=5: 336 pairs; k=10: 11 pairs)
+      is used ONLY to validate the estimator, never to set the rate. k=15 and k=30
+      lie beyond the largest certifiable rung and are labelled EXPLORATORY ONLY. X2
+      is not used, ranked against, or summed. If the estimator cannot separate sublinear
+      from linear, the reported outcome is inconclusive rather than a direction.'
+    expected_results:
+      dk_growth_exponent_alpha_vs_linear: 0.62
+      dk_growth_exponent_ci95_pair_bootstrap:
+      - 0.51
+      - 0.74
+      linear_iid_null_excluded: true
+      lrt_p_powerlaw_vs_alpha_1: 3.2e-05
+      dk_k5_all990: 0.412
+      dk_k10_all990: 0.633
+      dk_k15_all990_exploratory: 0.814
+      dk_k30_all820_exploratory: 1.251
+      linear_null_predicted_k30: 2.472
+      dk30_over_linear_null: 0.506
+      alpha_certifiable_window_only_k5_k10: 0.62
+      alpha_ci95_certifiable_window_only_k5_k10:
+      - 0.18
+      - 1.02
+      estimator_validation_rank_corr_certified_k5: 0.991
+      estimator_validation_mad_certified_k5: 0.0042
+      estimator_validation_rank_corr_certified_k10: 0.976
+      pairs_analyzed_by_k:
+      - 990
+      - 990
+      - 946
+      - 820
+      alpha_convention: per-law alpha/2 = 0.025 per side; union bound over the two
+        laws; joint 0.95 per side
+      adjudication_window: certifiable k in {5,10}; growth estimated over k in {5,10,15,30}
+        with k=15,30 labelled EXPLORATORY ONLY
+      verdict: SUBLINEAR_CONFIRMED_full_range; certifiable-window-only fit INCONCLUSIVE
+    result_rationale: This tier yields a positive, non-inconclusive C3 because the
+      corrected full-range design is retained rather than the retracted two-point
+      certifiable window. Within a flow the packets are dependent, so each additional
+      prefix position contributes a diminishing conditional divergence increment;
+      the chain-rule sum therefore grows with an exponent well below 1, and four k-points
+      (5,10,15,30) over all 990 pairs give the fit real residual leverage. Pair-level
+      resampling over 990 pairs plus a 45-service cluster bootstrap both exclude exponent
+      1, and the nested linear restriction is rejected by a likelihood-ratio test.
+      The certified subset is not used to set the rate, so its collapse at k=10 cannot
+      terminate the test; it only validates the estimator, and it does so (rank correlation
+      0.991 at k=5). Keeping k=15/30 labelled exploratory is what stops the weakest-coverage
+      points from carrying a growth claim they cannot support.
+    tables:
+    - title: D_k growth against the pre-registered linear i.i.d. null (all 990 pairs;
+        k=15,30 exploratory only)
+      headers:
+      - k
+      - pairs analyzed
+      - D_k
+      - power-law fit c*k^0.62
+      - linear i.i.d. null c*k
+      - ratio fit/null
+      - 95% CI of D_k (pair bootstrap)
+      rows:
+      - - 5
+        - 990
+        - 0.412
+        - 0.412
+        - 0.412
+        - 1
+        - - 0.384
+          - 0.443
+      - - 10
+        - 990
+        - 0.633
+        - 0.633
+        - 0.824
+        - 0.77
+        - - 0.581
+          - 0.687
+      - - 15
+        - 946
+        - 0.814
+        - 0.814
+        - 1.236
+        - 0.66
+        - - 0.741
+          - 0.89
+      - - 30
+        - 820
+        - 1.251
+        - 1.251
+        - 2.472
+        - 0.51
+        - - 1.108
+          - 1.402
+    - title: Exponent fit and confidence treatment
+      headers:
+      - fit window
+      - alpha_hat
+      - 95% CI
+      - CI excludes 1
+      - LRT p vs alpha=1
+      - note
+      rows:
+      - - k in {5,10} (certifiable only)
+        - 0.62
+        - - 0.18
+          - 1.02
+        - false
+        - n/a (no residual df)
+        - two-point fit has no leverage - the reason adjudication was moved to the
+          full range
+      - - k in {5,10,15,30} (full, pre-registered)
+        - 0.62
+        - - 0.51
+          - 0.74
+        - true
+        - 3.2e-05
+        - primary adjudication fit
+      - - k in {5,10,15} (drop k=30)
+        - 0.58
+        - - 0.45
+          - 0.72
+        - true
+        - 0.00085
+        - robustness to the weakest-coverage point
+      - - 45-service cluster bootstrap
+        - 0.61
+        - - 0.49
+          - 0.75
+        - true
+        - n/a
+        - cluster-robust to service-level correlation
+      - - odd/even pair halving
+        - 0.63
+        - - 0.5
+          - 0.77
+        - true
+        - n/a
+        - sample-split stability
+    - title: Estimator validation on the certified subset (validate only, never adjudicate)
+      headers:
+      - k
+      - certified pairs
+      - rank corr vs reference chain-rule estimator
+      - mean abs deviation
+      - per-pair CI coverage
+      - verdict
+      rows:
+      - - 5
+        - 336
+        - 0.991
+        - 0.0042
+        - 0.988
+        - estimator validated
+      - - 10
+        - 11
+        - 0.976
+        - 0.0097
+        - 0.955
+        - validated (small n, reported as such)
+    - title: Pre-registration and alpha bookkeeping
+      headers:
+      - item
+      - value
+      rows:
+      - - family-wise alpha
+        - 0.05
+      - - per-law alpha/2 per side
+        - 0.025
+      - - union bound over the two laws
+        - 'yes'
+      - - joint per-side coverage
+        - 0.95
+      - - null fixed before measurement
+        - linear i.i.d. (exponent 1)
+      - - predicted direction fixed before measurement
+        - sublinear
+      - - permitted outcome
+        - inconclusive
+      - - realized outcome
+        - sublinear confirmed
+    figures_description:
+    - 'log-log D_k against k: measured points with the power-law fit and the pre-registered
+      linear i.i.d. null, k=15 and k=30 drawn hollow to mark them exploratory.'
+    - Bootstrap distribution of the growth exponent with 1.0 marked and the 95% CI
+      shaded, showing exclusion on both the pair-level and service-clustered resamples.
+    - Residuals of the linear null against k, showing the systematic curvature that
+      the power law removes.
+    - Per-pair D_k against per-pair channel tv at k=5, certified pairs distinguished
+      from uncertified pairs.
+    - 'Estimator validation panel: estimated D_k against the reference chain-rule
+      quantity on the certified subset, with the identity line.'
+    - 'Exponent sensitivity: alpha_hat and CI when k=15 and k=30 are dropped, and
+      when only the certifiable window {5,10} is used.'
+    analysis: 'D_k is defined on the X1 k-prefix symbol law and estimated over all
+      990 pairs at every k point; the certified subset is deliberately kept out of
+      the rate estimate so that the growth claim is not hostage to the object that
+      dies first. The measured behaviour is sublinear and clearly separated from the
+      pre-registered linear i.i.d. null: at k=30 the fitted divergence is 1.251 against
+      a null prediction of 2.472, a ratio of 0.506 that widens monotonically with
+      k. The exponent is 0.62 with a 95% CI of [0.51, 0.74] under pair-level resampling
+      and [0.49, 0.75] under service-level clustering, so exponent 1 is excluded by
+      the confidence treatment and by the nested likelihood-ratio restriction. The
+      honest negative control is reported alongside: restricted to the two certifiable
+      k points, the exponent is still 0.62 by construction but its CI is [0.18, 1.02]
+      and includes 1, i.e. the certifiable window alone cannot adjudicate. That is
+      exactly why the full-range design is used, and it is reported as the justification
+      rather than buried. k=15 (946 pairs) and k=30 (820 pairs) are labelled exploratory
+      because only the one-sided lower bound survives beyond the largest certifiable
+      rung; they are shown but never carry the verdict. The estimator-validation step
+      confirms the sublinearity is not an artifact of uncertified pairs: on the certified
+      subset the estimator reproduces the reference chain-rule quantity with rank
+      correlation 0.991 and mean absolute deviation 0.0042 at k=5. Coverage per k
+      is 990/990/946/820 and no pair is added or dropped to rescue the fit. X2 is
+      not used, ranked, or summed anywhere in this result.'
+  - name: X4
+    plan_id: X4
+    description: 'Report the certificate horizon as a closed-form FUNCTION M_max(k,
+      n, tv) with tv_hat pinned at each tabulated value, never as an unpinned absolute.
+      At n = 3.9e6 (corpus mean) the k=5 frontier is 7/7/6/5/4/3/2 for tv_hat = 0.00/0.10/0.20/0.30/0.40/0.45/0.48.
+      Required additions: (a) the M=8 crossover in n at k=5 reported as a curve (4.2186e6
+      at tv_hat = 0.00, only about 8 percent above the corpus mean, so no absolute
+      ''M>=8 impossible'' statement may be written); (b) the same frontier at k=8
+      and k=10; (c) the reason a finer alphabet cannot help - the certificate provably
+      does not exist there at these k and n. Cross-check the closed form against the
+      measured saturation and median channel tv across the rung ladder. The reference
+      radius is confirmed exactly as recomputed (statcore.tv_upper_bound); the radius
+      expression itself is not restated here.'
+    expected_results:
+      m_max_frontier_k5_pinned_tv_grid:
+      - 7
+      - 7
+      - 6
+      - 5
+      - 4
+      - 3
+      - 2
+      m_max_frontier_k5_tv_grid:
+      - 0
+      - 0.1
+      - 0.2
+      - 0.3
+      - 0.4
+      - 0.45
+      - 0.48
+      m_max_frontier_k8_pinned_tv_grid:
+      - 2
+      - 2
+      - 2
+      - 2
+      - 1
+      - 1
+      - 1
+      m_max_frontier_k10_pinned_tv_grid:
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      m_max_frontier_tv0.30_k5_n3.9e6: 5
+      m8_crossover_n_k5_tv0.00: 4218600
+      corpus_mean_n: 3900000
+      m8_crossover_over_corpus_mean: 1.082
+      absolute_m8_impossible_permitted: false
+      no_certificate_tv_threshold_k5: 0.4985
+      k_cert_ladder_n3.9e6_tv0.30_M1_to_M16:
+      - 17
+      - 8
+      - 5
+      - 4
+      - 3
+      reference_radius_confirmed: true
+      frontier_vs_measured_saturation_direction: agree (frontier falls as saturation
+        and median tv rise)
+      certifiable_fraction_by_rung_joint_gate_M1_to_M16:
+      - 0.3394
+      - 0.0475
+      - 0.003
+      - 0
+      - 0
+      closed_form_integer_rung_max_abs_error: 0
+    result_rationale: 'This tier resolves the pending reference-radius confirmation
+      in favour of the recomputed convention, so the closed form''s slack term is
+      evaluated at the reference radius and the pinned frontier reproduces exactly.
+      The frontier is the algebraic inversion of the certificate condition, so it
+      returns the frozen facts without adjustment: k_cert = 17/8/5/4/3 across M =
+      1/2/4/8/16 at n = 3.9e6, tv = 0.30, which is the same inversion that gives the
+      k=5 frontier of 5 at that tv and the all-ones k=10 column where only M=1 survives.
+      Because the M=8 crossover on the tv_hat = 0.00 row is only about 8 percent above
+      the corpus mean, the tier must present it as a curve in n; writing ''M>=8 impossible''
+      as an absolute would be refuted by a single large service. The k=8 and k=10
+      frontiers are the required evidence that a finer alphabet cannot help: at k=10
+      the horizon is 1.98 even at tv_hat = 0, so no rung beyond M=1 can certify, and
+      above tv = 0.4985 no rung certifies at any M. The saturation cross-check closes
+      the loop in direction - rising M raises median tv into the no-certificate region,
+      so the certifiable fraction falls monotonically.'
+    tables:
+    - title: M_max frontier, pinned at tv_hat (n = 3.9e6; reference radius confirmed)
+      headers:
+      - tv_hat
+      - M_max (k=5)
+      - M_max (k=8)
+      - M_max (k=10)
+      - integer rungs certifiable at k=5
+      rows:
+      - - 0
+        - 7
+        - 2
+        - 1
+        - 1-7
+      - - 0.1
+        - 7
+        - 2
+        - 1
+        - 1-7
+      - - 0.2
+        - 6
+        - 2
+        - 1
+        - 1-6
+      - - 0.3
+        - 5
+        - 2
+        - 1
+        - 1-5
+      - - 0.4
+        - 4
+        - 1
+        - 1
+        - 1-4
+      - - 0.45
+        - 3
+        - 1
+        - 1
+        - 1-3
+      - - 0.48
+        - 2
+        - 1
+        - 1
+        - 1-2
+      - - 0.4985 or above
+        - 0
+        - 0
+        - 0
+        - none at any M
+    - title: M=8 crossover in n at k=5, by tv_hat (corpus mean n = 3.9e6)
+      headers:
+      - tv_hat
+      - n needed for M_max >= 8
+      - ratio to corpus mean
+      - absolute 'M>=8 impossible' permitted
+      rows:
+      - - 0
+        - 4218600
+        - 1.082
+        - false
+      - - 0.1
+        - 6603000
+        - 1.693
+        - false
+      - - 0.2
+        - 11769000
+        - 3.018
+        - false
+      - - 0.3
+        - 26612000
+        - 6.824
+        - false
+      - - 0.4
+        - 108080000
+        - 27.71
+        - false
+      - - 0.45
+        - 445780000
+        - 114.3
+        - false
+      - - 0.48
+        - 3063800000
+        - 785.6
+        - false
+    - title: Closed form vs measured monotonicity (k=5)
+      headers:
+      - M
+      - saturation fraction
+      - median channel tv
+      - certifiable fraction (joint gate)
+      - mechanism
+      rows:
+      - - 1
+        - 0
+        - 0.5805
+        - 0.3394
+        - median pair sits above the existence boundary; the certificate survives
+          only in the low-tv tail
+      - - 2
+        - 0.105
+        - 0.8833
+        - 0.0475
+        - finer alphabet resolves more, pushing tv into the no-certificate region
+      - - 4
+        - 0.239
+        - 0.9248
+        - 0.003
+        - same direction, four orders of magnitude fewer pairs
+      - - 8
+        - 0.336
+        - 0.9462
+        - 0
+        - no certificate at this tv and n
+      - - 16
+        - 0.391
+        - 0.9673
+        - 0
+        - no certificate at this tv and n
+    - title: 'Frontier inversion: k_cert by rung (n = 3.9e6, tv = 0.30)'
+      headers:
+      - M
+      - k_cert
+      - certificate at k=5
+      - at k=10
+      - at k=15
+      - at k=30
+      rows:
+      - - 1
+        - 17
+        - true
+        - true
+        - true
+        - false
+      - - 2
+        - 8
+        - true
+        - false
+        - false
+        - false
+      - - 4
+        - 5
+        - true
+        - false
+        - false
+        - false
+      - - 8
+        - 4
+        - false
+        - false
+        - false
+        - false
+      - - 16
+        - 3
+        - false
+        - false
+        - false
+        - false
+    figures_description:
+    - M_max against pinned tv_hat at k=5, with the M = 1/2/4/8/16 rung gridlines marking
+      where each rung drops out.
+    - The same frontier at k=8 and k=10, showing the horizon collapse to the single
+      M=1 rung.
+    - M=8 crossover curve n(tv_hat) at k=5 with the corpus mean marked and the +8
+      percent point at tv_hat = 0 annotated.
+    - Certificate-existence boundary in the (tv_hat, k) plane at n = 3.9e6, with rung
+      contours and the no-certificate region shaded.
+    - Measured saturation and median channel tv overlaid on the closed-form frontier,
+      showing the rung ladder marching into the no-certificate region.
+    - k_cert against M as the inverse view of the frontier, with the k grid lines
+      at 5/10/15/30.
+    analysis: 'The frontier is a function, not a number: M_max(k, n, tv) is the algebraic
+      inversion of the certificate condition, and every value in the table is reported
+      with tv_hat pinned. At n = 3.9e6 the k=5 frontier is 7/7/6/5/4/3/2 across tv_hat
+      = 0.00/0.10/0.20/0.30/0.40/0.45/0.48, and it reproduces the integer rungs with
+      zero error; nothing is fitted to the data. The two required additions are present.
+      First, the M=8 crossover at k=5 is carried as a curve in n: on the tv_hat =
+      0.00 row it needs n = 4.2186e6, only about 8 percent above the corpus mean,
+      so no absolute impossibility statement is written - a single larger service
+      would refute it. At tv_hat = 0.30 the same crossover needs n = 2.66e7, which
+      is reported as the same closed form evaluated elsewhere, not as a different
+      claim. Second, the k=8 frontier falls to 2 at low tv and 1 above tv_hat = 0.40,
+      and the k=10 frontier is 1 everywhere, so the certificate provably does not
+      exist at these k and n; that is the reason a finer alphabet cannot help, and
+      it is a statement about existence, not about resolution. The inverse view agrees
+      with the frozen ladder: k_cert = 17/8/5/4/3 across M = 1/2/4/8/16 at tv = 0.30,
+      which is why M=1 is the only rung retaining a certificate at k=10 and why the
+      coarsest rung is the only viable one. Above tv_hat = 0.4985 no rung certifies
+      at any M. The cross-check against the measured monotonicity closes in direction:
+      saturation rises (0/0.105/0.239/0.336/0.391) and median channel tv rises (0.5805/0.8833/0.9248/0.9462/0.9673)
+      exactly as the frontier falls, so the closed form and the empirical ladder agree
+      without either being fitted to the other. The certifiable fraction falls monotonically
+      (0.3394/0.0475/0.0030/0/0). The reference radius is confirmed as recomputed,
+      so the slack term carries a single convention throughout; the radius expression
+      is not restated and no 2x-loose column is quoted.'
+  - name: X5
+    plan_id: X5
+    description: 'Estimator correctness against analytically known TV on synthetic
+      discrete laws, with independence enforced at the IMPLEMENTATION level: a second
+      estimator written from the TV definition itself, not from the shared spec (which
+      is what let the 2x defect survive a nominal recompute). Battery: (i) tv_hat
+      -> true TV; (ii) eps_hi coverage at the DECLARED per-law alpha/2 = 0.025, with
+      a bare-alpha run reported only as contrast; (iii) eps_lo <= eps_hi per row;
+      (iv) a weak classifier never yields a larger lower bound than a strong one;
+      (v) identical distributions give tv_hat near 0 with the bound shrinking ~1/sqrt(n).
+      Closes with the real-channel full-n lower-side check (20,000-flow cap removed).
+      MANDATED LIMITATION, stated in the output: the lower-side falsification result
+      (divisibility crossing where the classifier does not) is about the SYNTHETIC
+      ensemble sharing the assumed factors, NOT about real channels.'
+    expected_results:
+      synthetic_battery_checks_passed: 5
+      tv_hat_mean_abs_error_n1e6: 0.00098
+      upper_bound_coverage_declared_alpha_over_2: 0.9816
+      upper_bound_coverage_bare_alpha_contrast: 0.9512
+      per_row_coherence_violations: 0
+      weak_vs_strong_lower_bound_inversions: 0
+      identical_distribution_tv_hat_median: 0.0018
+      identical_distribution_bound_ratio_4x_n: 1.97
+      cross_implementation_max_abs_diff: 3.2e-12
+      reference_radius_confirmation: reproduced row-by-row by a run that emits the
+        reference radius itself; the superseded inlined form is isolated as a 2x offset
+        and no loose column is quoted
+      lower_side_pass_count_k5_M1: 986
+      lower_side_pass_fraction_k5_M1: 0.996
+      upper_side_only_fraction_k5_M1: 0.3434
+      joint_gate_fraction_k5_M1: 0.3394
+    result_rationale: 'The independent implementation is written from the definition,
+      so the agreement at 3.2e-12 is evidence about the estimator rather than about
+      two runs of one shared spec; that is the only reason the battery means anything,
+      and it is also why the superseded inlined form shows up as a 2x offset instead
+      of agreeing. Because the tier''s confirming run emits the reference radius itself,
+      the X1 numbers are quoted under the corrected convention, and the full-n lower-side
+      recomputation removes the cap and every assumed pair, so X5''s stated real-channel
+      limitation is discharged rather than restated: 986/990 lower-side passes, 340/990
+      upper-side, 336/990 joint — the C1 headline verbatim. The bare-alpha contrast
+      lands below the declared 0.975 because it is a different guarantee, which is
+      the point of running (ii) at alpha/2.'
+    tables:
+    - title: Synthetic battery under analytically known TV
+      headers:
+      - Check
+      - Statistic
+      - Result
+      - Verdict
+      rows:
+      - - (i) tv_hat -> TV
+        - mean |tv_hat - TV_true| at n = 1e6
+        - '0.00098'
+        - PASS
+      - - (ii) coverage at declared per-law alpha/2 = 0.025
+        - replications with eps_hi >= TV_true (nominal >= 0.975), 2000 reps
+        - '0.9816'
+        - PASS
+      - - (ii-contrast) bare alpha = 0.05
+        - same coverage with the smaller radius
+        - '0.9512'
+        - different guarantee, below the declared 0.975
+      - - (iii) per-row coherence
+        - eps_lo <= eps_hi violations
+        - 0 / 9900 rows
+        - PASS
+      - - (iv) weak vs strong classifier
+        - lower-bound inversions (weak > strong), 2000 comparisons
+        - '0'
+        - PASS
+      - - (v) identical distributions
+        - median tv_hat at n = 1e5
+        - '0.0018'
+        - PASS
+      - - (v) bound shrinkage
+        - width(n) / width(4n)
+        - 1.97 (expected 2.0)
+        - PASS, 1/sqrt(n)
+    - title: Convergence and declared-alpha coverage vs sample size
+      headers:
+      - n
+      - Mean |tv_hat - TV|
+      - eps_hi coverage (target >= 0.975)
+      - Identical-law bound width
+      rows:
+      - - 1000
+        - 0.0312
+        - 0.9805
+        - 0.1094
+      - - 10000
+        - 0.0098
+        - 0.981
+        - 0.0347
+      - - 100000
+        - 0.0031
+        - 0.9816
+        - 0.011
+      - - 1000000
+        - 0.00098
+        - 0.9816
+        - 0.0035
+    - title: Implementation-level independence
+      headers:
+      - Comparison
+      - Result
+      - Interpretation
+      rows:
+      - - Second estimator written from the TV definition (no shared spec ancestor)
+          vs reference
+        - max absolute discrepancy 3.2e-12
+        - the estimates are not an artefact of one implementation
+      - - Reference vs the superseded inlined radius form
+        - 2x relative offset
+        - caught as a defect by definition-level independence; no loose column is
+          quoted
+      - - Reference radius emitted by the confirming run
+        - row-by-row match through tv_upper_bound
+        - the pending confirm-by-a-run dependency is closed
+    - title: Real-channel full-n lower-side check (k = 5, M = 1, 990 pairs)
+      headers:
+      - Quantity
+      - Value
+      - Note
+      rows:
+      - - Upper side alone (eps_hi < 0.5)
+        - 340 / 990 = 0.3434
+        - finite-sample strict; the side that binds
+      - - Lower side alone (eps_lo > 0.05), full n, cap removed
+        - 986 / 990 = 0.996
+        - measured, not assumed; 4 failing pairs (11-51, 27-29, 35-49, 39-44)
+      - - Joint gate (both sides)
+        - 336 / 990 = 0.3394
+        - the C1 headline (33.9%); reproduced by the confirming reference-radius run
+      - - eps_lo > eps_hi violations
+        - 0 / 990
+        - coherence invariant holds
+      - - Two coexisting objects, own-radius fractions
+        - 340/990 (k-prefix) vs 342/990 (PHIST); common-radii 340 vs 935 and 81 vs
+          342
+        - 'cancellation, not corroboration: statistics differ ~2.7x, constants ~7.34x,
+          opposite directions'
+    figures_description:
+    - '|tv_hat - TV_true| vs n on log-log axes with the 1/sqrt(n) reference slope,
+      one line per synthetic configuration.'
+    - Empirical eps_hi coverage vs n against the 0.975 target, with the bare-alpha
+      = 0.05 curve falling below it to show the guarantee differs.
+    - Identical-distribution bound width vs n (1/sqrt(n) shrinkage) with tv_hat scatter
+      clustered near 0.
+    - Weak-vs-strong classifier lower-bound scatter; all 2000 points on or below the
+      diagonal.
+    - Residual histogram of the definition-level second implementation, with the superseded
+      inlined form drawn at its 2x offset.
+    - Distribution of eps_lo over the 990 real pairs at k = 5 with the 0.05 line,
+      the four failing pairs marked, and the 336 joint-gate boundary annotated.
+    analysis: 'Run only with the definition-level second implementation, the battery
+      passes every check: tv_hat converges at 1/sqrt(n), eps_hi covers the true TV
+      at 0.9816 against the declared 0.975, coherence holds 9900/9900, no weak/strong
+      inversion appears, and identical laws give a bound that shrinks by ~2 per 4x
+      n. The bare-alpha contrast (0.9512) sits below the declared guarantee, which
+      is exactly why the check is run at alpha/2 = 0.025. Cross-implementation agreement
+      is at 3.2e-12, and the superseded inlined form shows up as a 2x offset rather
+      than as an agreeing recompute — the failure mode the meta-lesson names. On real
+      channels at full n the lower side now passes 986/990 (cap removed, assumed_pair_count
+      = 0) and the joint gate is 336/990 = 0.3394, the C1 headline, so no claim sentence
+      moves; the upper side alone stays 340/990 and the 2x2 decomposition travels
+      with the fractions as cancellation, not corroboration. The synthetic-scoped
+      limitation on the divisibility-crossing observation is retained verbatim and
+      is not lifted by any of these numbers.'
+  - name: X6
+    plan_id: X6
+    description: 'Rejection-generic / divisibility lower bound: TV(P1,P2) <= eps iff
+      the pair is eps-divisible, i.e. a test using only P1 and P2 exists with error
+      <= eps; under full realizability the bound is 1 - 2*(optimistic error). It requires
+      NO alphabet bound, so it reaches the large-k region where the plug-in certificate
+      is gone. Assumption-laden (VC / Cohn-Tesoriero-type realizability), stated explicitly
+      and never presented as distribution-free. Deliverable: make ''at large k only
+      the one-sided lower bound survives'' a MEASURED result with numbers. Validity:
+      over replications the bound must not exceed the true TV more often than the
+      declared alpha allows, with the split stated up front; a no-split run is reported
+      as the contrast that shows the assumption is doing the work.'
+    expected_results:
+      declared_per_side_alpha: 0.025
+      validity_split: 50/50 fit/eval, random_state=20260914
+      validity_replications: 2000
+      validity_exceedance_rate_with_split: 0.0231
+      validity_exceedance_rate_no_split_contrast: 0.2864
+      distribution_free: false
+      requires_alphabet_bound: false
+      is_a_certificate: false
+      large_k_lower_bound_coverage_k30: 0.42
+      large_k_lower_bound_coverage_k15_k30_pooled: 0.4
+      non_vacuous_count_k30: 344
+      usable_pairs_k30: 820
+      plugin_certificate_fraction_k30: 0
+      plugin_certificate_fraction_k15: 0
+    result_rationale: 'The tier''s claim is that the assumption-laden bound is valid
+      AND non-vacuous at large k, and that is what the numbers show: exceedance 0.0231
+      <= 0.025 under a stated 50/50 split, and a non-vacuous bound for 344/820 = 0.42
+      of pairs at k = 30, against 0/820 for the plug-in certificate there. That contrast
+      is the deliverable — 0.42 vs 0.00 at k = 30, 0.39 vs 0.00 at k = 15 — and it
+      lets C2 state its short horizon as a finding. Coverage rises with k because
+      a longer prefix resolves more, the same corrected mechanism the plug-in side
+      exhibits; the failure of the certificate at large k is a certifiability failure
+      on the other side, not a resolution failure here. The no-split contrast (0.2864)
+      is reported so that the bound is never read as distribution-free: without the
+      realization split it has no guarantee, and the real-channel numbers are coverage
+      of a non-vacuous bound, not a validity claim about real TV.'
+    tables:
+    - title: Validity of the divisibility bound at the declared alpha
+      headers:
+      - Setting
+      - Split
+      - Replications / pairs
+      - Rate(bound > true TV)
+      - Allowed
+      - Verdict
+      rows:
+      - - Realizable synthetic class (VC-type realizability enforced)
+        - 50/50 fit/eval
+        - 2000 replications
+        - '0.0231'
+        - '0.025'
+        - within allowance
+      - - Same estimator reusing the fit-set error
+        - none
+        - 2000 replications
+        - '0.2864'
+        - '0.025'
+        - invalid use; shows the assumption carries the bound
+      - - Real k-prefix law, large k
+        - month-level held-out
+        - 820 pairs at k = 30
+        - not measurable (true TV unknown off the synthetic realizable class)
+        - '-'
+        - validity scoped to the synthetic class; real numbers are coverage only
+    - title: One-sided survival at large k (k-prefix law, all usable pairs)
+      headers:
+      - k
+      - Usable pairs
+      - Plug-in upper certificate (eps_hi < 0.5)
+      - Divisibility lower bound non-vacuous (eps_lo > 0.05)
+      rows:
+      - - 5
+        - 990
+        - 340 (0.343)
+        - 277 (0.28)
+      - - 10
+        - 990
+        - 11 (0.011)
+        - 337 (0.34)
+      - - 15
+        - 946
+        - 0 (0.000)
+        - 369 (0.39)
+      - - 30
+        - 820
+        - 0 (0.000)
+        - 344 (0.42)
+    - title: Assumption ledger — what the bound does and does not claim
+      headers:
+      - Claim element
+      - Status
+      rows:
+      - - Requires no bound on alphabet size
+        - Yes; this is why it applies at k = 15 and k = 30, where the plug-in certificate
+          is gone
+      - - Distribution-free
+        - No; valid only under the stated VC / Cohn-Tesoriero-type realizability,
+          and never presented otherwise
+      - - Certifies or proves the lower side
+        - No; it is a lower bound with a stated assumption and a declared alpha, not
+          a certificate
+      - - Independence from the two certified objects
+        - Separate mechanism; never ranked against, substituted for, or summed with
+          the plug-in side
+      - - Coverage computed over
+        - All usable pairs on the k-prefix law across 5..30; the certified subset
+          is used only to validate the estimator
+    figures_description:
+    - Divisibility bound vs true TV on the synthetic realizable class with the 0.025
+      exceedance boundary marked.
+    - Empirical exceedance rate vs nominal alpha, split vs no-split curves diverging
+      to show the assumption is what carries the guarantee.
+    - Plug-in certifiable fraction vs k (falls to 0 by k = 15) overlaid on divisibility
+      non-vacuous coverage vs k (rises to 0.42) — the crossing picture.
+    - Per-pair scatter at k = 30 of eps_hi (plug-in) vs eps_lo (divisibility) with
+      the 0.5 and 0.05 gate lines, highlighting the region where only the lower bound
+      survives.
+    - Coverage vs k annotated with usable-pair counts (990 / 990 / 946 / 820).
+    analysis: 'The divisibility bound behaves as the tier requires: valid at the declared
+      per-side alpha (exceedance 0.0231 <= 0.025 under a stated 50/50 fit/eval split)
+      and non-vacuous across the large-k region, reaching 344/820 = 0.42 at k = 30
+      while the plug-in upper certificate is 0/820 there. That contrast — 0.42 vs
+      0.00 at k = 30, 0.39 vs 0.00 at k = 15 — is the measured form of ''at large
+      k only the one-sided lower bound survives'', and it is what lets C2 state its
+      horizon as a finding rather than a limitation. Coverage rises with k because
+      a longer prefix resolves more, which is the corrected mechanism direction read
+      from the lower side, while the certificate dies on certifiability, not on resolution.
+      The no-split run (0.2864) keeps the bound honest: its guarantee rests entirely
+      on the realizability assumption, so it is never called distribution-free and
+      never called a certificate, and the real-channel figures are coverage of a non-vacuous
+      bound rather than a validity claim about real TV. It is a structurally different
+      mechanism from the plug-in side and is neither ranked against nor combined with
+      it.'
+  - name: X7
+    plan_id: X7
+    description: 'Corrected masking comparison (best tier), run as a design that can
+      actually detect the effect. The masked arm truncates each flow at PPI_LEN and
+      the unmasked arm zero-pads it to k, and the two arms draw DISJOINT flow sets,
+      so min(PPI_LEN,k)==k on both sides cannot collapse the comparison to a structural
+      null (the failure mode of the recorded same-flow-set run, same_flow_set_both_arms=true,
+      signed_difference_all_rungs=0.0). Reports the padding-value distribution, per-k
+      signed-difference quantiles, the count of pairs that change, the PPI_LEN distribution,
+      and the flow-set separation audit; the k=30 denominator is annotated as the
+      LONG-FLOW subset. Reading rule enforced: ''no change at this k'' is a statement
+      about that k only, never a global ''no contamination'' claim.'
+    expected_results:
+      design: 'disjoint flow sets: masked = truncate at PPI_LEN, unmasked = zero-pad
+        to k'
+      same_flow_set_both_arms: false
+      arms_flow_set_overlap_flows: 0
+      rows_scanned: 10000000
+      padding_sample_flows: 200000
+      padding_tail_slots_sampled: 3805365
+      padding_value_distribution: all 3805365 sampled tail slots are 0; no nonzero
+        padding value observed, so a raw 0 is never a legal packet length
+      ppi_len_min: 2
+      ppi_len_q25: 19
+      ppi_len_median: 30
+      ppi_len_max: 30
+      ppi_len_ge_30_fraction: 0.6284
+      k5_post_mask_total_pairs: 990
+      k5_post_mask_pairs_usable: 990
+      k5_services_dropped_by_ppi_len_filter: 0
+      k5_M1_tv_masked_median: 0.580531549
+      k5_M1_saturation_fraction: 0
+      k10_M4_tv_masked_median: 0.996689567
+      k10_M4_saturation_fraction: 0.592929293
+      signed_difference_median_k5: 0.00042
+      signed_difference_median_k10: 0.00113
+      signed_difference_median_k15: 0.00201
+      signed_difference_median_k30_longflow_subset: 0.00347
+      pairs_changed_gt_0p005_k5: 61
+      pairs_changed_gt_0p005_k30_longflow_subset: 41
+      gate_verdicts_changed_k5: 0
+      gate_after_corrected_mask_k5_M1: 336
+      gate_denominator: 990
+      k30_denominator_annotation: LONG-FLOW subset (820 pairs), NOT the corpus
+      reading_rule: '''no change at this k'' applies to that k only; no global ''no
+        contamination'' claim is made'
+    result_rationale: The best tier is the one where the disjoint-flow-set design
+      is the design actually executed, so the two arms stop being trivially identical
+      and the signed difference becomes a measurement rather than a forced zero. The
+      padding mechanism is real and directional (every sampled tail slot is 0, so
+      naive binning loads the lowest size bin), which is why the per-k medians are
+      nonzero and grow with k as more short flows fall below the prefix; but the induced
+      pairwise-TV shift tracks flow length rather than service identity (1.7 percent
+      variance share, permutation p=0.34), so the benign-for-RC5 outcome holds without
+      any global 'no contamination' claim. The masked-arm values are pinned to the
+      frozen XS facts (k=5 M=1 median 0.580531549, saturation 0.0; k=10 M=4 median
+      0.996689567, saturation 0.592929293) and zero k=5 gate verdicts flip, so the
+      336/990 headline is reproduced rather than disturbed. Any tier reporting a changed
+      gate or a service-locked distortion would have broken the preserved-monotonicity
+      and headline invariants.
+    tables:
+    - title: Padding-value and PPI_LEN distribution (10M rows scanned, 200k flows
+        sampled)
+      headers:
+      - Quantity
+      - Value
+      rows:
+      - - Padding tail slots sampled
+        - 3805365
+      - - Padding values observed
+        - all zero; no nonzero padding value
+      - - PPI_LEN min / q5 / q25 / median / max
+        - 2 / 2 / 19 / 30 / 30
+      - - PPI_LEN >= 5 fraction
+        - 0.9274
+      - - PPI_LEN >= 10 fraction
+        - 0.881
+      - - PPI_LEN >= 15 fraction
+        - 0.8348841
+      - - PPI_LEN >= 30 fraction (long-flow share)
+        - 0.6284
+      - - k=30 denominator
+        - LONG-FLOW subset (820 pairs), not the corpus
+    - title: Per-k signed difference, corrected disjoint-flow-set design
+      headers:
+      - k
+      - Pairs (denominator)
+      - Median signed diff
+      - q5 / q75
+      - Pairs changed by > 0.005
+      - k=5 gate verdicts changed
+      rows:
+      - - 5
+        - 990
+        - 0.00042
+        - -0.0031 / 0.0021
+        - 61
+        - 0
+      - - 10
+        - 990
+        - 0.00113
+        - -0.0044 / 0.0052
+        - 88
+        - 0
+      - - 15
+        - 946
+        - 0.00201
+        - -0.0061 / 0.0079
+        - 73
+        - 0
+      - - 30 (long-flow subset)
+        - 820
+        - 0.00347
+        - -0.0092 / 0.0118
+        - 41
+        - 0
+    - title: Masked-arm reconstruction of the fixed k=5 monotonicity facts
+      headers:
+      - M
+      - tv median
+      - Saturation fraction (tv >= 0.99)
+      rows:
+      - - 1
+        - 0.580531549
+        - 0
+      - - 2
+        - 0.8833
+        - 0.105
+      - - 4
+        - 0.9248
+        - 0.239
+      - - 8
+        - 0.9462
+        - 0.336
+      - - 16
+        - 0.9673
+        - 0.391
+    - title: Flow-set separation and service-dependence audit
+      headers:
+      - Check
+      - Result
+      rows:
+      - - Arms share flow sets?
+        - No - overlap 0 flows, disjoint by construction
+      - - min(PPI_LEN,k)==k on both arms?
+        - No - prohibited design not used
+      - - Reconstructed k=5 M=1 tv median
+        - 0.580531549
+      - - Service identity variance share of signed diff
+        - 0.017
+      - - Service-dependence permutation p
+        - 0.34
+      - - eps_lo <= eps_hi violations
+        - 0 / 990
+      - - Joint gate after corrected mask (k=5, M=1)
+        - 336 / 990
+    figures_description:
+    - PPI_LEN distribution with the k grid at 5/10/15/30 overlaid, shading the k=30
+      long-flow subset so the denominator change is visible rather than implied.
+    - Per-k signed-difference distributions for masked-vs-unmasked arms on disjoint
+      flow sets, one panel per k, medians essentially on zero and the k=30 panel labelled
+      long-flow subset.
+    - Padding-value histogram (a single spike at 0) beside the lowest-size-bin occupancy
+      in each arm, showing the unmasked arm's zero-loading of bin 1.
+    - Per-service mean signed difference against that service's short-flow share,
+      with the fitted slope and the permutation null band, showing flow-length rather
+      than service identity as the driver.
+    analysis: 'The recorded run was structurally null by construction: with both arms
+      restricted to PPI_LEN >= k, min(PPI_LEN,k)==k makes the prefixes identical and
+      the signed difference identically 0.0, so it could not have detected a padding
+      effect no matter how large one was. The corrected best-tier run separates the
+      arms'' flow sets and recovers a real but small effect: median signed differences
+      of +0.00042 / +0.00113 / +0.00201 / +0.00347 at k=5/10/15/30, positive at every
+      k because zero-padding loads the lowest size bin and the loading grows with
+      k as more flows fall below the prefix. The effect is bounded and flow-length-driven
+      rather than service-driven (1.7 percent service-identity variance share, permutation
+      p=0.34), so it does not contaminate cross-service comparisons, does not flip
+      a single k=5 gate verdict, and leaves the frozen k=5 tv medians and saturation
+      fractions exactly in place. RC5 therefore closes as a precondition with the
+      k=30 number explicitly labelled a long-flow-subset quantity and the reading
+      rule honored: these are per-k statements, not a global clean bill.'
+  - name: X8
+    plan_id: X8
+    description: 'Vector-level distinguishability as a one-sided result. We compute
+      TV of the per-flow normalised 32-vector law over all 990 service pairs and validate
+      it with the per-item data-processing inequality TV(vector)_i >= TV(marginal)_i,
+      asserted on every pair as a self-failing object-mismatch detector: it must hold
+      990/990, and a failure is a BUG meaning the two sides were not computed on the
+      same flow set. New artifact; nothing is overwritten. This is a stronger distinguishability
+      statement than the one-hot marginal, but it is NOT a certified object and is
+      never presented as a better bound on X1''s symbol law or X2''s packet-cell law,
+      never ranked against them, and never summed with them.'
+    expected_results:
+      object: TV(per-flow normalised 32-vector law)
+      pair_count: 990
+      services: 45
+      per_item_dpi_assertions: 990
+      per_item_dpi_violations: 0
+      dpi_holds_pairs: 990/990
+      pairs_strictly_greater: 986
+      pairs_equal_saturation_limited: 4
+      min_margin_strictly_greater: 0.0031
+      max_margin: 0.487
+      tv_vector_median: 0.8585
+      tv_marginal_median: 0.5349
+      tv_vector_q5: 0.412
+      tv_vector_q25: 0.716
+      tv_vector_q75: 0.941
+      tv_vector_q95: 0.993
+      tv_marginal_q5: 0.201
+      tv_marginal_q25: 0.372
+      tv_marginal_q75: 0.702
+      tv_marginal_q95: 0.89
+      median_ratio_vector_over_marginal: 1.605
+      eps_lo_le_eps_hi_violations: 0/990
+      is_certified_object: false
+      ranked_against_X1_or_X2: false
+      quoted_as_bound_on_X1_or_X2: false
+    result_rationale: 'The per-item inequality is guaranteed by data processing, so
+      990/990 with zero violations is the only outcome consistent with the two sides
+      sitting on the same flow set; the best tier is simply the tier where that audit
+      is clean, which is also what certifies there is no object-mismatch bug. The
+      median ratio of about 1.6 is expected because the one-hot marginal discards
+      all within-flow structure that the 32-vector keeps, so the vector object is
+      uniformly at least as separable, with the gap closing to zero at saturation
+      where both sides hit the TV ceiling (the four equal pairs). The result is deliberately
+      one-sided: nothing here certifies an error floor, nothing adds a third certified
+      object, and nothing is compared against X1''s or X2''s fractions, so the two-object,
+      unranked, uncorroborated structure the invariants require is preserved.'
+    tables:
+    - title: TV(vector) vs TV(marginal) over 990 pairs
+      headers:
+      - Quantile
+      - TV(vector)
+      - TV(marginal)
+      - Ratio
+      rows:
+      - - q5
+        - 0.412
+        - 0.201
+        - 2.05
+      - - q25
+        - 0.716
+        - 0.372
+        - 1.92
+      - - median
+        - 0.8585
+        - 0.5349
+        - 1.605
+      - - q75
+        - 0.941
+        - 0.702
+        - 1.34
+      - - q95
+        - 0.993
+        - 0.89
+        - 1.12
+    - title: Per-item DPI audit (TV(vector)_i >= TV(marginal)_i)
+      headers:
+      - Check
+      - Result
+      rows:
+      - - Pairs asserted
+        - 990
+      - - Violations
+        - 0
+      - - Strictly greater
+        - 986
+      - - Equal (saturation-limited)
+        - 4
+      - - Min margin (strictly greater pairs)
+        - 0.0031
+      - - Max margin
+        - 0.487
+      - - Interpretation of a failure
+        - BUG - the two sides were not computed on the same flow set
+      - - Observed interpretation
+        - No object-mismatch bug; both sides share the flow set
+    - title: DPI margin by marginal-TV stratum
+      headers:
+      - Marginal-TV bin
+      - Pairs
+      - Min margin
+      - Median margin
+      - Max margin
+      rows:
+      - - '[0.00, 0.25)'
+        - 262
+        - 0.027
+        - 0.191
+        - 0.487
+      - - '[0.25, 0.50)'
+        - 241
+        - 0.014
+        - 0.132
+        - 0.351
+      - - '[0.50, 0.75)'
+        - 188
+        - 0.0061
+        - 0.071
+        - 0.212
+      - - '[0.75, 0.99)'
+        - 195
+        - 0.0031
+        - 0.031
+        - 0.098
+      - - '[0.99, 1.00]'
+        - 104
+        - 0
+        - 0.004
+        - 0.021
+    - title: Object separation (no ranking, no corroboration)
+      headers:
+      - Object
+      - Status in this tier
+      rows:
+      - - X1 k-prefix symbol law
+        - 'Certified object #1 - untouched by X8'
+      - - X2 whole-flow rectified PHIST lattice law
+        - 'Certified object #2 - untouched by X8'
+      - - X8 per-flow 32-vector law
+        - One-sided distinguishability result; NOT a certified object
+      - - Ranking / substitution / summation
+        - Prohibited; none performed
+      - - X8 quoted as a bound on X1 or X2
+        - No - different object, different radius convention
+    figures_description:
+    - Quantile overlays of TV(vector) and TV(marginal) across the 990 pairs, showing
+      the vector curve everywhere above the marginal curve.
+    - Scatter of TV(marginal) against TV(vector) with the y=x diagonal, the four saturation-equal
+      pairs annotated at the ceiling.
+    - Per-item DPI margin (vector minus marginal) against marginal TV, showing the
+      margin shrinking to zero as TV approaches 1.
+    - Distribution of the vector-to-marginal ratio across pairs, with the median marked
+      at 1.605.
+    analysis: 'X8 asks the question the one-hot reduction throws away: how separable
+      are two services when each flow is represented by its full normalised 32-cell
+      vector rather than a single pooled symbol. The per-item DPI inequality is the
+      whole audit, because it is self-failing: if the vector side and the marginal
+      side were ever computed on different flow sets the inequality would break, so
+      990/990 with zero violations is positive evidence that both sides share the
+      flow set rather than a result to be explained. The measured medians (~0.8585
+      vector against ~0.5349 marginal, ratio ~1.6) show the vector carries strictly
+      more separation on essentially every pair, with the four equal pairs being the
+      saturation-limited ones where both quantities sit at the TV ceiling. This is
+      a one-sided distinguishability claim, not a certificate and not a third certified
+      object: it is reported alongside X1 and X2 but never ranked against, substituted
+      for, or summed with either, and it is never cited as a better bound on their
+      laws.'
+  - name: X9
+    plan_id: X9
+    description: 'SNI/ECH sensitivity: measure the price of ECH as the bound delta
+      between the declared (direction, size) channel and an SNI-inclusive channel,
+      on the same fixed 990 pairs at k=5, M=1, under the reference radius, the same
+      flow- and time-disjoint split as X1, and the fixed alpha/2 = 0.025 per-law union-bound
+      convention. The gate is (eps_lo > 0.05) AND (eps_hi < 0.5) on ONE named object
+      — the k-prefix chain-rule symbol law (X1) — upper side finite-sample strict,
+      lower side asymptotic. Also re-run the channel-masking comparison with DISJOINT
+      flow sets, because the recorded same_flow_set_both_arms run is structurally
+      null (requiring min(PPI_LEN,k) == k on both sides makes the two arms identical).
+      Channel declaration, repeated in methods: PPI row 1 direction and row 2 size
+      are consumed; row 0 inter-packet timing is deliberately excluded; no SNI, UA,
+      TLS-extension or CID data is consumed in the declared channel. The SNI-inclusive
+      number is a measured price and never a redefinition of the channel.'
+    expected_results:
+      x9_sni_ech_price_delta: 0.0141
+      gate_count_sni_excluded: 336
+      gate_count_sni_inclusive: 322
+      gate_denominator: 990
+      gate_fraction_sni_excluded: 0.3394
+      gate_fraction_sni_inclusive: 0.3253
+      upper_side_only_count_sni_excluded: 340
+      upper_side_only_count_sni_inclusive: 326
+      lower_side_pass_count_sni_excluded: 986
+      lower_side_pass_count_sni_inclusive: 984
+      tv_median_k5_M1_sni_excluded: 0.5805
+      tv_median_k5_M1_sni_inclusive: 0.6012
+      per_row_coherence_violations: 0/990 in both arms
+      gate_exits_vs_entries: -14 exits / 0 entries
+      masking_arms_flow_sets_disjoint: true
+      masking_signed_difference_tv_median_k5: -0.0014
+      masking_service_contamination_flags: 0/45
+      alpha_convention: alpha/2 = 0.025 per law, union bound over two laws, joint
+        0.95 per side
+      split_policy: flow- and time-disjoint, unchanged from X1; packet-level splitting
+        not used
+    result_rationale: 'This tier resolves in the framed direction because the SNI
+      term is small against a channel that already binds on the upper side through
+      tv + radius. At k=5, M=1 the reference-radius gate on X1 is 336/990 = 33.9%;
+      adding the SNI-derived destination-host identifier shifts the tv median by only
+      +0.021 (0.5805 -> 0.6012), which moves 14 pairs across the eps_hi < 0.5 boundary
+      and none the other way, giving 322/990 = 32.5% and a price of 1.41 pp — inside
+      the pre-registered benign band [0.0, 0.03]. The direction is the expected one:
+      a richer channel resolves more, so certifiability falls slightly, and per-row
+      coherence is untouched at 0/990 in both arms. The corrected masking re-run is
+      designed with disjoint flow sets so it is not structurally null; the signed
+      tv-median difference at k=5 is small and negative and no service exceeds the
+      binomial band, so there is no service-dependent contamination. Neither measurement
+      redefines the channel or moves a claim sentence, so the exclusion of SNI/ECH
+      is a quantified, benign, pre-registered choice and RC5 is discharged without
+      editing C1.'
+    tables:
+    - title: Declared channel vs SNI-inclusive channel at k=5, M=1 (990 pairs, reference
+        radius, X1 object only)
+      headers:
+      - quantity
+      - SNI-excluded (declared)
+      - SNI-inclusive
+      - delta
+      rows:
+      - - joint gate count (eps_lo > 0.05 AND eps_hi < 0.5)
+        - 336
+        - 322
+        - -14
+      - - joint gate fraction
+        - 0.3394
+        - 0.3253
+        - -0.0141
+      - - upper-side-only count (eps_hi < 0.5)
+        - 340
+        - 326
+        - -14
+      - - lower-side pass count (eps_lo > 0.05)
+        - 986
+        - 984
+        - -2
+      - - tv median (k=5, M=1)
+        - 0.5805
+        - 0.6012
+        - 0.0207
+      - - eps_lo <= eps_hi violations
+        - 0/990
+        - 0/990
+        - 0
+    - title: Corrected masking re-run with disjoint flow sets at k=5 (the same_flow_set_both_arms
+        run is structurally null and is not cited)
+      headers:
+      - arm
+      - underlying flow set
+      - pairs
+      - gate fraction
+      - tv median (k=5, M=1)
+      - signed tv delta vs unrestricted
+      rows:
+      - - U (unrestricted)
+        - all flows of each service
+        - 990
+        - 0.3394
+        - 0.5805
+        - 0
+      - - M (masked)
+        - flows with PPI_LEN >= k only
+        - 990
+        - 0.3374
+        - 0.5791
+        - -0.0014
+    - title: 'Channel declaration: what is consumed and what the measured price does
+        not include'
+      headers:
+      - observable
+      - role
+      - consumed in declared channel
+      - effect
+      rows:
+      - - PPI row 1 direction
+        - declared
+        - 'yes'
+        - '-'
+      - - PPI row 2 size
+        - declared
+        - 'yes'
+        - '-'
+      - - PPI row 0 inter-packet timing
+        - excluded
+        - 'no'
+        - would change |A_k| and every k_cert; not measured here
+      - - SNI / destination host id
+        - pre-encryption side channel
+        - 'no'
+        - measured price -1.41 pp at k=5, M=1
+      - - UA / TLS extensions / CID
+        - TLS-fingerprint side data
+        - 'no'
+        - not consumed; out of scope
+    figures_description:
+    - 'Per-pair gate-indicator change (SNI-inclusive minus declared) at k=5, M=1:
+      histogram concentrated at zero, with all 14 net changes on the exit side and
+      no entries.'
+    - Scatter of declared-channel tv against SNI-inclusive tv over the 990 pairs with
+      the identity line; tight cluster around the line, median shift +0.021.
+    - 'Corrected masking re-run: per-service signed tv difference at k=5 plotted against
+      the binomial band, 0/45 services flagged for service-dependent contamination.'
+    analysis: The declared channel is (direction, size), row-0 inter-packet timing
+      deliberately excluded, and no SNI/UA/TLS-extension/CID data consumed. At k=5,
+      M=1 the reference-radius bracket on X1 gives 336/990 = 33.9%; adding the SNI-derived
+      destination-host identifier on the same 990 pairs, same split, same alpha convention
+      gives 322/990 = 32.5%, a price of 1.41 pp (14 pairs). The direction matches
+      the fixed resolution mechanism — a richer channel resolves more (tv median 0.5805
+      -> 0.6012), so certifiability falls slightly — and per-row coherence is untouched
+      at 0/990 in both arms; the upper-side-only count moves 340 -> 326 and the lower-side
+      pass count moves 986 -> 984. The corrected masking re-run uses disjoint flow
+      sets (the recorded same_flow_set_both_arms run is structurally null and is not
+      cited), returns a signed tv-median difference of -0.0014 at k=5, and flags 0/45
+      services for service-dependent contamination; any statement of similarity is
+      scoped to k=5 only. Neither the SNI-inclusive price nor the masking result redefines
+      the channel or moves the headline, so exclusion is a quantified, benign choice
+      and no claim sentence in C1 or the abstract changes. Object identity is fixed
+      to the k-prefix chain-rule symbol law (X1); the whole-flow PHIST object is not
+      reported here and no cross-object agreement is implied.
+  - name: X10
+    plan_id: X10
+    description: 'Close the environment gate on the full corpus. Ingest the 12 full
+      months (2024-06-01..2025-05-31) and exclude the 69-flow 2024-05 fragment unconditionally
+      as a one-day stub, not a month. Re-run Step-0 occupancy at corpus level so the
+      provisional XS-subset PASS becomes a corpus-level result, and state the month-level
+      split explicitly: contiguous 8 train months / 4 held-out months, 68/32 by flows,
+      flow- and time-disjoint, packet-level splitting not used. Report month-level
+      certifiability for the fixed 45 services at the 2000-flow threshold under the
+      k=5, M=1 joint gate (eps_lo > 0.05 AND eps_hi < 0.5) on the k-prefix chain-rule
+      symbol law (X1), upper side finite-sample strict and lower side asymptotic,
+      with the reference radius and the fixed alpha/2 = 0.025 union-bound convention.
+      M=1 is the only rung considered because it carries the highest k_cert and is
+      the only rung retaining a certificate at k=10. Keep DST_ASN an audited confound,
+      never an environment axis. Report the honest stratum statement: feasible in
+      aggregate, per-month certifiable for high-volume services.'
+    expected_results:
+      x10_month_level_certifiable_service_fraction: 0.7333
+      certifiable_in_every_held_out_month: 33/45
+      certifiable_in_at_least_10_of_12_months: 39/45
+      step0_status: CLOSED_PASS_full_corpus
+      months_included: 12
+      excluded_2024_05_fragment_flows: 69
+      month_level_split_train_test_months: 8/4
+      flow_split_train_test: 68/32
+      flows_per_month_min: 524108
+      flows_per_month_max: 1217162
+      thinnest_month_certificate_possible: false
+      thin_stratum_median_held_out_month_flows: 105
+      pair_set_k5: 990
+      service_set_at_threshold: 45
+      single_asn_services_all: 32
+      single_asn_services_at_threshold: 27
+    result_rationale: 'This tier closes the gate in the framed direction because the
+      closure condition is coverage, not volume: the full corpus supplies 12 uniformly
+      covered months, so re-running occupancy at corpus level reproduces and strengthens
+      the XS PASS rather than escalating the caveat, while the fixed evaluation identity
+      is untouched (45 services at the 2000-flow threshold, 990 pairs at k=5). Per-month
+      budgets span two orders of magnitude across services, so month-level certifiability
+      stratifies deterministically at the coarsest rung: the 33 high- and mid-volume
+      services have held-out-month flow counts large enough that at least one of their
+      pairs clears the k=5, M=1 joint gate in every month, giving 33/45 = 73.3% —
+      a majority, inside the pre-registered band — while the 12 thin services retain
+      ~105 flows in their thinnest month, where the radius term alone exceeds the
+      0.5 budget, so eps_hi > 0.5 and no certificate can exist regardless of tv. Because
+      the fixed object set and pair set do not change and DST_ASN stays a confound
+      rather than being promoted to an axis, no claim sentence weakens; the result
+      matches the pre-registered honest statement exactly.'
+    tables:
+    - title: Full-corpus month inventory, contiguous 8/4 split (69-flow 2024-05 fragment
+        excluded unconditionally)
+      headers:
+      - month (UTC)
+      - flows
+      - split
+      - threshold services joint-gate certifiable
+      rows:
+      - - 2024-05 (fragment)
+        - 69
+        - excluded
+        - n/a
+      - - 2024-06
+        - 1121880
+        - train
+        - 43
+      - - 2024-07
+        - 903447
+        - train
+        - 41
+      - - 2024-08
+        - 850000
+        - train
+        - 40
+      - - 2024-09
+        - 1058340
+        - train
+        - 43
+      - - 2024-10
+        - 800000
+        - train
+        - 42
+      - - 2024-11
+        - 1217162
+        - train
+        - 44
+      - - 2024-12
+        - 700000
+        - train
+        - 41
+      - - 2025-01
+        - 636410
+        - train
+        - 40
+      - - 2025-02
+        - 1058340
+        - test
+        - 39
+      - - 2025-03
+        - 921880
+        - test
+        - 37
+      - - 2025-04
+        - 924961
+        - test
+        - 36
+      - - 2025-05
+        - 524108
+        - test
+        - 33
+    - title: Month-level certifiability by held-out volume stratum (k=5, M=1 joint
+        gate, X1 object)
+      headers:
+      - stratum
+      - services
+      - median held-out-month flows
+      - certifiable in every held-out month
+      - share
+      rows:
+      - - high-volume (>= 4x threshold)
+        - 21
+        - 9400
+        - 21/21
+        - 1
+      - - mid-volume (1-4x threshold)
+        - 12
+        - 3100
+        - 12/12
+        - 1
+      - - thin (threshold .. ~1.2x)
+        - 12
+        - 105
+        - 0/12
+        - 0
+      - - all threshold services
+        - 45
+        - 1450
+        - 33/45
+        - 0.7333
+    - title: 'Environment-gate closure: XS subset (provisional) vs full corpus (closed)'
+      headers:
+      - quantity
+      - XS subset (provisional)
+      - full corpus (closed)
+      rows:
+      - - distinct services
+        - 53
+        - 53
+      - - services at 2000-flow threshold
+        - 45
+        - 45
+      - - two-axis gate, all services
+        - 43
+        - 47
+      - - two-axis gate, at threshold
+        - 39
+        - 43
+      - - full-crossing gate, all services
+        - 39
+        - 43
+      - - full-crossing gate, at threshold
+        - 36
+        - 40
+      - - month coverage
+        - unknown; 13-month span, uneven
+        - 12 full months, uniform
+      - - verdict
+        - PASS_XS_SUBSET (not closed)
+        - PASS_full_corpus (closed)
+    - title: Split and identity invariants held fixed during the corpus closure
+      headers:
+      - invariant
+      - value
+      rows:
+      - - flow- and time-disjoint split
+        - true
+      - - packet-level splitting
+        - prohibited; not used
+      - - month-level split (train/test months)
+        - 8/4
+      - - flow split by month
+        - 68/32
+      - - service set at threshold
+        - 45
+      - - pair set at k=5
+        - 990
+      - - excluded 2024-05 fragment flows
+        - 69
+      - - single-ASN services at threshold
+        - 27/45 (audited confound, not an axis)
+    figures_description:
+    - Per-month flow counts for the 12 full months (524,108-1,217,162) with the 69-flow
+      2024-05 fragment shown separately as excluded.
+    - Joint-gate certifiable threshold services per month against the 33-service contiguous-split
+      floor; 2025-05 is the binding thinnest month.
+    - Per-service held-out-month flow distribution on a log axis, showing the thin
+      stratum near 105 flows where the radius term alone exceeds the 0.5 budget.
+    - 'Environment-gate closure: XS-subset versus full-corpus occupancy counts against
+      the >=15 bar.'
+    analysis: 'The corpus closure turns the provisional XS occupancy PASS into a corpus-level
+      result without touching the fixed evaluation identity: the threshold service
+      set stays at 45 and the k=5 pair set stays at 990. All 12 full months are ingested;
+      the 69-flow 2024-05 fragment is excluded unconditionally as a one-day stub.
+      Occupancy gates clear the >=15 bar with margin on both axes and at the full
+      crossing, and no gate shrinks relative to the XS subset. The month-level split
+      is contiguous and stated: 8 train months / 4 held-out months, 68/32 by flows,
+      flow- and time-disjoint, packet-level splitting not used. Per-month budgets
+      span two orders of magnitude across services, so month-level certifiability
+      stratifies at the only viable rung (M=1, which carries the highest k_cert and
+      is the only rung retaining a certificate at k=10): the 33 high- and mid-volume
+      services clear the k=5, M=1 gate in every held-out month, while the 12 thin
+      services cannot, because a thin service retains ~105 flows in its thinnest month
+      and the radius term (~0.74 as recorded) already exceeds the 0.5 allowance, so
+      eps_hi > 0.5 and no certificate can exist there. The month-level certifiable
+      fraction is therefore 33/45 = 73.3%, a majority, with 39/45 = 86.7% certifiable
+      in at least 10 of 12 months. DST_ASN stays an audited confound (32/53 services
+      single-ASN; 27/45 at threshold) and is not promoted to an environment axis.
+      The result matches the pre-registered honest statement — feasible in aggregate,
+      per-month certifiable for high-volume services — and no claim sentence in C1,
+      C2 or the abstract is weakened.'
+  - name: X11
+    plan_id: X11
+    description: 'Independent-corpus replication of the C1 bracket on CESNET-QUIC22
+      (one month, 102 labels): same protocol, same declared (direction, size) channel,
+      same flow- and time-disjoint split policy, same reporting discipline, same rung
+      ladder M in {1,2,4,8,16} and k grid {5,10,15,30}. The X1 k-prefix chain-rule
+      object is recomputed end to end on QUIC22 under the confirmed reference-radius
+      convention; the pair denominator is set by the same 2000-flow service threshold
+      rule and is reported per rung. Deliverable: a side-by-side table stating, for
+      each replicable element, whether it reproduces within the 20 percent band, plus
+      an explicit list of elements that do not, each labelled as corpus-dependence.
+      Held-out evaluation is per service and per pair; packet-level splitting is prohibited.
+      No rung or k point is added or dropped to rescue a claim.'
+    expected_results:
+      x11_quic22_replication_fidelity: 0.88
+      replicating_elements_count: 7 of 8
+      joint_gate_fraction_k5_M1_XS_reference: 0.3394
+      joint_gate_fraction_k5_M1_QUIC22: 0.298
+      joint_gate_relative_difference_k5_M1: -0.122
+      joint_gate_fraction_k10_M1_XS_reference: 0.0111
+      joint_gate_fraction_k10_M1_QUIC22: 0.0092
+      upper_side_only_fraction_k5_M1_XS_reference: 0.3434
+      upper_side_only_fraction_k5_M1_QUIC22: 0.311
+      per_row_coherence_violations_QUIC22: 0/1035
+      tv_median_rises_with_M_both_corpora: true
+      saturation_rises_with_M_both_corpora: true
+      certifiable_fraction_falls_with_M_both_corpora: true
+      m_max_frontier_tv0.30_k5_pinned_at_tv: 6
+      x6_large_k_lower_bound_coverage_QUIC22: 0.22
+      x6_element_within_band: false
+      rungs_added_or_dropped: 0
+      k_points_added_or_dropped: 0
+    result_rationale: 'In the best tier the C1 framing is assumed to hold end to end,
+      so the replication is expected to succeed on the load-bearing elements and to
+      fail on exactly the element the tier flags as least robust. The gate magnitude
+      reproduces within band because the corpus-dependence of the bracket is modest:
+      the underlying tv structure of open-set encrypted traffic is a property of the
+      channel and split policy, both of which are held fixed, so the 20 percent tolerance
+      absorbs the month and label-set differences. The k=10 rung survives on QUIC22
+      because M=1 retains the highest k_cert there as well, which is a structural
+      consequence of the coarsest alphabet carrying the smallest radius rather than
+      a coincidence of the XS subset. Fidelity lands at 0.88 rather than 1.0 because
+      the X6 divisibility bound is the one assumption-laden element; the tier permits
+      the X6 large-k coverage to fall outside band, and reporting that as corpus-dependence
+      is the honest outcome and does not touch C1. No rung or k point is added because
+      the ladder is frozen, so a discrepancy is absorbed into the fidelity number,
+      never into a respecified grid.'
+    tables:
+    - title: 'Headline replication: XS reference vs CESNET-QUIC22'
+      headers:
+      - Quantity
+      - XS (reference)
+      - QUIC22 (102 labels, one month)
+      - relative difference
+      - within 20% band
+      rows:
+      - - Joint gate fraction, k=5, M=1
+        - 0.3394
+        - 0.298
+        - -12.2%
+        - 'yes'
+      - - Upper side only, k=5, M=1
+        - 0.3434
+        - 0.311
+        - -9.4%
+        - 'yes'
+      - - Joint gate fraction, k=10, M=1
+        - 0.0111
+        - 0.0092
+        - -17.1%
+        - 'yes'
+      - - Lower-side pass fraction, k=5, M=1
+        - 0.996
+        - 0.9985
+        - +0.3%
+        - 'yes'
+      - - Per-row coherence violations (eps_lo <= eps_hi)
+        - 0/990
+        - 0/1035
+        - n/a
+        - 'yes'
+      - - M_max frontier at tv=0.30, k=5 (closed-form, pinned at tv)
+        - 6
+        - 6
+        - 0.0%
+        - 'yes'
+    - title: Rung ladder, certifiable fraction on the X1 object (k=5)
+      headers:
+      - Rung M
+      - XS reference
+      - QUIC22
+      - relative difference
+      - within 20% band
+      rows:
+      - - M=1
+        - 0.3394
+        - 0.298
+        - -12.2%
+        - 'yes'
+      - - M=2
+        - 0.0475
+        - 0.0415
+        - -12.6%
+        - 'yes'
+      - - M=4
+        - 0.003
+        - 0.0029
+        - -3.3%
+        - 'yes'
+      - - M=8
+        - 0
+        - 0
+        - n/a
+        - yes (n-conditional)
+      - - M=16
+        - 0
+        - 0
+        - n/a
+        - yes (n-conditional)
+    - title: Monotone trends reproduced on both corpora (k=5)
+      headers:
+      - Monotone trend
+      - M=1
+      - M=2
+      - M=4
+      - M=8
+      - M=16
+      rows:
+      - - tv median, XS
+        - 0.5805
+        - 0.8833
+        - 0.9248
+        - 0.9462
+        - 0.9673
+      - - tv median, QUIC22
+        - 0.5641
+        - 0.8702
+        - 0.9188
+        - 0.9401
+        - 0.9622
+      - - Saturation (tv >= 0.99), XS
+        - 0
+        - 0.105
+        - 0.239
+        - 0.336
+        - 0.391
+      - - Saturation, QUIC22
+        - 0
+        - 0.098
+        - 0.231
+        - 0.325
+        - 0.383
+    - title: Replication fidelity by claim element
+      headers:
+      - Element replicated
+      - Reproduced on QUIC22?
+      - Note
+      rows:
+      - - Gate magnitude at k=5 and k=10, M=1
+        - 'yes'
+        - within 20 percent band
+      - - k=10 rung survives at all
+        - 'yes'
+        - 'thin: 11/990 XS, 9/1035 QUIC22'
+      - - tv median rises with M
+        - 'yes'
+        - both corpora, monotone
+      - - Saturation rises with M
+        - 'yes'
+        - both corpora, monotone
+      - - Certifiable fraction falls with M
+        - 'yes'
+        - monotone through M=4
+      - - Per-row coherence 0 violations
+        - 'yes'
+        - 0/1035 on QUIC22
+      - - M_max frontier consistent when pinned at tv
+        - 'yes'
+        - same value at tv=0.30, k=5
+      - - X6 large-k lower-bound coverage in band
+        - 'no'
+        - 0.22 vs [0.25, 0.60]; reported as corpus-dependence
+    figures_description:
+    - Certifiable fraction versus rung M for XS and QUIC22 on one axis, both monotone
+      decreasing, with the M=4-to-M=8 transition marked as n-conditional rather than
+      an absolute cutoff.
+    - tv median versus M for XS and QUIC22, both rising, showing the finer alphabet
+      resolves more.
+    - Saturation fraction (tv >= 0.99) versus M for both corpora, both rising.
+    - Joint gate fraction with confidence intervals across k = 5/10/15/30 for both
+      corpora, with the zero region beyond k=10 marked as a certificate-existence
+      failure, not a resolution failure.
+    - M_max frontier drawn as a closed-form function pinned at tv, with XS and QUIC22
+      evaluated at matched n so the two curves are comparable without an unpinned
+      absolute.
+    - Replication-fidelity bar by claim element with the single out-of-band X6 element
+      highlighted as the corpus-dependence finding.
+    analysis: 'X11 is a confirmation-shaped replication, so the expected outcome is
+      that the C1 bracket is a property of the declared channel and split policy rather
+      than of one subset. The gate magnitude lands at 0.298 against the 0.3394 XS
+      headline, a 12.2 percent gap inside the 20 percent band; the k=10 rung survives
+      again (0.92 percent), which follows from M=1 holding the highest k_cert rather
+      than from any subset-specific accident. The lower side validates at full n on
+      QUIC22 (998.5 thousandths), and per-row coherence measures 0/1035, so no coherence
+      BUG is triggered. Both monotone trends reproduce: tv medians rise with M and
+      saturation rises with M on QUIC22 as on XS. Seven of eight elements reproduce,
+      giving fidelity 0.88; the single failure is the X6 large-k lower-bound coverage,
+      which on QUIC22 lands at 0.22, just under the [0.25, 0.60] band. Because X6
+      is the assumption-laden divisibility bound, the tier treats this as a corpus-dependence
+      finding about that bound, stated in the table, and it does not propagate into
+      C1. No rung and no k point is added or dropped, so the frozen ladder is preserved.
+      The M=8 and M=16 rows are reported as corpus-n-conditional fractions with the
+      frontier kept as a closed-form function pinned at tv; no absolute impossibility
+      claim is made. Only the X1 k-prefix object is replicated here. The separately
+      certified PHIST object is neither ranked against nor substituted for it, and
+      if its own-radii fraction (342/990) is cited anywhere beside 340/990 the 2x2
+      decomposition travels with it: common-radii 340 vs 935 and 81 vs 342, statistics
+      differing 2.7x, constants 7.34x, opposite directions, cancelling. X11 is sequenced
+      after X10: the corpus the paper already characterises remains the foundation,
+      and this entry is the second-corpus defence, not a replacement for it.'
+  - name: X12
+    plan_id: X12
+    description: 'Detector-validation containment test, pre-registered as a one-sided
+      coverage test on the mandatory informative stratum. Only pairs with eps_hat_k_hi
+      < 0.5 (predicted floor above 0.25) enter the primary statistic; 0.5 <= eps_hi
+      < 0.9 is a secondary stratum reported but not primary; eps_hi >= 0.9 is reported
+      and excluded. Test statistic: the number of floor violations (observed per-pair
+      detector error below the predicted floor (1 - eps_hi)/2 outside its confidence
+      interval) among informative pairs, against a one-sided binomial test at the
+      nominal coverage level; any excess falsifies either the estimate or the channel
+      model and is reported. Four detector families are evaluated: LightGBM on k-packet
+      features, a SepSpace-style prototype-radius rejector, a RoNeTC-style uncertainty-quantified
+      rejector, and a frozen Pcap-Encoder probe, with OSCR and FPR95 per held-out
+      service at 5/10/20 percent label holdout. Address-field randomization (DST_IP/SUBNET/ASN/COUNTRY)
+      is applied at test time for any baseline consuming those fields, with before/after
+      deltas reported; our bound uses only the declared (direction, size) channel
+      and must be exactly invariant. If the informative stratum is empty at some k,
+      that k contributes no validation evidence and this is stated. The test is single-sided
+      by pre-registration: it can falsify the containment, never confirm the lower
+      side as proven.'
+    expected_results:
+      x12_floor_violations_informative_stratum: 0
+      informative_pairs_k5_M1: 340
+      secondary_pairs_k5_M1: 356
+      excluded_pairs_k5_M1: 294
+      informative_pairs_k10_M1: 11
+      informative_pairs_k15_M1: 0
+      detector_families_containment_holds_for: 4
+      violations_by_family:
+      - 0
+      - 0
+      - 0
+      - 0
+      combined_informative_pair_tests: 1360
+      combined_violations: 0
+      one_sided_binomial_p_excess: 1
+      predicted_floor_min_informative_stratum: 0.25
+      our_bound_delta_under_DST_randomization: 0
+      lower_side_relabelled_as_proven: false
+      empty_stratum_contributes_validation_evidence: false
+    result_rationale: 'The best tier assumes the brackets predict real detector behaviour
+      on the informative stratum, so the pre-registered one-sided test should return
+      no excess violations for any of the four families. Zero violations is the natural
+      outcome because the containment is a floor on distinguishable error: pairs with
+      eps_hi < 0.5 are close on the declared channel, and no detector can operate
+      below the floor without extra information, which the declared channel excludes
+      by construction. The tier also assumes the corrected masking comparison shows
+      no service-dependent contamination and that the SNI/ECH price is small, so the
+      address-randomization check should show our bound exactly invariant while only
+      the baselines that consume address fields move. The 340 informative pairs at
+      k=5, thinning to 11 at k=10 and to zero at k >= 15, is a direct consequence
+      of the frozen gate definition and the upper-side counts; an empty stratum there
+      yields no evidence and is stated rather than papered over. A violation count
+      of 0 rather than 1 is chosen because the containment is assumed to hold for
+      all four families in this tier; the allowed range admits a single violation,
+      but any violation would downgrade the containment to partial and is not the
+      best-tier realisation.'
+    tables:
+    - title: 'X12 stratification at M=1 (single named object: X1 chain law)'
+      headers:
+      - Stratum
+      - eps_hi range
+      - predicted floor (1 - eps_hi)/2
+      - pairs
+      - role
+      rows:
+      - - Primary (informative)
+        - eps_hi < 0.5
+        - '> 0.25'
+        - 340
+        - primary statistic
+      - - Secondary
+        - 0.5 <= eps_hi < 0.9
+        - 0.05 to 0.25
+        - 356
+        - reported, not primary
+      - - Excluded
+        - eps_hi >= 0.9
+        - < 0.05
+        - 294
+        - reported, excluded
+      - - Total at k=5
+        - all
+        - n/a
+        - 990
+        - one named object per cell
+      - - Primary at k=10
+        - eps_hi < 0.5
+        - '> 0.25'
+        - 11
+        - non-empty but thin; power stated
+      - - Primary at k >= 15
+        - eps_hi < 0.5
+        - '> 0.25'
+        - 0
+        - 'EMPTY: no validation evidence here, stated'
+    - title: One-sided coverage test, informative stratum at k=5 (violation = observed
+        error below floor outside its CI)
+      headers:
+      - Detector family
+      - informative pair-tests
+      - floor violations
+      - one-sided binomial p (excess)
+      - verdict
+      rows:
+      - - LightGBM, k-packet features
+        - 340
+        - 0
+        - 1
+        - containment holds
+      - - SepSpace-style prototype-radius
+        - 340
+        - 0
+        - 1
+        - containment holds
+      - - RoNeTC-style uncertainty-quantified
+        - 340
+        - 0
+        - 1
+        - containment holds
+      - - Frozen Pcap-Encoder probe
+        - 340
+        - 0
+        - 1
+        - holds (weakest power)
+      - - Combined
+        - 1360
+        - 0
+        - 1
+        - no excess; containment not falsified
+    - title: Per-pair error versus predicted floor, informative pairs (10% label holdout)
+      headers:
+      - Detector family
+      - mean per-pair error
+      - minimum per-pair error
+      - predicted floor (min over stratum)
+      - floor violations
+      - OSCR
+      - FPR95
+      rows:
+      - - LightGBM, k-packet features
+        - 0.44
+        - 0.27
+        - 0.25
+        - 0
+        - 0.9
+        - 0.15
+      - - SepSpace-style prototype-radius
+        - 0.39
+        - 0.26
+        - 0.25
+        - 0
+        - 0.86
+        - 0.21
+      - - RoNeTC-style uncertainty-quantified
+        - 0.36
+        - 0.255
+        - 0.25
+        - 0
+        - 0.83
+        - 0.24
+      - - Frozen Pcap-Encoder probe
+        - 0.31
+        - 0.251
+        - 0.25
+        - 0
+        - 0.77
+        - 0.3
+    - title: Holdout sensitivity and address-field randomization
+      headers:
+      - Detector family
+      - OSCR @5%
+      - OSCR @10%
+      - OSCR @20%
+      - FPR95 @5%
+      - FPR95 @10%
+      - FPR95 @20%
+      - delta OSCR under DST_* randomization
+      rows:
+      - - LightGBM, k-packet features
+        - 0.92
+        - 0.9
+        - 0.87
+        - 0.13
+        - 0.15
+        - 0.19
+        - 0
+      - - SepSpace-style prototype-radius
+        - 0.88
+        - 0.86
+        - 0.82
+        - 0.19
+        - 0.21
+        - 0.25
+        - -0.004
+      - - RoNeTC-style uncertainty-quantified
+        - 0.85
+        - 0.83
+        - 0.79
+        - 0.22
+        - 0.24
+        - 0.28
+        - -0.021
+      - - Frozen Pcap-Encoder probe
+        - 0.79
+        - 0.77
+        - 0.72
+        - 0.28
+        - 0.3
+        - 0.35
+        - -0.046
+      - - Our predicted bound (declared channel)
+        - invariant
+        - invariant
+        - invariant
+        - invariant
+        - invariant
+        - invariant
+        - 0
+    figures_description:
+    - Per-pair observed detector error against the predicted floor for the informative
+      stratum, all four families, with the containment boundary drawn as the diagonal;
+      no point falls below it.
+    - Floor-margin histogram (observed error minus predicted floor) with confidence
+      intervals, showing a positive-shifted distribution and no mass below zero.
+    - Floor-violation count versus nominal coverage level with the one-sided acceptance
+      region, per detector family, all at zero violations.
+    - OSCR and FPR95 versus label holdout fraction (5/10/20 percent) for the four
+      families, both metrics degrading smoothly with less label data.
+    - Before/after OSCR deltas under DST_IP/SUBNET/ASN/COUNTRY randomization, with
+      our bound's exact-zero invariance marked separately from the address-consuming
+      baselines.
+    - Informative-stratum size versus k (340 at k=5, 11 at k=10, 0 at k >= 15), making
+      explicit where the test carries evidence and where it does not.
+    analysis: 'X12 is the entry that turns the bracket from an internal object into
+      a falsifiable claim about detectors, and in the best tier it comes back clean.
+      The primary statistic is the floor-violation count on the mandatory informative
+      stratum (eps_hi < 0.5, predicted floor above 0.25), which at k=5 contains 340
+      pairs; the secondary stratum (0.5 <= eps_hi < 0.9) and the excluded stratum
+      (eps_hi >= 0.9) are reported so the check cannot be passed by diluting it with
+      trivially covered well-separated pairs. Across the four named families the combined
+      1360 informative pair-tests return zero violations, so the one-sided binomial
+      test finds no excess and the containment is not falsified. The observed per-pair
+      errors sit at 0.31 to 0.44, comfortably above the 0.25 floor minimum, with the
+      frozen Pcap-Encoder probe closest to the boundary, which is the expected ordering
+      because it is the least tuned family. OSCR and FPR95 degrade smoothly as label
+      holdout grows from 5 to 20 percent, and no family crosses the floor at any holdout.
+      The address-field randomization check separates two things that are easy to
+      conflate: baselines consuming DST_IP/SUBNET/ASN/COUNTRY move by up to -0.046
+      OSCR, while our predicted bound is exactly invariant (delta 0.000), because
+      the declared channel consumes (direction, size) only and never sees those fields;
+      the invariance is itself evidence that the implementation did not leak address
+      information into the bound. The stratum thins with k (11 pairs at k=10, none
+      at k >= 15), and the entry states that those k contribute no validation evidence
+      rather than reporting them as confirmations. The test is single-sided by pre-registration
+      and can only falsify the containment; the lower side is never called proven
+      or a certificate, so the guarantee asymmetry is preserved exactly as C1 states
+      it. No ranking, substitution, or summation between the k-prefix and PHIST objects
+      is introduced here, and the results support RC3 and RC6 without strengthening
+      any claim sentence.'
+  - name: X13
+    plan_id: X13
+    description: 'Good-Toulmin missing-service mass, scoped as a DEPLOYMENT-SITE quantity
+      and never as a universal unknown prior. The frequency-of-frequencies is taken
+      over fine-grained anonymised destination-host identifiers on the 1:100 flow
+      export of the CESNET-QUICEXT-25 XS capture (10M rows scanned; 1,000,000 sampled
+      flows, 62,318 distinct destination hosts in the pooled reference frame). The
+      identifiers are used ONLY as aggregate bookkeeping for this deployment-scoping
+      term: they are never consumed by the declared (direction, size) channel, never
+      enter the detector, and never enter either certified object''s bracket. The
+      Good-Toulmin estimator is fit on a reference half-window and predicts the number
+      of destination-host classes unseen in that half but present in a flow- and time-disjoint
+      evaluation half-window, with Eriksson-type 95% prediction intervals; the design
+      is repeated over four disjoint time blocks (2024-05 excluded unconditionally
+      per the fixed split policy). A MANDATORY 1:100-sampling sensitivity analysis
+      re-estimates the mass on a nested 1:100 sub-sample of the export (effective
+      1:10^4) both naively and with an explicit thinning correction. All quantities
+      are reported WITH and WITHOUT the unknown-class term, separately, so the reader
+      can read off how much of the open-set gap the unknown class accounts for.'
+    expected_results:
+      rows_scanned: 10000000
+      reference_frame_flows_1in100_export: 1000000
+      distinct_destination_hosts_reference_frame: 62318
+      f1_singleton_hosts: 31204
+      f2_doubleton_hosts: 12880
+      good_toulmin_new_hosts_estimate_block1: 12970
+      eriksson_pi95_new_hosts_block1:
+      - 10240
+      - 15860
+      observed_new_hosts_block1: 12004
+      eriksson_pi_coverage_across_4_blocks: 1
+      missing_service_mass_fraction_pooled: 0.0212
+      missing_service_mass_pi95_pooled:
+      - 0.0158
+      - 0.0279
+      missing_service_mass_realized_holdout_pooled: 0.0187
+      delta_u_per_block_central_range:
+      - 0.0188
+      - 0.0231
+      open_set_bound_without_unknown_term: 0.2905
+      open_set_bound_with_unknown_term: 0.3117
+      bound_delta_from_unknown_term: 0.0212
+      x12_floor_violations_without_term: 0
+      x12_floor_violations_with_term: 0
+      sampling_delta_u_nested_1e4_naive: 0.0068
+      sampling_delta_u_nested_1e4_thinning_corrected: 0.0203
+      sampling_bound_delta_shift_after_correction: 0.0009
+      universal_unknown_prior_claimed: false
+      headline_gate_value_unchanged: 336
+      k_grid_touched: false
+      declared_channel_remains_direction_size_only: true
+    result_rationale: 'This tier is defined by the original framing holding end to
+      end with every pillar resolving in the framed direction, and RC7 is one of the
+      pillars: the unknown-class mass must be a quantified, deployment-scoped, benign
+      term rather than a hole in the open-set story. The site''s destination-host
+      popularity law is heavy-tailed with a large singleton mass (f1 = 31,204 of 62,318
+      distinct hosts), which is exactly the regime Good-Toulmin is built for, so the
+      forward new-class estimate is finite and the Eriksson interval is tight enough
+      to be informative rather than vacuous. Because the two halves are time-adjacent
+      at one vantage, the realized new-class mass is below but close to the predicted
+      central value, so the interval covers the held-out observation in all four blocks
+      (coverage 1.0) — the estimator is validated on real held-out channels, not merely
+      on a synthetic ensemble. The resulting pooled missing-service mass, 2.12% of
+      flow mass (95% PI [1.58%, 2.79%]), is small enough that the open-set containment
+      bound moves by 2.1 points when the term is switched on, and since that shift
+      is far below the X12 comparison threshold the floor-violation count stays at
+      0 in BOTH arms — the with/without pair therefore reads as benign accounting
+      rather than as a rescope. The 1:100 sensitivity is the only place the best tier
+      can be threatened: at an effective 1:10^4 the singletons collapse and the naive
+      estimate falls to 0.68%, but the thinning correction recovers 2.03% and the
+      bound shifts by only 0.0009, so the conclusion is a property of the estimator,
+      not of the sampling rate. Under these outcomes no claim sentence needs editing:
+      the gate is 336/990, the two certified objects are untouched and unranked, and
+      the k grid is untouched because the FoF is k-independent bookkeeping.'
+    tables:
+    - title: Scaled frequency-of-frequencies over anonymised destination-host identifiers
+        (pooled reference frame, 1:100 export; 1,000,000 sampled flows, 62,318 distinct
+        hosts)
+      headers:
+      - j (flows per host)
+      - f_j (hosts)
+      - share of distinct
+      - cumulative share
+      rows:
+      - - 1
+        - 31204
+        - 0.5007
+        - 0.5007
+      - - 2
+        - 12880
+        - 0.2067
+        - 0.7074
+      - - 3
+        - 5960
+        - 0.0956
+        - 0.803
+      - - 4
+        - 3180
+        - 0.051
+        - 0.854
+      - - 5
+        - 1740
+        - 0.0279
+        - 0.8819
+      - - 6
+        - 1010
+        - 0.0162
+        - 0.8981
+      - - 7
+        - 602
+        - 0.0097
+        - 0.9078
+      - - 8
+        - 380
+        - 0.0061
+        - 0.9139
+      - - 9
+        - 246
+        - 0.0039
+        - 0.9178
+      - - 10
+        - 168
+        - 0.0027
+        - 0.9205
+      - - 11
+        - 120
+        - 0.0019
+        - 0.9224
+      - - 12
+        - 88
+        - 0.0014
+        - 0.9238
+      - - '>=13'
+        - 4740
+        - 0.0761
+        - 1
+    - title: Held-out new-class prediction vs observation, flow- and time-disjoint
+        half-windows over four blocks (2024-05 fragment excluded unconditionally)
+      headers:
+      - block
+      - reference distinct hosts
+      - Good-Toulmin predicted new
+      - Eriksson 95% PI
+      - observed new
+      - covered
+      - delta_u (central)
+      - delta_u realized
+      rows:
+      - - B1
+        - 50318
+        - 12970
+        - '[10240, 15860]'
+        - 12004
+        - true
+        - 0.0212
+        - 0.0187
+      - - B2
+        - 48904
+        - 13410
+        - '[10610, 16420]'
+        - 12930
+        - true
+        - 0.0231
+        - 0.0202
+      - - B3
+        - 47566
+        - 12180
+        - '[9540, 15010]'
+        - 11640
+        - true
+        - 0.0194
+        - 0.0168
+      - - B4
+        - 46120
+        - 11720
+        - '[9120, 14540]'
+        - 11610
+        - true
+        - 0.0188
+        - 0.0179
+      - - pooled
+        - 62318
+        - 12970
+        - '[0.0158, 0.0279] mass'
+        - n/a
+        - true
+        - 0.0212
+        - 0.0187
+    - title: Open-set containment bound WITH vs WITHOUT the missing-service term (same
+        flow set in both arms; no masking comparison implied)
+      headers:
+      - block
+      - WITHOUT unknown term
+      - WITH unknown term (central)
+      - WITH unknown term (PI upper)
+      - delta (unknown-class share)
+      - X12 violations WITHOUT / WITH
+      rows:
+      - - B1
+        - 0.2905
+        - 0.3117
+        - 0.3184
+        - 0.0212
+        - 0 / 0
+      - - B2
+        - 0.2905
+        - 0.3136
+        - 0.3207
+        - 0.0231
+        - 0 / 0
+      - - B3
+        - 0.2905
+        - 0.3099
+        - 0.3152
+        - 0.0194
+        - 0 / 0
+      - - B4
+        - 0.2905
+        - 0.3093
+        - 0.3141
+        - 0.0188
+        - 0 / 0
+      - - pooled
+        - 0.2905
+        - 0.3117
+        - 0.3184
+        - 0.0212
+        - 0 / 0
+    - title: Mandatory 1:100-sampling sensitivity analysis on the missing-service
+        mass
+      headers:
+      - frame
+      - delta_u (mass fraction)
+      - bound delta vs no-term
+      - X12 violations
+      - delta_u < 0.05
+      rows:
+      - - canonical 1:100 export (reference)
+        - 0.0212
+        - 0.0212
+        - 0
+        - true
+      - - nested 1:100 of export (effective 1:10^4), naive
+        - 0.0068
+        - 0.0068
+        - 0
+        - true
+      - - nested 1:10^4, thinning-corrected
+        - 0.0203
+        - 0.0203
+        - 0
+        - true
+      - - pooled Eriksson PI upper (1:100)
+        - 0.0279
+        - 0.0279
+        - 0
+        - true
+    figures_description:
+    - Log-log scaled frequency-of-frequencies over anonymised destination-host identifiers,
+      j = 1..15 plus the tail aggregate, with the singleton bar annotated as the mass
+      that drives the Good-Toulmin extrapolation.
+    - 'Good-Toulmin accumulation curve: predicted new destination-host classes versus
+      additional-sample fraction t/n, with the Eriksson 95% prediction band; the four
+      held-out observed new-class counts are overplotted as points and all fall inside
+      the band.'
+    - Missing-service mass per block and pooled, with Eriksson PI whiskers, a shaded
+      benign envelope at delta_u <= 0.05, and dashed lines for the realized held-out
+      values.
+    - Paired bars of the open-set containment bound WITH and WITHOUT the unknown-class
+      term per block, with the X12 floor-violation counts annotated as 0 in both arms.
+    - '1:100 sampling sensitivity: delta_u under the canonical 1:100 export, the nested
+      1:10^4 naive estimate, and the nested 1:10^4 thinning-corrected estimate, with
+      the Eriksson PI band and a conclusion-stability line at 0.05.'
+    - 'Robustness sweep: open-set bound delta versus an assumed delta_u swept from
+      0 to 0.05, with the measured pooled point and PI shaded, showing the conclusion
+      flips only beyond delta_u ~ 0.05, well outside the measured interval.'
+    analysis: 'RC7 resolves in the framed direction. The unknown-class mass entering
+      the open-set bound is bounded at 2.12% of flow mass (95% prediction interval
+      [1.58%, 2.79%]) on the deployment site''s own frequency-of-frequencies, the
+      estimator is validated against a flow- and time-disjoint held-out half-window
+      in all four blocks (predicted new-class counts 11,720-13,410; observed 11,610-12,930;
+      coverage 4/4), and the open-set containment bound moves by 2.1 points when the
+      term is switched on. Because that shift is small relative to the X12 comparison,
+      the floor-violation count is 0 with and without the term, so switching the unknown-class
+      term on changes no verdict. The with/without pair is reported side by side per
+      block, which is precisely what a reader needs to see how much of the open-set
+      gap the unknown class accounts for: it accounts for a bounded, measurable slice,
+      not the whole gap and not an unbounded residue. The mandatory 1:100 sensitivity
+      is the discriminating step: under a nested 1:100 sub-sample of the export (effective
+      1:10^4) the naive estimate falls to 0.68% purely from singleton thinning, while
+      the thinning correction recovers 2.03% and shifts the bound by 0.0009; the benign
+      conclusion is therefore a property of the estimator, not of the sampling rate.
+      Scoping is enforced in the write-up: the quantity is site-conditional, never
+      a universal unknown prior, and is reported per block as well as pooled so its
+      spread is visible.
+
+
+      Invariant checks, all satisfied. (i) The two certified objects are untouched
+      and remain unranked and unsummed; the missing-mass term attaches only to the
+      open-set containment bound, which is a separate reported object, and is never
+      merged into either object''s bracket. (ii) The gate definition (eps_lo > 0.05
+      AND eps_hi < 0.5 on one named object per cell) is not modified: the term is
+      additive only to the containment bound, and the headline gate stays 336/990.
+      (iii) The declared channel stays (direction, size) only; destination-host identifiers
+      enter solely as aggregate bookkeeping for this deployment-scoping term, are
+      never classifier input, and no SNI/UA/TLS-extension/CID data is consumed. (iv)
+      The fixed split policy is respected: the reference and evaluation half-windows
+      are flow- and time-disjoint, no packet-level splitting is used, block construction
+      is month-level, and the 69-flow 2024-05 fragment is excluded unconditionally.
+      (v) The rung ladder M in {1,2,4,8,16} and the k grid {5,10,15,30} are untouched
+      — the FoF is k-independent, so X13 cannot perturb X1/X2/X3 numbers, and the
+      metric k_grid_touched is false. (vi) The Eriksson 95% prediction interval is
+      an uncertainty statement on the missing-mass estimate, NOT a re-split of the
+      alpha convention; the per-law alpha/2 = 0.025 union-bounded gate alpha is untouched
+      and no unstated split is citable. (vii) The with/without pair shares one flow
+      set and differs only in bookkeeping, so it is explicitly not a masking comparison
+      and does not interact with the two-masking-arms requirement that those arms
+      use different flow sets. (viii) No prohibited artifact is quoted: no 2x inlined
+      radius columns, no 31r PHIST form, no Weissman 935/990 form, no retracted 984/990
+      arithmetic, no 0.0002-margin fragility statement. (ix) The M=1-highest-k_cert
+      and finer-alphabet-resolves-more facts are untouched because X13 computes no
+      k_cert and plots no tv against M.
+
+
+      Caveats that travel with the number, stated rather than resolved: the Step-0
+      occupancy PASS is provisional on the XS subset with unknown month coverage,
+      so the site-conditional missing-mass estimate inherits that caveat and is labelled
+      provisional-to-the-XS-subset; DST_ASN remains an audited confound (32/53 services
+      single-ASN) but is not an axis here; registry entry E7 stays DONE/failed with
+      no metrics recorded and is orthogonal to X13, never treated as a negative result;
+      and the pending reference-radius confirmation does not enter X13, which computes
+      no TV radius, so X13 inherits it only as a project-level open dependency. Because
+      all of the above lands in the framed direction, no claim sentence in the abstract,
+      C1, C2, C3, or the headline-result template needs editing, and RC7 no longer
+      rests on prose alone.'
+  review_report: ''
+  error: ''
+- tier: median
+  pdf_path: ''
+  imagined_experiments: []
+  review_report: ''
+  error: ''
+- tier: worst
+  pdf_path: ''
+  imagined_experiments: []
+  review_report: ''
+  error: ''
+errors: {}
+score_anomaly: ''
+score_compression: ''
+created_at: '2026-09-13T23:38:47+00:00'

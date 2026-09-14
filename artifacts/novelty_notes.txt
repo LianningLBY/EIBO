@@ -1,0 +1,54 @@
+EIBO focused novelty check
+Research timestamp: 2026-09-13 11:50:26 UTC
+Project root: /efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+
+Question
+-------
+Has a measured pairwise total-variation / epsilon-indistinguishability bracket already been published for encrypted network traffic?
+
+Operational definition used
+---------------------------
+Category 4 requires all of the following: (i) real captured encrypted traffic; (ii) pairwise per-service, per-class, or equivalent observable distributions; (iii) an empirically estimated two-sided interval or bracket on total variation; and (iv) explicit per-side certification status, with an upper side that can support an error-floor statement. Classifier accuracy, AUROC, OSCR, FPR95, a point estimate of a divergence, or a theoretical bound without a real-traffic measurement does not count.
+
+Verdict
+-------
+No category-4 item was found in the fetched literature. The honest verdict is therefore MEASURED_BRACKET_IS_NOVEL, with the scope limited to the records and search directions documented here. The core claim should be phrased as a literature-search result and then made definitive only after the final bibliography and reviewer-suggested searches are rechecked.
+
+Strongest counter-case: Self-Defense
+-------------------------------------
+Athanasiou, Chatzikokolakis, and Palamidessi, Self-Defense: Optimal QIF Solutions and Application to Website Fingerprinting, appears in the 2025 IEEE CSF record and has an arXiv full text at https://arxiv.org/abs/2411.10059.
+
+This is the closest prior art. The paper crawls 200 real news websites, records received page sizes, rounds them to KB, and constructs a distribution over page sizes. It then works with L1 distances between discrete probability distributions, explicitly noting that this is twice TV in the discrete setting. It selects a 20-site system, solves an optimization problem for the defended site's distribution, and evaluates the result with an ML attack. This is a genuine empirical distribution-distance treatment of encrypted-response observations, not merely a classifier score.
+
+It still does not meet category 4. The observed object is one encrypted response size per request, not a joint k-packet QUIC/TLS prefix law. The paper reports leakage, capacity, and attack accuracy, not a per-pair interval [lower, upper] with a distribution-free or otherwise explicitly certified upper side. Its L1/TV-equivalent distances are inputs to an optimization and a formal QIF analysis, not a certification-graded bracket for an error-floor claim. EIBO must cite this paper and state this boundary explicitly.
+
+Other closest records
+----------------------
+1. Li, Guo, and Hopper, Measuring Information Leakage in Website Fingerprinting Attacks and Defenses, CCS 2018, https://arxiv.org/abs/1710.06080.
+   This paper measures mutual-information leakage on real Tor website-fingerprinting traces and uses bootstrap confidence intervals. It is important evidence that traffic analysis has moved beyond raw accuracy, but its measured object is MI rather than pairwise TV. Its intervals are not the requested TV bracket and do not have EIBO's asymmetric lower/upper certification roles.
+
+2. Cherubin, Bayes, not Naive: Security Bounds on Website Fingerprinting Defenses, PoPETs 2017, https://arxiv.org/abs/1702.07707.
+   The paper estimates an asymptotic lower bound on the Bayes error of a WF adversary from real Tor traces and reports a privacy metric. It is a category-1 classifier/Bayes-error precedent, not a two-sided TV bracket. In particular, it does not provide an upper TV side that could certify an error floor.
+
+3. Liu, Cheng, and Liu, The Inevitability of Side-Channel Leakage in Encrypted Traffic, arXiv:2602.14055, https://arxiv.org/abs/2602.14055.
+   The fetched full text proves a theoretical lower bound on pairwise conditional-law TV under explicit assumptions and derives a positive mutual-information lower bound. It is category 3, not a measured traffic bracket. Correction: the conditional-independence/additivity result for iid repeated observations is in Section 4.1, not Section 5.1. Do not propagate the earlier Section 5.1 citation.
+
+4. Liu, Cheng, Liu, and Wang, Rate-Distortion Function for Encrypted Traffic Side-Channel Defense, arXiv:2607.17889, https://arxiv.org/abs/2607.17889.
+   This gives an exact Pareto frontier only within the stationary-memoryless defense class Theta_iid and compares published defenses using a rate/bit objective and Wasserstein-1 cost. It is theory plus empirical positioning, not a pairwise TV interval on captured traffic.
+
+5. Michel, Naf, and Meinshausen, High Probability Lower Bounds for the Total Variation Distance, arXiv:2005.06006, https://arxiv.org/abs/2005.06006.
+   This is the appropriate methodological basis for a classifier-based high-probability TV lower side, but its fetched record describes a climate-data application rather than encrypted traffic and does not publish EIBO's bracket.
+
+What was not counted
+--------------------
+Encrypted-traffic classifiers and open-set traffic-recognition papers that report accuracy, AUROC, OSCR, FPR95, or similar metrics were not treated as brackets. The ECH-specific paper Indistinguishability of Traffic by Open TLS Parameters with Encrypted ClientHello was found in search metadata, but the primary record was not successfully fetched during this pass, so its status is unverified. It should be checked manually before submission, but it cannot currently support a category-4 claim either way.
+
+Defensible novelty language
+---------------------------
+Use: "To the best of our search, prior encrypted-traffic work has reported classifier performance, mutual-information leakage, optimized distribution-distance objectives, or theoretical leakage bounds, but we found no study that measures a per-service two-sided TV bracket on real encrypted traces with separately stated lower- and upper-side certification."
+
+Avoid: "Existing theory is single-letter because it assumes iid traffic." Single-letterization for a marginal observable is available for any joint law by data processing. The defensible theoretical distinction is that iid/stationary-memoryless assumptions enable achievability and defense statements such as mutual-information additivity, tensorization, and exponential error decay. EIBO's primary gap is the missing measured, certification-graded bracket on real traffic; dependence-aware multi-letter analysis is supporting positioning.
+
+Search limitation
+-----------------
+This is a focused WebSearch/WebFetch pass, not a systematic review with exhaustive citation chaining. The strongest negative claim is consequently scoped to the fetched records. The main residual risk is an unpublished or publisher-hosted paper using a different name for statistical distance, confidence bands, or traffic morphing.

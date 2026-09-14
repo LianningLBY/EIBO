@@ -1,0 +1,136 @@
+{
+  "timestamp_utc": "2026-09-13T12:29:25Z",
+  "project_root": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade",
+  "server": "111",
+  "account": "root",
+  "file_location_before": {
+    "overlay_source": "/root/eibo/data/raw/2024-06.zip",
+    "overlay_source_observed": false,
+    "data_disk_destination": "/root/autodl-tmp/eibo/data/raw/2024-06.zip",
+    "data_disk_destination_observed": true
+  },
+  "move_performed": false,
+  "move_evidence": {
+    "source_size": null,
+    "dest_size": 1747398591,
+    "expected_dest_size": 1747398591,
+    "sha256": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b",
+    "expected_sha256": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b",
+    "source_removed": false,
+    "verification": "Destination already existed with the authoritative size and SHA-256; overlay source was absent, so no copy or deletion was performed.",
+    "file_type": "Zip archive data, at least v2.0 to extract, compression method=deflate"
+  },
+  "df_root_before_gb": {
+    "size": 30,
+    "used": 1.7,
+    "available": 29,
+    "mount": "/"
+  },
+  "df_root_after_gb": {
+    "size": 30,
+    "used": 1.7,
+    "available": 29,
+    "mount": "/"
+  },
+  "data_disk_avail_gb": 513,
+  "capacity_evidence": {
+    "before": "Filesystem /dev/md0, 550G size, 36G used, 515G available, mounted at /root/autodl-tmp.",
+    "after": "Filesystem /dev/md0, 550G size, 38G used, 513G available, mounted at /root/autodl-tmp.",
+    "mount_table": "findmnt showed /root/autodl-tmp on /dev/md0 with 550G size and approximately 514.6G available."
+  },
+  "fetch_method_that_works": "Foreground curl is permitted; resumable foreground curl with -C - is the only tested method that can transfer bytes, but it is currently impractical for complete remaining archives.",
+  "methods_tried": [
+    {
+      "method": "a",
+      "name": "foreground curl",
+      "outcome": "Permitted. A 60-second transfer of 2024-07.zip received 4973604 bytes at 82894 bytes/s, approximately 0.082894 MB/s; the call timed out with curl exit code 28. At that rate, the 1492444177-byte archive would take approximately 5.0 hours.",
+      "exact_refusal_text": null
+    },
+    {
+      "method": "b",
+      "name": "tmux detached curl",
+      "outcome": "Blocked by managed SSH policy before session creation.",
+      "exact_refusal_text": "Starting or terminating GPU processes through Worker SSH is blocked. Use managed GPU job tools so reservations and process ownership remain enforceable"
+    },
+    {
+      "method": "c",
+      "name": "setsid detached curl",
+      "outcome": "Blocked by managed SSH policy before process creation.",
+      "exact_refusal_text": "Starting or terminating GPU processes through Worker SSH is blocked. Use managed GPU job tools so reservations and process ownership remain enforceable"
+    },
+    {
+      "method": "d",
+      "name": "foreground Python urllib/requests byte-capped resumable client",
+      "outcome": "Unavailable because no Python executable is installed on the server.",
+      "exact_refusal_text": "bash: line 1: python3: command not found"
+    },
+    {
+      "method": "e",
+      "name": "nohup retry",
+      "outcome": "Not retried because the detached-process policy refusal was reproduced by both tmux and setsid; the refusal was not transient.",
+      "exact_refusal_text": null
+    },
+    {
+      "method": "extra",
+      "name": "foreground wget",
+      "outcome": "Executable is present, but the Zenodo endpoint returned HTTP 504 Gateway Time-out without transferring bytes.",
+      "exact_refusal_text": null
+    }
+  ],
+  "measured_throughput_mb_s": 0.082894,
+  "files_downloaded": [
+    {
+      "name": "2024-06.zip",
+      "path": "/root/autodl-tmp/eibo/data/raw/2024-06.zip",
+      "bytes": 1747398591,
+      "expected": 1747398591,
+      "sha256": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b",
+      "is_valid_archive": true,
+      "status": "complete and verified"
+    },
+    {
+      "name": "2024-07.zip",
+      "path": "/root/autodl-tmp/eibo/data/raw/2024-07.zip",
+      "bytes": 4973604,
+      "expected": 1492444177,
+      "sha256": "4d2ffa293422241547d8aa1f851afc302c363097a510ad8fa6d30a2770721236",
+      "is_valid_archive": false,
+      "status": "partial transfer; file identifies as ZIP archive data but does not match authoritative size"
+    },
+    {
+      "name": "2024-08.zip",
+      "path": "/root/autodl-tmp/eibo/data/raw/2024-08.zip",
+      "bytes": 0,
+      "expected": null,
+      "sha256": null,
+      "is_valid_archive": false,
+      "status": "zero-byte failed attempt after HTTP 504"
+    }
+  ],
+  "sha256sums_file_contents": "9277e2a2886658ad62aa041fa748ba2eae88eafd601be31b736e33999966bd4b  /root/autodl-tmp/eibo/data/raw/2024-06.zip\n",
+  "remaining_files": [
+    "2024-07.zip",
+    "2024-08.zip",
+    "2024-09.zip",
+    "2024-10.zip",
+    "2024-11.zip",
+    "2024-12.zip",
+    "2025-01.zip",
+    "2025-02.zip",
+    "2025-03.zip",
+    "2025-04.zip",
+    "2025-05.zip"
+  ],
+  "blockers": [
+    "Detached tmux and setsid launches are prohibited by managed SSH policy.",
+    "Python urllib/requests fallback cannot run because python3 is not installed.",
+    "Foreground curl is permitted but measured at approximately 0.082894 MB/s and timed out after 60 seconds.",
+    "Zenodo record metadata and direct file probes intermittently returned HTTP 504 Gateway Time-out, including retries.",
+    "Only 2024-06.zip is complete and verified; no remaining month can be marked complete from the observed transfers.",
+    "The 2024-07.zip partial remains resumable and the zero-byte 2024-08.zip failed artifact remains on the data disk; neither was deleted."
+  ],
+  "environment_notes": {
+    "detect_image": "SSH error; no image classification result was available.",
+    "working_directory_from_pwd": "/root"
+  }
+}
