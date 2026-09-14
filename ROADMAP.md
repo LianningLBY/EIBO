@@ -247,6 +247,26 @@
 > points; the ladder is the frozen design.
 > **⇒ Same discipline as the rest of the session: state what the arithmetic forbids BEFORE the run, so the run
 > cannot be read as having discovered it.**
+>
+> **★★ D091 — AND THE SHARPER ONE: THE COMPARISON IS VALID ONLY WHERE **BOTH** MATCHED ARMS ARE BELOW 1.0.**
+> Both arms at a matched rung share the declared `m`, hence share the radius. So `delta_eps_hi(B_B vs C_B)`
+> equals `tv_B − tv_C` **only while NEITHER clips**. Since X9 measured the full-identifier arm at `tv_hat ≈ 0.99`
+> against `tv_hat ≈ 0.40` for the excluded arm, and coarsening reduces `tv_B` by an unknown amount:
+> **⇒ IF the coarsening preserves the gap, the SNI arm sits at `tv + radius >= 1` at EVERY rung, including the
+> coarsest — and the run returns "no matched pair is non-clipped", i.e. the question is NOT answerable at this n.**
+> **⇒ At B=256 (radius 0.19) a non-clipped SNI arm requires `tv_B < 0.81`, i.e. coarsening to 8192 buckets must
+> cost at least 19% of the signal. That is plausible and NOT guaranteed.**
+>
+> **⇒ REQUIRED, and it is the rule that makes the result readable either way: the artifact reports, PER RUNG, a
+> `both_arms_nonclipped` flag; `delta_eps_hi(B_B vs C_B)` is QUOTED ONLY on rungs where it is true.** Rungs where
+> it is false are reported as **"comparison unavailable"**, never as "no effect".
+>
+> **⇒ AND THE PRE-REGISTERED PREDICTION HAS A SECOND FAILURE MODE, stated in advance:** I wrote that the inclusion
+> arm would *probably stop clipping* at a sane `m`. **The opposite is equally possible — that it clips everywhere**
+> — and if so the honest headline is *"even a coarse 1-bit sketch of the host identifier is enough to destroy the
+> certificate"*, **not** "no separation". **⇒ Both readings are findings; neither may be presented as the other.**
+> **⇒ Same discipline as the rest of the session: state what the arithmetic forbids BEFORE the run, so the run
+> cannot be read as having discovered it.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
 > `excluded_arm_mean_eps_hi = 0.6102972071320967`, `aggregate_delta_eps_hi = 0.3897027928679033`, and
