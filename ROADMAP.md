@@ -63,8 +63,12 @@
 > confound explicitly and refuse the "price of SNI" reading.** **UNTIL THEN the +0.39 may be reported only as
 > "a partition augmented with the destination-host identifier raises measured TV by ~0.39, attribution OPEN".**
 > **★ D083 — SNI ARM RULED, AND THE SPEC'S FOUNDING CLAIM IS NOW TESTABLE RATHER THAN ASSUMED.**
-> The artifact's own source block records that the corpus carries **BOTH** fields:
+> The artifact's own source block **DECLARES both** fields:
 > `sni_derived_destination_host_identifier_field: DST_IP` **and** `sni_field: QUIC_SNI`.
+> **⇒ PRECISION (do not repeat my own slip): that is a DECLARATION by the runner, not a measurement of the H5.**
+> The only location that block says was *verified* is the identifier's column. **So the premise test's first
+> duty is to CONFIRM `QUIC_SNI` is actually readable from `/flows`; if it is not, report THAT and stop** —
+> a declaration naming a field is not evidence the field exists. **Same defect class as everything else logged today.**
 > **⇒ So the claim that the anonymised identifier is a DETERMINISTIC FUNCTION of the SNI — the claim the whole
 > exclusion rests on — can be MEASURED on the shared flows in the same pass, and had NEVER been checked.**
 > **(a) PRIMARY ARM stays `DST_IP`** (do NOT substitute the raw hostname — the declared channel excludes the
