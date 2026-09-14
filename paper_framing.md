@@ -190,7 +190,7 @@ rule alone is **uncovered**.
 | **RC3** | "The lower side is asymptotic — what does it actually certify?" | **X12 — MEASURED, see §X12 below** (detector validation on the informative stratum), X6 (**the large-k side, ⚠ ASSUMPTION-LADEN / realizability-conditional — NOT distribution-free**) |
 | **RC4** | "Single subset with unknown month coverage." | X10 (closes Step-0), X11 |
 | **RC5** | "Side channels / the declared channel is a choice." | X9 (SNI/ECH price, measured), X7 (masking as a precondition) |
-| **RC6** | "Do the brackets predict anything about real detectors?" | **X12 — MEASURED: the floor is NOT falsified on the informative stratum, 9/9 cells** |
+| **RC6** | "Do the brackets predict anything about real detectors?" | **X12 — MEASURED: the floor is NOT falsified on the informative stratum (9/9 cells as committed; ⚠ cell count is UNDER RE-MEASUREMENT — see the max_tpr fix below)** |
 | **RC7** | "Open-set framing ignores the unknown-class mass." | **was absent ⇒ add X13 (Good-Toulmin missing-mass, deployment-site scoped)** |
 
 **Two components of the original brief were missing from my first plan and are restored above:**
@@ -214,6 +214,12 @@ rule alone is **uncovered**.
 - **★ X12 — MEASURED (D078). THE FLOOR IS NOT FALSIFIED.** The pre-registered one-sided binomial test ran on
   the informative stratum at k=5 (the populated stratum and C1's headline cell): **3 detectors × 3 holdout
   levels, all nine cells `reject_null = false`.**
+  **⚠⚠ PENDING RE-MEASUREMENT — DO NOT QUOTE THE 9-CELL COUNT YET (M115/D082).** The `max_tpr` fix
+  (`(correct & positive).sum()`) REVIVES the `near_zero_tpr` guard at line 558, which the bug had
+  disabled (the inflated numerator could never fall to <= 0.01). **Where the revived guard fires, that
+  detector's rows become `NO INFORMATION` instead of `computed`, so the cell count may drop from 9 to 6.**
+  **The direction is safe for the conclusion (cells can be lost, not gained), and the containment
+  verdict does not consume `max_tpr` — but the NUMBER must be re-measured before it is written.**
   lightgbm 8/8/10 violations of 340 (rates 0.0235/0.0235/0.0294, p 0.9954/0.9954/0.9765);
   prototype 3/4/4 (0.0088/0.0118/0.0118, p ≈1.0); ronetc 3/3/2 (0.0088/0.0088/0.0059, p ≈1.0).
   Observed violation rates sit **below** the 0.05 null, so there is **no excess** and the pre-registered

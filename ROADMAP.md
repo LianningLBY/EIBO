@@ -55,7 +55,7 @@
 > | prototype | 0.05 / 0.10 / 0.20 | 340 each | 3 / 4 / 4 | 0.0088 / 0.0118 / 0.0118 | ≈1.0 | **False** |
 > | ronetc | 0.05 / 0.10 / 0.20 | 340 each | 3 / 3 / 2 | 0.0088 / 0.0088 / 0.0059 | ≈1.0 | **False** |
 >
-> **⇒ ALL NINE CELLS FAIL TO REJECT. The bound is NOT falsified on the informative stratum**, at every detector
+> **⇒ ALL NINE CELLS FAIL TO REJECT (as committed). The bound is NOT falsified on the informative stratum**, at every detector
 > and every holdout level. Strata **informative 340 / secondary 540 / excluded 110 = 990** — exactly X1's pair
 > denominator. `floor_violation_test.status = computed`, `previously_deferred: true`. The pre-registered
 > falsification condition was "an excess of floor violations falsifies either the TV estimate or the declared
@@ -65,6 +65,11 @@
 > is **CLOSED-SET** classification error while the floor is an **OPEN-SET** error lower bound. **⇒ The citable
 > sentence is "per-pair macro-average closed-set error stays above the floor on the informative stratum" —
 > NOT "per-pair open-set error never beats the certificate".**
+> **⚠⚠ AND THE 9-CELL COUNT IS UNDER RE-MEASUREMENT (D082):** the `max_tpr` fix (`(correct & positive).sum()`)
+> **REVIVES the `near_zero_tpr` guard that the bug had disabled** — the inflated numerator could never fall to
+> ≤0.01, so the guard was dead. Where the revived guard fires, that detector's rows become `NO INFORMATION`
+> instead of `computed`, so **the count may drop from 9 to 6.** **Direction is safe (cells can be lost, not
+> gained) and the verdict does not consume `max_tpr` — but the NUMBER must be re-measured before quoting.**
 > **(b) `maximum_pair_tpr` CANNOT BE QUOTED (M113).** Its values (170.5 / 192.9 / 2.10) cannot be rates, and the
 > per-service `max_tpr` beneath it spans **0.0022–341.06 with 22 of 53 services above 1.0**. **Third instance of
 > this project's "field whose value cannot equal what its name claims" class** (after the retired
