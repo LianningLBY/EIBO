@@ -1,4 +1,4 @@
-_next_id: 124
+_next_id: 125
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -6147,4 +6147,68 @@ mistakes:
     reported specific bytes and literal errors, and refused to act - which is what
     prevented the repeat from also costing a round.
   related_decisions:
+  - D098
+- id: M124
+  date: '2026-09-14'
+  category: code_bug
+  severity: high
+  summary: 'The script that produced the k=5 containment evidence is not in the repository:
+    the tracked x12_detector_validation.py predates the pair-level rewrite (lacks
+    pair_error_surrogate and maximum_pair_tpr entirely), while the server copy ran
+    it. The artifact is tracked but cannot be regenerated - reproducibility requires
+    the producer, not only the product.'
+  root_cause: The pair-level rewrite of x12_detector_validation.py was done on the
+    server tree and never brought back into the repository, so the tracked copy remained
+    the pre-rewrite version. Nothing detected it because the artifact records its
+    inputs (h5 path, k, label field, seed) but not its producing script's hash, and
+    no check compares the runner in the repository against the runner that ran.
+  prevention: 'Do not assume the local tree is the newer or canonical one. For every
+    runner, establish the direction of staleness by comparing the tree where the code
+    RUNS against the tree we ship, and treat a runner that exists only on the execution
+    host as a provenance defect of the same severity as a missing artifact - because
+    the artifact cannot be regenerated without it. Concretely: (1) an artifact''s
+    runtime block should record its producing script''s sha256, so the artifact and
+    the code are bound together and a divergence is detectable; (2) before fixing
+    a runner, confirm which tree holds the version that produced the evidence, rather
+    than fixing the copy that happens to be convenient; (3) any script that produces
+    a tracked artifact must itself be tracked, or the reproduction claim is unbacked.
+    The general form: reproducibility requires the producer, not only the product.'
+  status: active
+  context: 'The script that produced this project''s headline containment evidence
+    (X12 k=5) is not in the repository. The local and tracked x12_detector_validation.py
+    is 38,415 B / sha b0b8a2c559f5 / mtime 02:32, which predates the pair-level rewrite.
+    I confirmed it lacks the fields the k=5 artifact was produced with: pair_error_surrogate
+    0 hits locally, maximum_pair_tpr 0 hits locally. The artifact it produced has
+    23 top-level keys including floor_violation_test, per_pair_detector_errors, score_matrices
+    and containment_statistic, and the server-side runner was quoted by workers at
+    lines 631-635, 645 and 675 - line numbers and expressions that do not exist in
+    the tracked copy.
+
+
+    So the canonical x12 runner lives only on the server tree and is untracked. The
+    repository can produce the artifact''s DATA (the artifact is tracked, 191,867
+    B) but cannot regenerate it, because the code that wrote it is absent. This directly
+    undercuts the project''s central evidentiary claim that every reported number
+    maps to an artifact''s bytes: the bytes are here, the producer is not.
+
+
+    The artifact''s own runtime block records h5_path, k_packets, label_field, python,
+    python_version, seed, smoke and x1_json - but NOT the runner''s sha256. So there
+    is no fingerprint tying the artifact to a specific script version, which is why
+    this went unnoticed.
+
+
+    This surfaced only because I checked whether the local runner carried the D057-style
+    fix and found it lacked not just the fix but the entire pair-level rewrite. Every
+    earlier assumption of mine had been that the LOCAL tree was the source of truth
+    and the server was behind; here the direction is reversed.'
+  fix: Recorded the gap and the direction of staleness. The immediate consequence
+    for the max_tpr fix is that it cannot be applied to the tracked copy as I had
+    implicitly assumed - the fix must be applied to the SERVER copy (or the server
+    copy must first be pulled into the repository, which is the better order because
+    it also closes the provenance gap). Sent the finding with the exact evidence so
+    the next action can be decided on measured facts rather than the assumption that
+    local is canonical.
+  related_decisions:
+  - D078
   - D098
