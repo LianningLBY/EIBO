@@ -220,6 +220,33 @@
 > the platform-local runtime (PyTables lives server-side), so the module cannot be imported here at all.
 > **⇒ The import-time capture is provable STATICALLY** (line 29 defines, line 41 calls) **or by importing on the
 > server — not locally.** **⇒ Do not let "we could not import it locally" be recorded as a failed proof.**
+>
+> **★★ D090 — PRE-RUN: TWO OF THE SIX LADDER POINTS ARE ARITHMETICALLY INCAPABLE OF BEING INFORMATIVE.**
+> Computed from the repository's own radius (`0.5·sqrt(m/n1) + 0.5·sqrt(m/n2) + fluctuation terms`) **calibrated
+> against the X9 artifact to 1e-10** (predicts ARM A test `eps_hi = 0.4178717723534` exactly). Since
+> `eps_hi = min(1, tv_hat + radius_1 + radius_2)` and `tv_hat >= 0`, **any point whose radius ALONE reaches 1.0
+> clips for EVERY possible dataset**:
+> | B | m = 32B | radius (test) | verdict |
+> |---|---|---|---|
+> | 2 / 4 / 16 / 256 | 64 … 8192 | 0.022 / 0.029 / 0.052 / 0.191 | informative POSSIBLE |
+> | **65536** | 2,097,152 | **2.97** | **FORCED TO CLIP** |
+> | **256^10** | 3.87e25 | **1.27e10** | **FORCED TO CLIP** |
+> **⇒ Largest B that can possibly be informative: ~7363 (test), ~10399 (train).** The ladder's top two points sit
+> far above that.
+>
+> **⇒ CONSEQUENCE, and it is a repeat of the X9 defect one rung down: a point that is arithmetically forced to
+> saturate is NOT A MEASUREMENT.** The artifact will report `2 of 6 ladder points saturated`, which reads as an
+> empirical finding about the channel when it is a property of the declaration. **⇒ REQUIRED: the artifact must
+> LABEL which points are arithmetically dead (radius alone >= 1) versus merely observed to saturate**, computed
+> from `n`, `alpha` and the declared `m` — **so the two are never conflated on the page.**
+>
+> **★ AND THE PREDICTION'S OWN BOUNDARY IS LOOSE:** `PREDICTION["sane_bucket_max"] = 65536` defines "sane" as
+> B <= 65536 — **but 65536 is one of the two forced-clip points.** So `part_i_nonclipped_at_sane_m` is evaluated
+> over a set containing a point that cannot possibly be non-clipped. **⇒ The arithmetic threshold (~7.4e3) is the
+> honest boundary, not the round number.** **⇒ Do NOT change the ladder** — record the threshold and label the
+> points; the ladder is the frozen design.
+> **⇒ Same discipline as the rest of the session: state what the arithmetic forbids BEFORE the run, so the run
+> cannot be read as having discovered it.**
 > **⚠⚠ AND M128 SHARPENS THIS FROM A CONFOUND INTO AN ARITHMETIC PROOF — `delta_eps_hi` IS NOT A MEASUREMENT.**
 > From the artifact's own `sensitivity_to_channel_inclusion`: `inclusive_arm_clipped_fraction = 1.0`,
 > `excluded_arm_mean_eps_hi = 0.6102972071320967`, `aggregate_delta_eps_hi = 0.3897027928679033`, and
