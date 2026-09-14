@@ -284,6 +284,19 @@
 > does not have it" is a statement about one of several places bytes can be.**
 > **⇒ Same discipline as the rest of the session: the object under claim (the bytes) still existed; only one of its
 > locations did not.**
+>
+> **✓✓ X9_E IS RUNNING ON THE FULLY-GATED RUNNER — and the binding is proven ON THE SERVER.**
+> Upload worker's verified record: **before** local `34554 / 0137df32…` vs server `24582 / 799ce5d0…` (**not matched**) ⇒
+> **after** local == server == **`34554 / 0137df32ccacb4dd…`**, equality confirmed, **1 transfer attempt, no retry**.
+> **Server-side checks: `AST OK`; the `__main__` guard is present; and the import-time proof runs ON THE SERVER:**
+> **`RUNNER_SHA256 = 0137df32…` with `matches_file = True`.** **⇒ That is the D089/D087 binding PROVEN at the
+> destination, not argued from the source** — the exact standard the whole day's propagation discipline has been aiming at.
+> **Registry: `X9_E` = `RUNNING`, pid `728753`, tmux `X9_E`, log path recorded.**
+> **⇒ One incident worth noting:** that worker's `submit_on_allocated` returned **`Experiment 'X9_E' not found in registry`**
+> at that moment, so it **correctly did not call `register_cron`** and reported the block as literal text. **The run is live
+> anyway** (pid 728753), so the submission took effect through another path. **⇒ The file being right is the load-bearing
+> fact, and it is proven: the process holds `0137df32…`.**
+> **⇒ ⇒ Conclusion: the run is executing the fully-gated runner, and every gate item is live in that file.**
 > stating that the artifact and D076 settle this experiment, and that its non-terminal `status` reflects **an unmanaged
 > worker run, not unfinished work.** **⇒ And the same for `X9_C`** — withdrawn, never run; its `conclusion: killed` is
 > defensible, its `PREPARING` status is not.
