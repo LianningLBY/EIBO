@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 21:40 UTC | Round 3 (~3/5 weak reject) fixes in progress: unambiguous items DONE and verified in the rendered PDF; 4 judgment items + appendix reflow HELD pending the independent Reviewer.
+> Last updated: 2026-09-15 22:05 UTC | Round 3: W4 SETTLED BY ME (radius certifies 0.975 not 0.95; fix raises headline to 342/338); other 3 judgment items + reflow still held.
 
 ## Core direction
 
@@ -8,7 +8,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 ## The three claims
 
-- **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). **95% cluster-bootstrap CI [26.5%, 43.1%]** — the pair bootstrap understated width by 2.84x, so quote the cluster interval. Cross-corpus replication supports **non-reproduction** (X11: 523/3321 = 15.75%, upper 534 / lower 3310): the all-pairs and >=13049 strata exclude zero under both bootstraps. **BUT the scale-matched strata do NOT survive** — under the cluster bootstrap the >=20000/>=40000/>=80000 gap intervals include zero (D106), so "the gap narrows under matching" is a point estimate, not a resolved effect. The lower-side reproduction claim (0.9960 vs 0.9967) still holds. DONE.
+- **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). **⚠️ PENDING CORRECTION (D118):** the radius constant is `sqrt(2 ln(2/alpha))` = 2.9604, which actually certifies **0.975**, not the stated 0.95 — the paper's mechanism sentence for the factor 2 is wrong. Fix: use `sqrt(2 ln(1/alpha))` = 2.7162 (makes 0.95 exact) and **recompute the counts, which I did: upper 340→342, joint 336→338**, with no pair's verdict reversing. The alternative (relabel to 0.975) is rejected because it would force the §4.4 null from 5% to 2.5%. **95% cluster-bootstrap CI [26.5%, 43.1%]** — the pair bootstrap understated width by 2.84x, so quote the cluster interval. Cross-corpus replication supports **non-reproduction** (X11: 523/3321 = 15.75%, upper 534 / lower 3310): the all-pairs and >=13049 strata exclude zero under both bootstraps. **BUT the scale-matched strata do NOT survive** — under the cluster bootstrap the >=20000/>=40000/>=80000 gap intervals include zero (D106), so "the gap narrows under matching" is a point estimate, not a resolved effect. The lower-side reproduction claim (0.9960 vs 0.9967) still holds. DONE.
 - **C2** — the certificate horizon is short; the coarsest channel is the only viable rung. DONE, incl. the divisibility lower bound (X6) at large k where the plug-in certificate is lost. **⚠️ CEILING (D112, verified):** the median-TV ladder **saturates at high k** — k=30 reaches 1.0000 by M=4 (increments then exactly 0), k=15 by M=8. The paper's three "a finer alphabet resolves more" claims are all **k=5-scoped** so they are true as written, but **if the claim is ever generalized beyond the measured rung it MUST carry this ceiling**: monotone in M at low k, saturating at high k. **Verified from the full 20-cell grid** (`registry.yaml` → `X1.metrics.upper_side_table_20_cells`): the informative count is non-zero in only **4 of 20 cells** (M_1@k5=340, M_2@k5=47, M_4@k5=3, M_1@k10=28) and is **zero by M=8 at every k** — the certificate dies by alphabet resolution 8 regardless of prefix length, which is stronger than the M=1 column the paper quotes.
 - **C3** — methods/limits: the standard plug-in chain-rule estimator **cannot adjudicate** the dependent-prefix growth question; robust to two independent repairs (X3_A, X3_B). DONE.
 
@@ -137,6 +137,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D118 | 2026-09-15 | D118: W4 settled analytically — the current radius | — |
 | D117 | 2026-09-15 | D117: Round 3 weak-reject — scientific core intact | — |
 | D116 | 2026-09-15 | D116: re-review submitted and accepted — Round 2's | — |
 | D115 | 2026-09-15 | D115: all independent-reviewer tracking items clos | — |
@@ -146,5 +147,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D111 | 2026-09-15 | D111: higher-k median-TV ladder verified (monotone | X1, X12_k5 |
 | D110 | 2026-09-15 | D110: Item 2's cited source surface was wrong (no  | — |
 | D109 | 2026-09-15 | D109: dispatch pre-staging (higher-k per-pair rows | X1, X12_k5 |
-| D108 | 2026-09-15 | D108: re-review attempted on owner instruction; pl | — |
 
