@@ -1,4 +1,4 @@
-_next_id: 33
+_next_id: 35
 constraints:
 - id: C001
   added: 2026-09-13 11:37 UTC
@@ -490,3 +490,38 @@ constraints:
     that lives only in a ledger does not operate; this makes it a workflow step. A
     worker caught the repeat by checking its own premise, not by any control of mine.'
   decision_id: D080
+- id: C033
+  added: 2026-09-14 13:34 UTC
+  summary: Every script that produces a registered artifact must itself be tracked
+    in the repository before that artifact is cited. When registering an artifact,
+    confirm its runner is tracked (git ls-files on the runner path) in the same action;
+    a runner present only on the execution host is a reproducibility defect of the
+    same severity as a missing artifact. The artifact should record runner_sha256
+    so the binding is explicit and a divergence is detectable.
+  scope: all
+  reason: 'The gap has now occurred twice for two different experiments. First x12_detector_validation.py
+    (M124): the repository held the k=5 artifact and could not regenerate it, because
+    the tracked copy was the pre-rewrite script and the pair-level producer existed
+    only on the server. Then x9_sni_channel_delta.py: the runner that produced the
+    X9 evidence was untracked, even though the artifact''s own recorded runner_sha256
+    (63f2a3564357172b...) matched that file exactly - so the artifact was already
+    bound to its producer while the repository did not hold it. For a project whose
+    contribution is certification-grade evidence, a producer that exists only on the
+    execution host means the reproduction claim has no backing, and the artifact cannot
+    be regenerated. A reminder once was not enough, so this becomes a check.'
+  decision_id: D082
+- id: C034
+  added: 2026-09-15 00:21 UTC
+  summary: A withdrawn-never-run design cannot reach a terminal registry status without
+    fabricating lifecycle history; annotate, do not force
+  scope: all
+  reason: 'The registry status vocabulary is {PENDING, QUEUED, ALLOCATED, RUNNING,
+    DONE} plus PREPARING, with no terminal value for a design that was withdrawn before
+    it ever ran. The state machine permits PREPARING->{PENDING,QUEUED} only, so reaching
+    DONE requires walking QUEUED->ALLOCATED->RUNNING->DONE, which writes transition
+    checkpoints asserting a managed run that never happened (M131). X9_C is exactly
+    this case: withdrawn (D084), never executed, conclusion ''killed'', all lifecycle
+    fields null. Its status therefore cannot be corrected without fabricating history,
+    and the passive-mode gate keys on registry status being terminal - so one legitimately-terminated-never-run
+    design permanently blocks passive mode. Resolved by annotation (D096), not by
+    forcing the transition.'

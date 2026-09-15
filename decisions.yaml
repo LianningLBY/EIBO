@@ -1,4 +1,4 @@
-_next_id: 99
+_next_id: 100
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -5579,5 +5579,32 @@ decisions:
     role: subject
   - exp_id: X11
     result: joint_gate_fraction nested; manual path recorded
+    role: subject
+  depends_on: []
+- id: D099
+  date: 2026-09-15 04:11 UTC
+  summary: 'D099: C3''s control citation pointed at the BIC route (LINEAR, tautological)
+    instead of the chain-rule route (SUBLINEAR); corrected'
+  rationale: 'The Paper Agent found and self-corrected an evidence-pointer error while
+    building the provenance crosswalk, and I verified it independently. Two X3 artifacts
+    are DIFFERENT ROUTES with OPPOSITE control verdicts: x3_parametric_growth.json
+    is the BIC/fitted-order route whose known-truth control returns LINEAR (outcome
+    LINEAR, known_truth_control.passed True, exact_growth_fit.verdict LINEAR — and
+    its own plain_statement says the LINEAR reading is a constructive tautology, NON-DIAGNOSTIC
+    per D057); x3_control_occupancy_dose_response.json is the chain-rule route whose
+    analytic truth is per-position 0.3389191441548814 at k=5 with the plain arm''s
+    exponent ladder 0.651/0.625/0.614 (sublinear). C3''s claim is about the CHAIN-RULE
+    estimator, so its control must cite the chain-rule artifact. The conclusion had
+    cited the BIC route''s control. Corrected: evidence now points at the chain-rule
+    artifact and the truth is stated as the per-position value 0.3389191441548814
+    rather than "exactly linear" (the latter is the BIC route''s phrasing, and per-position
+    is accurate for the chain-rule route). Claim text unchanged; only the pointer
+    was wrong. This also REINFORCES D057: the LINEAR verdict comes from a route whose
+    own artifact calls that verdict a tautology, so citing it as a control result
+    at all would have been a double error.'
+  related_experiments:
+  - exp_id: X3
+    result: BIC route control LINEAR (tautological, D057); chain-rule route control
+      SUBLINEAR with per-position truth 0.3389191441548814
     role: subject
   depends_on: []

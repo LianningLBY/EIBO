@@ -1,4 +1,4 @@
-_next_id: 130
+_next_id: 133
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -6540,3 +6540,110 @@ mistakes:
   related_decisions:
   - D086
   - D089
+- id: M130
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: medium
+  summary: Propagated a stale X12 Stage 2 'stub' premise across ROADMAP + handoff
+    + dispatch; it was already implemented and ran
+  root_cause: I asserted a code/experiment state from a stale narrative without re-checking
+    the live source, then propagated it across ROADMAP, handoff, and dispatches in
+    the same turn.
+  prevention: 'Before asserting the state of any file or experiment as a blocker in
+    an instruction, re-check the live source in the same turn — grep the current file,
+    read the current artifact. A claim carried forward from an old narrative is a
+    dated reading, and re-propagating it without verification is the same "stale reading"
+    failure I have repeatedly corrected in others today. This is the third instance
+    where the live code contradicted my instruction (type: code, the two-fix worker''s
+    scope, now X12 Stage 2).'
+  status: active
+  context: 'I propagated a stale premise about X12 Stage 2 across three artifacts
+    in one turn: the ROADMAP (twice — progress section and BLOCKED_ON table), the
+    reset handoff to the Agent, and two dispatches. The premise — that deferred_floor_test()
+    is a stub returning DEFERRED unconditionally — was true of an older version of
+    x12_detector_validation.py but had expired. The current code implements build_containment_join()
+    (sourcing X1 upper bounds, calling eibo.statcore.error_floor_lower_bound, strata
+    340/540/110, floor (1-eps_hi)/2, one-sided binomial alpha=0.05 unsplit), and the
+    k=5 artifact already carries real containment results (all detectors reject_null=false).
+    The Agent caught it by grepping the current file rather than trusting my instruction.
+    I had read the ''stub'' claim from the pre-condensation ROADMAP narrative and
+    did not re-verify against the live code before re-asserting it.'
+  fix: Verified directly (grep for deferred_floor_test/DEFERRED = zero matches; confirmed
+    build_containment_join, error_floor_from_eps_hi, PAIR_OBJECT_STATEMENT present;
+    read the artifact's floor_violation_test with real strata and reject_null=false).
+    Corrected the ROADMAP progress section, BLOCKED_ON table, GPU section, and removed
+    the now-false k=5 task.
+- id: M131
+  date: '2026-09-14'
+  category: agent_behavior
+  severity: low
+  summary: X11/X13 promotion walked the managed lifecycle, fabricating transition
+    checkpoints for unmanaged runs
+  root_cause: My instruction said "promote to DONE" without restating the D094 constraint,
+    and the Agent walked the full lifecycle state machine, fabricating transition
+    history for unmanaged/unpromoted experiments.
+  prevention: 'When directing a status promotion for an experiment that did NOT go
+    through the managed lifecycle, say explicitly: "this is a field-level terminal
+    update (status/conclusion/completed_at), NOT a lifecycle walk; do not emit QUEUED/ALLOCATED/RUNNING
+    transitions for it." The tool may require intermediate states, but that is a tool
+    path, not a license to fabricate a managed-run history. D094 is the authority:
+    a rejected transition is a categorisation fact, not an obstacle to work around.'
+  status: active
+  context: 'My D089 fix instructed "promote X11 and X13 to DONE" as a normal terminal
+    update. The Agent interpreted it as walking the full managed lifecycle — QUEUED→ALLOCATED→RUNNING→DONE
+    — which it did in ~56 seconds, producing synthetic state-transition checkpoints
+    (X11_QUEUED/ALLOCATED/RUNNING/DONE and X13_QUEUED/ALLOCATED/RUNNING/DONE) for
+    experiments that never went through a managed run. X11 ran via an unmanaged worker
+    (D094 already ruled its lifecycle is not managed); X13 completed but was never
+    promoted. The terminal fields are honest — pid=None, allocation_id=None, tmux_session=None,
+    process_identity=None — so no pid/allocation/tmux was fabricated, but the transition
+    HISTORY is fabricated: it asserts a managed run that never happened. This is the
+    exact risk D094 warned about, and my instruction "promote to DONE" did not repeat
+    the constraint that this must be a field-level update, not a lifecycle walk. The
+    tool earlier rejected PREPARING→DONE directly (only PENDING/QUEUED allowed), so
+    the walk was the tool''s permitted path — but that does not make the intermediate
+    transitions true.'
+  fix: The terminal state (DONE + conclusion + completed_at) is correct and the lifecycle
+    fields are honestly null, so the registry is now usable for coverage. The synthetic
+    transition checkpoints remain as a false history. Recorded this ruling so the
+    record does not read the checkpoints as evidence of a managed run.
+- id: M132
+  date: '2026-09-15'
+  category: experiment_design
+  severity: high
+  summary: fig3 panel (b) plotted an exact-sigmoid synthetic column as measured data,
+    plus a 69%-wrong endpoint label
+  root_cause: An intermediate CSV in /tmp supplied a generated (closed-form sigmoid)
+    column where empirical data was required, and the figure intent specified a wrong
+    endpoint value that the render script then hardcoded. Neither the CSV nor the
+    intent was checked against the source artifact.
+  prevention: 'A figure data file must be traceable to an artifact byte-for-byte,
+    not regenerated through an intermediate CSV whose writer is unchecked. Test before
+    trusting: if a plotted series matches a closed-form function to machine precision,
+    it is not data. Also — the wrong annotation entered via the INTENT file, so the
+    intent must be reviewed against the artifact too, not just against the render
+    output.'
+  status: active
+  context: 'The figure-generation path (/tmp/eibo_fig_data/fig3_panelB.csv, consumed
+    by figures/paper/_render_fig3.py) supplied fig3 panel (b) with a `mean_fraction_contexts_below_5`
+    column that is an EXACT logistic sigmoid sigma((k-18)/2) — max absolute deviation
+    0.000e+00 across all 26 rows. No empirical measurement matches a closed-form sigmoid
+    to machine precision, so the column is generated, not measured. The real data
+    exists in artifacts/X3/data/x3_control_occupancy_dose_response.json (arms.plain_iid.levels[0]):
+    fraction = 0.0 at k=5 rising to k30_mean_fraction_contexts_below_5 = 0.998015529348165.
+    The CSV carries 0.0015 and 0.9975 instead — different values. Compounding it,
+    the panel''s k=30 effective_n endpoint was annotated "1.087" while the plotted
+    value is 1.8323306344157342 (69% wrong), and the intent file itself specified
+    the wrong string, so the error entered at the specification stage, not just rendering.
+    The panel title read "Occupancy collapse drives the bias" and the intent said
+    the mechanism is "measured" — so synthetic data was presented as an empirical
+    observation.'
+  fix: 'Dispatched a critical instruction to the Paper Agent: regenerate panel (b)
+    from x3_control_occupancy_dose_response.json rather than the synthetic CSV; fix
+    the k=30 label to the true endpoint; fix the k=5 label to 3dp; and report the
+    provenance of the synthetic CSV plus which of the five figures came from /tmp/eibo_fig_data/*.csv
+    versus a direct artifact read. I independently audited the other four figures''
+    data files: fig2_panelA matches the framing''s M-ladder exactly (0.3434/0.0475/0.0030/0/0
+    with matching saturation), fig3_panelA endpoints match the artifact, fig4 carries
+    the joint-gate values, fig5 matches the X9_E medians. So the fabrication is localised
+    to fig3 panel (b) so far.'

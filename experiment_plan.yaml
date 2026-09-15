@@ -11,7 +11,7 @@ experiments:
   - C1
   - C2
   priority: 0
-  compute_class: 'CPU (assembly of measured values; no training)'
+  compute_class: CPU (assembly of measured values; no training)
   description: "HEADLINE BRACKET TABLE (k-prefix chain). The paper's primary result.\
     \ Present, for the pre-registered rung ladder M in {1,2,4,8,16} and k in {5,10,15,30},\
     \ the per-pair joint gate `(eps_lo > 0.05) AND (eps_hi < 0.5)` as a PROPORTION\
@@ -74,7 +74,7 @@ experiments:
 
     '
   priority: 0
-  compute_class: 'CPU (measured bound comparison)'
+  compute_class: CPU (measured bound comparison)
   depends_on: []
   registry_id: E9_Q2v3
   framing_ref:
@@ -85,7 +85,7 @@ experiments:
   claim:
   - C3
   priority: 0
-  compute_class: 'CPU (chain-rule divergence on symbol streams)'
+  compute_class: CPU (chain-rule divergence on symbol streams)
   description: 'THE THEORY TEST THAT DISCRIMINATES THE FRAMING (chain-rule D_k vs
     the i.i.d. null). ***STATUS -- INCONCLUSIVE, fixed by the pre-committed adjudication
     rule. NOT a falsification and NOT a confirmation.*** Estimate the CHAIN-RULE joint
@@ -203,7 +203,7 @@ experiments:
   claim:
   - C2
   priority: 0
-  compute_class: 'CPU (frontier function over measured values)'
+  compute_class: CPU (frontier function over measured values)
   description: "THE FRONTIER AS A FUNCTION, NOT A NUMBER -- this is what makes C2\
     \ a generalizable limit rather than one dataset's figure. M_max is a FUNCTION\
     \ of (k, n, tv):\n  M_max = 0.5 * (n * B^2)^(1/k),  B = 0.5 - tv_hat - sqrt(2*ln(2/alpha_law)/n),\
@@ -235,7 +235,7 @@ experiments:
   claim:
   - C1
   priority: 1
-  compute_class: 'CPU (estimator ground-truth comparison)'
+  compute_class: CPU (estimator ground-truth comparison)
   description: "ESTIMATOR CORRECTNESS UNDER KNOWN GROUND TRUTH (the evidence that\
     \ the numbers are not artefacts of the implementation). Synthetic discrete distributions\
     \ with ANALYTICALLY known TV:\n  (i) tv_hat converges to the true TV;\n  (ii)\
@@ -260,7 +260,7 @@ experiments:
   claim:
   - C1
   priority: 1
-  compute_class: 'CPU (divisibility lower bound; produces no D_k curve)'
+  compute_class: CPU (divisibility lower bound; produces no D_k curve)
   description: '***MECHANISM-NOVELTY TRACK.*** REJECTION-GENERIC / DIVISIBILITY LOWER
     BOUND -- a structurally DIFFERENT bound mechanism from the plug-in upper side,
     which is why it belongs in the plan independent of any single number. TV(P1,P2)
@@ -302,14 +302,14 @@ experiments:
 
     '
   depends_on: []
-  registry_id: null
+  registry_id: X6
   framing_ref:
   - RC3
 - id: X7
   claim:
   - C1
   priority: 1
-  compute_class: 'CPU (bound comparison)'
+  compute_class: CPU (bound comparison)
   description: 'MASKING AS A PRECONDITION, WITH A DESIGN THAT CAN ACTUALLY DETECT
     THE EFFECT. The padding question is not cleanup: sampled short-flow tail slots
     are all zero while sizes are read as abs(...), so a raw 0 is not a legal packet
@@ -335,7 +335,7 @@ experiments:
   claim:
   - C1
   priority: 1
-  compute_class: 'CPU (vector-law TV bound)'
+  compute_class: CPU (vector-law TV bound)
   description: 'VECTOR-LEVEL DISTINGUISHABILITY AS A ONE-SIDED RESULT (in flight).
     The quantity one-hot discards to put both sides on ONE object: TV(per-flow normalised
     32-vector law). ***CORRECTED (M055): the word marginal here silently named TWO
@@ -368,14 +368,15 @@ experiments:
     '
   depends_on:
   - X1
-  registry_id: null
+  registry_id: X8
   framing_ref:
   - RC2
 - id: X9
   claim:
   - C1
   priority: 1
-  compute_class: 'CPU (bound delta between two channel declarations; NO training, does not touch CUDA)'
+  compute_class: CPU (bound delta between two channel declarations; NO training, does
+    not touch CUDA)
   description: 'SNI/ECH SENSITIVITY -- THE MEASURED PRICE OF ECH. The anonymised destination-host
     identifier is a deterministic function of the SNI, so it is a legitimate pre-encryption
     side channel and MUST be excluded from the declared channel. Report the bound
@@ -392,14 +393,37 @@ experiments:
     '
   depends_on:
   - X1
-  registry_id: null
+  registry_id: X9
   framing_ref:
   - RC5
+- id: X9_E
+  claim:
+  - C1
+  priority: 2
+  compute_class: CPU (bound comparison over a declared alphabet ladder; no training)
+  description: 'Dose-response family over a DECLARED a-priori alphabet ladder. At
+    each declared B in [2,4,16,256,65536,256**10] with m = 32*B fixed before any data
+    is seen, run ARM B_B = (packed k=5 (direction,size) prefix, hash_B(DST_IP)) which
+    is SNI-DEPENDENT, against ARM C_B = (packed k=5 prefix, hash_B(random_id)) which
+    is SNI-INDEPENDENT at the SAME declared m with a fixed recorded seed. The informative
+    comparison is B_B against C_B at matched declared m, then both against ARM A (SNI-excluded,
+    m=32). Report per arm per point: the declared m actually passed as alphabet_size,
+    the realized support AS INFORMATION ONLY, n for both laws, the radius term 0.5*sqrt(m/n),
+    the clipped fraction, and mean/median tv_hat and eps_hi. A saturated arm (clipped
+    fraction 1.0) is reported as saturated and excluded from every delta. delta_eps_hi
+    and delta_tv_hat are reported as SEPARATE quantities and never combined. A separate
+    sub-check in the same run tests whether DST_IP is a deterministic function of
+    QUIC_SNI, reporting distinct counts for both and conflict counts in each direction;
+    if QUIC_SNI is unreadable that is recorded as a NAMED DEFECT and the rest of the
+    run continues.'
+  depends_on:
+  - X9
+  registry_id: X9_E
 - id: X10
   claim:
   - C1
   priority: 2
-  compute_class: 'CPU (bound comparison)'
+  compute_class: CPU (bound comparison)
   description: 'CLOSE THE ENVIRONMENT GATE. Step-0 PASSED on the XS subset (53 services;
     45 at the 2000-flow threshold; two-axis 43/39; full-crossing 39/36 -- comfortably
     clearing >= 15) with TIME_FIRST spanning 13 months (12 full + a 69-flow 2024-05
@@ -429,7 +453,7 @@ experiments:
   claim:
   - C1
   priority: 2
-  compute_class: 'CPU (cross-corpus feasibility at the k=5/M=1 protocol; ran CPU-side)'
+  compute_class: CPU (cross-corpus feasibility at the k=5/M=1 protocol; ran CPU-side)
   description: 'REPLICATION ON AN INDEPENDENT DATASET (CESNET-QUIC22, one month, 102
     labels). The strongest defence against a single-dataset review, and the project''s
     ONLY direct answer to it -- nothing has been run on it. Same protocol, same declared
@@ -450,7 +474,7 @@ experiments:
     '
   depends_on:
   - X1
-  registry_id: null
+  registry_id: X11
   framing_ref:
   - RC1
   - RC4
@@ -461,7 +485,8 @@ experiments:
   - RC3
   - RC6
   priority: 1
-  compute_class: 'GPU-ELIGIBLE -- the ONLY such entry; trains a detector panel, RoNeTC uses CUDA, LightGBM and prototype fall back to CPU'
+  compute_class: GPU-ELIGIBLE -- the ONLY such entry; trains a detector panel, RoNeTC
+    uses CUDA, LightGBM and prototype fall back to CPU
   registry_id: X12_k5
   description: 'DETECTOR VALIDATION -- THE FALSIFIABLE CONTAINMENT (restored from
     the brief; it was missing from my first plan). Pre-registered ONE-SIDED COVERAGE
@@ -540,8 +565,8 @@ experiments:
   framing_ref:
   - RC7
   priority: 2
-  compute_class: 'CPU (frequency-of-frequencies missing-service-mass estimate)'
-  registry_id: null
+  compute_class: CPU (frequency-of-frequencies missing-service-mass estimate)
+  registry_id: X13
   description: GOOD-TOULMIN MISSING-SERVICE MASS (restored from the brief; missing
     from my first plan). The unknown-class mass entering the open-set bound is scoped
     as a ***DEPLOYMENT-SITE MISSING SERVICE MASS***, estimated from the flow-level
@@ -550,6 +575,24 @@ experiments:
     ANALYSIS. ***NEVER a universal unknown prior.*** Report bounds WITH and WITHOUT
     this term separately, so a reader can see how much of the open-set gap the unknown
     class accounts for.
+- id: X3_A
+  claim:
+  - C3
+  priority: 1
+  compute_class: CPU (synthetic known-truth controls)
+  description: "Estimator-repair variant A (jackknife bias correction) — failed its known-truth gate; that failure IS part of C3's evidence."
+  depends_on:
+  - X3
+  registry_id: X3_A
+- id: X3_B
+  claim:
+  - C3
+  priority: 1
+  compute_class: CPU (synthetic known-truth controls + threshold sweep)
+  description: "Estimator-repair variant B (exposure conditioning) — failed its known-truth gate; with A, establishes C3's 'robust to two independent repairs'."
+  depends_on:
+  - X3
+  registry_id: X3_B
 claims:
   C1: A two-sided epsilon-indistinguishability bracket is computable on real encrypted
     traffic, with the two sides carrying explicitly different certification strength

@@ -4,8 +4,6 @@
   "alpha_split_convention": "The vector Michel call uses alpha=0.025. The pooled-side tv_hat is a point estimate; no finite-sample certificate is claimed for this one-sided result.",
   "check_is_sanity_not_detector": true,
   "check_is_sanity_not_detector_note": "The DPI comparison is between the vector law and its pooled-cell image, but both reported quantities are lower-bound/point-estimate outputs; a vector-side Michel lower bound below pooled tv_hat is expected and is not a falsification.",
-  "dpi_sanity_pass_pairs": 990,
-  "dpi_violations_vector_vs_pooled": 0,
   "guarantee_scope": "The vector-side value is asymptotic, not finite-sample. This artifact does not claim a finite-sample certificate for the vector law.",
   "kprefix_inversion_count": 26,
   "kprefix_marginal_tv_median": 0.5802408767389473,
@@ -18,7 +16,6 @@
   },
   "mutual_consistency_conflict_count": 0,
   "pair_count": 990,
-  "pairs_where_dpi_check_can_falsify": 0,
   "per_pair_rows": [
     {
       "kprefix_symbol_tv_hat": 0.3815,
@@ -12986,5 +12983,8 @@
   "status": "complete",
   "vector_law_tv_median": 0.8673875578391307,
   "vector_side_object": "TV of the per-flow normalized 32-vector PHIST law",
-  "vector_side_quantity_type": "asymptotic_HPLB_michel_adaptive"
+  "vector_side_quantity_type": "asymptotic_HPLB_michel_adaptive",
+  "dpi_smoke_test_violations": 0,
+  "dpi_smoke_test_testable_pairs": 0,
+  "D091_dpi_relabel": "The DPI check compared a LOWER BOUND (vector Michel HPLB) against a POINT ESTIMATE (pooled tv_hat). A lower bound below a point estimate is expected and does not falsify DPI. 0 violations means 0/990 testable, NOT 990/990 passed. This is a sanity smoke-test, not a falsifiable DPI verification. Do NOT cite as theorem verification."
 }

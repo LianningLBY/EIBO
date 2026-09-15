@@ -166,7 +166,9 @@
             "reason": null,
             "secondary_pair_count": 540,
             "split_convention": "one-sided; alpha is not split",
-            "status": "computed"
+            "status": "computed",
+            "violations": 8,
+            "trials": 340
           },
           "0.1": {
             "alpha": 0.05,
@@ -188,7 +190,9 @@
             "reason": null,
             "secondary_pair_count": 540,
             "split_convention": "one-sided; alpha is not split",
-            "status": "computed"
+            "status": "computed",
+            "violations": 8,
+            "trials": 340
           },
           "0.2": {
             "alpha": 0.05,
@@ -210,7 +214,9 @@
             "reason": null,
             "secondary_pair_count": 540,
             "split_convention": "one-sided; alpha is not split",
-            "status": "computed"
+            "status": "computed",
+            "violations": 10,
+            "trials": 340
           }
         },
         "status": "computed"
@@ -289,7 +295,9 @@
             "reason": null,
             "secondary_pair_count": 540,
             "split_convention": "one-sided; alpha is not split",
-            "status": "computed"
+            "status": "computed",
+            "violations": 3,
+            "trials": 340
           },
           "0.1": {
             "alpha": 0.05,
@@ -311,7 +319,9 @@
             "reason": null,
             "secondary_pair_count": 540,
             "split_convention": "one-sided; alpha is not split",
-            "status": "computed"
+            "status": "computed",
+            "violations": 4,
+            "trials": 340
           },
           "0.2": {
             "alpha": 0.05,
@@ -333,7 +343,9 @@
             "reason": null,
             "secondary_pair_count": 540,
             "split_convention": "one-sided; alpha is not split",
-            "status": "computed"
+            "status": "computed",
+            "violations": 4,
+            "trials": 340
           }
         },
         "status": "computed"
@@ -361,7 +373,9 @@
             "reason": null,
             "secondary_pair_count": 540,
             "split_convention": "one-sided; alpha is not split",
-            "status": "computed"
+            "status": "computed",
+            "violations": 3,
+            "trials": 340
           },
           "0.1": {
             "alpha": 0.05,
@@ -383,7 +397,9 @@
             "reason": null,
             "secondary_pair_count": 540,
             "split_convention": "one-sided; alpha is not split",
-            "status": "computed"
+            "status": "computed",
+            "violations": 3,
+            "trials": 340
           },
           "0.2": {
             "alpha": 0.05,
@@ -405,7 +421,9 @@
             "reason": null,
             "secondary_pair_count": 540,
             "split_convention": "one-sided; alpha is not split",
-            "status": "computed"
+            "status": "computed",
+            "violations": 2,
+            "trials": 340
           }
         },
         "status": "computed"
@@ -5581,5 +5599,22 @@
     "train": "earlier months"
   },
   "stage": "X12 Stage 2",
-  "status": "COMPLETED"
+  "status": "COMPLETED",
+  "backfill_note": {
+    "date": "2026-09-14",
+    "fields_added": [
+      "violations",
+      "trials"
+    ],
+    "trials_value": 340,
+    "source": "Re-derived from the run own per-pair data (x12_detector_validation_per_pair_k5.csv), not recomputed. The floor definition (pair_error_surrogate < (1 - eps_hi) / 2) matches the live producer.",
+    "verification": "All 9 (violations, trials) pairs reproduce their recorded binomial p_values within 1e-6 via binomtest(violations, 340, 0.05, alternative=greater).",
+    "reason": "The original 10:12 run computed the p-values but did not persist the integer counts. This backfill adds the counts post-hoc; the completed_timestamp still reads the original run time.",
+    "pair_count_unchanged": 990,
+    "strata_unchanged": {
+      "informative": 340,
+      "secondary": 540,
+      "excluded": 110
+    }
+  }
 }

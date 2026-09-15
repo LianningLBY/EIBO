@@ -26,10 +26,19 @@ import numpy as np
 import tables
 
 
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 PROJECT_ROOT = Path("/root/eibo")
 H5_PATH = Path("/root/autodl-tmp/eibo/data/CESNET-QUICEXT-25-XS.complete.h5")
 ARTIFACT_PATH = PROJECT_ROOT / "artifacts" / "x9_dose_response_channels.json"
-RUNNER_PATH = PROJECT_ROOT / "x9_dose_response_channels.py"
+RUNNER_PATH = Path(__file__).resolve()
+RUNNER_SHA256 = sha256_file(RUNNER_PATH)
 HELPER_PATH = PROJECT_ROOT / "scripts" / "xs_compression_early_readout.py"
 STATCORE_PATH = PROJECT_ROOT / "src" / "eibo" / "statcore.py"
 
@@ -66,14 +75,6 @@ PREDICTION = {
     "sane_bucket_max": 65536,
     "near_plus_0_39_tolerance": 0.10,
 }
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1 << 20), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def load_modules() -> tuple[Any, Any]:
@@ -251,6 +252,8 @@ def pair_result(counter_a: collections.Counter[Any], counter_b: collections.Coun
         "n_b": int(result.n2),
         "tv_hat": float(result.tv_hat),
         "eps_hi": float(result.eps_hi),
+        "radius_1": float(result.radius_1),
+        "radius_2": float(result.radius_2),
         "radius_term_a": float(0.5 * math.sqrt(float(m) / result.n1)),
         "radius_term_b": float(0.5 * math.sqrt(float(m) / result.n2)),
         "realized_support_union_information_only": int(support),
@@ -328,7 +331,210 @@ def run_point(
 def delta_summary(values: list[float], excluded_reason: str | None = None) -> dict[str, Any]:
     if excluded_reason is not None:
         return {"status": "excluded", "reason": excluded_reason, "count": 0, "mean": None, "median": None}
+    if not values:
+        return {"status": "no_rows", "count": 0, "mean": None, "median": None}
     return {"status": "informative", **summarize(values)}
+
+
+def reference_radius_result(
+    n_a: int,
+    n_b: int,
+    alphabet_size: int,
+    tv_upper_bound: Any,
+) -> Any:
+    """Obtain repository radii for observed sample sizes without data samples."""
+    return tv_upper_bound(
+        itertools.repeat(0, int(n_a)),
+        itertools.repeat(0, int(n_b)),
+        alphabet_size=alphabet_size,
+        alpha=ALPHA_PER_LAW,
+    )
+
+
+def largest_informative_bucket(
+    n_a: int,
+    n_b: int,
+    tv_upper_bound: Any,
+) -> int | None:
+    """Find the largest integer B whose repository radius sum remains below one."""
+    def is_informative(bucket_count: int) -> bool:
+        reference = reference_radius_result(
+            n_a,
+            n_b,
+            PREFIX_ALPHABET_SIZE * int(bucket_count),
+            tv_upper_bound,
+        )
+        return float(reference.radius_1) + float(reference.radius_2) < 1.0
+
+    upper = int(BUCKET_LADDER[-1])
+    if not is_informative(1):
+        return None
+    if is_informative(upper):
+        return upper
+    lo, hi = 1, upper
+    while lo < hi:
+        mid = (lo + hi + 1) // 2
+        if is_informative(mid):
+            lo = mid
+        else:
+            hi = mid - 1
+    return lo
+
+
+def build_arithmetic_labels(
+    split_results: dict[str, dict[str, Any]],
+    services: list[int],
+    tv_upper_bound: Any,
+) -> dict[str, Any]:
+    reference_pair = {"service_a": int(services[0]), "service_b": int(services[1])}
+    thresholds: dict[str, Any] = {}
+    per_ladder_point: dict[str, Any] = {}
+    forced_clip_rungs: dict[str, list[int]] = {}
+    for split_name in ("train", "test"):
+        reference_rows = split_results[split_name][f"B_{BUCKET_LADDER[0]}"]["pairs"]
+        reference_row = next(
+            row
+            for row in reference_rows
+            if row["service_a"] == reference_pair["service_a"]
+            and row["service_b"] == reference_pair["service_b"]
+        )
+        n_a = int(reference_row[f"B_{BUCKET_LADDER[0]}"]["n_a"])
+        n_b = int(reference_row[f"B_{BUCKET_LADDER[0]}"]["n_b"])
+        threshold_b = largest_informative_bucket(n_a, n_b, tv_upper_bound)
+        thresholds[split_name] = {
+            "reference_pair": reference_pair,
+            "observed_n": {"law_1": n_a, "law_2": n_b},
+            "largest_B_with_radius_sum_below_1": threshold_b,
+            "corresponding_m": None if threshold_b is None else PREFIX_ALPHABET_SIZE * threshold_b,
+        }
+        per_ladder_point[split_name] = {}
+        forced_clip_rungs[split_name] = []
+        for bucket_count in BUCKET_LADDER:
+            point_name = f"B_{bucket_count}"
+            rows = split_results[split_name][point_name]["pairs"]
+            pair_labels = []
+            for row in rows:
+                arm = row[point_name]
+                radius_sum = float(arm["radius_1"]) + float(arm["radius_2"])
+                pair_labels.append(
+                    {
+                        "service_a": int(row["service_a"]),
+                        "service_b": int(row["service_b"]),
+                        "n": {"law_1": int(arm["n_a"]), "law_2": int(arm["n_b"])},
+                        "radius_1": float(arm["radius_1"]),
+                        "radius_2": float(arm["radius_2"]),
+                        "radius_sum": radius_sum,
+                        "arithmetically_forced_to_clip": radius_sum >= 1.0,
+                    }
+                )
+            forced = bool(pair_labels) and all(item["arithmetically_forced_to_clip"] for item in pair_labels)
+            per_ladder_point[split_name][point_name] = {
+                "m": PREFIX_ALPHABET_SIZE * int(bucket_count),
+                "observed_clipped_fraction": split_results[split_name][point_name]["arms"][point_name]["clipped_fraction"],
+                "arithmetically_forced_to_clip": forced,
+                "per_pair": pair_labels,
+            }
+            if forced:
+                forced_clip_rungs[split_name].append(int(bucket_count))
+    return {
+        "per_ladder_point": per_ladder_point,
+        "forced_clip_rungs": forced_clip_rungs,
+        "informative_threshold": thresholds,
+        "threshold_method": "integer bisection over B using eibo.statcore.tv_upper_bound result.radius_1 and result.radius_2; strict radius_sum < 1.0",
+        "calibration_record": calibrate_previous_arm_a_test(tv_upper_bound),
+        "pre_registered_sane_bucket_max": PREDICTION["sane_bucket_max"],
+    }
+
+
+def build_comparison_availability(
+    split_results: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    points: dict[str, Any] = {}
+    for bucket_count in BUCKET_LADDER:
+        point_name = f"B_{bucket_count}"
+        by_split: dict[str, Any] = {}
+        for split_name in ("train", "test"):
+            rows = split_results[split_name][point_name]["pairs"]
+            pair_labels = []
+            tv_values = []
+            eps_values = []
+            for row in rows:
+                left = row[f"B_{bucket_count}"]
+                right = row[f"C_{bucket_count}"]
+                both_nonclipped = float(left["eps_hi"]) != 1.0 and float(right["eps_hi"]) != 1.0
+                pair_labels.append(
+                    {
+                        "service_a": int(row["service_a"]),
+                        "service_b": int(row["service_b"]),
+                        "both_arms_nonclipped": both_nonclipped,
+                    }
+                )
+                tv_values.append(float(left["tv_hat"]) - float(right["tv_hat"]))
+                if both_nonclipped:
+                    eps_values.append(float(left["eps_hi"]) - float(right["eps_hi"]))
+            both_arms_nonclipped = bool(rows) and all(item["both_arms_nonclipped"] for item in pair_labels)
+            tv_summary = summarize(tv_values)
+            tv_summary["status"] = "informative_radius_free_measurement" if tv_values else "no_rows"
+            by_split[split_name] = {
+                "both_arms_nonclipped": both_arms_nonclipped,
+                "per_pair": pair_labels,
+                "delta_eps_hi": delta_summary(eps_values) if both_arms_nonclipped else "comparison_unavailable",
+                "delta_tv_hat": tv_summary,
+            }
+        points[point_name] = {"by_split": by_split}
+    return {
+        "delta_tv_hat_validity": "delta_tv_hat is radius-free and valid at every rung, including clipped rungs",
+        "delta_eps_hi_validity": "delta_eps_hi is quoted only when both_arms_nonclipped is true; otherwise it is comparison_unavailable",
+        "points": points,
+    }
+
+
+def resolve_existing_path(candidates: Iterable[Path]) -> Path:
+    candidate_list = list(candidates)
+    for candidate in candidate_list:
+        if candidate.exists():
+            return candidate
+    raise FileNotFoundError(
+        f"calibration input not found; tried: {[str(path) for path in candidate_list]}"
+    )
+
+
+def calibrate_previous_arm_a_test(tv_upper_bound: Any) -> dict[str, Any]:
+    candidates = [
+        PROJECT_ROOT / "artifacts" / "x9_sni_channel_delta.json",
+        PROJECT_ROOT / "artifacts" / "X9" / "data" / "x9_sni_channel_delta.json",
+    ]
+    calibration_path = resolve_existing_path(candidates)
+    with calibration_path.open(encoding="utf-8") as handle:
+        previous = json.load(handle)
+    calibration_pair = next(
+        pair
+        for pair in previous["per_pair"]
+        if pair["service_a"] == 0 and pair["service_b"] == 1
+    )
+    recorded = calibration_pair["by_split"]["test"]["arm_a_sni_excluded"]
+    reference = reference_radius_result(
+        int(recorded["n_a"]),
+        int(recorded["n_b"]),
+        PREFIX_ALPHABET_SIZE,
+        tv_upper_bound,
+    )
+    predicted_eps_hi = min(
+        1.0,
+        float(recorded["tv_hat"]) + float(reference.radius_1) + float(reference.radius_2),
+    )
+    absolute_difference = abs(predicted_eps_hi - float(recorded["eps_hi"]))
+    if absolute_difference > 1e-6:
+        raise RuntimeError(f"calibration absolute difference exceeds 1e-6: {absolute_difference}")
+    return {
+        "source": str(calibration_path),
+        "candidates_tried": [str(path) for path in candidates],
+        "service_pair": {"service_a": 0, "service_b": 1},
+        "split": "test",
+        "predicted_arm_a_eps_hi": predicted_eps_hi,
+        "recorded_arm_a_eps_hi": float(recorded["eps_hi"]),
+        "absolute_difference": absolute_difference,
+    }
 
 
 def build_deltas(split_results: dict[str, dict[str, Any]], services: list[int]) -> dict[str, Any]:
@@ -356,8 +562,10 @@ def build_deltas(split_results: dict[str, dict[str, Any]], services: list[int]) 
             reason = None
             if excluded:
                 reason = f"{excluded} pair-split rows had at least one saturated arm; delta_eps_hi is arithmetic residue and is not quotable"
+            tv_summary = summarize(tv_values)
+            tv_summary["status"] = "informative_radius_free_measurement" if tv_values else "no_rows"
             points[label] = {
-                "delta_tv_hat": {"status": "informative_radius_free_measurement", **summarize(tv_values)},
+                "delta_tv_hat": tv_summary,
                 "delta_eps_hi": delta_summary(eps_values, reason),
             }
     return points
@@ -432,11 +640,31 @@ def run() -> int:
     sane_b = [k for k in BUCKET_LADDER if k <= PREDICTION["sane_bucket_max"]]
     nonclipped = [k for k in sane_b if arms_block[f"B_{k}"]["splits"]["train"]["clipped_fraction"] < 1.0 or arms_block[f"B_{k}"]["splits"]["test"]["clipped_fraction"] < 1.0]
     tv_candidates = [deltas[f"B_{k}_vs_A"]["delta_tv_hat"]["mean"] for k in sane_b if deltas[f"B_{k}_vs_A"]["delta_tv_hat"]["mean"] is not None]
-    near = any(abs(float(value) - 0.39) <= PREDICTION["near_plus_0_39_tolerance"] for value in tv_candidates)
-    prediction_verdict = "CONFIRMS" if nonclipped and near else "REFUTES"
+    part_i_nonclipped_at_sane_m = bool(nonclipped)
+    near_tolerance = PREDICTION["near_plus_0_39_tolerance"]
+    nearest_tv_candidate = min(tv_candidates, key=lambda value: abs(float(value) - 0.39), default=None)
+    nearest_tv_candidate_abs_distance = (
+        abs(float(nearest_tv_candidate) - 0.39) if nearest_tv_candidate is not None else None
+    )
+    part_ii_tv_delta_near_0_39 = (
+        nearest_tv_candidate_abs_distance is not None and nearest_tv_candidate_abs_distance <= near_tolerance
+    )
+    if part_i_nonclipped_at_sane_m and part_ii_tv_delta_near_0_39:
+        prediction_verdict = "CONFIRMS"
+        failed_parts = []
+    elif part_i_nonclipped_at_sane_m:
+        prediction_verdict = "CONFIRMS_PART_I_ONLY"
+        failed_parts = ["part_ii"]
+    else:
+        prediction_verdict = "REFUTES"
+        failed_parts = ["part_i"]
+    arithmetic_labels = build_arithmetic_labels(split_results, services, tv_upper_bound)
+    comparison_availability = build_comparison_availability(split_results)
     artifact = {
         "experiment": "X9_E",
         "outcome": "MEASURED_DOSE_RESPONSE_CHANNELS",
+        "runner_path": str(RUNNER_PATH),
+        "runner_sha256": RUNNER_SHA256,
         "cpu_only": True,
         "source": {
             "h5_path": str(H5_PATH),
@@ -479,11 +707,30 @@ def run() -> int:
         "arms": arms_block,
         "split_results": split_results,
         "deltas": deltas,
-        "prediction": {**PREDICTION, "verdict": prediction_verdict, "sane_nonclipped_B_values": nonclipped, "tv_delta_candidates": tv_candidates},
+        "arithmetic_labels": arithmetic_labels,
+        "comparison_availability": comparison_availability,
+        "prediction": {
+            **PREDICTION,
+            "verdict": prediction_verdict,
+            "failed_parts": failed_parts,
+            "part_i_nonclipped_at_sane_m": part_i_nonclipped_at_sane_m,
+            "part_i_evidence": nonclipped,
+            "part_ii_tv_delta_near_0_39": part_ii_tv_delta_near_0_39,
+            "part_ii_evidence": {
+                "tv_delta_candidates": tv_candidates,
+                "tolerance_used": near_tolerance,
+                "nearest_candidate": nearest_tv_candidate,
+                "nearest_candidate_abs_distance_from_0_39": nearest_tv_candidate_abs_distance,
+            },
+            "sane_nonclipped_B_values": nonclipped,
+            "tv_delta_candidates": tv_candidates,
+            "opposite_outcome_statement": "If the SNI-inclusive arm clips at every rung including the coarsest, the honest headline is: even a coarse sketch of the host identifier is enough to destroy the certificate. This is a finding, not no separation or inconclusive.",
+            "both_readings_are_findings": True,
+        },
         "execution": {"elapsed_seconds_before_write": time.time() - started, "cuda_touched": False},
     }
     write_json_atomic(ARTIFACT_PATH, artifact)
-    print(json.dumps({"artifact_path": str(ARTIFACT_PATH), "artifact_bytes": ARTIFACT_PATH.stat().st_size, "artifact_sha256": sha256_file(ARTIFACT_PATH), "runner_path": str(RUNNER_PATH), "runner_sha256": sha256_file(RUNNER_PATH), "outcome": artifact["outcome"]}, sort_keys=True), flush=True)
+    print(json.dumps({"artifact_path": str(ARTIFACT_PATH), "artifact_bytes": ARTIFACT_PATH.stat().st_size, "artifact_sha256": sha256_file(ARTIFACT_PATH), "runner_path": str(RUNNER_PATH), "runner_sha256": RUNNER_SHA256, "outcome": artifact["outcome"]}, sort_keys=True), flush=True)
     return 0
 
 

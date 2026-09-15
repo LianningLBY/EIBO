@@ -2176,3 +2176,18 @@ For every completion check, ask: *if the worker does exactly what I asked, does 
   **⇒ and the substantive consequence: the "corrected" copy still carries the uncorrected claim in `non_interchangeability` and `relationship_to_marginal`.** The eleven added fields are right and the `spec_correction_no_dpi_order` note is right, **but the original false sentence was never edited out** — so the file now asserts the non-theorem in one field and retracts it in another. **A retraction that does not remove the retracted text leaves the reader with both, and the false one is the one with the author's original voice.**
 - **★★★ "CANNOT BE DONE" IS A CLAIM LIKE ANY OTHER — CHECK WHETHER THE QUANTITY EXISTS UNDER ANOTHER NAME (M057), AND WHETHER THE FILE WAS SIMPLY THE WRONG ONE (M058).** A `NOT_PERFORMABLE` verdict was false because the values sat in an artifact the worker had read but whose object it had not recognised. **And the inverse error is the same family: I declared X3 "not running" from a local `ls scripts/`, when the run had completed server-side via a deleted temp runner and left its log in `logs/workers/`.** **Before recording either verdict, look in the places you have not yet looked — for a "does not exist", check alternate names; for "not running", check the completion log, which exists even when the runner was deleted.**
 - [failure pattern] infrastructure: the X12 detector script's DEFAULT train/test split was auto-derived across adjacent local-time (UTC+3) month buckets, which SHARE raw TIME_FIRST boundary values, so the strict raw-UTC guard `max(train TIME_FIRST) < min(test TIME_FIRST)` could not be satisfied by any clean adjacent-month split; fixed by resolving the D043 pre-registered split with one UNUSED buffer month (train 202406..202411, buffer 202412 unused, test 202501..202505) -> the guard is correct and must never be weakened; when a strict ordering invariant fails on a derivation the script chose itself, fix the derivation, not the invariant.
+
+## 🔴 DATA-PULL GATE — X12_k5 must be read from local manifest path (D094)
+The chain of record for X12_k5 is **local (git-tracked) + manifest sha + registry pointer**, all agreeing at
+**193,228 B / sha `bebe6bf00ec3b48a541c948353b7db8574fa7721fec64199c614b239adf0a8d5`** (with `backfill_note`
+and violations/trials provenance). The server scratch copy is 192,372 B / sha `71fa0233` (without the note).
+**If any figure or table script pulls X12_k5 data from the server, it gets the version whose violations/trials
+have no provenance marker.** Any downstream read must resolve through the manifest path (local), never a
+hardcoded server path. The server copy stays un-updated — D094 rules the server is a compute scratch copy,
+not a distribution surface.
+
+## 🔴 PROVENANCE GATE — provenance.yaml before number-freeze
+`provenance.yaml` must be built before any quantitative number is finalized in the draft. Every
+figure/table claim needs an exp_id chain back to the registry. Run `auto_build_provenance` during the
+first data-pull pass — not before (there is no draft text to trace yet), but as a mandatory
+gate before numbers are frozen.

@@ -50,13 +50,13 @@ lost as M grows.*
 
 **C3 — The growth question is non-vacuous, and the standard estimator provably cannot answer it.**
 **C3 has changed TYPE (D046): it is no longer a claimed sublinear-growth RATE. It is a methods/limits finding,
-supported by an existence corroboration reported separately and at lower strength.** The pre-registered
+accompanied by a vacated BIC-vote result reported separately as a measurement artifact (NOT evidence).** The pre-registered
 statement it was *meant* to test was: *estimated over ALL 990 pairs across the full k range (5…30), the
 chain-rule joint divergence `D_k` grows **sublinearly** in k, whereas the i.i.d. null predicts linear growth.*
 - **⚠ THE GROWTH-RATE CLAIM IS NOT MADE. It is neither confirmed nor refuted** — see the reason below. What
   the paper reports instead is (i) a **methods/limits finding** about the estimator, which **is** the measured
-  result, and (ii) an **existence corroboration** of dependence from a different route, which is
-  **supporting, not the claim**.
+  result, and (ii) a **vacated BIC-vote result** from a different route, which is
+  **a measurement artifact, not evidence for dependence**.
 
 **(i) THE METHODS/LIMITS FINDING — this is the novel content.**
 - **The standard plug-in chain-rule divergence estimator CANNOT adjudicate the dependent-prefix growth
@@ -86,7 +86,7 @@ chain-rule joint divergence `D_k` grows **sublinearly** in k, whereas the i.i.d.
   who wants a growth-rate answer on this data needs a **different measurement design**, not a better
   hyperparameter — and this paper says so with numbers rather than asserting it.
 
-**(ii) THE EXISTENCE CORROBORATION — supporting evidence, NOT the claim.**
+**(ii) THE VACATED BIC-VOTE RESULT — NOT evidence for dependence (retained as measurement artifact).**
 - **Variant C** — a **nested-model comparison** (first-order Markov vs i.i.d., **BIC**) — is a **different
   route**: it does **not** estimate a growth rate, and it was pre-registered with its **own discriminating
   control** (an **i.i.d. synthetic case does NOT favour Markov** — IID 12/12, median `ΔBIC −21.771`; a
@@ -163,7 +163,7 @@ Two **coexisting certified objects** are reported and **may not be ranked or sub
 law and a whole-flow rectified (PHIST) object. A dedicated section states why their near-equal informative
 fractions are **cancellation, not corroboration**. **A third claim (C3) is reported at the strength it
 reached: not as a measured growth rate, but as a methods/limits finding — the standard estimator provably
-cannot adjudicate the growth question on this data — with a separately-reported existence corroboration that
+cannot adjudicate the growth question on this data — with a separately-reported vacated BIC-vote result that
 the question is non-vacuous. Its negative result is reported as a finding, not hidden.**
 
 **Headline result template.**
@@ -258,7 +258,7 @@ rule alone is **uncovered**.
    (2026-09-14, D046): the growth-rate form of that test is NOT reported as a result — the estimator provably
    cannot adjudicate it at these k and n (C3(i)). What the paper reports from that direction is the
    methods/limits finding itself; the dependence question is addressed only by the separate, lower-strength
-   existence corroboration (C3(ii)), and the two must never be presented as one.**
+   vacated BIC-vote result (C3(ii)), and the two must never be presented as one.**
 2. **"Your certificate covers only ~34% of pairs."** **This is true and must be stated, not smoothed.**
    **Mitigation**: the claim is scoped to the stratum by construction — *"33.9% of pairs admit…"* — and the
    median pair falling **outside** the band is reported. A reviewer's natural follow-up ("so the other 66%?")
@@ -276,7 +276,7 @@ rule alone is **uncovered**.
    **robust to two independent repairs** (estimator family; exposure conditioning), and the repair that would
    work costs **over half the data at k=30** — so it identifies a **structural** obstacle, not an
    implementation defect. It is reported with the numbers that make it checkable, and the accompanying
-   existence corroboration (C3(ii)) shows the question it fails to answer is **non-vacuous**. **A negative
+   vacated BIC-vote result (C3(ii)) shows the question it fails to answer is **non-vacuous**. **A negative
    that survives two repairs and is bounded by a quantified data cost is a finding, not an omission.**
 
 ## The one thing that must never be written

@@ -46,6 +46,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D099 | 2026-09-15 | D099: C3's control citation pointed at the BIC rou | X3 |
 | D098 | 2026-09-15 | D098: do not reshape registry keys to satisfy a va | X1, X11 |
 | D097 | 2026-09-15 | D097: figures verified (fig3 synthetic data fixed, | X3 |
 | D096 | 2026-09-15 | D096: do not force X9_C to terminal; accept the st | X9_C |
@@ -55,5 +56,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D092 | 2026-09-14 | D092: X11 full bracket closes D076 — joint-gate ga | X11 |
 | D091 | 2026-09-14 | D091: X8 DPI check is vacuous (0/990 testable); re | X8 |
 | D090 | 2026-09-14 | D090: X12 containment WAS executed at k=5 (9/9 rej | X12_k5 |
-| D089 | 2026-09-14 | D089: X13 bootstrap interval is invalid — multinom | X13 |
 
