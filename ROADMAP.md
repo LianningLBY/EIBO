@@ -1,8 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 01:00 UTC | Update reason: Writing window open: research complete, Full Draft dispatched to the Paper Agent; adds figures task and the X9_C tool-gap gate
-
-> Last updated: 2026-09-15 00:45 UTC · writing window OPEN — Full Draft dispatched to the Paper Agent.
+> Last updated: 2026-09-15 05:55 UTC | Update reason: Paper drafted and in formal review Round 1; check off the completed build/figure work, add the review-response task
 
 ## Core direction
 
@@ -10,23 +8,22 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 ## The three claims
 
-- **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). Supported in **two independent settings** (primary corpus + X11 cross-corpus). DONE.
+- **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). Supported in **two independent settings** (primary corpus + X11 cross-corpus: 523/3321 = 15.75%, upper 534 / lower 3310). DONE.
 - **C2** — the certificate horizon is short; the coarsest channel is the only viable rung. DONE, incl. the divisibility lower bound (X6) at large k where the plug-in certificate is lost.
 - **C3** — methods/limits: the standard plug-in chain-rule estimator **cannot adjudicate** the dependent-prefix growth question; robust to two independent repairs (X3_A, X3_B). DONE.
 
 ## Current progress
 
-- **Research phase COMPLETE; writing phase OPEN.** All three claims fully backed. ⚠ **The coverage tool's percentages are misleading and must not be read as gaps:** it classifies `conclusion: negative` as "failed", so it reports C1 83.3% (X9, X9_E negative), C3 33.3% (X3_A, X3_B negative) — but **the negatives ARE the evidence**. C3's claim is "the standard estimator cannot adjudicate"; X3_A/X3_B *failing their known-truth gates is what establishes it*. **Evidentiary coverage is 100% for all three claims.**
-- **X11 full two-sided bracket on CESNET-QUIC22 (independent corpus) — C1's answer to "one dataset".** 3,321 pairs: upper 16.08%, lower 99.67%, **joint gate 15.75%** (primary: 33.94%). **The lower side reproduces across corpora (99.67% vs 99.60%)** — not a foregone conclusion, since it uses a different method (Michel adaptive). **Scale-matched, the joint-gate gap narrows to 9.7 pts (min n ≥ 20,000) but does not vanish** — the citable form is the stratum-matched pair, **not** the raw single 0.1608 point (closes D076). ⚠ **Disclosed (D093):** the gate ANDs full-n upper with capped-20k lower (2,145/3,321 capped); bias is **CONSERVATIVE**.
-- **X9_E — channel-sensitivity finding.** Dose-only hypothesis falsified: at matched declared m the SNI-dependent arm separates from the SNI-independent arm, delta growing 0.03→0.36 before both saturate. **⚠ CLAIM BOUNDARY (D087): established at the `tv_hat` level ONLY** — `eps_hi` is `comparison_unavailable` at every rung, `eps_lo` absent. May write "identifier changes radius-free separation beyond cardinality"; must NOT write "SNI destroys the ε-certificate".
-- **X12 k=5 containment holds** (9/9 cells, all detectors `reject_null=false`, guard cannot fire at corrected rates); counts backfilled and verified against their p-values.
-- **Provenance discipline is load-bearing**: manifest `content_sha256` on all live entries; runner self-hash captured at import and recorded *in the artifact*; the flat-vs-nested two-tree layout resolved via `resolve_existing_path` (flat first). Cross-tree audit (19 runners, 53 paths): one defect found and fixed, four provenance-only silent-fallback sites deferred.
+- **Research phase COMPLETE.** All three claims fully backed; evidentiary coverage 100%. (The coverage tool labels `conclusion: negative` as "failed", so it under-reports C1/C3 — the negatives ARE the evidence; noted, not "fixed" in the tool.)
+- **Paper DRAFTED AND IN FORMAL REVIEW — Round 1 active** (`review_id ebf482e0`), 3 reviewers dispatched. Deliverables: `docs/paper/main.tex` + `main.pdf`, 16 pages with the body ending mid-page-12 (inside the 13-page limit), appendices carry the mandatory Open Science and ethics sections. Compiled against the genuine USENIX Security 2027 kit.
+- **Pre-submission verification (all done by me, not relayed):** 3 pdflatex passes + bibtex exit 0, 44 bibitems, 0 undefined citations, 0 overfull boxes; **visual review 16/16 pages passed** (receipt bound to sha256 `abc000bd`); headline numbers independently re-derived from artifacts — C1 336/990, X11 523/3321, chain-rule per-position truth `0.3389191441548814`; references 44 entries all cited, zero dangling, both bib copies byte-identical.
+- **Claim boundaries honoured in the prose**: X9_E's identifier finding scoped to `tv_hat` only (D087); X11's joint gate discloses its per-side sample sizes and the **conservative** bias direction (D093); X8's DPI check is a smoke-test, never cited as theorem verification (D091); C3 reframed as a methods/limits finding (D046); novelty stated as a knowledge claim ("to our knowledge"), never "exhaustive search".
+- **Provenance discipline is load-bearing**: manifest `content_sha256` on all live entries; runner self-hash captured at import and recorded *in the artifact*; figures regenerate from manifest-resolved artifacts via committed generators; the flat-vs-nested two-tree layout resolved via `resolve_existing_path` (flat first).
 
 ## Near-term tasks
 
-- [ ] **Paper Full Draft (in progress)** — dispatched to the Paper Agent. Deliverable `docs/paper/main.tex` + `main.pdf`; `writing_plan.yaml` to be approved before section drafting. Binding claim constraints: X9_E scoped to `tv_hat` (D087); X11 per-side n disclosed (D093); X8 DPI check is a smoke-test (D091); C3 reframed (D046); venue not downgraded.
-- [ ] **Figures** — dose-response curve (X9_E ladder), the cross-corpus bracket comparison (X11), and the C2 horizon/rung plot. Route non-statistical figures via Agentic Figure; data plots via the approved data path.
-- [ ] **x6 input-path resolver** — standing item; give x6's four hardcoded inputs the flat-first resolver **when x6 is next edited** (do not retrofit now).
+- [ ] **Await and act on the Round 1 review report** — on arrival run the holistic pass then the per-comment Action Matrix (`review-report-action` skill); do not respond with a blanket acknowledgement.
+- [ ] **x6 input-path resolver** — standing: give x6's four hardcoded inputs the flat-first resolver **when x6 is next edited** (do not retrofit now).
 - [ ] **Four silent-fallback sites** (E7 ×2, Q2 v3, X3 controls) — provenance-only; fix when those files are next touched.
 
 ## BLOCKED_ON
@@ -34,13 +31,13 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | gate | trigger | state |
 |---|---|---|
 | ~~X12 Stage 2 containment statistic~~ | n/a | **CLOSED** — implemented and ran at k=5; containment holds |
-| ~~x3_parametric_growth D057 sentence~~ | n/a | **CLOSED** — withdrawn sentence gone from both trees; sha matches manifest |
+| ~~x3_parametric_growth D057 sentence~~ | n/a | **CLOSED** — withdrawn sentence gone; sha matches manifest |
 | ~~x3_axis_validation pull~~ | n/a | **CLOSED** — local sha matches manifest |
-| `X9_C` non-terminal status | a registry status vocabulary that admits `cancelled`/`withdrawn` | **OPEN — tool gap (C034), not work.** A withdrawn-never-run design cannot reach a terminal status without fabricating a managed-run history (M131). Annotated per D096. Blocks passive mode only; costs no integrity. |
+| `X9_C` non-terminal status | a registry status vocabulary admitting `cancelled`/`withdrawn` | **OPEN — tool gap (C034), not work.** A withdrawn-never-run design cannot reach a terminal status without fabricating a managed-run history (M131). Annotated per D096. Costs no integrity. |
 
 ## GPU budget
 
-1× RTX 5090 D bound. **X12 (the only GPU-eligible entry) is DONE.** All remaining work is CPU-only (paper assembly, figures) by design — the card idle is a property of the plan, not an omission. Do not invent GPU work to fill it.
+1× RTX 5090 D bound. **X12 (the only GPU-eligible entry) is DONE**; all remaining work is CPU-only (paper, review response) by design. The card idle is a property of the plan, not an omission — do not invent GPU work to fill it.
 
 ## Key Decision Log
 
@@ -56,4 +53,5 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D092 | 2026-09-14 | D092: X11 full bracket closes D076 — joint-gate ga | X11 |
 | D091 | 2026-09-14 | D091: X8 DPI check is vacuous (0/990 testable); re | X8 |
 | D090 | 2026-09-14 | D090: X12 containment WAS executed at k=5 (9/9 rej | X12_k5 |
+
 
