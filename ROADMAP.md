@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 15:55 UTC | Higher-k ladder verified and staged; manifest clean (87 entries, 0 unresolved); review gateway still stalled.
+> Last updated: 2026-09-15 16:20 UTC | Manifest debt closed (87 entries, 0 unresolved); paper frozen in Round 2; gateway still stalled.
 
 ## Core direction
 
@@ -19,7 +19,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 - **Round-2 pre-submission verification (all done by me, not relayed):** 3 pdflatex passes + bibtex exit 0, 53 bibitems, 0 undefined, 0 overfull; **visual review 18/18 pages passed** (receipt bound to sha256 `5edd8928`); headline numbers independently re-derived — C1 336/990 with cluster CI [26.5%, 43.1%], X11 523/3321, chain-rule per-position truth `0.3389191441548814`; every page rendered and read.
 - **Two FALSE constraints rejected after checking the official CFP**: there is **no abstract word limit** (so the divisibility clause and detector paragraph were NOT cut), and the **appendices' placement vs references is unspecified** (so the order was NOT changed, which would have re-broken the page limit). Camera-ready ceiling is 20 pages incl. appendices; we are at 18.
 - **Claim boundaries honoured in the prose**: X9_E's identifier finding scoped to `tv_hat` only (D087); X11's joint gate discloses its per-side sample sizes and the **conservative** bias direction (D093); X8's DPI check is a smoke-test, never cited as theorem verification (D091); C3 reframed as a methods/limits finding (D046); novelty stated as a knowledge claim ("to our knowledge"), never "exhaustive search".
-- **Provenance discipline is load-bearing**: manifest `content_sha256` on all live entries; runner self-hash captured at import and recorded *in the artifact*; figures regenerate from manifest-resolved artifacts via committed generators; the flat-vs-nested two-tree layout resolved via `resolve_existing_path` (flat first).
+- **Provenance discipline is load-bearing**: manifest `content_sha256` on all live entries; runner self-hash captured at import and recorded *in the artifact*; figures regenerate from manifest-resolved artifacts via committed generators; the flat-vs-nested two-tree layout resolved via `resolve_existing_path` (flat first) **Verified clean and debt-free (D114)**: 87 entries, 71 live, **0 unresolved, 0 hash mismatches**, exactly one live entry per artifact; the seven resolving entries that lacked a hash are backfilled, five `agentic-figure` run-scratch records are retired (that integration registered its run directory where `paper-visualization` and `experiment-analysis` correctly registered deliverables), and the last D070 violation — which was **mine**, a retirement note whose path still pointed at the live file — is closed. **Diagnostic worth keeping**: manifest paths are rooted at `/efs/workspace`, not the project dir, so a project-rooted resolution probe reports dozens of false "missing" — a probe defect, not a content defect; I made that error three times before it was caught.
 
 ## Review retrospection — Round 1 (2026-09-15)
 
@@ -129,6 +129,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D114 | 2026-09-15 | D114: manifest debt closed (87 entries, 0 unresolv | — |
 | D113 | 2026-09-15 | D113: higher-k ladder manifest defects closed — ha | — |
 | D112 | 2026-09-15 | D112: higher-k ladder saturates (median 1.0 by M=4 | — |
 | D111 | 2026-09-15 | D111: higher-k median-TV ladder verified (monotone | X1, X12_k5 |
@@ -138,5 +139,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D107 | 2026-09-15 | D107: Round 2 submitted and active — the four reje | — |
 | D106 | 2026-09-15 | D106: W9 cluster bootstrap flips the scale-matched | — |
 | D105 | 2026-09-15 | D105: retract my "lower side is finite-sample" ins | — |
-| D104 | 2026-09-15 | D104: W10 cluster bootstrap confirmed correct — re | — |
 
