@@ -4,7 +4,7 @@
 
 ## Core direction
 
-Certification-grade ε-indistinguishability brackets for open-set encrypted-traffic recognition: for each service pair on real QUIC wire data, a two-sided interval on the total-variation distance whose **upper side is finite-sample strict** and **lower side is asymptotic** — the asymmetry *is* the contribution, not a caveat. Target: USENIX Security 2027 Cycle 2 (deadline 2027-01-26). See `paper_framing.md`.
+Certification-grade ε-indistinguishability brackets for open-set encrypted-traffic recognition: for each service pair on real QUIC wire data, a two-sided interval on the total-variation distance whose **upper side is a finite-sample strict bound** and **lower side a finite-sample high-probability (nominal 1-alpha) bound of a different construction** — the two sides differ in construction and tightness, not in whether proof is possible. Target: USENIX Security 2027 Cycle 2 (deadline 2027-01-26). See `paper_framing.md`.
 
 ## The three claims
 
@@ -57,6 +57,31 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 **No framing PIVOT and no new experiment is required by any item.** W1/W2/W5 are wording cuts back to the measured scope; W3/W6/W7/W8 are disclosure additions from existing artifacts; W9/W10 are computations over existing data; W4 is structural. The three claims stand.
 
+## Formal Round 1 review (23 items) — verdict: reject (resubmit-worthy)
+
+The **formal** review (3 reviewers) returned 23 items, 10 critical. **ROUTING WARNING to future-me: this set shares identifiers with the earlier pre-review list but has DIFFERENT content — the earlier list's R1-W1..W8 are NOT this list's W1..W8.** The Paper Agent completed the earlier list (detector panel, compute disclosure, corpus naming, 990 provenance, appendix consolidation, fig1 front-load — all good and all retained), but the formal criticals below were untouched by it. Re-dispatched under non-colliding tags FR-1..FR-23.
+
+### The four reject causes (correctness / framing)
+- **FR-1 (W1)** — Eq.(4)'s radius is **unproven, mis-attributed, i.i.d. undeclared**. `measurement_design.tex:83` calls it "Dvoretzky-Kiefer-Wolfowitz type"; **DKW is sup-norm, Eq.(4) is l1** (closer to Han-Jiao-Weissman [14]). Fix: theorem statement + derivation (the `0.5*sqrt(m/n)` term is an l1-deviation term; the `0.5*sqrt(2ln(2/alpha)/n)` a McDiarmid bounded-differences fluctuation, `2/alpha` from the union over two laws), declare i.i.d. flow sampling, add a time-correlation limitation. **My empirical coverage test (100% at m in {4,16,64,256}) is a sanity check only — `tv_hat` is upward-biased there, so coverage is NOT evidence for the bound. The derivation is.**
+- **FR-2 (W2)** — the paper asserts an impossibility **our own code and brief contradict**. `introduction.tex:30`: "'Proven' is unavailable for the lower side at any sample size." But `statcore.py::tv_lower_bound` implements Michel's construction **with a per-sample-size finite-sample confidence constant** (`_michel_beta`), self-labelling "a nominal 1-alpha lower bound"; and PROJECT_BRIEF Step 5 calls the lower side "a **certified, distribution-free** LOWER bound" from "**high-probability**" bounds (Michel's own title). Fix: describe the lower side as what it is and delete the impossibility claim. **The asymmetry selling point survives as construction/tightness, not impossibility.**
+- **FR-3 (W3)** — the promised **open-set** error floor has no reduction from the certified per-pair object. Fix by **repositioning** as a pairwise indistinguishability certificate; state the per-pair Le Cam consequence and that the multi-class aggregation is not reduced. Do not invent a reduction we lack.
+- **FR-4 (W4)** — "each side of the bracket ... joint 0.95" contradicts the paper's own discipline; the 0.95 belongs to the upper side. **Same error as FR-2 seen from another angle.**
+
+### Other formal items
+FR-5 (W5) scope the binding claim to M=1 and fix the column citation · FR-6/7 (W6) panel + **state the near-zero power** (X12 ran binomtest, p=0.9954) · **FR-8 (W7) strip internal workflow annotations from refs [2][30][32][38][44] — desk-reject-visible** · FR-9 (W8) anonymous artifact pointer + exp_id->sha256 + pre-registration record · FR-10 (W10) abstract rebalance · FR-11/12 (W11/12) compute + corpus disclosure (already done) · FR-13/14 (W13/14) uncertainty · FR-15 (W15) four missing related-work clusters (DP, traffic morphing, sparse bias, certified robustness) · FR-16 (W16) soften C3 causality · FR-17 (W17) reference metadata incl. the unchecked `chan2013closeness` year · FR-18..23 formatting/ethics/title.
+
+### Uncertainty — CORRECTED (D102)
+The first bootstrap resampled **pairs**, but the 990 pairs are the **complete graph C(45,2)**: 45 services, every service in exactly 44 pairs (verified from the artifact). Pairs sharing a service are correlated, so the pair bootstrap understates width. **Cluster bootstrap over services is the defensible construction.** My own replication:
+
+| quantity | pair bootstrap | cluster bootstrap | ratio |
+|---|---|---|---|
+| joint gate 33.9% | [0.3101, 0.3677] | **[0.2635, 0.4365]** | 3.00x |
+| upper 34.3% | [0.3152, 0.3727] | [0.2678, 0.4409] | 3.01x |
+| lower 99.6% | [0.9919, 0.9990] | [0.9915, 1.0000] | 1.21x |
+| median tv (M=1) | [0.5600, 0.6042] | [0.5158, 0.6459] | 2.94x |
+
+**Report the pair AND cluster intervals side by side with the ratio — the comparison is itself the evidence for W10.** Median-TV intervals are **not estimable for M in {2,4,8,16}** (no per-pair rows persisted; X1 stores aggregates) — a future-me must NOT present those without first re-running those cells; cost estimate requested before authorizing.
+
 ## Near-term tasks
 
 - [ ] **Await and act on the Round 1 review report** — on arrival run the holistic pass then the per-comment Action Matrix (`review-report-action` skill); do not respond with a blanket acknowledgement.
@@ -80,6 +105,9 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D102 | 2026-09-15 | D102: bootstrap must resample services, not pairs  | — |
+| D101 | 2026-09-15 | D101: Round 1 review verdict reject (resubmit-wort | — |
+| D100 | 2026-09-15 | D100: Round 1 review action matrix — two systemic  | X11, X13 |
 | D099 | 2026-09-15 | D099: C3's control citation pointed at the BIC rou | X3 |
 | D098 | 2026-09-15 | D098: do not reshape registry keys to satisfy a va | X1, X11 |
 | D097 | 2026-09-15 | D097: figures verified (fig3 synthetic data fixed, | X3 |
@@ -87,8 +115,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D095 | 2026-09-14 | D095: the 5 unlinked experiments split into MVP-er | X3_A, X3_B, E3, E7, E10 |
 | D094 | 2026-09-14 | D094: artifact chain-of-record is local+manifest+r | X12_k5 |
 | D093 | 2026-09-14 | D093: X11 joint gate mixes two sample sizes (conse | X11 |
-| D092 | 2026-09-14 | D092: X11 full bracket closes D076 — joint-gate ga | X11 |
-| D091 | 2026-09-14 | D091: X8 DPI check is vacuous (0/990 testable); re | X8 |
-| D090 | 2026-09-14 | D090: X12 containment WAS executed at k=5 (9/9 rej | X12_k5 |
-
 
