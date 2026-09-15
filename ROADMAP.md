@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 08:55 UTC | Round 2 submitted and active.
+> Last updated: 2026-09-15 09:15 UTC | Round 2 in review (cross-sharing phase); awaiting the report.
 
 ## Core direction
 
@@ -87,9 +87,11 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 ## Near-term tasks
 
-- [ ] **Await and act on the Round 1 review report** — on arrival run the holistic pass then the per-comment Action Matrix (`review-report-action` skill); do not respond with a blanket acknowledgement.
-- [ ] **x6 input-path resolver** — standing: give x6's four hardcoded inputs the flat-first resolver **when x6 is next edited** (do not retrofit now).
+- [ ] **Await the Round 2 report** — on arrival run the holistic pass then the per-comment Action Matrix (`review-report-action`); no blanket acknowledgement.
+- [ ] **Paper edits are FROZEN** until that report lands; any change now would invalidate the submitted version.
+- [ ] **x6 input-path resolver** — standing: give x6's four hardcoded inputs the flat-first resolver **when x6 is next edited**.
 - [ ] **Four silent-fallback sites** (E7 ×2, Q2 v3, X3 controls) — provenance-only; fix when those files are next touched.
+- [ ] Two FROZEN SNAPSHOT manifest entries carry an audit snapshot's hash while their path points at the live runner (path/hash inconsistent by design) — leave unless the runner changes again.
 
 ## BLOCKED_ON
 
