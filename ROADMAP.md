@@ -50,7 +50,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | R1-W7 | primary corpus unnamed | edit paper | name CESNET-QUICEXT-25 XS with an artifact reference | Paper Agent | now |
 | R1-W8 | flow threshold unstated | edit paper | state the floor and how it yields 990 pairs | Paper Agent | now |
 | R1-W4 | orphan discussion blocks | edit paper (structural) | promote the two blocks that have artifacts (X13 mass, whole-flow object) into the contribution list + Results; **remove the DST_ASN promise at `related_work.tex:102`** since no audit exists | Paper Agent | now |
-| R1-W9 | no uncertainty on cross-corpus numbers | add computation | bootstrap CI on the 0.9967/0.9960 and the 18.2→9.7 gap; or soften wording | Agent (compute) → Paper Agent | 1d |
+| R1-W9 | no uncertainty on cross-corpus numbers | add computation | bootstrap CI on the 0.9967/0.9960 and the gap series; **note the gap is NOT monotone** (18.3→15.5→9.3→13.0→15.4: minimised at ≥20000, then widens) so "narrows to 9.7" was threshold-shopping; all five intervals exclude zero (pair bootstrap — cluster version pending, ≥20000 has the thinnest margin) | Agent (compute) → Paper Agent | 1d |
 | R1-W10 | no uncertainty in main table / tv series | add computation | CI or distribution for the median-tv series, or justify the threshold collapse | Agent (compute) → Paper Agent | 1d |
 | R3-W1 | reference metadata/brace items | edit paper | fix author fields and braces; re-verify `michel2020high`, `jiao2018l1distance`, `chan2013closeness` | Paper Agent | now |
 | R3-W2 | page economy, no early visual anchor | edit paper | consolidate the two appendices; front-load the bracket schematic | Paper Agent | now |
