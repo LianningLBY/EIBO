@@ -85,13 +85,17 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 **Report the pair AND cluster intervals side by side with the ratio — the comparison is itself the evidence for W10.** Median-TV intervals are **not estimable for M in {2,4,8,16}** (no per-pair rows persisted; X1 stores aggregates) — a future-me must NOT present those without first re-running those cells; cost estimate requested before authorizing.
 
-## ⚠️ BLOCKER — Round 2 stalled at the review gateway (raised 2026-09-15 12:45 UTC)
+## ⚠️ BLOCKER — Round 2 stalled; re-review attempted and DE-DUPLICATED (2026-09-15 13:35 UTC)
 
-**Symptom.** Round 2 has been in `cross_sharing` since 09:13 with 3 reviewers dispatched and no report. Round 1 completed in ~32 min; Round 2 is at ~3h50m. **No review-side session has written since 09:31** while my session and the execution session are both active, so this is specific to the review round, not a site outage. The authoritative status is not flagged `indeterminate`.
+**Symptom.** Round 2 has sat in `cross_sharing` since 09:13 with 3 reviewers dispatched and no report. Round 1 completed in ~32 min; this round is at ~4h40m. No review-side session has written since 09:31, while my session and the execution session are both active. Status is not flagged `indeterminate`.
 
-**Concrete unstick action and owner.** There is **no tool in the Director toolset that retries, resumes, or advances a round** — only `submit_paper_to_review`, which would create a *duplicate* round and mask the fault. **So the unstick action is: report the stalled round to the platform for review-gateway recovery, and do NOT resubmit.** Owner: platform operations (external to this project); my part is the report plus leaving the round counter and review sessions untouched so recovery can act on them.
+**Re-review attempt (owner-instructed) — outcome: blocked by design.** I re-ran the full gate (re-rendered and re-inspected all 18 pages, refreshed the 2-hour visual receipt against the unchanged bytes) and called `submit_paper_to_review`. The platform returned **`deduplicated: true`** with the *existing* `review_id` and round 2 — the entry point de-duplicates by content, so **while the manuscript bytes are unchanged there is NO Director-side path to open a fresh round.** That is protective (it prevents round/record corruption) but it makes the stall unsolvable from inside this project's toolset.
 
-**Do not:** resubmit, hand-edit review state, or bump the round counter. Any of those destroys the evidence and can double-count the round.
+**Unstick action and owner (updated).** Two viable paths, both outside my toolset:
+1. **Platform-side review-gateway recovery** — the round did not close out cleanly; ownership is platform operations. My part is the report and leaving round records untouched.
+2. **Owner-initiated re-review from the web side** — if the web UI exposes a resubmit / re-review control, it may not traverse the same de-duplication. If the owner takes this path, hand over: round id, where it stopped (cross-sharing since 09:13), duration (~4h40m), byte-verification state, and the 23-item fix list.
+
+**Do NOT:** resubmit a third time (same result), hand-edit review state, bump the round counter, or modify the manuscript solely to defeat de-duplication — a fabricated byte change made to game the gateway would also invalidate the visual receipt and the submitted provenance.
 
 **What is NOT blocked:** the paper is frozen and drift-free; all 23 Round 1 issues are resolved; provenance is clean (all 83 manifest entries resolve with matching hashes). Only the *report* is missing.
 
@@ -120,6 +124,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D108 | 2026-09-15 | D108: re-review attempted on owner instruction; pl | — |
 | D107 | 2026-09-15 | D107: Round 2 submitted and active — the four reje | — |
 | D106 | 2026-09-15 | D106: W9 cluster bootstrap flips the scale-matched | — |
 | D105 | 2026-09-15 | D105: retract my "lower side is finite-sample" ins | — |
@@ -129,5 +134,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D101 | 2026-09-15 | D101: Round 1 review verdict reject (resubmit-wort | — |
 | D100 | 2026-09-15 | D100: Round 1 review action matrix — two systemic  | X11, X13 |
 | D099 | 2026-09-15 | D099: C3's control citation pointed at the BIC rou | X3 |
-| D098 | 2026-09-15 | D098: do not reshape registry keys to satisfy a va | X1, X11 |
 
