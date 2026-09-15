@@ -1,0 +1,95 @@
+why_this_block_exists: Several quantitative claims cite evidence through a NESTED
+  path (a dict key one level down, a list row selected on two fields, or a dict-valued
+  metric) that the write-time evidence validator cannot resolve. The values are correct
+  and artifact-derived. Per a Director ruling on 2026-09-15 the registry is NOT restructured
+  to fit the tool; instead every nested path is written out in full here, beside its
+  value, its artifact home, and that artifact's manifest sha256, so a human can follow
+  each number to its source.
+known_limitation: The validator does not resolve nested registry paths, list-row selections,
+  or dict-valued metrics; claims listed here report as 'tier 3 (untraced)'. That tier
+  label is a property of the validator, not a provenance gap.
+entries:
+- claim: C011
+  path: X11.joint_gate_fraction
+  home: artifacts/X11/data/x11_full_bracket.json
+  sha: 83c1a5a103e8f97e55517c58b7df14c80e3cf07be5bd567b3abfaee8cbf67d35
+  value:
+    joint_gate_fraction: 0.1574826859379705
+    joint_gate_count: 523
+    pair_count: 3321
+    upper_fraction: 0.16079494128274616
+    lower_fraction: 0.9966877446552244
+  note: discussion; these are top-level keys in the artifact JSON but not in the registry
+    metrics block
+- claim: C011/C013
+  path: X11.sample_size_disclosure.{upper_side_n,lower_side_n,capped_pair_count,total_pairs,bias_direction}
+  home: artifacts/X11/data/x11_full_bracket.json
+  sha: 83c1a5a103e8f97e55517c58b7df14c80e3cf07be5bd567b3abfaee8cbf67d35
+  value:
+    upper_side_n: full (all eligible test flows per service, uncapped)
+    lower_side_n: capped at 20000 flows per service (sample_seed=20260913, method=michel,
+      random_state=0)
+    capped_pair_count: 2145
+    total_pairs: 3321
+    bias_direction: CONSERVATIVE — a lower bound with less data is weaker (smaller
+      eps_lo), so the cap can only shrink eps_lo and understate the joint gate. The
+      reported 15.75% is therefore a lower bound on the true joint-gate fraction,
+      not inflated.
+  note: BC2 disclosure; nested one level down, not a top-level metric
+- claim: C033
+  path: X1.headline_table_unified_calibre[M=1,k=5]
+  home: artifacts/_project/data/x1_headline_table.json
+  sha: c9f840a94644687e50e672f6cdd3c65fd0469a9045ca55d1881d11a8afd41c9c
+  value:
+    upper_side_fraction: 0.3434343434343434
+    gate_fraction_both: 0.3393939393939394
+    pair_denominator: 990
+    saturation_fraction_tv_ge_0_99: 0.0
+  note: NOT a key named headline_cell_m1_k5. It is a ROW of the headline_table_unified_calibre
+    list selected on M=1 and k=5, which is why the validator cannot resolve it.
+- claim: C031/C034/C036
+  path: X3.plain_statement
+  home: artifacts/X3/data/x3_parametric_growth.json
+  sha: 1a6f9f65fe41d89a6a6de70b8c3491d22abd8bfcc405ac9bb53f0c69e6b83530
+  value: 'NON-DIAGNOSTIC (D057): the fitted exponent reads LINEAR, but that is a constructive
+    tautology of this route, not a finding. The route cannot adjudicate the question,
+    so the plug-in limitation must NOT be narrowed. The earlier wording (adjudicable
+    / narrow the limitation) is WITHDRAWN.'
+  note: this is the D057 withdrawal about the BIC route, NOT the chain-rule finding.
+    The chain-rule finding cited in results lives in the control-occupancy artifact
+    below.
+- claim: C031
+  path: X3.known_truth_control.{selected_order,passed,exact_growth_fit.verdict,fitted_growth_fit.verdict}
+  home: artifacts/X3/data/x3_parametric_growth.json
+  sha: 1a6f9f65fe41d89a6a6de70b8c3491d22abd8bfcc405ac9bb53f0c69e6b83530
+  value:
+    selected_order: 2
+    passed: true
+    exact_verdict: LINEAR
+    fitted_verdict: LINEAR
+  note: dict-valued, so the validator cannot compare it to a scalar
+- claim: C035
+  path: X3.arms.plain_iid.levels[0].occupancy_by_k[*].mean_fraction_contexts_below_5
+  home: artifacts/X3/data/x3_control_occupancy_dose_response.json
+  sha: 2ff2dd05befce758db81ab15df7b2fd54971254cd28f0266f4708ba511a085fa
+  value:
+    k5: 0.0
+    k30: 0.998015529348165
+  note: results; the fig3 panel (b) series
+- claim: C035
+  path: X3.arms.plain_iid.levels[0].occupancy_by_k[*].{p,q}.median_context_count
+  home: artifacts/X3/data/x3_control_occupancy_dose_response.json
+  sha: 2ff2dd05befce758db81ab15df7b2fd54971254cd28f0266f4708ba511a085fa
+  value:
+    k5_p: 200000.0
+    k30_p: 1.0
+  note: results; the fig3 panel (c) series
+- claim: C035
+  path: X3.arms.plain_iid.levels[0].curve[*].D_k_median
+  home: artifacts/X3/data/x3_control_occupancy_dose_response.json
+  sha: 2ff2dd05befce758db81ab15df7b2fd54971254cd28f0266f4708ba511a085fa
+  value:
+    k5: 1.6949092697605275
+    k30: 6.882192756421704
+    per_position_truth: 0.3389191441548814
+  note: results; the fig3 panel (a) plain-arm series and analytic truth

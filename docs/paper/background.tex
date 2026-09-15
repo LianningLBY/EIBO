@@ -1,0 +1,93 @@
+\section{Background}
+\label{sec:background}
+
+\subsection{Total variation and what a bound buys}
+\label{sec:background/tv}
+
+For two distributions $P$ and $Q$ over the same finite alphabet, the total
+variation distance $\tv(P,Q)$ in \eqref{eq:tv} is, up to a factor of one half,
+the smallest error probability achievable by any test that must decide which of
+the two generated an observation. This is why a bound on $\tv$ is the natural
+quantity for a practitioner. An upper bound on $\tv$ translates into a floor
+that no classifier can go below; a lower bound translates into a statement that
+the pair is genuinely separable. Neither is available from a classifier's own
+accuracy, which measures one system rather than the problem.
+
+We write the bracket as in \eqref{eq:bracket} and call each endpoint by what it
+is. The upper endpoint is finite-sample strict: it holds at the observed flow
+counts with a stated confidence, under no assumption on the shape of $P$ or $Q$
+beyond the alphabet being finite. The lower endpoint is asymptotic. When the
+interval is read as a two-sided statement it inherits the weaker of the two
+guarantees, which is why we report the sides separately and quote the gate as a
+conjunction \eqref{eq:gate} rather than as a single certified number.
+
+\subsection{Prior information bounds on traffic analysis}
+\label{sec:background/prior}
+
+The idea of bounding traffic-analysis performance from information-theoretic
+quantities rather than measuring it is well established.
+\citet{cherubin2017bayes} gives feature-set-conditional Bayes-error bounds for
+website fingerprinting, a closed-set error floor and the closest precedent for
+our upper side. Work on anonymity follows the same route, from an entropy-like
+quantity or a metric on distributions toward a bound on what an adversary can
+infer \citep{serjantov2003metric,ghaderi2010anonymous,venkitasubramaniam2008eavesdroppers,venkitasubramaniam2008chaum},
+and the quantitative-information-flow literature supplies closely related
+indistinguishability notions with error bounds
+\citep{chatzikokolakis2007error,chatzikokolakis2008noisy}. Our construction
+differs in being an explicit interval whose two endpoints come from different
+machinery, measured on real trace data, with the asymmetry between the endpoints
+kept visible rather than averaged away.
+
+The most directly relevant recent results are the side-channel leakage
+inevitability theorem of \citet{liu2026inevitability} and its rate-distortion
+companion \citep{liu2026rate}. The former establishes that leakage is
+unavoidable under explicit non-degeneracy and distinguishability conditions; the
+latter characterizes an exact leakage-cost frontier. Both are single-letter in a
+specific sense. The exponential error decay in the first requires conditionally
+i.i.d.\ repeated observations, and the frontier in the second is proved within a
+stationary-memoryless class. Packet prefixes satisfy neither condition. Our
+measurement makes no such assumption and instead reports what is certifiable
+about the dependent prefix law as it stands, which is why the upper side is
+distribution-free while the lower side is asymptotic rather than exponential.
+
+\subsection{Estimating and testing total variation}
+\label{sec:background/tv_est}
+
+Turning a bound like \eqref{eq:upper} into a usable statement requires a
+confidence radius for the empirical distribution, and the classical
+Kolmogorov-Smirnov style constructions supply exactly that
+\citep{wei2011dkwtwo,reeve2024dkwmassart}, with high-probability and two-sample
+refinements that make the constant tight enough to be informative
+\citep{diakonikolas2020highprob,han2015l1distribution,jiao2018l1distance}. Two
+further routes are relevant. Classifier-based methods give lower bounds from a
+decision function's error rate, and \citet{michel2020high} provides the adaptive
+high-probability form we use for the lower side. \citet{tao2024discriminative}
+relates discriminative estimation of total variation to classification risk
+under a hypothesis-class assumption, which is the route we take for the
+conditional large-prefix bound where the plug-in certificate is unavailable.
+
+On the open-set side, generalization and learnability results
+\citep{fang2021learning,garov2025closer} characterize what can be guaranteed for
+detectors that must reject unknown classes. Those guarantees bound the risk of a
+learning procedure; ours bounds the separation available in the data. The two
+are complementary rather than competing, because a learnability bound says how
+well a detector can be trained while a bracket says how much room there is to
+train into. Quantifying the unknown-class mass that a bracket over observed
+services necessarily omits is a separate problem with its own literature
+\citep{orlitsky2016optimal,eriksson2026unseen}, which we use for the site-level
+term in \Cref{sec:discussion/missing_mass}.
+
+\subsection{The QUIC observable}
+\label{sec:background/quic}
+
+QUIC's wire image exposes a packet-level view from which an observer can recover
+packet directions and sizes and their timing, while application content stays
+behind encryption; \citet{kuhlewind2022rfc} documents this for operators. The
+observable we use is the (direction, size) sequence of the leading packets, and
+the prefix length and alphabet resolution are the two parameters we pre-register
+and vary. Timing is deliberately excluded, and we measure the consequence of
+excluding the host identifier rather than asserting that the exclusion costs
+nothing. Prior work establishes both the relevance and the difficulty of this
+setting \citep{smith2021website,li2023facing,jerabek2025simple}, and recent
+surveys map the surface against which a bracket has to be interpreted
+\citep{wickramasinghe2025sok}.

@@ -1,0 +1,93 @@
+\section{Introduction}
+\label{sec:intro}
+
+A traffic classifier that reports 97\% accuracy on a benchmark has told you
+almost nothing about what is achievable on your network. It has not told you
+whether 99\% is reachable with a longer observation window, whether 97\% is
+already at the limit the channel permits, or whether the remaining 3\% is
+irreducible for reasons that have nothing to do with the classifier. Detectors
+in this area are evaluated by their own error rates, and an error rate is a
+statement about one system rather than a statement about the problem.
+
+What a practitioner needs is the other direction: a bound on how well
+\emph{any} classifier can do, at a stated observation window, for a stated pair
+of services. That is an information-theoretic statement, and the ingredients for
+it exist. Classical work gives feature-conditional bounds for closed-set
+fingerprinting, and recent work establishes that side-channel leakage is
+inevitable under explicit conditions and characterizes a rate-distortion
+frontier for defense. These results are strong, and they share a limitation that
+matters here: they are single-letter or i.i.d.-conditional. Exponential error
+decay requires repeated conditionally independent observations, and the frontier
+is proved inside a stationary-memoryless class. Real packet prefixes are neither
+independent nor stationary, and the gap between what those results assume and
+what a packet trace provides is exactly the gap a practitioner has to cross.
+
+We measure a two-sided indistinguishability bracket on real encrypted traffic
+instead, and we treat the two sides as claims of different strength that may not
+borrow from each other. The upper side is a finite-sample strict bound on the
+total variation distance between two services' prefix laws. The lower side is an
+asymptotic bound. The asymmetry is not a defect we would remove if we could; it
+is the shape of the problem. ``Proven'' is unavailable for the lower side at any
+sample size, while the upper side is the side an error-floor claim needs, and it
+is the side that in practice binds.
+
+The bracket is computable, and it is computable at a resolution that is
+deliberately coarse. On a paired QUIC corpus, at the coarsest channel we
+pre-register, 336 of 990 service pairs (33.9\%) admit an interval whose upper
+side is finite-sample strict and whose lower side clears the gate
+(\Cref{tab:bracket}). The certificate is not free: raising the alphabet
+resolution makes the channel more informative and destroys the certificate at
+the same time, because the confidence radius grows with the alphabet size while
+the threshold does not. The certifiable set falls from 340 pairs at the coarsest
+rung to none four rungs finer (\Cref{fig:horizon}). The coarse channel is
+therefore not a concession to tractability but the only regime in which a
+two-sided certificate exists at these prefix lengths and flow counts.
+
+We also report a negative result that we consider part of the contribution. The
+natural estimator for how divergence accumulates across dependent packet
+positions is a chain-rule plug-in, and it cannot answer the question on this
+data. On a synthetic source whose analytic per-position divergence is known
+exactly, the estimator returns sublinear growth, deflating its estimate to
+$0.6769$ of the truth on the plain arm at the longest prefix
+(\Cref{fig:estimator}). The cause is measured rather than conjectured: prefix
+occupancy collapses as the prefix lengthens, and a per-position smoothing bias
+accumulates exactly where contexts are sparse. Two independent repairs both fail
+their known-truth gate, and the repair that would work discards more than half
+the data at the upper end of the range. We report this as a methods and limits
+finding, not as an estimate of a growth rate, and the question is left open with
+the reason stated in numbers.
+
+\paragraph{Contributions.}
+\begin{itemize}
+  \item \textbf{A two-sided bracket on real encrypted traffic, with the guarantee
+  asymmetry as the result.} We compute a per-pair interval whose upper side is a
+  finite-sample strict bound and whose lower side is asymptotic, measured over
+  all 990 pairs at the coarsest pre-registered channel
+  (\Cref{sec:design}, \Cref{sec:results/bracket}). 33.9\% of pairs satisfy the
+  joint gate, and the upper side binds on every rung.
+  \item \textbf{The certificate horizon, as a function rather than a number.}
+  We show that a finer alphabet resolves more and certifies less, that the
+  certifiable set is empty beyond the fourth rung, and that the boundary has a
+  closed form in resolution, sample size, and distance whose two derivation
+  routes agree to zero (\Cref{sec:results/horizon}). Where the certificate is
+  lost, a conditional divisibility bound keeps the large-prefix regime
+  non-empty.
+  \item \textbf{A methods and limits finding for the growth question.} The
+  standard chain-rule estimator cannot adjudicate whether divergence grows
+  sublinearly at these prefix lengths and sample sizes, its bias manufactures
+  the effect it is meant to detect, and the failure is robust to two independent
+  repairs at a quantified data cost (\Cref{sec:results/estimator}).
+  \item \textbf{Bracket validation against real detectors and an independent
+  corpus.} On the informative stratum no detector breaches the certified floor
+  above the null rate (\Cref{sec:results/detector_validation}), and the lower
+  side reproduces across corpora while the upper side's difference is explained,
+  and disclosed, by sample-size stratification
+  (\Cref{sec:discussion/robustness}).
+\end{itemize}
+
+\paragraph{Scope.}
+The bracket is a measurement instrument, not a vulnerability. We consume a
+(direction, size) channel and no name, address, or content field, and we quantify
+what including an identifier would change rather than assuming it is immaterial.
+The certified fraction is a stratum statement, and we state the stratum wherever
+we quote it.

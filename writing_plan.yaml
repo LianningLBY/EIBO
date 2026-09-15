@@ -1,0 +1,634 @@
+meta:
+  venue: USENIX Security 2027
+  track: Cycle 2
+  paper_type: empirical
+  template: docs/paper/usenix.sty
+  template_note: >
+    OFFICIAL KIT OBTAINED AND VERIFIED 2026-09-15. Fetched from the USENIX
+    Security 2027 Call for Papers page, which links
+    https://www.usenix.org/sites/default/files/usenixsecurity2027_latex_templates.zip
+    The archive contains usenixsecurity2027_latex_templates/usenix.sty and
+    usenixsecurity2027_latex_templates/usenixsecurity2027.tex. Both were
+    extracted to docs/paper/. A minimal document using
+    \documentclass[letterpaper,twocolumn,10pt]{article} + \usepackage{usenix}
+    was compiled with pdflatex in this environment and succeeded (exit 0,
+    63,930-byte PDF). The kit is NOT a .cls; it is a .sty used with the
+    standard article class. No third-party or hand-rolled geometry is used.
+  page_limit: 13
+  deadline: 2027-01-26
+  registration_deadline: 2027-01-19
+  core_claim: >
+    On real QUIC wire data, a two-sided epsilon-indistinguishability bracket is
+    computable per service pair whose upper side is a finite-sample strict bound
+    and whose lower side is an asymptotic lower bound; the guarantee asymmetry is
+    the result, not a caveat. At the coarsest pre-registered channel (k=5, M=1),
+    336/990 = 33.9% of service pairs satisfy the joint gate, and a finer alphabet
+    strictly reduces the certifiable fraction until the certificate is lost
+    entirely beyond M=4.
+  created_at: 2026-09-15T01:05:00Z
+  revised_at: 2026-09-15T02:06:00Z
+  revision_note: >
+    Revised after Director approval to fold in two constraints: (1) every artifact
+    is resolved through artifacts/manifest.yaml content_sha256, never through a
+    server path; (2) paper_provenance.yaml is a required gate artifact and no
+    quantitative claim is frozen without it. Venue requirements upgraded from
+    assumed to verified against the official 2027 CFP.
+
+binding_claim_constraints:
+  - id: BC1
+    rule: >
+      X9_E (channel sensitivity) is scoped to tv_hat ONLY (D087). The paper may
+      write "identifier content changes radius-free separation, beyond a pure
+      cardinality effect". It MUST NOT write "SNI destroys the epsilon-certificate"
+      or "degrades the bracket".
+    why: >
+      eps_hi is comparison_unavailable at every rung (an arm saturates) and eps_lo
+      is absent. Writing a certificate/bracket effect would be an object
+      substitution (same class as X12/D064).
+    applies_to: [results, discussion, abstract]
+    carries: [fig5_channel_sensitivity]
+  - id: BC2
+    rule: >
+      X11's joint gate ANDs a full-n upper side with a capped-20k lower side (D093).
+      State the per-side n beside the gate, and state that the resulting bias is
+      CONSERVATIVE.
+    why: >
+      2,145/3,321 pairs capped; a weaker eps_lo understates the gate, so the
+      reported gate is a floor, not an overstatement.
+    applies_to: [results, discussion, abstract]
+    carries: [fig4_cross_corpus, tab_cross_corpus]
+  - id: BC3
+    rule: >
+      X8's DPI check is a smoke-test, NOT a verifier (D091). Never cite
+      dpi_violations: 0 as theorem verification.
+    why: >
+      0/990 testable pairs; a lower bound below a point estimate is expected and
+      falsifies nothing.
+    applies_to: [results, discussion]
+  - id: BC4
+    rule: >
+      C3 is reframed (D046): a methods/limits finding, not a growth-rate claim.
+      The withdrawn sublinear-growth wording must not reappear in any form.
+    why: >
+      The estimator's own known-truth control returned sublinear on exactly-linear
+      data, so the growth question is neither confirmed nor refuted.
+    applies_to: [results, discussion, abstract, introduction]
+  - id: BC5
+    rule: >
+      The target venue must not be silently downgraded.
+    why: Director instruction.
+    applies_to: [meta, report]
+  - id: BC6
+    rule: >
+      Every artifact is resolved through artifacts/manifest.yaml -> content_sha256
+      -> local git-tracked path. NEVER through a server path. A server scratch copy
+      is not an artifact of record.
+    why: >
+      Director instruction 2026-09-15. For X12_k5 specifically the canonical bytes
+      are 193,228 B / sha256 bebe6bf00ec3b48a541c948353b7db8574fa7721fec64199c614b239adf0a8d5
+      (includes the backfill_note explaining the violations/trials backfill). A
+      server scratch copy exists at 192,372 B / 71fa0233 WITHOUT that note; numbers
+      read from it would have no provenance.
+    applies_to: [all]
+    verified: >
+      VERIFIED 2026-09-15: the manifest entry for exp_id X12_k5 named
+      x12_detector_validation_k5.json resolves to
+      artifacts/X12_k5/data/x12_detector_validation_k5.json, whose on-disk bytes are
+      193,228 and whose sha256 begins bebe6bf0 and contains backfill_note. Matches
+      the stated canonical form.
+  - id: BC7
+    rule: >
+      paper_provenance.yaml is a gate. No quantitative claim is frozen without an
+      exp_id -> registry entry -> manifest sha chain recorded in it.
+    why: >
+      Director instruction 2026-09-15. Every figure/table number must trace to an
+      exp_id.
+    applies_to: [all]
+
+structure_contract:
+  venue_requirements:
+    source: "USENIX Security 2027 Call for Papers (official)"
+    source_url: "https://www.usenix.org/conference/usenixsecurity27/call-for-papers"
+    verified_at: 2026-09-15
+    verified_status: verified
+    body_page_limit: 13
+    body_page_limit_quote: "Paper submissions can include up to 13 pages of body text"
+    references_limit: unlimited
+    appendix_limit: unlimited
+    camera_ready_limit: 20
+    review_model: double-blind
+    required_content:
+      - open_science_appendix
+    required_content_quote: "Papers must include an 'Open Science' Appendix on submission"
+    recommended_content:
+      - ethics_appendix
+    recommended_content_quote: "An Appendix discussing Ethics is recommended"
+    formatting_requirements: >
+      U.S. letter, two-column, 10-point Times Roman on 12-point leading, text
+      block 7in x 9in. Author names must NOT appear (anonymous review). Papers
+      must be self-contained without optional appendices; reviewers are not
+      required to read appendices.
+    prohibited_practices: "modifying whitespace or formatting defaults (negative vspaces, savetrees, titlesec, removing author blocks, changing fonts)"
+    note: >
+      Replaces the earlier unverified entry. The mandatory required section is the
+      Open Science Appendix (submission-time artifact list with anonymous links);
+      the Ethics appendix is recommended, not mandatory. A "Limitations"
+      subsection is not a USENIX-mandated section but is retained inside the
+      Discussion because BC4-BC7 and the negative C3 result require explicit
+      scoping. Cycle 2 mandatory registration is 2027-01-19; the paper deadline is
+      2027-01-26.
+  technical_core:
+    role: study_design
+    section_ids: [measurement_design]
+    required_for_claims: [C1, C2, C3]
+    completeness:
+      - problem_formulation
+      - measurement_protocol
+      - channel_definition_and_hygiene
+      - upper_side_construction
+      - lower_side_construction
+      - guarantee_asymmetry
+      - rung_ladder_and_frontier
+      - estimation_procedure_and_controls
+      - reproducibility_boundary
+    source_coverage:
+      - item: "TV upper bound: plug-in TV estimate plus a DKW-type confidence radius at alpha_law = 0.025"
+        source_ref: "registry X1 conventions_corrected; eibo.statcore::tv_upper_bound"
+        destination: measurement_design/upper_side
+        manifest_sha: "via artifacts/manifest.yaml content_sha256 for the X1 assembly artifact"
+      - item: "TV lower bound: Michel adaptive high-probability lower bound (asymptotic)"
+        source_ref: "registry E10; literature_map michel2020high"
+        destination: measurement_design/lower_side
+      - item: "channel definition: (direction,size) quantized into M bins across k positions, m = (2M)^k; rung ladder M in {1,2,4,8,16}, k in {5,10,15,30}"
+        source_ref: "registry X1 k_coverage_denominators; E3"
+        destination: measurement_design/channel_and_hygiene
+      - item: "hygiene regime: flow- and time-disjoint splits, packet-level splitting prohibited, SNI/address not consumed, padding-mask verification"
+        source_ref: "registry E8; X9_E splits; literature_map zhao2025sweet, zhao2026shortcutcatcher"
+        destination: measurement_design/channel_and_hygiene
+      - item: "frontier function M_max(k,n,tv) closed form"
+        source_ref: "registry X4 (TWO_ROUTES_AGREE)"
+        destination: results/horizon
+      - item: "divisibility lower bound at large k where the plug-in certificate is lost (realizability-conditional)"
+        source_ref: "registry X6; literature_map tao2024discriminative"
+        destination: results/horizon
+      - item: "step-0 occupancy gate"
+        source_ref: "registry E1 (gate_verdict PASS_XS_SUBSET_full_paired_design)"
+        destination: results/datasets
+      - item: "chain-rule estimator construction and known-truth control design"
+        source_ref: "registry X3; X3_A; X3_B"
+        destination: results/estimator_limit
+      - item: "detector-validation protocol: one-sided binomial on the informative stratum"
+        source_ref: "registry X12_k5 (canonical 193,228 B / bebe6bf0 via manifest)"
+        destination: results/detector_validation
+    reproducibility_boundary:
+      main_text: "protocol, channel definition, alpha convention, gate definition, and the frontier closed form"
+      supplement: "per-pair ledgers (990 rows), the 20-cell upper-side table, X11's n-stratification table, X6's label audit, X3's cross-variant comparison"
+      released_artifacts: >
+        runners plus the artifacts/manifest.yaml content_sha256 chain; XS-subset
+        pair tables; the estimator control artifacts. Described in the mandatory
+        Open Science Appendix with anonymous access links.
+  evidence_ownership:
+    section_ids: [results, discussion]
+    evidence_policy: "Each table/figure has exactly one analysis_home; other sections cite without re-analysis."
+    validation_units:
+      - id: VU1
+        kind: experiment
+        name: "Bracket construction (C1)"
+        claim_ids: [C1]
+        evidence: [tab1_headline_bracket, fig1_bracket_overview, fig2_certificate_horizon]
+        analysis_home: results/bracket
+      - id: VU2
+        kind: experiment
+        name: "Certificate horizon and divisibility (C2)"
+        claim_ids: [C2]
+        evidence: [fig2_certificate_horizon, tab1_headline_bracket]
+        analysis_home: results/horizon
+      - id: VU3
+        kind: experiment
+        name: "Estimator limit (C3)"
+        claim_ids: [C3]
+        evidence: [tab3_estimator_control, fig3_estimator_control]
+        analysis_home: results/estimator_limit
+      - id: VU4
+        kind: experiment
+        name: "Detector validation"
+        claim_ids: [C1]
+        evidence: [tab2_detector_validation]
+        analysis_home: results/detector_validation
+      - id: VU5
+        kind: experiment
+        name: "Cross-corpus and sensitivity"
+        claim_ids: [C1]
+        evidence: [fig4_cross_corpus, fig5_channel_sensitivity]
+        analysis_home: discussion/robustness
+    evidence_coverage:
+      - evidence_id: X1
+        disposition: body
+        analysis_home: results/bracket
+      - evidence_id: E10
+        disposition: body
+        analysis_home: results/bracket
+      - evidence_id: E3
+        disposition: body
+        analysis_home: results/horizon
+      - evidence_id: X4
+        disposition: body
+        analysis_home: results/horizon
+      - evidence_id: X6
+        disposition: body
+        analysis_home: results/horizon
+        note: "realizability-conditional; never called distribution-free (D065)"
+      - evidence_id: X13
+        disposition: body
+        analysis_home: discussion/missing_mass
+      - evidence_id: X12_k5
+        disposition: body
+        analysis_home: results/detector_validation
+        manifest_note: "canonical 193,228 B / bebe6bf0 (with backfill_note); resolved via manifest"
+      - evidence_id: X11
+        disposition: body
+        analysis_home: discussion/robustness
+        note: "per-side n stated; bias CONSERVATIVE (BC2)"
+      - evidence_id: X9_E
+        disposition: body
+        analysis_home: discussion/robustness
+        note: "scoped to tv_hat per BC1/D087"
+      - evidence_id: E1
+        disposition: body
+        analysis_home: results/datasets
+      - evidence_id: E8
+        disposition: body
+        analysis_home: measurement_design/channel_and_hygiene
+      - evidence_id: X3
+        disposition: body
+        analysis_home: results/estimator_limit
+      - evidence_id: X3_A
+        disposition: body
+        analysis_home: results/estimator_limit
+      - evidence_id: X3_B
+        disposition: body
+        analysis_home: results/estimator_limit
+      - evidence_id: X8
+        disposition: appendix
+        destination: appendix/vector_law
+        rationale: "vector-law relation; DPI check is a smoke-test only (D091/BC3)"
+      - evidence_id: E9_Q2v3
+        disposition: appendix
+        destination: appendix/phist_side
+      - evidence_id: X9
+        disposition: omit
+        rationale: "the original +0.39 SNI delta was a clipping artifact and its attribution is confounded (M127); X9_E replaces it"
+      - evidence_id: E7
+        disposition: omit
+        rationale: "conclusion=failed; produced no usable artifact and carries no approved claim"
+  budget_policy:
+    basis: "USENIX Security 13-page body limit (verified); empirical-measurement paper type; five figures plus three tables"
+    tolerance: 0.15
+    hard_ratio: null
+
+required_artifacts:
+  - id: paper_provenance
+    path: paper_provenance.yaml
+    status: required
+    gate: true
+    built_by: "Director's Agent via auto_build_provenance, during the first data-pull pass"
+    rule: >
+      Every quantitative claim in the draft traces exp_id -> registry entry ->
+      manifest content_sha256. No number is frozen without it. Writing_plan
+      approval was granted on the understanding that this is a hard gate.
+  - id: references_bib
+    path: docs/paper/references.bib
+    status: required
+    built_by: "bib_sync Worker from literature_map.yaml (verified=true entries only)"
+  - id: open_science_appendix
+    path: docs/paper/main.tex (appendix)
+    status: required
+    gate: true
+    rule: "USENIX Security 2027 mandates an Open Science appendix at submission"
+  - id: ethics_appendix
+    path: docs/paper/main.tex (appendix)
+    status: recommended
+    rule: "Strongly encouraged by the 2027 CFP; planned"
+
+contribution_map:
+  C1:
+    statement: >
+      A two-sided epsilon-indistinguishability bracket is computable per service
+      pair on real encrypted traffic, with the upper side finite-sample strict and
+      the lower side asymptotic; 336/990 = 33.9% of pairs satisfy the joint gate at
+      k=5/M=1, and the upper side binds.
+    technical_core: [measurement_design/upper_side, measurement_design/lower_side, measurement_design/gate]
+    validation: [VU1, VU4, VU5]
+  C2:
+    statement: >
+      The certificate horizon is short and the coarsest channel is the only viable
+      rung: the certifiable fraction falls monotonically in alphabet resolution
+      (upper-only 0.3434 / 0.0475 / 0.0030 / 0 / 0 across M=1/2/4/8/16) while tv
+      median rises with M, and the certificate is lost entirely beyond M=4.
+    technical_core: [measurement_design/channel_and_hygiene, measurement_design/rung_ladder]
+    validation: [VU2]
+  C3:
+    statement: >
+      The standard plug-in chain-rule divergence estimator cannot adjudicate the
+      dependent-prefix growth question at these k and n: its k-dependent
+      sparse-context bias manufactures sublinearity on exactly-linear data, and
+      the failure survives two independent repairs.
+    technical_core: [measurement_design/estimation_procedure_and_controls]
+    validation: [VU3]
+
+paper_outline:
+  - section: abstract
+    content_role: summary
+    word_budget: 200
+    budget_rationale: "official template asks for not more than 200 words, preferably closer to 150"
+    core_bullets:
+      - "Problem: encrypted-traffic detectors report AUROC/OSCR with no stated limits; no error floor is established per service pair."
+      - "What we do: compute a two-sided epsilon-indistinguishability bracket on real QUIC wire data, upper side finite-sample strict, lower side asymptotic; the asymmetry is the result."
+      - "Headline: at k=5/M=1, 336/990 = 33.9% of pairs; on an independent corpus the lower side reproduces and the joint gate is 15.75% with the per-side n stated."
+      - "Mechanism: finer alphabets resolve more but destroy the certificate; only the coarsest rung survives."
+      - "Methods/limits: the standard plug-in estimator cannot adjudicate the growth question, robust to two repairs."
+      - "Detector check: no detector breaches the certificate above chance rate on the informative stratum."
+    dependencies: [results, measurement_design]
+    figures: [fig1_bracket_overview]
+
+  - section: introduction
+    content_role: context
+    word_budget: 1150
+    budget_rationale: "establish the gap and contributions without duplicating results"
+    core_bullets:
+      - "Hook: practitioners cannot say what error floor is impossible for a given observation window, or whether a reported gain is near that floor."
+      - "Gap: the theory exists but in disconnected pieces — classifier TV lower bounds, single-letter (i.i.d.-conditional) leakage-inevitability, and a rate-distortion frontier inside a stationary-memoryless class; nothing measures a two-sided, certification-graded bracket on real encrypted traffic."
+      - "Insight: the two sides of the bracket carry different certification strength and must never borrow from each other; measuring them so each is asserted only at the strength it can carry is the contribution."
+      - "Mechanism: a pre-registered coarse channel, a finite-sample upper side, an asymptotic lower side, and a joint gate, on flow- and time-disjoint splits with packet-level splitting prohibited."
+      - "Contributions: C1 (the bracket, 33.9% at k=5/M=1), C2 (short horizon, coarsest rung only, divisibility bound at large k), C3 (the standard estimator provably cannot adjudicate the growth question)."
+      - "Positioning: this is measurement/certification, not a vulnerability; the bracket is a function of (M,k,n,tv), not one dataset's number."
+    dependencies: [results, measurement_design]
+    citation_hints:
+      - "cherubin2017bayes — closed-set feature-conditional information-limit precedent"
+      - "michel2020high — the lower-side construction"
+      - "liu2026inevitability, liu2026rate — single-letter / stationary-memoryless comparators"
+      - "qu2026sepspace, wang2025reliable — the detectors whose limits go unstated"
+    figures: [fig1_bracket_overview]
+
+  - section: background
+    content_role: context
+    word_budget: 900
+    budget_rationale: "notation, TV distance, and the QUIC observable; the measurement procedure itself is deferred to the technical core"
+    core_bullets:
+      - "Total variation distance and the epsilon-indistinguishability bracket; the two-sided semantics (upper bounds the error floor from below, lower distinguishes)."
+      - "Prior information bounds: Cherubin (closed-set, feature-conditioned); Liu-Cheng-Liu (single-letter; exponential decay only under i.i.d.-conditional repeated observation; rate-distortion inside a stationary-memoryless class)."
+      - "QUIC wire observables (RFC 9312) and the admissible alphabet after implementation conditioning."
+      - "Open-set recognition context: the detector families whose reported limits are unstated."
+    dependencies: [measurement_design]
+    citation_hints:
+      - "kuhlewind2022rfc — QUIC wire image"
+      - "scheirer2013toward, fang2021learning, garov2025closer — open-set"
+    notation_table:
+      k: "number of leading positions in the k-prefix symbol law"
+      M: "per-position alphabet resolution (bins per direction/size axis); m = (2M)^k symbols"
+      n: "flow count available to a pair"
+      tv: "true total variation distance between the two services' prefix laws"
+      tv_hat: "plug-in estimate of tv"
+      eps_hi: "finite-sample-strict upper bound on tv"
+      eps_lo: "asymptotic lower bound on tv"
+      radius: "0.5*sqrt(m/n) + 0.5*sqrt(2*ln(2/alpha_law)/n)"
+      alpha_law: "per-law significance level, 0.025"
+
+  - section: measurement_design
+    content_role: technical_core
+    word_budget: 1800
+    budget_rationale: "the paper's central contribution and the section a USENIX reviewer will scrutinize; carries the full protocol, both sides, and the frontier function"
+    core_bullets:
+      - "Problem formulation: for a service pair (a,b) and a declared channel, bracket the true TV."
+      - "Channel definition: (direction,size) into M bins over k positions, m=(2M)^k; the rung ladder M in {1,2,4,8,16}, k in {5,10,15,30}; the third exporter channel (inter-packet timing) is deliberately excluded; no SNI/UA/TLS-extension consumed."
+      - "Upper side: tv_hat plus a DKW-type confidence radius; finite-sample strict at alpha_law=0.025 under a union bound over the two laws; no distributional assumption beyond finite alphabet."
+      - "Lower side: a Michel adaptive classifier-based high-probability lower bound; asymptotic, certifies distinguishability, caps the error floor from above."
+      - "The joint gate: eps_lo > 0.05 AND eps_hi < 0.5; the binding side is the upper side; why the asymmetry is the result and not a caveat."
+      - "Hygiene regime: flow- and time-disjoint splits, packet-level splitting prohibited, address-field randomization, and the padding-mask verification (E8: padding histogram 0; E1: Step-0 PASS on the XS subset)."
+      - "Estimation procedure and its known-truth control: the chain-rule estimator and the pre-registered rule that a candidate may be applied to real data only after it first passes the known-truth gate."
+      - "Reproducibility boundary: what is in the main text, the supplement, and the released artifacts; the manifest content_sha256 chain is the artifact of record."
+      - "Frontier function M_max(k,n,tv), closed form, with the scale caveat (full-corpus projection ~3.886e6 mean n vs the XS measured ~2.22e5)."
+    dependencies: []
+    registry_refs: [X1, E10, E3, X4, X6, E1, E8, X3]
+    figures: [fig1_bracket_overview]
+
+  - section: results
+    content_role: evaluation
+    word_budget: 2300
+    budget_rationale: "answers the three claims once each; exhaustive settings and per-cell tables move to the appendix"
+    core_bullets:
+      - "Dataset and protocol summary (CESNET-QUICEXT-25 XS subset; 45 services, 990 pairs; Step-0 gate PASS, provisional on the XS subset)."
+      - "The two-sided bracket (C1): Table 1 + Figure 2; the joint gate 336/990 = 33.9% at k=5/M=1, upper-only 340/990 = 0.3434, saturation 0.0; the upper side binds."
+      - "The certificate horizon (C2): Table 1 + Figure 2; upper-only fraction falls monotonically in M; tv median RISES with M; a finer alphabet resolves more, not less; the certificate is lost beyond M=4; the frontier function as a function of tv; the divisibility lower bound (X6) at k=15/20/25/30 where the plug-in certificate is lost — realizability-conditional, never distribution-free."
+      - "Detector validation (Table 2): one-sided binomial, 340 informative pairs, three detectors x three holdouts, all nine cells reject_null=false; the floor is not falsified."
+      - "The estimator limit (C3): Table 3 + Figure 3; the known-truth control; est/true falls 1.0002 to 0.6769; occupancy collapse; two repairs both fail; the vacated BIC vote."
+    dependencies: [measurement_design]
+    registry_refs: [E1, X1, E10, E3, X4, X6, X12_k5, X3, X3_A, X3_B]
+    tables: [tab1_headline_bracket, tab2_detector_validation, tab3_estimator_control]
+    figures: [fig2_certificate_horizon, fig3_estimator_control]
+
+  - section: discussion
+    content_role: synthesis
+    word_budget: 1050
+    budget_rationale: "robustness, the second certified object, missing mass, limitations, and ethics; no repeated table analysis"
+    core_bullets:
+      - "Robustness across corpora (Figure 4): QUIC22 joint gate 15.75% vs 33.94%; the lower side reproduces (99.67% vs 99.60%); the scale-matched gap narrows to 9.7 points; state the per-side n and the CONSERVATIVE bias (BC2)."
+      - "Channel sensitivity (Figure 5): the dose-response on the SNI-dependent vs SNI-independent arms, tv_hat only (BC1); identifier content changes radius-free separation beyond a pure cardinality effect."
+      - "The two certified objects and why they must not be described as corroborating each other."
+      - "Deployment-site missing-service mass (X13): 0.00202 at 1:1, growing to 0.0237 at 1:100; a site-specific quantity, never a universal unknown prior."
+      - "Limitations: the XS subset and its provisional Step-0; the certificate covers 33.9% of pairs; a single protocol; the asymptotic lower side; the open growth question."
+      - "Ethics considerations: measurement on an open dataset with no deanonymization; the certificate is a defensive/auditing instrument."
+    dependencies: [results]
+    registry_refs: [X11, X9_E, X13, X8, E9_Q2v3]
+    tables: []
+    figures: [fig4_cross_corpus, fig5_channel_sensitivity]
+
+  - section: related_work
+    content_role: context
+    word_budget: 850
+    budget_rationale: "positioning across five clusters"
+    core_bullets:
+      - "Information-theoretic bounds and traffic analysis (Cherubin; Liu-Cheng-Liu) — closed-set or single-letter, and we measure on real dependent traffic."
+      - "TV estimation and lower bounds (Michel; Tao)."
+      - "Open-set recognition for network traffic (SepSpace, RoNeTC, Shamsimukhametov ECH) — they report detector accuracy with no stated limits."
+      - "Data hygiene and shortcut learning in encrypted-traffic classification — the hygiene regime we adopt."
+      - "Unseen-species / missing-mass (Orlitsky; Eriksson)."
+    dependencies: [introduction, results]
+    citation_hints:
+      - "cluster them so each ends with an explicit distinction from EIBO"
+
+  - section: conclusion
+    content_role: synthesis
+    word_budget: 400
+    budget_rationale: "concise synthesis plus required limitations; no repeated table analysis"
+    core_bullets:
+      - "Summary of the three claims at their measured strength."
+      - "Honest limitations: the XS subset, the 33.9% coverage, the asymptotic lower side, the growth question left open."
+      - "Future work: full-corpus confirmation, a measurement design that both clears a known-truth gate and retains the data, and other protocols."
+    dependencies: [results, discussion]
+
+visualization_plan:
+  - fig_id: fig1_bracket_overview
+    type: conceptual
+    tool: agentic_figure
+    status: delivered
+    render_note: >
+      Agentic Figure provider failed twice on a retryable error; hand-built with
+      matplotlib per the documented fallback. Programmatic collision AND
+      box-containment checks pass (10 text artists, 3 boxes contained).
+    description: "Two-branch overview: channel quantization forks into a finite-sample-strict upper side and an asymptotic lower side that rejoin at the per-pair interval and its gate."
+    narrative_intent: >
+      The two sides of the bracket come from different machinery and carry
+      different certification strength; they meet only at the gate.
+    data_source: "conceptual; no numeric data"
+    placement: introduction
+    aspect_ratio: "16:9"
+
+  - fig_id: fig2_certificate_horizon
+    type: statistical
+    tool: paperbanana
+    status: delivered
+    render_note: >
+      PaperBanana returned a version whose panel titles overprinted and whose
+      in-axes labels collided. Re-rendered deterministically with matplotlib and a
+      programmatic collision check (39 text artists, 0 collisions). The median-TV
+      series was removed from the plot area because it is not on the same scale as
+      the fractions; its values are stated in the caption instead.
+    narrative_intent: >
+      Finer alphabets resolve more but destroy the certificate, and the
+      certificate provably cannot exist past a tv-dependent horizon.
+    design_notes:
+      - "Pattern A: regime bands marking M<=1 certifiable vs M>4 lost"
+      - "Two panels, single y-scale each; no dual axes"
+    data_source: "manifest: X1 headline table, E3, X4; masking sweep for tv medians"
+    placement: results
+    aspect_ratio: "16:9"
+
+  - fig_id: fig3_estimator_control
+    type: statistical
+    tool: paperbanana
+    status: delivered
+    render_note: >
+      Re-rendered deterministically; panel titles shortened to eliminate collision
+      (60 text artists, 0 collisions).
+    narrative_intent: >
+      On exactly-linear truth the standard estimator returns sublinear because its
+      sparse-context bias deflates large-k divergence, and occupancy collapse is
+      the measured mechanism.
+    design_notes:
+      - "Pattern A: shade the region beyond the crossover where the ratio departs 1.0"
+    data_source: "manifest: X3 control occupancy dose-response; X3 parametric growth"
+    placement: results
+    aspect_ratio: "4:3"
+
+  - fig_id: fig4_cross_corpus
+    type: statistical
+    tool: paperbanana
+    status: delivered
+    render_note: >
+      PaperBanana returned a version whose panel titles collided and whose BC2
+      disclosure was an unreadable grey watermark clipped at both ends.
+      Re-rendered deterministically: the BC2 disclosure is now a bordered static
+      text box below the axes stating the per-side n and the CONSERVATIVE
+      direction, and the capped lower-side bar carries diagonal hatching
+      (39 text artists, 0 collisions).
+    narrative_intent: >
+      The bracket reproduces on an independent corpus, and the lower side
+      reproduces almost exactly while the upper side reflects a sample-size
+      difference that narrows under scale matching.
+    design_notes:
+      - "Pattern G: hatch the capped-20k lower-side bar to encode the mixed-n caveat"
+      - "BC2 disclosure as static legible text, never an overlay"
+    data_source: "manifest: X11 full bracket, X1, E10"
+    placement: discussion
+    aspect_ratio: "4:3"
+    carries_constraint: BC2
+
+  - fig_id: fig5_channel_sensitivity
+    type: statistical
+    tool: paperbanana
+    status: pending
+    narrative_intent: >
+      Identifier content changes radius-free separation beyond a pure cardinality
+      effect, and the effect is monotone before saturation.
+    design_notes:
+      - "Pattern B: log2 x-axis; label the saturation point"
+      - "y-axis states tv_hat only; no certificate implication"
+    data_source: "manifest: X9_E dose-response channels"
+    placement: discussion
+    aspect_ratio: "4:3"
+    carries_constraint: BC1
+
+table_plan:
+  - table_id: tab1_headline_bracket
+    caption: "Two-sided bracket on the primary corpus: per-(M,k) upper-side count, certifiable fraction, saturation fraction, and the joint gate where measured. Zero cells are listed, not omitted."
+    placement: results
+    type: statistics
+    columns: [M, k, pairs, upper_count, upper_fraction, saturation_fraction, joint_gate_count, joint_gate_fraction]
+    data_source: "manifest: X1, E10, E3"
+    notes: >
+      The joint gate exists at M=1 only (k=5: 336/990; k=10: 11/990). M>=2 cells
+      are upper-only and must be labelled as such. The M=1 upper-only value is
+      340/990 and is NOT an element of the joint series.
+  - table_id: tab2_detector_validation
+    caption: "Detector validation on the informative stratum: one-sided binomial test of floor violations against a null rate of 0.05."
+    placement: results
+    type: statistics
+    columns: [detector, holdout, informative_pairs, violations, rate, p_value, reject_null]
+    data_source: "manifest: X12_k5 (canonical 193,228 B / bebe6bf0)"
+    notes: >
+      Three detectors (lightgbm, prototype, ronetc). maximum_pair_tpr must not be
+      quoted. pcap_encoder is not_run and is not counted as a pass.
+  - table_id: tab3_estimator_control
+    caption: "The chain-rule estimator on its known-truth control: estimated divergence against exactly-linear truth, with the occupancy statistics that drive the deficit."
+    placement: results
+    type: ablation
+    columns: [prefix_k, truth_Dk, estimated_Dk, est_over_true, occupancy_frac_lt5, effective_n_per_context]
+    data_source: "manifest: X3 control occupancy dose-response, X3 parametric growth"
+    notes: "The synthetic truth is exactly linear; sublinear behaviour is the estimator's bias."
+
+literature_strategy:
+  citation_budget: 35
+  macro_context:
+    - "encrypted-traffic classification and traffic analysis"
+    - "information-theoretic limits and total variation estimation"
+    - "open-set recognition"
+  micro_clusters:
+    - cluster_name: "Information-theoretic bounds and traffic analysis"
+      target_count: 8
+      status: "gap-fill Worker dispatched 2026-09-15"
+    - cluster_name: "Total variation estimation and lower bounds"
+      target_count: 5
+      status: "gap-fill Worker dispatched 2026-09-15"
+    - cluster_name: "Open-set recognition and traffic-classification baselines"
+      target_count: 7
+      status: "gap-fill Worker dispatched 2026-09-15"
+    - cluster_name: "Data hygiene and shortcut learning"
+      target_count: 4
+      status: "partially covered"
+    - cluster_name: "QUIC measurement and datasets"
+      target_count: 4
+      status: "verification Worker queued"
+    - cluster_name: "Unseen species and missing mass"
+      target_count: 3
+      status: "covered"
+
+writing_order:
+  - measurement_design
+  - results
+  - discussion
+  - background
+  - introduction
+  - related_work
+  - abstract
+  - conclusion
+
+color_palette:
+  upper_side: "#0072B2"
+  lower_side: "#E69F00"
+  joint_gate: "#009E73"
+  headline_marker: "#D55E00"
+  secondary_line: "#56B4E9"
+  saturation_band: "#CC79A7"
+  neutral_grid: "#B0B0B0"
+  text_primary: "#1A1A1A"

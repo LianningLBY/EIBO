@@ -1,0 +1,28 @@
+\begin{abstract}
+Open-set encrypted-traffic recognition is reported empirically: detectors
+publish accuracy with no stated limit, so a practitioner cannot say what error
+floor is impossible for a given observation window. We measure a two-sided
+$\epsilon$-indistinguishability bracket on real QUIC wire data, one interval per
+service pair, whose upper side is a finite-sample strict bound on the total
+variation distance and whose lower side is asymptotic. The two sides come from
+different machinery and carry different guarantees; the asymmetry is the result,
+not a caveat.
+
+At the coarsest pre-registered channel, 336 of 990 service pairs (33.9\%) admit
+such an interval and the upper side binds. Raising the alphabet resolution
+resolves more structure and destroys the certificate at the same time, because
+the confidence radius grows with the alphabet while the threshold does not; the
+certifiable set falls from 340 pairs to none four rungs finer, and the boundary
+has a closed form. Where the certificate is lost, a divisibility bound keeps the
+large-prefix regime non-empty under a realizability assumption. On an
+independent corpus the lower side reproduces almost exactly (0.9967 against
+0.9960) and the joint gate is 15.75\%, with the per-side sample sizes disclosed
+and the resulting bias conservative.
+
+We also report a negative result: the standard chain-rule plug-in estimator
+returns sublinear growth on a source whose divergence is known, so it cannot
+adjudicate whether divergence grows sublinearly across dependent packet
+positions, and the failure survives two independent repairs. On the pairs where
+a certificate exists, no detector in a three-model panel breaches the certified
+floor above the null rate.
+\end{abstract}

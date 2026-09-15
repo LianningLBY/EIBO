@@ -1,0 +1,135 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EIBO: Certification-Grade epsilon-Indistinguishability Brackets for Open-Set
+% Encrypted-Traffic Recognition
+%
+% Target: USENIX Security 2027, Cycle 2.
+% Template: official USENIX Security 2027 LaTeX author kit (usenix.sty).
+% Body limit: 13 pages. References and appendices unlimited.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{usenix}
+% natbib must come after usenix.sty: usenix loads the `cite` package, and
+% natbib redefines the citation commands on top of it.
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{cleveref}
+
+% cleveref must be told about the natbib-style theorem of equations/tables
+\crefname{table}{Table}{Tables}
+\crefname{figure}{Figure}{Figures}
+\crefname{section}{Section}{Sections}
+\crefname{equation}{Equation}{Equations}
+
+% shorthands used throughout the paper
+\newcommand{\tv}{\mathrm{TV}}
+\newcommand{\epslo}{\ensuremath{\epsilon_{\mathrm{lo}}}}
+\newcommand{\epshi}{\ensuremath{\epsilon_{\mathrm{hi}}}}
+\newcommand{\alaw}{\ensuremath{\alpha_{\mathrm{law}}}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+
+\title{\Large \bf Certification-Grade $\epsilon$-Indistinguishability Brackets\\
+  for Open-Set Encrypted-Traffic Recognition}
+
+\author{Anonymous Submission}
+\date{}
+
+\begin{document}
+\maketitle
+
+\input{abstract}
+
+\input{introduction}
+
+\input{background}
+
+\input{measurement_design}
+
+\input{results}
+
+\input{discussion}
+
+\input{related_work}
+
+\input{conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\cleardoublepage
+\appendix
+
+\section*{Ethical Considerations}
+\addcontentsline{toc}{section}{Ethical Considerations}
+
+All measurements in this paper are computed on a public research corpus of
+backbone traffic collected and released by its operators under their own ethics
+and data-handling framework. We consume flow-level metadata only. We do not
+attempt to identify users, reconstruct content, or deanonymize any flow, and we
+report no per-flow identifier values. The identifier analysis in the channel
+sensitivity study compares a hashed destination address against a random
+per-flow identifier at matched declared resolution and reports only an aggregate
+separation statistic.
+
+The result is a defensive and auditing instrument. A certified lower bound on
+the error floor tells an operator what detection performance cannot be improved
+past at a stated observation window, which is the information needed to judge
+whether a reported detection gain is close to the limit the channel supports. We
+see no path by which the published bracket enables an attack that is not already
+available to anyone with the same observable channel.
+
+\cleardoublepage
+\section*{Open Science}
+\addcontentsline{toc}{section}{Open Science}
+
+This appendix lists the artifacts needed to evaluate the paper's core
+contributions and how the review committee can reach each one. Access links are
+anonymized to preserve double-blind review; they are provided through the
+submission system's artifact channel.
+
+\textbf{Released artifacts.}
+\begin{description}
+  \item[Measurement code.] The statcore module implementing the upper-side
+  bound (\texttt{tv\_upper\_bound}) and the classifier-based lower bound
+  (\texttt{tv\_lower\_bound}), together with the channel packer that maps a
+  (direction, size) prefix into a symbol index for a given $M$ and $k$.
+  \item[Per-pair ledgers.] The 990-row per-pair bracket table at $k{=}5$,
+  $M{=}1$, carrying the upper-side bound, the lower-side bound, the saturation
+  flag, and the per-side flow counts. This is the artifact behind
+  \Cref{tab:bracket}.
+  \item[Detector-validation payload.] The per-pair join for the nine-cell
+  containment test, the stratum assignment (340 informative, 540 secondary,
+  110 excluded), and the pre-registered one-sided binomial results in
+  \Cref{tab:detectors}.
+  \item[Estimator study artifacts.] The chain-rule control on a known-truth
+  source, both arms (plain and real-occupancy), and the two repair attempts
+  with their known-truth gates.
+  \item[Cross-corpus and sensitivity artifacts.] The independent-corpus bracket
+  including its sample-size stratification table, and the channel-sensitivity
+  dose-response series.
+  \item[Figure generators.] The scripts that rebuild every figure in this paper
+  from its artifact, plus the provenance map recording each series' source file
+  and content hash.
+\end{description}
+
+\textbf{Content-addressed chain of record.}
+Every artifact is registered in a project manifest carrying a
+\texttt{content\_sha256} for its bytes. The manifest hash, rather than any
+working copy, is the artifact of record, and every quantitative claim in this
+paper resolves through an experiment identifier to a manifest entry. Where a
+claim cites a nested field of an artifact, the full path is recorded in the
+paper's provenance crosswalk so a reviewer can follow the number to its source
+without tooling.
+
+\textbf{Data.}
+The primary corpus is publicly released by its operators and requires no
+credential to obtain; the independent replication corpus is likewise public. We
+redistribute neither, and instead document the acquisition steps and the
+preprocessing applied to produce the flow-level tables used here.
+
+\end{document}

@@ -1,0 +1,42 @@
+{
+  "fig2_panelA.csv": {
+    "upper_fraction/upper_count": {
+      "file": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x1_headline_table.json",
+      "sha256": "c9f840a94644687e50e672f6cdd3c65fd0469a9045ca55d1881d11a8afd41c9c"
+    },
+    "tv_median": {
+      "file": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/masking_regime_sweep.json",
+      "sha256": "453ac98df4afca9834034b7e2ddce93a719b5789d8b2637c25797d5d3f11094e"
+    }
+  },
+  "fig2_joint_gate_m1.json": {
+    "file": "registry E10 gate_definition (336 joint) + X1 headline_table_unified_calibre (340 upper)",
+    "sha256": "c9f840a94644687e50e672f6cdd3c65fd0469a9045ca55d1881d11a8afd41c9c"
+  },
+  "fig2_panelB.csv": {
+    "file": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x4_frontier_function.json",
+    "sha256": "3fd919a41bf5e599ded3cff5524029e07f31372805ab1f59602f961200e3113b"
+  },
+  "fig3_panelA.csv": {
+    "file": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_control_occupancy_dose_response.json",
+    "sha256": "2ff2dd05befce758db81ab15df7b2fd54971254cd28f0266f4708ba511a085fa"
+  },
+  "fig3_panelB.csv": {
+    "file": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_control_occupancy_dose_response.json",
+    "sha256": "2ff2dd05befce758db81ab15df7b2fd54971254cd28f0266f4708ba511a085fa",
+    "column": "arms.plain_iid.levels[0].occupancy_by_k[*].mean_fraction_contexts_below_5"
+  },
+  "fig3_panelC.csv": {
+    "file": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_control_occupancy_dose_response.json",
+    "sha256": "2ff2dd05befce758db81ab15df7b2fd54971254cd28f0266f4708ba511a085fa",
+    "column": "arms.plain_iid.levels[0].occupancy_by_k[*].{p,q}.median_context_count"
+  },
+  "fig4_cross_corpus.csv": {
+    "file": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X11/data/x11_full_bracket.json",
+    "sha256": "83c1a5a103e8f97e55517c58b7df14c80e3cf07be5bd567b3abfaee8cbf67d35"
+  },
+  "fig5_channel_sensitivity.csv": {
+    "file": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X9_E/data/x9_dose_response_channels.json",
+    "sha256": "7bca0a93b0b933e949b8a797a127e641140fda2aa226a22894495cd1f9179c49"
+  }
+}
