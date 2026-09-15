@@ -69,3 +69,8 @@ artifacts/*.tmp
 *.fdb_latexmk
 *.synctex.gz
 !docs/paper/main.pdf
+
+# --- Transient tool state (regenerated per run; the .lock siblings are tracked) ---
+_paper_audit_state.json
+_verify_refs_state.json
+.agentic-figure/
