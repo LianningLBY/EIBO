@@ -1,0 +1,53 @@
+{
+  "method": "nonparametric pair bootstrap over service pairs, percentile CI",
+  "confidence_level": 0.95,
+  "alpha": 0.05,
+  "percentile_levels": [
+    2.5,
+    97.5
+  ],
+  "seed": 20260915,
+  "replicates": 2000,
+  "source_artifacts": [
+    "artifacts/_project/data/q1_lower_side_full_n.json",
+    "artifacts/_project/data/x1_headline_table.json"
+  ],
+  "resampling_unit": "service pairs (treats 990 dependent pairs as iid)",
+  "joint_gate": {
+    "count": 336,
+    "n": 990,
+    "fraction": 0.3393939393939394,
+    "ci_lo": 0.3090909090909091,
+    "ci_hi": 0.36767676767676766,
+    "ci_scale": "fraction",
+    "count_ci_lo": 306.0,
+    "count_ci_hi": 364.0
+  },
+  "upper_side": {
+    "count": 340,
+    "n": 990,
+    "fraction": 0.3434343434343434,
+    "ci_lo": 0.31414141414141417,
+    "ci_hi": 0.37272727272727274,
+    "ci_scale": "fraction",
+    "count_ci_lo": 311.0,
+    "count_ci_hi": 369.0
+  },
+  "lower_side": {
+    "count": 986,
+    "n": 990,
+    "fraction": 0.9959595959595959,
+    "ci_lo": 0.9919191919191919,
+    "ci_hi": 0.998989898989899,
+    "ci_scale": "fraction",
+    "count_ci_lo": 982.0,
+    "count_ci_hi": 989.0
+  },
+  "median_tv": {
+    "n": 990,
+    "median_tv": 0.580531548936329,
+    "ci_lo": 0.5600733035718723,
+    "ci_hi": 0.6063900712474695
+  },
+  "limitations": "Pair bootstrap treats dependent service pairs as iid; use ci_main_table.json cluster_bootstrap for the defensible interval."
+}

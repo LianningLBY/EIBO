@@ -1,0 +1,178 @@
+{
+  "method": "nonparametric bootstrap, percentile CI",
+  "confidence_level": 0.95,
+  "alpha": 0.05,
+  "percentile_levels": [
+    2.5,
+    97.5
+  ],
+  "seed": 20260915,
+  "replicates": 2000,
+  "source_artifacts": [
+    "artifacts/_project/data/q1_lower_side_full_n.json",
+    "artifacts/_project/data/x1_headline_table.json"
+  ],
+  "pair_bootstrap": {
+    "resampling_unit": "service pairs (treats 990 dependent pairs as iid)",
+    "joint_gate": {
+      "count": 336,
+      "n": 990,
+      "fraction": 0.3393939393939394,
+      "ci_lo": 0.3090909090909091,
+      "ci_hi": 0.36767676767676766,
+      "ci_scale": "fraction",
+      "count_ci_lo": 306.0,
+      "count_ci_hi": 364.0
+    },
+    "upper_side": {
+      "count": 340,
+      "n": 990,
+      "fraction": 0.3434343434343434,
+      "ci_lo": 0.31414141414141417,
+      "ci_hi": 0.37272727272727274,
+      "ci_scale": "fraction",
+      "count_ci_lo": 311.0,
+      "count_ci_hi": 369.0
+    },
+    "lower_side": {
+      "count": 986,
+      "n": 990,
+      "fraction": 0.9959595959595959,
+      "ci_lo": 0.9919191919191919,
+      "ci_hi": 0.998989898989899,
+      "ci_scale": "fraction",
+      "count_ci_lo": 982.0,
+      "count_ci_hi": 989.0
+    },
+    "median_tv": {
+      "n": 990,
+      "median_tv": 0.580531548936329,
+      "ci_lo": 0.5600733035718723,
+      "ci_hi": 0.6063900712474695
+    }
+  },
+  "cluster_bootstrap": {
+    "resampling_unit": "services (cluster bootstrap). CONSTRUCTION, stated explicitly so a replicator reproduces the replicate pair-count distribution (median 406, p5 300, p95 496): each replicate draws 45 services WITH REPLACEMENT from the 45; the drawn services are then DEDUPLICATED TO A SET (a service drawn twice appears once, keeping identity but not multiplicity); the complete graph is rebuilt on that distinct set, EXCLUDING self-pairs; the statistic is recomputed on that replicate's distinct unordered pairs. Contrast: retaining multiplicity as weights (pair weighted m_i*m_j) would instead give ~968 pair-instances and a materially different interval — that construction is NOT used here. A 200,000-trial simulation of this exact construction reproduces the 406/300/496 distribution.",
+    "joint_gate": {
+      "count": 336,
+      "n": 990,
+      "fraction": 0.3393939393939394,
+      "ci_lo": 0.26451242120875046,
+      "ci_hi": 0.4310390439700784,
+      "replicate_pair_count_median": 406.0,
+      "replicate_pair_count_p5": 300.0,
+      "replicate_pair_count_p95": 496.0
+    },
+    "upper_side": {
+      "count": 340,
+      "n": 990,
+      "fraction": 0.3434343434343434,
+      "ci_lo": 0.2684729064039409,
+      "ci_hi": 0.4338465608465608,
+      "replicate_pair_count_median": 406.0,
+      "replicate_pair_count_p5": 300.0,
+      "replicate_pair_count_p95": 496.0
+    },
+    "lower_side": {
+      "count": 986,
+      "n": 990,
+      "fraction": 0.9959595959595959,
+      "ci_lo": 0.9913978494623656,
+      "ci_hi": 1.0,
+      "replicate_pair_count_median": 406.0,
+      "replicate_pair_count_p5": 300.0,
+      "replicate_pair_count_p95": 496.0
+    },
+    "median_tv": {
+      "n": 990,
+      "median_tv": 0.580531548936329,
+      "ci_lo": 0.5205287868445039,
+      "ci_hi": 0.6434510172792044,
+      "replicate_pair_count_median": 406.0,
+      "replicate_pair_count_p5": 300.0,
+      "replicate_pair_count_p95": 496.0
+    }
+  },
+  "width_ratio": {
+    "joint_gate": {
+      "pair_ci_width": 0.058585858585858575,
+      "cluster_ci_width": 0.16652662276132796,
+      "ratio": 2.8424371816157707
+    },
+    "upper_side": {
+      "pair_ci_width": 0.058585858585858575,
+      "cluster_ci_width": 0.16537365444261992,
+      "ratio": 2.8227572051412717
+    },
+    "lower_side": {
+      "pair_ci_width": 0.007070707070707116,
+      "cluster_ci_width": 0.008602150537634357,
+      "ratio": 1.2165898617511368
+    },
+    "median_tv": {
+      "pair_ci_width": 0.046316767675597115,
+      "cluster_ci_width": 0.12292223043470052,
+      "ratio": 2.6539466505013576
+    }
+  },
+  "dependency_note": "The 990 pairs are the complete graph on 45 services (degree 44 each). Pairs sharing a service are correlated, so the pair bootstrap is anti-conservative. The cluster bootstrap is the defensible interval.",
+  "guards": {
+    "row_count_990": true,
+    "service_count_45": true,
+    "complete_graph_on_services": true,
+    "eps_lo_le_eps_hi_violations": 0,
+    "three_way_count_cross_check": "PASS: observed counts from q1_lower_side_full_n rows match required counts joint=336, upper=340, lower=986; all rows satisfy joint <= upper and joint <= lower.",
+    "expected_counts": {
+      "joint_gate": 336,
+      "upper_side": 340,
+      "lower_side": 986
+    },
+    "observed_counts": {
+      "joint_gate": 336,
+      "upper_side": 340,
+      "lower_side": 986
+    }
+  },
+  "estimability_notes": [
+    {
+      "quantity": "per-M median tv CI at M=1",
+      "estimable": true,
+      "reason": "All 990 k=5, M=1 rows contain upper_recomputed.tv_hat."
+    },
+    {
+      "quantity": "per-M median tv CI at M=2",
+      "estimable": false,
+      "reason": "Not estimable from the available per-pair rows: q1_lower_side_full_n.json contains 990 rows only for k=5, M=1. x1_headline_table.json has aggregate summaries but no per-pair tv_hat values for this M."
+    },
+    {
+      "quantity": "per-M median tv CI at M=4",
+      "estimable": false,
+      "reason": "Not estimable from the available per-pair rows: q1_lower_side_full_n.json contains 990 rows only for k=5, M=1. x1_headline_table.json has aggregate summaries but no per-pair tv_hat values for this M."
+    },
+    {
+      "quantity": "per-M median tv CI at M=8",
+      "estimable": false,
+      "reason": "Not estimable from the available per-pair rows: q1_lower_side_full_n.json contains 990 rows only for k=5, M=1. x1_headline_table.json has aggregate summaries but no per-pair tv_hat values for this M."
+    },
+    {
+      "quantity": "per-M median tv CI at M=16",
+      "estimable": false,
+      "reason": "Not estimable from the available per-pair rows: q1_lower_side_full_n.json contains 990 rows only for k=5, M=1. x1_headline_table.json has aggregate summaries but no per-pair tv_hat values for this M."
+    },
+    {
+      "quantity": "joint-gate CI at k=5, M=1",
+      "estimable": true,
+      "reason": "All 990 rows contain eps_lo and upper_recomputed.eps_hi."
+    },
+    {
+      "quantity": "upper-side CI at k=5, M=1",
+      "estimable": true,
+      "reason": "All 990 rows contain upper_recomputed.eps_hi."
+    },
+    {
+      "quantity": "lower-side CI at k=5, M=1",
+      "estimable": true,
+      "reason": "All 990 rows contain eps_lo."
+    }
+  ]
+}
