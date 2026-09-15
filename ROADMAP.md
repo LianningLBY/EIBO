@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 19:45 UTC | **Round 3 ACTIVE** (re-review accepted after Round 2 reconciled to failed); manifest debt-free; all reviewer items closed.
+> Last updated: 2026-09-15 20:00 UTC | Round 3 report in: weak reject (~3/5), scientific core intact, 22 items all text/table/layout. **My earlier appendix-order conclusion was WRONG (see corrected bullet).**
 
 ## Core direction
 
@@ -17,12 +17,20 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 - **Research phase COMPLETE.** All three claims fully backed; evidentiary coverage 100%. (The coverage tool labels `conclusion: negative` as "failed", so it under-reports C1/C3 — the negatives ARE the evidence; noted, not "fixed" in the tool.)
 - **Paper in FORMAL REVIEW — Round 3 active** (`review_id 06cc5857`). Sequence: Round 1 returned reject (resubmit-worthy) with 23 items, all fixed; Round 2 then stalled at cross-sharing with no report and reconciled to **failed**, which cleared the content de-duplication that had blocked resubmission; the owner-requested re-review was submitted from the unchanged manuscript and accepted as a new round. Round 1's 23 items are all fixed and recorded resolved. Deliverables: `docs/paper/main.tex` + `main.pdf`, **18 pages with the body on 1–13 and References from page 14** (13-page limit satisfied — measured from RENDERED pages, not the compile log, which cannot show where the body ends).
 - **Pre-submission verification (all mine, not relayed):** 3 pdflatex passes + bibtex exit 0, 53 bibitems, 0 undefined, 0 overfull; **visual review 18/18 pages passed** (receipt bound to sha256 `5edd8928`); headline numbers independently re-derived — C1 336/990 with cluster CI [26.5%, 43.1%], X11 523/3321, chain-rule per-position truth `0.3389191441548814`; every page rendered and read.
-- **Two FALSE constraints rejected after checking the official CFP**: there is **no abstract word limit** (so the divisibility clause and detector paragraph were NOT cut), and the **appendices' placement vs references is unspecified** (so the order was NOT changed, which would have re-broken the page limit). Camera-ready ceiling is 20 pages incl. appendices; we are at 18.
+- **Two CFP checks — one holds, one I got WRONG (corrected 2026-09-15):** ✅ there is genuinely **no abstract word limit**, so not cutting was right. ❌ **I claimed the appendix/reference order is unspecified — that was wrong.** USENIX's artifact policy states the ethics and open-science sections must appear **immediately preceding the reference section**, each within one page; the reviewers are right and Round 3 raises it as a possible desk-rejection (W3). The fix is to move both mandatory appendices before the references and compress each to ≤1 page. Camera-ready ceiling is 20 pages incl. appendices; we are at 18.
 - **Claim boundaries honoured in the prose**: X9_E's identifier finding scoped to `tv_hat` only (D087); X11's joint gate discloses its per-side sample sizes and the **conservative** bias direction (D093); X8's DPI check is a smoke-test, never cited as theorem verification (D091); C3 reframed as a methods/limits finding (D046); novelty stated as a knowledge claim ("to our knowledge"), never "exhaustive search".
 - **Provenance discipline is load-bearing**: manifest `content_sha256` on all live entries; runner self-hash captured at import and recorded *in the artifact*; figures regenerate from manifest-resolved artifacts via committed generators; the flat-vs-nested two-tree layout resolved via `resolve_existing_path` (flat first).
 - **Manifest verified clean and debt-free (D114)**: **87 entries · 72 with-hash · 16 path-null · 0 unresolved · 0 hash mismatches**, exactly one live entry per artifact (independently recounted by the Reviewer). The seven resolving entries lacking a hash are backfilled; five `agentic-figure` run-scratch records are retired (that integration registered its run directory where `paper-visualization` and `experiment-analysis` correctly registered deliverables); and the last D070 violation — a retirement note whose path still pointed at the live file, **my own error** — is closed.
 - **Figure pipeline verified (D115)**: all five figures byte-identical across their three copies; the fig4 non-monotone caption and the fig2 340-vs-336 annotation are fixed **at generator source**, not patched into the PDF; every fig data series maps to a manifest-hashed artifact whose sha matches; the `/tmp` CSV location is a cache since `build_data.py` regenerates from manifest-resolved artifacts; the renderer aborts on bounding-box collisions.
 - **Diagnostic worth keeping**: manifest paths are rooted at `/efs/workspace`, not the project dir, so a project-rooted resolution probe reports dozens of false "missing" — a probe defect, not a content defect; I made that error three times before it was caught.
+
+## Review retrospection — Round 3 (2026-09-15) · weak reject, panel ≈3/5
+
+**Material fact:** the Round 3 PDF was byte-identical to Round 2's, because **Round 2's report was never delivered** (platform fault) so nothing was revised between rounds; every Round 2 finding therefore reproduces by construction. This is the first Round 3 report seen.
+
+**Holistic pass — the core is intact and the remainder is one closed list.** All three reviewers confirm the scientific core: Reviewer 1 independently rederived Lemma 1's full chain; the nominal-level reframe, the pairwise repositioning, the cluster bootstrap and §5.1's voluntary self-downgrade all hold. **Every remaining item is a text edit, a table recomputation, or a layout move — no new experiments.** So the systemic issue is not scientific: it is that a revision's remaining work is visible, enumerated, and unclosed.
+
+**Two desk-visible (W1, W2) · one layout violation (W3) · one item that moves published numbers (W4) · one self-contradicting table row (W5) · one missing characterisation of the title object (W6).** Plan sent to the independent Reviewer before dispatch; W4's radius legitimacy and W6's analysis-vs-writing classification are the two judgments held for its check.
 
 ## Review retrospection — Round 1 (2026-09-15)
 
@@ -132,6 +140,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D117 | 2026-09-15 | D117: Round 3 weak-reject — scientific core intact | — |
 | D116 | 2026-09-15 | D116: re-review submitted and accepted — Round 2's | — |
 | D115 | 2026-09-15 | D115: all independent-reviewer tracking items clos | — |
 | D114 | 2026-09-15 | D114: manifest debt closed (87 entries, 0 unresolv | — |
@@ -141,5 +150,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D110 | 2026-09-15 | D110: Item 2's cited source surface was wrong (no  | — |
 | D109 | 2026-09-15 | D109: dispatch pre-staging (higher-k per-pair rows | X1, X12_k5 |
 | D108 | 2026-09-15 | D108: re-review attempted on owner instruction; pl | — |
-| D107 | 2026-09-15 | D107: Round 2 submitted and active — the four reje | — |
 
