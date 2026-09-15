@@ -13,7 +13,7 @@ import numpy as np
 PROJECT = Path(__file__).resolve().parents[1]
 PRIMARY_PATH = PROJECT / "artifacts/_project/data/q1_lower_side_full_n.json"
 QUIC_PATH = PROJECT / "artifacts/X11/data/x11_full_bracket.json"
-OUTPUT_PATH = PROJECT / "artifacts/_project/data/ci_cross_corpus.json"
+OUTPUT_PATH = PROJECT / "artifacts/_project/data/ci_cross_corpus_pairbootstrap.json"
 SEED = 20260915
 REPLICATES = 2000
 

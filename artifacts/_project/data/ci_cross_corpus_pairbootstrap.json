@@ -1,0 +1,65 @@
+{
+  "method": "nonparametric bootstrap, percentile CI",
+  "resampling_unit": "service pairs",
+  "seed": 20260915,
+  "replicates": 2000,
+  "runner_sha256": "f36980b6965d29f307aa1970042a6ffba08700b76f94d987da0b2679c59288c4",
+  "lower_side_ci": {
+    "primary": {
+      "fraction": 0.9959595959595959,
+      "ci_lo": 0.9919191919191919,
+      "ci_hi": 0.998989898989899,
+      "n_pairs": 990
+    },
+    "quic22": {
+      "fraction": 0.9966877446552244,
+      "ci_lo": 0.994579945799458,
+      "ci_hi": 0.9984944293887383,
+      "n_pairs": 3321
+    }
+  },
+  "stratum_matched_gap_ci": [
+    {
+      "threshold": "all",
+      "n_quic22": 3321,
+      "n_primary": 990,
+      "gap": -0.18263940215159727,
+      "ci_lo": -0.21447469272672523,
+      "ci_hi": -0.15149756371301087
+    },
+    {
+      "threshold": ">=13049",
+      "n_quic22": 861,
+      "n_primary": 496,
+      "gap": -0.1546776066839009,
+      "ci_lo": -0.20644335871642128,
+      "ci_hi": -0.1055431254917388
+    },
+    {
+      "threshold": ">=20000",
+      "n_quic22": 528,
+      "n_primary": 325,
+      "gap": -0.09318764568764565,
+      "ci_lo": -0.15875291375291378,
+      "ci_hi": -0.026165209790209983
+    },
+    {
+      "threshold": ">=40000",
+      "n_quic22": 351,
+      "n_primary": 276,
+      "gap": -0.13046575003096744,
+      "ci_lo": -0.20320822494735535,
+      "ci_hi": -0.05514523721045467
+    },
+    {
+      "threshold": ">=80000",
+      "n_quic22": 190,
+      "n_primary": 210,
+      "gap": -0.15438596491228074,
+      "ci_lo": -0.24763784461152882,
+      "ci_hi": -0.06239974937343365
+    }
+  ],
+  "primary_eps_hi_source": "q1_lower_side_full_n.json rows[*].upper_recomputed.eps_hi",
+  "limitations": "None for the requested quantities; primary eps_hi was present in upper_recomputed."
+}

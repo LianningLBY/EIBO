@@ -1,0 +1,103 @@
+{
+  "method": "nonparametric cluster bootstrap over services, percentile CI",
+  "confidence_level": 0.95,
+  "alpha": 0.05,
+  "percentile_levels": [
+    2.5,
+    97.5
+  ],
+  "alpha_split_convention": "two-sided percentile interval: 0.025 lower and 0.025 upper tail",
+  "seed": 20260915,
+  "replicates": 2000,
+  "runner_sha256": "e25b82fe62477b8fa332bd072fa9b9649e0650d3fcb2c88e30067fa523019538",
+  "degree_check": {
+    "primary": {
+      "n_services": 45,
+      "n_pairs": 990,
+      "expected": "C(45,2)",
+      "degree_distribution": {
+        "44": 45
+      }
+    },
+    "quic22": {
+      "n_services": 82,
+      "n_pairs": 3321,
+      "expected": "C(82,2)",
+      "degree_distribution": {
+        "81": 82
+      }
+    }
+  },
+  "lower_side_ci_cluster": {
+    "primary": {
+      "fraction": 0.9959595959595959,
+      "ci_lo": 0.9913978494623656,
+      "ci_hi": 1.0,
+      "replicate_pair_count_median": 406.0
+    },
+    "quic22": {
+      "fraction": 0.9966877446552244,
+      "ci_lo": 0.9930118798043326,
+      "ci_hi": 0.9992458521870287,
+      "replicate_pair_count_median": 1326.0
+    }
+  },
+  "stratum_matched_gap_ci_cluster": [
+    {
+      "threshold": "all",
+      "gap": -0.18263940215159727,
+      "ci_lo": -0.27440293961941287,
+      "ci_hi": -0.09998362922891227,
+      "spans_zero": false
+    },
+    {
+      "threshold": ">=13049",
+      "gap": -0.1546776066839009,
+      "ci_lo": -0.2837768440709617,
+      "ci_hi": -0.02890873015873018,
+      "spans_zero": false
+    },
+    {
+      "threshold": ">=20000",
+      "gap": -0.09318764568764565,
+      "ci_lo": -0.24204364263187791,
+      "ci_hi": 0.05151414960617065,
+      "spans_zero": true
+    },
+    {
+      "threshold": ">=40000",
+      "gap": -0.13046575003096744,
+      "ci_lo": -0.30067693744164337,
+      "ci_hi": 0.04289979628214912,
+      "spans_zero": true
+    },
+    {
+      "threshold": ">=80000",
+      "gap": -0.15438596491228074,
+      "ci_lo": -0.3361249167499168,
+      "ci_hi": 0.02929320679320676,
+      "spans_zero": true
+    }
+  ],
+  "pair_vs_cluster_comparison": {
+    "lower_side": {
+      "primary": {
+        "pair_width": 0.007070707070707116,
+        "cluster_width": 0.008602150537634357,
+        "ratio": 1.2165898617511368
+      },
+      "quic22": {
+        "pair_width": 0.003914483589280371,
+        "cluster_width": 0.006233972382696074,
+        "ratio": 1.592540175610268
+      }
+    },
+    "gap_all": {
+      "pair_width": 0.06297712901371436,
+      "cluster_width": 0.1744193103905006,
+      "ratio": 2.7695659221384608
+    },
+    "note": "source of the pair-bootstrap values for comparison: ci_cross_corpus_pairbootstrap.json (the pair construction is retained under its own name; this file, ci_cross_corpus.json, holds the authoritative cluster construction)"
+  },
+  "dependency_note": "Both pair sets are complete graphs on their service sets, so pairs sharing a service are correlated. The pair bootstrap is anti-conservative; the cluster bootstrap is the defensible interval."
+}

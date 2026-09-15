@@ -13,8 +13,8 @@ import numpy as np
 PROJECT = Path(__file__).resolve().parents[1]
 PRIMARY_PATH = PROJECT / "artifacts/_project/data/q1_lower_side_full_n.json"
 QUIC_PATH = PROJECT / "artifacts/X11/data/x11_full_bracket.json"
-PAIR_CI_PATH = PROJECT / "artifacts/_project/data/ci_cross_corpus.json"
-OUTPUT_PATH = PROJECT / "artifacts/_project/data/ci_cross_corpus_75134b.json"
+PAIR_CI_PATH = PROJECT / "artifacts/_project/data/ci_cross_corpus_pairbootstrap.json"
+OUTPUT_PATH = PROJECT / "artifacts/_project/data/ci_cross_corpus.json"
 
 SEED = 20260915
 REPLICATES = 2000
@@ -317,7 +317,7 @@ def main() -> None:
         "pair_vs_cluster_comparison": {
             "lower_side": lower_widths,
             "gap_all": gap_cluster_widths["gap_all"],
-            "note": "source of the pair-bootstrap values for comparison: ci_cross_corpus.json",
+            "note": "source of the pair-bootstrap values for comparison: ci_cross_corpus_pairbootstrap.json",
         },
         "dependency_note": (
             "Both pair sets are complete graphs on their service sets, so pairs "
