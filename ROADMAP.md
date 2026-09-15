@@ -4,7 +4,7 @@
 
 ## Core direction
 
-Certification-grade ε-indistinguishability brackets for open-set encrypted-traffic recognition: for each service pair on real QUIC wire data, a two-sided interval on the total-variation distance whose **upper side is a finite-sample strict bound** and **lower side a finite-sample high-probability (nominal 1-alpha) bound of a different construction** — the two sides differ in construction and tightness, not in whether proof is possible. Target: USENIX Security 2027 Cycle 2 (deadline 2027-01-26). See `paper_framing.md`.
+Certification-grade ε-indistinguishability brackets for open-set encrypted-traffic recognition: for each service pair on real QUIC wire data, a two-sided interval on the total-variation distance whose **upper side is a finite-sample strict bound** and **lower side a high-probability bound at a NOMINAL level, with an asymptotically-derived (iterated-log) confidence constant and a conservative finite patch only in the degenerate small-effective-m regime** — the two sides differ in construction and tightness, not in whether proof is possible. Target: USENIX Security 2027 Cycle 2 (deadline 2027-01-26). See `paper_framing.md`.
 
 ## The three claims
 
@@ -107,6 +107,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D105 | 2026-09-15 | D105: retract my "lower side is finite-sample" ins | — |
 | D104 | 2026-09-15 | D104: W10 cluster bootstrap confirmed correct — re | — |
 | D103 | 2026-09-15 | D103: cross-corpus gap is non-monotone (correct th | — |
 | D102 | 2026-09-15 | D102: bootstrap must resample services, not pairs  | — |
@@ -116,5 +117,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D098 | 2026-09-15 | D098: do not reshape registry keys to satisfy a va | X1, X11 |
 | D097 | 2026-09-15 | D097: figures verified (fig3 synthetic data fixed, | X3 |
 | D096 | 2026-09-15 | D096: do not force X9_C to terminal; accept the st | X9_C |
-| D095 | 2026-09-14 | D095: the 5 unlinked experiments split into MVP-er | X3_A, X3_B, E3, E7, E10 |
 
