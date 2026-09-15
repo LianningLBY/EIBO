@@ -1,6 +1,6 @@
 meta:
-  last_updated: '2026-09-13T12:53:51.508Z'
-  total_papers: 20
+  last_updated: '2026-09-15T02:06:54.971Z'
+  total_papers: 42
   verification_level_note: 'verification_level: abstract | fulltext | unverified | unknown. Restored because C001 requires knowing whether a citation was checked at theorem level rather than abstract level; the boolean `verified` cannot express that. NB: the managed writer (core.tools.literature.add_to_literature_map) normalises entries to its own whitelist and will DROP verification_level and notes — re-add them after any writer-based update.'
 categories:
 - dataset
@@ -473,3 +473,513 @@ papers:
 
       Direct competitor, and the only one never fetched — its absence is load-bearing for "measured bracket is novel". A targeted title search (2026-09-13) surfaced the record: Shamsimukhametov, Kurapov, Liubogoshchev, Khorov, Journal of Communications Technology and Electronics 68(12):1523-1529, 2023, DOI 10.1134/S1064226923120173, from the Kharkevich Institute / MIPT group. The same group published "Is Encrypted ClientHello a Challenge for Traffic Classification?" (IEEE Access 2022) and related ECH classification work whose reported object is classifier accuracy (hRFTC / hC4.5 F-score), not a measured two-sided TV bracket. On that evidence this does not meet the category-4 definition, so the novelty boundary holds. CAVEAT: the paper itself was NOT fetched — this rests on the record plus the group''s adjacent work, so the verdict is metadata-level, and the entry stays verified=false. Fetch the full text before the novelty sentence is locked.'
     verification_level: unverified
+  lin2022etbert:
+    title: 'ET-BERT: A Contextualized Datagram Representation with Pre-training Transformers for Encrypted Traffic Classification'
+    authors:
+    - Xinjie Lin
+    - Gang Xiong
+    - Gaopeng Gou
+    - Zhen Li
+    - Junzheng Shi
+    - Jing Yu
+    year: 2022
+    venue: Proceedings of the ACM Web Conference (WWW), 2022
+    url: https://arxiv.org/abs/2202.06335
+    doi: 10.1145/3485447.3512217
+    bibtex_key: lin2022etbert
+    category: positioning-competitor
+    role: background
+    relevance: Canonical transformer pretraining baseline for encrypted traffic classification. EIBO uses it to position detector-panel representation learning baselines and to separate empirical classifier performance from pairwise TV brackets.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: codex-literature-update-2026-09-15
+    added_at: '2026-09-15T01:46:27.909Z'
+    arxiv_id: '2202.06335'
+    notes: The arXiv primary record was checked for title, author list, WWW 2022 venue, DOI, and pretraining-transformer framing. It reports classifier performance, not a two-sided TV/indistinguishability bracket or information-theoretic error floor.
+    verification_level: verified-abstract
+  zhao2023yatc:
+    title: 'Yet Another Traffic Classifier: A Masked Autoencoder Based Traffic Transformer with Multi-Level Flow Representation'
+    authors:
+    - Ruijie Zhao
+    - Mingwei Zhan
+    - Xianwen Deng
+    - Yanhao Wang
+    - Yijun Wang
+    - Guan Gui
+    - Zhi Xue
+    year: 2023
+    venue: Proceedings of the AAAI Conference on Artificial Intelligence, 2023
+    url: https://ojs.aaai.org/index.php/AAAI/article/view/25674
+    doi: 10.1609/aaai.v37i4.25674
+    bibtex_key: zhao2023yatc
+    category: positioning-competitor
+    role: background
+    relevance: Masked-autoencoder traffic transformer with packet-level and flow-level attention over multi-level flow representations. EIBO uses it as a modern deep representation baseline for detector-panel construction.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: codex-literature-update-2026-09-15
+    added_at: '2026-09-15T01:46:27.909Z'
+    notes: The AAAI primary article page was checked for title, DOI, authors, and the masked-autoencoder traffic-transformer contribution. It reports representation/classifier performance, not a two-sided TV/indistinguishability bracket or information-theoretic error floor.
+    verification_level: verified-abstract
+  meng2023netgpt:
+    title: 'NetGPT: Generative Pretrained Transformer for Network Traffic'
+    authors:
+    - Xuying Meng
+    - Chungang Lin
+    - Yequan Wang
+    - Yujun Zhang
+    year: 2023
+    venue: arXiv, 2023
+    url: https://arxiv.org/abs/2304.09513
+    doi: 10.48550/arXiv.2304.09513
+    bibtex_key: meng2023netgpt
+    category: positioning-competitor
+    role: background
+    relevance: Network-traffic foundation-model proposal using generative pretraining for traffic understanding and generation, including encrypted-software datasets. EIBO uses it to position generic traffic pretraining against certification-grade per-pair brackets.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: codex-literature-update-2026-09-15
+    added_at: '2026-09-15T01:46:27.909Z'
+    arxiv_id: '2304.09513'
+    notes: The arXiv primary record was checked for title, author list, and NetGPT generative-pretraining framing. It is a foundation-model/representation baseline, not a two-sided TV/indistinguishability bracket or information-theoretic error-floor measurement.
+    verification_level: verified-abstract
+  cui2025trafficllm:
+    title: 'TrafficLLM: Enhancing Large Language Models for Network Traffic Analysis with Generic Traffic Representation'
+    authors:
+    - Tianyu Cui
+    - Xinjie Lin
+    - Sijia Li
+    - Miao Chen
+    - Qilei Yin
+    - Qi Li
+    - Ke Xu
+    year: 2025
+    venue: arXiv, 2025
+    url: https://arxiv.org/abs/2504.04222
+    doi: 10.48550/arXiv.2504.04222
+    bibtex_key: cui2025trafficllm
+    category: positioning-competitor
+    role: background
+    relevance: Traffic-domain LLM/foundation-model approach for heterogeneous raw traffic representation, detection, generation, and unseen-traffic generalization. EIBO uses it as current positioning for foundation-model baselines.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: codex-literature-update-2026-09-15
+    added_at: '2026-09-15T01:46:27.909Z'
+    arxiv_id: '2504.04222'
+    notes: The arXiv primary record was checked for title, author list, 2025 date, and generic traffic representation claims. It evaluates traffic-analysis tasks and unseen-traffic generalization, not a two-sided TV/indistinguishability bracket or information-theoretic error floor.
+    verification_level: verified-abstract
+  hu2022opencbd:
+    title: 'OpenCBD: A Network-Encrypted Unknown Traffic Identification Scheme Based on Open-Set Recognition'
+    authors:
+    - Xinyi Hu
+    - Chunxiang Gu
+    - Yihang Chen
+    - Xi Chen
+    - Fushan Wei
+    year: 2022
+    venue: Wireless Communications and Mobile Computing, 2022
+    url: https://onlinelibrary.wiley.com/doi/10.1155/2022/1746373
+    doi: 10.1155/2022/1746373
+    bibtex_key: hu2022opencbd
+    category: open-set
+    role: background
+    relevance: Encrypted-traffic open-set recognition method for identifying unknown traffic while classifying known traffic. EIBO uses it as background for unknown-service rejection without treating detector rejection as a certification bound.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: codex-literature-update-2026-09-15
+    added_at: '2026-09-15T01:46:27.909Z'
+    notes: The Wiley primary page was checked for title, authors, DOI, 2022 venue, and abstract-level open-set encrypted unknown traffic identification claim. It reports detector/classifier performance, not a two-sided TV/indistinguishability bracket or information-theoretic error floor.
+    verification_level: verified-abstract
+  li2023facing:
+    title: 'Facing Unknown: Open-World Encrypted Traffic Classification Based on Contrastive Pre-Training'
+    authors:
+    - Xiang Li
+    - Beibei Feng
+    - Tianning Zang
+    - Shuyuan Zhao
+    - Jingrun Ma
+    year: 2023
+    venue: IEEE ISCC, 2023
+    url: https://arxiv.org/abs/2308.16861
+    doi: 10.48550/arXiv.2308.16861
+    bibtex_key: li2023facing
+    category: open-set
+    role: background
+    relevance: Open-world encrypted traffic classifier using contrastive pretraining and an unknown Softmax node. EIBO uses it as open-set detector context for known/unknown service separation.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: codex-literature-update-2026-09-15
+    added_at: '2026-09-15T01:46:27.909Z'
+    arxiv_id: '2308.16861'
+    notes: The arXiv primary record was checked for title, authors, ISCC 2023 note, contrastive pretraining, and unknown Softmax node. It reports open-world classifier behavior, not a two-sided TV/indistinguishability bracket or information-theoretic error floor.
+    verification_level: verified-abstract
+  wickramasinghe2025sok:
+    title: 'SoK: Decoding the Enigma of Encrypted Network Traffic Classifiers'
+    authors:
+    - Nimesha Wickramasinghe
+    - Arash Shaghaghi
+    - Gene Tsudik
+    - Sanjay Jha
+    year: 2025
+    venue: IEEE Symposium on Security and Privacy, 2025
+    url: https://arxiv.org/abs/2503.20093
+    doi: 10.1109/SP61157.2025.00165
+    bibtex_key: wickramasinghe2025sok
+    category: hygiene-shortcut
+    role: background
+    relevance: Systematizes encrypted traffic classifier assumptions, benchmark choices, outdated datasets, unencrypted-traffic leakage, and feature-occlusion evidence. EIBO uses it to motivate hygiene gates and shortcut diagnostics.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: codex-literature-update-2026-09-15
+    added_at: '2026-09-15T01:46:27.909Z'
+    arxiv_id: '2503.20093'
+    notes: The arXiv primary record was checked for title, author list, IEEE S&P 2025 venue, DOI, and systematic critique scope. It is a hygiene/benchmarking critique; it does not measure a two-sided TV/indistinguishability bracket or information-theoretic error floor.
+    verification_level: verified-abstract
+  jerabek2025simple:
+    title: 'When Simple Model Just Works: Is Network Traffic Classification in Crisis?'
+    authors:
+    - Kamil Jerabek
+    - Jan Luxemburk
+    - Richard Plny
+    - Josef Koumar
+    - Jaroslav Pesek
+    - Karel Hynek
+    year: 2025
+    venue: arXiv, 2025
+    url: https://arxiv.org/abs/2506.08655
+    doi: 10.48550/arXiv.2506.08655
+    bibtex_key: jerabek2025simple
+    category: hygiene-shortcut
+    role: background
+    relevance: Shows that simple k-NN over packet-sequence metadata can match complex traffic classifiers and identifies redundant identical packet sequences across common train/test splits. EIBO uses it to motivate split hygiene and duplicate/conflict audits.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: codex-literature-update-2026-09-15
+    added_at: '2026-09-15T01:46:27.909Z'
+    arxiv_id: '2506.08655'
+    notes: The arXiv primary record was checked for title, authors, 2025 date, simple-model finding, and duplicate-sequence split issue. It is a data-hygiene/evaluation critique; it does not measure a two-sided TV/indistinguishability bracket or information-theoretic error floor.
+    verification_level: verified-abstract
+  wei2011dkwtwo:
+    title: Dvoretzky–Kiefer–Wolfowitz Inequalities for the Two-Sample Case
+    authors:
+    - Fan Wei
+    - R. M. Dudley
+    year: 2011
+    venue: arXiv, 2011
+    url: https://arxiv.org/abs/1107.5356
+    doi: ''
+    bibtex_key: wei2011dkwtwo
+    category: tv-estimation
+    role: method-component
+    relevance: Analyzes finite-sample Dvoretzky–Kiefer–Wolfowitz–Massart inequalities for two-sample empirical CDFs, including the equal-sample case and finite exceptions. EIBO uses it as a two-sample confidence-radius precedent and keeps its stated finite-sample scope explicit.
+    abstract: Studies the two-sample analogue of the Dvoretzky–Kiefer–Wolfowitz inequality and characterizes when the sharp constant holds in finite samples.
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research:tv-estimation
+    added_at: '2026-09-15T01:54:33.439Z'
+    arxiv_id: '1107.5356'
+    notes: 'Primary arXiv PDF inspected at theorem level: Theorem 1(c) proves the sharp two-sample DKWM tail P(KS_{n,n} >= M) <= 2 exp(-2 M^2) for n >= 458, while Theorem 1(d) records finite-sample failures below that threshold. This is a finite-sample result with explicit scope, not an asymptotic certificate.'
+    verification_level: verified-fulltext
+  chan2013closeness:
+    title: Optimal Algorithms for Testing Closeness of Discrete Distributions
+    authors:
+    - Siu-On Chan
+    - Ilias Diakonikolas
+    - Gregory Valiant
+    - Paul Valiant
+    year: 2013
+    venue: arXiv, 2013
+    url: https://arxiv.org/abs/1308.3946
+    doi: ''
+    bibtex_key: chan2013closeness
+    category: lower-bound-method
+    role: foundation
+    relevance: Gives matching information-theoretic upper and lower sample-complexity bounds for two-sample closeness testing in discrete distributions under L1/TV separation. EIBO uses it as the minimax testing baseline for finite-alphabet alternatives.
+    abstract: Establishes an optimal closeness tester for two discrete distributions with sample complexity Theta(max{n^(2/3)/epsilon^(4/3), n^(1/2)/epsilon^2}) and matching lower bounds.
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research:tv-estimation
+    added_at: '2026-09-15T01:54:33.439Z'
+    arxiv_id: '1308.3946'
+    notes: 'Primary arXiv PDF inspected at theorem level: Theorem 1 gives an L1/TV closeness tester with success probability at least 2/3 using O(max{n^(2/3)/epsilon^(4/3), n^(1/2)/epsilon^2}) samples and states a matching information-theoretic lower bound. This is a constant-confidence testing result, not a confidence interval.'
+    verification_level: verified-fulltext
+  han2015l1distribution:
+    title: Minimax Estimation of Discrete Distributions under ℓ1 Loss
+    authors:
+    - Yanjun Han
+    - Jiantao Jiao
+    - Tsachy Weissman
+    year: 2015
+    venue: IEEE Transactions on Information Theory, 2015
+    url: https://arxiv.org/abs/1411.1467
+    doi: 10.1109/TIT.2015.2453312
+    bibtex_key: han2015l1distribution
+    category: tv-estimation
+    role: foundation
+    relevance: Provides tight risk bounds for discrete distribution estimation under L1 loss, which is twice total variation, including a non-asymptotic minimax lower bound and high-dimensional rates. EIBO uses it to contextualize plug-in estimation error and the finite-alphabet regime.
+    abstract: Studies maximum and minimax L1 risk for discrete distribution estimation across fixed-support, high-dimensional, and bounded-entropy regimes, including non-asymptotic lower bounds.
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research:tv-estimation
+    added_at: '2026-09-15T01:54:33.439Z'
+    arxiv_id: '1411.1467'
+    notes: 'Primary arXiv PDF inspected at theorem level: Theorem 1 gives the empirical-distribution worst-case L1 risk upper bound sqrt((S-1)/n), and Theorem 2 gives a non-asymptotic minimax lower bound. Since L1 equals twice TV, this supports finite-alphabet plug-in calibration; the paper also contains asymptotic regimes, which are not treated as finite-sample certificates.'
+    verification_level: verified-fulltext
+  jiao2018l1distance:
+    title: Minimax Estimation of the L1 Distance
+    authors:
+    - Jiantao Jiao
+    - Yanjun Han
+    - Tsachy Weissman
+    year: 2018
+    venue: IEEE Transactions on Information Theory, 2018
+    url: https://arxiv.org/abs/1705.00807
+    doi: 10.1109/TIT.2018.2846245
+    bibtex_key: jiao2018l1distance
+    category: tv-estimation
+    role: method-component
+    relevance: Analyzes nonasymptotic minimax estimation of the L1 distance between two discrete distributions, with known- and unknown-reference settings and explicit MSE upper/lower bounds. EIBO uses it as the direct discrete TV-estimation counterpart to classifier-based lower bounds.
+    abstract: Constructs minimax rate-optimal estimators for the L1 distance between two discrete probability measures and characterizes the effective sample-size enlargement phenomenon.
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research:tv-estimation
+    added_at: '2026-09-15T01:54:33.439Z'
+    arxiv_id: '1705.00807'
+    notes: 'Primary arXiv PDF inspected at theorem level: Theorem 1 gives an explicit non-asymptotic MSE upper bound for the plug-in L1-distance estimator with known Q and a matching worst-case lower bound, while later theorems construct minimax rate-optimal estimators. L1 is twice TV; these are estimation-risk statements, not exact confidence coverage statements.'
+    verification_level: verified-fulltext
+  diakonikolas2020highprob:
+    title: Optimal Testing of Discrete Distributions with High Probability
+    authors:
+    - Ilias Diakonikolas
+    - Themis Gouleakis
+    - Daniel M. Kane
+    - John Peebles
+    - Eric Price
+    year: 2020
+    venue: arXiv, 2020
+    url: https://arxiv.org/abs/2009.06540
+    doi: ''
+    bibtex_key: diakonikolas2020highprob
+    category: lower-bound-method
+    role: method-component
+    relevance: Characterizes high-confidence sample complexity for discrete closeness testing as a function of epsilon and delta, with matching information-theoretic lower bounds. EIBO uses it to distinguish fixed-confidence testing results from explicit high-probability certification language.
+    abstract: Studies distribution testing in the high-probability regime and gives sample-optimal closeness and independence testers with matching lower bounds, including dependence on the failure probability.
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research:tv-estimation
+    added_at: '2026-09-15T01:54:33.439Z'
+    arxiv_id: '2009.06540'
+    notes: 'Primary arXiv PDF inspected at theorem level: Theorem 1.2 gives a computationally efficient (epsilon, delta)-closeness tester with sample complexity Theta(n^(2/3) log^(1/3)(1/delta)/epsilon^(4/3) + (n^(1/2) log^(1/2)(1/delta) + log(1/delta))/epsilon^2) and a matching information-theoretic lower bound. The confidence dependence is finite-sample testing, distinct from asymptotic lower-bound estimators.'
+    verification_level: verified-fulltext
+  reeve2024dkwmassart:
+    title: A short proof of the Dvoretzky–Kiefer–Wolfowitz–Massart inequality
+    authors:
+    - Henry W. J. Reeve
+    year: 2024
+    venue: arXiv, 2024
+    url: https://arxiv.org/abs/2403.16651
+    doi: ''
+    bibtex_key: reeve2024dkwmassart
+    category: tv-estimation
+    role: method-component
+    relevance: Provides a finite-sample one-sided DKW–Massart bound that is uniform over intervals and adapts to the population CDF on the interval. EIBO uses it as a modern primary-source check on the direction and finite-sample nature of empirical-distribution confidence radii.
+    abstract: Proves a one-sided local Dvoretzky–Kiefer–Wolfowitz–Massart inequality valid for any failure probability and any real-line interval.
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research:tv-estimation
+    added_at: '2026-09-15T01:54:33.439Z'
+    arxiv_id: '2403.16651'
+    notes: 'Primary arXiv PDF inspected at theorem level: Theorem 1 proves a one-sided local DKW-Massart inequality for every interval I and failure probability delta in (0,1), with the empirical CDF deviation bounded by the stated KL-inverted radius. This is a finite-sample confidence bound, not an asymptotic result.'
+    verification_level: verified-fulltext
+  chatzikokolakis2008noisy:
+    title: Anonymity Protocols as Noisy Channels
+    authors:
+    - Konstantinos Chatzikokolakis
+    - Catuscia Palamidessi
+    - Prakash Panangaden
+    year: 2008
+    venue: Information and Computation
+    url: https://doi.org/10.1016/j.ic.2007.07.003
+    doi: 10.1016/j.ic.2007.07.003
+    bibtex_key: chatzikokolakis2008noisy
+    category: theory-foundation
+    role: foundation
+    relevance: Formalizes anonymity protocols as noisy channels and proves capacity-based anonymity and error relationships. EIBO uses this as the channel-level precedent for distinguishing a TV object from a classifier-specific score; the source guarantees are model-dependent and not finite-sample EIBO certificates.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research
+    added_at: '2026-09-15T01:55:08.634Z'
+    verification_level: verified-fulltext
+    notes: Full text was read and checked against the DOI record. Proposition 14 characterizes zero channel capacity by identical rows, and Theorem 17 gives an explicit capacity upper bound under symmetric partial anonymity; these are model-dependent results, not finite-sample certificates.
+  serjantov2003metric:
+    title: Towards an Information Theoretic Metric for Anonymity
+    authors:
+    - Andrei Serjantov
+    - George Danezis
+    year: 2003
+    venue: Privacy Enhancing Technologies, LNCS 2482
+    url: https://doi.org/10.1007/3-540-36467-6_4
+    doi: 10.1007/3-540-36467-6_4
+    bibtex_key: serjantov2003metric
+    category: theory-foundation
+    role: foundation
+    relevance: Introduces an entropy-based information-theoretic anonymity metric over an adversary posterior. EIBO uses it to position pairwise TV brackets alongside posterior-uncertainty measures, while keeping the bracket object and its finite-sample guarantee explicit.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research
+    added_at: '2026-09-15T01:55:08.634Z'
+    verification_level: verified-abstract
+    notes: The Springer DOI record verifies the title, authors, publication year, and Privacy Enhancing Technologies venue. Full text was not accessible in this run, so no theorem-level claim is used from this entry.
+  chatzikokolakis2007error:
+    title: Probability of Error in Information-Hiding Protocols
+    authors:
+    - Konstantinos Chatzikokolakis
+    - Catuscia Palamidessi
+    - Prakash Panangaden
+    year: 2007
+    venue: 20th IEEE Computer Security Foundations Symposium (CSF 2007)
+    url: https://doi.org/10.1109/csf.2007.27
+    doi: 10.1109/csf.2007.27
+    bibtex_key: chatzikokolakis2007error
+    category: theory-foundation
+    role: foundation
+    relevance: Connects probabilistic anonymity notions with Bayesian probability of error and derives information-theoretic error relationships. EIBO uses it to separate error-probability interpretations from its TV distinguishability bracket and to avoid calling asymptotic or model-specific results finite-sample certificates.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research
+    added_at: '2026-09-15T01:55:08.634Z'
+    verification_level: verified-abstract
+    notes: The IEEE DOI record verifies the title, authors, publication year, and CSF 2007 venue. Full text was not accessible in this run, so no theorem-level claim is used from this entry.
+  venkitasubramaniam2008chaum:
+    title: On the Anonymity of Chaum Mixes
+    authors:
+    - Parvathinathan Venkitasubramaniam
+    - Venkat Anantharam
+    year: 2008
+    venue: 2008 IEEE International Symposium on Information Theory
+    url: https://doi.org/10.1109/isit.2008.4595043
+    doi: 10.1109/isit.2008.4595043
+    bibtex_key: venkitasubramaniam2008chaum
+    category: theory-foundation
+    role: foundation
+    relevance: Studies information-theoretic anonymity of Chaum mixes under explicit timing and latency constraints and optimizes the attainable mixing strategy. EIBO uses it as a classical traffic-mixing limit precedent, with its guarantee understood as model-specific rather than a generic finite-sample bound.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research
+    added_at: '2026-09-15T01:55:08.634Z'
+    verification_level: verified-abstract
+    notes: The IEEE DOI record verifies the title, authors, publication year, and ISIT 2008 venue. Full text was not accessible in this run, so no theorem-level claim is used from this entry.
+  venkitasubramaniam2008eavesdroppers:
+    title: Anonymous Networking Amidst Eavesdroppers
+    authors:
+    - Parvathinathan Venkitasubramaniam
+    - Ting He
+    - Lang Tong
+    year: 2008
+    venue: IEEE Transactions on Information Theory
+    url: https://doi.org/10.1109/tit.2008.921660
+    doi: 10.1109/tit.2008.921660
+    bibtex_key: venkitasubramaniam2008eavesdroppers
+    category: theory-foundation
+    role: foundation
+    relevance: Develops information-theoretic anonymity limits for networking in the presence of eavesdroppers. EIBO uses it to position observable traffic features as a constrained anonymity channel and to compare explicit adversary/latency assumptions against its open-set pairwise construction.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research
+    added_at: '2026-09-15T01:55:08.634Z'
+    verification_level: verified-abstract
+    notes: The IEEE DOI record verifies the title, authors, publication year, and IEEE Transactions on Information Theory venue. Full text was not accessible in this run, so no theorem-level claim is used from this entry.
+  ghaderi2010anonymous:
+    title: Towards a Theory of Anonymous Networking
+    authors:
+    - J. Ghaderi
+    - R. Srikant
+    year: 2010
+    venue: 2010 Proceedings IEEE INFOCOM
+    url: https://arxiv.org/abs/0908.1805
+    doi: 10.1109/infcom.2010.5462155
+    bibtex_key: ghaderi2010anonymous
+    category: theory-foundation
+    role: foundation
+    relevance: Derives optimal anonymity and throughput strategies for timing-observed mix networks under latency and queue constraints. EIBO uses it as a direct precedent for explicit traffic-observation limits and for stating the assumptions under which a bound applies.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research
+    added_at: '2026-09-15T01:55:08.634Z'
+    arxiv_id: '0908.1805'
+    verification_level: verified-fulltext
+    notes: The arXiv PDF and IEEE INFOCOM DOI record were checked. The paper states information-theoretic anonymity definitions and gives optimal strategies and bounds under explicit latency, queue, and timing-observation assumptions; these are model-specific rather than finite-sample EIBO certificates.
+  dyer2012peekaboo:
+    title: 'Peek-a-Boo, I Still See You: Why Efficient Traffic Analysis Countermeasures Fail'
+    authors:
+    - Kevin P. Dyer
+    - Scott E. Coull
+    - Thomas Ristenpart
+    - Thomas Shrimpton
+    year: 2012
+    venue: 2012 IEEE Symposium on Security and Privacy
+    url: https://doi.org/10.1109/SP.2012.28
+    doi: 10.1109/SP.2012.28
+    bibtex_key: dyer2012peekaboo
+    category: theory-foundation
+    role: background
+    relevance: Shows that bandwidth-efficient general-purpose traffic-analysis countermeasures can leave coarse observable signals sufficient for website identification. EIBO uses this negative-limit precedent for its emphasis on observable-object definition and for separating empirical attack evidence from theorem-backed certification.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research
+    added_at: '2026-09-15T01:55:08.634Z'
+    verification_level: verified-fulltext
+    notes: Full text was read and checked against DOI 10.1109/SP.2012.28. The paper reports a negative limit result for bandwidth-efficient general-purpose countermeasures using coarse traffic features; it is empirical positioning, not a finite-sample theorem.
+  athanasiou2025selfdefense:
+    title: 'Self-Defense: Optimal QIF Solutions and Application to Website Fingerprinting'
+    authors:
+    - Andreas Athanasiou
+    - Konstantinos Chatzikokolakis
+    - Catuscia Palamidessi
+    year: 2025
+    venue: 2025 IEEE 38th Computer Security Foundations Symposium (CSF)
+    url: https://arxiv.org/abs/2411.10059
+    doi: 10.1109/csf64896.2025.00002
+    bibtex_key: athanasiou2025selfdefense
+    category: theory-foundation
+    role: foundation
+    relevance: Proves optimal QIF leakage solutions for exact-guessing and s-distinguishing adversaries and applies them to website fingerprinting. EIBO uses it as a modern decision-theoretic comparator for TV-based distinguishability, while keeping its optimization guarantees distinct from EIBO finite-sample concentration certificates.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-research
+    added_at: '2026-09-15T01:55:08.634Z'
+    arxiv_id: '2411.10059'
+    verification_level: verified-fulltext
+    notes: The arXiv PDF and CSF 2025 DOI record were checked. Theorems 1, 3, and 4 give exact QIF leakage expressions and optimal s-distinguishing solutions; these optimization results are distinct from EIBO finite-sample concentration certificates.
+novelty_check:
+  verdict: NO PRIOR WORK FOUND that measures a two-sided TV / epsilon-indistinguishability bracket on real encrypted traffic. The contribution claim is not challenged by anything in this map.
+  date: '2026-09-15'
+  searched:
+    method: Literature clusters dispatched by the Paper Agent across three directions (open-set/hygiene/baselines; information-theoretic bounds; TV estimation/testing), plus an explicit novelty-threat hunt that asked 'has anyone measured a two-sided bracket on encrypted traffic?'
+    evidence: 42 entries in this map, each carrying a verification_level (fulltext / abstract / unverified) and a per-entry note stating the object it reports.
+    CAVEAT_ON_SCOPE: This block records the RESULT of that search and the exclusion rule below. It does NOT record the literal query strings or the databases searched, because those were not captured at search time. The negative verdict is therefore only as strong as the cluster notes' consistency, not as strong as a reproducible query log would be. Treat it as a motivated search, not an exhaustive one.
+  exclusion_rule_what_would_not_count:
+  - 'TV or divergence estimation as general statistics, without an applied encrypted-traffic measurement (covered: han2015, jiao2018, wei, reeve, chan2013, diakonikolas2020) -> methodology we USE, not a competing result.'
+  - Anonymity / QIF channel bounds evaluated on models or synthetic channels rather than real traffic (serjantov, chatzikokolakis2008, venkitasubramaniam, ghaderi) -> establishes the IT-limit pedigree, but no measured bracket on captured traffic.
+  - Classifier / representation performance on encrypted traffic, including open-set methods (ET-BERT, YaTC, NetGPT, TrafficLLM, OpenCBD, Li2023 Facing Unknown) -> reports accuracy-style metrics, not a two-sided interval on the observable laws.
+  - Self-defense / countermeasure evaluations (Athanasiou 2025, Dyer 2012 Peek-a-Boo) -> adjacent application, not a certificate.
+  falsification_condition: A prior paper WOULD be a threat if it reports, for real captured encrypted traffic, a per-object interval on the total-variation distance whose sides carry explicitly different certification strength (a finite-sample strict bound on one side, an asymptotic bound on the other) -- i.e. the same asymmetric-guarantee object this project measures. None of the 42 entries does.
+  honest_limitations:
+  - Some entries are verified at ABSTRACT level only, and at least one carries an explicit note that the paper was NOT fetched, so its exclusion rests on metadata. Per-entry notes record this; the verdict above inherits that weakness.
+  - A motivated search can miss work phrased in different vocabulary (e.g. 'distinguishability certificate', 'tolerance interval on distributions on QoS observables'). The exclusion rule above is stated so a reader can judge the miss risk.
