@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 16:40 UTC | All reviewer items closed (D115); manifest debt-free; figures verified reproduced from source. Only Round 2's report outstanding.
+> Last updated: 2026-09-15 19:45 UTC | **Round 3 ACTIVE** (re-review accepted after Round 2 reconciled to failed); manifest debt-free; all reviewer items closed.
 
 ## Core direction
 
@@ -15,8 +15,8 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 ## Current progress
 
 - **Research phase COMPLETE.** All three claims fully backed; evidentiary coverage 100%. (The coverage tool labels `conclusion: negative` as "failed", so it under-reports C1/C3 — the negatives ARE the evidence; noted, not "fixed" in the tool.)
-- **Paper in FORMAL REVIEW — Round 2 active** (`review_id a1a8ea1e`). Round 1 returned reject (resubmit-worthy) with 23 items; all are fixed and recorded resolved. Deliverables: `docs/paper/main.tex` + `main.pdf`, **18 pages with the body on 1–13 and References from page 14** (13-page limit satisfied — measured from RENDERED pages, not the compile log, which cannot show where the body ends).
-- **Round-2 pre-submission verification (all done by me, not relayed):** 3 pdflatex passes + bibtex exit 0, 53 bibitems, 0 undefined, 0 overfull; **visual review 18/18 pages passed** (receipt bound to sha256 `5edd8928`); headline numbers independently re-derived — C1 336/990 with cluster CI [26.5%, 43.1%], X11 523/3321, chain-rule per-position truth `0.3389191441548814`; every page rendered and read.
+- **Paper in FORMAL REVIEW — Round 3 active** (`review_id 06cc5857`). Sequence: Round 1 returned reject (resubmit-worthy) with 23 items, all fixed; Round 2 then stalled at cross-sharing with no report and reconciled to **failed**, which cleared the content de-duplication that had blocked resubmission; the owner-requested re-review was submitted from the unchanged manuscript and accepted as a new round. Round 1's 23 items are all fixed and recorded resolved. Deliverables: `docs/paper/main.tex` + `main.pdf`, **18 pages with the body on 1–13 and References from page 14** (13-page limit satisfied — measured from RENDERED pages, not the compile log, which cannot show where the body ends).
+- **Pre-submission verification (all mine, not relayed):** 3 pdflatex passes + bibtex exit 0, 53 bibitems, 0 undefined, 0 overfull; **visual review 18/18 pages passed** (receipt bound to sha256 `5edd8928`); headline numbers independently re-derived — C1 336/990 with cluster CI [26.5%, 43.1%], X11 523/3321, chain-rule per-position truth `0.3389191441548814`; every page rendered and read.
 - **Two FALSE constraints rejected after checking the official CFP**: there is **no abstract word limit** (so the divisibility clause and detector paragraph were NOT cut), and the **appendices' placement vs references is unspecified** (so the order was NOT changed, which would have re-broken the page limit). Camera-ready ceiling is 20 pages incl. appendices; we are at 18.
 - **Claim boundaries honoured in the prose**: X9_E's identifier finding scoped to `tv_hat` only (D087); X11's joint gate discloses its per-side sample sizes and the **conservative** bias direction (D093); X8's DPI check is a smoke-test, never cited as theorem verification (D091); C3 reframed as a methods/limits finding (D046); novelty stated as a knowledge claim ("to our knowledge"), never "exhaustive search".
 - **Provenance discipline is load-bearing**: manifest `content_sha256` on all live entries; runner self-hash captured at import and recorded *in the artifact*; figures regenerate from manifest-resolved artifacts via committed generators; the flat-vs-nested two-tree layout resolved via `resolve_existing_path` (flat first).
@@ -132,6 +132,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D116 | 2026-09-15 | D116: re-review submitted and accepted — Round 2's | — |
 | D115 | 2026-09-15 | D115: all independent-reviewer tracking items clos | — |
 | D114 | 2026-09-15 | D114: manifest debt closed (87 entries, 0 unresolv | — |
 | D113 | 2026-09-15 | D113: higher-k ladder manifest defects closed — ha | — |
@@ -141,5 +142,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D109 | 2026-09-15 | D109: dispatch pre-staging (higher-k per-pair rows | X1, X12_k5 |
 | D108 | 2026-09-15 | D108: re-review attempted on owner instruction; pl | — |
 | D107 | 2026-09-15 | D107: Round 2 submitted and active — the four reje | — |
-| D106 | 2026-09-15 | D106: W9 cluster bootstrap flips the scale-matched | — |
 
