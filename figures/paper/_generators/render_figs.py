@@ -305,12 +305,15 @@ def fig4():
     axb.set_xticklabels([t.replace(">=", "$\\geq$") for t in th], fontsize=7)
     axb.set_xlabel("Minimum per-pair flow count")
     axb.set_ylabel("Gate gap (percentage points)")
-    axb.set_title("(b) Gap narrows when matched", loc="left")
+    axb.set_title("(b) Gap is stratum-dependent, not monotone", loc="left")
     axb.set_ylim(0, 21)
     idx = th.index(">=20000")
-    axb.annotate("9.7 pts at $n \\geq 20{,}000$", xy=(idx, gap[idx]),
-                 xytext=(idx - 0.35, gap[idx] + 5.4), fontsize=7.2, color=BLUE,
+    axb.annotate("minimum 9.7\nat $n \\geq 20{,}000$", xy=(idx, gap[idx]),
+                 xytext=(idx - 0.55, gap[idx] + 5.4), fontsize=7.0, color=BLUE,
                  arrowprops=dict(arrowstyle="-", color=BLUE, lw=0.8))
+    axb.text(0.02, 0.03, "widens again at stricter floors",
+             transform=axb.transAxes, fontsize=6.6, color=GREY,
+             style="italic", va="bottom")
 
     ok = check_collisions(fig, "fig4_cross_corpus")
     save(fig, "fig4_cross_corpus")

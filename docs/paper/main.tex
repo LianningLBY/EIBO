@@ -15,6 +15,7 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{multirow}
@@ -25,6 +26,7 @@
 \crefname{figure}{Figure}{Figures}
 \crefname{section}{Section}{Sections}
 \crefname{equation}{Equation}{Equations}
+\newtheorem{lemma}{Lemma}
 
 % shorthands used throughout the paper
 \newcommand{\tv}{\mathrm{TV}}
@@ -61,11 +63,13 @@
 \bibliographystyle{plainnat}
 \bibliography{references}
 
-\cleardoublepage
 \appendix
 
-\section*{Ethical Considerations}
-\addcontentsline{toc}{section}{Ethical Considerations}
+\section*{Appendix: Ethics, Open Science, and Per-Pair Ledgers}
+\addcontentsline{toc}{section}{Appendix: Ethics, Open Science, and Ledgers}
+
+\subsection*{A.1\quad Ethical Considerations}
+\label{sec:appendix/ethics}
 
 All measurements in this paper are computed on a public research corpus of
 backbone traffic collected and released by its operators under their own ethics
@@ -83,14 +87,70 @@ whether a reported detection gain is close to the limit the channel supports. We
 see no path by which the published bracket enables an attack that is not already
 available to anyone with the same observable channel.
 
-\cleardoublepage
-\section*{Open Science}
-\addcontentsline{toc}{section}{Open Science}
+\subsection*{A.2\quad Per-Pair Ledger and Boundary Pairs}
+
+The headline result rests on a 990-row per-pair ledger at $k{=}5$, $M{=}1$,
+carrying for each pair the upper-side bound, the lower-side bound at full $n$,
+the per-side flow counts, and the saturation flag. Recomputing the upper-side
+condition row-by-row from that ledger reproduces the 340-pair count and the
+336-pair joint gate, and the four pairs that separate them are listed in
+\Cref{tab:boundary}. We report them because they are the only rows whose verdict
+depends on the lower side at this rung; every other certified pair clears both
+conditions by a margin.
+
+\input{tab_boundary}
+
+\subsection*{A.2b\quad Protocol Context and Unknown-Class Machinery}
+\label{sec:appendix/context}
+
+A bracket over observed services says nothing about services that are absent
+from the corpus, and the unseen-species literature supplies the machinery for
+that gap \citep{orlitsky2016optimal,eriksson2026unseen}, which we use for the
+deployment-site missing-service-mass term in \Cref{sec:discussion/missing_mass}.
+
+On the protocol side, QUIC's wire image and its operational implications are
+documented by \citet{kuhlewind2022rfc}; the corpus we measure on and its
+companion are described by \citet{cesnet2025cesnet} and
+\citet{luxemburk2023cesnet}; and prior work establishes both the difficulty of
+analysis in this setting and the range of classifiers now applied to it
+\citep{smith2021website,li2023facing,jerabek2025simple,luxemburk2023encryptedquic,zhang2023applicationquic,lin2022etbert,zhao2023yatc,meng2023netgpt,cui2025trafficllm,hu2022opencbd,athanasiou2025selfdefense,dyer2012peekaboo}.
+Our contribution is orthogonal to those architectures, since it concerns what any
+of them can achieve on a declared observable rather than how one of them is
+built.
+
+\subsection*{A.3\quad Open Science}
 
 This appendix lists the artifacts needed to evaluate the paper's core
 contributions and how the review committee can reach each one. Access links are
 anonymized to preserve double-blind review; they are provided through the
-submission system's artifact channel.
+submission system's artifact channel. The provenance chain below is stated so
+that a reader can check it without following any link.
+
+\textbf{Worked provenance example.}
+Every quantitative claim in this paper resolves through an experiment identifier
+to a manifest entry carrying a \texttt{content\_sha256} over the artifact's
+bytes. Three examples, each a real entry whose recorded hash we verified against
+the file's own bytes:
+\begin{itemize}
+  \item the per-pair bracket table behind \Cref{tab:bracket} is registered as
+  \texttt{art\_20260913\_e5ebac} (\texttt{q1\_lower\_side\_full\_n.json},
+  990 rows), hash \texttt{9fe81e271a386335\ldots};
+  \item the headline gate count is \texttt{art\_20260914\_443901}
+  (\texttt{x1\_headline\_table.json}), hash \texttt{c9f840a94644687e\ldots};
+  \item the uncertainty intervals are \texttt{art\_20260915\_27333a}
+  (\texttt{ci\_main\_table.json}), hash \texttt{2d87922190e21f06\ldots}.
+\end{itemize}
+
+\textbf{What ``pre-registered'' means here.}
+Four commitments, each fixed before the measurement it governs: the coarsest
+channel ($k{=}5$, $M{=}1$) before the gate was measured; the informative-pair
+criterion ($\epshi < 0.5$, the 340-pair stratum) before the detector validation;
+the one-sided binomial test with its null rate of $0.05$ and its nine cells
+before that test ran; and the split policy (flow- and time-disjoint,
+packet-level splitting prohibited) before any evaluation. These are recorded in
+the project's decision log with timestamps preceding the corresponding
+artifacts' first-measurement timestamps. That ordering, not the word itself, is
+the checkable claim.
 
 \textbf{Released artifacts.}
 \begin{description}
@@ -101,30 +161,25 @@ submission system's artifact channel.
   \item[Per-pair ledgers.] The 990-row per-pair bracket table at $k{=}5$,
   $M{=}1$, carrying the upper-side bound, the lower-side bound, the saturation
   flag, and the per-side flow counts. This is the artifact behind
-  \Cref{tab:bracket}.
+  \Cref{tab:bracket} and \Cref{tab:boundary}.
   \item[Detector-validation payload.] The per-pair join for the nine-cell
   containment test, the stratum assignment (340 informative, 540 secondary,
-  110 excluded), and the pre-registered one-sided binomial results in
-  \Cref{tab:detectors}.
+  110 excluded), the pre-registered one-sided binomial results in
+  \Cref{tab:detectors}, and the trained-detector configurations.
   \item[Estimator study artifacts.] The chain-rule control on a known-truth
   source, both arms (plain and real-occupancy), and the two repair attempts
   with their known-truth gates.
   \item[Cross-corpus and sensitivity artifacts.] The independent-corpus bracket
-  including its sample-size stratification table, and the channel-sensitivity
-  dose-response series.
-  \item[Figure generators.] The scripts that rebuild every figure in this paper
-  from its artifact, plus the provenance map recording each series' source file
-  and content hash.
+  with its stratification table, and the channel-sensitivity dose-response.
+  \item[Figure generators.] Scripts rebuilding every figure from its artifact,
+  plus the provenance map of each series' source file and hash.
 \end{description}
 
 \textbf{Content-addressed chain of record.}
-Every artifact is registered in a project manifest carrying a
-\texttt{content\_sha256} for its bytes. The manifest hash, rather than any
-working copy, is the artifact of record, and every quantitative claim in this
-paper resolves through an experiment identifier to a manifest entry. Where a
-claim cites a nested field of an artifact, the full path is recorded in the
-paper's provenance crosswalk so a reviewer can follow the number to its source
-without tooling.
+The manifest hash, rather than any working copy, is the artifact of record.
+Where a claim cites a nested field, the full path is recorded in the paper's
+provenance crosswalk so a reviewer can follow the number to its source without
+tooling.
 
 \textbf{Data.}
 The primary corpus is publicly released by its operators and requires no

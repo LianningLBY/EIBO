@@ -3,8 +3,8 @@
 
 This section defines the object we measure, the channel over which it is
 measured, and the two bounds that constitute the bracket. One rule governs the
-design: each side of the bracket is asserted only at the strength it can carry,
-and neither side borrows strength from the other.
+design: each side is stated with the guarantee its own construction actually
+supports, and neither side's guarantee is extended to the other.
 
 \subsection{Problem formulation}
 \label{sec:design/problem}
@@ -15,11 +15,23 @@ services $a$ and $b$. Our object is the total variation distance
   \tv(P,Q) \;=\; \tfrac{1}{2}\sum_{x} \abs{P(x) - Q(x)},
   \label{eq:tv}
 \end{equation}
-which lower-bounds the error of any test that distinguishes $a$ from $b$: for any
-measurable test $\phi$,
-$\Pr[\phi \text{ errs}] \ge \tfrac{1}{2}\bigl(1 - \tv(P,Q)\bigr)$.
-A bound on $\tv$ is therefore a bound on the best achievable error, and every
-statement we make about distinguishability is phrased in those terms.
+and the quantity we certify is a \emph{pairwise} indistinguishability
+certificate: an interval on $\tv(P,Q)$ for one ordered pair of services, at one
+declared channel. Its decision-theoretic content is the two-point (Le Cam)
+consequence, which applies to that pair and requires no further aggregation: for
+any test $\phi$ that must decide which of the two services generated an
+observation,
+\begin{equation}
+  \Pr[\phi \text{ errs}] \;\ge\; \tfrac{1}{2}\bigl(1 - \tv(P,Q)\bigr),
+  \label{eq:lecam}
+\end{equation}
+so a certified upper bound on $\tv$ gives a certified lower bound on the error
+of the best possible pairwise test. We state this consequence per pair and
+nowhere claim a multi-class reduction: aggregating pairwise certificates into an
+open-set floor over $K$ classes would require an argument we do not give, and
+the validation in \Cref{sec:results/detector_validation} accordingly tests a
+pair-level surrogate rather than the open-set quantity. Every statement we make
+about distinguishability is phrased in the terms of \eqref{eq:lecam}.
 
 We report a two-sided interval
 \begin{equation}
@@ -28,7 +40,8 @@ We report a two-sided interval
 \end{equation}
 where the two endpoints come from different statistical machinery and carry
 different guarantees. $\epshi$ is a finite-sample upper bound at a stated
-confidence level; $\epslo$ is an asymptotic lower bound. The interval is
+confidence level; $\epslo$ is a classifier-based lower bound at a nominal
+level. The interval is
 certified for a pair when both endpoints exist and satisfy the gate
 \begin{equation}
   \epslo > 0.05 \quad\text{and}\quad \epshi < 0.5 .
@@ -48,27 +61,24 @@ ladder is $M \in \{1,2,4,8,16\}$ and $k \in \{5,10,15,30\}$. We treat $M$ as a
 discrete rung rather than a continuous knob, because the interesting behavior is
 at the coarse end and a continuous sweep would obscure it.
 
-Two properties of this channel matter for interpretation. It is coarse by
-construction. The exporter we use also exposes inter-packet timing, and we
-exclude it; no name, address, user-agent, or TLS-extension field is consumed by
-any measurement in this paper. Second, the alphabet size $m$ is the a-priori grid
-size and never the realized support. This distinction is not cosmetic. A bound
-that substitutes realized support for the declared alphabet can be made to look
-tighter by sampling, and it is the most common way a discrete bound of this form
-is quietly invalidated.
+Two properties matter for interpretation. The channel is coarse by
+construction: the exporter also exposes inter-packet timing and we exclude it,
+and no name, address, user-agent, or TLS-extension field is consumed by any
+measurement here. Second, $m$ is the a-priori grid size and never the realized
+support. That distinction is not cosmetic, since a bound substituting realized
+support for the declared alphabet can be made to look tighter by sampling, which
+is the most common way a discrete bound of this form is quietly invalidated.
 
-Three hygiene rules govern every evaluation. Splits are flow-disjoint and
-time-disjoint; the train and test periods do not overlap and the buffer month
-between them is discarded. Packet-level splitting is prohibited, so no flow is
-partially represented on both sides of a split. Address fields are randomized
-where the evaluation would otherwise be exposed to a shortcut, and the masking
-regime is verified rather than assumed: the padding sweep reports a padding
-histogram with a single zero-valued bin and 990 usable pairs at $k{=}5$ with no
-services dropped. The occupancy gate is checked before any bracket is computed.
-It passes on the subset used here, and we return to the scope of that pass in
-\Cref{sec:discussion}.
+Three hygiene rules govern every evaluation. Splits are flow- and
+time-disjoint, with the buffer month between train and test discarded, and
+packet-level splitting is prohibited so no flow appears on both sides. Address
+fields are randomized where a shortcut would otherwise be reachable, and the
+masking regime is verified rather than assumed: the padding sweep reports a
+single zero-valued bin and 990 usable pairs at $k{=}5$ with no services dropped.
+The occupancy gate is checked before any bracket is computed; it passes on this
+subset, and \Cref{sec:discussion} returns to that scope.
 
-\subsection{The upper side: finite-sample strict}
+\subsection{The upper side: finite-sample, high probability}
 \label{sec:design/upper}
 
 The upper side is a plug-in estimate plus a confidence radius,
@@ -78,43 +88,144 @@ The upper side is a plug-in estimate plus a confidence radius,
         + \tfrac{1}{2}\sqrt{\tfrac{2\ln(2/\alaw)}{n_i}},
   \label{eq:upper}
 \end{equation}
-where $n_i$ is the flow count available to service $i$ and $\alaw$ is the
-per-law significance level. Equation~\eqref{eq:upper} is a
-Dvoretzky-Kiefer-Wolfowitz type bound: it holds for any pair of distributions on
-a finite alphabet, requires no smoothness, and is valid at the stated $n$. With
-$\alaw = 0.025$ and a union bound over the two laws, each side of the
-bracket is a joint $0.95$ statement. The left-hand column of
-\Cref{tab:bracket} is computed at this setting for all 990 pairs, with a per-row
-invariant check that $\epslo \le \epshi$; no violation was recorded.
+where $n_i$ is the flow count available to service $i$, $m$ is the declared
+alphabet size, and $\alaw$ is the per-law significance level. We state the
+guarantee rather than asserting it, because the two terms in $r_i$ have
+different origins and only one of them is a fluctuation term.
+
+\begin{lemma}[$\ell_1$ upper bound on the total variation distance]
+\label{lem:upper}
+Let $P$ and $Q$ be distributions on an alphabet of size $m$, let
+$\widehat{P}_n$ and $\widehat{Q}_n$ be their empirical distributions from $n$
+i.i.d.\ draws each, and let
+$\widehat{tv} = \tfrac{1}{2}\lVert \widehat{P}_n - \widehat{Q}_n\rVert_1$.
+Then for any $\alpha \in (0,1)$, each side satisfies
+\begin{equation}
+  \tv(P,Q) \;\le\; \widehat{tv}
+  + \tfrac{1}{2}\sqrt{\tfrac{m}{n}} + \tfrac{1}{2}\sqrt{\tfrac{2\ln(2/\alpha)}{n}}
+  \label{eq:lem}
+\end{equation}
+with probability at least $1-\alpha$, and summing the two sides' radii gives
+\eqref{eq:upper} with $\alpha = \alaw$.
+\end{lemma}
+
+\emph{Proof sketch.} Write
+$\tv(P,Q) \le \tv(\widehat{P}_n,\widehat{Q}_n)
++ \tfrac{1}{2}\lVert P - \widehat{P}_n\rVert_1
++ \tfrac{1}{2}\lVert Q - \widehat{Q}_n\rVert_1$
+by the triangle inequality, so it suffices to control one empirical deviation
+$\lVert P - \widehat{P}_n\rVert_1$. That deviation splits into two terms.
+
+The first is the expected deviation. For a distribution on $m$ symbols,
+Jensen and Cauchy-Schwarz give
+$\mathbb{E}\lVert P - \widehat{P}_n\rVert_1
+= \sum_j \mathbb{E}\lvert P_j - \widehat{P}_{n,j}\rvert
+\le \sum_j \sqrt{P_j(1-P_j)/n} \le \sqrt{m/n}$,
+using $\sum_j P_j(1-P_j) \le 1$. The factor $\tfrac12$ converts the $\ell_1$
+deviation to a $\tv$ deviation. This is the $\ell_1$ family of bounds for
+discrete distributions, of which \citet{han2015l1distribution} give the minimax
+version; it is the term scaling as $\sqrt{m/n}$.
+
+The second is the fluctuation about that expectation. Replacing one of the $n$
+observations changes $\lVert P - \widehat{P}_n\rVert_1$ by at most $2/n$, so
+that deviation is a function of independent random variables with bounded
+differences, and McDiarmid's inequality gives
+\begin{equation}
+  \lVert P - \widehat{P}_n\rVert_1
+  \;\le\; \mathbb{E}\lVert P - \widehat{P}_n\rVert_1
+  + \sqrt{\tfrac{2\ln(1/\alpha')}{n}}
+  \label{eq:mcdiarmid}
+\end{equation}
+with probability at least $1-\alpha'$. The constant inside the logarithm is
+$2/\alaw$ rather than $1/\alaw$ because the per-law level is halved: each of the
+two laws must hold simultaneously, and the union bound over them contributes the
+factor of $2$. With $\alaw = 0.025$ the upper side is therefore a joint $0.95$
+statement. This level belongs to the upper side; the lower side's level is set
+by its own construction in \Cref{sec:design/lower} and is not $0.95$ by this
+argument. $\square$
+
+Two remarks on what the lemma does and does not require. It is an $\ell_1$
+deviation bound, not a sup-norm bound, and we do not attribute it to
+Dvoretzky-Kiefer-Wolfowitz, whose inequality controls the Kolmogorov-Smirnov
+sup-norm statistic and would give a different and generally looser radius on
+this alphabet. Its only distributional hypothesis is that the $n$ flows of each
+service are independent draws from that service's law; it assumes nothing about
+smoothness, and nothing about the shape of $P$ or $Q$ beyond the alphabet being
+finite and pre-declared.
+
+That sampling hypothesis is a threat rather than an implicit assumption. Flows
+from one service arrive in bursts and cluster in time, so same-service
+observations are correlated, and correlation inflates the variance of
+$\widehat{tv}$ relative to the i.i.d.\ value the radius assumes; the resulting
+error direction is coverage below nominal, not above it. We report the bound on
+flow- and time-disjoint splits, which limits but does not eliminate clustering,
+and we treat the i.i.d.\ hypothesis as the upper side's binding assumption. A
+coverage check on near-identical synthetic pairs would not test it, since
+$\widehat{tv}$ is itself upward-biased there, so we do not offer one; the
+derivation is what supports the bound.
+
+The left-hand column of \Cref{tab:bracket} is computed at this setting for all
+990 pairs, with a per-row invariant check that $\epslo \le \epshi$; no violation
+was recorded.
 
 The finite-sample guarantee is what makes the upper side the side to read for an
 error floor. It is also, as \Cref{sec:results/horizon} shows, the side that
 binds: the radius grows with $m$, so a finer alphabet tightens nothing and
 eventually destroys the certificate outright.
 
-\subsection{The lower side: asymptotic}
+\subsection{The lower side: high probability at a nominal level}
 \label{sec:design/lower}
 
-The lower side is a classifier-based high-probability lower bound. We choose a
-decision function from a fixed class, estimate its error rate on held-out data,
-and convert that rate into a lower bound on $\tv$ through the two-point
-reduction; the construction follows the adaptive cutoff form of
-\citet{michel2020high}. We report it as asymptotic and do not call it a
-certificate, because it is not one. Its role is to cap the achievable error
-floor from above: if $\epslo$ is large, no detector can do much better than the
-pair's intrinsic ambiguity, and a claim that a detector has not yet reached the
-information limit should be read against it.
+The lower side is a classifier-based lower bound that carries a stated
+confidence level. We choose a decision function from a fixed class, estimate its
+performance on held-out data, and convert that into a lower bound on $\tv$
+through the two-point reduction. The construction is the adaptive
+sup-over-cutoff form of \citet{michel2020high}: for each threshold $\lambda$ we
+test whether the observed in-class accuracy gap is consistent with a null at
+that separation, take the largest $\lambda$ the data supports, and read off the
+implied $\tv$ lower bound.
 
-Because the lower bound is asymptotic and the upper bound finite-sample, the two
-endpoints are not symmetric in kind, and the interval in \eqref{eq:bracket}
-inherits that asymmetry. We treat this as a property of the measurement rather
-than a defect to be hidden. The upper side is where a practitioner looks for a
-floor that cannot be beaten at the stated window; the lower side is where one
-looks to confirm that a pair is genuinely separated. Neither statement is
-available at the other endpoint's strength, and this extends to how we describe
-cross-corpus agreement later: a joint gate over a finite-sample upper side and
-an asymptotic lower side is a mixed-strength two-sided measurement, and we do
-not describe it as an exact finite-sample two-sided certificate.
+The strength of the guarantee turns on where its confidence constant comes from,
+and we state that provenance rather than summarizing it. The constant is the
+iterated-log expression of Appendix B.1 of that work, which is an
+\emph{asymptotic} form; the implementation substitutes a conservative finite
+value only in the degenerate regime where the effective alphabet is too small
+for that expression to be defined, rather than extrapolating it. The bound is
+therefore reported at a \textbf{nominal} $1-\alpha$ level with
+$\alpha = 0.025$, which is what the implementation's own diagnostics record. It
+is a high-probability bound and not a point estimate, and it is not an exact
+finite-sample certificate of the kind the upper side provides. We use the word
+nominal deliberately.
+
+Two further properties matter for how the bracket should be read. The
+construction is distribution-free in the sense that it assumes nothing about the
+shape of $P$ and $Q$, but it is \textbf{conditional on the trained classifier}:
+the guarantee is that the bound holds given the decision function that was
+fitted, and a poorly chosen function yields a valid but loose bound rather than
+an invalid one. The bound therefore cannot be tightened indefinitely by
+classifier engineering, which is the property that makes it usable as a
+reference for a detector: if $\epslo$ is large, no detector can do much better
+than the pair's intrinsic ambiguity, and a claim that a detector is far from the
+limit should be read against it.
+
+\subsection{Where the two sides differ}
+\label{sec:design/asymmetry}
+
+Both sides of the bracket carry a confidence level, so the bracket is not a
+proven side paired with an unproven one, and we do not describe it that way. The
+difference between them is in construction, in the provenance of their
+constants, and in tightness. The upper side's radius is a fixed-form bound whose
+constant is derived for the finite-sample regime and applies at the observed
+counts; the lower side's constant is asymptotically derived, so its level is
+nominal rather than exact. The upper radius is also determined by the alphabet
+size and the flow counts alone and grows with $m$ regardless of the data, while
+the lower bound must hold against an adversarial choice of decision function
+over its class and is correspondingly wider. In practice the upper side is what
+determines whether a certificate exists at a given resolution, and it is the
+side that binds in the measured ladder; the lower side almost always clears its
+condition, because most pairs on this channel are genuinely separable. What the
+two sides share is a confidence level and a distribution-free construction; what
+separates them is which one is harder to satisfy.
 
 \subsection{Estimation procedure and its control}
 \label{sec:design/estimator}
@@ -147,25 +258,29 @@ who compares them directly will draw the wrong conclusion.
 \subsection{Reproducibility boundary}
 \label{sec:design/repro}
 
-The main text carries the protocol, the channel definition, the significance
-convention, the gate, and the frontier closed form. The appendix and the
-released artifacts carry the per-pair ledgers, the full 20-cell resolution
-table, the sample-size stratification table, and the cross-variant comparison
-for the estimator study. Every quantitative claim is tied to an experiment
-identifier and resolved through a content-addressed manifest; the manifest hash,
-not a working copy on any machine, is the artifact of record. Artifacts are
-described in the Open Science appendix.
+The main text carries the protocol, channel definition, significance
+convention, gate, and frontier closed form; the appendix and released artifacts
+carry the per-pair ledgers, the 20-cell resolution table, the stratification
+table, and the estimator cross-variant comparison. Every quantitative claim is
+tied to an experiment identifier and resolved through a content-addressed
+manifest, whose hash rather than any working copy is the artifact of record.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/paper/fig1_bracket_overview.pdf}
-\caption{The EIBO measurement. Raw QUIC flow records are quantized into a
-$k$-prefix symbol over a (direction, size) alphabet at resolution $M$. The
-quantized symbol feeds two branches that carry different certification
-strength: an upper branch combining a plug-in TV estimate with a confidence
-radius, which is finite-sample strict, and a lower branch built from a
-classifier-based high-probability lower bound, which is asymptotic. The
-branches meet at the per-pair interval, whose gate is the conjunction
-$\epslo > 0.05$ and $\epshi < 0.5$.}
-\label{fig:bracket}
-\end{figure}
+\subsection{Compute, splits, and cost}
+\label{sec:design/compute}
+
+The measurements are cheap relative to the detector panel they are compared
+against, which is the intended shape: the bracket is a property of the data, so
+its cost does not grow with model capacity. The two large measurement passes
+each run in tens of minutes. The independent-corpus bracket ran in about 21
+minutes, parallelized over eight CPU workers. The channel-sensitivity sweep ran
+in about 31 minutes and touched no GPU. The known-truth estimator control, the
+most expensive single computation in the estimator study, reuses a cached
+occupancy table and completes in under a minute. The detector panel is the only
+GPU-eligible step: it trains three models and runs in about 37 minutes on a
+single consumer GPU.
+
+Splits are flow-disjoint and time-disjoint throughout, so no flow appears on
+both sides and the test period follows the training period with a discarded
+buffer month between them. Packet-level splitting is prohibited. The detector
+panel records both properties in its artifact.
+

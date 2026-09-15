@@ -10,7 +10,7 @@ import numpy as np
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 LOWER_PATH = PROJECT_ROOT / "artifacts/_project/data/q1_lower_side_full_n.json"
 X1_PATH = PROJECT_ROOT / "artifacts/_project/data/x1_headline_table.json"
-OUTPUT_PATH = PROJECT_ROOT / "artifacts/_project/data/ci_main_table.json"
+OUTPUT_PATH = PROJECT_ROOT / "artifacts/_project/data/ci_main_table_pairbootstrap.json"
 
 SEED = 20260915
 REPLICATES = 2000
@@ -131,14 +131,6 @@ def main():
     }
 
     median_ci = percentile_ci(tv_hat, np.median)
-    per_m = [
-        {
-            "M": 1,
-            "median_tv": float(np.median(tv_hat)),
-            "ci_lo": median_ci[0],
-            "ci_hi": median_ci[1],
-        }
-    ]
     non_estimable = []
     for m in (2, 4, 8, 16):
         non_estimable.append(
@@ -169,21 +161,26 @@ def main():
         }
 
     result = {
-        "method": "nonparametric bootstrap, percentile CI",
+        "method": "nonparametric pair bootstrap over service pairs, percentile CI",
         "confidence_level": 0.95,
         "alpha": ALPHA,
         "percentile_levels": [PERCENTILES[0], PERCENTILES[1]],
-        "resampling_unit": "service pairs",
+        "resampling_unit": "service pairs (treats 990 dependent pairs as iid)",
         "seed": SEED,
         "replicates": REPLICATES,
         "source_artifacts": [
             "artifacts/_project/data/q1_lower_side_full_n.json",
             "artifacts/_project/data/x1_headline_table.json",
         ],
-        "per_M_median_tv_ci": per_m,
-        "joint_gate_ci": interval_payload(joint_gate),
-        "upper_side_ci": interval_payload(upper_side),
-        "lower_side_ci": interval_payload(lower_side),
+        "joint_gate": interval_payload(joint_gate),
+        "upper_side": interval_payload(upper_side),
+        "lower_side": interval_payload(lower_side),
+        "median_tv": {
+            "n": int(tv_hat.size),
+            "median_tv": float(np.median(tv_hat)),
+            "ci_lo": median_ci[0],
+            "ci_hi": median_ci[1],
+        },
         "estimability_notes": [
             {
                 "quantity": "per-M median tv CI at M=1",

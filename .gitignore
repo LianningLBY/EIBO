@@ -77,3 +77,7 @@ _verify_refs_state.json
 
 # --- Figure build scratch (candidate renders, not deliverables) ---
 artifacts/_project/chart/_scratch/
+
+# --- PDF render scratch (visual-review working files) ---
+docs/paper/_pdf_images/
+_pdf_images/

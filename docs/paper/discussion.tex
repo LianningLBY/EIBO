@@ -1,18 +1,28 @@
 \section{Discussion}
 \label{sec:discussion}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.92\columnwidth]{figures/paper/fig5_channel_sensitivity.pdf}
+\caption{Channel sensitivity. Matched difference in the radius-free estimate
+$\widehat{tv}$ between the identifier-dependent and identifier-independent arms
+against alphabet cardinality $B$; it grows before both arms saturate. The
+quantity is the radius-free estimate only, and no certificate-level implication
+follows.}
+\label{fig:sensitivity}
+\end{figure}
+
 \subsection{Robustness across corpora}
 \label{sec:discussion/robustness}
 
 The primary result is one corpus's number, so we repeated the measurement on an
 independent one. On CESNET-QUIC22, 3,321 pairs yield an upper-side fraction of
 $0.1608$ ($534/3321$), a lower-side fraction of $0.9967$ ($3310/3321$), and a
-joint gate of $0.1575$ ($523/3321$)
-(\Cref{fig:cross_corpus}a). The lower side reproduces almost exactly across the
-two corpora, $0.9967$ against $0.9960$, and that is not a foregone conclusion:
-the lower side is computed by a different method from the upper side and on
-different data, and a construction that agreed only by accident would not be
-expected to hold to three decimal places.
+joint gate of $0.1575$ ($523/3321$) (\Cref{fig:cross_corpus}a). The lower side
+reproduces across the two corpora, $0.9967$ against $0.9960$, which is not a
+foregone conclusion: it is computed by a different method from the upper side and
+on different data, and a construction agreeing only by accident would not hold to
+three decimal places.
 
 The upper side does not reproduce, and we state the two facts that govern how it
 should be read. First, the joint gate combines a full-$n$ upper side with a
@@ -20,12 +30,31 @@ lower side capped at 20,000 flows per service, and the cap binds on 2,145 of the
 3,321 pairs. Because a lower bound computed from less data is weaker, the cap
 can only shrink $\epslo$ and therefore can only understate the gate; the
 reported figure is a floor, and the bias runs in the conservative direction.
-Second, the comparison is sensitive to sample-size stratification: the gap
-between the two corpora narrows to 9.7 percentage points once pairs are matched
-on minimum flow count, against 18.2 points on the unmatched comparison
-(\Cref{fig:cross_corpus}b). The residual gap after matching is real, but the raw
-single number overstates it, and the stratum-matched pair is the honest form in
-which to quote it.
+Second, the comparison depends on how much evidence per pair is required, and
+the dependence is not monotone. On the $\epshi < 0.5$ stratum the gap is $-18.3$
+percentage points unmatched, $-15.5$ at a $13{,}049$-flow floor, $-9.3$ at
+$20{,}000$, $-13.0$ at $40{,}000$, and $-15.4$ at $80{,}000$
+(\Cref{fig:cross_corpus}b). We quote the stratum values rather than the figure's,
+which plots the joint-gate fraction over a slightly different subset; the two
+series share the same minimum and shape but are not the same quantity. The series
+minimises in the middle and widens again, so ``matched evidence'' is not one
+well-defined point and the minimum is not quoted as the matched value.
+
+Whether the gap survives at matched evidence turns on the dependence structure.
+The 990 pairs form a complete graph over 45 services ($\binom{45}{2}$), as do the
+$3{,}321$ replication pairs over 82 services, so pairs sharing a service are
+correlated and a pair-level bootstrap is anti-conservative. Under a
+service-cluster bootstrap, non-reproduction remains significant unmatched
+($-18.3$ points, interval $[-27.4,-10.0]$) and at the $13{,}049$-flow floor
+($-15.5$, $[-28.4,-2.9]$), but the intervals at the $20{,}000$, $40{,}000$, and
+$80{,}000$ floors are $[-24.2,+5.2]$, $[-30.1,+4.3]$, and $[-33.6,+2.9]$, **all of
+which include zero**. The residual gap at deep matching is therefore not
+statistically resolved at this sample size: it is negative at every stratum as a
+point estimate, and the scale-matched defence of it does not survive a
+defensible interval. The correction is itself informative, in that it widens the
+unmatched gap's interval by a factor of $2.77$ while moving the lower side's by
+only $1.22\times$; the lower side is saturated, so it reproduces across corpora
+under either construction, and only the gap claim is affected.
 
 \subsection{Channel sensitivity}
 \label{sec:discussion/sensitivity}
@@ -74,16 +103,14 @@ not fold it into the bracket.
 \subsection{Two certified objects that must not be ranked}
 \label{sec:discussion/objects}
 
-Two certified objects coexist in this work: the $k$-prefix symbol law that
-carries the headline bracket, and a whole-flow rectified object computed on the
-same flows. Their informative fractions are numerically close, and it would be
-attractive to present that agreement as a cross-check. It is not one. The two
-objects agree only where each uses its own radius convention; holding the
-convention common separates them by hundreds of pairs. The underlying statistics
-differ by a factor of about 2.7 and the radius constants by about 7.3, in
-opposite directions, so the near-equality of the fractions is a cancellation
-rather than a corroboration. We report both objects and explicitly decline to
-rank or substitute one for the other.
+Two certified objects coexist: the $k$-prefix symbol law carrying the headline
+bracket, and a whole-flow rectified object on the same flows. Their informative
+fractions are numerically close, and presenting that as a cross-check would be
+wrong. They agree only where each uses its own radius convention, and holding the
+convention common separates them by hundreds of pairs: the statistics differ by
+about $2.7\times$ and the radius constants by about $7.3\times$ in opposite
+directions, so the near-equality is cancellation rather than corroboration. We
+report both without ranking them.
 
 \subsection{Limitations}
 \label{sec:discussion/limitations}
@@ -91,63 +118,44 @@ rank or substitute one for the other.
 The certificate covers 33.9\% of service pairs on the primary corpus. The
 remaining pairs are not indistinguishable; for most of them no certificate
 exists at these $k$ and $n$, which \Cref{sec:results/horizon} establishes as a
-consequence of the radius rather than of the traffic. A reader who needs a
-statement about those pairs should read it as an absence of certification, not
-as evidence of closeness.
+consequence of the radius rather than of the traffic. That should be read as an
+absence of certification, not as evidence of closeness.
 
 Every number here is measured on a subset whose occupancy pass is provisional
-pending full-corpus confirmation, and on a single protocol. The lower side of
-the bracket is asymptotic throughout, so the interval is only as strong as its
-weaker endpoint when it is read as a two-sided statement. The growth question
-that motivated the estimator study remains open: the standard estimator cannot
-answer it on data of this sparsity, and the repair that would let it answer
-costs more than half the data at the top of the prefix range. We do not present
-an estimate of the growth rate anywhere in this paper.
-
-The large-$k$ divisibility bound is conditional on a realizability assumption.
-It is available in the regime where the plug-in certificate is lost, which makes
-it useful, but it is not distribution-free, and the difference matters for how
+pending full-corpus confirmation, and on a single protocol. Both sides of the
+bracket carry a confidence level, and the lower side's is conditional on the
+fitted decision function, so the interval is only as strong as its weaker
+endpoint when read as a two-sided statement. The growth question that motivated
+the estimator study remains open, and we present no estimate of the growth rate
+anywhere in this paper. The large-$k$ divisibility bound is conditional on a
+realizability assumption: it is available where the plug-in certificate is lost,
+which makes it useful, but it is not distribution-free and that limits how
 strongly it may be worded.
 
 \subsection{Ethics considerations}
 \label{sec:discussion/ethics}
 
-All measurements are on a public research corpus of backbone traffic collected
-by its operators under their own ethics and data-handling framework. We consume
-flow metadata and do not attempt to identify users, reconstruct content, or
-deanonymize any flow. The identifier analysis in
-\Cref{sec:discussion/sensitivity} compares a hashed address against a random
-identifier at matched resolution and reports an aggregate separation statistic;
-no per-flow identifier value is reported. The result is a defensive instrument:
-it tells an operator what error floor is impossible at a given observation
-window, which is the information needed to judge whether a reported detection
-gain is close to the limit of what the channel can support.
+All measurements use a public corpus collected by its operators under their own
+data-handling framework. We consume flow-level metadata only, attempt no
+deanonymization, and report no per-flow identifier values. The result is a
+defensive auditing instrument; the appendix sets out the full considerations.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/paper/fig4_cross_corpus.pdf}
+\includegraphics[width=0.82\textwidth]{figures/paper/fig4_cross_corpus.pdf}
 \caption{Robustness across corpora. (a) Per-side fractions on the primary corpus
-and on an independent corpus. Upper side carries the true upper fractions, which
-differ between corpora ($0.3434$ against $0.1608$); the lower side reproduces
-almost exactly ($0.9960$ against $0.9967$); the joint gate carries $0.3394$
-against $0.1575$. The independent corpus's joint gate combines a full-$n$ upper
-side with a lower side capped at $20{,}000$ flows per service, shown hatched;
-because capping can only weaken $\epslo$, the bias is conservative. This joint
-gate is a mixed-strength measurement, not an exact finite-sample two-sided
-certificate. (b) The gate gap by minimum per-pair flow count, narrowing from
-$18.2$ percentage points unmatched to $9.7$ points once pairs are matched at a
-minimum of $20{,}000$ flows.}
+and on CESNET-QUIC22: the lower side reproduces almost exactly ($0.9960$ against
+$0.9967$) while the upper side and joint gate differ. The QUIC22 joint gate
+combines a full-$n$ upper side with a lower side capped at $20{,}000$ flows per
+service, shown hatched; capping can only weaken $\epslo$, so the bias is
+conservative, and this is a mixed-strength measurement rather than an exact
+finite-sample certificate. (b) The gate gap by minimum per-pair flow count,
+plotted as the joint-gate fraction difference over the pairs present at each
+floor. The gap is largest unmatched, narrows to a minimum at $20{,}000$, then
+widens again: the series is not monotone, so ``matched evidence'' is not one
+point. Under a service-cluster bootstrap the unmatched gap excludes zero while
+the deeper strata do not, so the matched-evidence gap is not resolved at this
+sample size.}
 \label{fig:cross_corpus}
 \end{figure*}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/paper/fig5_channel_sensitivity.pdf}
-\caption{Channel sensitivity. The matched difference in the radius-free estimate
-$\widehat{tv}$ between the identifier-dependent arm and the identifier-independent
-random-identifier arm, as a function of alphabet cardinality $B$. The difference
-grows with identifier cardinality before both arms saturate. The quantity is the
-radius-free estimate only: no two-sided interval is emitted by this experiment
-and no certificate-level implication follows from it.}
-\label{fig:sensitivity}
-\end{figure}

@@ -14,29 +14,26 @@ the pair is genuinely separable. Neither is available from a classifier's own
 accuracy, which measures one system rather than the problem.
 
 We write the bracket as in \eqref{eq:bracket} and call each endpoint by what it
-is. The upper endpoint is finite-sample strict: it holds at the observed flow
-counts with a stated confidence, under no assumption on the shape of $P$ or $Q$
-beyond the alphabet being finite. The lower endpoint is asymptotic. When the
-interval is read as a two-sided statement it inherits the weaker of the two
-guarantees, which is why we report the sides separately and quote the gate as a
-conjunction \eqref{eq:gate} rather than as a single certified number.
+is. The upper endpoint is finite-sample and holds at the observed flow counts
+with a stated confidence, under no assumption on $P$ or $Q$ beyond a finite
+alphabet; the lower endpoint is a classifier-based bound at a nominal level,
+distribution-free in the same sense but conditional on the fitted decision
+function. Both carry a confidence level, so we report them separately and quote
+the gate as a conjunction \eqref{eq:gate} rather than folding them into one
+number.
 
 \subsection{Prior information bounds on traffic analysis}
 \label{sec:background/prior}
 
-The idea of bounding traffic-analysis performance from information-theoretic
-quantities rather than measuring it is well established.
-\citet{cherubin2017bayes} gives feature-set-conditional Bayes-error bounds for
-website fingerprinting, a closed-set error floor and the closest precedent for
-our upper side. Work on anonymity follows the same route, from an entropy-like
-quantity or a metric on distributions toward a bound on what an adversary can
-infer \citep{serjantov2003metric,ghaderi2010anonymous,venkitasubramaniam2008eavesdroppers,venkitasubramaniam2008chaum},
-and the quantitative-information-flow literature supplies closely related
-indistinguishability notions with error bounds
-\citep{chatzikokolakis2007error,chatzikokolakis2008noisy}. Our construction
-differs in being an explicit interval whose two endpoints come from different
-machinery, measured on real trace data, with the asymmetry between the endpoints
-kept visible rather than averaged away.
+Bounding traffic-analysis performance from information-theoretic quantities,
+rather than measuring it, is well established. \citet{cherubin2017bayes} gives
+feature-set-conditional Bayes-error bounds for website fingerprinting, a
+closed-set floor and the closest precedent for our upper side. Work on anonymity
+and quantitative information flow follows the same route, from an entropy-like
+quantity or a metric on distributions toward a bound on inference
+\citep{serjantov2003metric,ghaderi2010anonymous,venkitasubramaniam2008eavesdroppers,venkitasubramaniam2008chaum,chatzikokolakis2007error,chatzikokolakis2008noisy}.
+Our construction differs in being an explicit interval on real trace data, with
+the difference between its endpoints kept visible rather than averaged away.
 
 The most directly relevant recent results are the side-channel leakage
 inevitability theorem of \citet{liu2026inevitability} and its rate-distortion
@@ -48,7 +45,9 @@ i.i.d.\ repeated observations, and the frontier in the second is proved within a
 stationary-memoryless class. Packet prefixes satisfy neither condition. Our
 measurement makes no such assumption and instead reports what is certifiable
 about the dependent prefix law as it stands, which is why the upper side is
-distribution-free while the lower side is asymptotic rather than exponential.
+distribution-free, while the lower side is a classifier-based bound whose
+width is set by the adversarial choice of decision function rather than by an
+exponential decay rate.
 
 \subsection{Estimating and testing total variation}
 \label{sec:background/tv_est}
@@ -66,28 +65,22 @@ relates discriminative estimation of total variation to classification risk
 under a hypothesis-class assumption, which is the route we take for the
 conditional large-prefix bound where the plug-in certificate is unavailable.
 
-On the open-set side, generalization and learnability results
-\citep{fang2021learning,garov2025closer} characterize what can be guaranteed for
-detectors that must reject unknown classes. Those guarantees bound the risk of a
-learning procedure; ours bounds the separation available in the data. The two
-are complementary rather than competing, because a learnability bound says how
-well a detector can be trained while a bracket says how much room there is to
-train into. Quantifying the unknown-class mass that a bracket over observed
-services necessarily omits is a separate problem with its own literature
-\citep{orlitsky2016optimal,eriksson2026unseen}, which we use for the site-level
-term in \Cref{sec:discussion/missing_mass}.
+Open-set generalization and learnability results
+\citep{fang2021learning,garov2025closer} bound the risk of a learning procedure;
+ours bounds the separation available in the data, and the two are complementary
+since a learnability bound says how well a detector can be trained while a
+bracket says how much room there is to train into. The unknown-class mass a
+bracket over observed services omits is a separate problem with its own
+literature \citep{orlitsky2016optimal,eriksson2026unseen}, used for the
+site-level term in \Cref{sec:discussion/missing_mass}.
 
 \subsection{The QUIC observable}
 \label{sec:background/quic}
 
-QUIC's wire image exposes a packet-level view from which an observer can recover
-packet directions and sizes and their timing, while application content stays
-behind encryption; \citet{kuhlewind2022rfc} documents this for operators. The
-observable we use is the (direction, size) sequence of the leading packets, and
-the prefix length and alphabet resolution are the two parameters we pre-register
-and vary. Timing is deliberately excluded, and we measure the consequence of
-excluding the host identifier rather than asserting that the exclusion costs
-nothing. Prior work establishes both the relevance and the difficulty of this
-setting \citep{smith2021website,li2023facing,jerabek2025simple}, and recent
-surveys map the surface against which a bracket has to be interpreted
-\citep{wickramasinghe2025sok}.
+QUIC's wire image exposes a packet-level view from which an observer recovers
+packet directions, sizes, and timing, while content stays behind encryption;
+\citet{kuhlewind2022rfc} documents this for operators. We use the
+(direction, size) sequence of the leading packets, with prefix length and
+alphabet resolution as the two parameters we pre-register and vary. Timing is
+deliberately excluded, and we measure the cost of excluding the host identifier
+rather than asserting it is free.
