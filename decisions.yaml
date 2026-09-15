@@ -1,4 +1,4 @@
-_next_id: 85
+_next_id: 99
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -4850,10 +4850,10 @@ decisions:
 
     (2) The runner was then synced to the server (16,592 B, D057 wording at line 350,
     deployed correctly with backup, managed upload, py_compile and before/after sha256)
-    but was NOT re-run, so the stored artifact kept the bare label. This instance is
-    recorded HERE, as D079; an earlier wording of this paragraph said "Logged as D084",
-    naming an ID that did not then exist. Corrected so D084 unambiguously means the
-    later, unrelated ruling on the bound''s alphabet.
+    but was NOT re-run, so the stored artifact kept the bare label. This instance
+    is recorded HERE, as D079; an earlier wording of this paragraph said "Logged as
+    D084", naming an ID that did not then exist. Corrected so D084 unambiguously means
+    the later, unrelated ruling on the bound''s alphabet.
 
 
     (3) The runner was then re-run server-side and produced 123,295 B / 4061258e with
@@ -5251,3 +5251,333 @@ decisions:
       premise test'
   depends_on:
   - D083
+- id: D085
+  date: 2026-09-14 17:59 UTC
+  summary: 'D099: Fix C3(ii) title–body contradiction and X3 registry label per Reviewer
+    audit'
+  rationale: 'Reviewer independently verified all three X3 control artifacts, confirmed
+    D046 reframing is legitimate and honest, but found two internal-consistency issues:
+    (1) registry `conclusion: "success"` contradicts the artifacts'' `DOWNGRADED-TO-INCONCLUSIVE`
+    — changed to `reframed`; (2) C3(ii) section title said "supporting evidence" while
+    body said "NOT evidence" — title changed to "THE VACATED BIC-VOTE RESULT — NOT
+    evidence for dependence" and all five "existence corroboration" references updated
+    to "vacated BIC-vote result" throughout paper_framing.md. Both are label/title
+    fixes; no scientific conclusion changed.'
+  related_experiments:
+  - exp_id: X3
+    role: subject
+    result: conclusion relabeled from success to reframed; C3(ii) title corrected
+  depends_on: []
+- id: D086
+  date: 2026-09-14 18:48 UTC
+  summary: 'D086: X9_E verdict — negative on dose-only hypothesis; positive on channel-sensitivity
+    finding'
+  rationale: 'X9_E falsified the "move-together" hypothesis: at matched declared m,
+    the SNI-dependent arm (DST_IP hash) yields systematically higher TV than the SNI-independent
+    arm (random ID hash), with median delta_tv_hat growing monotonically from 0.03
+    (B=2) to 0.36 (B=256) before collapsing to 0 once both arms saturate. 703 matched
+    pairs per rung, train/test flow-disjoint and time-disjoint. Additionally, DST_IP
+    is non-deterministic (8,323 of 10M rows map one QUIC_SNI to multiple DST_IPs),
+    yet the identifier effect dominates through the conflation. This establishes that
+    the epsilon bracket is NOT identifier-agnostic: the choice of identifier channel
+    is a methodological degree of freedom that affects the certificate value. Paper
+    treatment: explicit "channel sensitivity" discussion paragraph beyond a mere methods
+    caveat — the dose-response curve is a quantitative finding, not an auxiliary limitation.'
+  related_experiments:
+  - exp_id: X9_E
+    result: negative on dose-only, positive on channel-sensitivity
+    role: primary
+  - exp_id: X9
+    result: confounded predecessor, attribution OPEN
+    role: predecessor
+  depends_on: []
+- id: D087
+  date: 2026-09-14 19:19 UTC
+  summary: 'D087: X9_E claim boundary — identifier effect is tv_hat-level, not ε-certificate-level'
+  rationale: 'Reviewer flagged a claim-strength boundary on X9_E that I had already
+    over-extended in the ROADMAP. The falsified dose-only hypothesis is established
+    at the tv_hat (radius-free estimate) level ONLY: eps_hi is comparison_unavailable
+    at every rung because at least one arm saturates, and eps_lo is absent. Therefore
+    the paper may claim the identifier changes radius-free separation beyond a pure
+    cardinality effect, but MUST NOT claim it destroys the ε-certificate or degrades
+    the bracket — that is object substitution (tv_hat estimate → ε-certificate), the
+    same class as the X12/D064 error. Fixed in ROADMAP and recorded as a binding claim
+    boundary for the paper.'
+  related_experiments:
+  - exp_id: X9_E
+    result: negative on dose-only; channel-sensitivity at tv_hat level only
+    role: subject
+  depends_on: []
+- id: D088
+  date: 2026-09-14 19:35 UTC
+  summary: 'D088: Correct ROADMAP X9/X9_E wording — identifier is the dominant contributor,
+    not the cardinality'
+  rationale: 'Reviewer flagged a critical ROADMAP contradiction: line 19 said X9''s
+    +0.39 was "fully attributed" to a declared-alphabet artifact, which a paper writer
+    would read as "the identifier effect is all cardinality artifact" — the exact
+    opposite of X9_E''s finding. The two statements measure different quantities:
+    X9''s +0.39 was an eps_hi delta at m=256^10 (radius 3.7e9 clips all 1406 pairs,
+    so that number IS a clipping artifact); X9_E at sane m measured tv_hat, where
+    the identifier arm contributes ~0.34 while the cardinality-only arm contributes
+    ~0.04 at B=256. So the identifier is the dominant contributor, not the cardinality.
+    Rewrote both lines. Also corrected the coverage line: negative conclusions are
+    completed findings, not failures.'
+  related_experiments:
+  - exp_id: X9
+    result: eps_hi delta was a clipping artifact at m=256^10
+    role: context
+  - exp_id: X9_E
+    result: identifier dominates cardinality at tv_hat level
+    role: primary
+  depends_on: []
+- id: D089
+  date: 2026-09-14 20:10 UTC
+  summary: 'D089: X13 bootstrap interval is invalid — multinomial bootstrap resamples
+    the observed set, not the unseen mass'
+  rationale: 'Reviewer found a critical defect in X13''s confidence interval, and
+    I verified it directly. The point estimate missing_mass = 0.002024 (f1/n = 10198/5039616)
+    is correct. But the bootstrap interval [0.000938, 0.000981] (center 0.000960)
+    does not contain the point estimate and is 2.1x smaller — the hard signature of
+    measuring the wrong quantity. The runner used rng.multinomial(n, observed_counts/n),
+    which resamples from the OBSERVED species set and therefore treats it as complete:
+    unseen species (exactly what missing mass estimates) do not exist in the resample.
+    The expected singleton rate under that bootstrap is Σ p_i(1-p_i)^(n-1) ≈ 0.0009,
+    matching the reported mean. So the interval estimates "singleton rate of future
+    samples from the observed distribution", not "probability mass of unseen species".
+    Plan required Eriksson-type; runner substituted naive multinomial bootstrap because
+    "no implementation available" — honest annotation does not rescue a wrong-quantity
+    estimator.'
+  related_experiments:
+  - exp_id: X13
+    result: point estimate correct; bootstrap interval measures wrong quantity
+    role: subject
+  depends_on: []
+- id: D090
+  date: 2026-09-14 20:47 UTC
+  summary: 'D090: X12 containment WAS executed at k=5 (9/9 reject_null=false); the
+    warning cited a deleted k=15 file'
+  rationale: 'Reviewer issued a warning that X12 containment "has literally never
+    been executed", citing artifact x12_detector_validation.json (k=15, timestamp
+    04:59). I verified directly: that file no longer exists on disk or in the manifest.
+    The live artifact is artifacts/X12_k5/data/x12_detector_validation_k5.json, registered
+    as art_20260914_082a7f with content_sha256 14f0f581dc52. Its floor_violation_test.status
+    = "computed", pair_count = 990, strata informative=340/secondary=540/excluded=110,
+    per_detector carries 9 binomial tests across lightgbm (3 holdouts) + prototype
+    + ronetc (pcap_encoder errored ModuleNotFoundError), all 9 reject_null=false with
+    real p-values (0.9954, 0.9765, 1.0×7). So containment WAS executed and holds.
+    One minor gap: the per-holdout violations/trials fields are absent (None) in the
+    artifact though the Agent''s report cited 8/340 and 3/340, which are consistent
+    with the p-values (binomtest p for 8/340 = 0.9954). Conclusion: the warning is
+    a stale-file false alarm; the k=5 containment is real and citable.'
+  related_experiments:
+  - exp_id: X12_k5
+    result: containment executed, 9/9 reject_null=false
+    role: subject
+  depends_on: []
+- id: D091
+  date: 2026-09-14 21:00 UTC
+  summary: 'D091: X8 DPI check is vacuous (0/990 testable); relabel as smoke-test,
+    empirical claim stands alone'
+  rationale: 'Reviewer flagged X8''s DPI sanity check as vacuous, and the artifact
+    confirms it: pairs_where_dpi_check_can_falsify = 0, and check_is_sanity_not_detector_note
+    admits a vector-side Michel LOWER bound below pooled tv_hat is "expected and not
+    a falsification". The check compares a LOWER bound on vector (Michel HPLB) against
+    a POINT ESTIMATE of pooled (tv_hat) — dimensionally incoherent for a DPI-violation
+    detector, so the falsification clause in the hypothesis is unreachable. dpi_sanity_pass_pairs:
+    990 reads as "990/990 passed" when the honest form is "0/990 testable" — the exact
+    X6/D071 class ("0/120" that should have been "45/45 testable").
+
+
+    RULING: (b) — do not rebuild the like-with-like check (that needs vector-level
+    tv_hat, out of scope and unnecessary). Relabel the DPI check as a sanity smoke-test,
+    remove the "holds per pair" wording, and state plainly that dpi_violations: 0
+    is not a verified theorem. The empirical claim is separately sound and does NOT
+    depend on the DPI check: a Michel LOWER bound (0.867) above a kprefix POINT ESTIMATE
+    (0.580) implies true vector TV >= 0.867 > ~0.580, so "vector resolves more" holds
+    without the sanity check. C1 is unaffected (X1 bracket + X12 containment are load-bearing).'
+  related_experiments:
+  - exp_id: X8
+    result: empirical claim sound; DPI check vacuous (0/990 testable)
+    role: subject
+  depends_on: []
+- id: D092
+  date: 2026-09-14 21:42 UTC
+  summary: 'D092: X11 full bracket closes D076 — joint-gate gap narrows to ~10 pts
+    at matched n but does not vanish'
+  rationale: 'X11 full two-sided bracket completed on CESNET-QUIC22 (3,321 pairs),
+    closing D076''s open requirement. Verified from the artifact directly: pair_count
+    3321, upper 534 (16.08%), lower 3310 (99.67%), JOINT gate 523 (15.75%), eps_lo<=eps_hi
+    violations 0, tuning_performed false, upper side reconciles with the feasibility
+    pass to machine precision. The lower side (99.67% QUIC22 vs 99.60% primary) REPRODUCES
+    almost exactly despite using a different method (Michel adaptive) from the upper
+    side. The n-stratified comparison now covers the JOINT gate (D076 covered upper-side
+    only), and the key finding is stronger than D076 alone: at matched min(n_a,n_b)
+    the gap NARROWS but does NOT close — all-pairs 18.2 pts, >=13049 15.5 pts, >=20000
+    9.7 pts, >=40000 13.3 pts, >=80000 16.0 pts. So the residual cross-corpus difference
+    is real and survives scale matching; D076''s "must not cite 0.1608 as corpus non-extrapolability"
+    now has its matched comparison, and the honest citable form is the stratum-matched
+    pair, not the raw single point.'
+  related_experiments:
+  - exp_id: X11
+    result: full two-sided bracket; joint gate 15.75% vs 33.94%; gap narrows to 9.7pts
+      at matched n but persists
+    role: primary
+  depends_on: []
+- id: D093
+  date: 2026-09-14 21:47 UTC
+  summary: 'D093: X11 joint gate mixes two sample sizes (conservative bias); disclose
+    per-side n, fix registry pointer'
+  rationale: 'Reviewer flagged that X11''s joint gate ANDs ε_hi at full n with ε_lo
+    at a 20,000/service cap. Verified: 2,145/3,321 QUIC22 pairs are capped on the
+    lower side (n_a/n_b full e.g. 196,347/356,415 vs lower_n_a/lower_n_b = 20,000).
+    This is the D065-class object note: two bounds at different n must not be tabulated
+    without disclosure. The bias direction is favourable and worth stating: a lower
+    bound computed with less data is weaker (smaller), so the cap can only shrink
+    ε_lo and understate the joint gate — the reported 15.75% is CONSERVATIVE, not
+    inflated. Supporting evidence: only 16 of 534 upper-certifiable pairs sit near
+    the ε_lo=0.05 boundary, and the gate is upper-bounded. Requires disclosure in
+    the artifact and captions, and the same check applied to the primary corpus''s
+    0.3394. Also: the full-bracket artifact (art_20260914_c2a33e) is off-surface —
+    manifest entry lacks content_sha256 and the registry still points at the feasibility
+    artifact (b1fdde), so X11''s registry conclusion rested on the wrong artifact.'
+  related_experiments:
+  - exp_id: X11
+    result: joint gate mixes full-n upper with capped-n lower; bias is conservative;
+      artifact off-surface in registry
+    role: subject
+  depends_on: []
+- id: D094
+  date: 2026-09-14 22:36 UTC
+  summary: 'D094: artifact chain-of-record is local+manifest+registry; server scratch
+    divergence is benign and need not be pushed back'
+  rationale: 'Reviewer flagged that local and server diverged on the X12_k5 artifact:
+    local 193,228 B / bebe6bf0 with backfill_note; server 192,372 B / 71fa0233 without
+    it. Verified locally: local, manifest (art_20260914_082a7f), and registry (X12_k5
+    spec) are ALL in agreement at 193,228 B / bebe6bf0, and the artifact carries the
+    backfill_note with 9 violations counts. So the canonical chain is internally consistent;
+    only the server scratch copy lags. This is the two-tree pattern INVERTED (previously
+    server led, local lagged), and it is the benign direction to diverge in: the artifact
+    was ENRICHED (provenance note added) after the run, and the run output itself
+    is unchanged (pair_count 990, strata 340/540/110 identical). RULING: do NOT push
+    the note back to the server. The project invariant for artifacts is chain-of-record
+    = LOCAL (tracked in git) + MANIFEST sha + registry pointer; the server is a compute
+    scratch copy, not a distribution surface, and git is the durable record. Pushing
+    a hand-edited artifact back onto the server would also risk it being overwritten
+    by a future re-run. Record the invariant explicitly rather than leaving the divergence
+    undocumented.'
+  related_experiments:
+  - exp_id: X12_k5
+    result: backfill_note added post-run; canonical chain local+manifest+registry
+      agrees; server scratch lags
+    role: subject
+  depends_on: []
+- id: D095
+  date: 2026-09-14 23:12 UTC
+  summary: 'D095: the 5 unlinked experiments split into MVP-era legacy (E3/E7/E10,
+    expected) and C3 evidence (X3_A/X3_B, deserve entries)'
+  rationale: 'Freshness check flagged 5 experiments (34.8%) unlinked to plan entries:
+    E10, E3, E7, X3_A, X3_B. Inspected each. Two distinct causes: (i) E3/E7/E10 are
+    MVP-era runs created 2026-09-13 18:50-20:04, BEFORE the formal experiment_plan.yaml
+    existed (X1 first created 2026-09-14 01:46) - they are legacy runs the plan was
+    written after, so "not linked" is expected, not a gap; (ii) X3_A and X3_B are
+    the two estimator-repair variants that constitute the EVIDENCE for C3''s methods/limits
+    finding - real, hypothesis-bearing experiments with completed conclusions (both
+    negative), but never added as plan entries since X3''s plan entry lists only claim
+    [C3] and does not reference them. RULING: X3_A/X3_B deserve explicit plan entries
+    under C3 (they are load-bearing evidence, not incidental); E3/E7/E10 should be
+    marked legacy-MVP in a note so the freshness check''s signal is explained rather
+    than recursing. The check itself is behaving correctly - it is detecting exactly
+    the plan-era boundary - so no tool change is warranted.'
+  related_experiments:
+  - exp_id: X3_A
+    result: negative; evidence for C3 methods/limits
+    role: unlinked_evidence
+  - exp_id: X3_B
+    result: negative; evidence for C3 methods/limits
+    role: unlinked_evidence
+  - exp_id: E3
+    result: MVP-era legacy
+    role: legacy
+  - exp_id: E7
+    result: MVP-era legacy, failed
+    role: legacy
+  - exp_id: E10
+    result: MVP-era legacy
+    role: legacy
+  depends_on: []
+- id: D096
+  date: 2026-09-15 00:20 UTC
+  summary: 'D096: do not force X9_C to terminal; accept the status-vocabulary gap
+    and annotate (costs passive mode, not integrity)'
+  rationale: 'The passive-mode gate refuses entry while X9_C is non-terminal, and
+    the state machine refuses PREPARING->DONE (only PENDING/QUEUED permitted). Reaching
+    DONE therefore requires walking QUEUED->ALLOCATED->RUNNING->DONE, which would
+    write transition checkpoints asserting a managed run for a design that was withdrawn
+    and never executed - exactly what M131 forbids. DECISION: accept the non-terminal
+    status, do not force the transition, and annotate the row to say why. This follows
+    D094, which was written about this precise row: a refused transition on an object
+    the state machine does not govern is a categorisation fact, and the remedy is
+    annotation, not a workaround. It does not reverse D088 (a withdrawn design must
+    not read as live) - it accepts that the status vocabulary cannot express ''withdrawn'',
+    so the note carries that meaning instead, and the fields that would be fabricated
+    (pid/allocation/tmux) stay null. TRADE-OFF ACCEPTED: the project cannot enter
+    passive mode while this row is non-terminal. That is a tool-vocabulary gap (no
+    cancelled/withdrawn value), not unfinished work, and it costs only the quiet-idle
+    convenience, not any scientific or provenance integrity. Flagged for the platform.'
+  related_experiments:
+  - exp_id: X9_C
+    result: withdrawn, never run; status cannot reach a terminal value without fabricating
+      history
+    role: subject
+  depends_on:
+  - D088
+  - D094
+- id: D097
+  date: 2026-09-15 03:59 UTC
+  summary: 'D097: figures verified (fig3 synthetic data fixed, shas recorded, generators
+    committed); bib fix and scratch-entry retirement still unlanded'
+  rationale: 'Verified the figure rebuild independently. (1) fig3 panel (b) is genuinely
+    fixed: the data file now deviates from sigma((k-18)/2) by max 0.204 (previously
+    exactly 0.000e+00), so it is the real artifact series from x3_control_occupancy_dose_response.json,
+    not the generated sigmoid. The Paper Agent also found the effective-n column was
+    a geometric decay with constant ratio 0.6065 — both columns were generated, and
+    it corrected the Results prose from 1.09 to 1.0. (2) All five figure manifest
+    content_sha256 values now match their files bit-for-bit (fig1 cb64fde5, fig2 d3b21d28,
+    fig3 c9546605, fig4 4eee2b1e, fig5 67f2d2e9) — I recomputed each from disk. (3)
+    Generators committed at figures/paper/_generators/ (build_data.py reads manifest-resolved
+    artifacts and records per-file sha256 in DATA_PROVENANCE.json; render_figs.py
+    and render_fig1.py). TWO ITEMS DID NOT LAND: the four g0_candidate_*.png chart
+    entries are still live in the manifest with null shas, and references.bib still
+    has 38 entries with all four direct-competitor/baseline keys absent. Sections
+    drafted: measurement_design, results, discussion, introduction, conclusion; background
+    and related_work were rejected on citation validation because references.bib did
+    not exist at write time.'
+  related_experiments:
+  - exp_id: X3
+    result: fig3 rebuilt from the real artifact; sigmoid deviation now 0.204
+    role: subject
+  depends_on: []
+- id: D098
+  date: 2026-09-15 04:00 UTC
+  summary: 'D098: do not reshape registry keys to satisfy a validator that cannot
+    read nested paths; record the path instead'
+  rationale: 'The provenance validator reports 4/21 (19%) Tier-3 untraced claims,
+    all because their registry metrics live at nested paths (X1.headline_cell_m1_k5,
+    X11.joint_gate_fraction, X3.plain_statement, X8-class block strings) that the
+    validator cannot descend into. The Paper Agent offered to reshape the evidence
+    keys. RULING: do not restructure the registry to satisfy the tool. A validator
+    that cannot read a nested path has a limitation; changing the record''s shape
+    to match the tool''s parser would let the instrument dictate the fact. Instead:
+    write the full dotted path beside each such number in the draft so a human can
+    follow it, and record the validator''s nested-path limitation explicitly. Same
+    principle as the day''s other rulings — when a tool refuses or cannot see something,
+    ask first whether the object is the kind of thing the tool governs, rather than
+    deforming the object.'
+  related_experiments:
+  - exp_id: X1
+    result: headline_cell_m1_k5 nested; manual path recorded
+    role: subject
+  - exp_id: X11
+    result: joint_gate_fraction nested; manual path recorded
+    role: subject
+  depends_on: []

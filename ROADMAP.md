@@ -1,6 +1,8 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-14 19:12 UTC | Update reason: Condense 1270-line accumulated narrative to a dashboard; incorporate X9_E verdict, X12 Stage 2 blocker, cross-tree audit, and current coverage
+> Last updated: 2026-09-15 01:00 UTC | Update reason: Writing window open: research complete, Full Draft dispatched to the Paper Agent; adds figures task and the X9_C tool-gap gate
+
+> Last updated: 2026-09-15 00:45 UTC · writing window OPEN — Full Draft dispatched to the Paper Agent.
 
 ## Core direction
 
@@ -8,45 +10,45 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 ## The three claims
 
-- **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). DONE.
-- **C2** — the certificate horizon is short; the coarsest channel is the only viable rung (upper-only fraction falls monotonically in M). DONE, incl. the divisibility lower bound (X6) at large k where the plug-in certificate is lost.
-- **C3** — methods/limits: the standard plug-in chain-rule estimator **cannot adjudicate** the dependent-prefix growth question; robust to two independent repairs. DONE (reframed from a growth-rate claim).
+- **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). Supported in **two independent settings** (primary corpus + X11 cross-corpus). DONE.
+- **C2** — the certificate horizon is short; the coarsest channel is the only viable rung. DONE, incl. the divisibility lower bound (X6) at large k where the plug-in certificate is lost.
+- **C3** — methods/limits: the standard plug-in chain-rule estimator **cannot adjudicate** the dependent-prefix growth question; robust to two independent repairs (X3_A, X3_B). DONE.
 
 ## Current progress
 
-- **MVP passed**; the three claims are all supported by completed experiments. **All claims fully backed.** ⚠ **The coverage tool's percentages are misleading and must not be read as gaps:** it classifies `conclusion: negative` as "failed", so it reports C1 83.3% (X9, X9_E negative), C3 33.3% (X3_A, X3_B negative) — but **the negatives ARE the evidence**. C3's claim is "the standard estimator cannot adjudicate the growth question"; X3_A/X3_B *failing their known-truth gates is what establishes it* (D046/D055/D064). **Evidentiary coverage is 100% for all three claims.** A negative result is a completed finding, not a failure — noted, not "fixed" in the tool.
-- **X9_E completed (negative→channel-sensitivity finding).** The dose-only hypothesis is falsified: at matched declared m, the SNI-dependent arm (DST_IP hash) yields systematically higher TV than the SNI-independent arm (random ID), median delta growing 0.03→0.36 before both saturate. **⚠ CLAIM BOUNDARY (D087, reviewer-flagged): the identifier effect is established at the `tv_hat` (radius-free estimate) level ONLY — `eps_hi` is `comparison_unavailable` at every rung (an arm saturates), and `eps_lo` is absent.** ⇒ The paper may write "identifier content changes radius-free separation, beyond a pure cardinality effect" — **must NOT write "SNI destroys the ε-certificate" or "degrades the bracket"** (object substitution, same class as X12/D064). Plus: `DST_IP ≠ f(QUIC_SNI)` (8,323 SNI values map to multiple DST_IPs).
-- **X9's original +0.39 SNI delta was a clipping artifact of the `eps_hi` measurement, and X9_E separated the confound — the identifier effect is REAL, not the cardinality.** Specifically: X9's +0.39 was `eps_hi` at m=256^10 where radius≈3.7e9 clips all 1406 pairs (that number is a clipping artifact); X9_E then measured at sane m and found the identifier contributes ~0.34 of `tv_hat` separation while the cardinality-only arm contributes ~0.04 at B=256. **The identifier is the dominant contributor, not the cardinality.**
-- **X11 full two-sided bracket on CESNET-QUIC22 (independent corpus) — C1's strongest answer to "one dataset".** 3,321 pairs: upper 16.08%, lower 99.67%, **joint gate 15.75%** (primary: 33.94%). **The lower side reproduces across corpora (99.67% vs 99.60%)** — not a foregone conclusion, since it uses a different method (Michel adaptive) from the upper side. **Scale-matched, the joint-gate gap narrows to 9.7 pts (min n ≥ 20,000) but does not vanish** — so the residual is real, and the citable form is the stratum-matched pair, **not** the raw single 0.1608 point (closes D076). ⚠ **Disclosed (D093):** the joint gate ANDs full-n upper with capped-20k lower (2,145/3,321 capped); the bias is **CONSERVATIVE** (a weaker ε_lo understates the gate), stated in the artifact.
-- **X12 k=5 containment holds** (9/9 cells, guard cannot fire at corrected rates); detector panel (lightgbm/prototype/ronetc) validated. **X12 Stage 2 (containment statistic) IS implemented and ran** — `build_containment_join` sources X1 upper bounds, calls `eibo.statcore`'s `error_floor_lower_bound`, computes informative/secondary/excluded strata (340/540/110), floor `(1−eps_hi)/2`, and a one-sided binomial α=0.05 unsplit; **all detectors × all holdouts `reject_null=false`**. Pair object: macro-average of the two per-service error rates (documented `PAIR_OBJECT_STATEMENT`).
-- **Provenance discipline is now load-bearing**: manifest `content_sha256` on all live entries; runner self-hash captured at import and recorded *in the artifact*; the flat-vs-nested two-tree layout resolved via `resolve_existing_path` (flat first). A cross-tree input audit (19 runners, 53 paths) found one snapshot-only defect (already fixed) and four silent-fallback sites (provenance-only, deferred).
+- **Research phase COMPLETE; writing phase OPEN.** All three claims fully backed. ⚠ **The coverage tool's percentages are misleading and must not be read as gaps:** it classifies `conclusion: negative` as "failed", so it reports C1 83.3% (X9, X9_E negative), C3 33.3% (X3_A, X3_B negative) — but **the negatives ARE the evidence**. C3's claim is "the standard estimator cannot adjudicate"; X3_A/X3_B *failing their known-truth gates is what establishes it*. **Evidentiary coverage is 100% for all three claims.**
+- **X11 full two-sided bracket on CESNET-QUIC22 (independent corpus) — C1's answer to "one dataset".** 3,321 pairs: upper 16.08%, lower 99.67%, **joint gate 15.75%** (primary: 33.94%). **The lower side reproduces across corpora (99.67% vs 99.60%)** — not a foregone conclusion, since it uses a different method (Michel adaptive). **Scale-matched, the joint-gate gap narrows to 9.7 pts (min n ≥ 20,000) but does not vanish** — the citable form is the stratum-matched pair, **not** the raw single 0.1608 point (closes D076). ⚠ **Disclosed (D093):** the gate ANDs full-n upper with capped-20k lower (2,145/3,321 capped); bias is **CONSERVATIVE**.
+- **X9_E — channel-sensitivity finding.** Dose-only hypothesis falsified: at matched declared m the SNI-dependent arm separates from the SNI-independent arm, delta growing 0.03→0.36 before both saturate. **⚠ CLAIM BOUNDARY (D087): established at the `tv_hat` level ONLY** — `eps_hi` is `comparison_unavailable` at every rung, `eps_lo` absent. May write "identifier changes radius-free separation beyond cardinality"; must NOT write "SNI destroys the ε-certificate".
+- **X12 k=5 containment holds** (9/9 cells, all detectors `reject_null=false`, guard cannot fire at corrected rates); counts backfilled and verified against their p-values.
+- **Provenance discipline is load-bearing**: manifest `content_sha256` on all live entries; runner self-hash captured at import and recorded *in the artifact*; the flat-vs-nested two-tree layout resolved via `resolve_existing_path` (flat first). Cross-tree audit (19 runners, 53 paths): one defect found and fixed, four provenance-only silent-fallback sites deferred.
 
 ## Near-term tasks
 
-- [x] **x3_parametric_growth re-run + pull** — DONE; withdrawn sentence gone from both trees, sha 1a6f9f65 matches manifest.
-- [x] **x3_axis_validation pull + re-register** — DONE; art_20260914_de3248, 123,295 B, sha 4061258e.
-- [x] **X13 manifest consolidation + pointer fix** — DONE; single live entry art_20260914_0c143b, sha 430ebed6; two retired; spec.artifact_id now resolves to the live entry.
-- [x] **X8 DPI relabel** — DONE; sha 0f8b83bb, 0/0 testable, smoke-test label, empirical claim note recorded.
-- [x] **X12 k=5 violations/trials backfill** — DONE; 9/9 counts persisted and all reproduce their recorded p-values; `backfill_note` in-artifact; local == manifest == registry at 193,228 B / `bebe6bf0`.
-- [ ] **Paper: channel-sensitivity section** — X9_E dose-response finding, scoped to `tv_hat` per D087 (Paper Agent territory, later).
+- [ ] **Paper Full Draft (in progress)** — dispatched to the Paper Agent. Deliverable `docs/paper/main.tex` + `main.pdf`; `writing_plan.yaml` to be approved before section drafting. Binding claim constraints: X9_E scoped to `tv_hat` (D087); X11 per-side n disclosed (D093); X8 DPI check is a smoke-test (D091); C3 reframed (D046); venue not downgraded.
+- [ ] **Figures** — dose-response curve (X9_E ladder), the cross-corpus bracket comparison (X11), and the C2 horizon/rung plot. Route non-statistical figures via Agentic Figure; data plots via the approved data path.
+- [ ] **x6 input-path resolver** — standing item; give x6's four hardcoded inputs the flat-first resolver **when x6 is next edited** (do not retrofit now).
+- [ ] **Four silent-fallback sites** (E7 ×2, Q2 v3, X3 controls) — provenance-only; fix when those files are next touched.
 
 ## BLOCKED_ON
 
 | gate | trigger | state |
 |---|---|---|
-| ~~X12 Stage 2 containment statistic~~ | n/a | **CLOSED** — implemented and ran at k=5; containment holds, all detectors `reject_null=false` |
-| ~~x3_parametric_growth D057 sentence~~ | n/a | **CLOSED** — withdrawn sentence gone from both trees; local sha 1a6f9f65 matches manifest; plain_statement is the corrected NON-DIAGNOSTIC wording |
-| ~~x3_axis_validation pull~~ | n/a | **CLOSED** — local sha 4061258e matches manifest; both trees consistent |
-| git push | platform sync route | **CLOSING** — instructed to push; confirm origin/main sha |
+| ~~X12 Stage 2 containment statistic~~ | n/a | **CLOSED** — implemented and ran at k=5; containment holds |
+| ~~x3_parametric_growth D057 sentence~~ | n/a | **CLOSED** — withdrawn sentence gone from both trees; sha matches manifest |
+| ~~x3_axis_validation pull~~ | n/a | **CLOSED** — local sha matches manifest |
+| `X9_C` non-terminal status | a registry status vocabulary that admits `cancelled`/`withdrawn` | **OPEN — tool gap (C034), not work.** A withdrawn-never-run design cannot reach a terminal status without fabricating a managed-run history (M131). Annotated per D096. Blocks passive mode only; costs no integrity. |
 
 ## GPU budget
 
-1× RTX 5090 D bound. **X12 (the only GPU-eligible entry) is DONE; its k=5 containment run already completed.** All remaining work (X1/X2/X7/X8/X10/X11/X13) is CPU-only by design — the card idle is a property of the plan, not an omission. Do not invent GPU work to fill it.
+1× RTX 5090 D bound. **X12 (the only GPU-eligible entry) is DONE.** All remaining work is CPU-only (paper assembly, figures) by design — the card idle is a property of the plan, not an omission. Do not invent GPU work to fill it.
 
 ## Key Decision Log
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D098 | 2026-09-15 | D098: do not reshape registry keys to satisfy a va | X1, X11 |
+| D097 | 2026-09-15 | D097: figures verified (fig3 synthetic data fixed, | X3 |
+| D096 | 2026-09-15 | D096: do not force X9_C to terminal; accept the st | X9_C |
 | D095 | 2026-09-14 | D095: the 5 unlinked experiments split into MVP-er | X3_A, X3_B, E3, E7, E10 |
 | D094 | 2026-09-14 | D094: artifact chain-of-record is local+manifest+r | X12_k5 |
 | D093 | 2026-09-14 | D093: X11 joint gate mixes two sample sizes (conse | X11 |
@@ -54,7 +56,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D091 | 2026-09-14 | D091: X8 DPI check is vacuous (0/990 testable); re | X8 |
 | D090 | 2026-09-14 | D090: X12 containment WAS executed at k=5 (9/9 rej | X12_k5 |
 | D089 | 2026-09-14 | D089: X13 bootstrap interval is invalid — multinom | X13 |
-| D088 | 2026-09-14 | D088: Correct ROADMAP X9/X9_E wording — identifier | X9, X9_E |
-| D087 | 2026-09-14 | D087: X9_E claim boundary — identifier effect is t | X9_E |
-| D086 | 2026-09-14 | D086: X9_E verdict — negative on dose-only hypothe | X9_E, X9 |
 
