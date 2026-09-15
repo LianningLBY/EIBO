@@ -1,0 +1,506 @@
+- id: R1-W1
+  summary: Eq.(4) upper-bound radius unproven, mis-attributed as DKW (it is an l1 bound), and its i.i.d. flow-sampling assumption undeclared.
+  category: method
+  severity: critical
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Lemma with derivation added; DKW re-attributed as a dis-attribution; i.i.d. hypothesis explicit with the error direction stated.
+  resolution_round: 1
+- id: R1-W2
+  summary: The guarantee asymmetry is presented as a property of the problem when it is a method choice; finite-sample two-sided TV testers are already cited.
+  category: framing
+  severity: critical
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Lower side rewritten as a nominal-level high-probability construction with an asymptotically-derived constant; the impossibility claim deleted (D105).
+  resolution_round: 1
+- id: R1-W3
+  summary: No reduction from the pairwise TV bracket to an open-set error floor; the abstract/intro promise one.
+  category: framing
+  severity: critical
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Repositioned to a pairwise indistinguishability certificate; no multi-class aggregation claimed.
+  resolution_round: 1
+- id: R1-W4
+  summary: '''Each side of the bracket is a joint 0.95 statement'' contradicts the paper''s own asymmetry discipline.'
+  category: writing
+  severity: critical
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: The joint 0.95 is assigned to the upper side; the lower side level is set by its own construction.
+  resolution_round: 1
+- id: R1-W5
+  summary: '''The upper side binds on every rung'' overreaches, and cites a nonexistent binding-fraction column.'
+  category: framing
+  severity: critical
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Scoped to M=1; 340/336 labelled and explained.
+  resolution_round: 1
+- id: R1-W6
+  summary: Detector validation panel unreproducible; 'no detector breaches' not matched by evidence; near-zero power; closed-set object.
+  category: experiment
+  severity: critical
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Detector panel specified with citations; closed-set surrogate scoped before the result; near-zero power stated.
+  resolution_round: 1
+- id: R1-W7
+  summary: References carry internal workflow annotations - desk-reject-visible.
+  category: format
+  severity: critical
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Internal workflow annotations stripped from the bibliography; file audited.
+  resolution_round: 1
+- id: R1-W8
+  summary: 'Reproducibility chain unverifiable: no exp_id, sha256, anonymous pointer, or pre-registration record.'
+  category: experiment
+  severity: critical
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Open Science carries a worked exp_id->content_sha256 example and the pre-registration record.
+  resolution_round: 1
+- id: R1-W9
+  summary: Orphan result-bearing blocks in Discussion, including a promised DST_ASN audit that never appears.
+  category: framing
+  severity: critical
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: The two blocks with artifacts promoted; the DST_ASN promise deleted (no audit exists).
+  resolution_round: 1
+- id: R1-W10
+  summary: Abstract inverted and conflates the upper-only 340 with the joint-gate 336.
+  category: writing
+  severity: critical
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: 'Abstract rebalanced: pairwise object led, detector validation named, 336 quoted, divisibility bound surfaced.'
+  resolution_round: 1
+- id: R1-W11
+  summary: No compute/hardware/hyperparameter disclosure.
+  category: experiment
+  severity: warning
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Compute, splits, and cost disclosed.
+  resolution_round: 1
+- id: R1-W12
+  summary: Primary corpus not named in the body; flow threshold unstated.
+  category: experiment
+  severity: warning
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Corpus named (CESNET-QUICEXT-25 XS); the flow threshold yielding 990 stated.
+  resolution_round: 1
+- id: R1-W13
+  summary: Cross-corpus comparison uses an argument from precision, not a test.
+  category: method
+  severity: warning
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Bootstrap intervals added; the scale-matching defence corrected to two of five strata excluding zero (D106).
+  resolution_round: 1
+- id: R1-W14
+  summary: Median-TV series asserted without display, and confounded with sparse-context bias.
+  category: method
+  severity: warning
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Per-M intervals added; the rise is tested with paired increments rather than overlapping marginals.
+  resolution_round: 1
+- id: R1-W15
+  summary: 'Missing related-work clusters: DP, traffic-indistinguishability defenses, sparse plug-in bias, certified robustness.'
+  category: novelty
+  severity: warning
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: DP, traffic-morphing, sparse-bias, and certified-robustness clusters added; three traffic-defense refs verified.
+  resolution_round: 1
+- id: R1-W16
+  summary: C3 causal language overreaches.
+  category: framing
+  severity: warning
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: C3 causal language softened; the 0.608@k=30 cost and the heterogeneous-i.i.d. confound foregrounded.
+  resolution_round: 1
+- id: R1-W17
+  summary: Reference metadata defects.
+  category: format
+  severity: warning
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: chan2013closeness corrected to SODA 2014; author fields and brace issues fixed.
+  resolution_round: 1
+- id: R1-W18
+  summary: Discussion is not a discussion.
+  category: writing
+  severity: warning
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: First-reported results moved into Results.
+  resolution_round: 1
+- id: R1-W19
+  summary: Section order buries the positioning claim.
+  category: writing
+  severity: warning
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Novelty boundary moved into the Introduction.
+  resolution_round: 1
+- id: R1-W20
+  summary: '''EIBO'' used but never defined.'
+  category: writing
+  severity: minor
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Defined in the body.
+  resolution_round: 1
+- id: R1-W21
+  summary: X11's 20,000-flow cap never justified.
+  category: experiment
+  severity: minor
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Cap justified.
+  resolution_round: 1
+- id: R1-W22
+  summary: Section 5.2 dual-use result with a purely defensive ethics statement.
+  category: ethics
+  severity: minor
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Balanced dual-use statement and salt disclosure added.
+  resolution_round: 1
+- id: R1-W23
+  summary: Title 'Certification-Grade' overstates a mixed-strength gate.
+  category: framing
+  severity: minor
+  status: resolved
+  first_raised_round: 1
+  last_seen_round: 1
+  mentions:
+  - round: 1
+    reviewers: []
+    note: Raised in the consolidated Round 1 report.
+  action_items:
+  - round: 1
+    action: Dispatched in the Round 1 Action Matrix.
+    assigned_to: Research Director
+    status: resolved
+  - round: 1
+    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    assigned_to: Research Director
+    status: resolved
+  resolution: Title term defined in the first paragraph.
+  resolution_round: 1
