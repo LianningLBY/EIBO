@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 20:00 UTC | Round 3 report in: weak reject (~3/5), scientific core intact, 22 items all text/table/layout. **My earlier appendix-order conclusion was WRONG (see corrected bullet).**
+> Last updated: 2026-09-15 21:40 UTC | Round 3 (~3/5 weak reject) fixes in progress: unambiguous items DONE and verified in the rendered PDF; 4 judgment items + appendix reflow HELD pending the independent Reviewer.
 
 ## Core direction
 
@@ -110,18 +110,15 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 **What is NOT blocked:** the paper is frozen and drift-free; all 23 Round 1 issues are resolved; provenance is clean (all 83 manifest entries resolve with matching hashes). Only the *report* is missing.
 
-## Near-term tasks
+## Near-term tasks — Round 3 (all items are text/table/layout; NO new experiments)
 
-- [ ] **Await the Round 2 report** — on arrival run the holistic pass then the per-comment Action Matrix (`review-report-action`); no blanket acknowledgement.
-- [ ] **Paper edits are FROZEN** until that report lands; any change now would invalidate the submitted version.
-- [x] **DONE (D111): higher-k median-TV ladder** — verified monotone and strongly concave in k (increments → 0 at k=30). k=15/k=30 rows promoted to canonical names; medians 0.9127/0.9979 reproduce exactly. **NEW numbers, not printed in the paper** — supporting evidence for C2, not a correction. Limitation stated in the artifact: hidden rows carry `tv_masked` only, so this does NOT enable a higher-k containment panel.
-- [x] **DONE (D113): both manifest defects closed** — hashes backfilled on all four new entries; `ci_k_ladder` consolidated to a single live entry (the single-RNG run, which fixes per-replicate re-seeding); byte-identical residual copy removed. Manifest verified: **87 entries, 0 unresolved, 0 hash mismatches**. (Diagnostic note: manifest paths are rooted at `/efs/workspace`, not the project dir — probing from the project root yields dozens of false "missing", a probe defect not a content defect.)
-- [x] ~~**IN FLIGHT: two manifest defects from that work**~~ — (a) none of the 4 new entries carries a `content_sha256`; (b) `ci_k_ladder` is registered TWICE from two different runner revisions, differing only in bootstrap resampling while all point estimates are identical — needs one canonical file + retired sibling + hashes.
-- [x] ~~**IN FLIGHT (D109): higher-k per-pair rows**~~ — re-run the masked-count pass at k=10/15/30 and persist per-pair rows in the `q1_absolute_counts.json` shape, then the same service-cluster CIs + paired increments. Absence of these rows is why higher-k uncertainty is "not estimable" today. Cost estimate required before any run.
-- [ ] **IN FLIGHT (D109): higher-k detector panel scoping** — how many informative pairs exist at each higher k (k=15/k=30 had an EMPTY stratum at k=5, so a panel may be impossible), which detectors need retraining, cheapest defensible cost. Scoping only.
-- [ ] **x6 input-path resolver** — standing: give x6's four hardcoded inputs the flat-first resolver **when x6 is next edited**.
-- [ ] **Four silent-fallback sites** (E7 ×2, Q2 v3, X3 controls) — provenance-only; fix when those files are next touched.
-- [x] ~~Two FROZEN SNAPSHOT manifest entries appear path/hash inconsistent~~ — **WITHDRAWN (my error)**: resolved by the FULL recorded path, both entries resolve and every hash matches. All 83 entries verified clean; the apparent mismatch was a basename collision in my own sweep.
+**DONE and verified against the rendered PDF:** RT-W1 ([4] author list corrected to Luxemburk/Hynek/Jonas Mücke + dataset DOI — the wrong given name "Jan" had been carried from the machine residue and read as a clean citation); RT-W2 (literal markdown marker removed from the compiled text); RT-W8; RT-W10; RT-W12; RT-W13 (the "duplicate" was a point stated twice, not a paragraph); RT-W14; RT-W15 (fig1 labels fixed at generator source, all three copies identical); RT-W16; RT-W17; RT-W18; RT-W19 (hashes now full 64 chars + pre-registration timestamps); RT-W22; plus fig1's manifest hash re-registered and all five figure entries audited.
+
+**DRAFTED and approved, implementation HELD:** the A.2b sentence rewrite (three clean claims: wire image / corpus+companion / deployment measured / classifiers applied) with `mucke2025waiting` added, `dyer2012peekaboo` **dropped** (already cited in §6.3 — moving would duplicate) and `athanasiou2025selfdefense` **moved to §6.3** (its only home was its wrong one); plus the §6.3 defenses-clause addition. Page 12 is the densest in the body (807 words) but page 13 has ~100 words of slack, so the ~18-word addition should reflow; the fallback is a same-size §6.3 cut, verified by RENDERING not the compile log. Drafts must use `\citep`/`\citet` — the paper has zero bare `\cite`.
+
+**HELD pending the independent Reviewer's check on four judgment calls:** RT-W4 (the 0.95/0.975 radius arithmetic — the only item that can move published numbers; preferred fix raises 340/336), RT-W6 (whether the missing ε_lo distribution is an analysis gap or a writing gap), RT-W7 (novelty-boundary rewrite vs one aligning sentence), RT-W9 (the three promotions). Also held: RT-W3 (appendix reflow before the references — verified a real USENIX requirement, and it overturns my own earlier wrong conclusion) and RT-W11 (sparse-inflation confound).
+
+**Then:** ONE combined reflow (A.2b + §6.3 + W3 + held items), verified by rendering; per-item Reviewer verification before any item is marked resolved; then decide the next round. The report states the remedy is a visible revision, not more science.
 
 ## BLOCKED_ON
 
