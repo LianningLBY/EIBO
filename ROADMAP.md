@@ -20,6 +20,43 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 - **Claim boundaries honoured in the prose**: X9_E's identifier finding scoped to `tv_hat` only (D087); X11's joint gate discloses its per-side sample sizes and the **conservative** bias direction (D093); X8's DPI check is a smoke-test, never cited as theorem verification (D091); C3 reframed as a methods/limits finding (D046); novelty stated as a knowledge claim ("to our knowledge"), never "exhaustive search".
 - **Provenance discipline is load-bearing**: manifest `content_sha256` on all live entries; runner self-hash captured at import and recorded *in the artifact*; figures regenerate from manifest-resolved artifacts via committed generators; the flat-vs-nested two-tree layout resolved via `resolve_existing_path` (flat first).
 
+## Review retrospection — Round 1 (2026-09-15)
+
+**Holistic pass.** Twelve issues (4 critical, 8 warning). Clustering by theme rather than treating them independently:
+
+### ★ SYSTEMIC ISSUE 1 — the abstract over-states relative to the body's own measured scope
+**Cluster (3 items): R1-W1, R1-W2, R1-W5.** W1 asserts "the upper side binds on every rung" — an extrapolation of the M=1 joint gate to the whole ladder, where no per-rung lower side exists, and `results.tex`'s own caption concedes exactly that. W5 makes the same error in miniature: the abstract says the certifiable set "falls from **340** pairs", mixing the upper-only count (340) with the joint gate (336) — the one place the paper's otherwise-tight two-number discipline breaks. W2 is the same family one level up: the abstract is inverted against the Introduction's contribution list, giving the estimator negative its own paragraph while omitting the detector validation and the divisibility bound. **⇒ Root cause: the abstract was written to read well rather than to state exactly what was measured.** This is the same defect class the session spent the day removing from the figures — a name pointing at the wrong object. **⇒ It does NOT invalidate any claim; it means the headline prose must be cut back to the measured scope.**
+**Global impact: high but bounded — framing-only.** No experiment changes; the body is already correct. Mandatory before the action matrix: a `red-section` framing pass on the abstract.
+
+### ★ SYSTEMIC ISSUE 2 — the experiment is under-reported for a measurement paper
+**Cluster (4 items): R1-W3, R1-W6, R1-W7, R1-W8.** The primary corpus is never named (W7) — a reader cannot tell where the headline 336/990 comes from or reproduce the split; the flow threshold that yields the 990-pair set is never stated (W8) even though 990 is the most-quoted denominator; the detector panel has no architecture/features/training protocol/citations (W3); and there is no compute/hardware disclosure and the promised per-pair ledger tables are absent from the appendix (W6). **⇒ Root cause: the paper reports results with rigor but omits the provenance a replicator needs** — ironically the one thing this project's artifact discipline does best internally. **⇒ W3 carries an extra edge: the paper's own text concedes the closed-set/open-set mismatch, so the claim must be scoped to the surrogate it actually measures, plus multiplicity handling.**
+
+### Secondary cluster (2 items): absent uncertainty on cross-corpus and ladder numbers
+**R1-W9, R1-W10** — the cross-corpus comparison argues from precision ("agree to three decimals") rather than a statistical test, and the main table plus the median-TV series carry no interval. **⇒ A real gap, but not systemic: both are computable from existing artifacts** (bootstrap CIs), so they are computations, not new experiments.
+
+### Not systemic
+**R1-W4** (three Discussion blocks unpaired with the contribution list) is structural-editorial. Decided here: **all three have artifacts or are genuinely absent — promote the two that exist, cut the one that does not.** X13's missing-service-mass has an artifact (`artifacts/X13/data/x13_missing_service_mass.json`); the whole-flow rectified object has one (`q1_absolute_*`). **The DST_ASN audit does NOT exist and is promised at `related_work.tex:102` — that promise must be removed or the audit produced.**
+**R3-W1/R3-W2** are reference metadata and page economy — cosmetic, addressed in passing.
+
+### Action Matrix
+
+| ID | Summary | Category | Action | Owner | ETA |
+|---|---|---|---|---|---|
+| R1-W1 | binding-side claim extrapolated | edit paper (framing) | `red-section`: delete "on every rung"/"100% of the ladder"; state the upper side is the scarce object at M=1 where the joint gate is defined | Paper Agent | now |
+| R1-W2 | abstract inverted vs contributions | edit paper (framing) | rebalance: surface detector validation + divisibility bound, compress the C3 negative to one clause | Paper Agent | now |
+| R1-W5 | 340/336 conflation in abstract | edit paper | quote 336 (joint) or label 340 as upper-only | Paper Agent | now |
+| R1-W3 | detector panel not reproducible | edit paper + clarify scope | add architectures/features/training/citations; state the closed-set surrogate explicitly; report multiplicity handling | Paper Agent | now |
+| R1-W6 | no compute disclosure; ledgers absent | edit paper + add appendix tables | add compute budget and split boundaries; add the promised per-pair ledger tables | Paper Agent | now |
+| R1-W7 | primary corpus unnamed | edit paper | name CESNET-QUICEXT-25 XS with an artifact reference | Paper Agent | now |
+| R1-W8 | flow threshold unstated | edit paper | state the floor and how it yields 990 pairs | Paper Agent | now |
+| R1-W4 | orphan discussion blocks | edit paper (structural) | promote the two blocks that have artifacts (X13 mass, whole-flow object) into the contribution list + Results; **remove the DST_ASN promise at `related_work.tex:102`** since no audit exists | Paper Agent | now |
+| R1-W9 | no uncertainty on cross-corpus numbers | add computation | bootstrap CI on the 0.9967/0.9960 and the 18.2→9.7 gap; or soften wording | Agent (compute) → Paper Agent | 1d |
+| R1-W10 | no uncertainty in main table / tv series | add computation | CI or distribution for the median-tv series, or justify the threshold collapse | Agent (compute) → Paper Agent | 1d |
+| R3-W1 | reference metadata/brace items | edit paper | fix author fields and braces; re-verify `michel2020high`, `jiao2018l1distance`, `chan2013closeness` | Paper Agent | now |
+| R3-W2 | page economy, no early visual anchor | edit paper | consolidate the two appendices; front-load the bracket schematic | Paper Agent | now |
+
+**No framing PIVOT and no new experiment is required by any item.** W1/W2/W5 are wording cuts back to the measured scope; W3/W6/W7/W8 are disclosure additions from existing artifacts; W9/W10 are computations over existing data; W4 is structural. The three claims stand.
+
 ## Near-term tasks
 
 - [ ] **Await and act on the Round 1 review report** — on arrival run the holistic pass then the per-comment Action Matrix (`review-report-action` skill); do not respond with a blanket acknowledgement.
