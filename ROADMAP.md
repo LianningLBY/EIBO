@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 09:15 UTC | Round 2 in review (cross-sharing phase); awaiting the report.
+> Last updated: 2026-09-15 13:55 UTC | Round 2 stalled at the review gateway (re-review de-duplicated); paper frozen and verified.
 
 ## Core direction
 
