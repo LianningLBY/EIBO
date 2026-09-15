@@ -1,421 +1,449 @@
 - id: R1-W1
-  summary: Eq.(4) upper-bound radius unproven, mis-attributed as DKW (it is an l1 bound), and its i.i.d. flow-sampling assumption undeclared.
+  summary: Eq.(4)/(5) upper-bound radius was unproven, mis-attributed as Dvoretzky-Kiefer-Wolfowitz (it is an l1 bound), with the i.i.d. flow-sampling assumption undeclared.
   category: method
   severity: critical
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
   - round: 1
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: R1-1 = R2-N3 = R3-M2.
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Lemma 1 added; R1 rederived the chain (triangle -> Jensen/Cauchy-Schwarz -> E||P-Phat||_1 <= sqrt(m/n) -> McDiarmid) and confirmed correct. DKW attribution withdrawn; i.i.d. declared as a threat with error direction stated.
+  - round: 3
     reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Lemma with derivation added; DKW re-attributed as a dis-attribution; i.i.d. hypothesis explicit with the error direction stated.
-  resolution_round: 1
+    note: 'Round 3 confirms fixed: Lemma 1 with proof, DKW dis-attribution, i.i.d. declared.'
+  action_items: []
+  resolution: Verified correct by all three reviewers in Rounds 2 and 3.
+  resolution_round: 2
 - id: R1-W2
-  summary: The guarantee asymmetry is presented as a property of the problem when it is a method choice; finite-sample two-sided TV testers are already cited.
+  summary: The guarantee asymmetry was presented as a property of the problem when it is a method choice.
   category: framing
   severity: critical
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
   - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Lower side rewritten as a nominal-level high-probability construction with an asymptotically-derived constant; the impossibility claim deleted (D105).
-  resolution_round: 1
+    reviewers:
+    - 2
+    - 3
+    note: R2-N1.
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Sec 3.4 'nominal level'; Sec 3.5 'Where the two sides differ'; the impossibility claim deleted.
+  - round: 3
+    reviewers:
+    - 3
+    note: R3 rebuts R2's claim that this fix destroyed the novelty boundary - the residual 'exact vs nominal' asymmetry survives and is what Sec 6.4 describes. See R2-N1.
+  action_items: []
+  resolution: Reframe verified. The knock-on issue is tracked at R2-N1.
+  resolution_round: 2
 - id: R1-W3
-  summary: No reduction from the pairwise TV bracket to an open-set error floor; the abstract/intro promise one.
+  summary: No reduction from the pairwise TV bracket to an open-set error floor.
   category: framing
   severity: critical
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
   - round: 1
+    reviewers:
+    - 2
+    - 3
+    note: R2-N2.
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Repositioned to a pairwise certificate; explicit refusal of multi-class aggregation.
+  - round: 3
     reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Repositioned to a pairwise indistinguishability certificate; no multi-class aggregation claimed.
-  resolution_round: 1
+    note: 'Round 3 confirms fixed: pairwise repositioning is thorough.'
+  action_items: []
+  resolution: Repositioned; residual wording tracked at R3-W12.
+  resolution_round: 2
 - id: R1-W4
-  summary: '''Each side of the bracket is a joint 0.95 statement'' contradicts the paper''s own asymmetry discipline.'
+  summary: '''Each side of the bracket is a joint 0.95 statement'' contradicted the asymmetry discipline.'
   category: writing
   severity: critical
-  status: resolved
+  status: partially_resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
   - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: The joint 0.95 is assigned to the upper side; the lower side level is set by its own construction.
-  resolution_round: 1
+    reviewers:
+    - 3
+    note: R3-M4.
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Attribution fixed; R2 raised the arithmetic critical then RETRACTED after deriving sum c_i^2 = 4/n.
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: R1-N1 / R3-A8. Tracked at R3-W2.
+  action_items: []
+  resolution: Attribution fixed; arithmetic reconciliation is R3-W2.
+  resolution_round: null
 - id: R1-W5
-  summary: '''The upper side binds on every rung'' overreaches, and cites a nonexistent binding-fraction column.'
+  summary: '''Binds on every rung / 100% of the ladder'' overreached and cited a nonexistent column.'
   category: framing
   severity: critical
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
   - round: 1
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: M>=2 has no per-rung lower side.
+  - round: 2
+    reviewers:
+    - 1
+    - 3
+    note: Scoped to M=1; column reference deleted.
+  - round: 3
     reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Scoped to M=1; 340/336 labelled and explained.
-  resolution_round: 1
+    note: Round 3 confirms the 340/336 distinction is now made (though W4 raises an adjacent arithmetic question).
+  action_items: []
+  resolution: Verified resolved.
+  resolution_round: 2
 - id: R1-W6
-  summary: Detector validation panel unreproducible; 'no detector breaches' not matched by evidence; near-zero power; closed-set object.
+  summary: Detector-validation panel unreproducible; 'no detector breaches' exceeded its evidence; closed-set surrogate; near-zero power.
   category: experiment
   severity: critical
-  status: resolved
+  status: partially_resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
   - round: 1
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: R2 [REBUT] on the null derivation only (0.05 IS the correct null).
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Panel specified; closed-set scope stated; power stated; multiplicity addressed.
+  - round: 3
     reviewers: []
-    note: Raised in the consolidated Round 1 report.
+    note: 'Paper audit: abstract/intro phrase ''above the null rate'' is ambiguous/inverted - observed rates 0.6-2.9% are BELOW the 5% null.'
   action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
+  - round: 3
+    action: Rewrite the abstract/Intro detector sentence to match Results.
     assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Detector panel specified with citations; closed-set surrogate scoped before the result; near-zero power stated.
-  resolution_round: 1
+    status: open
+  resolution: Panel resolved; the headline sentence wording is open.
+  resolution_round: null
 - id: R1-W7
-  summary: References carry internal workflow annotations - desk-reject-visible.
+  summary: References carry internal workflow annotations (desk-visible).
   category: format
   severity: critical
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
   - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
+    reviewers:
+    - 2
+    - 3
+    note: 'R3-M1: [2][30][32][38][44].'
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: '[30][32][38][44] cleared; [4] REMAINS and spread into Appendix A.2b.'
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: 'R3-A1 render-confirms p14 + p17. R1 found the canonical replacement: Mucke et al., ''Waiting for QUIC...'', Proc. ACM Netw. 3, CoNEXT4, Art. 41, 2025, DOI 10.1145/3768988.'
   action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
+  - round: 3
+    action: Remove the residue from [4] and Appendix A.2b; fill [4] with the canonical citation.
     assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Internal workflow annotations stripped from the bibliography; file audited.
-  resolution_round: 1
+    status: open
+  resolution: Round 3 confirms sibling annotations cleared - but [4] was MISSED and is now Round 3 W1.
+  resolution_round: 3
 - id: R1-W8
-  summary: 'Reproducibility chain unverifiable: no exp_id, sha256, anonymous pointer, or pre-registration record.'
+  summary: Reproducibility chain and pre-registration unverifiable in the submission.
   category: experiment
   severity: critical
-  status: resolved
+  status: partially_resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
   - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: R3-M3.
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Worked provenance example + pre-registration statement added.
+  - round: 3
+    reviewers:
+    - 3
+    note: 'R3-A3: hashes TRUNCATED to 16 hex chars while the field is content_sha256; timestamps not given; appendix has ZERO URLs.'
   action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
+  - round: 3
+    action: Publish full 64-char hashes, timestamps, anonymous URLs; correct Sec 3.8.
     assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Open Science carries a worked exp_id->content_sha256 example and the pre-registration record.
-  resolution_round: 1
+    status: open
+  resolution: Example added but not verifiable as written.
+  resolution_round: null
 - id: R1-W9
-  summary: Orphan result-bearing blocks in Discussion, including a promised DST_ASN audit that never appears.
+  summary: Orphan result-bearing blocks in Discussion, incl. a promised DST_ASN audit.
   category: framing
   severity: critical
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 2
   mentions:
   - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: The two blocks with artifacts promoted; the DST_ASN promise deleted (no audit exists).
-  resolution_round: 1
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: R1-8, R2, R3-W4.
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Blocks promoted; DST_ASN promise deleted.
+  action_items: []
+  resolution: Verified resolved.
+  resolution_round: 2
 - id: R1-W10
-  summary: Abstract inverted and conflates the upper-only 340 with the joint-gate 336.
+  summary: Abstract inverted and conflated the upper-only 340 with the joint-gate 336.
   category: writing
   severity: critical
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 2
   mentions:
-  - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: 'Abstract rebalanced: pairwise object led, detector validation named, 336 quoted, divisibility bound surfaced.'
-  resolution_round: 1
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    note: Abstract now reads 'the upper-side set falls from 340 pairs to none four rungs finer'.
+  action_items: []
+  resolution: Abstract fixed; Contributions entry 2 still drifts - see R3-W11.
+  resolution_round: 2
 - id: R1-W11
-  summary: No compute/hardware/hyperparameter disclosure.
+  summary: Compute/hardware/hyperparameter disclosure thin; Sec 3.7 promised appendix tables not present.
   category: experiment
   severity: warning
-  status: resolved
+  status: partially_resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
-  - round: 1
+  - round: 3
     reviewers: []
-    note: Raised in the consolidated Round 1 report.
+    note: 'Paper audit: GPU named only as ''a single consumer GPU''; RoNeTC epoch budget left as ''a fixed epoch budget''; no compute table.'
   action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
+  - round: 3
+    action: Add a one-line compute disclosure.
     assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Compute, splits, and cost disclosed.
-  resolution_round: 1
+    status: open
+  resolution: ''
+  resolution_round: null
 - id: R1-W12
   summary: Primary corpus not named in the body; flow threshold unstated.
   category: experiment
   severity: warning
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 2
   mentions:
-  - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Corpus named (CESNET-QUICEXT-25 XS); the flow threshold yielding 990 stated.
-  resolution_round: 1
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Sec 4.1 names the corpus; threshold 'at least 2,000 flows'; C(45,2)=990.
+  action_items: []
+  resolution: Verified resolved.
+  resolution_round: 2
 - id: R1-W13
   summary: Cross-corpus comparison uses an argument from precision, not a test.
   category: method
   severity: warning
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
-  - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Bootstrap intervals added; Sec 5.1 voluntarily downgraded the 9.7pt claim.
+  - round: 3
+    reviewers:
+    - 1
+    note: 'R1-N-F: the SAME subsection still retains ''would not hold to three decimal places'', contradicting its own new ''the lower side is saturated'' sentence.'
   action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
+  - round: 3
+    action: Delete or reword the 'three decimal places' sentence.
     assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Bootstrap intervals added; the scale-matching defence corrected to two of five strata excluding zero (D106).
-  resolution_round: 1
+    status: open
+  resolution: Round 3 confirms the cluster bootstrap is correct.
+  resolution_round: 3
 - id: R1-W14
-  summary: Median-TV series asserted without display, and confounded with sparse-context bias.
+  summary: Median-TV series asserted without display and confounded with sparse-context bias.
   category: method
   severity: warning
-  status: resolved
+  status: partially_resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
-  - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Paired-increment test added.
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    note: Significance settled; the sparse-inflation CONFOUND is still not named.
   action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
+  - round: 3
+    action: Name the sparse-inflation confound in Sec 4.3.
     assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Per-M intervals added; the rise is tested with paired increments rather than overlapping marginals.
-  resolution_round: 1
+    status: open
+  resolution: ''
+  resolution_round: null
 - id: R1-W15
   summary: 'Missing related-work clusters: DP, traffic-indistinguishability defenses, sparse plug-in bias, certified robustness.'
   category: novelty
   severity: warning
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
-  - round: 1
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: All four clusters added and well-placed in Sec 6.3.
+  - round: 3
     reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: DP, traffic-morphing, sparse-bias, and certified-robustness clusters added; three traffic-defense refs verified.
-  resolution_round: 1
+    note: Round 3 confirms the four added citation clusters are present and well placed.
+  action_items: []
+  resolution: Verified present and positioned.
+  resolution_round: 2
 - id: R1-W16
-  summary: C3 causal language overreaches.
+  summary: C3 causal language overreached.
   category: framing
   severity: warning
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 2
   mentions:
-  - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: C3 causal language softened; the 0.608@k=30 cost and the heterogeneous-i.i.d. confound foregrounded.
-  resolution_round: 1
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Sec 6.3 delimits Paninski/Nemenman.
+  action_items: []
+  resolution: Verified.
+  resolution_round: 2
 - id: R1-W17
-  summary: Reference metadata defects.
+  summary: Reference metadata defects (mismatches, missing authors, braces, wrong DOIs).
   category: format
   severity: warning
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
   - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
+    reviewers:
+    - 2
+    - 3
+    note: 12 mismatches, 2 missing authors, 4 brace issues.
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: Three reviewers + independent web verification CONFIRM [5] has a wrong DOI (.86 -> unrelated chapter; correct .88), reversed author order (should be Chan, Diakonikolas, PAUL Valiant, Gregory Valiant), and missing pages (1193-1203).
   action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
+  - round: 3
+    action: Fix [5] DOI/author order/pages; resolve the .bib-vs-PDF divergence (R3-W4); settle the 2 missing-author and 4 brace items against the authoritative .bib.
     assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: chan2013closeness corrected to SODA 2014; author fields and brace issues fixed.
-  resolution_round: 1
+    status: open
+  resolution: Round 3 confirms the reference metadata work landed; [5] still needs its DOI/author fix (now part of RT-W17).
+  resolution_round: 3
 - id: R1-W18
-  summary: Discussion is not a discussion.
+  summary: Discussion was not a discussion.
   category: writing
   severity: warning
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 2
   mentions:
-  - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: First-reported results moved into Results.
-  resolution_round: 1
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    note: First-reported results moved into Results.
+  action_items: []
+  resolution: Verified.
+  resolution_round: 2
 - id: R1-W19
-  summary: Section order buries the positioning claim.
+  summary: Positioning claim buried at the end of Related Work (novelty boundary).
   category: writing
   severity: warning
-  status: resolved
+  status: open
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
-  - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    note: Still at the end of Related Work (Sec 6.4). The Round 1 tracker marked this resolved; Round 3 evidence contradicts that.
   action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
+  - round: 3
+    action: Move into the Introduction, after rewriting per R2-N1.
     assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Novelty boundary moved into the Introduction.
-  resolution_round: 1
+    status: open
+  resolution: NOT resolved despite the Round 1 tracker marking.
+  resolution_round: null
 - id: R1-W20
   summary: '''EIBO'' used but never defined.'
   category: writing
@@ -423,84 +451,874 @@
   status: resolved
   first_raised_round: 1
   last_seen_round: 1
-  mentions:
-  - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Defined in the body.
+  mentions: []
+  action_items: []
+  resolution: Resolved.
   resolution_round: 1
 - id: R1-W21
-  summary: X11's 20,000-flow cap never justified.
+  summary: X11's 20,000-flow cap was never justified.
   category: experiment
   severity: minor
   status: resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 2
   mentions:
-  - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
-  action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
-    assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Cap justified.
-  resolution_round: 1
+  - round: 2
+    reviewers:
+    - 1
+    note: Justified. The cap's monotonicity claim was later contradicted by Table 4 - see R3-W3.
+  action_items: []
+  resolution: Justification added.
+  resolution_round: 2
 - id: R1-W22
-  summary: Section 5.2 dual-use result with a purely defensive ethics statement.
+  summary: Sec 5.2 dual-use result with a purely defensive ethics statement.
   category: ethics
   severity: minor
-  status: resolved
+  status: open
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
   mentions:
-  - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
+  - round: 3
+    reviewers:
+    - 3
+    note: 'R3-A5: Appendix A.1 and Sec 5.6 verbatim unchanged; no balanced dual-use statement; no IP-hash reversibility/salting discussion.'
   action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
+  - round: 3
+    action: Add the balanced statement and salt/reversibility discussion.
     assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
-    assigned_to: Research Director
-    status: resolved
-  resolution: Balanced dual-use statement and salt disclosure added.
-  resolution_round: 1
+    status: open
+  resolution: NOT resolved despite the Round 1 tracker marking.
+  resolution_round: null
 - id: R1-W23
-  summary: Title 'Certification-Grade' overstates a mixed-strength gate.
+  summary: Title 'Certification-Grade' overstated a mixed-strength gate.
   category: framing
   severity: minor
-  status: resolved
+  status: partially_resolved
   first_raised_round: 1
-  last_seen_round: 1
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 2
+    - 3
+    note: Term defined in Sec 3.1, not the first paragraph; smoothing delimitation in Sec 6.3; title/abstract tension remains.
+  action_items:
+  - round: 3
+    action: Define the term in the first paragraph; add one clause mapping title to claim.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R2-N1
+  summary: 'DIVERGENT: whether the novelty boundary''s stated differentiator was destroyed by the paper''s own revision. Sec 6.4 claims priority on ''asymmetric guarantee strength''; Sec 1 now says the two sides ''differ in construction and in tightness, not in whether a guarantee is available''. R2 (joined by R1) reads this as the novelty argument''s support being removed; R3 REBUTS that Sec 3.5 retains a different asymmetry - finite-sample-exact vs asymptotically-derived-nominal - which is what Sec 6.4 describes.'
+  category: novelty
+  severity: critical
+  status: open
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    note: 'R2-C1 (its top Round 3 finding): ''the novelty argument''s load-bearing property is one the paper has abandoned''. R1 fully concurs and strengthens: the residual axes (construction, provenance of constants, tightness) are weaker than ''asymmetric guarantee strength''.'
+  - round: 3
+    reviewers:
+    - 3
+    note: 'R3 REBUTS: the withdrawn claim was proven-vs-unproven (about the EXISTENCE of a guarantee); Sec 3.5 retains exact-vs-nominal (about its KIND), and Sec 6.4''s phrasing maps onto the latter. R3 agrees the wording is tense across the two senses and asks for one aligning sentence, but calls ''the novel claim cannot stand'' too heavy.'
+  action_items:
+  - round: 3
+    action: 'At minimum, align the novelty-boundary wording with Sec 3.5 (asymmetric in the KIND of guarantee: finite-sample exact vs nominal). If the authors adopt R1/R2''s reading, rewrite the paragraph''s novelty claim outright. Then move it into the Introduction.'
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W1
+  summary: 'Three promised positional fixes never executed: the heterogeneous-i.i.d. confound demonstration was not promoted into Contributions; ''certification-grade'' is not defined in the first paragraph; the novelty boundary was not moved into the Introduction.'
+  category: writing
+  severity: major
+  status: open
+  first_raised_round: 2
+  last_seen_round: 3
+  mentions:
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: R2 items 3/5/6.
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    note: All three confirmed unexecuted; the confound demo is still absent from the five Contributions.
+  action_items:
+  - round: 3
+    action: Promote the confound demo; define the term in paragraph 1; rewrite+move the novelty boundary.
+    assigned_to: Research Director
+    status: open
+  resolution: Flagged across two rounds; not executed.
+  resolution_round: null
+- id: R3-W2
+  summary: 'The upper side''s stated joint level and its radius constant are not reconciled: with alpha_law per-law and radius sqrt(2 ln(2/alpha_law)/n), the two-law union gives 0.975, not the stated 0.95.'
+  category: method
+  severity: critical
+  status: open
+  first_raised_round: 1
+  last_seen_round: 3
   mentions:
   - round: 1
-    reviewers: []
-    note: Raised in the consolidated Round 1 report.
+    reviewers:
+    - 3
+    note: R3-M4.
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    note: 'R1-N-A; R2-F1 raised critical, then RETRACTED after deriving sum c_i^2 = 4/n. The retraction is accepted: two readings are each self-consistent.'
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: 'All three render-confirm. RESOLVED SPLIT: the radius is correctly calibrated to 0.975 so the 0.95 label is a conservative understatement (R2''s reading stands); BUT R1 and R3 agree the preferred fix - radius -> ln(1/alpha_law) - would shrink the radius, lower eps_hi, and RAISE 340/336, i.e. Table 1 must be RECOMPUTED, not merely relabelled. R3 adds: the alternative (relabel to 0.975) would force Sec 4.4''s null from 5% to 2.5%, worsening the already low-power detector test.'
   action_items:
-  - round: 1
-    action: Dispatched in the Round 1 Action Matrix.
+  - round: 3
+    action: 'Preferred fix: radius -> ln(1/alpha_law); recompute Table 1 (counts can only rise); keeps Sec 4.4''s 5% null valid. Also align Figure 1''s in-figure annotation.'
     assigned_to: Research Director
-    status: resolved
-  - round: 1
-    action: Fixed and verified by the Research Director against the rendered PDF and source.
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W3
+  summary: 'Table 4''s row 35-49 contradicts the conservative-bias monotonicity claim: capped eps_lo = 0.043732 EXCEEDS the full-n value 0.042725, while Sec 5.1 and Figure 5a assert the cap ''can only shrink eps_lo''.'
+  category: method
+  severity: critical
+  status: open
+  first_raised_round: 2
+  last_seen_round: 3
+  mentions:
+  - round: 2
+    reviewers:
+    - 1
+    - 3
+    note: R1-N-B and R3-N2, independently.
+  - round: 3
+    reviewers:
+    - 1
+    - 3
+    note: Render-confirmed. Paper audit suggests the two columns may be swapped for that row.
+  action_items:
+  - round: 3
+    action: Check whether the row's columns are swapped; otherwise demote the claim to 'expected direction' and retain the counterexample.
     assigned_to: Research Director
-    status: resolved
-  resolution: Title term defined in the first paragraph.
-  resolution_round: 1
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W4
+  summary: 'The reference-check''s .bib and the submitted PDF appear to be different objects: the check reports 2 missing author fields, 10 orphans, and a CRAN resolution for [31], none of which reproduce in the rendered PDF.'
+  category: format
+  severity: warning
+  status: open
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 1
+    - 3
+    note: R3-A4 (caveated as PDF-layer only); R1 corroborates. R3 closed the [5] item (genuinely wrong) while keeping these three suspended. The 'checked a neighbouring object' pattern.
+  action_items:
+  - round: 3
+    action: Determine whether the working-tree .bib differs from the one that built the PDF, or whether the PDF was not rebuilt after bib edits; align, then re-run.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W5
+  summary: 'Mandatory-appendix placement and structure. Verified requirement: Ethical Considerations (mandatory) and Open Science each occupy <=1 page immediately after the body and BEFORE the references. The paper places both at p17-18, AFTER references at p14-16; merges them with optional material into one block; and A.3 Open Science runs ~1.1-1.2 pages.'
+  category: format
+  severity: critical
+  status: open
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 1
+    reviewers:
+    - 2
+    - 3
+    note: R3 raised it; R2 REBUTTED it as conventional post-reference placement. R2 has since FORMALLY CORRECTED that rebuttal - do not credit it.
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: 'R1 (C-5), R3 (B) confirm independently; R2 (C-4) confirms and self-corrects. R3: the only item judged possibly desk-reject-triggering; R1 demurs on severity. R2 adds: Table 4 floats after the references as a consequence.'
+  action_items:
+  - round: 3
+    action: Move both mandatory appendices before the references; split optional material out; compress Open Science to <=1 page.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W6
+  summary: Sec 4.4's closing detector paragraph is duplicated verbatim ('...it is not counted as a pass.' appears twice).
+  category: writing
+  severity: warning
+  status: open
+  first_raised_round: 2
+  last_seen_round: 3
+  mentions:
+  - round: 2
+    reviewers:
+    - 1
+    - 2
+    - 3
+    note: R1-N-D, R2-F2, R3-N3 - all three independently.
+  - round: 3
+    reviewers:
+    - 1
+    - 3
+    note: Render-confirmed at p8.
+  action_items:
+  - round: 3
+    action: Delete one of the two paragraphs.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W7
+  summary: 'A literal unrendered Markdown bold marker appears in the compiled PDF: ''**all of which include zero**'' in Sec 5.1 (p10).'
+  category: format
+  severity: critical
+  status: open
+  first_raised_round: 2
+  last_seen_round: 3
+  mentions:
+  - round: 2
+    reviewers:
+    - 3
+    note: R3-N1 (text-layer, flagged for render confirmation).
+  - round: 3
+    reviewers:
+    - 1
+    - 3
+    note: 'R1 and R3 both render-confirm at p10. NOTE: the automated visual check reported ''no leftover LaTeX markup''; the two direct render inspections disagree with it. Weight the direct inspections.'
+  action_items:
+  - round: 3
+    action: Delete the literal asterisks.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W8
+  summary: Sec 6.2's 'Kolmogorov-Smirnov family' grouping wrongly includes closeness-testing refs [5] Chan and [11] Diakonikolas, contradicting Sec 3.3's own 'we do not attribute it to Dvoretzky-Kiefer-Wolfowitz'.
+  category: novelty
+  severity: warning
+  status: open
+  first_raised_round: 2
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 2
+    - 3
+    note: Confirmed by both.
+  action_items:
+  - round: 3
+    action: Narrow the grouping to sup-norm KS-family results only.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W9
+  summary: Figure 1's in-figure labels ('finite-sample strictly valid' / 'asymptotic') contradict the revised caption and Sec 3.5.
+  category: writing
+  severity: warning
+  status: open
+  first_raised_round: 2
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 1
+    - 3
+    note: Render-confirmed by both.
+  action_items:
+  - round: 3
+    action: Unify the in-figure labels with the caption and Sec 3.5.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W10
+  summary: Sec 6.4's cross-reference is broken ('Section 6.4 states the boundary accordingly' points at its own section).
+  category: writing
+  severity: minor
+  status: open
+  first_raised_round: 2
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 1
+    - 3
+    note: Render-confirmed.
+  action_items:
+  - round: 3
+    action: Repair the cross-reference.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W11
+  summary: 'Rung-counting and certifiable-set wording drift: Contributions entry 2 still says ''the certifiable set is empty beyond the fourth rung''; ''fourth rung'' vs ''four rungs finer'' index the ladder differently (empty from M=8).'
+  category: writing
+  severity: minor
+  status: open
+  first_raised_round: 2
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    note: Confirmed; paper audit flags the same ladder-index ambiguity.
+  action_items:
+  - round: 3
+    action: Use one rung convention; align entry 2 with the abstract's 'upper-side set'.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W12
+  summary: Residual unqualified error-floor language in Appendix A.1 ('what detection performance cannot be improved past') and Sec 7's closing sentence.
+  category: framing
+  severity: warning
+  status: open
+  first_raised_round: 2
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 1
+    - 2
+    note: Confirmed.
+  action_items:
+  - round: 3
+    action: Add the pairwise qualifier or reword both.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W13
+  summary: Sec 4.2's closing direction word is inverted - 'falls to zero as the alphabet coarsens' (it falls as the alphabet is REFINED), contradicting the mechanism paragraph directly below it.
+  category: writing
+  severity: warning
+  status: open
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Paper audit. Missed by all three reviewers across rounds 1-3.
+  action_items:
+  - round: 3
+    action: Fix the direction word.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W14
+  summary: 'Intro contribution 4 overstates the cross-corpus result against Sec 5.1: it says the upper side''s difference is ''explained, and disclosed, by sample-size stratification'', while Sec 5.1 concludes the residual gap ''is not statistically resolved''.'
+  category: framing
+  severity: critical
+  status: open
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 1
+    note: Paper audit; R1 independently found the identical contradiction. Same class as R2-N1.
+  action_items:
+  - round: 3
+    action: Reword to 'the gap is strongly stratum-dependent and is not resolved at matched evidence'.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R1-N2
+  summary: 'NEW (round 3, R1): the paper never reports the distribution of eps_lo or the width of the certified bracket. Only pass rates (986/990, 0.9960/0.9967) and the four near-threshold values in Table 4 (0.015-0.044) are given; the other 982 pairs'' eps_lo margins are never shown, so the content of the paper''s title object - the bracket - is nowhere characterised.'
+  category: method
+  severity: critical
+  status: open
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 1
+    - 3
+    note: R1's second new finding; R3 concurs and notes it is the same class of gap as the truncated hashes - 'the artifact of record (with its eps_lo column) is never exhibited'.
+  action_items:
+  - round: 3
+    action: Report the eps_lo distribution / bracket-width summary (e.g. a cumulative or quantile display).
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R1-N3
+  summary: 'NEW (round 3, R1): Sec 3.3''s refusal to run a coverage check rests on a reason that only covers the degenerate TV ~ 0 case (''btv is itself upward-biased there''). A truth-scan over TV in (0, 0.5), and a coverage test on dependent (bursty) synthetic data, are both feasible and would directly test the paper''s own declared i.i.d. threat.'
+  category: experiment
+  severity: warning
+  status: open
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 1
+    - 3
+    note: 'R1''s third new finding; R3 concurs: ''closing with derivation-is-what-supports-the-bound sidesteps the one assumption the paper itself calls a threat''.'
+  action_items:
+  - round: 3
+    action: Add a coverage calibration over a range of true TV, including a dependent-data arm.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W15
+  summary: 'NEW (round 3): minor numeric/wording drifts found by R1 - Abstract calls the 340-pair stratum ''where a certificate exists'' but certificates exist for 336; Mmax(k,n,TV) is really four quantities (n_a != n_b by up to three orders of magnitude); ''two independent derivation routes agreeing to zero'' reads as an algebraic identity rather than independent cross-validation; Sec 4.3''s increment estimator is undefined (marginal median difference vs median of paired differences); Sec 5.2''s text stops at B=256 while Figure 4''s axis runs to 65536.'
+  category: writing
+  severity: warning
+  status: open
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 1
+    - 3
+    note: R1's minor list; R3 agrees with all but one (the spelling item, which R3 reads as the awkward-but-not-misspelled 'significant unmatched').
+  action_items:
+  - round: 3
+    action: Fix the 340/336 wording; state the Mmax argument list; define the increment estimator; align the Sec 5.2 / Figure 4 ranges.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R3-W16
+  summary: 'NEW (round 3, R3): p17''s three provenance bullets stretch word spacing badly because of long unbreakable tokens (art_20260913_e5ebac, q1_lower_side_full_n.json), visibly degrading that column.'
+  category: format
+  severity: minor
+  status: open
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers:
+    - 3
+    note: R3's own render inspection; R1 and R2 did not report it.
+  action_items:
+  - round: 3
+    action: Use short texttt aliases plus a footnote for full names.
+    assigned_to: Research Director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: RT-W1
+  summary: 'Reference [4]''s machine-residue author field (CESNET and associated paper cited by the record: Jan Mucke et al.) remains and has spread into Appendix A.2b body text. Desk-visible.'
+  category: format
+  severity: critical
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W2
+  summary: A literal unrendered Markdown bold marker (**all of which include zero**) appears in the compiled PDF at p10 - introduced by the previous revision. Desk-visible.
+  category: format
+  severity: critical
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W3
+  summary: The mandatory appendices are positioned AFTER the references; Open Science also exceeds its ~1-page allowance. USENIX policy requires both immediately preceding the references, each <=1 page.
+  category: format
+  severity: critical
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W4
+  summary: 'The upper side states a joint level of 0.95 while the 2*ln(2/alpha) radius gives 0.975. Preferred fix: radius -> ln(1/alpha_law), which raises 340/336; the alternative forces the section 4.4 null from 5% to 2.5%.'
+  category: method
+  severity: critical
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W5
+  summary: Table 4 row 35-49 has capped eps_lo 0.043732 exceeding the full-n value 0.042725, contradicting the conservative-bias monotonicity claim the cross-corpus argument rests on.
+  category: method
+  severity: critical
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W6
+  summary: The paper never reports the eps_lo distribution or the certified bracket width - the title object is not characterised, only pass rates and four near-threshold values.
+  category: method
+  severity: critical
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W7
+  summary: Novelty-boundary wording in section 6.4 is in tension with the revised section 1/3.5; state which asymmetry is claimed and cite section 3.5.
+  category: framing
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W8
+  summary: Introduction contribution 4 overstates the cross-corpus result against section 5.1.
+  category: writing
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W9
+  summary: 'Three promised positional fixes unexecuted: confound promoted into Contributions; ''certification-grade'' defined in the first paragraph; novelty boundary moved into the Introduction.'
+  category: writing
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W10
+  summary: Section 5.1 still contradicts itself ('three decimal places' vs the saturation concession).
+  category: writing
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W11
+  summary: Section 4.3's 'a finer alphabet resolves more' remains confounded by sparse inflation, which the paired-increment test does not settle.
+  category: method
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W12
+  summary: Section 4.2's closing direction word is inverted ('coarsens' where refining is meant). Found by the paper audit; missed by all three reviewers.
+  category: writing
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W13
+  summary: Section 4.4's closing detector paragraph is duplicated verbatim.
+  category: writing
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W14
+  summary: The abstract/Intro detector sentence is ambiguous or inverted against Results.
+  category: writing
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W15
+  summary: Figure 1's in-figure labels contradict the revised caption and section 3.5.
+  category: format
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W16
+  summary: Section 6.2's Kolmogorov-Smirnov family grouping wrongly includes the closeness-testing refs.
+  category: writing
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W17
+  summary: Reference [5] has a wrong DOI, reversed author order, and missing pages.
+  category: format
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W18
+  summary: Section 6.4's self-reference is broken; a contribution entry says 'beyond the fourth rung'; section 5.2's text stops at B=256 while Figure 4 runs to 65536.
+  category: writing
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W19
+  summary: 'Reproducibility unverifiable as written: provenance hashes truncated to 16 hex while the field is content_sha256; no pre-registration timestamps; no URLs.'
+  category: format
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W20
+  summary: 'The automated reference check disagrees with the rendered PDF (orphans, author fields, a CRAN resolution). DIAGNOSED: the built .bbl has 53 keys matching the 53-entry .bib exactly, 0 orphans - the check ran against a stale source.'
+  category: format
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W21
+  summary: Section 5.2's dual-use result still has a purely defensive ethics statement with no IP-hash reversibility/salting discussion.
+  category: ethics
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
+- id: RT-W22
+  summary: Page 17's provenance bullets stretch word spacing badly.
+  category: format
+  severity: warning
+  status: in_progress
+  first_raised_round: 3
+  last_seen_round: 3
+  mentions:
+  - round: 3
+    reviewers: []
+    note: Raised in the Round 3 consolidated report.
+  action_items:
+  - round: 3
+    action: Plan sent to the independent Reviewer for checking before dispatch.
+    assigned_to: Research Director
+    status: in_progress
+  resolution: ''
+  resolution_round: null
