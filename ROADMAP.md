@@ -8,7 +8,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 ## The three claims
 
-- **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). **95% cluster-bootstrap CI [26.5%, 43.1%]** — the pair bootstrap understated width by 2.84x, so quote the cluster interval. Supported in **two independent settings** (primary corpus + X11 cross-corpus: 523/3321 = 15.75%, upper 534 / lower 3310). DONE.
+- **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). **95% cluster-bootstrap CI [26.5%, 43.1%]** — the pair bootstrap understated width by 2.84x, so quote the cluster interval. Cross-corpus replication supports **non-reproduction** (X11: 523/3321 = 15.75%, upper 534 / lower 3310): the all-pairs and >=13049 strata exclude zero under both bootstraps. **BUT the scale-matched strata do NOT survive** — under the cluster bootstrap the >=20000/>=40000/>=80000 gap intervals include zero (D106), so "the gap narrows under matching" is a point estimate, not a resolved effect. The lower-side reproduction claim (0.9960 vs 0.9967) still holds. DONE.
 - **C2** — the certificate horizon is short; the coarsest channel is the only viable rung. DONE, incl. the divisibility lower bound (X6) at large k where the plug-in certificate is lost.
 - **C3** — methods/limits: the standard plug-in chain-rule estimator **cannot adjudicate** the dependent-prefix growth question; robust to two independent repairs (X3_A, X3_B). DONE.
 
@@ -107,6 +107,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D106 | 2026-09-15 | D106: W9 cluster bootstrap flips the scale-matched | — |
 | D105 | 2026-09-15 | D105: retract my "lower side is finite-sample" ins | — |
 | D104 | 2026-09-15 | D104: W10 cluster bootstrap confirmed correct — re | — |
 | D103 | 2026-09-15 | D103: cross-corpus gap is non-monotone (correct th | — |
@@ -116,5 +117,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D099 | 2026-09-15 | D099: C3's control citation pointed at the BIC rou | X3 |
 | D098 | 2026-09-15 | D098: do not reshape registry keys to satisfy a va | X1, X11 |
 | D097 | 2026-09-15 | D097: figures verified (fig3 synthetic data fixed, | X3 |
-| D096 | 2026-09-15 | D096: do not force X9_C to terminal; accept the st | X9_C |
 
