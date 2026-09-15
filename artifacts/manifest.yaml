@@ -881,7 +881,8 @@
   - runner
   - auditable
 - id: art_20260914_c13fe7
-  name: x3_variant_b_support_conditioning.py (FROZEN SNAPSHOT — not the executing runner; see top-level file)
+  name: x3_variant_b_support_conditioning.py (FROZEN SNAPSHOT — not the executing
+    runner; see top-level file)
   type: intermediate
   description: 'X3-repair variant B runner (auditable). Implements the EXPOSURE-conditioning
     change: the same reference symmetrized conditional Bernoulli KL contribution per
@@ -1064,7 +1065,8 @@
   - dose-response
   - fixed
 - id: art_20260914_646bc6
-  name: x3_control_occupancy_dose_response.py (FROZEN SNAPSHOT — not the executing runner; see top-level file)
+  name: x3_control_occupancy_dose_response.py (FROZEN SNAPSHOT — not the executing
+    runner; see top-level file)
   type: intermediate
   description: D056-fixed dose-response control RUNNER, left in repo for provenance.
     Contains the labels-only fix (lines 179-181) and the permanent assertion assert_plain_unthinned_reference()
@@ -1357,7 +1359,7 @@
     the pair-level error is a PROXY (macro-average of two single-service classification
     errors), and classification_error is CLOSED-SET while the floor is OPEN-SET.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X12_k5/data/x12_detector_validation_k5.json
-  content_sha256: 14f0f581dc52ff8e5c8a26907fc105f5bf6ef7cc92550daab0d861f4cd5fa999
+  content_sha256: bebe6bf00ec3b48a541c948353b7db8574fa7721fec64199c614b239adf0a8d5
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X12_k5
@@ -1470,3 +1472,372 @@
   - runner
   - C033
   - producer
+- id: art_20260914_974965
+  name: runner_input_path_audit
+  type: intermediate
+  description: 'Cross-tree input path audit for all 19 project runners: 53 paths checked,
+    1 snapshot-only defect (X9 nested path), 4 silent fallback risks, 4 late-precondition
+    runners.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/runner_input_path_audit_974965.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-14T18:08:04.588161+00:00'
+  tags:
+  - audit
+  - cross-tree
+  - input-paths
+  - defect-class
+- id: art_20260914_b0ab78
+  name: X9_E dose-response channels analysis
+  type: report
+  description: Structured exact-value analysis of X9_E SNI-dependent versus SNI-independent
+    dose-response arms, clipping/saturation, hypothesis evaluation, and DST_IP/QUIC_SNI
+    determinism check.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X9_E/report/x9_dose_response_channels_analysis.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X9_E
+  skill: experiment-analysis
+  created_at: '2026-09-14T18:41:52.587119+00:00'
+  tags:
+  - X9_E
+  - analysis
+  - dose-response
+  - TV
+  - saturation
+  - determinism
+- id: art_20260914_24c7ab
+  name: X9_E dose-response channels raw artifact
+  type: data
+  description: Original X9_E JSON artifact containing both-arm train/test rung results,
+    matched-pair deltas, clipping labels, arithmetic thresholds, and DST_IP/QUIC_SNI
+    premise test.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X9_E/data/x9_dose_response_channels.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X9_E
+  skill: experiment-analysis
+  created_at: '2026-09-14T18:41:54.700602+00:00'
+  tags:
+  - X9_E
+  - raw
+  - dose-response
+  - TV
+- id: art_20260914_0f9311
+  name: x9e_analysis_summary
+  type: intermediate
+  description: X9_E dose-response analysis summary JSON — verdict refuted, delta_tv_hat
+    monotonic growth to 0.358 at B=256 before saturation, calibration check passed
+    (diff 0.0), DST_IP/SNI conflicts 8323/13111. Second independent analysis worker
+    cross-validating the first.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X9_E/intermediate/x9e_analysis_summary.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X9_E
+  skill: ''
+  created_at: '2026-09-14T19:16:16.010403+00:00'
+  tags:
+  - x9e
+  - analysis
+  - dose-response
+  - negative
+- id: art_20260914_20d2b6
+  name: X13 Good-Toulmin Missing-Service Mass
+  type: data
+  description: Deployment-site Good-Turing/Good-Toulmin missing destination-host mass
+    over the X1 training split, with frequency-of-frequencies, bootstrap alternative
+    interval, and 1:100 sampling sensitivity.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X13/data/x13_missing_service_mass.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X13
+  skill: experiment-analysis
+  created_at: '2026-09-14T19:56:01.828027+00:00'
+  superseded_by: art_20260914_0c143b
+  retirement_note: Retired under D070 because this record described the stale bootstrap-CI
+    artifact at the canonical source path; the clean D089 artifact is registered as
+    art_20260914_0c143b and must be cited instead.
+  tags:
+  - X13
+  - good-turing
+  - good-toulmin
+  - missing-mass
+  - open-set
+  - deployment-site
+- id: art_20260914_9b47f8
+  name: x13_missing_service_mass
+  type: data
+  description: 'X13 Good-Turing missing-service mass (D089: bootstrap CI deleted from
+    runner and artifact)'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X13/data/x13_missing_service_mass_9b47f8.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X13
+  skill: ''
+  created_at: '2026-09-14T20:36:30.932589+00:00'
+  superseded_by: art_20260914_0c143b
+  retirement_note: Retired under D070 because the versioned clean copy was consolidated
+    into the canonical source artifact and re-registered as art_20260914_0c143b; this
+    duplicate entry must not be cited.
+  tags:
+  - x13
+  - missing-mass
+  - d089-fixed
+- id: art_20260914_74ad7e
+  name: X8 vector-level TV result
+  type: data
+  description: X8 one-sided vector-law TV result with pooled-cell DPI sanity check
+    and empirical k-prefix comparison.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x8_vector_law_tv.json
+  content_sha256: 0f8b83bb29f2e2f926b5a176a607317d871128c04ebe628bedc99c86eb1dc7d8
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X8
+  skill: ''
+  created_at: '2026-09-14T20:47:38.193714+00:00'
+  tags:
+  - X8
+  - vector-law
+  - TV
+  - DPI
+  - primary-corpus
+- id: art_20260914_0c143b
+  name: x13_missing_service_mass
+  type: data
+  description: X13 Good-Turing missing-service mass (D089 clean, D070 consolidated
+    to canonical path)
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X13/data/x13_missing_service_mass.json
+  content_sha256: 430ebed687a11fd951ce9bd683a93ef821147ef2674784d99af1eb5ce20a997c
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X13
+  skill: ''
+  created_at: '2026-09-14T20:50:11.020046+00:00'
+  tags:
+  - x13
+  - missing-mass
+  - d089-fixed
+  - d070-consolidated
+- id: art_20260914_de3248
+  name: x3_axis_validation
+  type: data
+  description: x3 axis validation (re-run bytes pulled from server, D070)
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_axis_validation_de3248.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X3
+  skill: ''
+  created_at: '2026-09-14T21:08:01.004630+00:00'
+  tags:
+  - x3
+  - axis-validation
+  - d070-pull
+- id: art_20260914_3bde36
+  name: x3_parametric_growth
+  type: data
+  description: x3 parametric growth re-run with D057 non-diagnostic wording (withdrawn
+    sentence removed)
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_parametric_growth_3bde36.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X3
+  skill: ''
+  created_at: '2026-09-14T21:09:48.460434+00:00'
+  tags:
+  - x3
+  - parametric-growth
+  - d057-fixed
+- id: art_20260914_c2a33e
+  name: X11 full two-sided CESNET-QUIC22 bracket
+  type: data
+  description: 'Full X11 two-sided epsilon-indistinguishability bracket on CESNET-QUIC22
+    XS: 3,321 service pairs, finite-sample tv_upper_bound upper side, Michel adaptive
+    lower side with fixed 20,000-flow cap and random_state=0, joint gate, hard invariant
+    checks, feasibility reconciliation, and n-stratified primary comparison.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X11/data/x11_full_bracket.json
+  content_sha256: 83c1a5a103e8f97e55517c58b7df14c80e3cf07be5bd567b3abfaee8cbf67d35
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X11
+  skill: experiment-analysis
+  created_at: '2026-09-14T21:37:38.780702+00:00'
+  tags:
+  - X11
+  - CESNET-QUIC22
+  - full-bracket
+  - epsilon-indistinguishability
+  - certification
+- id: art_20260915_b38553
+  name: run_report.html
+  type: report
+  description: AgenticFigure run_report output for run af-55371c4d9411452fb3df7e6ef910b06b
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/report/run_report.html
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: agentic-figure
+  created_at: '2026-09-15T01:26:03.612884+00:00'
+  tags:
+  - agentic-figure
+  - af-55371c4d9411452fb3df7e6ef910b06b
+  - run_report
+- id: art_20260915_679f6d
+  name: state.json
+  type: data
+  description: AgenticFigure state output for run af-55371c4d9411452fb3df7e6ef910b06b
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/state.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: agentic-figure
+  created_at: '2026-09-15T01:26:03.865307+00:00'
+  tags:
+  - agentic-figure
+  - af-55371c4d9411452fb3df7e6ef910b06b
+  - state
+- id: art_20260915_533627
+  name: generation_0/critic_failure.json
+  type: data
+  description: AgenticFigure round_artifact output for run af-55371c4d9411452fb3df7e6ef910b06b
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/critic_failure.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: agentic-figure
+  created_at: '2026-09-15T01:26:04.110531+00:00'
+  tags:
+  - agentic-figure
+  - af-55371c4d9411452fb3df7e6ef910b06b
+  - round_artifact
+- id: art_20260915_9a8338
+  name: generation_0/generation_result.json
+  type: data
+  description: AgenticFigure round_artifact output for run af-55371c4d9411452fb3df7e6ef910b06b
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/generation_result.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: agentic-figure
+  created_at: '2026-09-15T01:26:05.527171+00:00'
+  tags:
+  - agentic-figure
+  - af-55371c4d9411452fb3df7e6ef910b06b
+  - round_artifact
+- id: art_20260915_272c32
+  name: generation_0/job_status.json
+  type: data
+  description: AgenticFigure round_artifact output for run af-55371c4d9411452fb3df7e6ef910b06b
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/job_status.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: agentic-figure
+  created_at: '2026-09-15T01:26:05.781136+00:00'
+  tags:
+  - agentic-figure
+  - af-55371c4d9411452fb3df7e6ef910b06b
+  - round_artifact
+- id: art_20260915_5e1f84
+  name: fig1_bracket_overview
+  type: chart
+  description: 'fig1 (hero, conceptual): EIBO two-sided bracket overview. Channel
+    quantization forks into a finite-sample-strict upper side (plug-in TV + confidence
+    radius) and an asymptotic lower side (classifier-based HPLB), rejoining at the
+    per-pair interval and its gate. Hand-built after the Agentic Figure provider failed
+    twice on a retryable error; passes a programmatic text-collision AND box-containment
+    check.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/chart/fig1_bracket_overview.pdf
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: paper-visualization
+  created_at: '2026-09-15T03:29:41.115639+00:00'
+  tags:
+  - paper
+  - introduction
+  - conceptual
+  - hero
+  content_sha256: cb64fde5d8848bdb7529f98bb76df2a87c17048f11c304e4a0d0ed8ec22aed33
+- id: art_20260915_8d56b5
+  name: fig2_certificate_horizon
+  type: chart
+  description: 'fig2 (statistical): Certificate horizon. Panel (a) certifiable fraction
+    vs alphabet resolution M at k=5 (manifest: X1 headline table, E3) with the saturation
+    fraction; panel (b) the crossover sample size n vs true TV (manifest: X4 frontier
+    function), where two derivation routes agree to 0.0. Values: 340/990 = 0.3434
+    certifiable at M=1, falling to 0 by M=8; saturation 0.0 -> 0.391.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/chart/fig2_certificate_horizon.pdf
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: paper-visualization
+  created_at: '2026-09-15T03:29:45.165249+00:00'
+  tags:
+  - paper
+  - results
+  - statistical
+  content_sha256: ee1cc738afbd3bf42fb43beacbc29793b6b478f08baf6c2e2a6517f5044f667b
+- id: art_20260915_9f6690
+  name: fig3_estimator_control
+  type: chart
+  description: 'fig3 (statistical): Estimator limit. Panel (a) estimated/true divergence
+    vs prefix length k for the plain-i.i.d. known-truth control (1.0002 -> 0.6769)
+    and the real-occupancy twin (0.9938 -> 0.8820) against exactly-linear truth; panel
+    (b) the sparse-context fraction (0.000 -> 0.998); panel (c) effective n per context
+    (200000 -> 1.09). Manifest: X3 control occupancy dose-response, X3 parametric
+    growth.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/chart/fig3_estimator_control.pdf
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: paper-visualization
+  created_at: '2026-09-15T03:29:49.053166+00:00'
+  tags:
+  - paper
+  - results
+  - statistical
+  content_sha256: 8b63afea2aaa9fe75fb1b0d8022f2b956e97f3dc330c0e63ad3ec959c842f800
+- id: art_20260915_f2b327
+  name: fig4_cross_corpus
+  type: chart
+  description: 'fig4 (statistical): Cross-corpus bracket. Panel (a) per-side fractions
+    for the primary corpus vs CESNET-QUIC22 (upper 0.3434/0.1608, lower 0.9960/0.9967,
+    joint 0.3394/0.1575) with the capped lower-side bar hatched and the BC2 disclosure
+    as a readable boxed caption; panel (b) the gate gap by minimum per-pair flow count
+    (18.2 -> 9.7 -> 16.0 pts). Manifest: X11 full bracket. CARRIES BC2: per-side n
+    stated, bias CONSERVATIVE.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/chart/fig4_cross_corpus.pdf
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: paper-visualization
+  created_at: '2026-09-15T03:29:53.286901+00:00'
+  tags:
+  - paper
+  - discussion
+  - statistical
+  - BC2
+  content_sha256: a246929a7c43409dcb497421406bc1ed5b489440703cebdefeffc2ec040b55db
+- id: art_20260915_1f7aa3
+  name: fig5_channel_sensitivity
+  type: chart
+  description: 'fig5 (statistical): Channel sensitivity dose-response. Matched delta
+    tv_hat between the SNI-dependent arm (k-prefix + hashed DST_IP) and the SNI-independent
+    arm (k-prefix + random id) vs alphabet cardinality B on a log2 axis, mean and
+    median, with the saturation region banded. Values (median): 0.0300, 0.0940, 0.2485,
+    0.3325, 0.0162. Manifest: X9_E dose-response channels. CARRIES BC1: y-axis is
+    tv_hat only, radius-free, no certificate implication.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/chart/fig5_channel_sensitivity.pdf
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: paper-visualization
+  created_at: '2026-09-15T03:29:57.705817+00:00'
+  tags:
+  - paper
+  - discussion
+  - statistical
+  - BC1
+  content_sha256: b2dc9aabe9dd1e5e13e92977ae120358d5795816e25de2656ec350459fdd115c

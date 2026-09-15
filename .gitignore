@@ -74,3 +74,6 @@ artifacts/*.tmp
 _paper_audit_state.json
 _verify_refs_state.json
 .agentic-figure/
+
+# --- Figure build scratch (candidate renders, not deliverables) ---
+artifacts/_project/chart/_scratch/

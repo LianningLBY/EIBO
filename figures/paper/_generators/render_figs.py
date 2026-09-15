@@ -76,6 +76,14 @@ def check_collisions(fig, fig_id):
         for t in (ax.title, ax.xaxis.label, ax.yaxis.label):
             if t.get_text().strip():
                 texts.append(t)
+        # ax.title is EMPTY when a title is set with loc="left"/"right"; the
+        # text lives on ax._left_title / ax._right_title. Collecting only
+        # ax.title made every left-aligned title invisible to this check, which
+        # is how the fig2 legend-over-title collision survived several passes.
+        for attr in ("_left_title", "_center_title", "_right_title"):
+            t = getattr(ax, attr, None)
+            if t is not None and t.get_text().strip():
+                texts.append(t)
         xlo, xhi = sorted(ax.get_xlim())
         ylo, yhi = sorted(ax.get_ylim())
         for x, lab in zip(ax.get_xticks(), ax.get_xticklabels()):
@@ -154,9 +162,11 @@ def fig2():
                   "$\\epsilon_{hi} < 0.5$")
     ax.set_ylim(-0.02, 1.34)
     ax.set_title("(a) Finer alphabet, lost certificate", loc="left")
-    ax.legend(loc="upper center", bbox_to_anchor=(0.5, 1.19),
-              ncol=2, frameon=False, handlelength=1.6, columnspacing=1.2,
-              fontsize=6.8)
+    # Legend sits INSIDE the axes, below the title: an anchor above 1.0 would
+    # place it in the title's row.
+    ax.legend(loc="upper right", bbox_to_anchor=(1.0, 1.0),
+              ncol=1, frameon=False, handlelength=1.5, fontsize=6.6,
+              borderaxespad=0.25)
     ax.annotate(f"{jg['upper_count']}/990 upper side\n"
                 f"{jg['joint_gate_count']}/990 joint gate (33.9\\%)",
                 xy=(0, upper[0]), xytext=(0.62, 0.52), fontsize=6.8,
@@ -270,10 +280,11 @@ def fig4():
     ax.set_xticks(x)
     ax.set_xticklabels(groups)
     ax.set_ylabel("Fraction of corpus pairs")
-    ax.set_ylim(0, 1.30)
+    ax.set_ylim(0, 1.45)
     ax.set_title("(a) Per-side fractions", loc="left")
-    ax.legend(loc="upper center", bbox_to_anchor=(0.5, 1.15),
-              ncol=2, frameon=False, fontsize=7.2)
+    ax.legend(loc="upper right", bbox_to_anchor=(1.0, 1.0),
+              ncol=1, frameon=False, fontsize=6.6, handlelength=1.4,
+              borderaxespad=0.25)
     for rects, vals in ((b1, prim), (b2, quic)):
         for rect, v in zip(rects, vals):
             ax.text(rect.get_x() + rect.get_width() / 2, v + 0.03,
