@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 14:25 UTC | Paper frozen in review; pre-staging dispatched (D109) rather than idling on the stalled gateway.
+> Last updated: 2026-09-15 14:50 UTC | Paper frozen in review; higher-k pre-staging running; C2 grid verified (4/20 cells, zero by M=8).
 
 ## Core direction
 
@@ -9,7 +9,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 ## The three claims
 
 - **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). **95% cluster-bootstrap CI [26.5%, 43.1%]** — the pair bootstrap understated width by 2.84x, so quote the cluster interval. Cross-corpus replication supports **non-reproduction** (X11: 523/3321 = 15.75%, upper 534 / lower 3310): the all-pairs and >=13049 strata exclude zero under both bootstraps. **BUT the scale-matched strata do NOT survive** — under the cluster bootstrap the >=20000/>=40000/>=80000 gap intervals include zero (D106), so "the gap narrows under matching" is a point estimate, not a resolved effect. The lower-side reproduction claim (0.9960 vs 0.9967) still holds. DONE.
-- **C2** — the certificate horizon is short; the coarsest channel is the only viable rung. DONE, incl. the divisibility lower bound (X6) at large k where the plug-in certificate is lost.
+- **C2** — the certificate horizon is short; the coarsest channel is the only viable rung. DONE, incl. the divisibility lower bound (X6) at large k where the plug-in certificate is lost. **Verified from the full 20-cell grid** (`registry.yaml` → `X1.metrics.upper_side_table_20_cells`): the informative count is non-zero in only **4 of 20 cells** (M_1@k5=340, M_2@k5=47, M_4@k5=3, M_1@k10=28) and is **zero by M=8 at every k** — the certificate dies by alphabet resolution 8 regardless of prefix length, which is stronger than the M=1 column the paper quotes.
 - **C3** — methods/limits: the standard plug-in chain-rule estimator **cannot adjudicate** the dependent-prefix growth question; robust to two independent repairs (X3_A, X3_B). DONE.
 
 ## Current progress
@@ -126,6 +126,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D110 | 2026-09-15 | D110: Item 2's cited source surface was wrong (no  | — |
 | D109 | 2026-09-15 | D109: dispatch pre-staging (higher-k per-pair rows | X1, X12_k5 |
 | D108 | 2026-09-15 | D108: re-review attempted on owner instruction; pl | — |
 | D107 | 2026-09-15 | D107: Round 2 submitted and active — the four reje | — |
@@ -135,5 +136,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D103 | 2026-09-15 | D103: cross-corpus gap is non-monotone (correct th | — |
 | D102 | 2026-09-15 | D102: bootstrap must resample services, not pairs  | — |
 | D101 | 2026-09-15 | D101: Round 1 review verdict reject (resubmit-wort | — |
-| D100 | 2026-09-15 | D100: Round 1 review action matrix — two systemic  | X11, X13 |
 
