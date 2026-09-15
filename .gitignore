@@ -53,3 +53,19 @@ artifacts/*.tmp
 .eibo_remote_gitignore
 .work/
 
+
+# --- LaTeX build byproducts (docs/paper/) --------------------------------
+# Regenerable from the .tex sources; tracking them would put churn between a
+# reader and the source. The compiled main.pdf IS tracked deliberately -- it is
+# the deliverable that gets reviewed. Negation comes after the byproduct rules
+# so it wins for that one file.
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+!docs/paper/main.pdf
