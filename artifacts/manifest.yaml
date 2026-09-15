@@ -1,9 +1,7 @@
 - id: art_20260913_04f411
   name: Blocked dispatch packages
   type: report
-  description: Self-contained packages for two dispatch-blocked tasks (ECH retrieval,
-    source-index repair) plus the third blocked rerun, for Director routing. Includes
-    verbatim rejection text and the full prompt bodies.
+  description: Self-contained packages for two dispatch-blocked tasks (ECH retrieval, source-index repair) plus the third blocked rerun, for Director routing. Includes verbatim rejection text and the full prompt bodies.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/report/blocked_dispatch_packages.md
   content_sha256: c4df013b962b50dc5e429a8e06b5989d60b94c6db5e44774fc438689cd8a64eb
   url: null
@@ -19,9 +17,7 @@
 - id: art_20260913_e08ee7
   name: Q1 absolute summary (k=5)
   type: data
-  description: 'E3''s per-rung summary for the Q1 absolute-quantity window at k=5:
-    band lower-edge fraction, upper fraction, both, saturation fraction, T_n_median,
-    radius_median, over M in {1,2,4,8,16} on 45 services / 990 pairs.'
+  description: 'E3''s per-rung summary for the Q1 absolute-quantity window at k=5: band lower-edge fraction, upper fraction, both, saturation fraction, T_n_median, radius_median, over M in {1,2,4,8,16} on 45 services / 990 pairs.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_summary.json
   content_sha256: 32c1934ba27da16bec743a9cda8b125bbca593dd3c647c52e390e4d3cb9041a8
   url: null
@@ -37,9 +33,7 @@
 - id: art_20260913_3f762c
   name: Q1 absolute count table (k=5, 4950 rows)
   type: data
-  description: 'E3''s per-pair count table for k=5: one row per (unordered service
-    pair, rung M) with service_a, service_b, M, n_a, n_b, tv_k5_masked. 4,950 rows.
-    TV scalars only, no verdicts.'
+  description: 'E3''s per-pair count table for k=5: one row per (unordered service pair, rung M) with service_a, service_b, M, n_a, n_b, tv_k5_masked. 4,950 rows. TV scalars only, no verdicts.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts.json
   content_sha256: 979c462e0638f624438fee2d8965f4c49140d8f975561b870c3af03144348094
   url: null
@@ -55,8 +49,7 @@
 - id: art_20260913_59bbc0
   name: Q1 absolute count table CSV (k=5)
   type: data
-  description: E3's count table as CSV, same schema as q1_absolute_counts.json (4,950
-    rows).
+  description: E3's count table as CSV, same schema as q1_absolute_counts.json (4,950 rows).
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts.csv
   content_sha256: 388495382742723461212b0384a8d997dcc66b72fa053feee1bd81b0c132b15b
   url: null
@@ -73,10 +66,7 @@
 - id: art_20260913_6addd0
   name: Q1 count table metadata header (k=5)
   type: data
-  description: 'E3''s metadata header: k, masking function, grid_fixed_a_priori, channel-exclusion
-    declaration, alpha and per-law split, lower/upper formulas, chosen_k/alt_k with
-    coverage, split policy and measured granularity, h5 sha256, pairing rule, two-layer
-    service threshold, per-k coverage, k=5 post-mask usable pairs.'
+  description: 'E3''s metadata header: k, masking function, grid_fixed_a_priori, channel-exclusion declaration, alpha and per-law split, lower/upper formulas, chosen_k/alt_k with coverage, split policy and measured granularity, h5 sha256, pairing rule, two-layer service threshold, per-k coverage, k=5 post-mask usable pairs.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts.meta.json
   content_sha256: f4e8609e4722a28feda129bb2092ec4379785992ccf82c223b10fc71ee3f7a4e
   url: null
@@ -92,9 +82,7 @@
 - id: art_20260913_f2a9c4
   name: Q1 dense symbol counts M=1,2 (k=5)
   type: data
-  description: E3's dense symbol counts for M=1 and M=2 at k=5 (alphabets 32 and 1024),
-    allowing an independent implementation to recompute the 990 per-pair TVs from
-    counts rather than trusting E3's tv routine.
+  description: E3's dense symbol counts for M=1 and M=2 at k=5 (alphabets 32 and 1024), allowing an independent implementation to recompute the 990 per-pair TVs from counts rather than trusting E3's tv routine.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_dense_counts_m1_m2.json
   content_sha256: 479571b55bae30c6d09846f004969759365f92c21e8b67274b09f2ecf612a099
   url: null
@@ -111,8 +99,7 @@
 - id: art_20260913_ea99d2
   name: Q1 absolute count table (k=10, 4950 rows)
   type: data
-  description: 'E3b''s k=10 per-pair count table: one row per (unordered service pair,
-    rung M) with service_a, service_b, M, n_a, n_b, tv_k10_masked. 4,950 rows.'
+  description: 'E3b''s k=10 per-pair count table: one row per (unordered service pair, rung M) with service_a, service_b, M, n_a, n_b, tv_k10_masked. 4,950 rows.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts_k10.json
   content_sha256: 26b62988b5d6bb90b29efe8a013694cb61115bc624d79b9e3b65d3fc335cd3bd
   url: null
@@ -128,8 +115,7 @@
 - id: art_20260913_d887a7
   name: Q1 absolute summary (k=10)
   type: data
-  description: 'E3b''s k=10 per-rung summary: upper/band-edge/both fractions, saturation
-    fraction and dynamic-range label per M in {1,2,4,8,16}.'
+  description: 'E3b''s k=10 per-rung summary: upper/band-edge/both fractions, saturation fraction and dynamic-range label per M in {1,2,4,8,16}.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_k10_summary.json
   content_sha256: a6a9f3884f218cda171e41e270924f39c77fc61cbaf8a350fd5d07d9de98551f
   url: null
@@ -145,8 +131,7 @@
 - id: art_20260913_1f0edb
   name: Q1 count table metadata (k=10)
   type: data
-  description: E3b's k=10 metadata header, including the per-month TIME_FIRST flow
-    counts that decide month-level split feasibility.
+  description: E3b's k=10 metadata header, including the per-month TIME_FIRST flow counts that decide month-level split feasibility.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts_k10.meta.json
   content_sha256: 5917153bcfc60630711ada3e447e0b924fbacb261f515348d15cbe751b6fe4fb
   url: null
@@ -162,10 +147,7 @@
 - id: art_20260913_53ee73
   name: Q1 eps_lo on the symbol map (k=5, M=1, 990 pairs)
   type: data
-  description: 'Q1 eps_lo on the one-hot symbol map at k=5/M=1: Michel asymptotic
-    HPLB lower side on one-hot symbol draws, m=32, cap 20000 flows/service, seed 20260913,
-    990 pairs, zero eps_lo<=eps_hi violations. NOTE: its eps_hi was computed with
-    the 2x-inflated radius and must be recomputed.'
+  description: 'Q1 eps_lo on the one-hot symbol map at k=5/M=1: Michel asymptotic HPLB lower side on one-hot symbol draws, m=32, cap 20000 flows/service, seed 20260913, 990 pairs, zero eps_lo<=eps_hi violations. NOTE: its eps_hi was computed with the 2x-inflated radius and must be recomputed.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_eps_lo_symbol_map.json
   content_sha256: aafe46afa9cde831f5576634c780021b63259815a012f717115b89639fccdf83
   url: null
@@ -181,10 +163,7 @@
 - id: art_20260913_0c7031
   name: Q2 v3 PHIST lattice-law single-object certificate
   type: data
-  description: 'Q2 v3 single-object recalculation: lattice-law object at k=5/M=1,
-    m=32, upper side 31 free mean coordinates with Hoeffding+union (r_i = sqrt(log(2*31/0.025)/(2*n_i)),
-    eps_hi = tv_hat + 31*r_a + 31*r_b), lower side Michel one-hot draws. 45 services
-    / 990 pairs, 0 eps_lo>eps_hi violations, cap 20000 flows/service.'
+  description: 'Q2 v3 single-object recalculation: lattice-law object at k=5/M=1, m=32, upper side 31 free mean coordinates with Hoeffding+union (r_i = sqrt(log(2*31/0.025)/(2*n_i)), eps_hi = tv_hat + 31*r_a + 31*r_b), lower side Michel one-hot draws. 45 services / 990 pairs, 0 eps_lo>eps_hi violations, cap 20000 flows/service.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q2_phist_certificate_v3.json
   content_sha256: 71a20309c2d12fbeb5f7204f312243c951e0259d6ae3550ea579fcf6cbb94840
   url: null
@@ -200,11 +179,7 @@
 - id: art_20260913_791a79
   name: Q1 independent recompute (exact CP + own TV routine)
   type: data
-  description: 'Independent recompute (own TV routine, own exact Clopper-Pearson threshold):
-    4950 rows; T_exact vs the calibrated T(n) differ by ~3e-7; all five rungs'' three
-    fractions matched with max deviation 0; independent TV from dense counts max deviation
-    0.0. NOTE: its radii used the 2x-inflated formula from my spec and are VOID for
-    upper-side use.'
+  description: 'Independent recompute (own TV routine, own exact Clopper-Pearson threshold): 4950 rows; T_exact vs the calibrated T(n) differ by ~3e-7; all five rungs'' three fractions matched with max deviation 0; independent TV from dense counts max deviation 0.0. NOTE: its radii used the 2x-inflated formula from my spec and are VOID for upper-side use.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_independent_recompute.json
   content_sha256: 896c091dd49e3f473f73c1e82e826c7a44054fe675dee95d46464f4d5bfea8c2
   url: null
@@ -220,10 +195,7 @@
 - id: art_20260913_613998
   name: Q1 gate closure (5 pairs at full n + reference-radius recompute)
   type: data
-  description: 'E10 joint gate closure: full-n eps_lo for the 5 pairs that failed
-    the lower side under the 20k cap, plus a whole-table upper-side recompute on the
-    reference radius. k=1, gate 336/990. Also confirms the per-rung reference-radius
-    counts 340/47/3/0/0 and C016 violations 0.'
+  description: 'E10 joint gate closure: full-n eps_lo for the 5 pairs that failed the lower side under the 20k cap, plus a whole-table upper-side recompute on the reference radius. k=1, gate 336/990. Also confirms the per-rung reference-radius counts 340/47/3/0/0 and C016 violations 0.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_gate_five_pairs_full_n.json
   content_sha256: 0a0c239f2a7c0cd3a081087c578443d36e6305ab4ab5fab67eae986093fe3557
   url: null
@@ -239,10 +211,7 @@
 - id: art_20260913_262f85
   name: Q2 upper bound at 16r (sum-to-zero correction)
   type: data
-  description: 'Q2 upper side recomputed at the sum-to-zero-corrected constant 16r:
-    informativeness 342/990 = 0.3455 (vs 152/990 = 0.1535 at the loose 31r), plus
-    the exhaustive sign-pattern check confirming max L1/r == m for m=2,4,8,16,32,
-    and the note that the Weissman categorical form is unproven for this estimator.'
+  description: 'Q2 upper side recomputed at the sum-to-zero-corrected constant 16r: informativeness 342/990 = 0.3455 (vs 152/990 = 0.1535 at the loose 31r), plus the exhaustive sign-pattern check confirming max L1/r == m for m=2,4,8,16,32, and the note that the Weissman categorical form is unproven for this estimator.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q2_upper_bound_16r.json
   content_sha256: 77fcaf7c88b6b576d9fa59b02be57c6884cc46e07c01b60ac8fac74fc0a8bff3
   url: null
@@ -258,11 +227,7 @@
 - id: art_20260913_5cca25
   name: E8 PPI masking verification (XS h5)
   type: data
-  description: 'E8''s PPI masking verification on the XS h5: 10M rows scanned, all-zero
-    padding over 3,805,365 tail scalar slots (histogram {0: 3805365}), PPI_LEN distribution
-    (min 2 / max 30 / median 30 / q5 2 / q25 19, >=15 fraction 0.8348841), k=5 post-mask
-    990/990 pairs with 0 services dropped. Also records that E8b''s signed difference
-    was 0.0 at every (M,k) because my spec forced both arms onto the same flow set.'
+  description: 'E8''s PPI masking verification on the XS h5: 10M rows scanned, all-zero padding over 3,805,365 tail scalar slots (histogram {0: 3805365}), PPI_LEN distribution (min 2 / max 30 / median 30 / q5 2 / q25 19, >=15 fraction 0.8348841), k=5 post-mask 990/990 pairs with 0 services dropped. Also records that E8b''s signed difference was 0.0 at every (M,k) because my spec forced both arms onto the same flow set.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/masking_verification.json
   content_sha256: f7cbab76f4261839d60118612a97fb73913e8a0acf9e37caab2258b6bb3b679f
   url: null
@@ -279,11 +244,7 @@
 - id: art_20260913_dd5823
   name: E8b masking regime sweep (non-finding)
   type: data
-  description: 'E8b''s informative-regime sweep over k in {5,10} x M in {1,2,4,8,16}.
-    Signed masked-vs-unmasked difference is exactly 0.0 at every rung because BOTH
-    arms were forced onto flows with PPI_LEN >= k, making min(PPI_LEN,k) == k and
-    the prefixes identical by construction. Non-finding: no discriminating power,
-    so the masking effect is neither measured nor refuted.'
+  description: 'E8b''s informative-regime sweep over k in {5,10} x M in {1,2,4,8,16}. Signed masked-vs-unmasked difference is exactly 0.0 at every rung because BOTH arms were forced onto flows with PPI_LEN >= k, making min(PPI_LEN,k) == k and the prefixes identical by construction. Non-finding: no discriminating power, so the masking effect is neither measured nor refuted.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/masking_regime_sweep.json
   content_sha256: 453ac98df4afca9834034b7e2ddce93a719b5789d8b2637c25797d5d3f11094e
   url: null
@@ -299,14 +260,7 @@
 - id: art_20260913_e5ebac
   name: Q1 full-n lower side, all 990 pairs, cap removed (PRIORITY-1)
   type: data
-  description: 'PRIORITY-1 full-n lower side over ALL 990 M=1 pairs with the 20,000-flow
-    cap removed: eps_lo > 0.05 count = 986/990 (fraction 0.99596), measured_full_n_pair_count
-    990, assumed_pair_count 0, cap_is_none true. Upper condition recomputed row-by-row
-    through statcore.tv_upper_bound: 340 pass, matching the recorded 340. gate_count
-    = 336. eps_lo > eps_hi violations 0. Only 1 verdict changed vs capped (pair 21-23:
-    0.049781 -> 0.058781). Distance-to-line: 0 pairs within 0.005, 3 within 0.02.
-    This DISCHARGES the half-measured caveat and the [333,336] range: no pair''s lower
-    side is assumed any more.'
+  description: 'PRIORITY-1 full-n lower side over ALL 990 M=1 pairs with the 20,000-flow cap removed: eps_lo > 0.05 count = 986/990 (fraction 0.99596), measured_full_n_pair_count 990, assumed_pair_count 0, cap_is_none true. Upper condition recomputed row-by-row through statcore.tv_upper_bound: 340 pass, matching the recorded 340. gate_count = 336. eps_lo > eps_hi violations 0. Only 1 verdict changed vs capped (pair 21-23: 0.049781 -> 0.058781). Distance-to-line: 0 pairs within 0.005, 3 within 0.02. This DISCHARGES the half-measured caveat and the [333,336] range: no pair''s lower side is assumed any more.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_lower_side_full_n.json
   content_sha256: 9fe81e271a386335a9526563ca03631bcdf832fa5d66d3861b2e22ec079256f5
   url: null
@@ -324,22 +278,8 @@
 - id: art_20260913_f8b2e5
   name: X8 vector-level one-sided result, full n
   type: data
-  description: 'X8 vector-level distinguishability as a full-n one-sided result (cap
-    removed): TV(per-flow normalised 32-vector law) over all 990 pairs. Quantiles
-    min 0.10531548567491701, q5 0.4959739903592185, q25 0.7383670417083631, median
-    0.8673875578391307, q75 0.9578527666076553, q95 0.9858218464175719, max 0.9963109497130209;
-    mean 0.8226024312313195. full-n pairs 990, assumed 0, cap_is_none true, 9,992,060
-    valid normalised vectors, 0 zero-sum rows. The DPI sentence formerly here (''By
-    DPI TV(vector) >= TV(marginal)'') is RETRACTED (M055): that inequality is NOT
-    a theorem for those two objects -- the vector law and the k-prefix symbol law
-    consume different aspects of the flow and have NO data-processing order in either
-    direction, and the per-pair comparison INVERTS on 78 of 990 pairs (largest gap
-    0.3415 at pair (29,38)). The valid theorem is TV(vector law) >= TV(POOLED CELL
-    law) (deterministic pooling, same flows and channel). The vector figure must not
-    be presented as a better bound on the k-prefix symbol law or the packet-cell law.
-    CURRENT BYTES: sha256 b9c27c0ceefc8b1c372c409904ddc420fa09ef866f73857af0a0505b6e368df5,
-    8134 bytes; this is the corrected file, and the earlier 119b1221/7296-byte pre-correction
-    copy is deleted with no copy on disk.'
+  description: 'X8 vector-level distinguishability as a full-n one-sided result (cap removed): TV(per-flow normalised 32-vector law) over all 990 pairs. Quantiles min 0.10531548567491701, q5 0.4959739903592185, q25 0.7383670417083631, median 0.8673875578391307, q75 0.9578527666076553, q95 0.9858218464175719, max 0.9963109497130209; mean 0.8226024312313195. full-n pairs 990, assumed 0, cap_is_none true, 9,992,060 valid normalised vectors, 0 zero-sum rows. The DPI sentence formerly here (''By DPI TV(vector) >= TV(marginal)'') is RETRACTED (M055): that inequality is NOT a theorem for those two objects -- the vector law and the k-prefix symbol law consume different aspects of the flow and have NO data-processing order in either direction, and the per-pair comparison INVERTS on 78 of 990 pairs (largest gap 0.3415 at pair (29,38)). The valid theorem is TV(vector law) >= TV(POOLED CELL law) (deterministic pooling, same flows and channel). The vector figure must not be presented as a better bound
+    on the k-prefix symbol law or the packet-cell law. CURRENT BYTES: sha256 b9c27c0ceefc8b1c372c409904ddc420fa09ef866f73857af0a0505b6e368df5, 8134 bytes; this is the corrected file, and the earlier 119b1221/7296-byte pre-correction copy is deleted with no copy on disk.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_vector_level_one_sided_full_n.json
   content_sha256: b9c27c0ceefc8b1c372c409904ddc420fa09ef866f73857af0a0505b6e368df5
   url: null
@@ -356,16 +296,7 @@
 - id: art_20260914_3dff66
   name: X3 chain-rule divergence vs linear i.i.d. null (SUBLINEAR)
   type: data
-  description: 'X3 chain-rule joint divergence D_k over the dependent packet prefix
-    vs the linear i.i.d. null, full k range 5-30, all 990 pairs. Adjudication: SUBLINEAR.
-    Power fit D_k = 0.5074355076 * k^0.838 (exponent 0.838 < 1); square-root AIC beats
-    linear by 88.83938258; first/last median increment ratio 1.5562111971. D_k median
-    rises 1.381373627 (k=5) to 8.521791516 (k=30) over a shrinking denominator (990
-    at k<=13, then 946, 903, 861, 820). Estimator validated on BOTH certifiable subsets
-    separately: k=5 990/990 pairs Pearson 0.8819701750 Spearman 0.9444675765; k=10
-    990/990 pairs Pearson 0.8788490445 Spearman 0.9551200564; zero Pinsker violations
-    in both. Inequality D_sym >= 2*TV^2 checked per item. Used PyTables and PPI[1]/PPI[2]
-    only (PPI[0] excluded).'
+  description: 'X3 chain-rule joint divergence D_k over the dependent packet prefix vs the linear i.i.d. null, full k range 5-30, all 990 pairs. Adjudication: SUBLINEAR. Power fit D_k = 0.5074355076 * k^0.838 (exponent 0.838 < 1); square-root AIC beats linear by 88.83938258; first/last median increment ratio 1.5562111971. D_k median rises 1.381373627 (k=5) to 8.521791516 (k=30) over a shrinking denominator (990 at k<=13, then 946, 903, 861, 820). Estimator validated on BOTH certifiable subsets separately: k=5 990/990 pairs Pearson 0.8819701750 Spearman 0.9444675765; k=10 990/990 pairs Pearson 0.8788490445 Spearman 0.9551200564; zero Pinsker violations in both. Inequality D_sym >= 2*TV^2 checked per item. Used PyTables and PPI[1]/PPI[2] only (PPI[0] excluded).'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_chain_rule_divergence.json
   content_sha256: c19d73926f4e51d64b22af06a1f1f939f971176bb24d4a662db542c16a3d5605
   url: null
@@ -382,16 +313,7 @@
 - id: art_20260914_0e48a1
   name: X4 frontier function (server-only create)
   type: data
-  description: 'X4 certification frontier as a pinned function M_max(k, n, tv_hat),
-    PULLED FROM SERVER to create the missing local copy. Server-only until now, while
-    the declared authority is the local tree. Contains: the certifiability crossover
-    as PRIMARY (4,218,590.770769814 / 6,591,548.079327833 / 11,718,307.69658282 /
-    26,366,192.31731133 / 105,464,769.2692454 / 421,859,077.0769816 / 2,636,619,231.7311296
-    for tv = 0.00/0.10/0.20/0.30/0.40/0.45/0.48 at M=8 k=5), the preserved-but-labelled
-    radius-only crossover (4,218,591, necessary-not-sufficient), the full n_scale
-    labelling (28 n-carrying fields, distinguishing full-corpus projection 194.3M/50
-    from XS measured 10M/45, a ~17.5x gap that must not be compared directly), and
-    why_finer_alphabet_cannot_help.'
+  description: 'X4 certification frontier as a pinned function M_max(k, n, tv_hat), PULLED FROM SERVER to create the missing local copy. Server-only until now, while the declared authority is the local tree. Contains: the certifiability crossover as PRIMARY (4,218,590.770769814 / 6,591,548.079327833 / 11,718,307.69658282 / 26,366,192.31731133 / 105,464,769.2692454 / 421,859,077.0769816 / 2,636,619,231.7311296 for tv = 0.00/0.10/0.20/0.30/0.40/0.45/0.48 at M=8 k=5), the preserved-but-labelled radius-only crossover (4,218,591, necessary-not-sufficient), the full n_scale labelling (28 n-carrying fields, distinguishing full-corpus projection 194.3M/50 from XS measured 10M/45, a ~17.5x gap that must not be compared directly), and why_finer_alphabet_cannot_help.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x4_frontier_function.json
   content_sha256: 3fd919a41bf5e599ded3cff5524029e07f31372805ab1f59602f961200e3113b
   url: null
@@ -407,18 +329,7 @@
 - id: art_20260914_443901
   name: X1 headline table (rebuilt, canonical conventions)
   type: data
-  description: 'X1 headline table REBUILT at the canonical conventions: all upper-side
-    cells recomputed at per-law alpha_law = 0.025 (constant 2.9604) instead of the
-    under-split alpha=0.05 (2.7162); the M=1/k=5 lower side switched to full-n. Corrected
-    headline cell = upper 340 / lower 986 / gate 336 / fraction 0.3393939393939394.
-    20-cell upper table: M=1 k=5=340 k=10=28 k=15=0 k=30=0; M=2 k=5=47 rest 0; M=4
-    k=5=3 rest 0; M=8 and M=16 all 0. The other 19 cells carry lower_side_measured=false,
-    lower_side_pairs=null and no gate fields. Dead numbers quarantined under superseded_dead_numbers
-    (292 = 2x inlined radius; 342 = unsplit alpha; 987 = proxy tv_hat > T(n); 985
-    = capped lower side retained as NON-CANONICAL sensitivity). Effective alpha read
-    from the code path (TVUpperBoundResult.alpha) = 0.025. claim_sentence_supported
-    unchanged (33.9%, which is correct); the erroneous gate_fraction field corrected
-    0.34040404040404043 -> 0.3393939393939394. Adds test_under_split_guard to tests/test_q1_thresholds.py,
+  description: 'X1 headline table REBUILT at the canonical conventions: all upper-side cells recomputed at per-law alpha_law = 0.025 (constant 2.9604) instead of the under-split alpha=0.05 (2.7162); the M=1/k=5 lower side switched to full-n. Corrected headline cell = upper 340 / lower 986 / gate 336 / fraction 0.3393939393939394. 20-cell upper table: M=1 k=5=340 k=10=28 k=15=0 k=30=0; M=2 k=5=47 rest 0; M=4 k=5=3 rest 0; M=8 and M=16 all 0. The other 19 cells carry lower_side_measured=false, lower_side_pairs=null and no gate fields. Dead numbers quarantined under superseded_dead_numbers (292 = 2x inlined radius; 342 = unsplit alpha; 987 = proxy tv_hat > T(n); 985 = capped lower side retained as NON-CANONICAL sensitivity). Effective alpha read from the code path (TVUpperBoundResult.alpha) = 0.025. claim_sentence_supported unchanged (33.9%, which is correct); the erroneous gate_fraction field corrected 0.34040404040404043 -> 0.3393939393939394. Adds test_under_split_guard to tests/test_q1_thresholds.py,
     which rejects the unsplit form and passes at alpha/2.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x1_headline_table.json
   content_sha256: c9f840a94644687e50e672f6cdd3c65fd0469a9045ca55d1881d11a8afd41c9c
@@ -434,47 +345,12 @@
   - alpha-0p025
   - full-n-lower
 - id: art_20260914_9fb96b
-  name: 'X5 estimator ground-truth validation (CORRECTED: per-law alpha on both sides,
-    vacuous rows labelled)'
+  name: 'X5 estimator ground-truth validation (CORRECTED: per-law alpha on both sides, vacuous rows labelled)'
   type: data
-  description: 'X5 estimator ground-truth validation, CORRECTED run — the authoritative
-    artifact, produced by a SERVER-side re-run and retrieved once into this canonical
-    path. Five checks, all PASS: check_1 tv_hat converges to closed-form truth (0.34297
-    -> 0.31676 -> 0.30989 -> 0.30495 against truth 0.300 across n=32/128/512/2048);
-    check_2 upper bound holds at the declared per-law alpha/2 (total_violation_count=0)
-    BUT this test has NO POWER here, because the bound is very loose at these n (mean_eps_hi
-    0.99970 at n=32 and 0.41532 at n=2048 for truth 0.300), so it could not have failed
-    — read it as "no contradiction observed", never as "verified"; check_3 rows_checked=120
-    violation_count=0 for eps_lo <= eps_hi; check_4 weak classifier never beats strong
-    (weak 0.000 in all rows, strong 0.076905333-0.169629102, strict_improvement_count=20/20);
-    check_5 identical distributions give tv_hat near 0 with the bound shrinking in
-    n (0.16578 -> 0.08320 -> 0.03905 -> 0.02134). ALPHA PROVENANCE read from the RETURNED
-    objects, not typed as constants: upper result.alpha=[0.025] (per-law); lower canonical
-    requested 0.025 / returned [0.025]; lower ORIGINAL requested 0.05 / returned [0.05]
-    RETAINED beside it as evidence the non-crossing result was not fragile. The corrected
-    lower-bound means move in the direction theory requires (a smaller alpha means
-    a larger Michel penalty, hence a smaller eps_lo): check_3 shifted_four_symbol
-    n=256 0.025819471 -> 0.010686205, n=1024 0.129470649 -> 0.112211300; check_4 strong
-    range 0.094568448-0.186992519 -> 0.076905333-0.169629102; identical_four_symbol
-    unchanged at 0.000 across n=64/256/1024. VACUOUS ROWS LABELLED: disjoint_heavy_tails
-    at n=32 and n=128 carry mean_eps_hi=1.000000000 exactly (clipped at 1) and are
-    marked vacuous_by_clipping — those 2 of 8 coverage rows carry no information.
-    Validity-vs-tightness sentence present: coverage 1.000000 is a "no contradiction
-    observed" VALIDITY check, not a tightness check; at n=32 in shifted_four_symbol
-    the mean upper bound is 0.999696928 against truth 0.300000000 (slack +0.699696928),
-    and the genuine convergence evidence is the shrinking mean absolute error 0.0862
-    -> 0.0431 -> 0.0211 -> 0.0128. verified_word_count=0 in the artifact. THIS IS
-    A DECLARED-VS-EXECUTED mismatch of the C003 class, not merely a property of the
-    bound: the script passed the overall alpha while the artifact field declared the
-    per-law one — now aligned. LIMITATION, stated verbatim in the artifact: synthetic
-    only; it validates the estimator and the finite-sample categorical upper-bound
-    implementation on the specified synthetic distributions, NOT real-traffic results
-    or real channels; the existing lower-side falsification result concerns a synthetic
-    ensemble sharing the same assumed factors, not real channels. PROVENANCE: this
-    is the ONLY X5 artifact in a citable position; the earlier 0.05-semantics copy
-    is superseded and must not be cited. Script sha256 336a627e9204336476efff1122f916d18f395c60850163c1e78a9955215e0228;
-    artifact sha256 31bbee3f4d3a8d89ed2606485fd481e543ae233a1aadac0640c4e839942a08e9;
-    bytes 135979; generated_at_utc 2026-09-14T03:12:35.303829+00:00.'
+  description: 'X5 estimator ground-truth validation, CORRECTED run — the authoritative artifact, produced by a SERVER-side re-run and retrieved once into this canonical path. Five checks, all PASS: check_1 tv_hat converges to closed-form truth (0.34297 -> 0.31676 -> 0.30989 -> 0.30495 against truth 0.300 across n=32/128/512/2048); check_2 upper bound holds at the declared per-law alpha/2 (total_violation_count=0) BUT this test has NO POWER here, because the bound is very loose at these n (mean_eps_hi 0.99970 at n=32 and 0.41532 at n=2048 for truth 0.300), so it could not have failed — read it as "no contradiction observed", never as "verified"; check_3 rows_checked=120 violation_count=0 for eps_lo <= eps_hi; check_4 weak classifier never beats strong (weak 0.000 in all rows, strong 0.076905333-0.169629102, strict_improvement_count=20/20); check_5 identical distributions give tv_hat near 0 with the bound shrinking in n (0.16578 -> 0.08320 -> 0.03905 -> 0.02134). ALPHA PROVENANCE read from
+    the RETURNED objects, not typed as constants: upper result.alpha=[0.025] (per-law); lower canonical requested 0.025 / returned [0.025]; lower ORIGINAL requested 0.05 / returned [0.05] RETAINED beside it as evidence the non-crossing result was not fragile. The corrected lower-bound means move in the direction theory requires (a smaller alpha means a larger Michel penalty, hence a smaller eps_lo): check_3 shifted_four_symbol n=256 0.025819471 -> 0.010686205, n=1024 0.129470649 -> 0.112211300; check_4 strong range 0.094568448-0.186992519 -> 0.076905333-0.169629102; identical_four_symbol unchanged at 0.000 across n=64/256/1024. VACUOUS ROWS LABELLED: disjoint_heavy_tails at n=32 and n=128 carry mean_eps_hi=1.000000000 exactly (clipped at 1) and are marked vacuous_by_clipping — those 2 of 8 coverage rows carry no information. Validity-vs-tightness sentence present: coverage 1.000000 is a "no contradiction observed" VALIDITY check, not a tightness check; at n=32 in shifted_four_symbol the
+    mean upper bound is 0.999696928 against truth 0.300000000 (slack +0.699696928), and the genuine convergence evidence is the shrinking mean absolute error 0.0862 -> 0.0431 -> 0.0211 -> 0.0128. verified_word_count=0 in the artifact. THIS IS A DECLARED-VS-EXECUTED mismatch of the C003 class, not merely a property of the bound: the script passed the overall alpha while the artifact field declared the per-law one — now aligned. LIMITATION, stated verbatim in the artifact: synthetic only; it validates the estimator and the finite-sample categorical upper-bound implementation on the specified synthetic distributions, NOT real-traffic results or real channels; the existing lower-side falsification result concerns a synthetic ensemble sharing the same assumed factors, not real channels. PROVENANCE: this is the ONLY X5 artifact in a citable position; the earlier 0.05-semantics copy is superseded and must not be cited. Script sha256 336a627e9204336476efff1122f916d18f395c60850163c1e78a9955215e0228;
+    artifact sha256 31bbee3f4d3a8d89ed2606485fd481e543ae233a1aadac0640c4e839942a08e9; bytes 135979; generated_at_utc 2026-09-14T03:12:35.303829+00:00.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x5_estimator_ground_truth.json
   content_sha256: 31bbee3f4d3a8d89ed2606485fd481e543ae233a1aadac0640c4e839942a08e9
   url: null
@@ -489,38 +365,11 @@
   - corrected
   - per-law-alpha
 - id: art_20260914_b4d6db
-  name: 'X3 controls (both artifacts) — verdict DOWNGRADED to INCONCLUSIVE: known-truth
-    control fails, smoothing shape unstable'
+  name: 'X3 controls (both artifacts) — verdict DOWNGRADED to INCONCLUSIVE: known-truth control fails, smoothing shape unstable'
   type: data
-  description: 'X3 controls, BOTH artifacts. THE VERDICT DOWNGRADED: X3''s SUBLINEAR
-    adjudication is NOT CONFIRMED and is now INCONCLUSIVE, decided by the pre-committed
-    rule. (QUESTION 1) The fitted SHAPE is NOT STABLE across smoothing settings: smoothing=0.0
-    -> INCONCLUSIVE (p=1.25, sqrt_AIC_adv=9.03, ratio=5.018); smoothing=0.5 -> SUBLINEAR
-    (p=0.838, adv=88.84, ratio=1.556); smoothing=1.0 -> SUBLINEAR (p=0.766, adv=60.63,
-    ratio=2.071). The adjudication is therefore not robust to an estimator choice.
-    NOTE p=1.25 is impossible as a fraction and indicates the unsmoothed fit lies
-    outside the admissible region -- it must NOT be quoted as a probability. (QUESTION
-    2) The fixed-population recompute SURVIVES: with the pair denominator pinned at
-    820, verdict stays SUBLINEAR (p=0.844, adv=74.15, ratio=1.503), so COMPOSITION
-    is not the explanation. (THE DECISIVE FAILURE) The known-truth control FAILS.
-    On synthetic data whose analytic truth is LINEAR BY CONSTRUCTION (p=0.30, q=0.70,
-    per-position truth 0.3389191441548814, so D_k = k*0.3389191441548814), the estimator
-    returned SUBLINEAR in BOTH arms -- plain_iid (p=0.651) and the real-occupancy
-    twin (p=0.897). So the estimator CAN MANUFACTURE a sublinear verdict on linear
-    truth, which means X3''s own SUBLINEAR result cannot be attributed to the dependence
-    structure rather than to the estimator. THE OCCUPANCY DIAGNOSTIC EXPLAINS WHY:
-    contexts explode with k (712 at k=5 to 18,692,427 at k=30) while effective n per
-    context collapses (64,965 to 8.12), with 90.5% of k=30 contexts holding fewer
-    than 5 samples -- exactly the sparse-context regime the known-truth control was
-    built to emulate. ESTIMATOR REPRODUCTION PASSED at 1e-9 (k=5/10/20/30 recomputed
-    to diff 2.2e-16/4.4e-16/1.8e-15/1.4e-14 against the published medians), so the
-    reimplementation is admissible. WHAT THIS DOES NOT SAY: it does NOT say D_k grows
-    linearly. It says the pre-committed test could NOT distinguish sublinear from
-    linear on this data. The dependent-prefix framing is neither confirmed nor refuted
-    by X3. Reading discipline: D_k rising 1.38 -> 8.52 is an ABSOLUTE increase; ''sublinear''
-    concerns the GROWTH RATE, and the verdict rests on the fitted SHAPE -- which is
-    what proved unstable. No rescue attempted. The pre-existing x3_chain_rule_divergence.json
-    was NOT modified; the auditable runner is left at /root/eibo/x3_controls.py.'
+  description: 'X3 controls, BOTH artifacts. THE VERDICT DOWNGRADED: X3''s SUBLINEAR adjudication is NOT CONFIRMED and is now INCONCLUSIVE, decided by the pre-committed rule. (QUESTION 1) The fitted SHAPE is NOT STABLE across smoothing settings: smoothing=0.0 -> INCONCLUSIVE (p=1.25, sqrt_AIC_adv=9.03, ratio=5.018); smoothing=0.5 -> SUBLINEAR (p=0.838, adv=88.84, ratio=1.556); smoothing=1.0 -> SUBLINEAR (p=0.766, adv=60.63, ratio=2.071). The adjudication is therefore not robust to an estimator choice. NOTE p=1.25 is impossible as a fraction and indicates the unsmoothed fit lies outside the admissible region -- it must NOT be quoted as a probability. (QUESTION 2) The fixed-population recompute SURVIVES: with the pair denominator pinned at 820, verdict stays SUBLINEAR (p=0.844, adv=74.15, ratio=1.503), so COMPOSITION is not the explanation. (THE DECISIVE FAILURE) The known-truth control FAILS. On synthetic data whose analytic truth is LINEAR BY CONSTRUCTION (p=0.30, q=0.70, per-position truth
+    0.3389191441548814, so D_k = k*0.3389191441548814), the estimator returned SUBLINEAR in BOTH arms -- plain_iid (p=0.651) and the real-occupancy twin (p=0.897). So the estimator CAN MANUFACTURE a sublinear verdict on linear truth, which means X3''s own SUBLINEAR result cannot be attributed to the dependence structure rather than to the estimator. THE OCCUPANCY DIAGNOSTIC EXPLAINS WHY: contexts explode with k (712 at k=5 to 18,692,427 at k=30) while effective n per context collapses (64,965 to 8.12), with 90.5% of k=30 contexts holding fewer than 5 samples -- exactly the sparse-context regime the known-truth control was built to emulate. ESTIMATOR REPRODUCTION PASSED at 1e-9 (k=5/10/20/30 recomputed to diff 2.2e-16/4.4e-16/1.8e-15/1.4e-14 against the published medians), so the reimplementation is admissible. WHAT THIS DOES NOT SAY: it does NOT say D_k grows linearly. It says the pre-committed test could NOT distinguish sublinear from linear on this data. The dependent-prefix framing is
+    neither confirmed nor refuted by X3. Reading discipline: D_k rising 1.38 -> 8.52 is an ABSOLUTE increase; ''sublinear'' concerns the GROWTH RATE, and the verdict rests on the fitted SHAPE -- which is what proved unstable. No rescue attempted. The pre-existing x3_chain_rule_divergence.json was NOT modified; the auditable runner is left at /root/eibo/x3_controls.py.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_control_known_truth.json
   content_sha256: 048cf42fcc2b1cc88018ca35b1503226ea751b9f6c210a528e8ebd8a0b5be26a
   url: null
@@ -535,30 +384,10 @@
   - verdict-downgraded
   - inconclusive
 - id: art_20260914_023753
-  name: X3 controls (fixed population + occupancy) — composition control survives;
-    occupancy collapses at high k
+  name: X3 controls (fixed population + occupancy) — composition control survives; occupancy collapses at high k
   type: data
-  description: 'X3 controls, second artifact: fixed-population recompute and the occupancy
-    diagnostic. FIXED-POPULATION RESULT: pinning the pair set to the flows eligible
-    at k=30 (denominator 820 at EVERY k) leaves the verdict SUBLINEAR (p=0.844, sqrt_AIC_adv=74.15,
-    ratio=1.503) versus the original variable-population fit (p=0.838, adv=88.84,
-    ratio=1.556). Endpoints: original k=5 n=990 median 1.3813736271298078 -> k=30
-    n=820 median 8.52179151609541; fixed k=5 n=820 median 1.2429739095119168 -> k=30
-    n=820 median 8.521791516095425. So the sublinearity SURVIVES the composition control
-    -- the shrinking flow set (990 -> 946 -> 903 -> 861 -> 820) is NOT what produced
-    it. OCCUPANCY DIAGNOSTIC (the part that explains the known-truth failure): k=5
-    contexts=712, frac_lt_5=0.0154, effective_n_per_context=64965.6; k=10 contexts=18873,
-    frac_lt_5=0.1925, effective_n=4722.3; k=20 contexts=2532150, frac_lt_5=0.7248,
-    effective_n=58.0; k=30 contexts=18692427, frac_lt_5=0.9055, effective_n=8.12.
-    Contexts explode while per-context mass collapses -- at k=30, 90.5% of contexts
-    have fewer than 5 samples and effective n per context is 8.1. This is the sparse-context
-    regime in which a per-position smoothing bias can accumulate with k and fake sublinearity;
-    it is exactly the regime the known-truth control was constructed to emulate, and
-    there the estimator indeed returned SUBLINEAR on linear truth. Also records the
-    runner/cache inventory: the ORIGINAL X3 runner was deleted from the repo, so this
-    controls pass had to RE-DERIVE the estimator and PROVE IDENTITY by reproducing
-    the published per-k medians at 1e-9 -- which it did. The auditable runner is left
-    at /root/eibo/x3_controls.py so the estimator is now reproducible.'
+  description: 'X3 controls, second artifact: fixed-population recompute and the occupancy diagnostic. FIXED-POPULATION RESULT: pinning the pair set to the flows eligible at k=30 (denominator 820 at EVERY k) leaves the verdict SUBLINEAR (p=0.844, sqrt_AIC_adv=74.15, ratio=1.503) versus the original variable-population fit (p=0.838, adv=88.84, ratio=1.556). Endpoints: original k=5 n=990 median 1.3813736271298078 -> k=30 n=820 median 8.52179151609541; fixed k=5 n=820 median 1.2429739095119168 -> k=30 n=820 median 8.521791516095425. So the sublinearity SURVIVES the composition control -- the shrinking flow set (990 -> 946 -> 903 -> 861 -> 820) is NOT what produced it. OCCUPANCY DIAGNOSTIC (the part that explains the known-truth failure): k=5 contexts=712, frac_lt_5=0.0154, effective_n_per_context=64965.6; k=10 contexts=18873, frac_lt_5=0.1925, effective_n=4722.3; k=20 contexts=2532150, frac_lt_5=0.7248, effective_n=58.0; k=30 contexts=18692427, frac_lt_5=0.9055, effective_n=8.12. Contexts explode
+    while per-context mass collapses -- at k=30, 90.5% of contexts have fewer than 5 samples and effective n per context is 8.1. This is the sparse-context regime in which a per-position smoothing bias can accumulate with k and fake sublinearity; it is exactly the regime the known-truth control was constructed to emulate, and there the estimator indeed returned SUBLINEAR on linear truth. Also records the runner/cache inventory: the ORIGINAL X3 runner was deleted from the repo, so this controls pass had to RE-DERIVE the estimator and PROVE IDENTITY by reproducing the published per-k medians at 1e-9 -- which it did. The auditable runner is left at /root/eibo/x3_controls.py so the estimator is now reproducible.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_fixed_population_and_occupancy.json
   content_sha256: 394b7790d892144af21be618b12f64ca8bf7dad3da31a7ba4e4e2359665119b0
   url: null
@@ -573,33 +402,10 @@
   - occupancy
   - composition
 - id: art_20260914_d39799
-  name: 'Pcap-Encoder availability decision (CORRECTED reason: ~800GB structural constraint
-    primary; network failures transient)'
+  name: 'Pcap-Encoder availability decision (CORRECTED reason: ~800GB structural constraint primary; network failures transient)'
   type: data
-  description: 'Pcap-Encoder availability decision record, CORRECTED reason. It is
-    the authoritative server copy: 15,694 bytes. The reason now leads with the DECISIVE
-    structural constraint rather than the weaker operational one: the pretrained encoder
-    is reported by the AUTHORS in the SIGCOMM 2025 conference Q&A for ''The Sweet
-    Danger of Sugar: Debunking Representation Learning for Encrypted Traffic Classification''
-    (Politecnico di Torino / SmartData) at about 800 GB, answering ''What''s the size
-    of your model?'' with ''About 800GB for the pretraining model''. That is authors''
-    Q&A testimony, NOT a measurement made here and NOT a figure from the paper text.
-    That size is beyond this project''s resource envelope for a frozen-probe baseline
-    (a single experiment is capped at <=8 h on a 32 GB card), so the omission does
-    NOT depend on any transient network condition. Secondarily, acquisition attempts
-    from server 111 also failed with TRANSIENT network-class errors -- a TLS/GnuTLS
-    error on the repository clone, curl exit codes 7 and 28 against the documented
-    Google Drive URL, a HuggingFace API timeout (exit 28), and a Zenodo 504 -- and
-    these are labelled TRANSIENT and explicitly must NOT be read as evidence of non-existence.
-    The distinction that matters: the CODE is public (the repository''s code/PCAP_encoder
-    implementation), the DATA is available via HuggingFace per the repository README,
-    and only the WEIGHTS are the blocker. Conclusion: decision = three_of_four, so
-    the evaluated baseline set is three of the four planned detectors. Retains no_substitution_statement
-    (no substitute probe was used and the planned baseline set was not silently reduced)
-    and false_negative_risk. NOTE ON ABSENCE OF A PRIOR REGISTERED LOCAL COPY: the
-    only local copy previously was a STALE top-level file (artifacts/pcap_encoder_availability.json,
-    15,236 B, sha256 f815676e..., carrying the OLD weaker reason); this registration
-    records the corrected bytes at the manifest-registered data-artifact path.'
+  description: 'Pcap-Encoder availability decision record, CORRECTED reason. It is the authoritative server copy: 15,694 bytes. The reason now leads with the DECISIVE structural constraint rather than the weaker operational one: the pretrained encoder is reported by the AUTHORS in the SIGCOMM 2025 conference Q&A for ''The Sweet Danger of Sugar: Debunking Representation Learning for Encrypted Traffic Classification'' (Politecnico di Torino / SmartData) at about 800 GB, answering ''What''s the size of your model?'' with ''About 800GB for the pretraining model''. That is authors'' Q&A testimony, NOT a measurement made here and NOT a figure from the paper text. That size is beyond this project''s resource envelope for a frozen-probe baseline (a single experiment is capped at <=8 h on a 32 GB card), so the omission does NOT depend on any transient network condition. Secondarily, acquisition attempts from server 111 also failed with TRANSIENT network-class errors -- a TLS/GnuTLS error on the repository
+    clone, curl exit codes 7 and 28 against the documented Google Drive URL, a HuggingFace API timeout (exit 28), and a Zenodo 504 -- and these are labelled TRANSIENT and explicitly must NOT be read as evidence of non-existence. The distinction that matters: the CODE is public (the repository''s code/PCAP_encoder implementation), the DATA is available via HuggingFace per the repository README, and only the WEIGHTS are the blocker. Conclusion: decision = three_of_four, so the evaluated baseline set is three of the four planned detectors. Retains no_substitution_statement (no substitute probe was used and the planned baseline set was not silently reduced) and false_negative_risk. NOTE ON ABSENCE OF A PRIOR REGISTERED LOCAL COPY: the only local copy previously was a STALE top-level file (artifacts/pcap_encoder_availability.json, 15,236 B, sha256 f815676e..., carrying the OLD weaker reason); this registration records the corrected bytes at the manifest-registered data-artifact path.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/pcap_encoder_availability.json
   content_sha256: 1234f2d8f09e11bf6c71884c568e2bea4b9d75237febefcf429f9c354bc836b1
   url: null
@@ -614,19 +420,9 @@
   - corrected-reason
   - structural-limitation
 - id: art_20260914_a5b4c7
-  name: X3 controls runner (auditable estimator reimplementation; closes the deleted-runner
-    provenance gap)
+  name: X3 controls runner (auditable estimator reimplementation; closes the deleted-runner provenance gap)
   type: intermediate
-  description: 'X3 controls runner (x3_controls.py), the AUDITABLE reimplementation
-    used for the X3 controls pass. This file exists because the ORIGINAL X3 runner
-    (/root/eibo/x3_tmp_runner.py) was DELETED after the original run, leaving the
-    estimator unreproducible from the repo -- a recorded provenance gap. This controls
-    pass therefore had to RE-DERIVE the estimator and PROVE IDENTITY by reproducing
-    the published per-k medians (k=5 1.3813736271298078, k=10 3.4493236537679586,
-    k=20 6.357055609304329, k=30 8.52179151609541) at tolerance 1e-9, which it did
-    (max diff 1.42e-14). Leaving this runner in the tree closes that gap: the estimator
-    is now reproducible, and the controls'' admissibility is independently checkable
-    from this file plus the two control artifacts. Size 58,196 bytes on the server.'
+  description: 'X3 controls runner (x3_controls.py), the AUDITABLE reimplementation used for the X3 controls pass. This file exists because the ORIGINAL X3 runner (/root/eibo/x3_tmp_runner.py) was DELETED after the original run, leaving the estimator unreproducible from the repo -- a recorded provenance gap. This controls pass therefore had to RE-DERIVE the estimator and PROVE IDENTITY by reproducing the published per-k medians (k=5 1.3813736271298078, k=10 3.4493236537679586, k=20 6.357055609304329, k=30 8.52179151609541) at tolerance 1e-9, which it did (max diff 1.42e-14). Leaving this runner in the tree closes that gap: the estimator is now reproducible, and the controls'' admissibility is independently checkable from this file plus the two control artifacts. Size 58,196 bytes on the server.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_controls.py
   content_sha256: b8145a48b1635aa569140c86e82a3b237175d2fdead49b6010715a3c7ef93b88
   url: null
@@ -641,34 +437,11 @@
   - auditable
   - provenance-fix
 - id: art_20260914_542f5d
-  name: SUPERSEDED -- do not cite -- X3-repair variant B (support/conditioning) pre-fix
-    table (gate FAILED, real data untouched)
+  name: SUPERSEDED -- do not cite -- X3-repair variant B (support/conditioning) pre-fix table (gate FAILED, real data untouched)
   type: data
-  description: 'X3-repair variant B (support/conditioning change), gate FAILED --
-    real data NOT touched. ESTIMATOR: same reference symmetrized conditional Bernoulli
-    KL contribution per prefix position (from x3_controls.py:d_chain_fast), but exposure
-    is conditioned to the shared context set with n_P >= T and n_Q >= T, renormalized
-    over retained mass, keeping the reference add-0.5 smoothing. T was selected ONLY
-    from known-truth controls. PRE-REGISTERED GATE (per arm): p > 0.95, linear-over-sqrt
-    AIC advantage > 6, first-to-last median increment ratio <= 1.10. Threshold rule:
-    test T in [5,10,20,50,100] on known-truth only, ascending; select the first threshold
-    where BOTH arms pass. GATE OUTCOME FAIL: the PLAIN arm never passed at any threshold
-    (T=5,10,20,50,100 all False), while the TWIN arm passed all (True). At the reported
-    T=5: plain arm returned SUBLINEAR (p=0.539, AIC advantage NEGATIVE -10.607, increment
-    ratio +inf internally, encoded as null in strict JSON); twin arm returned LINEAR
-    (p=1.042, AIC advantage 88.570, increment ratio 0.865). TWO SANITY ANOMALIES TO
-    CARRY FORWARD, not to be quoted as probabilities: p=1.042 and p=0.539 with a NEGATIVE
-    AIC advantage and an infinite increment ratio are outside the admissible region
-    for these statistics -- the same class of anomaly as the earlier unsmoothed p=1.25.
-    They indicate the fit is out of region, and must be read as such rather than as
-    fraction values. EXCLUDED MASS (reported explicitly, never silently dropped):
-    mean two-sided excluded mass on known-truth plain rises 0.000 (T<=9) to 0.608
-    at T=30; on the twin it rises 0.000 (T<=10) to 0.318 at T=30. CACHE: present,
-    360 .npz parts + merged.pkl + results.pkl + ledger.json, 121,179,291 bytes total;
-    no H5 rescan. Original x3_chain_rule_divergence.json UNCHANGED (sha256 c19d7392...
-    before and after). Runner left in repo at /root/eibo/x3_variant_b_support_conditioning.py
-    (24,885 B, sha256 c2de06e0...). NOT COMPLETED: artifact registry registration
-    -- that role''s tooling was unavailable to it; performed here.'
+  description: 'X3-repair variant B (support/conditioning change), gate FAILED -- real data NOT touched. ESTIMATOR: same reference symmetrized conditional Bernoulli KL contribution per prefix position (from x3_controls.py:d_chain_fast), but exposure is conditioned to the shared context set with n_P >= T and n_Q >= T, renormalized over retained mass, keeping the reference add-0.5 smoothing. T was selected ONLY from known-truth controls. PRE-REGISTERED GATE (per arm): p > 0.95, linear-over-sqrt AIC advantage > 6, first-to-last median increment ratio <= 1.10. Threshold rule: test T in [5,10,20,50,100] on known-truth only, ascending; select the first threshold where BOTH arms pass. GATE OUTCOME FAIL: the PLAIN arm never passed at any threshold (T=5,10,20,50,100 all False), while the TWIN arm passed all (True). At the reported T=5: plain arm returned SUBLINEAR (p=0.539, AIC advantage NEGATIVE -10.607, increment ratio +inf internally, encoded as null in strict JSON); twin arm returned LINEAR (p=1.042,
+    AIC advantage 88.570, increment ratio 0.865). TWO SANITY ANOMALIES TO CARRY FORWARD, not to be quoted as probabilities: p=1.042 and p=0.539 with a NEGATIVE AIC advantage and an infinite increment ratio are outside the admissible region for these statistics -- the same class of anomaly as the earlier unsmoothed p=1.25. They indicate the fit is out of region, and must be read as such rather than as fraction values. EXCLUDED MASS (reported explicitly, never silently dropped): mean two-sided excluded mass on known-truth plain rises 0.000 (T<=9) to 0.608 at T=30; on the twin it rises 0.000 (T<=10) to 0.318 at T=30. CACHE: present, 360 .npz parts + merged.pkl + results.pkl + ledger.json, 121,179,291 bytes total; no H5 rescan. Original x3_chain_rule_divergence.json UNCHANGED (sha256 c19d7392... before and after). Runner left in repo at /root/eibo/x3_variant_b_support_conditioning.py (24,885 B, sha256 c2de06e0...). NOT COMPLETED: artifact registry registration -- that role''s tooling was unavailable
+    to it; performed here.'
   path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -676,13 +449,7 @@
   skill: ''
   created_at: '2026-09-14T04:30:57.464762+00:00'
   superseded_by: art_20260914_0118c2
-  retirement_note: Described the pre-fix support-conditioning table; the later D063
-    artifact supersedes it and this entry must not be cited. The superseded BYTES
-    are retained at artifacts/_project/data/x3_variant_b_support_conditioning.RETIRED_pre_freeze_do_not_cite.json
-    (109,361 B / sha256 29f9bcab3e0b92a5...), renamed so a path- or filename-based
-    reader cannot mistake the pre-freeze table for the live one. The rename left the
-    bytes and sha256 unchanged, so the registry X3_B checkpoint_path sha binding still
-    resolves.
+  retirement_note: Described the pre-fix support-conditioning table; the later D063 artifact supersedes it and this entry must not be cited. The superseded BYTES are retained at artifacts/_project/data/x3_variant_b_support_conditioning.RETIRED_pre_freeze_do_not_cite.json (109,361 B / sha256 29f9bcab3e0b92a5...), renamed so a path- or filename-based reader cannot mistake the pre-freeze table for the live one. The rename left the bytes and sha256 unchanged, so the registry X3_B checkpoint_path sha binding still resolves.
   tags:
   - x3-repair
   - variant-b
@@ -690,37 +457,11 @@
   - gate-failed
   - excluded-mass
 - id: art_20260914_7986d6
-  name: X3-repair variant C (nested Markov-vs-IID BIC route) — DIFFERENT ROUTE, control
-    USABLE, Markov favoured 45/45 at every k
+  name: X3-repair variant C (nested Markov-vs-IID BIC route) — DIFFERENT ROUTE, control USABLE, Markov favoured 45/45 at every k
   type: data
-  description: 'X3-repair variant C (nested-model likelihood-ratio route) -- the DIFFERENT
-    ROUTE, and the only one of three variants to produce a usable result. ROUTE STATEMENT,
-    quoted: ''This is a DIFFERENT route from the prior D_k growth-rate claim: it compares
-    nested first-order Markov and i.i.d. models, and a positive result here does NOT
-    restore, confirm, or rescue any prior SUBLINEAR verdict.'' MODELS: IID X_t ~ Bernoulli(p),
-    one parameter; first-order Markov with X_1 ~ Bernoulli(pi) and X_t | X_{t-1}=r
-    ~ Bernoulli(theta_r), three parameters; IID is nested via pi=theta_0=theta_1=p.
-    CRITERION: BIC = -2 log L + d log N; Delta_BIC = BIC_IID - BIC_Markov, positive
-    favours Markov. The two-parameter asymmetry is INSIDE BIC and no raw likelihood
-    advantage is reported. CACHE: present at /dev/shm/eibo_x3_chain_rule, 513 regular
-    files including 360 .npz parts, 383,660,740 bytes, 45 cached service items, 1305
-    model fits after control; NO H5 rescan. CONTROL OUTCOME: USABLE -- synthetic IID
-    case had IID favoured 12/12 items with Markov 0/12 (median Delta_BIC -21.771);
-    synthetic dependent case had Markov favoured 12/12 with IID 0/12 (median Delta_BIC
-    86689.854). The control was printed and evaluated BEFORE any real-data comparison.
-    REAL-DATA COMPARISON at k=30 across all 45 services: Markov favoured 45/45, IID
-    favoured 0/45, ties 0; median BIC(IID) 911100.019 vs median BIC(Markov) 801008.876;
-    median Delta_BIC 110091.143, mean 365781.932, range 2098.481 to 3203664.214. PER-POSITION:
-    for EVERY tested prefix length k=2..30, Markov was favoured by all 45/45 services
-    and IID by 0/45. READING: this supports first-order dependence over IID under
-    this nested-model BIC route. It does NOT reinstate or validate the blocked D_k
-    growth-rate verdict -- and it must never be reported as doing so. SCOPE NOTE:
-    this is a model-comparison result on the same cached corpus and channel (PPI[1]
-    direction and PPI[2] size only), not a growth-rate result, and it is on the XS
-    subset. Protected x3_chain_rule_divergence.json UNCHANGED (sha256 c19d7392...
-    before and after). Runner left in repo at /root/eibo/x3_variant_c_nested_lr.py
-    (sha256 35581cef...). NOT COMPLETED BY IT: artifact registry registration (tooling
-    unavailable to it); performed here.'
+  description: 'X3-repair variant C (nested-model likelihood-ratio route) -- the DIFFERENT ROUTE, and the only one of three variants to produce a usable result. ROUTE STATEMENT, quoted: ''This is a DIFFERENT route from the prior D_k growth-rate claim: it compares nested first-order Markov and i.i.d. models, and a positive result here does NOT restore, confirm, or rescue any prior SUBLINEAR verdict.'' MODELS: IID X_t ~ Bernoulli(p), one parameter; first-order Markov with X_1 ~ Bernoulli(pi) and X_t | X_{t-1}=r ~ Bernoulli(theta_r), three parameters; IID is nested via pi=theta_0=theta_1=p. CRITERION: BIC = -2 log L + d log N; Delta_BIC = BIC_IID - BIC_Markov, positive favours Markov. The two-parameter asymmetry is INSIDE BIC and no raw likelihood advantage is reported. CACHE: present at /dev/shm/eibo_x3_chain_rule, 513 regular files including 360 .npz parts, 383,660,740 bytes, 45 cached service items, 1305 model fits after control; NO H5 rescan. CONTROL OUTCOME: USABLE -- synthetic IID case
+    had IID favoured 12/12 items with Markov 0/12 (median Delta_BIC -21.771); synthetic dependent case had Markov favoured 12/12 with IID 0/12 (median Delta_BIC 86689.854). The control was printed and evaluated BEFORE any real-data comparison. REAL-DATA COMPARISON at k=30 across all 45 services: Markov favoured 45/45, IID favoured 0/45, ties 0; median BIC(IID) 911100.019 vs median BIC(Markov) 801008.876; median Delta_BIC 110091.143, mean 365781.932, range 2098.481 to 3203664.214. PER-POSITION: for EVERY tested prefix length k=2..30, Markov was favoured by all 45/45 services and IID by 0/45. READING: this supports first-order dependence over IID under this nested-model BIC route. It does NOT reinstate or validate the blocked D_k growth-rate verdict -- and it must never be reported as doing so. SCOPE NOTE: this is a model-comparison result on the same cached corpus and channel (PPI[1] direction and PPI[2] size only), not a growth-rate result, and it is on the XS subset. Protected x3_chain_rule_divergence.json
+    UNCHANGED (sha256 c19d7392... before and after). Runner left in repo at /root/eibo/x3_variant_c_nested_lr.py (sha256 35581cef...). NOT COMPLETED BY IT: artifact registry registration (tooling unavailable to it); performed here.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_variant_c_nested_lr.json
   content_sha256: fa1eeaabc52003cb2399719d2611dc837d2803d40676f59e107989c6b5e1645e
   url: null
@@ -738,34 +479,9 @@
 - id: art_20260914_e21c94
   name: X3-repair variant A (estimator-FAMILY change) — gate FAILED, real data untouched
   type: data
-  description: 'X3-repair variant A (estimator-FAMILY change), FINAL. Gate FAILED;
-    no real-data growth result was computed or reported. ESTIMATOR SENTENCE, quoted:
-    at each prefix position and observed context, estimate both binary conditionals
-    with Laplace alpha=1 smoothing, apply a two-sample delete-one jackknife bias correction
-    to each directed conditional KL, project corrected directed contributions to the
-    nonnegative half-line, weight P-to-Q terms by empirical P context frequency and
-    Q-to-P terms by empirical Q context frequency, and sum over positions. PRE-REGISTERED
-    CRITERIA: recover LINEAR iff power exponent p > 0.95, linear AIC advantage over
-    sqrt > 6, and first-to-last median increment ratio <= 1.10; BOTH the plain-iid
-    and real-occupancy twin arms must pass before real data. GATE NUMBERS: plain-iid
-    exponent 0.552, linear AIC advantage NEGATIVE -19.457, increment ratio 5.305 ->
-    FAIL_NOT_LINEAR; real-occupancy twin exponent 0.837, linear AIC advantage NEGATIVE
-    -38.649, increment ratio 1.987 -> FAIL_NOT_LINEAR. Because the gate failed the
-    runner STOPPED BEFORE REAL DATA; readback confirmed has_real_data_growth False
-    and if_failed_real_data_touched False. SCIENTIFIC CONTENT OF THIS NEGATIVE: replacing
-    the Jeffreys add-0.5 plug-in with a jackknife-bias-corrected estimator family
-    does NOT fix the sparse-context bias -- the corrected estimator still fails to
-    recover linear truth in EITHER arm. Together with variant B (occupancy conditioning,
-    also failed) this narrows the picture: neither the estimator family nor the exposure
-    conditioning is the fix. SANITY NOTE, same class as before: a NEGATIVE AIC advantage
-    with an increment ratio well above 1.10 means the fit lands outside the admissible
-    region for these statistics; read these as out-of-region signals and NOT as probabilities
-    or rates. CACHE: present at /dev/shm/eibo_x3_chain_rule, 360 parts, 121,179,291
-    bytes; no H5 scan. Protected x3_chain_rule_divergence.json UNCHANGED (sha256 c19d73926f4e51d64b22af06a1f1f939f971176bb24d4a662db542c16a3d5605,
-    verified here independently at 24,249 B). Runner left in repo at /root/eibo/x3_variant_a_estimator_family.py
-    (sha256 37ad36a9765e99913184dbdc91925cb2d76d2de3859b62c3607fb785f40d74cf). NOT
-    COMPLETED BY IT: artifact registration (its tooling lacked register_artifact);
-    performed here.'
+  description: 'X3-repair variant A (estimator-FAMILY change), FINAL. Gate FAILED; no real-data growth result was computed or reported. ESTIMATOR SENTENCE, quoted: at each prefix position and observed context, estimate both binary conditionals with Laplace alpha=1 smoothing, apply a two-sample delete-one jackknife bias correction to each directed conditional KL, project corrected directed contributions to the nonnegative half-line, weight P-to-Q terms by empirical P context frequency and Q-to-P terms by empirical Q context frequency, and sum over positions. PRE-REGISTERED CRITERIA: recover LINEAR iff power exponent p > 0.95, linear AIC advantage over sqrt > 6, and first-to-last median increment ratio <= 1.10; BOTH the plain-iid and real-occupancy twin arms must pass before real data. GATE NUMBERS: plain-iid exponent 0.552, linear AIC advantage NEGATIVE -19.457, increment ratio 5.305 -> FAIL_NOT_LINEAR; real-occupancy twin exponent 0.837, linear AIC advantage NEGATIVE -38.649, increment ratio
+    1.987 -> FAIL_NOT_LINEAR. Because the gate failed the runner STOPPED BEFORE REAL DATA; readback confirmed has_real_data_growth False and if_failed_real_data_touched False. SCIENTIFIC CONTENT OF THIS NEGATIVE: replacing the Jeffreys add-0.5 plug-in with a jackknife-bias-corrected estimator family does NOT fix the sparse-context bias -- the corrected estimator still fails to recover linear truth in EITHER arm. Together with variant B (occupancy conditioning, also failed) this narrows the picture: neither the estimator family nor the exposure conditioning is the fix. SANITY NOTE, same class as before: a NEGATIVE AIC advantage with an increment ratio well above 1.10 means the fit lands outside the admissible region for these statistics; read these as out-of-region signals and NOT as probabilities or rates. CACHE: present at /dev/shm/eibo_x3_chain_rule, 360 parts, 121,179,291 bytes; no H5 scan. Protected x3_chain_rule_divergence.json UNCHANGED (sha256 c19d73926f4e51d64b22af06a1f1f939f971176bb24d4a662db542c16a3d5605,
+    verified here independently at 24,249 B). Runner left in repo at /root/eibo/x3_variant_a_estimator_family.py (sha256 37ad36a9765e99913184dbdc91925cb2d76d2de3859b62c3607fb785f40d74cf). NOT COMPLETED BY IT: artifact registration (its tooling lacked register_artifact); performed here.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_variant_a_estimator_family.json
   content_sha256: ee01233bd8271243d8a67f00689caec63de89a14bbfdfa03c472be7c8c287d3e
   url: null
@@ -780,36 +496,11 @@
   - gate-failed
   - real-data-untouched
 - id: art_20260914_a4f090
-  name: SUPERSEDED -- do not cite -- X3-repair variant C (nested Markov-vs-IID BIC)
-    — DIFFERENT ROUTE; control USABLE; Markov 45/45 at every k=2..30
+  name: SUPERSEDED -- do not cite -- X3-repair variant C (nested Markov-vs-IID BIC) — DIFFERENT ROUTE; control USABLE; Markov 45/45 at every k=2..30
   type: data
-  description: 'X3-repair variant C (nested-model likelihood-ratio route) -- the DIFFERENT
-    ROUTE, and the evidence for C3''s existence corroboration (D046 part ii). ROUTE
-    STATEMENT, quoted: ''This is a DIFFERENT route from the prior D_k growth-rate
-    claim: it compares nested first-order Markov and i.i.d. models, and a positive
-    result here does NOT restore, confirm, or rescue any prior SUBLINEAR verdict.''
-    MODELS: IID X_t ~ Bernoulli(p), one parameter; first-order Markov with X_1 ~ Bernoulli(pi)
-    and X_t | X_{t-1}=r ~ Bernoulli(theta_r), three parameters; IID is nested via
-    pi=theta_0=theta_1=p. CRITERION: BIC = -2 log L + d log N; Delta_BIC = BIC_IID
-    - BIC_Markov, positive favours Markov; the two-parameter asymmetry is INSIDE BIC
-    and no raw likelihood advantage is reported. DISCRIMINATING CONTROL (before any
-    real data): synthetic IID case had IID favoured 12/12 with Markov 0/12 (median
-    Delta_BIC -21.771); synthetic dependent case had Markov favoured 12/12 with IID
-    0/12 (median Delta_BIC 86689.854); control_outcome = USABLE. REAL DATA at k=30
-    across all 45 services: Markov favoured 45/45, IID 0/45, ties 0; median BIC(IID)
-    911100.019 vs median BIC(Markov) 801008.876; median Delta_BIC 110091.143, mean
-    365781.932, range 2098.481 to 3203664.214. PER-POSITION: for EVERY tested prefix
-    length k=2..30, Markov favoured 45/45 and IID 0/45. READING AND ITS LIMIT, STATED
-    PLAINLY: this is a SANITY CORROBORATION, NOT A NOVEL RESULT -- a first-order Markov
-    law beating i.i.d. by BIC on real packet data is EXPECTED, because packets are
-    serially dependent by nature. It establishes that the question the growth-rate
-    estimator fails to adjudicate is NON-VACUOUS. It does NOT prove the growth-rate
-    claim and must NEVER be read as a restored SUBLINEAR verdict (C027). SCOPE: same
-    cached corpus and channel (PPI[1] direction and PPI[2] size only), XS subset.
-    CACHE: present at /dev/shm/eibo_x3_chain_rule, 513 files incl. 360 .npz parts,
-    383,660,740 bytes; no H5 rescan. Protected x3_chain_rule_divergence.json UNCHANGED.
-    Runner left in repo at /root/eibo/x3_variant_c_nested_lr.py (sha256 35581cefa00219271ef6040c32a65c317adfceadd14146c8e21bf9184b8905fb).
-    File size 748,847 B on the server.'
+  description: 'X3-repair variant C (nested-model likelihood-ratio route) -- the DIFFERENT ROUTE, and the evidence for C3''s existence corroboration (D046 part ii). ROUTE STATEMENT, quoted: ''This is a DIFFERENT route from the prior D_k growth-rate claim: it compares nested first-order Markov and i.i.d. models, and a positive result here does NOT restore, confirm, or rescue any prior SUBLINEAR verdict.'' MODELS: IID X_t ~ Bernoulli(p), one parameter; first-order Markov with X_1 ~ Bernoulli(pi) and X_t | X_{t-1}=r ~ Bernoulli(theta_r), three parameters; IID is nested via pi=theta_0=theta_1=p. CRITERION: BIC = -2 log L + d log N; Delta_BIC = BIC_IID - BIC_Markov, positive favours Markov; the two-parameter asymmetry is INSIDE BIC and no raw likelihood advantage is reported. DISCRIMINATING CONTROL (before any real data): synthetic IID case had IID favoured 12/12 with Markov 0/12 (median Delta_BIC -21.771); synthetic dependent case had Markov favoured 12/12 with IID 0/12 (median Delta_BIC 86689.854);
+    control_outcome = USABLE. REAL DATA at k=30 across all 45 services: Markov favoured 45/45, IID 0/45, ties 0; median BIC(IID) 911100.019 vs median BIC(Markov) 801008.876; median Delta_BIC 110091.143, mean 365781.932, range 2098.481 to 3203664.214. PER-POSITION: for EVERY tested prefix length k=2..30, Markov favoured 45/45 and IID 0/45. READING AND ITS LIMIT, STATED PLAINLY: this is a SANITY CORROBORATION, NOT A NOVEL RESULT -- a first-order Markov law beating i.i.d. by BIC on real packet data is EXPECTED, because packets are serially dependent by nature. It establishes that the question the growth-rate estimator fails to adjudicate is NON-VACUOUS. It does NOT prove the growth-rate claim and must NEVER be read as a restored SUBLINEAR verdict (C027). SCOPE: same cached corpus and channel (PPI[1] direction and PPI[2] size only), XS subset. CACHE: present at /dev/shm/eibo_x3_chain_rule, 513 files incl. 360 .npz parts, 383,660,740 bytes; no H5 rescan. Protected x3_chain_rule_divergence.json
+    UNCHANGED. Runner left in repo at /root/eibo/x3_variant_c_nested_lr.py (sha256 35581cefa00219271ef6040c32a65c317adfceadd14146c8e21bf9184b8905fb). File size 748,847 B on the server.'
   path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -817,9 +508,7 @@
   skill: ''
   created_at: '2026-09-14T04:47:42.188979+00:00'
   superseded_by: art_20260914_7986d6
-  retirement_note: Path never resolved because the file does not exist, so this entry
-    must not be cited. The physical RETIRED suffix duplicate preserves the PRE-RESHAPE
-    version; the live entry now holds the newer fa1eeaab bytes.
+  retirement_note: Path never resolved because the file does not exist, so this entry must not be cited. The physical RETIRED suffix duplicate preserves the PRE-RESHAPE version; the live entry now holds the newer fa1eeaab bytes.
   tags:
   - x3-repair
   - variant-c
@@ -830,15 +519,7 @@
 - id: art_20260914_41c92c
   name: X3-repair variant C runner (nested Markov-vs-IID BIC; own discriminating control)
   type: intermediate
-  description: 'X3-repair variant C runner (auditable). Implements the nested-model
-    likelihood-ratio route: first-order Markov vs i.i.d. under BIC, per service and
-    per prefix length, with a discriminating synthetic control (i.i.d. synthetic must
-    NOT favour Markov; a deliberately dependent synthetic must). Its control outcome
-    was USABLE (IID 12/12 on the IID case; Markov 12/12 on the dependent case), which
-    is what makes its real-data comparison admissible. Its real-data result (Markov
-    45/45 at every k=2..30) is reported as a SANITY CORROBORATION of dependence, NOT
-    as a novel result and NOT as a restoration of any SUBLINEAR growth verdict. Left
-    in the repo so this route is reproducible. sha256 35581cefa00219271ef6040c32a65c317adfceadd14146c8e21bf9184b8905fb.'
+  description: 'X3-repair variant C runner (auditable). Implements the nested-model likelihood-ratio route: first-order Markov vs i.i.d. under BIC, per service and per prefix length, with a discriminating synthetic control (i.i.d. synthetic must NOT favour Markov; a deliberately dependent synthetic must). Its control outcome was USABLE (IID 12/12 on the IID case; Markov 12/12 on the dependent case), which is what makes its real-data comparison admissible. Its real-data result (Markov 45/45 at every k=2..30) is reported as a SANITY CORROBORATION of dependence, NOT as a novel result and NOT as a restoration of any SUBLINEAR growth verdict. Left in the repo so this route is reproducible. sha256 35581cefa00219271ef6040c32a65c317adfceadd14146c8e21bf9184b8905fb.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_variant_c_nested_lr.py
   content_sha256: 35581cefa00219271ef6040c32a65c317adfceadd14146c8e21bf9184b8905fb
   url: null
@@ -852,22 +533,10 @@
   - runner
   - auditable
 - id: art_20260914_0c6784
-  name: 'X3-repair variant A runner (estimator-family: jackknife-bias-corrected; gate
-    failed both arms)'
+  name: 'X3-repair variant A runner (estimator-family: jackknife-bias-corrected; gate failed both arms)'
   type: intermediate
-  description: 'X3-repair variant A runner (auditable). Implements the estimator-FAMILY
-    change: Laplace alpha=1 smoothing at each prefix position and observed context,
-    a two-sample delete-one jackknife bias correction to each directed conditional
-    KL, projection of corrected directed contributions to the nonnegative half-line,
-    P-to-Q terms weighted by empirical P context frequency and Q-to-P terms by empirical
-    Q context frequency, summed over positions. Its pre-registered gate required recovery
-    of exactly-LINEAR synthetic truth on BOTH arms before any real data; it FAILED
-    on both (plain-iid exponent 0.552, linear AIC advantage -19.457, increment ratio
-    5.305; real-occupancy twin exponent 0.837, linear AIC advantage -38.649, increment
-    ratio 1.987), so the runner stopped before real data and has_real_data_growth
-    is False. This is part of the NEGATIVE that makes C3''s methods/limits finding
-    robust: a bias-corrected estimator family does NOT fix the sparse-context bias.
-    Left in the repo so this route is reproducible. sha256 37ad36a9765e99913184dbdc91925cb2d76d2de3859b62c3607fb785f40d74cf.'
+  description: 'X3-repair variant A runner (auditable). Implements the estimator-FAMILY change: Laplace alpha=1 smoothing at each prefix position and observed context, a two-sample delete-one jackknife bias correction to each directed conditional KL, projection of corrected directed contributions to the nonnegative half-line, P-to-Q terms weighted by empirical P context frequency and Q-to-P terms by empirical Q context frequency, summed over positions. Its pre-registered gate required recovery of exactly-LINEAR synthetic truth on BOTH arms before any real data; it FAILED on both (plain-iid exponent 0.552, linear AIC advantage -19.457, increment ratio 5.305; real-occupancy twin exponent 0.837, linear AIC advantage -38.649, increment ratio 1.987), so the runner stopped before real data and has_real_data_growth is False. This is part of the NEGATIVE that makes C3''s methods/limits finding robust: a bias-corrected estimator family does NOT fix the sparse-context bias. Left in the repo so this
+    route is reproducible. sha256 37ad36a9765e99913184dbdc91925cb2d76d2de3859b62c3607fb785f40d74cf.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_variant_a_estimator_family.py
   content_sha256: 37ad36a9765e99913184dbdc91925cb2d76d2de3859b62c3607fb785f40d74cf
   url: null
@@ -881,23 +550,10 @@
   - runner
   - auditable
 - id: art_20260914_c13fe7
-  name: x3_variant_b_support_conditioning.py (FROZEN SNAPSHOT — not the executing
-    runner; see top-level file)
+  name: x3_variant_b_support_conditioning.py (FROZEN SNAPSHOT — not the executing runner; see top-level file)
   type: intermediate
-  description: 'X3-repair variant B runner (auditable). Implements the EXPOSURE-conditioning
-    change: the same reference symmetrized conditional Bernoulli KL contribution per
-    prefix position (from x3_controls.py:d_chain_fast), but exposure is conditioned
-    to the shared context set with n_P >= T and n_Q >= T, renormalized over retained
-    mass, keeping the reference add-0.5 smoothing. Threshold T is selected ONLY from
-    known-truth controls (tested ascending over T in {5,10,20,50,100}; first T where
-    BOTH arms pass). Its gate FAILED on the plain arm at every threshold while the
-    twin passed all, and it reports the EXCLUDED-MASS curve explicitly at every k
-    rather than silently dropping rows -- the 0.608 excluded mass at k=30 is what
-    earns ''structural, not a tuning problem'' for C3 part (i). Its own threshold
-    sweep is also the evidence that the causal attribution to sparse occupancy is
-    NOT ESTABLISHED (plain exponent falls as T tightens: 0.539/0.420/0.372/0.260/0.210
-    vs 0.651 no-filter, twin opposite). Left in the repo so this route is reproducible.
-    Server sha256 c2de06e0ec1530aac641b280de70f6189953ed601562affc3d801c9de21b95df.'
+  description: 'X3-repair variant B runner (auditable). Implements the EXPOSURE-conditioning change: the same reference symmetrized conditional Bernoulli KL contribution per prefix position (from x3_controls.py:d_chain_fast), but exposure is conditioned to the shared context set with n_P >= T and n_Q >= T, renormalized over retained mass, keeping the reference add-0.5 smoothing. Threshold T is selected ONLY from known-truth controls (tested ascending over T in {5,10,20,50,100}; first T where BOTH arms pass). Its gate FAILED on the plain arm at every threshold while the twin passed all, and it reports the EXCLUDED-MASS curve explicitly at every k rather than silently dropping rows -- the 0.608 excluded mass at k=30 is what earns ''structural, not a tuning problem'' for C3 part (i). Its own threshold sweep is also the evidence that the causal attribution to sparse occupancy is NOT ESTABLISHED (plain exponent falls as T tightens: 0.539/0.420/0.372/0.260/0.210 vs 0.651 no-filter, twin opposite).
+    Left in the repo so this route is reproducible. Server sha256 c2de06e0ec1530aac641b280de70f6189953ed601562affc3d801c9de21b95df.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_variant_b_support_conditioning.py
   content_sha256: c2de06e0ec1530aac641b280de70f6189953ed601562affc3d801c9de21b95df
   url: null
@@ -912,30 +568,10 @@
   - auditable
   - excluded-mass
 - id: art_20260914_104088
-  name: 'X12 L0 label-space check (three numbers) — index-vs-label mismatch REFUTED:
-    classes is exactly 0..52'
+  name: 'X12 L0 label-space check (three numbers) — index-vs-label mismatch REFUTED: classes is exactly 0..52'
   type: data
-  description: 'X12 L0 label-space check -- THREE NUMBERS, read-only, no interpretation.
-    RESULT: THE INDEX-VS-LABEL MISMATCH HYPOTHESIS IS REFUTED BY MEASUREMENT. (1)
-    The class list `schema.service_labels_common_to_both_sides` is EXACTLY [0,1,...,52]:
-    length 53, min 0, max 52, and `max == len(list) - 1` is YES. The prediction index
-    space and the raw service-label space therefore COINCIDE, so `pred == label` compares
-    like with like and there is NO index-vs-label defect. (2) Per-detector prediction-vs-true-label
-    agreement over all 1,493,995 rows: lightgbm equal 725,738 / different 768,257
-    (48.6% agreement) with accepted_true = 1,493,995 i.e. ALL rows accepted; prototype
-    equal 202,097 / different 1,291,898 (13.5%) with accepted_true 1,485,612; ronetc
-    equal 868,026 / different 625,969 (58.1%) with accepted_true 1,455,114. THESE
-    AGREEMENT RATES ARE NOT NEAR-ZERO -- so the prediction path is demonstrably doing
-    something real, which is in tension with the near-zero OSCR and undefined FPR95
-    recorded for the same run. THAT TENSION IS A FACT REQUIRING THE NEXT CHECK, NOT
-    A CONCLUSION. (3) Value ranges: true_label 0..52 with 53 distinct; lightgbm_pred
-    0..52 with 53 distinct; prototype_pred 0..52 with 53 distinct; rONETC_pred 0..52
-    with only 29 DISTINCT (worth noting: one detector''s predictions cover fewer than
-    half the class space). (4) lightgbm''s accept flag is all_rows_accepted = true
-    in the JSON, so for that detector the accept gate CANNOT be the explanation of
-    a low TPR. THE PRIME SUSPECT IS REFUTED; per the Director''s own instruction the
-    TRAIN-SIDE CONTROL is now the decisive check. This artifact asserts no interpretation,
-    no cause, and no fix -- numbers only.'
+  description: 'X12 L0 label-space check -- THREE NUMBERS, read-only, no interpretation. RESULT: THE INDEX-VS-LABEL MISMATCH HYPOTHESIS IS REFUTED BY MEASUREMENT. (1) The class list `schema.service_labels_common_to_both_sides` is EXACTLY [0,1,...,52]: length 53, min 0, max 52, and `max == len(list) - 1` is YES. The prediction index space and the raw service-label space therefore COINCIDE, so `pred == label` compares like with like and there is NO index-vs-label defect. (2) Per-detector prediction-vs-true-label agreement over all 1,493,995 rows: lightgbm equal 725,738 / different 768,257 (48.6% agreement) with accepted_true = 1,493,995 i.e. ALL rows accepted; prototype equal 202,097 / different 1,291,898 (13.5%) with accepted_true 1,485,612; ronetc equal 868,026 / different 625,969 (58.1%) with accepted_true 1,455,114. THESE AGREEMENT RATES ARE NOT NEAR-ZERO -- so the prediction path is demonstrably doing something real, which is in tension with the near-zero OSCR and undefined FPR95 recorded
+    for the same run. THAT TENSION IS A FACT REQUIRING THE NEXT CHECK, NOT A CONCLUSION. (3) Value ranges: true_label 0..52 with 53 distinct; lightgbm_pred 0..52 with 53 distinct; prototype_pred 0..52 with 53 distinct; rONETC_pred 0..52 with only 29 DISTINCT (worth noting: one detector''s predictions cover fewer than half the class space). (4) lightgbm''s accept flag is all_rows_accepted = true in the JSON, so for that detector the accept gate CANNOT be the explanation of a low TPR. THE PRIME SUSPECT IS REFUTED; per the Director''s own instruction the TRAIN-SIDE CONTROL is now the decisive check. This artifact asserts no interpretation, no cause, and no fix -- numbers only.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x12_label_space_check.json
   content_sha256: f884df70034661652accc260714b4b706c02e9458c19f73fb3fed9a64bbbbe15
   url: null
@@ -950,32 +586,10 @@
   - label-space
   - prime-suspect-refuted
 - id: art_20260914_1bdf63
-  name: X3 control (a) heterogeneous-i.i.d. arm — Markov 1,281/1,305 (0.9816); rule
-    verdict DEAD, but the rule's implication conflicts with the 47x magnitude result
+  name: X3 control (a) heterogeneous-i.i.d. arm — Markov 1,281/1,305 (0.9816); rule verdict DEAD, but the rule's implication conflicts with the 47x magnitude result
   type: data
-  description: 'X3 control (a) -- HETEROGENEOUS-i.i.d. ARM. Construction: within each
-    item (a service), each flow gets its OWN direction rate drawn from the pooled
-    empirical per-flow rate distribution, and each flow''s bits are i.i.d. WITHIN
-    ITSELF, so there is ZERO true within-flow dependence anywhere; otherwise the same
-    code path, item structure, pooling and Markov-vs-iid BIC comparison as variant
-    C. Empirical per-flow rate distribution from the cache: n_flows 5,058,007; mean
-    0.4738917918; sd 0.1184684229; quantiles min 0.0333333, Q1 0.4, median 0.5, Q3
-    0.5333333, max 1.0. PER-PREFIX VERDICTS (Markov/IID/ties): k=2 35/10/0; k=3 40/5/0;
-    k=4 41/4/0; k=5 43/2/0; k=6 43/2/0; k=7 44/1/0; k=8..30 45/0/0 at every prefix.
-    ACROSS ALL 1,305 ITEM-PREFIX COMPARISONS: 1,281 Markov, 24 IID, 0 ties; Markov
-    fraction 0.981609. PRE-REGISTERED THRESHOLD: at least 44/45 = 0.977778. VERDICT
-    BY THAT RULE: DEAD. *** UNRESOLVED TENSION, STATED AS FACT: the rule''s stated
-    implication was ''heterogeneity FULLY explains the real result''; that implication
-    is INCONSISTENT with the separately measured MAGNITUDE result (a pure heterogeneous-i.i.d.
-    null predicts 2*DeltaLL/N = 3.09e-03 nats/obs against an observed 1.44e-01, about
-    47x short, so heterogeneity accounts for roughly 2% of the effect and the BIC
-    penalty share is only 2.43e-04). So this arm shows that a MARKOV WIN is NOT by
-    itself discriminating -- heterogeneity produces wins too -- while the MAGNITUDE
-    measurement is what separates them. The pre-registered rule fires, but whether
-    its consequence stands is a CLAIM-WORDING decision for the Director and is NOT
-    resolved here. NO interpretation, cause, or fix is asserted in this artifact.
-    Cache reused (/dev/shm/eibo_x3_chain_rule, 360 .npz parts), no H5 rescan. X12
-    untouched.'
+  description: 'X3 control (a) -- HETEROGENEOUS-i.i.d. ARM. Construction: within each item (a service), each flow gets its OWN direction rate drawn from the pooled empirical per-flow rate distribution, and each flow''s bits are i.i.d. WITHIN ITSELF, so there is ZERO true within-flow dependence anywhere; otherwise the same code path, item structure, pooling and Markov-vs-iid BIC comparison as variant C. Empirical per-flow rate distribution from the cache: n_flows 5,058,007; mean 0.4738917918; sd 0.1184684229; quantiles min 0.0333333, Q1 0.4, median 0.5, Q3 0.5333333, max 1.0. PER-PREFIX VERDICTS (Markov/IID/ties): k=2 35/10/0; k=3 40/5/0; k=4 41/4/0; k=5 43/2/0; k=6 43/2/0; k=7 44/1/0; k=8..30 45/0/0 at every prefix. ACROSS ALL 1,305 ITEM-PREFIX COMPARISONS: 1,281 Markov, 24 IID, 0 ties; Markov fraction 0.981609. PRE-REGISTERED THRESHOLD: at least 44/45 = 0.977778. VERDICT BY THAT RULE: DEAD. *** UNRESOLVED TENSION, STATED AS FACT: the rule''s stated implication was ''heterogeneity FULLY
+    explains the real result''; that implication is INCONSISTENT with the separately measured MAGNITUDE result (a pure heterogeneous-i.i.d. null predicts 2*DeltaLL/N = 3.09e-03 nats/obs against an observed 1.44e-01, about 47x short, so heterogeneity accounts for roughly 2% of the effect and the BIC penalty share is only 2.43e-04). So this arm shows that a MARKOV WIN is NOT by itself discriminating -- heterogeneity produces wins too -- while the MAGNITUDE measurement is what separates them. The pre-registered rule fires, but whether its consequence stands is a CLAIM-WORDING decision for the Director and is NOT resolved here. NO interpretation, cause, or fix is asserted in this artifact. Cache reused (/dev/shm/eibo_x3_chain_rule, 360 .npz parts), no H5 rescan. X12 untouched.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x3_control_heterogeneous_iid.json
   content_sha256: 22ece9bc49e5cd93183e643291f4faaf5c0a97caa6cebe0270ef51ab7f4b68ed
   url: null
@@ -990,34 +604,10 @@
   - d052
   - unresolved-tension
 - id: art_20260914_b9b161
-  name: SUPERSEDED -- do not cite -- X3 control (b) occupancy dose-response pre-fix
-    table (p=1.001 shifted axis)
+  name: SUPERSEDED -- do not cite -- X3 control (b) occupancy dose-response pre-fix table (p=1.001 shifted axis)
   type: data
-  description: 'X3 control (b) -- OCCUPANCY DOSE-RESPONSE. Pre-registered rule, written
-    before running: thinning tracks deflation iff the sparse-context statistic is
-    NONdecreasing AND the fitted exponent p is NONincreasing as the retained flow
-    fraction decreases; BOTH arms must satisfy it for a joint positive result. TABLE
-    (retained fraction | thinning | plain sparse mean | plain k30 | plain p | twin
-    sparse mean | twin k30 | twin p): 1.00 | 0% | 0.415644 | 0.998016 | 1.001 | 0.393029
-    | 0.919060 | 1.262; 0.50 | 50% | 0.449344 | 0.997736 | 0.967 | 0.400877 | 0.857108
-    | 1.258; 0.25 | 75% | 0.484141 | 0.998771 | 0.946 | 0.416340 | 0.840343 | 1.246;
-    0.10 | 90% | 0.531709 | 1.000000 | 0.922 | 0.447073 | 0.848275 | 1.221; 0.05 |
-    95% | 0.569369 | 1.000000 | 0.891 | 0.473722 | 0.857707 | 1.195. OBSERVED: plain
-    arm tracks thinning true; twin arm tracks thinning true; JOINT RESULT true. ***
-    TWO UNRESOLVED TENSIONS, STATED AS FACT AND RESOLVED NOWHERE HERE. (1) BASELINE
-    DISAGREEMENT: this control''s retained=1.00 (i.e. no thinning) fitted exponent
-    is 1.001, while the earlier threshold sweep (variant B) reports a no-filter baseline
-    of 0.651 -- the SAME nominal quantity with two different values, so the two scripts
-    may not be measuring the same thing; this needs explanation before the dose-response
-    can be read. (2) DIRECTION COMPARISON: the earlier threshold sweep showed that
-    TIGHTENING the occupancy threshold (removing the sparsest contexts) makes the
-    plain exponent FALL (0.539/0.420/0.372/0.260/0.210 vs 0.651 no-filter), while
-    this control shows that THINNING (deliberately adding sparsity) also makes the
-    plain exponent FALL (1.001 to 0.891). So the two interventions move occupancy
-    in OPPOSITE directions yet move p in the SAME direction. Both are measured facts
-    from the artifacts; neither is interpreted, and neither is resolved here. NO interpretation,
-    cause, or fix is asserted in this artifact. Cache reused (/dev/shm/eibo_x3_chain_rule),
-    no H5 rescan. X12 untouched.'
+  description: 'X3 control (b) -- OCCUPANCY DOSE-RESPONSE. Pre-registered rule, written before running: thinning tracks deflation iff the sparse-context statistic is NONdecreasing AND the fitted exponent p is NONincreasing as the retained flow fraction decreases; BOTH arms must satisfy it for a joint positive result. TABLE (retained fraction | thinning | plain sparse mean | plain k30 | plain p | twin sparse mean | twin k30 | twin p): 1.00 | 0% | 0.415644 | 0.998016 | 1.001 | 0.393029 | 0.919060 | 1.262; 0.50 | 50% | 0.449344 | 0.997736 | 0.967 | 0.400877 | 0.857108 | 1.258; 0.25 | 75% | 0.484141 | 0.998771 | 0.946 | 0.416340 | 0.840343 | 1.246; 0.10 | 90% | 0.531709 | 1.000000 | 0.922 | 0.447073 | 0.848275 | 1.221; 0.05 | 95% | 0.569369 | 1.000000 | 0.891 | 0.473722 | 0.857707 | 1.195. OBSERVED: plain arm tracks thinning true; twin arm tracks thinning true; JOINT RESULT true. *** TWO UNRESOLVED TENSIONS, STATED AS FACT AND RESOLVED NOWHERE HERE. (1) BASELINE DISAGREEMENT: this control''s
+    retained=1.00 (i.e. no thinning) fitted exponent is 1.001, while the earlier threshold sweep (variant B) reports a no-filter baseline of 0.651 -- the SAME nominal quantity with two different values, so the two scripts may not be measuring the same thing; this needs explanation before the dose-response can be read. (2) DIRECTION COMPARISON: the earlier threshold sweep showed that TIGHTENING the occupancy threshold (removing the sparsest contexts) makes the plain exponent FALL (0.539/0.420/0.372/0.260/0.210 vs 0.651 no-filter), while this control shows that THINNING (deliberately adding sparsity) also makes the plain exponent FALL (1.001 to 0.891). So the two interventions move occupancy in OPPOSITE directions yet move p in the SAME direction. Both are measured facts from the artifacts; neither is interpreted, and neither is resolved here. NO interpretation, cause, or fix is asserted in this artifact. Cache reused (/dev/shm/eibo_x3_chain_rule), no H5 rescan. X12 untouched.'
   path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1025,24 +615,16 @@
   skill: ''
   created_at: '2026-09-14T06:12:36.541671+00:00'
   superseded_by: art_20260914_4d9b49
-  retirement_note: Described the pre-fix shifted-axis table with p=1.001; the later
-    D056-fixed entry supersedes it and this entry must not be cited.
+  retirement_note: Described the pre-fix shifted-axis table with p=1.001; the later D056-fixed entry supersedes it and this entry must not be cited.
   tags:
   - x3
   - control
   - occupancy
   - dose-response
 - id: art_20260914_4d9b49
-  name: SUPERSEDED -- do not cite -- x3_control_occupancy_dose_response.json (D056-fixed
-    older twin)
+  name: SUPERSEDED -- do not cite -- x3_control_occupancy_dose_response.json (D056-fixed older twin)
   type: data
-  description: 'D056-fixed dose-response control artifact. Off-by-4 k-axis corrected
-    at lines 179-181 (thinned_p[: k - 4] -> thinned_p[:k]); no estimator/smoothing/arm/thinning/acceptance
-    logic changed. Acceptance test PASSED: un-thinned plain_iid k=5 D_k = 1.6949092697605275
-    vs analytic truth 1.694595720774407, est/true = 1.0001850287843153; corrected
-    no-thinning exponent p = 0.651, exactly matching the original control''s 0.651
-    (the defective value was 1.001). Permanent bit-identical assertion added. Verdict
-    on the corrected axis remains joint_tracks_thinning = true.'
+  description: 'D056-fixed dose-response control artifact. Off-by-4 k-axis corrected at lines 179-181 (thinned_p[: k - 4] -> thinned_p[:k]); no estimator/smoothing/arm/thinning/acceptance logic changed. Acceptance test PASSED: un-thinned plain_iid k=5 D_k = 1.6949092697605275 vs analytic truth 1.694595720774407, est/true = 1.0001850287843153; corrected no-thinning exponent p = 0.651, exactly matching the original control''s 0.651 (the defective value was 1.001). Permanent bit-identical assertion added. Verdict on the corrected axis remains joint_tracks_thinning = true.'
   path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1050,13 +632,7 @@
   skill: ''
   created_at: '2026-09-14T07:02:14.721114+00:00'
   superseded_by: art_20260914_fc478a
-  retirement_note: Described the D056-fixed occupancy dose-response table; the later
-    D063 artifact supersedes it and this entry must not be cited. The superseded BYTES
-    are retained at artifacts/_project/data/x3_control_occupancy_dose_response.RETIRED_pre_guard_do_not_cite.json
-    (291,163 B / sha256 88625bbacbe95984...), renamed so a path- or filename-based
-    reader cannot mistake the pre-guard table for the live one. Those bytes predate
-    the D063 freeze guard, where joint_tracks_thinning reads True in them, which is
-    the SEMANTIC error D074 ruled on. The rename left the bytes and sha256 unchanged.
+  retirement_note: Described the D056-fixed occupancy dose-response table; the later D063 artifact supersedes it and this entry must not be cited. The superseded BYTES are retained at artifacts/_project/data/x3_control_occupancy_dose_response.RETIRED_pre_guard_do_not_cite.json (291,163 B / sha256 88625bbacbe95984...), renamed so a path- or filename-based reader cannot mistake the pre-guard table for the live one. Those bytes predate the D063 freeze guard, where joint_tracks_thinning reads True in them, which is the SEMANTIC error D074 ruled on. The rename left the bytes and sha256 unchanged.
   supersedes: art_20260914_b9b161
   tags:
   - X3
@@ -1065,14 +641,9 @@
   - dose-response
   - fixed
 - id: art_20260914_646bc6
-  name: x3_control_occupancy_dose_response.py (FROZEN SNAPSHOT — not the executing
-    runner; see top-level file)
+  name: x3_control_occupancy_dose_response.py (FROZEN SNAPSHOT — not the executing runner; see top-level file)
   type: intermediate
-  description: D056-fixed dose-response control RUNNER, left in repo for provenance.
-    Contains the labels-only fix (lines 179-181) and the permanent assertion assert_plain_unthinned_reference()
-    at lines 231-266, which asserts actual_curve == reference_curve at every labelled
-    k=5..30 (bit-identical against the shared d_chain_fast(raw_p[:k], raw_q[:k], 0.5))
-    and that the analytic k=5 ratio is within 0.001 of one.
+  description: D056-fixed dose-response control RUNNER, left in repo for provenance. Contains the labels-only fix (lines 179-181) and the permanent assertion assert_plain_unthinned_reference() at lines 231-266, which asserts actual_curve == reference_curve at every labelled k=5..30 (bit-identical against the shared d_chain_fast(raw_p[:k], raw_q[:k], 0.5)) and that the analytic k=5 ratio is within 0.001 of one.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/x3_control_occupancy_dose_response.py
   content_sha256: da81dabb4fb4289194cf5ef46cbfea45b04a4e60c73855634607a43a6a7b2e7a
   url: null
@@ -1089,16 +660,7 @@
 - id: art_20260914_280fd1
   name: x3_positionwise_iid_null.json
   type: data
-  description: 'D064: the position-wise i.i.d. null result. PRE-REGISTERED CRITERION
-    written before the run: ''first-order'' is licensed iff the position-wise i.i.d.
-    null loses to first-order Markov by BIC for a strict majority of services at k=30
-    AND at every tested prefix k=2..30; a win or tie at any k withholds the licence.
-    RESULT at k=30: Markov beats position-wise i.i.d. on only 4/45 services; position-wise
-    wins 41/45; ties 0; median Delta_BIC(positionwise - Markov) = -27266.969455033075.
-    Across k: position-wise wins 45/45 at k=2, 43-44/45 for k=8..29, 41/45 at k=30,
-    0 ties. OUTCOME: first_order_licensed = FALSE. So the earlier ''first-order''
-    reading is explained by per-position MARGINAL structure for most services, not
-    by transition structure.'
+  description: 'D064: the position-wise i.i.d. null result. PRE-REGISTERED CRITERION written before the run: ''first-order'' is licensed iff the position-wise i.i.d. null loses to first-order Markov by BIC for a strict majority of services at k=30 AND at every tested prefix k=2..30; a win or tie at any k withholds the licence. RESULT at k=30: Markov beats position-wise i.i.d. on only 4/45 services; position-wise wins 41/45; ties 0; median Delta_BIC(positionwise - Markov) = -27266.969455033075. Across k: position-wise wins 45/45 at k=2, 43-44/45 for k=8..29, 41/45 at k=30, 0 ties. OUTCOME: first_order_licensed = FALSE. So the earlier ''first-order'' reading is explained by per-position MARGINAL structure for most services, not by transition structure.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_positionwise_iid_null.json
   content_sha256: 83505f9f069b68c6d505c81dea98484c794712417d92abfd7e5ca72757c48650
   url: null
@@ -1131,15 +693,7 @@
 - id: art_20260914_a3381d
   name: x3_parametric_growth.json (CONCLUSION WITHDRAWN — must not be cited)
   type: data
-  description: 'The parametric growth route''s artifact — ATTEMPTED AND STRUCTURALLY
-    NON-DIAGNOSTIC (D057). CAUTION: its own conclusion sentence reads ''cannot adjudicate
-    the question must narrow to the plug-in estimator cannot adjudicate it'', and
-    THAT NARROWING IS WITHDRAWN, because both the route''s LINEAR and its ''decisively
-    passed'' control are affine by construction and carry no information about the
-    data. The run is a legitimate record of an attempted route; the conclusion sentence
-    must not be cited. The Director''s D063 verified variant B has a critical known-truth
-    curve defect; the position-wise null (D064) supersedes both as the direct negative
-    on ''first-order''.'
+  description: 'The parametric growth route''s artifact — ATTEMPTED AND STRUCTURALLY NON-DIAGNOSTIC (D057). CAUTION: its own conclusion sentence reads ''cannot adjudicate the question must narrow to the plug-in estimator cannot adjudicate it'', and THAT NARROWING IS WITHDRAWN, because both the route''s LINEAR and its ''decisively passed'' control are affine by construction and carry no information about the data. The run is a legitimate record of an attempted route; the conclusion sentence must not be cited. The Director''s D063 verified variant B has a critical known-truth curve defect; the position-wise null (D064) supersedes both as the direct negative on ''first-order''.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_parametric_growth.json
   content_sha256: 1a6f9f65fe41d89a6a6de70b8c3491d22abd8bfcc405ac9bb53f0c69e6b83530
   url: null
@@ -1156,13 +710,7 @@
 - id: art_20260914_dcc52e
   name: x3_parametric_growth.py
   type: intermediate
-  description: 'Runner for the parametric growth route, left in repo for provenance.
-    The route is ATTEMPTED AND STRUCTURALLY NON-DIAGNOSTIC (D057): it fits a Markov
-    model of order 0/1/2 by BIC ONCE per service and computes the curve under that
-    already-fitted model with NO per-k refit, so D_k is AFFINE for any stationary
-    chain and sublinear is unreachable. Its control compares two curves that are both
-    affine by construction and therefore cannot fail. DO NOT repair or re-run without
-    a new approved design.'
+  description: 'Runner for the parametric growth route, left in repo for provenance. The route is ATTEMPTED AND STRUCTURALLY NON-DIAGNOSTIC (D057): it fits a Markov model of order 0/1/2 by BIC ONCE per service and computes the curve under that already-fitted model with NO per-k refit, so D_k is AFFINE for any stationary chain and sublinear is unreachable. Its control compares two curves that are both affine by construction and therefore cannot fail. DO NOT repair or re-run without a new approved design.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/intermediate/x3_parametric_growth.py
   content_sha256: 08f49cf702e26b1bb8b8b8a69ae88350fb8d1122fd2133b547fc2c74dd781790
   url: null
@@ -1179,22 +727,8 @@
 - id: art_20260914_44e723
   name: x3_axis_validation.json
   type: data
-  description: 'Axis + expectation-recovery validation for the vote-based heterogeneous-i.i.d.
-    arm and the parametric runner. VOTE ARM: the arm''s per-prefix votes RECOVER THE
-    KNOWN ANSWER on synthetic sources -- S1 pure i.i.d. gave 0 MARKOV / 8 IID / 0
-    TIE (independent expectation 0/8/0); S2 deliberately dependent gave 8/0/0 (expected
-    8/0/0); S3 heterogeneous-and-independent (the construction the DEAD verdict rests
-    on) gave 8/0/0 (expected 8/0/0); expectations were computed by a SEPARATELY WRITTEN
-    BIC calculation with 8 independent seeded replicates and the production-vs-independent
-    mismatch count was ZERO for every case. EXPLICIT AXIS TEST: dependence was constructed
-    only through transitions 0->1, 1->2, 2->3 with the i.i.d. suffix beginning at
-    3->4, so the expected transition was prefix k=5; observed k=4 MARKOV then k=5..30
-    IID -- AXIS PASS. PARAMETRIC RUNNER: at a known order-2 chain the per-k residuals
-    over the consumed range k=5..30 were between 0 and 1.0658141036401503e-14, max
-    absolute residual 1.0658141036401503e-14, AXIS PASS; the k=1 boundary residual
-    -0.6931471805599453 is outside the consumed range and retained in the artifact.
-    THE PARAMETRIC ROUTE WAS NOT REPAIRED. Per-artifact: x3_control_heterogeneous_iid.py
-    verified-correct; x3_parametric_growth.py verified-correct.'
+  description: 'Axis + expectation-recovery validation for the vote-based heterogeneous-i.i.d. arm and the parametric runner. VOTE ARM: the arm''s per-prefix votes RECOVER THE KNOWN ANSWER on synthetic sources -- S1 pure i.i.d. gave 0 MARKOV / 8 IID / 0 TIE (independent expectation 0/8/0); S2 deliberately dependent gave 8/0/0 (expected 8/0/0); S3 heterogeneous-and-independent (the construction the DEAD verdict rests on) gave 8/0/0 (expected 8/0/0); expectations were computed by a SEPARATELY WRITTEN BIC calculation with 8 independent seeded replicates and the production-vs-independent mismatch count was ZERO for every case. EXPLICIT AXIS TEST: dependence was constructed only through transitions 0->1, 1->2, 2->3 with the i.i.d. suffix beginning at 3->4, so the expected transition was prefix k=5; observed k=4 MARKOV then k=5..30 IID -- AXIS PASS. PARAMETRIC RUNNER: at a known order-2 chain the per-k residuals over the consumed range k=5..30 were between 0 and 1.0658141036401503e-14, max absolute
+    residual 1.0658141036401503e-14, AXIS PASS; the k=1 boundary residual -0.6931471805599453 is outside the consumed range and retained in the artifact. THE PARAMETRIC ROUTE WAS NOT REPAIRED. Per-artifact: x3_control_heterogeneous_iid.py verified-correct; x3_parametric_growth.py verified-correct.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_axis_validation.json
   content_sha256: 4061258ecb39c37329608e9468d8ac6a6d0340d4915c0806e28dd675107c9c78
   url: null
@@ -1211,19 +745,8 @@
 - id: art_20260914_9a009c
   name: x6_divisibility_lower_bound.json
   type: data
-  description: 'X6 divisibility lower bound — the rejection-generic / distribution-free-of-alphabet
-    lower bound that applies at ANY k, i.e. exactly where the plug-in upper certificate
-    is lost. DELIVERABLE ACHIEVED: it turns "at large k only the one-sided lower bound
-    survives" from an assertion into a MEASURED result. Reported numbers (per the
-    Director''s record): 100% of pairs nontrivial at k=15/20/25/30; informative 0.9989/1.0/1.0/1.0;
-    validity 0/120 violations at alpha=0.05; it CALLS the repo function tv_lower_bound_divisibility
-    rather than restating it. LABEL AUDIT: verified-correct (no [:k-C] constant-offset
-    construct; axis probe k=5/10/15 -> encoded shapes [1,5]/[1,10]/[1,15]). CAVEATS
-    THAT MUST TRAVEL WITH IT: (1) it is ASSUMPTION-LADEN (VC / Cohn-Tesoriero type
-    realizability) and must NEVER be presented as distribution-free; (2) subsample
-    20,000 flows/service versus C1''s full-n upper side. No `large_k_usable` field
-    exists; the artifact declares large-k entries EXPLORATORY because the plug-in
-    upper side is lost.'
+  description: 'X6 divisibility lower bound — the rejection-generic / distribution-free-of-alphabet lower bound that applies at ANY k, i.e. exactly where the plug-in upper certificate is lost. DELIVERABLE ACHIEVED: it turns "at large k only the one-sided lower bound survives" from an assertion into a MEASURED result. Reported numbers (per the Director''s record): 100% of pairs nontrivial at k=15/20/25/30; informative 0.9989/1.0/1.0/1.0; validity 0/120 violations at alpha=0.05; it CALLS the repo function tv_lower_bound_divisibility rather than restating it. LABEL AUDIT: verified-correct (no [:k-C] constant-offset construct; axis probe k=5/10/15 -> encoded shapes [1,5]/[1,10]/[1,15]). CAVEATS THAT MUST TRAVEL WITH IT: (1) it is ASSUMPTION-LADEN (VC / Cohn-Tesoriero type realizability) and must NEVER be presented as distribution-free; (2) subsample 20,000 flows/service versus C1''s full-n upper side. No `large_k_usable` field exists; the artifact declares large-k entries EXPLORATORY because
+    the plug-in upper side is lost.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X6/data/x6_divisibility_lower_bound.json
   content_sha256: 617db1f7ea65e7f3d97a4f3acfcf6964ce8fe2aa995d85c623a36ce1fe6aec85
   url: null
@@ -1240,23 +763,8 @@
 - id: art_20260914_0118c2
   name: x3_variant_b_support_conditioning.json (D063 freeze-fixed, refusal implemented)
   type: data
-  description: 'Variant B (exposure-conditioning repair) after the D063 freeze fix.
-    THE FREEZE IS CONFIRMED FROM THE ARTIFACT: the plain known-truth curve prior to
-    the fix was PINNED at 5.908567858844014 for every k=16..30 with 14/25 increments
-    EXACTLY ZERO, while the ORIGINAL unfiltered control has 0/25. Cause verified in
-    the code path (np_ctx >= threshold & nq_ctx >= threshold, lines ~155-180): with
-    fixed-length 200000-flow samples the context space grows while per-context counts
-    collapse -- new distinct contexts 4096/8192/16381/32400/59608/183870/395041 at
-    k=13/14/15/16/17/20/30 but new RETAINED 2464/2162/400/5/0/0/0, so the retained
-    total saturates at 8762 from k=16. The retained set CANNOT grow further without
-    changing the estimator''s conditioning definition, so the CONSTRUCTION WAS NOT
-    ALTERED and the runners now REFUSE instead. RESULT: B plain status REFUSED_CONSTANT_TAIL,
-    freeze onset k=16, non-frozen fit window k=5..16, CORRECTED POWER EXPONENT p =
-    1.093 -- LINEAR, NOT SUBLINEAR. The former full-window p=0.539 is no longer emitted.
-    EXCLUDED MASS: non-frozen-axis value at k=16 is 0.26544640625; the previous k=30
-    figure was 0.6082380833333334. The mass calculation does not use the fitted curve,
-    so the freeze did not algebraically create the mass VALUE -- but k=30 IS post-freeze,
-    so a non-frozen-axis reading is the k=16 value.'
+  description: 'Variant B (exposure-conditioning repair) after the D063 freeze fix. THE FREEZE IS CONFIRMED FROM THE ARTIFACT: the plain known-truth curve prior to the fix was PINNED at 5.908567858844014 for every k=16..30 with 14/25 increments EXACTLY ZERO, while the ORIGINAL unfiltered control has 0/25. Cause verified in the code path (np_ctx >= threshold & nq_ctx >= threshold, lines ~155-180): with fixed-length 200000-flow samples the context space grows while per-context counts collapse -- new distinct contexts 4096/8192/16381/32400/59608/183870/395041 at k=13/14/15/16/17/20/30 but new RETAINED 2464/2162/400/5/0/0/0, so the retained total saturates at 8762 from k=16. The retained set CANNOT grow further without changing the estimator''s conditioning definition, so the CONSTRUCTION WAS NOT ALTERED and the runners now REFUSE instead. RESULT: B plain status REFUSED_CONSTANT_TAIL, freeze onset k=16, non-frozen fit window k=5..16, CORRECTED POWER EXPONENT p = 1.093 -- LINEAR, NOT SUBLINEAR.
+    The former full-window p=0.539 is no longer emitted. EXCLUDED MASS: non-frozen-axis value at k=16 is 0.26544640625; the previous k=30 figure was 0.6082380833333334. The mass calculation does not use the fitted curve, so the freeze did not algebraically create the mass VALUE -- but k=30 IS post-freeze, so a non-frozen-axis reading is the k=16 value.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_variant_b_support_conditioning.json
   content_sha256: 16308ae79fe20000921e1262b2da31e31c7e5a346ae52a573a2e814e511f1f26
   url: null
@@ -1275,16 +783,7 @@
 - id: art_20260914_fc478a
   name: x3_control_occupancy_dose_response.json (D063 no-freeze assertion added)
   type: data
-  description: 'Occupancy dose-response control after the D063 no-freeze assertion
-    was added. STILL CARRIES THE D056 FIX (no-thinning p = 0.651, k=5 D_k = 1.6949092697605275
-    matching analytic truth). NEW: a permanent no-freeze assertion using a threshold
-    of at least TWO exactly equal tail values, which catches both the variant-B freeze
-    and the dose-response''s own deep-level freezes. ASSERTION RESULTS: dose plain
-    retained=1.00 PASS, 0.50 PASS, 0.25 PASS, retained=0.10 FAIL at k=29..30, retained=0.05
-    FAIL at k=27..30; dose twin all levels PASS. So the two deepest plain levels are
-    now REFUSED rather than silently fitted -- meaning the 0.603 and 0.557 exponent
-    values were fits across frozen windows and must not be cited as sparsity response.
-    Artifact 310141 B.'
+  description: 'Occupancy dose-response control after the D063 no-freeze assertion was added. STILL CARRIES THE D056 FIX (no-thinning p = 0.651, k=5 D_k = 1.6949092697605275 matching analytic truth). NEW: a permanent no-freeze assertion using a threshold of at least TWO exactly equal tail values, which catches both the variant-B freeze and the dose-response''s own deep-level freezes. ASSERTION RESULTS: dose plain retained=1.00 PASS, 0.50 PASS, 0.25 PASS, retained=0.10 FAIL at k=29..30, retained=0.05 FAIL at k=27..30; dose twin all levels PASS. So the two deepest plain levels are now REFUSED rather than silently fitted -- meaning the 0.603 and 0.557 exponent values were fits across frozen windows and must not be cited as sparsity response. Artifact 310141 B.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_control_occupancy_dose_response.json
   content_sha256: 2ff2dd05befce758db81ab15df7b2fd54971254cd28f0266f4708ba511a085fa
   url: null
@@ -1302,33 +801,9 @@
 - id: art_20260914_b1fdde
   name: x11_feasibility.json
   type: data
-  description: 'X11 CESNET-QUIC22 replication feasibility + one-month protocol run.
-    FEASIBILITY CONFIRMED: cesnet-datazoo installed by this task (0.2.0; module at
-    /root/miniconda3/lib/python3.12/site-packages/cesnet_datazoo/__init__.py; NO CLI
-    executable exists). ACCESS IS PUBLIC -- no DUA, no registration, no credential
-    (the library calls resumable_download()/simple_download() with no credential step;
-    Zenodo metadata access_right=open, license cc-by-4.0). SIZE: downloaded XS H5
-    = 2,714,067,131 bytes, servicemap 9,415 bytes; official Zenodo ZIP = 20,952,008,298
-    bytes; documented uncompressed size UNVERIFIED. Data disk before = 507G free,
-    after = 498G free. FIELD MAPPING CONFIRMED PRESENT: PPI row 1 = direction, row
-    2 = size, PPI_LEN = packet-sequence length (uint16), APP = service label, CATEGORY
-    = category label; PPI row 0 = IPT timing, present but EXCLUDED. Library metadata
-    independently reports ppi_features [''IPT'',''DIR'',''SIZE''], application_count
-    102. Download location /root/autodl-tmp/eibo/data/cesnet-quic22-explicit-v2/XS/.
-    H5 sha256 669a810ec49b7a9c2d5c9ea9d2bc3fbe9907a787cd9b5af5eeaa41e092cd1aaf. ***
-    THE SCIENTIFIC RESULT -- A CORPUS-DEPENDENCE FINDING, REPORTED AS SUCH AND NOT
-    TUNED: the upper-side informative fraction DID NOT REPRODUCE. QUIC22: eps_hi <
-    0.5 on 534/3,321 = 0.1607949413 (median TV 0.6891804418, median eps_hi 0.7661406742).
-    Primary corpus reference: 340/990 = 0.3434343434. So 16.08% versus 34.34% -- roughly
-    half. *** PROTOCOL HELD FIXED: k=5, M=1, alphabet 32, per-law alpha 0.025, channel
-    (direction,size) with timing excluded, service threshold 2000 flows; split train
-    2022-10-31..11-06, unused buffer 11-07..11-13, test 11-14..11-27; NO packet-level
-    split; the repository packing helper and src/eibo/statcore.py::tv_upper_bound
-    were CALLED (reference reconciliation on one real pair gave zero difference in
-    tv_hat and eps_hi). Test population 5,085,259 flows (5,024,310 with PPI_LEN >=
-    5), 105 labels observed, 82 retained services, 3,321 service pairs. *** THE LOWER
-    SIDE AND THE FULL TWO-SIDED BRACKET WERE NOT RUN, as the feasibility-first scope
-    required. ***'
+  description: 'X11 CESNET-QUIC22 replication feasibility + one-month protocol run. FEASIBILITY CONFIRMED: cesnet-datazoo installed by this task (0.2.0; module at /root/miniconda3/lib/python3.12/site-packages/cesnet_datazoo/__init__.py; NO CLI executable exists). ACCESS IS PUBLIC -- no DUA, no registration, no credential (the library calls resumable_download()/simple_download() with no credential step; Zenodo metadata access_right=open, license cc-by-4.0). SIZE: downloaded XS H5 = 2,714,067,131 bytes, servicemap 9,415 bytes; official Zenodo ZIP = 20,952,008,298 bytes; documented uncompressed size UNVERIFIED. Data disk before = 507G free, after = 498G free. FIELD MAPPING CONFIRMED PRESENT: PPI row 1 = direction, row 2 = size, PPI_LEN = packet-sequence length (uint16), APP = service label, CATEGORY = category label; PPI row 0 = IPT timing, present but EXCLUDED. Library metadata independently reports ppi_features [''IPT'',''DIR'',''SIZE''], application_count 102. Download location /root/autodl-tmp/eibo/data/cesnet-quic22-explicit-v2/XS/.
+    H5 sha256 669a810ec49b7a9c2d5c9ea9d2bc3fbe9907a787cd9b5af5eeaa41e092cd1aaf. *** THE SCIENTIFIC RESULT -- A CORPUS-DEPENDENCE FINDING, REPORTED AS SUCH AND NOT TUNED: the upper-side informative fraction DID NOT REPRODUCE. QUIC22: eps_hi < 0.5 on 534/3,321 = 0.1607949413 (median TV 0.6891804418, median eps_hi 0.7661406742). Primary corpus reference: 340/990 = 0.3434343434. So 16.08% versus 34.34% -- roughly half. *** PROTOCOL HELD FIXED: k=5, M=1, alphabet 32, per-law alpha 0.025, channel (direction,size) with timing excluded, service threshold 2000 flows; split train 2022-10-31..11-06, unused buffer 11-07..11-13, test 11-14..11-27; NO packet-level split; the repository packing helper and src/eibo/statcore.py::tv_upper_bound were CALLED (reference reconciliation on one real pair gave zero difference in tv_hat and eps_hi). Test population 5,085,259 flows (5,024,310 with PPI_LEN >= 5), 105 labels observed, 82 retained services, 3,321 service pairs. *** THE LOWER SIDE AND THE FULL TWO-SIDED
+    BRACKET WERE NOT RUN, as the feasibility-first scope required. ***'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X11/data/x11_feasibility.json
   content_sha256: 60d205fb10399bc05c732b3e40f630ab03aeee3f7f70ade9c974ec4fd3d45e5d
   url: null
@@ -1346,18 +821,7 @@
 - id: art_20260914_082a7f
   name: x12_detector_validation_k5.json
   type: data
-  description: 'k=5 detector-validation artifact — COMPLETED SUCCESSFULLY (EXIT_CODE=0).
-    Contains the containment statistic (Stage 2: joins the rebuilt X1 per-pair eps_hi
-    values to explicitly labeled per-service detector-error surrogates) plus the OSCR/FPR95
-    detector metrics. Log ends: ''CHECKPOINT 2026-09-14T10:12:25'', ''ARTIFACT_JSON
-    path=/root/eibo/artifacts/x12_detector_validation_k5.json bytes=191867'', ''ARTIFACT_CSV
-    ... bytes=2579853 rows=11880'', ''ADDRESS_RANDOMIZATION status=computed delta=0.0'',
-    ''CONTAINMENT_STATISTIC Stage 2 joins ...'', ''EXIT_CODE=0''. THE THREE-STATE
-    READING OF THE CONTAINMENT OUTCOME MUST BE CHECKED IN THE FILE: an empty informative
-    stratum yields NO VALIDATION EVIDENCE and a near-zero-TPR detector yields NO INFORMATION
-    — neither is ever a pass. AND TWO OBJECT SUBSTITUTIONS TRAVEL WITH ANY READING:
-    the pair-level error is a PROXY (macro-average of two single-service classification
-    errors), and classification_error is CLOSED-SET while the floor is OPEN-SET.'
+  description: 'k=5 detector-validation artifact — COMPLETED SUCCESSFULLY (EXIT_CODE=0). Contains the containment statistic (Stage 2: joins the rebuilt X1 per-pair eps_hi values to explicitly labeled per-service detector-error surrogates) plus the OSCR/FPR95 detector metrics. Log ends: ''CHECKPOINT 2026-09-14T10:12:25'', ''ARTIFACT_JSON path=/root/eibo/artifacts/x12_detector_validation_k5.json bytes=191867'', ''ARTIFACT_CSV ... bytes=2579853 rows=11880'', ''ADDRESS_RANDOMIZATION status=computed delta=0.0'', ''CONTAINMENT_STATISTIC Stage 2 joins ...'', ''EXIT_CODE=0''. THE THREE-STATE READING OF THE CONTAINMENT OUTCOME MUST BE CHECKED IN THE FILE: an empty informative stratum yields NO VALIDATION EVIDENCE and a near-zero-TPR detector yields NO INFORMATION — neither is ever a pass. AND TWO OBJECT SUBSTITUTIONS TRAVEL WITH ANY READING: the pair-level error is a PROXY (macro-average of two single-service classification errors), and classification_error is CLOSED-SET while the floor is OPEN-SET.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X12_k5/data/x12_detector_validation_k5.json
   content_sha256: bebe6bf00ec3b48a541c948353b7db8574fa7721fec64199c614b239adf0a8d5
   url: null
@@ -1374,11 +838,7 @@
 - id: art_20260914_28bbfe
   name: x12_k5_max_tpr_recomputed.json
   type: data
-  description: Recomputed per-service and pair TPR for the k=5 detector validation,
-    after constraining the numerator to each service's own positives. Written to a
-    NEW file (the original k=5 artifact is untouched). Carries the payload-only reproduction
-    of the three known-wrong values and the corrected maximum_pair_tpr per detector/holdout.
-    CPU-only postprocess; no GPU work.
+  description: Recomputed per-service and pair TPR for the k=5 detector validation, after constraining the numerator to each service's own positives. Written to a NEW file (the original k=5 artifact is untouched). Carries the payload-only reproduction of the three known-wrong values and the corrected maximum_pair_tpr per detector/holdout. CPU-only postprocess; no GPU work.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X12_k5/data/x12_k5_max_tpr_recomputed.json
   content_sha256: e0dc82e03e0e56fc2c49f5036ff265c5c8724d88b8eb349ecc022d46ecfb1fae
   url: null
@@ -1395,10 +855,7 @@
 - id: art_20260914_7836e1
   name: x9_sni_channel_delta.json
   type: data
-  description: X9 two-arm measurement of the per-pair TV upper-bracket delta when
-    the SNI-derived destination-host identifier (DST_IP) participates in the channel
-    partition vs. when it is excluded. Same flows, same k=5 (direction,size) prefix
-    alphabet, flow- and time-disjoint train/test splits, 703 common service pairs.
+  description: X9 two-arm measurement of the per-pair TV upper-bracket delta when the SNI-derived destination-host identifier (DST_IP) participates in the channel partition vs. when it is excluded. Same flows, same k=5 (direction,size) prefix alphabet, flow- and time-disjoint train/test splits, 703 common service pairs.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X9/data/x9_sni_channel_delta.json
   content_sha256: 7f6edd6b1b9ca2dacb385b5af3029e7411a990fb2c4c2d02280fa2aa8877c736
   url: null
@@ -1475,10 +932,9 @@
 - id: art_20260914_974965
   name: runner_input_path_audit
   type: intermediate
-  description: 'Cross-tree input path audit for all 19 project runners: 53 paths checked,
-    1 snapshot-only defect (X9 nested path), 4 silent fallback risks, 4 late-precondition
-    runners.'
+  description: 'Cross-tree input path audit for all 19 project runners: 53 paths checked, 1 snapshot-only defect (X9 nested path), 4 silent fallback risks, 4 late-precondition runners.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/runner_input_path_audit_974965.md
+  content_sha256: 5e2685559d7cfa7b54fe6f69548a435c3e33971db98d1ba195925b769b442536
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -1492,10 +948,9 @@
 - id: art_20260914_b0ab78
   name: X9_E dose-response channels analysis
   type: report
-  description: Structured exact-value analysis of X9_E SNI-dependent versus SNI-independent
-    dose-response arms, clipping/saturation, hypothesis evaluation, and DST_IP/QUIC_SNI
-    determinism check.
+  description: Structured exact-value analysis of X9_E SNI-dependent versus SNI-independent dose-response arms, clipping/saturation, hypothesis evaluation, and DST_IP/QUIC_SNI determinism check.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X9_E/report/x9_dose_response_channels_analysis.md
+  content_sha256: 39f48226fd3cc1d0bc076a3074736cebd9a042f7b6484b6a3b612fb0160bf8ad
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X9_E
@@ -1511,10 +966,9 @@
 - id: art_20260914_24c7ab
   name: X9_E dose-response channels raw artifact
   type: data
-  description: Original X9_E JSON artifact containing both-arm train/test rung results,
-    matched-pair deltas, clipping labels, arithmetic thresholds, and DST_IP/QUIC_SNI
-    premise test.
+  description: Original X9_E JSON artifact containing both-arm train/test rung results, matched-pair deltas, clipping labels, arithmetic thresholds, and DST_IP/QUIC_SNI premise test.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X9_E/data/x9_dose_response_channels.json
+  content_sha256: 7bca0a93b0b933e949b8a797a127e641140fda2aa226a22894495cd1f9179c49
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X9_E
@@ -1528,11 +982,9 @@
 - id: art_20260914_0f9311
   name: x9e_analysis_summary
   type: intermediate
-  description: X9_E dose-response analysis summary JSON — verdict refuted, delta_tv_hat
-    monotonic growth to 0.358 at B=256 before saturation, calibration check passed
-    (diff 0.0), DST_IP/SNI conflicts 8323/13111. Second independent analysis worker
-    cross-validating the first.
+  description: X9_E dose-response analysis summary JSON — verdict refuted, delta_tv_hat monotonic growth to 0.358 at B=256 before saturation, calibration check passed (diff 0.0), DST_IP/SNI conflicts 8323/13111. Second independent analysis worker cross-validating the first.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X9_E/intermediate/x9e_analysis_summary.json
+  content_sha256: 32b022fe4c74ca67a7103e607937892062f4f5761c6f7bf3b39576f403e7e422
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X9_E
@@ -1546,19 +998,15 @@
 - id: art_20260914_20d2b6
   name: X13 Good-Toulmin Missing-Service Mass
   type: data
-  description: Deployment-site Good-Turing/Good-Toulmin missing destination-host mass
-    over the X1 training split, with frequency-of-frequencies, bootstrap alternative
-    interval, and 1:100 sampling sensitivity.
-  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X13/data/x13_missing_service_mass.json
+  description: Deployment-site Good-Turing/Good-Toulmin missing destination-host mass over the X1 training split, with frequency-of-frequencies, bootstrap alternative interval, and 1:100 sampling sensitivity.
+  path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X13
   skill: experiment-analysis
   created_at: '2026-09-14T19:56:01.828027+00:00'
   superseded_by: art_20260914_0c143b
-  retirement_note: Retired under D070 because this record described the stale bootstrap-CI
-    artifact at the canonical source path; the clean D089 artifact is registered as
-    art_20260914_0c143b and must be cited instead.
+  retirement_note: 'Retired under D070: this record described the stale bootstrap-CI artifact at the canonical source path. It is held with no path so it cannot be resolved as a live artifact; the clean D089 artifact is art_20260914_0c143b and must be cited instead.'
   tags:
   - X13
   - good-turing
@@ -1569,8 +1017,7 @@
 - id: art_20260914_9b47f8
   name: x13_missing_service_mass
   type: data
-  description: 'X13 Good-Turing missing-service mass (D089: bootstrap CI deleted from
-    runner and artifact)'
+  description: 'X13 Good-Turing missing-service mass (D089: bootstrap CI deleted from runner and artifact)'
   path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1578,8 +1025,7 @@
   skill: ''
   created_at: '2026-09-14T20:36:30.932589+00:00'
   superseded_by: art_20260914_0c143b
-  retirement_note: Superseded by the canonical x13_missing_service_mass.json (D089/D070
-    consolidation).
+  retirement_note: Superseded by the canonical x13_missing_service_mass.json (D089/D070 consolidation).
   tags:
   - x13
   - missing-mass
@@ -1587,8 +1033,7 @@
 - id: art_20260914_74ad7e
   name: X8 vector-level TV result
   type: data
-  description: X8 one-sided vector-law TV result with pooled-cell DPI sanity check
-    and empirical k-prefix comparison.
+  description: X8 one-sided vector-law TV result with pooled-cell DPI sanity check and empirical k-prefix comparison.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/x8_vector_law_tv.json
   content_sha256: 0f8b83bb29f2e2f926b5a176a607317d871128c04ebe628bedc99c86eb1dc7d8
   url: null
@@ -1605,8 +1050,7 @@
 - id: art_20260914_0c143b
   name: x13_missing_service_mass
   type: data
-  description: X13 Good-Turing missing-service mass (D089 clean, D070 consolidated
-    to canonical path)
+  description: X13 Good-Turing missing-service mass (D089 clean, D070 consolidated to canonical path)
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X13/data/x13_missing_service_mass.json
   content_sha256: 430ebed687a11fd951ce9bd683a93ef821147ef2674784d99af1eb5ce20a997c
   url: null
@@ -1624,6 +1068,7 @@
   type: data
   description: x3 axis validation (re-run bytes pulled from server, D070)
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_axis_validation_de3248.json
+  content_sha256: 4061258ecb39c37329608e9468d8ac6a6d0340d4915c0806e28dd675107c9c78
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
@@ -1636,9 +1081,9 @@
 - id: art_20260914_3bde36
   name: x3_parametric_growth
   type: data
-  description: x3 parametric growth re-run with D057 non-diagnostic wording (withdrawn
-    sentence removed)
+  description: x3 parametric growth re-run with D057 non-diagnostic wording (withdrawn sentence removed)
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X3/data/x3_parametric_growth_3bde36.json
+  content_sha256: 1a6f9f65fe41d89a6a6de70b8c3491d22abd8bfcc405ac9bb53f0c69e6b83530
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X3
@@ -1651,10 +1096,7 @@
 - id: art_20260914_c2a33e
   name: X11 full two-sided CESNET-QUIC22 bracket
   type: data
-  description: 'Full X11 two-sided epsilon-indistinguishability bracket on CESNET-QUIC22
-    XS: 3,321 service pairs, finite-sample tv_upper_bound upper side, Michel adaptive
-    lower side with fixed 20,000-flow cap and random_state=0, joint gate, hard invariant
-    checks, feasibility reconciliation, and n-stratified primary comparison.'
+  description: 'Full X11 two-sided epsilon-indistinguishability bracket on CESNET-QUIC22 XS: 3,321 service pairs, finite-sample tv_upper_bound upper side, Michel adaptive lower side with fixed 20,000-flow cap and random_state=0, joint gate, hard invariant checks, feasibility reconciliation, and n-stratified primary comparison.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X11/data/x11_full_bracket.json
   content_sha256: 83c1a5a103e8f97e55517c58b7df14c80e3cf07be5bd567b3abfaee8cbf67d35
   url: null
@@ -1672,7 +1114,8 @@
   name: run_report.html
   type: report
   description: AgenticFigure run_report output for run af-55371c4d9411452fb3df7e6ef910b06b
-  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/report/run_report.html
+  path: null
+  retirement_note: Runtime scratch from automated run af-55371c4d9411452fb3df7e6ef910b06b; pipeline internal, not a research deliverable.
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -1686,7 +1129,8 @@
   name: state.json
   type: data
   description: AgenticFigure state output for run af-55371c4d9411452fb3df7e6ef910b06b
-  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/state.json
+  path: null
+  retirement_note: Runtime scratch from automated run af-55371c4d9411452fb3df7e6ef910b06b; pipeline internal, not a research deliverable.
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -1700,7 +1144,8 @@
   name: generation_0/critic_failure.json
   type: data
   description: AgenticFigure round_artifact output for run af-55371c4d9411452fb3df7e6ef910b06b
-  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/critic_failure.json
+  path: null
+  retirement_note: Runtime scratch from automated run af-55371c4d9411452fb3df7e6ef910b06b; pipeline internal, not a research deliverable.
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -1714,7 +1159,8 @@
   name: generation_0/generation_result.json
   type: data
   description: AgenticFigure round_artifact output for run af-55371c4d9411452fb3df7e6ef910b06b
-  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/generation_result.json
+  path: null
+  retirement_note: Runtime scratch from automated run af-55371c4d9411452fb3df7e6ef910b06b; pipeline internal, not a research deliverable.
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -1728,7 +1174,8 @@
   name: generation_0/job_status.json
   type: data
   description: AgenticFigure round_artifact output for run af-55371c4d9411452fb3df7e6ef910b06b
-  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/job_status.json
+  path: null
+  retirement_note: Runtime scratch from automated run af-55371c4d9411452fb3df7e6ef910b06b; pipeline internal, not a research deliverable.
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -1741,12 +1188,7 @@
 - id: art_20260915_5e1f84
   name: fig1_bracket_overview
   type: chart
-  description: 'fig1 (hero, conceptual): EIBO two-sided bracket overview. Channel
-    quantization forks into a finite-sample-strict upper side (plug-in TV + confidence
-    radius) and an asymptotic lower side (classifier-based HPLB), rejoining at the
-    per-pair interval and its gate. Hand-built after the Agentic Figure provider failed
-    twice on a retryable error; passes a programmatic text-collision AND box-containment
-    check.'
+  description: 'fig1 (hero, conceptual): EIBO two-sided bracket overview. Channel quantization forks into a finite-sample-strict upper side (plug-in TV + confidence radius) and an asymptotic lower side (classifier-based HPLB), rejoining at the per-pair interval and its gate. Hand-built after the Agentic Figure provider failed twice on a retryable error; passes a programmatic text-collision AND box-containment check.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/chart/fig1_bracket_overview.pdf
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1762,11 +1204,7 @@
 - id: art_20260915_8d56b5
   name: fig2_certificate_horizon
   type: chart
-  description: 'fig2 (statistical): Certificate horizon. Panel (a) certifiable fraction
-    vs alphabet resolution M at k=5 (manifest: X1 headline table, E3) with the saturation
-    fraction; panel (b) the crossover sample size n vs true TV (manifest: X4 frontier
-    function), where two derivation routes agree to 0.0. Values: 340/990 = 0.3434
-    certifiable at M=1, falling to 0 by M=8; saturation 0.0 -> 0.391.'
+  description: 'fig2 (statistical): Certificate horizon. Panel (a) certifiable fraction vs alphabet resolution M at k=5 (manifest: X1 headline table, E3) with the saturation fraction; panel (b) the crossover sample size n vs true TV (manifest: X4 frontier function), where two derivation routes agree to 0.0. Values: 340/990 = 0.3434 certifiable at M=1, falling to 0 by M=8; saturation 0.0 -> 0.391.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/chart/fig2_certificate_horizon.pdf
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1781,12 +1219,7 @@
 - id: art_20260915_9f6690
   name: fig3_estimator_control
   type: chart
-  description: 'fig3 (statistical): Estimator limit. Panel (a) estimated/true divergence
-    vs prefix length k for the plain-i.i.d. known-truth control (1.0002 -> 0.6769)
-    and the real-occupancy twin (0.9938 -> 0.8820) against exactly-linear truth; panel
-    (b) the sparse-context fraction (0.000 -> 0.998); panel (c) effective n per context
-    (200000 -> 1.09). Manifest: X3 control occupancy dose-response, X3 parametric
-    growth.'
+  description: 'fig3 (statistical): Estimator limit. Panel (a) estimated/true divergence vs prefix length k for the plain-i.i.d. known-truth control (1.0002 -> 0.6769) and the real-occupancy twin (0.9938 -> 0.8820) against exactly-linear truth; panel (b) the sparse-context fraction (0.000 -> 0.998); panel (c) effective n per context (200000 -> 1.09). Manifest: X3 control occupancy dose-response, X3 parametric growth.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/chart/fig3_estimator_control.pdf
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1801,12 +1234,7 @@
 - id: art_20260915_f2b327
   name: fig4_cross_corpus
   type: chart
-  description: 'fig4 (statistical): Cross-corpus bracket. Panel (a) per-side fractions
-    for the primary corpus vs CESNET-QUIC22 (upper 0.3434/0.1608, lower 0.9960/0.9967,
-    joint 0.3394/0.1575) with the capped lower-side bar hatched and the BC2 disclosure
-    as a readable boxed caption; panel (b) the gate gap by minimum per-pair flow count
-    (18.2 -> 9.7 -> 16.0 pts). Manifest: X11 full bracket. CARRIES BC2: per-side n
-    stated, bias CONSERVATIVE.'
+  description: 'fig4 (statistical): Cross-corpus bracket. Panel (a) per-side fractions for the primary corpus vs CESNET-QUIC22 (upper 0.3434/0.1608, lower 0.9960/0.9967, joint 0.3394/0.1575) with the capped lower-side bar hatched and the BC2 disclosure as a readable boxed caption; panel (b) the gate gap by minimum per-pair flow count (18.2 -> 9.7 -> 16.0 pts). Manifest: X11 full bracket. CARRIES BC2: per-side n stated, bias CONSERVATIVE.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/chart/fig4_cross_corpus.pdf
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1822,12 +1250,7 @@
 - id: art_20260915_1f7aa3
   name: fig5_channel_sensitivity
   type: chart
-  description: 'fig5 (statistical): Channel sensitivity dose-response. Matched delta
-    tv_hat between the SNI-dependent arm (k-prefix + hashed DST_IP) and the SNI-independent
-    arm (k-prefix + random id) vs alphabet cardinality B on a log2 axis, mean and
-    median, with the saturation region banded. Values (median): 0.0300, 0.0940, 0.2485,
-    0.3325, 0.0162. Manifest: X9_E dose-response channels. CARRIES BC1: y-axis is
-    tv_hat only, radius-free, no certificate implication.'
+  description: 'fig5 (statistical): Channel sensitivity dose-response. Matched delta tv_hat between the SNI-dependent arm (k-prefix + hashed DST_IP) and the SNI-independent arm (k-prefix + random id) vs alphabet cardinality B on a log2 axis, mean and median, with the saturation region banded. Values (median): 0.0300, 0.0940, 0.2485, 0.3325, 0.0162. Manifest: X9_E dose-response channels. CARRIES BC1: y-axis is tv_hat only, radius-free, no certificate implication.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/chart/fig5_channel_sensitivity.pdf
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1843,9 +1266,7 @@
 - id: art_20260915_27333a
   name: ci_main_table
   type: data
-  description: R1-W10 nonparametric percentile bootstrap CIs over the existing k=5,
-    M=1 service-pair rows, including median TV, joint-gate, upper-side, and lower-side
-    intervals; unavailable M>1 median-TV intervals are documented.
+  description: R1-W10 nonparametric percentile bootstrap CIs over the existing k=5, M=1 service-pair rows, including median TV, joint-gate, upper-side, and lower-side intervals; unavailable M>1 median-TV intervals are documented.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/ci_main_table.json
   content_sha256: 2d87922190e21f06fbd7e47ebe62f22f494c45252d84578c3ff9f888176b2c86
   url: null
@@ -1859,8 +1280,7 @@
 - id: art_20260915_75134b
   name: ci_cross_corpus
   type: data
-  description: R1-W9 seeded nonparametric bootstrap percentile 95% CIs for lower-side
-    fractions and stratum-matched cross-corpus gaps.
+  description: R1-W9 seeded nonparametric bootstrap percentile 95% CIs for lower-side fractions and stratum-matched cross-corpus gaps.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/ci_cross_corpus.json
   content_sha256: 854c718e4f512e029145c04d874d57465fbe6731cace90721991037d1b8e17a1
   url: null
@@ -1874,9 +1294,7 @@
 - id: art_20260915_1ea3c0
   name: ci_main_table_cluster_bootstrap
   type: data
-  description: Main-table bootstrap comparison retaining pair bootstrap results and
-    adding the requested 2,000-replicate service-cluster bootstrap for k=5, M=1, with
-    guards and CI width ratios.
+  description: Main-table bootstrap comparison retaining pair bootstrap results and adding the requested 2,000-replicate service-cluster bootstrap for k=5, M=1, with guards and CI width ratios.
   path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1892,8 +1310,7 @@
 - id: art_20260915_d59fd8
   name: ci_main_table_1ea3c0_construction_documented
   type: data
-  description: R1-W10 cluster bootstrap CIs with explicit set-dedup construction documented
-    (documentation-only edit; all numerics unchanged from art_20260915_1ea3c0)
+  description: R1-W10 cluster bootstrap CIs with explicit set-dedup construction documented (documentation-only edit; all numerics unchanged from art_20260915_1ea3c0)
   path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1909,10 +1326,7 @@
 - id: art_20260915_35ea13
   name: R1-W9 cluster-bootstrap cross-corpus confidence intervals
   type: data
-  description: Cluster bootstrap over services for primary and QUIC22 cross-corpus
-    lower-side fractions and stratum-matched upper-side gaps. Includes complete-graph
-    degree checks, 95% percentile CIs, pair-vs-cluster width ratios, zero-span flags,
-    and runner hash.
+  description: Cluster bootstrap over services for primary and QUIC22 cross-corpus lower-side fractions and stratum-matched upper-side gaps. Includes complete-graph degree checks, 95% percentile CIs, pair-vs-cluster width ratios, zero-span flags, and runner hash.
   path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1929,8 +1343,7 @@
 - id: art_20260915_89f97d
   name: ci_main_table_27333a_d59fd8
   type: data
-  description: Per-M cluster-bootstrap percentile confidence intervals for k=5 median
-    TV ladder assembled from q1_absolute_counts.json.
+  description: Per-M cluster-bootstrap percentile confidence intervals for k=5 median TV ladder assembled from q1_absolute_counts.json.
   path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -1946,10 +1359,7 @@
 - id: art_20260915_240634
   name: ci_cross_corpus_pairbootstrap
   type: data
-  description: R1-W9 cross-corpus PAIR bootstrap (naive, treats 990/3321 dependent
-    pairs as iid) — retained as the companion to the canonical cluster bootstrap in
-    ci_cross_corpus.json. Pair width understates the cluster width by 1.22x (primary)
-    / 1.59x (QUIC22).
+  description: R1-W9 cross-corpus PAIR bootstrap (naive, treats 990/3321 dependent pairs as iid) — retained as the companion to the canonical cluster bootstrap in ci_cross_corpus.json. Pair width understates the cluster width by 1.22x (primary) / 1.59x (QUIC22).
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/ci_cross_corpus_pairbootstrap.json
   content_sha256: 075ae0a7254acb9bc1b150c1cd13322c2990bea6a8a2f4b8212832b5b180800b
   url: null
@@ -1975,8 +1385,7 @@
 - id: art_20260915_883c41
   name: q1_absolute_counts_k15
   type: data
-  description: Canonical non-dot k=15 higher-k absolute count rows assembled from
-    hidden rung files; tv_masked renamed to tv_k15_masked.
+  description: Canonical non-dot k=15 higher-k absolute count rows assembled from hidden rung files; tv_masked renamed to tv_k15_masked.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts_k15.json
   content_sha256: e76eec7d0768e0e778c0d9dc693077edf2a8e45f551d9617ca33ebaa1402c2ce
   url: null
@@ -1992,8 +1401,7 @@
 - id: art_20260915_4ddfb9
   name: q1_absolute_counts_k30
   type: data
-  description: Canonical non-dot k=30 higher-k absolute count rows assembled from
-    hidden rung files; tv_masked renamed to tv_k30_masked.
+  description: Canonical non-dot k=30 higher-k absolute count rows assembled from hidden rung files; tv_masked renamed to tv_k30_masked.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts_k30.json
   content_sha256: 1d8da5966f9be5ae87e6438c54af7f37f7f3a9beadee54a9232eb6bb38053006
   url: null
@@ -2009,8 +1417,7 @@
 - id: art_20260915_92d4a1
   name: ci_k_ladder
   type: data
-  description: Cluster-bootstrap median-TV ladder CIs and paired increments for k=10/15/30,
-    with degree checks and paper-agreement notes.
+  description: Cluster-bootstrap median-TV ladder CIs and paired increments for k=10/15/30, with degree checks and paper-agreement notes.
   path: null
   content_sha256: 61d1ceca5e82e4c9fafb0b65cb2cc87c0c7804e9b5e819e7453f27d6921f9f97
   superseded_by: art_20260915_70f9a1
@@ -2028,8 +1435,7 @@
 - id: art_20260915_70f9a1
   name: ci_k_ladder
   type: data
-  description: Final single-RNG cluster-bootstrap median-TV ladder CIs and paired
-    increments for k=10/15/30, with degree checks and paper-agreement notes.
+  description: Final single-RNG cluster-bootstrap median-TV ladder CIs and paired increments for k=10/15/30, with degree checks and paper-agreement notes.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/ci_k_ladder.json
   content_sha256: e5944c5ccae5650f6185c9465c14fbcc6855e7f191177fdcf6b3f339bf7c97af
   url: null
