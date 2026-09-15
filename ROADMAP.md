@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 14:50 UTC | Paper frozen in review; higher-k pre-staging running; C2 grid verified (4/20 cells, zero by M=8).
+> Last updated: 2026-09-15 15:10 UTC | Higher-k ladder verified (D111); two manifest defects dispatched; review gateway still stalled.
 
 ## Core direction
 
@@ -103,7 +103,9 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 - [ ] **Await the Round 2 report** — on arrival run the holistic pass then the per-comment Action Matrix (`review-report-action`); no blanket acknowledgement.
 - [ ] **Paper edits are FROZEN** until that report lands; any change now would invalidate the submitted version.
-- [ ] **IN FLIGHT (D109): higher-k per-pair rows** — re-run the masked-count pass at k=10/15/30 and persist per-pair rows in the `q1_absolute_counts.json` shape, then the same service-cluster CIs + paired increments. Absence of these rows is why higher-k uncertainty is "not estimable" today. Cost estimate required before any run.
+- [x] **DONE (D111): higher-k median-TV ladder** — verified monotone and strongly concave in k (increments → 0 at k=30). k=15/k=30 rows promoted to canonical names; medians 0.9127/0.9979 reproduce exactly. **NEW numbers, not printed in the paper** — supporting evidence for C2, not a correction. Limitation stated in the artifact: hidden rows carry `tv_masked` only, so this does NOT enable a higher-k containment panel.
+- [ ] **IN FLIGHT: two manifest defects from that work** — (a) none of the 4 new entries carries a `content_sha256`; (b) `ci_k_ladder` is registered TWICE from two different runner revisions, differing only in bootstrap resampling while all point estimates are identical — needs one canonical file + retired sibling + hashes.
+- [x] ~~**IN FLIGHT (D109): higher-k per-pair rows**~~ — re-run the masked-count pass at k=10/15/30 and persist per-pair rows in the `q1_absolute_counts.json` shape, then the same service-cluster CIs + paired increments. Absence of these rows is why higher-k uncertainty is "not estimable" today. Cost estimate required before any run.
 - [ ] **IN FLIGHT (D109): higher-k detector panel scoping** — how many informative pairs exist at each higher k (k=15/k=30 had an EMPTY stratum at k=5, so a panel may be impossible), which detectors need retraining, cheapest defensible cost. Scoping only.
 - [ ] **x6 input-path resolver** — standing: give x6's four hardcoded inputs the flat-first resolver **when x6 is next edited**.
 - [ ] **Four silent-fallback sites** (E7 ×2, Q2 v3, X3 controls) — provenance-only; fix when those files are next touched.
@@ -126,6 +128,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D111 | 2026-09-15 | D111: higher-k median-TV ladder verified (monotone | X1, X12_k5 |
 | D110 | 2026-09-15 | D110: Item 2's cited source surface was wrong (no  | — |
 | D109 | 2026-09-15 | D109: dispatch pre-staging (higher-k per-pair rows | X1, X12_k5 |
 | D108 | 2026-09-15 | D108: re-review attempted on owner instruction; pl | — |
@@ -135,5 +138,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D104 | 2026-09-15 | D104: W10 cluster bootstrap confirmed correct — re | — |
 | D103 | 2026-09-15 | D103: cross-corpus gap is non-monotone (correct th | — |
 | D102 | 2026-09-15 | D102: bootstrap must resample services, not pairs  | — |
-| D101 | 2026-09-15 | D101: Round 1 review verdict reject (resubmit-wort | — |
 
