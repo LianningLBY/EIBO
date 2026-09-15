@@ -85,6 +85,16 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 **Report the pair AND cluster intervals side by side with the ratio — the comparison is itself the evidence for W10.** Median-TV intervals are **not estimable for M in {2,4,8,16}** (no per-pair rows persisted; X1 stores aggregates) — a future-me must NOT present those without first re-running those cells; cost estimate requested before authorizing.
 
+## ⚠️ BLOCKER — Round 2 stalled at the review gateway (raised 2026-09-15 12:45 UTC)
+
+**Symptom.** Round 2 has been in `cross_sharing` since 09:13 with 3 reviewers dispatched and no report. Round 1 completed in ~32 min; Round 2 is at ~3h50m. **No review-side session has written since 09:31** while my session and the execution session are both active, so this is specific to the review round, not a site outage. The authoritative status is not flagged `indeterminate`.
+
+**Concrete unstick action and owner.** There is **no tool in the Director toolset that retries, resumes, or advances a round** — only `submit_paper_to_review`, which would create a *duplicate* round and mask the fault. **So the unstick action is: report the stalled round to the platform for review-gateway recovery, and do NOT resubmit.** Owner: platform operations (external to this project); my part is the report plus leaving the round counter and review sessions untouched so recovery can act on them.
+
+**Do not:** resubmit, hand-edit review state, or bump the round counter. Any of those destroys the evidence and can double-count the round.
+
+**What is NOT blocked:** the paper is frozen and drift-free; all 23 Round 1 issues are resolved; provenance is clean (all 83 manifest entries resolve with matching hashes). Only the *report* is missing.
+
 ## Near-term tasks
 
 - [ ] **Await the Round 2 report** — on arrival run the holistic pass then the per-comment Action Matrix (`review-report-action`); no blanket acknowledgement.
