@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 13:55 UTC | Round 2 stalled at the review gateway (re-review de-duplicated); paper frozen and verified.
+> Last updated: 2026-09-15 14:25 UTC | Paper frozen in review; pre-staging dispatched (D109) rather than idling on the stalled gateway.
 
 ## Core direction
 
@@ -103,6 +103,8 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 - [ ] **Await the Round 2 report** — on arrival run the holistic pass then the per-comment Action Matrix (`review-report-action`); no blanket acknowledgement.
 - [ ] **Paper edits are FROZEN** until that report lands; any change now would invalidate the submitted version.
+- [ ] **IN FLIGHT (D109): higher-k per-pair rows** — re-run the masked-count pass at k=10/15/30 and persist per-pair rows in the `q1_absolute_counts.json` shape, then the same service-cluster CIs + paired increments. Absence of these rows is why higher-k uncertainty is "not estimable" today. Cost estimate required before any run.
+- [ ] **IN FLIGHT (D109): higher-k detector panel scoping** — how many informative pairs exist at each higher k (k=15/k=30 had an EMPTY stratum at k=5, so a panel may be impossible), which detectors need retraining, cheapest defensible cost. Scoping only.
 - [ ] **x6 input-path resolver** — standing: give x6's four hardcoded inputs the flat-first resolver **when x6 is next edited**.
 - [ ] **Four silent-fallback sites** (E7 ×2, Q2 v3, X3 controls) — provenance-only; fix when those files are next touched.
 - [x] ~~Two FROZEN SNAPSHOT manifest entries appear path/hash inconsistent~~ — **WITHDRAWN (my error)**: resolved by the FULL recorded path, both entries resolve and every hash matches. All 83 entries verified clean; the apparent mismatch was a basename collision in my own sweep.
@@ -124,6 +126,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D109 | 2026-09-15 | D109: dispatch pre-staging (higher-k per-pair rows | X1, X12_k5 |
 | D108 | 2026-09-15 | D108: re-review attempted on owner instruction; pl | — |
 | D107 | 2026-09-15 | D107: Round 2 submitted and active — the four reje | — |
 | D106 | 2026-09-15 | D106: W9 cluster bootstrap flips the scale-matched | — |
@@ -133,5 +136,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D102 | 2026-09-15 | D102: bootstrap must resample services, not pairs  | — |
 | D101 | 2026-09-15 | D101: Round 1 review verdict reject (resubmit-wort | — |
 | D100 | 2026-09-15 | D100: Round 1 review action matrix — two systemic  | X11, X13 |
-| D099 | 2026-09-15 | D099: C3's control citation pointed at the BIC rou | X3 |
 
