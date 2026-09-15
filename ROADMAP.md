@@ -91,7 +91,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 - [ ] **Paper edits are FROZEN** until that report lands; any change now would invalidate the submitted version.
 - [ ] **x6 input-path resolver** — standing: give x6's four hardcoded inputs the flat-first resolver **when x6 is next edited**.
 - [ ] **Four silent-fallback sites** (E7 ×2, Q2 v3, X3 controls) — provenance-only; fix when those files are next touched.
-- [ ] Two FROZEN SNAPSHOT manifest entries carry an audit snapshot's hash while their path points at the live runner (path/hash inconsistent by design) — leave unless the runner changes again.
+- [x] ~~Two FROZEN SNAPSHOT manifest entries appear path/hash inconsistent~~ — **WITHDRAWN (my error)**: resolved by the FULL recorded path, both entries resolve and every hash matches. All 83 entries verified clean; the apparent mismatch was a basename collision in my own sweep.
 
 ## BLOCKED_ON
 
