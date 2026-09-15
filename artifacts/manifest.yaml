@@ -1578,7 +1578,8 @@
   skill: ''
   created_at: '2026-09-14T20:36:30.932589+00:00'
   superseded_by: art_20260914_0c143b
-  retirement_note: Superseded by the canonical x13_missing_service_mass.json (D089/D070 consolidation).
+  retirement_note: Superseded by the canonical x13_missing_service_mass.json (D089/D070
+    consolidation).
   tags:
   - x13
   - missing-mass
@@ -1971,3 +1972,73 @@
   - bootstrap-ci
   - pair-bootstrap
   - companion
+- id: art_20260915_883c41
+  name: q1_absolute_counts_k15
+  type: data
+  description: Canonical non-dot k=15 higher-k absolute count rows assembled from
+    hidden rung files; tv_masked renamed to tv_k15_masked.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts_k15.json
+  content_sha256: e76eec7d0768e0e778c0d9dc693077edf2a8e45f551d9617ca33ebaa1402c2ce
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-15T18:08:35.708164+00:00'
+  tags:
+  - r1-w10
+  - cluster-bootstrap
+  - k-ladder
+  - pre-stage
+- id: art_20260915_4ddfb9
+  name: q1_absolute_counts_k30
+  type: data
+  description: Canonical non-dot k=30 higher-k absolute count rows assembled from
+    hidden rung files; tv_masked renamed to tv_k30_masked.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/q1_absolute_counts_k30.json
+  content_sha256: 1d8da5966f9be5ae87e6438c54af7f37f7f3a9beadee54a9232eb6bb38053006
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-15T18:08:42.159535+00:00'
+  tags:
+  - r1-w10
+  - cluster-bootstrap
+  - k-ladder
+  - pre-stage
+- id: art_20260915_92d4a1
+  name: ci_k_ladder
+  type: data
+  description: Cluster-bootstrap median-TV ladder CIs and paired increments for k=10/15/30,
+    with degree checks and paper-agreement notes.
+  path: null
+  content_sha256: 61d1ceca5e82e4c9fafb0b65cb2cc87c0c7804e9b5e819e7453f27d6921f9f97
+  superseded_by: art_20260915_70f9a1
+  retirement_note: Earlier run of the same ladder with a different RNG handling; superseded by the single-RNG run art_20260915_70f9a1. Point estimates identical; only CI endpoints differed.
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-15T18:08:45.460530+00:00'
+  tags:
+  - r1-w10
+  - cluster-bootstrap
+  - k-ladder
+  - pre-stage
+- id: art_20260915_70f9a1
+  name: ci_k_ladder
+  type: data
+  description: Final single-RNG cluster-bootstrap median-TV ladder CIs and paired
+    increments for k=10/15/30, with degree checks and paper-agreement notes.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/ci_k_ladder.json
+  content_sha256: e5944c5ccae5650f6185c9465c14fbcc6855e7f191177fdcf6b3f339bf7c97af
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-15T18:11:28.179509+00:00'
+  tags:
+  - r1-w10
+  - cluster-bootstrap
+  - k-ladder
+  - pre-stage
