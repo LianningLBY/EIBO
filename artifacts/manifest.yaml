@@ -1571,16 +1571,14 @@
   type: data
   description: 'X13 Good-Turing missing-service mass (D089: bootstrap CI deleted from
     runner and artifact)'
-  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X13/data/x13_missing_service_mass_9b47f8.json
+  path: null
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: X13
   skill: ''
   created_at: '2026-09-14T20:36:30.932589+00:00'
   superseded_by: art_20260914_0c143b
-  retirement_note: Retired under D070 because the versioned clean copy was consolidated
-    into the canonical source artifact and re-registered as art_20260914_0c143b; this
-    duplicate entry must not be cited.
+  retirement_note: Superseded by the canonical x13_missing_service_mass.json (D089/D070 consolidation).
   tags:
   - x13
   - missing-mass
@@ -1778,7 +1776,7 @@
   - paper
   - results
   - statistical
-  content_sha256: ee1cc738afbd3bf42fb43beacbc29793b6b478f08baf6c2e2a6517f5044f667b
+  content_sha256: 7654b8f43cfc25c7dda07da5aa7af8c4cd7164ed349ad327a7a3048161f0e632
 - id: art_20260915_9f6690
   name: fig3_estimator_control
   type: chart
@@ -1798,7 +1796,7 @@
   - paper
   - results
   - statistical
-  content_sha256: 8b63afea2aaa9fe75fb1b0d8022f2b956e97f3dc330c0e63ad3ec959c842f800
+  content_sha256: 661f43794804ab0f47f244dbc568253c72f89057c51782b2e0a73da36c2ffc37
 - id: art_20260915_f2b327
   name: fig4_cross_corpus
   type: chart
@@ -1819,7 +1817,7 @@
   - discussion
   - statistical
   - BC2
-  content_sha256: a246929a7c43409dcb497421406bc1ed5b489440703cebdefeffc2ec040b55db
+  content_sha256: 779018eef5997265858387f8146082d07bead6f15225055b462eaf72ebab6a5b
 - id: art_20260915_1f7aa3
   name: fig5_channel_sensitivity
   type: chart
@@ -1840,4 +1838,136 @@
   - discussion
   - statistical
   - BC1
-  content_sha256: b2dc9aabe9dd1e5e13e92977ae120358d5795816e25de2656ec350459fdd115c
+  content_sha256: 2e6c94a5273aaa3fb8649f91a8b6fb7a627f3ef9619731c2a40b19f6b2120ad1
+- id: art_20260915_27333a
+  name: ci_main_table
+  type: data
+  description: R1-W10 nonparametric percentile bootstrap CIs over the existing k=5,
+    M=1 service-pair rows, including median TV, joint-gate, upper-side, and lower-side
+    intervals; unavailable M>1 median-TV intervals are documented.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/ci_main_table.json
+  content_sha256: 2d87922190e21f06fbd7e47ebe62f22f494c45252d84578c3ff9f888176b2c86
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-15T06:29:33.960872+00:00'
+  tags:
+  - r1-w10
+  - bootstrap-ci
+- id: art_20260915_75134b
+  name: ci_cross_corpus
+  type: data
+  description: R1-W9 seeded nonparametric bootstrap percentile 95% CIs for lower-side
+    fractions and stratum-matched cross-corpus gaps.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/ci_cross_corpus.json
+  content_sha256: 854c718e4f512e029145c04d874d57465fbe6731cace90721991037d1b8e17a1
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-15T06:39:16.291779+00:00'
+  tags:
+  - r1-w9
+  - bootstrap-ci
+- id: art_20260915_1ea3c0
+  name: ci_main_table_cluster_bootstrap
+  type: data
+  description: Main-table bootstrap comparison retaining pair bootstrap results and
+    adding the requested 2,000-replicate service-cluster bootstrap for k=5, M=1, with
+    guards and CI width ratios.
+  path: null
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-15T06:46:44.916720+00:00'
+  tags:
+  - bootstrap
+  - cluster-bootstrap
+  - main-table
+  - confidence-interval
+  retirement_note: Consolidated into ci_main_table.json (canonical cluster artifact).
+- id: art_20260915_d59fd8
+  name: ci_main_table_1ea3c0_construction_documented
+  type: data
+  description: R1-W10 cluster bootstrap CIs with explicit set-dedup construction documented
+    (documentation-only edit; all numerics unchanged from art_20260915_1ea3c0)
+  path: null
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-15T07:01:27.571463+00:00'
+  tags:
+  - r1-w10
+  - bootstrap-ci
+  - cluster-bootstrap
+  - construction-documented
+  retirement_note: Superseded by ci_main_table.json.
+- id: art_20260915_35ea13
+  name: R1-W9 cluster-bootstrap cross-corpus confidence intervals
+  type: data
+  description: Cluster bootstrap over services for primary and QUIC22 cross-corpus
+    lower-side fractions and stratum-matched upper-side gaps. Includes complete-graph
+    degree checks, 95% percentile CIs, pair-vs-cluster width ratios, zero-span flags,
+    and runner hash.
+  path: null
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: experiment-analysis
+  created_at: '2026-09-15T07:02:00.322891+00:00'
+  tags:
+  - R1-W9
+  - cluster-bootstrap
+  - cross-corpus
+  - confidence-interval
+  - services
+  retirement_note: Consolidated into ci_cross_corpus.json.
+- id: art_20260915_89f97d
+  name: ci_main_table_27333a_d59fd8
+  type: data
+  description: Per-M cluster-bootstrap percentile confidence intervals for k=5 median
+    TV ladder assembled from q1_absolute_counts.json.
+  path: null
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-15T07:09:14.174751+00:00'
+  tags:
+  - r1-w10
+  - w14
+  - cluster-bootstrap
+  - m-ladder
+  retirement_note: Superseded by ci_main_table.json.
+- id: art_20260915_240634
+  name: ci_cross_corpus_pairbootstrap
+  type: data
+  description: R1-W9 cross-corpus PAIR bootstrap (naive, treats 990/3321 dependent
+    pairs as iid) — retained as the companion to the canonical cluster bootstrap in
+    ci_cross_corpus.json. Pair width understates the cluster width by 1.22x (primary)
+    / 1.59x (QUIC22).
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/ci_cross_corpus_pairbootstrap.json
+  content_sha256: 075ae0a7254acb9bc1b150c1cd13322c2990bea6a8a2f4b8212832b5b180800b
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-15T07:11:10.355604+00:00'
+  tags:
+  - r1-w9
+  - bootstrap-ci
+  - pair-bootstrap
+  - companion
+- id: art_20260915_ci_main_table_pairbootstrap
+  name: ci_main_table_pairbootstrap
+  type: data
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/ci_main_table_pairbootstrap.json
+  content_sha256: bcac3f0646b6cc897fb52c38d0a50f9a02fa2c58a8166617a631099fd0c95072
+  tags:
+  - r1-w10
+  - bootstrap-ci
+  - pair-bootstrap
+  - companion
