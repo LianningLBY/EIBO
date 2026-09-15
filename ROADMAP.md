@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 15:35 UTC | Higher-k ladder verified + saturation found (D111/D112); all three "resolves more" claims are k=5-scoped so no edit while frozen.
+> Last updated: 2026-09-15 15:55 UTC | Higher-k ladder verified and staged; manifest clean (87 entries, 0 unresolved); review gateway still stalled.
 
 ## Core direction
 
@@ -104,7 +104,8 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 - [ ] **Await the Round 2 report** — on arrival run the holistic pass then the per-comment Action Matrix (`review-report-action`); no blanket acknowledgement.
 - [ ] **Paper edits are FROZEN** until that report lands; any change now would invalidate the submitted version.
 - [x] **DONE (D111): higher-k median-TV ladder** — verified monotone and strongly concave in k (increments → 0 at k=30). k=15/k=30 rows promoted to canonical names; medians 0.9127/0.9979 reproduce exactly. **NEW numbers, not printed in the paper** — supporting evidence for C2, not a correction. Limitation stated in the artifact: hidden rows carry `tv_masked` only, so this does NOT enable a higher-k containment panel.
-- [ ] **IN FLIGHT: two manifest defects from that work** — (a) none of the 4 new entries carries a `content_sha256`; (b) `ci_k_ladder` is registered TWICE from two different runner revisions, differing only in bootstrap resampling while all point estimates are identical — needs one canonical file + retired sibling + hashes.
+- [x] **DONE (D113): both manifest defects closed** — hashes backfilled on all four new entries; `ci_k_ladder` consolidated to a single live entry (the single-RNG run, which fixes per-replicate re-seeding); byte-identical residual copy removed. Manifest verified: **87 entries, 0 unresolved, 0 hash mismatches**. (Diagnostic note: manifest paths are rooted at `/efs/workspace`, not the project dir — probing from the project root yields dozens of false "missing", a probe defect not a content defect.)
+- [x] ~~**IN FLIGHT: two manifest defects from that work**~~ — (a) none of the 4 new entries carries a `content_sha256`; (b) `ci_k_ladder` is registered TWICE from two different runner revisions, differing only in bootstrap resampling while all point estimates are identical — needs one canonical file + retired sibling + hashes.
 - [x] ~~**IN FLIGHT (D109): higher-k per-pair rows**~~ — re-run the masked-count pass at k=10/15/30 and persist per-pair rows in the `q1_absolute_counts.json` shape, then the same service-cluster CIs + paired increments. Absence of these rows is why higher-k uncertainty is "not estimable" today. Cost estimate required before any run.
 - [ ] **IN FLIGHT (D109): higher-k detector panel scoping** — how many informative pairs exist at each higher k (k=15/k=30 had an EMPTY stratum at k=5, so a panel may be impossible), which detectors need retraining, cheapest defensible cost. Scoping only.
 - [ ] **x6 input-path resolver** — standing: give x6's four hardcoded inputs the flat-first resolver **when x6 is next edited**.
@@ -128,6 +129,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D113 | 2026-09-15 | D113: higher-k ladder manifest defects closed — ha | — |
 | D112 | 2026-09-15 | D112: higher-k ladder saturates (median 1.0 by M=4 | — |
 | D111 | 2026-09-15 | D111: higher-k median-TV ladder verified (monotone | X1, X12_k5 |
 | D110 | 2026-09-15 | D110: Item 2's cited source surface was wrong (no  | — |
@@ -137,5 +139,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D106 | 2026-09-15 | D106: W9 cluster bootstrap flips the scale-matched | — |
 | D105 | 2026-09-15 | D105: retract my "lower side is finite-sample" ins | — |
 | D104 | 2026-09-15 | D104: W10 cluster bootstrap confirmed correct — re | — |
-| D103 | 2026-09-15 | D103: cross-corpus gap is non-monotone (correct th | — |
 
