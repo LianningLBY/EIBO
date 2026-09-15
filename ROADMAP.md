@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 05:55 UTC | Update reason: Paper drafted and in formal review Round 1; check off the completed build/figure work, add the review-response task
+> Last updated: 2026-09-15 08:55 UTC | Round 2 submitted and active.
 
 ## Core direction
 
@@ -15,8 +15,9 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 ## Current progress
 
 - **Research phase COMPLETE.** All three claims fully backed; evidentiary coverage 100%. (The coverage tool labels `conclusion: negative` as "failed", so it under-reports C1/C3 — the negatives ARE the evidence; noted, not "fixed" in the tool.)
-- **Paper DRAFTED AND IN FORMAL REVIEW — Round 1 active** (`review_id ebf482e0`), 3 reviewers dispatched. Deliverables: `docs/paper/main.tex` + `main.pdf`, 16 pages with the body ending mid-page-12 (inside the 13-page limit), appendices carry the mandatory Open Science and ethics sections. Compiled against the genuine USENIX Security 2027 kit.
-- **Pre-submission verification (all done by me, not relayed):** 3 pdflatex passes + bibtex exit 0, 44 bibitems, 0 undefined citations, 0 overfull boxes; **visual review 16/16 pages passed** (receipt bound to sha256 `abc000bd`); headline numbers independently re-derived from artifacts — C1 336/990, X11 523/3321, chain-rule per-position truth `0.3389191441548814`; references 44 entries all cited, zero dangling, both bib copies byte-identical.
+- **Paper in FORMAL REVIEW — Round 2 active** (`review_id a1a8ea1e`). Round 1 returned reject (resubmit-worthy) with 23 items; all are fixed and recorded resolved. Deliverables: `docs/paper/main.tex` + `main.pdf`, **18 pages with the body on 1–13 and References from page 14** (13-page limit satisfied — measured from RENDERED pages, not the compile log, which cannot show where the body ends).
+- **Round-2 pre-submission verification (all done by me, not relayed):** 3 pdflatex passes + bibtex exit 0, 53 bibitems, 0 undefined, 0 overfull; **visual review 18/18 pages passed** (receipt bound to sha256 `5edd8928`); headline numbers independently re-derived — C1 336/990 with cluster CI [26.5%, 43.1%], X11 523/3321, chain-rule per-position truth `0.3389191441548814`; every page rendered and read.
+- **Two FALSE constraints rejected after checking the official CFP**: there is **no abstract word limit** (so the divisibility clause and detector paragraph were NOT cut), and the **appendices' placement vs references is unspecified** (so the order was NOT changed, which would have re-broken the page limit). Camera-ready ceiling is 20 pages incl. appendices; we are at 18.
 - **Claim boundaries honoured in the prose**: X9_E's identifier finding scoped to `tv_hat` only (D087); X11's joint gate discloses its per-side sample sizes and the **conservative** bias direction (D093); X8's DPI check is a smoke-test, never cited as theorem verification (D091); C3 reframed as a methods/limits finding (D046); novelty stated as a knowledge claim ("to our knowledge"), never "exhaustive search".
 - **Provenance discipline is load-bearing**: manifest `content_sha256` on all live entries; runner self-hash captured at import and recorded *in the artifact*; figures regenerate from manifest-resolved artifacts via committed generators; the flat-vs-nested two-tree layout resolved via `resolve_existing_path` (flat first).
 
@@ -107,6 +108,7 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D107 | 2026-09-15 | D107: Round 2 submitted and active — the four reje | — |
 | D106 | 2026-09-15 | D106: W9 cluster bootstrap flips the scale-matched | — |
 | D105 | 2026-09-15 | D105: retract my "lower side is finite-sample" ins | — |
 | D104 | 2026-09-15 | D104: W10 cluster bootstrap confirmed correct — re | — |
@@ -116,5 +118,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D100 | 2026-09-15 | D100: Round 1 review action matrix — two systemic  | X11, X13 |
 | D099 | 2026-09-15 | D099: C3's control citation pointed at the BIC rou | X3 |
 | D098 | 2026-09-15 | D098: do not reshape registry keys to satisfy a va | X1, X11 |
-| D097 | 2026-09-15 | D097: figures verified (fig3 synthetic data fixed, | X3 |
 
