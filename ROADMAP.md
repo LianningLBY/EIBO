@@ -8,7 +8,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 ## The three claims
 
-- **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). Supported in **two independent settings** (primary corpus + X11 cross-corpus: 523/3321 = 15.75%, upper 534 / lower 3310). DONE.
+- **C1** — a two-sided bracket is computable on real encrypted traffic (**336/990 = 33.9%** of pairs at k=5/M=1; upper side binds). **95% cluster-bootstrap CI [26.5%, 43.1%]** — the pair bootstrap understated width by 2.84x, so quote the cluster interval. Supported in **two independent settings** (primary corpus + X11 cross-corpus: 523/3321 = 15.75%, upper 534 / lower 3310). DONE.
 - **C2** — the certificate horizon is short; the coarsest channel is the only viable rung. DONE, incl. the divisibility lower bound (X6) at large k where the plug-in certificate is lost.
 - **C3** — methods/limits: the standard plug-in chain-rule estimator **cannot adjudicate** the dependent-prefix growth question; robust to two independent repairs (X3_A, X3_B). DONE.
 
@@ -73,12 +73,14 @@ FR-5 (W5) scope the binding claim to M=1 and fix the column citation · FR-6/7 (
 ### Uncertainty — CORRECTED (D102)
 The first bootstrap resampled **pairs**, but the 990 pairs are the **complete graph C(45,2)**: 45 services, every service in exactly 44 pairs (verified from the artifact). Pairs sharing a service are correlated, so the pair bootstrap understates width. **Cluster bootstrap over services is the defensible construction.** My own replication:
 
-| quantity | pair bootstrap | cluster bootstrap | ratio |
+| quantity | pair bootstrap | cluster bootstrap (authoritative) | ratio |
 |---|---|---|---|
-| joint gate 33.9% | [0.3101, 0.3677] | **[0.2635, 0.4365]** | 3.00x |
-| upper 34.3% | [0.3152, 0.3727] | [0.2678, 0.4409] | 3.01x |
-| lower 99.6% | [0.9919, 0.9990] | [0.9915, 1.0000] | 1.21x |
-| median tv (M=1) | [0.5600, 0.6042] | [0.5158, 0.6459] | 2.94x |
+| joint gate 33.9% | [0.3091, 0.3677] | **[0.2645, 0.4310]** | 2.84x |
+| upper 34.3% | [0.3141, 0.3727] | [0.2685, 0.4338] | 2.82x |
+| lower 99.6% | [0.9919, 0.9990] | [0.9914, 1.0000] | 1.22x |
+| median tv (M=1) | [0.5601, 0.6064] | [0.5205, 0.6435] | 2.65x |
+
+**Construction (pinned, D104):** draw the 45 services with replacement, **deduplicate to a set**, rebuild the complete graph on the set. Verified by a 50,000-trial simulation reproducing the artifact's replicate pair-count distribution exactly (median 406, p5 300, p95 496). My earlier replication endpoints (3.00x) were from a faulty script and are retracted. Sanity: the naive sqrt(990/45)=4.7x expectation exceeds the observed 2.8x, consistent with only part of the per-pair TV variance being service-level.
 
 **Report the pair AND cluster intervals side by side with the ratio — the comparison is itself the evidence for W10.** Median-TV intervals are **not estimable for M in {2,4,8,16}** (no per-pair rows persisted; X1 stores aggregates) — a future-me must NOT present those without first re-running those cells; cost estimate requested before authorizing.
 
@@ -105,6 +107,8 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D104 | 2026-09-15 | D104: W10 cluster bootstrap confirmed correct — re | — |
+| D103 | 2026-09-15 | D103: cross-corpus gap is non-monotone (correct th | — |
 | D102 | 2026-09-15 | D102: bootstrap must resample services, not pairs  | — |
 | D101 | 2026-09-15 | D101: Round 1 review verdict reject (resubmit-wort | — |
 | D100 | 2026-09-15 | D100: Round 1 review action matrix — two systemic  | X11, X13 |
@@ -113,6 +117,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D097 | 2026-09-15 | D097: figures verified (fig3 synthetic data fixed, | X3 |
 | D096 | 2026-09-15 | D096: do not force X9_C to terminal; accept the st | X9_C |
 | D095 | 2026-09-14 | D095: the 5 unlinked experiments split into MVP-er | X3_A, X3_B, E3, E7, E10 |
-| D094 | 2026-09-14 | D094: artifact chain-of-record is local+manifest+r | X12_k5 |
-| D093 | 2026-09-14 | D093: X11 joint gate mixes two sample sizes (conse | X11 |
 
