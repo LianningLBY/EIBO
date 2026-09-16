@@ -2101,12 +2101,20 @@
   - corrected-constant
   - 342-pair-stratum
   content_sha256: 277f3d1b2006de5d52ef3b7a43e8bc8cfad00e2c59ac58a78dd3af1ac57d3504
+  not_citable: true
+  not_citable_reason: NOT CITABLE for any published number. Corrected-342 aggregation
+    under the REJECTED constant sqrt(2 ln(1/alpha_law)) = 2.7162. The paper's frozen
+    convention is the ledger constant 2.9604 with 340 upper / 336 joint (D124/D125).
+    Retained as an archive of the rejected convention and for the known-truth reproduction
+    gate it contains.
 - id: art_20260916_afbae4
   name: X12 k=5 corrected 342-pair containment aggregation
   type: data
-  description: Final re-aggregation of X12 k=5 containment over the corrected 342-pair
+  description: 'Final re-aggregation of X12 k=5 containment over the corrected 342-pair
     upper stratum, including original 340-pair reproduction, corrected p-values, row-level
-    floor-rule verification, and the two newly included pairs.
+    floor-rule verification, and the two newly included pairs. NOTE: this artifact
+    implements the unsplit 2.7162 convention and MUST NOT source a published number;
+    the reproduction gate inside it is the valuable part and is preserved.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X12_k5/data/x12_k5_containment_corrected_342_afbae4.json
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
@@ -2120,3 +2128,9 @@
   - 342-pair-stratum
   - final
   content_sha256: 6675d7c2e64e2c0d9e06ac530c3099e13f0ea11e428c1d26efda44759f880ce6
+  not_citable: true
+  not_citable_reason: NOT CITABLE for any published number. Corrected-342 aggregation
+    under the REJECTED constant sqrt(2 ln(1/alpha_law)) = 2.7162. The paper's frozen
+    convention is the ledger constant 2.9604 with 340 upper / 336 joint (D124/D125).
+    Retained as an archive of the rejected convention and for the known-truth reproduction
+    gate it contains.

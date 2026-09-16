@@ -121,15 +121,40 @@ class TestUpperRadius(unittest.TestCase):
 
         If the upper side silently reverts to per-law alpha while the lower
         keeps alpha/2, one gate claims joint 0.90 and 0.95 simultaneously.
+        The unsplit alpha=0.05 call yields the SMALLER radius r=0.004239862, i.e.
+        the narrower (less conservative) interval, which is the weaker guarantee;
+        alpha/2 yields the larger radius r=0.004363524 and the stronger one.
+        Default must be the alpha/2 convention, matching the lower side.
         """
         per_law_alpha = ev.radius_sum(1, 3_900_000, 3_900_000, alpha_per_law=ev.ALPHA)
         per_law_half = ev.radius_sum(1, 3_900_000, 3_900_000, alpha_per_law=ev.ALPHA_PER_LAW)
-        self.assertLess(per_law_alpha, per_law_half, "joint 0.90 must be the tighter radius")
+        self.assertLess(
+            per_law_alpha, per_law_half,
+            "the unsplit alpha=0.05 call gives the SMALLER radius, i.e. the "
+            "narrower interval and the WEAKER guarantee (joint 0.90); alpha/2 "
+            "gives the larger radius and the stronger guarantee (joint 0.95). "
+            "Default must be alpha/2.",
+        )
         # default must be the alpha/2 convention, matching the lower side
         self.assertAlmostEqual(
             ev.radius_sum(1, 3_900_000, 3_900_000), per_law_half, places=12
         )
         self.assertAlmostEqual(ev.ALPHA_PER_LAW, ev.ALPHA / 2, places=12)
+
+    def test_guard_rejects_the_unsplit_constant(self):
+        """The guard must REJECT the unsplit constant, not merely accept the split one."""
+        import math
+        C_split = math.sqrt(2 * math.log(2 / ev.ALPHA_PER_LAW))
+        C_unsplit = math.sqrt(2 * math.log(1 / ev.ALPHA_PER_LAW))
+        self.assertNotAlmostEqual(C_unsplit, C_split, places=6)
+        self.assertLess(C_unsplit, C_split)  # the unsplit constant is weaker
+        # the radius computed with the unsplit constant must NOT equal the pinned radius
+        n = 3_900_000
+        pinned = ev.radius_sum(1, n, n, alpha_per_law=ev.ALPHA_PER_LAW)
+        # unsplit: per-law alpha = ALPHA (0.05), which is the wrong convention here
+        wrong = ev.radius_sum(1, n, n, alpha_per_law=ev.ALPHA)
+        self.assertNotAlmostEqual(pinned, wrong, places=6,
+                                  msg="the unsplit convention must produce a different radius")
 
     def test_under_split_guard(self):
         """Reject the unsplit alpha=0.05 upper-side convention."""
@@ -147,6 +172,20 @@ class TestUpperRadius(unittest.TestCase):
             "the unsplit alpha=0.05 form must be rejected, not silently accepted",
         )
         self.assertNotAlmostEqual(expected, unsplit, places=12)
+
+    def test_constant_is_pinned_to_its_joint_level(self):
+        """A split slip must fail here, not be noticed by a person."""
+        ALPHA, ALPHA_LAW = ev.ALPHA, ev.ALPHA_PER_LAW
+        C = math.sqrt(2 * math.log(2 / ALPHA_LAW))
+        per_law_tail = math.exp(-C * C / 2)
+        self.assertAlmostEqual(per_law_tail, ALPHA_LAW / 2, places=12)
+        self.assertAlmostEqual(per_law_tail, 0.0125, places=12)
+        joint = 1 - 2 * per_law_tail
+        self.assertAlmostEqual(joint, 1 - ALPHA_LAW, places=12)
+        self.assertGreater(joint, 1 - 2 * ALPHA_LAW)
+        unsplit = math.sqrt(2 * math.log(1 / ALPHA_LAW))
+        self.assertLess(unsplit, C, "the unsplit constant is weaker and must be rejected")
+        self.assertNotAlmostEqual(unsplit, C, places=6)
 
 
 class TestRadiusIsKPerRow(unittest.TestCase):

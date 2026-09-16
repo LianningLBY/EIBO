@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
-"""Re-aggregate X12 k=5 containment counts under the corrected upper constant."""
+"""Re-aggregate X12 k=5 containment counts under the REJECTED upper constant.
+
+NOT CITABLE for any published number. This runner implements the unsplit
+sqrt(2 ln(1/alpha_law)) = 2.7162 convention, which the project REJECTED.
+The frozen convention is sqrt(2 ln(2/alpha_law)) = 2.9604, giving 340 upper
+/ 336 joint at k=5, M=1 (D124/D125). Retained as an archive of the rejected
+convention and for the known-truth reproduction gate it contains.
+
+This runner implements the unsplit 2.7162 convention and MUST NOT source a
+published number; the reproduction gate inside it is the valuable part and is
+preserved.
+"""
 
 from __future__ import annotations
 

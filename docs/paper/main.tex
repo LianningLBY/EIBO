@@ -116,7 +116,7 @@ broken across lines where needed so they do not stretch the spacing:
 \textbf{What ``pre-registered'' means here.}
 Four commitments, each fixed before the measurement it governs: the coarsest
 channel ($k{=}5$, $M{=}1$) before the gate was measured; the informative-pair
-criterion ($\epshi < 0.5$, the 342-pair stratum) before the detector validation;
+criterion ($\epshi < 0.5$, the 340-pair stratum) before the detector validation;
 the one-sided binomial test with its null rate of $0.05$ and its nine cells
 before that test ran; and the split policy (flow- and time-disjoint,
 packet-level splitting prohibited) before any evaluation. These are recorded in
@@ -138,7 +138,7 @@ measurement. That ordering, not the word itself, is the claim.
   flag, and the per-side flow counts. This is the artifact behind
   \Cref{tab:bracket} and \Cref{tab:boundary}.
   \item[Detector-validation payload.] The per-pair join for the nine-cell
-  containment test, the stratum assignment (342 informative, 538 secondary,
+  containment test, the stratum assignment (340 informative, 540 secondary,
   110 excluded), the pre-registered one-sided binomial results in
   \Cref{tab:detectors}, and the trained-detector configurations.
   \item[Estimator study artifacts.] The chain-rule control on a known-truth
@@ -171,8 +171,8 @@ preprocessing applied to produce the flow-level tables used here.
 The headline result rests on a 990-row per-pair ledger at $k{=}5$, $M{=}1$,
 carrying for each pair the upper-side bound, the lower-side bound at full $n$,
 the per-side flow counts, and the saturation flag. Recomputing the upper-side
-condition row-by-row from that ledger reproduces the 342-pair count and the
-338-pair joint gate, and the four pairs that separate them are listed in
+condition row-by-row from that ledger reproduces the 340-pair count and the
+336-pair joint gate, and the four pairs that separate them are listed in
 \Cref{tab:boundary}. We report them because they are the only rows whose verdict
 depends on the lower side at this rung; every other certified pair clears both
 conditions by a margin.
@@ -195,7 +195,7 @@ saturates" means quantitatively, and no bracket has negative width.}
  & min & p25 & median & p75 & max \\
 \midrule
 $\epslo$ & 0.0151 & 0.3411 & 0.5548 & 0.6990 & 0.9729 \\
-width $\epshi-\epslo$ & 0.0137 & 0.0420 & 0.0771 & 0.1097 & 0.2173 \\
+width $\epshi-\epslo$ & 0.0139 & 0.0428 & 0.0784 & 0.1119 & 0.2214 \\
 \bottomrule
 \end{tabular}
 \end{table}

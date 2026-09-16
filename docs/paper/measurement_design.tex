@@ -136,20 +136,14 @@ differences, and McDiarmid's inequality gives
   + \sqrt{\tfrac{2\ln(2/\alpha')}{n}}
   \label{eq:mcdiarmid}
 \end{equation}
-with probability at least $1-\alpha'$. The factor of $2$ inside the logarithm
-comes from bounding the \emph{absolute} deviation rather than one tail: the
-implementation applies the two-sided form
-$t = \sqrt{2\ln(2/\alpha')/n}$, which is what the released code computes and
-therefore what the reported numbers carry. The one-sided variant would admit the
-smaller $t = \sqrt{2\ln(1/\alpha')/n}$ and a correspondingly tighter radius; we
-use the two-sided constant throughout and state the bound at the level it
-actually certifies. The union over the two laws is carried
-separately, by evaluating each law at the per-law level $\alaw$ and requiring
-both to hold simultaneously. With $\alaw = 0.025$ each law holds with
-probability at least $0.975$, so by the union bound the upper side is a joint
-$0.95$ statement. This level belongs to the upper side; the lower side's level
-is set by its own construction in \Cref{sec:design/lower} and is not $0.95$ by
-this argument. $\square$
+with probability at least $1-\alpha'$. The factor of $2$ is the two-sided
+deviation factor of the bounded-differences bound; the union over the two laws is
+carried by the per-law level $\alaw = \alpha/2 = 0.025$, which fixes the
+constant through $2e^{-C^{2}/2} = \alaw$. Each law then holds with probability
+$1 - e^{-C^{2}/2} = 0.9875$, and requiring both to hold simultaneously makes the
+upper side a joint $1 - \alaw = 0.975$ statement. This level belongs to the upper
+side; the lower side's level is set by its own construction in
+\Cref{sec:design/lower} and is not inherited from this argument. $\square$
 
 Two remarks on what the lemma does and does not require. It is an $\ell_1$
 deviation bound, not a sup-norm bound, and we do not attribute it to

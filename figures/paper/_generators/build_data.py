@@ -97,20 +97,25 @@ def main():
 
     # The joint gate exists at M=1 only and is carried separately so the
     # annotation can state it without implying a monotone joint series.
-    jg_path = os.path.join(ART, "X12_k5/..")
-    e10 = json.load(open(os.path.join(
-        ART, "_project/data/q1_lower_side_full_n.json"))) \
-        if os.path.exists(os.path.join(
-            ART, "_project/data/q1_lower_side_full_n.json")) else {}
+    ledger_path = os.path.join(ART, "_project/data/q1_lower_side_full_n.json")
+    e10 = json.load(open(ledger_path)) if os.path.exists(ledger_path) else {}
+    # Read the ledger's own joint-gate block rather than hardcoding, so the
+    # annotation cannot drift from the artifact that carries the constant.
+    jg = (e10.get("joint_gate") or {}) if isinstance(e10, dict) else {}
+    upper_count = int(jg.get("upper_condition_row_recomputation_pass_count", 340))
+    gate_count = int(jg.get("gate_count", 336))
     with open(os.path.join(OUT, "fig2_joint_gate_m1.json"), "w") as fh:
-        json.dump({"M": 1, "k": 5, "upper_count": 342, "upper_fraction": 0.3455,
-                   "joint_gate_count": 338, "joint_gate_fraction": 0.3414141414,
-                   "source": "recomputed from q1_lower_side_full_n.json under the "
-                             "corrected constant sqrt(2 ln(1/alpha_law)) = 2.7162"},
+        json.dump({"M": 1, "k": 5,
+                   "upper_count": upper_count,
+                   "upper_fraction": round(upper_count / 990, 10),
+                   "joint_gate_count": gate_count,
+                   "joint_gate_fraction": round(gate_count / 990, 10),
+                   "source": "q1_lower_side_full_n.json joint_gate block "
+                             "(constant sqrt(2 ln(2/alpha_law)) = 2.9604)"},
                   fh, indent=2)
     sources["fig2_joint_gate_m1.json"] = {
-        "file": "recomputed: 338 joint / 342 upper under C=2.7162",
-        "sha256": sha256(x1_path),
+        "file": ledger_path,
+        "sha256": sha256(ledger_path) if os.path.exists(ledger_path) else "",
     }
 
     grid = x4["certifiability_crossover"]["grid"]
@@ -180,23 +185,16 @@ def main():
     # ---------------- fig4 ---------------------------------------------
     x11_path = os.path.join(ART, "X11/data/x11_full_bracket.json")
     x11 = json.load(open(x11_path))
-    # The X11 artifact was assembled under the ORIGINAL radius constant; the
-    # paper's headline now uses the corrected one. The primary corpus's
-    # upper-side count and joint gate are therefore taken from the local
-    # recomputation (342 / 338), not from the artifact's stale 340 / 336.
-    CORRECTED_PRIMARY = {"upper_fraction": 342 / 990, "gate_fraction": 338 / 990}
+    # X11 is the artifact of record for the cross-corpus comparison and was
+    # built at the frozen constant; read it directly.
     rows4 = []
     for c in x11["n_stratified_comparison"]:
         rows4.append({
             "threshold": c["threshold"],
             "primary_pairs": c["primary"]["pair_count"],
-            "primary_upper": (CORRECTED_PRIMARY["upper_fraction"]
-                              if c["threshold"] == "all"
-                              else c["primary"]["upper_fraction"]),
+            "primary_upper": c["primary"]["upper_fraction"],
             "primary_lower": c["primary"]["lower_fraction"],
-            "primary_gate": (CORRECTED_PRIMARY["gate_fraction"]
-                             if c["threshold"] == "all"
-                             else c["primary"]["joint_gate_fraction"]),
+            "primary_gate": c["primary"]["joint_gate_fraction"],
             "quic22_pairs": c["quic22"]["pair_count"],
             "quic22_upper": c["quic22"]["upper_fraction"],
             "quic22_lower": c["quic22"]["lower_fraction"],
