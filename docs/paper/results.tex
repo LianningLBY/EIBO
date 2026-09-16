@@ -24,6 +24,17 @@ unmasked symbol counts are identical at every rung. A bracket over a channel tha
 silently includes padding or address structure would be a bracket over a
 different channel than the one declared.
 
+The headline $336/990$ is computed under the full-$n$ convention: every eligible
+flow contributes, with no per-service cap. Both corpora were measured under both
+conventions; the primary corpus's capped variant gives $335/990$ rather than
+$336/990$, with pair $(21,23)$ the sole difference
+($\epsilon_{\rm lo}^{\rm capped} = 0.0498$ falls below the $0.05$ gate while
+$\epsilon_{\rm lo}^{\rm full\text{-}n} = 0.0588$ clears it). The
+$20{,}000$-flow cap binds on 814 of the 990 primary-corpus pairs; of those,
+capping raises $\epsilon_{\rm lo}$ on 38 (a 4.7\% reversal rate within the
+cap-bound subset, 3.8\% of all pairs). The aggregate direction holds: 776 pairs
+see $\epsilon_{\rm lo}$ decrease under capping against 38 where it increases.
+
 \subsection{The two-sided bracket}
 \label{sec:results/bracket}
 
@@ -62,7 +73,8 @@ from. The lower side's interval is tight by comparison, which is the same
 observation the gate makes, that most pairs are separable here and the
 certificate is limited by the upper side.
 
-Saturation is zero at this rung: no pair reaches $\tv \ge 0.99$. The informative
+Saturation is zero at this rung: no pair's plug-in estimate $\widehat{tv}$
+reaches $0.99$. The informative
 fraction is therefore the whole corpus, and the certificate is not being
 purchased by discarding saturated pairs. \Cref{tab:endpoints} in the appendix
 gives both endpoints' quantiles across all 990 pairs.
@@ -88,7 +100,7 @@ treat either as a check on the other.
 \begin{table*}[t]
 \centering
 \small
-\caption{The two-sided bracket on the primary corpus by resolution $M$ and prefix length $k$. \emph{Upper} is the count and fraction of pairs whose upper side alone satisfies $\epshi < 0.5$; \emph{sat.} is the fraction with $\widehat{tv} \geq 0.99$. \emph{Joint} is the count satisfying the full gate \eqref{eq:gate}. The joint gate is defined at $M{=}1$ only: no per-rung lower side was computed for $M \geq 2$, so those cells are upper-only and are marked as such. Zero cells are listed rather than omitted.}
+\caption{The two-sided bracket on the primary corpus by resolution $M$ and prefix length $k$. \emph{Upper} is the count and fraction of pairs whose upper side alone satisfies $\epshi < 0.5$; \emph{sat.} is the fraction with $\widehat{tv} \geq 0.99$. The joint gate is defined at $M{=}1$ only, so later rows are upper-only; zero cells are listed rather than omitted.}
 \label{tab:bracket}
 \begin{tabular}{rr rr rr r}
 \toprule
@@ -131,7 +143,16 @@ $0.9462$ to $0.9673$ at $M{=}16$.
 
 The rise is tested with paired increments rather than by comparing marginal
 intervals, since the same service draws are reused at every rung and the
-marginals overlap at the finer resolutions. The per-replicate change in median
+marginals overlap at the finer resolutions. The increment at a step is the
+median of the paired differences
+$\Delta_i = \widehat{tv}(M,\ \text{pair}_i) - \widehat{tv}(M-1,\ \text{pair}_i)$
+taken over pairs, \emph{not} the difference of the two rungs' medians; the two
+statistics differ because the median is not additive, and at the first step they
+give $+0.2931$ (median of differences, what we report) against $+0.3028$
+(difference of the two rungs' median divergences, $0.8833 - 0.5805$ from the
+first line above). The paired form is the one that controls for pair identity
+and carries the interval.
+The per-replicate change in median
 $\tv$ excludes zero at every step: $+0.2931$ $[+0.2580,+0.3320]$ from $M{=}1$
 to $2$; $+0.0438$ $[+0.0229,+0.0708]$ to $4$; $+0.0199$ $[+0.0040,+0.0429]$ to
 $8$; and $+0.0131$ $[+0.0003,+0.0403]$ to $16$. The increase is statistically
@@ -139,15 +160,16 @@ supported at every rung and the increment shrinks by over an order of magnitude
 across the ladder. One confound must be named: the increments establish that the medians rise with
 significance, but do not by themselves separate genuine resolution from sparse
 inflation at fixed $n$, since a finer alphabet spreads the same flows over more
-symbols. The saturating column is the tell (\Cref{fig:estimator}b,c). The last
+symbols. The saturating column is the tell (\Cref{tab:bracket} / \Cref{fig:horizon}a). The last
 step is weakest,
 its lower bound essentially on zero,
 so we describe the tail as still rising but flattening rather than asserting it
 as firmly as the first step. The $M{=}1$ median's marginal interval is
 $[0.5079,0.6459]$.
 
-A finer alphabet resolves more structure, exactly as one would want from a
-measurement channel. What falls is the fraction of pairs for which an upper bound
+A finer alphabet is associated with higher median divergence, but the confound
+named above leaves the causal claim open. What falls is the fraction of pairs for
+which an upper bound
 below the gate threshold still exists: $340/990$ at $M{=}1$, $47/990$ at
 $M{=}2$, $3/990$ at $M{=}4$, and zero at $M{=}8$ and $M{=}16$
 (\Cref{fig:horizon}a).
@@ -196,7 +218,16 @@ The pre-registration was written before the first measurement, with seed 12 and
 flow- and time-disjoint splits; the registration timestamp precedes the
 first-measurement timestamp. Three detectors are executed and one is not.
 \emph{LightGBM} is trained on the $k{=}5$ (direction, size) feature vector, with
-100 boosting rounds, learning rate $0.1$, and 31 leaves, on CPU.
+100 boosting rounds, learning rate $0.1$, and 31 leaves, on CPU. The detector's
+features are the raw direction bits and log-transformed packet sizes at each of
+the $k{=}5$ prefix positions (10 dimensions), which is a strictly finer
+observable than the $m{=}(2M)^k{=}32$-cell quantized alphabet on which the
+certificate's radius is computed. A detector that fails to breach the certified
+floor is therefore evidence about a more informative observable than the one the
+bracket covers. This is a second object substitution beyond the
+closed-set/open-set one declared below this paragraph; both run in the
+same direction (the validated object is harder to detect on than the certified
+one) and we scope the claim to the validated object.
 \emph{Prototype} is a nearest-centre rejector in the style of prototype-radius
 open-set methods \citep{qu2026sepspace}: one mean centre per service, with a
 per-service acceptance radius set at a fixed distance quantile of the training
@@ -218,7 +249,11 @@ strongest cell is $p = 0.9765$, so no correction for multiplicity could change
 the verdict, and we make no family-wise claim beyond that.
 
 Power is the more serious limitation, and it cuts against the test. The null is
-a $5\%$ violation rate; 8 violations in 340 pairs gives $p = 0.9954$, so the
+a $5\%$ violation rate\footnote{The null is pre-registered at $5\%$. The $0.975$
+joint level uses the larger constant ($2.9604$), which produces a smaller
+predicted floor and makes violations less likely; the $5\%$ null is therefore the
+stricter direction. No cell rejects at either rate (see the settled computation
+in the review record).}; 8 violations in 340 pairs gives $p = 0.9954$, so the
 design has very little power against a modest excess. Reading ``not falsified''
 as evidence that the floor is tight would be a mistake: the test supports only
 the weaker statement that no gross violation is present. Detecting a two- or
@@ -288,7 +323,7 @@ contexts are sparse, biasing the fitted exponent downward.
 
 \begin{table}[t]
 \centering
-\caption{The chain-rule estimator on its known-truth control. The control's per-position divergence is known analytically, so growth in $k$ is linear by construction; a ratio below $1.0$ is the estimator deflating large-$k$ divergence. Occupancy is the fraction of contexts holding fewer than five transitions. Selected prefix lengths are shown; the full $k=5..30$ series is in the artifact.}
+\caption{The chain-rule estimator on its known-truth control, whose per-position divergence is known analytically, so growth in $k$ is linear by construction; a ratio below $1.0$ is the estimator deflating large-$k$ divergence. Selected prefix lengths are shown; the full $k{=}5..30$ series is in the artifact.}
 \label{tab:estimator}
 \begin{tabular}{rr rr rr}
 \toprule
@@ -334,29 +369,25 @@ that the vote cannot settle the question.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.70\textwidth]{figures/paper/fig2_certificate_horizon.pdf}
+\includegraphics[width=0.64\textwidth]{figures/paper/fig2_certificate_horizon.pdf}
 \caption{The certificate horizon. (a) The fraction of the 990 pairs whose upper
-side alone satisfies $\epshi < 0.5$, as a function of alphabet resolution $M$ at
-$k{=}5$. It falls from $340/990 = 0.3434$ at $M{=}1$ to zero at $M{=}8$ and
-$M{=}16$, while the saturated fraction rises from $0.000$ to $0.391$. The
-annotation states the upper-side count and the joint gate together: $336/990$
-pairs satisfy the full two-sided gate at $M{=}1$, and no per-rung joint gate
-exists for $M \geq 2$. (b) The crossover sample size at which the $M{=}8$
-certificate ceases to exist, as a function of true TV distance; two independent
-derivation routes agree to zero absolute difference at every grid point.}
+side alone satisfies $\epshi < 0.5$ against resolution $M$ at $k{=}5$: it falls
+from $340/990 = 0.3434$ at $M{=}1$ to zero at $M{=}8$, while the saturated
+fraction rises from $0.000$ to $0.391$. The annotation gives both the upper-side
+count and the joint gate ($336/990$), which exists at $M{=}1$ only. (b) The
+crossover sample size at which the $M{=}8$ certificate ceases to exist, against
+true TV distance; two derivation routes agree to zero absolute difference.}
 \label{fig:horizon}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.70\textwidth]{figures/paper/fig3_estimator_control.pdf}
-\caption{The estimator limit. (a) Estimated-to-true divergence against a source
-whose analytic per-position divergence is known exactly, for the plain-i.i.d.
-known-truth control and the real-occupancy twin. Both ratios peak near $1.0$ in
-the middle of the range and then fall away, reaching $0.6769$ and $0.8820$ at
-$k{=}30$. (b) The fraction of contexts holding fewer than five transitions,
-rising from $0.000$ to $0.998$. (c) The median context count available to the
-estimator, falling from $200{,}000$ to $1$. The estimator deflates divergence
-exactly where contexts are sparse.}
+\includegraphics[width=0.64\textwidth]{figures/paper/fig3_estimator_control.pdf}
+\caption{The estimator limit. (a) Estimated-to-true divergence on a source whose
+analytic per-position divergence is known, for the plain-i.i.d.\ control and the
+real-occupancy twin: both peak near $1.0$ then fall to $0.6769$ and $0.8820$ at
+$k{=}30$. (b) Fraction of contexts with fewer than five transitions, rising to
+$0.998$. (c) Median context count, falling from $200{,}000$ to $1$. The estimator
+deflates divergence exactly where contexts are sparse.}
 \label{fig:estimator}
 \end{figure*}

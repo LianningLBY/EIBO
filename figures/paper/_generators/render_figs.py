@@ -294,7 +294,8 @@ def fig4():
 
     ax.text(0.5, -0.34,
             "QUIC22 gate combines full-$n$ upper with a 20000-flow capped lower.\n"
-            "Capping can only weaken $\\epsilon_{lo}$, so the bias is CONSERVATIVE.",
+            "Capping lowers $\\epsilon_{lo}$ in aggregate; the direction is not\n"
+            "per-pair (pair 35–49).",
             transform=ax.transAxes, ha="center", va="top", fontsize=7.0,
             color=INK,
             bbox=dict(boxstyle="round,pad=0.35", facecolor="#F5F5F5",

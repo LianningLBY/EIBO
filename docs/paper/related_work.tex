@@ -12,14 +12,11 @@ for our upper side, though conditional on the analyst's chosen feature set. The
 anonymity and quantitative-information-flow literature takes the complementary
 route, toward a bound on inference
 \citep{serjantov2003metric,ghaderi2010anonymous,venkitasubramaniam2008eavesdroppers,venkitasubramaniam2008chaum,chatzikokolakis2007error,chatzikokolakis2008noisy},
-but evaluates bounds on models or synthetic channels. The nearest recent results
-are the leakage-inevitability theorem of \citet{liu2026inevitability} and the
-rate-distortion frontier of \citet{liu2026rate}, both single-letter in a sense
-that matters here: exponential error decay in the first requires conditionally
-i.i.d.\ repeated observations, and the frontier in the second holds inside a
-stationary-memoryless class. Packet prefixes satisfy neither, so neither applies
-without an assumption the data does not satisfy; our upper side is
-distribution-free precisely so the argument does not depend on one.
+but evaluates bounds on models or synthetic channels. The nearest recent results, the
+leakage-inevitability theorem of \citet{liu2026inevitability} and its
+rate-distortion companion \citep{liu2026rate}, are single-letter and so do not
+apply to packet prefixes; our upper side is distribution-free precisely so the
+argument does not depend on such a structure.
 
 \subsection{Total variation estimation and lower bounds}
 \label{sec:related/tv}
@@ -34,9 +31,8 @@ relevant \citep{diakonikolas2020highprob,chan2013closeness}. For lower bounds,
 \citet{michel2020high} gives the adaptive high-probability form we use, and
 \citet{tao2024discriminative} connects discriminative total-variation estimation
 to classification risk under a hypothesis-class assumption, which is the route
-our conditional large-prefix bound follows. Our contribution composes these into
-an explicit two-sided interval and reports the sides separately, since the
-composition is where their difference becomes visible.
+our conditional large-prefix bound follows. Our contribution composes these into an
+explicit two-sided interval and reports the sides separately.
 
 \subsection{Estimation bias and certified indistinguishability}
 \label{sec:related/growth}
@@ -82,38 +78,39 @@ adopt.
 
 Open-set recognition is the framing this setting inherits.
 \citet{scheirer2013toward} introduced the risk of novel classes at deployment,
-and generalization and learnability analyses \citep{fang2021learning,garov2025closer}
-characterize what can be guaranteed for detectors that must reject unknowns;
-those bound the risk of a learning procedure, while a bracket bounds the
-separation present in the data. Unknown-traffic identification in the encrypted
-setting applies the same rejection framing and reports detector-level metrics
+\citet{bendale2016towards} made the boundary operational for deep networks
+through OpenMax, and \citet{geng2021recent} surveys the field since.
+Generalization analyses \citep{fang2021learning,garov2025closer} characterize
+what can be guaranteed for detectors that must reject unknowns: those bound the
+risk of a learning procedure, while a bracket bounds the separation present in
+the data, and all report detector-level quantities rather than an interval on the
+observable. Unknown-traffic identification applies the same rejection framing
 \citep{hu2022opencbd,li2023facing}.
+
+In the fingerprinting context, \citet{sirinam2018deep} showed a deep model
+undermining defenses measured against feature-based attacks and
+\citet{rimmer2018automated} automated that pipeline; both report accuracy-style
+metrics, so neither bounds what the channel permits.
 
 Two comparators bear directly on our positioning.
 \citet{shamsimukhametov2023indistinguishability} studies indistinguishability
-under open TLS parameters with Encrypted ClientHello, the closest
-protocol-privacy precedent and the work our channel declaration must answer to:
-it addresses how much of the observable survives parameter changes, while we
-report an interval on the observable as declared. Our knowledge of it is
-abstract-level, and \Cref{sec:related/novelty} states the boundary accordingly.
-RoNeTC \citep{wang2025reliable} represents uncertainty-aware reliable open-set
-classification, and a detector of that family is one arm of our validation panel.
-Against these and prototype-radius rejection \citep{qu2026sepspace}, the
-distinction is not that their detectors are weak but that their reported
-quantities are accuracy-style metrics with no stated limit. Our evaluation
-discipline comes from the data-hygiene literature: \citet{zhao2025sweet}
-documents shortcut features and leakage in data organization, \citet{wang2026bias}
-gives a model-agnostic detector for dataset-specific shortcuts, and
-\citet{wickramasinghe2025sok} systematizes the critique across the classifier
-literature, which is what makes it load-bearing rather than redundant, since it
-shows the problem is a property of the field's practice; a fourth line turns
-critique into an audit procedure by randomizing address fields
-\citep{zhao2026shortcutcatcher}.
+under open TLS parameters with Encrypted ClientHello: it asks how much of the
+observable survives parameter changes, while we report an interval on the
+observable as declared, and our knowledge of it is abstract-level. RoNeTC
+\citep{wang2025reliable} is uncertainty-aware reliable open-set classification,
+one arm of our validation panel. Against these and prototype-radius rejection
+\citep{qu2026sepspace}, the distinction is not that their detectors are weak but
+that their reported quantities are accuracy-style metrics with no stated limit. Our evaluation
+discipline comes from the data-hygiene literature:
+\citet{zhao2025sweet} documents shortcut leakage in data organization,
+\citet{wang2026bias} detects dataset-specific shortcuts, and
+\citet{wickramasinghe2025sok} shows the problem is a property of the field's
+practice rather than a single dataset's; \citet{zhao2026shortcutcatcher} turns
+the critique into an audit procedure by randomizing address fields.
 
 To our knowledge, no prior work measures a two-sided bracket with asymmetric
 guarantee strength on real encrypted traffic, the asymmetry being the one in
 \Cref{sec:design/asymmetry}: different constant provenance and a
-nominal-versus-exact level, not a proven-versus-unproven pair. That is a knowledge
-claim, not a search result, and each work above reports a bound on synthetic
-channels, a closed-set floor, or an accuracy-style metric rather than a per-pair
-interval. \label{sec:related/novelty}
+nominal-versus-exact level, not a proven-versus-unproven pair. Each work above
+reports a bound on synthetic channels, a closed-set floor, or an accuracy-style
+metric rather than a per-pair interval. \label{sec:related/novelty}

@@ -212,21 +212,20 @@ limit should be read against it.
 \subsection{Where the two sides differ}
 \label{sec:design/asymmetry}
 
-Both sides of the bracket carry a confidence level, so the bracket is not a
-proven side paired with an unproven one, and we do not describe it that way. The
-difference between them is in construction, in the provenance of their
-constants, and in tightness. The upper side's radius is a fixed-form bound whose
-constant is derived for the finite-sample regime and applies at the observed
-counts; the lower side's constant is asymptotically derived, so its level is
+Both sides carry a confidence level, so the bracket is not a proven side paired
+with an unproven one, and we do not describe it that way. The difference is in
+construction, in the provenance of their constants, and in tightness. The upper
+radius is a fixed-form bound whose constant is derived for the finite-sample
+regime; the lower side's constant is asymptotically derived, so its level is
 nominal rather than exact. The upper radius is also determined by the alphabet
-size and the flow counts alone and grows with $m$ regardless of the data, while
-the lower bound must hold against an adversarial choice of decision function
-over its class and is correspondingly wider. In practice the upper side is what
-determines whether a certificate exists at a given resolution, and it is the
-side that binds in the measured ladder; the lower side almost always clears its
-condition, because most pairs on this channel are genuinely separable. What the
-two sides share is a confidence level and a distribution-free construction; what
-separates them is which one is harder to satisfy.
+size and flow counts alone and grows with $m$ regardless of the data, while the
+lower bound must hold against an adversarial choice of decision function and is
+correspondingly wider. In practice the upper side determines whether a
+certificate exists at a given resolution and is the side that binds in the
+measured ladder; the lower side almost always clears its condition, because most
+pairs on this channel are genuinely separable. What they share is a confidence
+level and a distribution-free construction; what separates them is which is
+harder to satisfy.
 
 \subsection{Estimation procedure and its control}
 \label{sec:design/estimator}
@@ -271,14 +270,11 @@ manifest, whose hash rather than any working copy is the artifact of record.
 
 The measurements are cheap relative to the detector panel they are compared
 against, which is the intended shape: the bracket is a property of the data, so
-its cost does not grow with model capacity. The two large measurement passes
-each run in tens of minutes. The independent-corpus bracket ran in about 21
-minutes, parallelized over eight CPU workers. The channel-sensitivity sweep ran
-in about 31 minutes and touched no GPU. The known-truth estimator control, the
-most expensive single computation in the estimator study, reuses a cached
-occupancy table and completes in under a minute. The detector panel is the only
-GPU-eligible step: it trains three models and runs in about 37 minutes on a
-single consumer GPU.
+its cost does not grow with model capacity. The independent-corpus bracket ran in
+about 21 minutes (eight CPU workers); the channel-sensitivity sweep in about 31
+minutes with no GPU; the known-truth estimator control reuses a cached occupancy
+table and finishes in under a minute. The detector panel is the only GPU-eligible
+step, training three models in about 37 minutes on a single consumer GPU.
 
 Splits are flow-disjoint and time-disjoint throughout, so no flow appears on
 both sides and the test period follows the training period with a discarded

@@ -1,6 +1,6 @@
 meta:
-  last_updated: '2026-09-15T03:29:38Z'
-  total_papers: 44
+  last_updated: '2026-09-16T03:43:35.845Z'
+  total_papers: 48
   verification_level_note: 'verification_level: abstract | fulltext | unverified |
     unknown. Restored because C001 requires knowing whether a citation was checked
     at theorem level rather than abstract level; the boolean `verified` cannot express
@@ -1259,6 +1259,91 @@ papers:
       rule-based application-layer inference from encrypted QUIC size, timing, direction,
       and multiplexing features without decryption.
     verification_level: verified-abstract
+  bendale2016towards:
+    title: Towards Open Set Deep Networks
+    authors:
+    - Abhijit Bendale
+    - Terrance E. Boult
+    year: 2016
+    venue: 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)
+    url: https://doi.org/10.1109/CVPR.2016.173
+    doi: 10.1109/CVPR.2016.173
+    bibtex_key: bendale2016towards
+    category: open-set-recognition
+    role: background
+    relevance: Introduces OpenMax and the open-set recognition boundary for deep networks;
+      the framing EIBO's pairwise bracket inherits, though it reports accuracy-style
+      metrics with no stated limit.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-agent-round4
+    added_at: '2026-09-16T03:43:35.843Z'
+  geng2021recent:
+    title: 'Recent Advances in Open Set Recognition: A Survey'
+    authors:
+    - Chuanxing Geng
+    - Sheng-Jun Huang
+    - Songcan Chen
+    year: 2021
+    venue: IEEE Transactions on Pattern Analysis and Machine Intelligence, 43(10)
+    url: https://doi.org/10.1109/TPAMI.2020.2981604
+    doi: 10.1109/TPAMI.2020.2981604
+    bibtex_key: geng2021recent
+    category: open-set-recognition
+    role: background
+    relevance: Survey of open-set recognition, used to characterize the boundary between
+      detector-level risk guarantees and a data-level separation bracket.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-agent-round4
+    added_at: '2026-09-16T03:43:35.843Z'
+  sirinam2018deep:
+    title: 'Deep Fingerprinting: Undermining Website Fingerprinting Defenses with
+      Deep Learning'
+    authors:
+    - Payap Sirinam
+    - Mohsen Imani
+    - Marc Juarez
+    - Matthew Wright
+    year: 2018
+    venue: Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications
+      Security (CCS)
+    url: https://doi.org/10.1145/3243734.3243768
+    doi: 10.1145/3243734.3243768
+    bibtex_key: sirinam2018deep
+    category: traffic-analysis
+    role: background
+    relevance: Deep-learning fingerprinting across defenses; cited for the traffic-analysis
+      context in which EIBO's bracket is measured.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-agent-round4
+    added_at: '2026-09-16T03:43:35.843Z'
+  rimmer2018automated:
+    title: Automated Website Fingerprinting through Deep Learning
+    authors:
+    - Vera Rimmer
+    - Davy Preuveneers
+    - Marc Juarez
+    - Tom Van Goethem
+    - Wouter Joosen
+    year: 2018
+    venue: Proceedings 2018 Network and Distributed System Security Symposium (NDSS)
+    url: https://doi.org/10.14722/ndss.2018.23105
+    doi: 10.14722/ndss.2018.23105
+    bibtex_key: rimmer2018automated
+    category: traffic-analysis
+    role: background
+    relevance: Automated deep-learning fingerprinting with a fully automated pipeline;
+      cited for the traffic-analysis context.
+    abstract: ''
+    semantic_scholar_id: ''
+    verified: true
+    added_by: paper-agent-round4
+    added_at: '2026-09-16T03:43:35.843Z'
 novelty_check:
   verdict: NO PAPER IN THIS MAP HAS BEEN VERIFIED AS REPORTING a two-sided TV / epsilon-indistinguishability
     bracket on real encrypted traffic. This remains an abstract-level map review,

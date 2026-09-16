@@ -78,21 +78,27 @@ per-flow identifier at matched declared resolution and reports only an aggregate
 separation statistic.
 
 The result is a defensive and auditing instrument. A certified lower bound on
-the error floor tells an operator what detection performance cannot be improved
-past at a stated observation window, which is the information needed to judge
-whether a reported detection gain is close to the limit the channel supports. We
-see no path by which the published bracket enables an attack that is not already
-available to anyone with the same observable channel.
+the error floor tells an operator what pairwise detection performance cannot be
+improved past at a stated observation window, which is the information needed to
+judge whether a reported detection gain is close to the limit the channel
+supports. We see no path by which the published bracket enables an attack that is
+not already available to anyone with the same observable channel.
+
+The identifier is a hash over a destination address. Hashing is not
+anonymization where the address space is enumerable: a salt rotated per
+measurement window would prevent cross-window linkage but is not part of the
+current dataset's collection protocol.
 
 \section*{Open Science}
 \addcontentsline{toc}{section}{Open Science}
 
 
 This appendix lists the artifacts needed to evaluate the paper's core
-contributions and how the review committee can reach each one. Access links are
-anonymized to preserve double-blind review; they are provided through the
-submission system's artifact channel. The provenance chain below is stated so
-that a reader can check it without following any link.
+contributions and how the review committee can reach each one. Artifacts are
+accessible through the submission system's supplementary-material channel;
+anonymous URLs are not provided to preserve double-blind integrity. The
+provenance chain below is stated so that a reader can check it without following
+any link.
 
 \textbf{Worked provenance example.}
 Every quantitative claim in this paper resolves through an experiment identifier
@@ -180,8 +186,10 @@ conditions by a margin.
 \input{tab_boundary}
 
 \label{sec:appendix/context}
-\subsection*{A.1b\quad Endpoint Distributions}
 \label{sec:appendix/endpoints}
+
+Table~\ref{tab:endpoints} gives the distributional summary of the bracket
+endpoints.
 
 \begin{table}[t]
 \centering

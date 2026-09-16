@@ -7,20 +7,18 @@
 For two distributions $P$ and $Q$ over the same finite alphabet, the total
 variation distance $\tv(P,Q)$ in \eqref{eq:tv} is, up to a factor of one half,
 the smallest error probability achievable by any test that must decide which of
-the two generated an observation. This is why a bound on $\tv$ is the natural
-quantity for a practitioner. An upper bound on $\tv$ translates into a floor
-that no classifier can go below; a lower bound translates into a statement that
-the pair is genuinely separable. Neither is available from a classifier's own
-accuracy, which measures one system rather than the problem.
+the two generated an observation, which is why a bound on $\tv$ is the natural
+quantity here. An upper bound gives a floor no classifier can go below; a lower
+bound says the pair is genuinely separable. Neither is available from a
+classifier's own accuracy, which measures one system rather than the problem.
 
 We write the bracket as in \eqref{eq:bracket} and call each endpoint by what it
-is. The upper endpoint is finite-sample and holds at the observed flow counts
-with a stated confidence, under no assumption on $P$ or $Q$ beyond a finite
-alphabet; the lower endpoint is a classifier-based bound at a nominal level,
-distribution-free in the same sense but conditional on the fitted decision
-function. Both carry a confidence level, so we report them separately and quote
-the gate as a conjunction \eqref{eq:gate} rather than folding them into one
-number.
+is: the upper endpoint is finite-sample and holds at the observed flow counts
+under no assumption on $P$ or $Q$ beyond a finite alphabet, and the lower
+endpoint is a classifier-based bound at a nominal level, distribution-free in
+the same sense but conditional on the fitted decision function. Both carry a
+confidence level, so we report them separately and quote the gate as a
+conjunction \eqref{eq:gate} rather than folding them into one number.
 
 \subsection{Prior information bounds on traffic analysis}
 \label{sec:background/prior}
@@ -37,17 +35,11 @@ the difference between its endpoints kept visible rather than averaged away.
 
 The most directly relevant recent results are the side-channel leakage
 inevitability theorem of \citet{liu2026inevitability} and its rate-distortion
-companion \citep{liu2026rate}. The former establishes that leakage is
-unavoidable under explicit non-degeneracy and distinguishability conditions; the
-latter characterizes an exact leakage-cost frontier. Both are single-letter in a
-specific sense. The exponential error decay in the first requires conditionally
-i.i.d.\ repeated observations, and the frontier in the second is proved within a
-stationary-memoryless class. Packet prefixes satisfy neither condition. Our
-measurement makes no such assumption and instead reports what is certifiable
-about the dependent prefix law as it stands, which is why the upper side is
-distribution-free, while the lower side is a classifier-based bound whose
-width is set by the adversarial choice of decision function rather than by an
-exponential decay rate.
+companion \citep{liu2026rate}, both single-letter: the first requires
+conditionally i.i.d.\ repeated observations for its exponential error decay, and
+the second is proved within a stationary-memoryless class. Packet prefixes
+satisfy neither condition, so we make no such assumption and report what is
+certifiable about the dependent prefix law as it stands.
 
 \subsection{Estimating and testing total variation}
 \label{sec:background/tv_est}
@@ -65,14 +57,13 @@ relates discriminative estimation of total variation to classification risk
 under a hypothesis-class assumption, which is the route we take for the
 conditional large-prefix bound where the plug-in certificate is unavailable.
 
-Open-set generalization and learnability results
-\citep{fang2021learning,garov2025closer} bound the risk of a learning procedure;
-ours bounds the separation available in the data, and the two are complementary
-since a learnability bound says how well a detector can be trained while a
-bracket says how much room there is to train into. The unknown-class mass a
-bracket over observed services omits is a separate problem with its own
-literature \citep{orlitsky2016optimal,eriksson2026unseen}, used for the
-site-level term in \Cref{sec:discussion/missing_mass}.
+Open-set generalization results \citep{fang2021learning,garov2025closer} bound
+the risk of a learning procedure, whereas ours bounds the separation available in
+the data; the two are complementary, since a learnability bound says how well a
+detector can be trained while a bracket says how much room there is to train
+into. The unknown-class mass a bracket over observed services omits is a separate
+problem with its own literature \citep{orlitsky2016optimal,eriksson2026unseen},
+used for the site-level term in \Cref{sec:discussion/missing_mass}.
 
 \subsection{The QUIC observable}
 \label{sec:background/quic}
