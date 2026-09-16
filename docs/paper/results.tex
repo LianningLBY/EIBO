@@ -13,18 +13,11 @@ occupancy gate is defined.
 The \textbf{990-pair denominator} comes from a flow-count threshold applied
 before any bracket is computed. Of the 53 service labels present, 45 carry at
 least 2{,}000 flows in the retained period, and those 45 form
-$\binom{45}{2} = 990$ unordered pairs, all surviving the hygiene filters. The
-2{,}000-flow rule is pre-registered rather than tuned: it was fixed before the
-gate was measured so that one rule governs every rung, replacing an earlier
-53-service / 1{,}378-pair selection with a 617-flow minimum, since two selection
-rules on one capture would make the artifacts mutually non-citable. The gate
-passes on this subset, and the pass is provisional: a subset pass, not a
-full-corpus confirmation.
-
-Flows follow the corpus's own five-tuple and idle-timeout convention, with no
-resegmentation of our own. From each we read the leading packet sequence and
-reduce it to the (direction, size) prefix the channel declares; no payload is
-parsed, and the acquisition steps are recorded in the released notes.
+$\binom{45}{2} = 990$ unordered pairs, all surviving the hygiene filters. Flow
+segmentation and service selection follow a pre-registered rule
+(\Cref{sec:appendix/preprocessing}); the 2{,}000-flow threshold was fixed before
+the gate was measured. The gate passes on this subset, and the pass is
+provisional: a subset pass, not a full-corpus confirmation.
 
 The masking regime is verified rather than assumed: the padding sweep reports a
 single zero-valued bin across the sampled tail slots, 990 usable pairs at

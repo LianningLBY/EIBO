@@ -34,15 +34,13 @@ should be read. First, that cap binds on 2{,}145 of the replication corpus's
 floor and the bias is conservative.
 
 The direction is aggregate rather than per-pair, and the two corpora are
-separate statements here. On the \emph{primary} corpus, where the cap also
-binds, capping raises $\epslo$ on 38 of the 990 pairs, one of them being pair
-35--49 (full-$n$ $0.042725$ against capped $0.043732$ in
-\Cref{tab:boundary}); the 2{,}145-of-3{,}321 figure above is the replication
-corpus and is not comparable to it, since the two corpora differ in size and in
-flow-count distribution. The construction selects its cutoff $\lambda$
-adaptively, and on a subsample that selection can move far enough to raise the
-bound, which is why the claim is stated in aggregate and not as a universal
-monotonicity.
+separate statements. On the \emph{primary} corpus the cap also binds, and capping
+raises $\epslo$ on 38 of the 990 pairs, one being pair 35--49 (full-$n$ $0.042725$
+against capped $0.043732$ in \Cref{tab:boundary}); the 2{,}145-of-3{,}321 figure
+above is the replication corpus and is not comparable to it. The construction
+selects its cutoff $\lambda$ adaptively, and on a subsample that selection can
+move far enough to raise the bound, which is why the claim is aggregate rather
+than a universal monotonicity.
 Second, the comparison depends on how much evidence per pair is required, and
 the dependence is not monotone. On the $\epshi < 0.5$ stratum the gap is $-18.3$
 percentage points unmatched, $-15.5$ at a $13{,}049$-flow floor, $-9.3$ at
@@ -138,25 +136,18 @@ Every number here is measured on a subset whose occupancy pass is provisional
 pending full-corpus confirmation, and on a single protocol. Three further
 limitations are raised in the body and collected here.
 
-Three further limitations are raised in the body and collected here.
+Three further limitations are raised in the body.
 
-\emph{Coverage and construction.} Both sides carry a confidence level and the
-lower side's is conditional on the fitted decision function, so as a two-sided
-statement the interval is only as strong as its weaker endpoint, and that level is
-nominal rather than exact (\Cref{sec:design/lower}): $1-\alpha$ is what the
-construction reports, not the finite-sample guarantee the upper side provides. The
-large-$k$ divisibility bound is conditional on a realizability assumption ---
-useful exactly where the plug-in certificate is lost, but not distribution-free.
+\emph{Coverage and construction.} The lower side's confidence level is nominal
+rather than exact (\Cref{sec:design/lower}), so as a two-sided statement the
+interval is only as strong as its weaker endpoint.
 
 \emph{Cross-corpus comparison.} The corpora use different lower-side
-conventions, the primary at full $n$ and the replication capped, so the headline
-comparison is mixed-strength by construction
+conventions, so the headline comparison is mixed-strength by construction
 (\Cref{sec:discussion/robustness}).
 
 \emph{Test power.} The detector validation is a consistency check with limited
-power: on 340 informative pairs it detects a gross violation but not a two- or
-three-point excess (\Cref{sec:results/detector_validation}), and the growth
-question that motivated the estimator study remains open.
+power, not a falsifiable test (\Cref{sec:results/detector_validation}).
 
 \subsection{Dual-use considerations}
 \label{sec:discussion/ethics}
@@ -172,8 +163,7 @@ cheap to distinguish. At the finest rung the paper demonstrates detection is
 possible, so the publishable content is the existence claim rather than a new
 capability, and the identifier result (\Cref{sec:discussion/sensitivity}) shows
 that metadata beyond the declared channel carries separation the certificate does
-not cover --- an argument for the certificate as a lower bound, not a new attack
-vector.
+not cover.
 
 \begin{figure*}[t]
 \centering

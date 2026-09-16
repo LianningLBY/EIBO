@@ -161,6 +161,19 @@ The manifest hash, rather than any working copy, is the artifact of record, and 
 nested-field citation is recorded in the paper's provenance crosswalk so a
 reviewer can follow the number to its source without tooling.
 
+\textbf{Compute.}
+\label{sec:appendix/compute}
+Every bracket, sweep, and estimator computation is CPU-only: the
+independent-corpus bracket ran in about 21 minutes on eight CPU workers, the
+channel-sensitivity sweep in about 31 minutes, and the known-truth estimator
+control reuses a cached occupancy table and finishes in under a minute. Detector
+training and validation ran mostly on CPU. Per-detector device assignments:
+LightGBM on CPU (its OpenCL attempt found no device and fell back), the
+prototype rejector on CPU, and RoNeTC on the accelerator --- NVIDIA GeForce
+RTX 5090 D, 32\,GB. The panel completed in about 37 minutes. The host carries
+208 CPU cores, 32\,GB of accelerator memory, and a 90\,GB memory limit, so no
+result here depends on a large-scale cluster.
+
 \textbf{Data.}
 The primary corpus is publicly released by its operators and requires no
 credential to obtain; the independent replication corpus is likewise public. We
@@ -224,6 +237,51 @@ and classifiers are now applied to it across a range of architectures
 Our contribution is orthogonal to those architectures, since it concerns what any
 of them can achieve on a declared observable rather than how one of them is
 built.
+
+\subsection*{A.3\quad Preprocessing and Service Selection}
+\label{sec:appendix/preprocessing}
+
+Flows follow the corpus's own five-tuple and idle-timeout convention, with no
+resegmentation of our own. From each flow we read the leading packet sequence and
+reduce it to the (direction, size) prefix the channel declares; no payload is
+parsed, and the acquisition steps that turn a capture into the flow-level tables
+used here are recorded in the released notes.
+
+The service-eligibility rule is pre-registered rather than tuned. The
+2{,}000-flow threshold was fixed before the gate was measured, so that one rule
+governs every rung of the ladder. It replaces an earlier 53-service /
+1{,}378-pair selection that used a lower 617-flow minimum: two selection rules
+on one capture would make the resulting artifacts mutually non-citable, which is
+why the stricter rule was adopted. Masking is likewise verified rather than
+assumed, as \Cref{sec:results/datasets} reports.
+
+\subsection*{A.4\quad Supporting Detail for the Limitations}
+\label{sec:appendix/limitations}
+
+Three limitations are stated in one sentence each in the body; the supporting
+detail is collected here.
+
+\emph{Lower-side status.} The lower side's constant is asymptotically derived
+and a conservative finite value is substituted only in the degenerate regime
+where the effective alphabet is too small for the asymptotic expression to be
+defined (\Cref{sec:design/lower}). The $1-\alpha$ label is therefore what the
+construction reports rather than a finite-sample guarantee, and the large-$k$
+divisibility bound is separately conditional on a realizability assumption ---
+useful exactly where the plug-in certificate is lost, but not distribution-free.
+
+\emph{Convention dependence.} The corpora use different lower-side conventions,
+the primary at full $n$ and the replication at a $20{,}000$-flow cap. The cap's
+effect is aggregate rather than per-pair: it lowers $\epslo$ on 776 of the 990
+primary-corpus pairs and raises it on 38, which is why we report an aggregate
+direction and do not translate between the two conventions
+(\Cref{sec:discussion/robustness,sec:discussion/limitations}).
+
+\emph{Test power.} With 340 informative pairs the one-sided binomial test
+detects a gross violation of the certified floor but not a two- or three-point
+excess: at a $5\%$ null the strongest cell gives $p = 0.9765$, and at the
+$2.5\%$ threshold implied by the joint level, $p = 0.346$. The growth question
+that motivated the estimator study also remains open
+(\Cref{sec:results/detector_validation,sec:results/estimator}).
 
 \bibliographystyle{plainnat}
 \bibliography{references}
