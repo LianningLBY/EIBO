@@ -1,4 +1,4 @@
-_next_id: 133
+_next_id: 141
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -6647,3 +6647,286 @@ mistakes:
     with matching saturation), fig3_panelA endpoints match the artifact, fig4 carries
     the joint-gate values, fig5 matches the X9_E medians. So the fabrication is localised
     to fig3 panel (b) so far.'
+- id: M133
+  date: '2026-09-15'
+  category: agent_behavior
+  severity: medium
+  summary: Twice flagged a defect in another role's artifact that was actually a defect
+    in my own replication script
+  root_cause: I ran quick ad-hoc replication scripts instead of using the committed
+    runner, and treated their output as authoritative over a guarded artifact. One
+    read was truncated by my own tooling and I reported the truncation as a gap in
+    the artifact. In the same round I also accepted a reviewer's arithmetic that evaluated
+    a convex function at its mean when its conclusion happened to match the artifact,
+    which would have let a wrong derivation stand if the numbers had differed.
+  prevention: 'Before reporting a discrepancy against another role''s artifact, reproduce
+    THEIR construction from their stated method, not a construction I think is equivalent.
+    If my numbers differ, the prior should be that my ad-hoc script is wrong, not
+    their artifact — I write throwaway replication code under time pressure and it
+    has fewer guards than their committed runner. Concretely: (a) read the artifact''s
+    method field and implement exactly that, including tie-handling and deduplication;
+    (b) when a count-based check is involved, simulate the distribution rather than
+    evaluating a function at a mean — C(K,2) is convex, so C(E[K],2) is not the median
+    of C(K,2); (c) verify a claim of ABSENCE (like "M=16 is missing") by exhaustive
+    read of the whole container, never a truncated display — the truncation is mine,
+    not the artifact''s.'
+  status: active
+  context: 'Two instances in one round, both about flagging defects in others'' work
+    that were actually defects in mine. (1) I told the Main Agent the CI artifact
+    omitted the M=16 estimability entry; re-reading without truncation showed 8 entries
+    including M=16 — my earlier read truncated at 4. (2) I told the Main Agent my
+    cluster-bootstrap replication disagreed with its artifact (my [0.2635,0.4365]
+    vs its [0.2645,0.4310]) and asked it to pin a multiplicity convention and re-run.
+    A 50000-trial simulation of its exact construction reproduced its numbers exactly
+    (median replicate pair count 406, p5 300, p95 496), and my own ad-hoc replication
+    script was the faulty one — it produced 396 then 378 across variants depending
+    on how I built the replicate rows. I retracted both instructions. Separately,
+    the independent Reviewer''s verification of the same artifact reached the CORRECT
+    conclusion by faulty arithmetic: it computed C(45*(1-(44/45)^45), 2) = C(28.63,2)
+    = 395.6 and wrote "= 406", evaluating the convex function C(K,2) at E[K] rather
+    than at the median K=29 (C(29,2)=406 exactly).'
+  fix: Retracted both instructions explicitly and told the Main Agent the artifact
+    was correct as delivered; asked only for a documentation addition (state that
+    duplicates are deduplicated before rebuilding the graph). Noted to the Main Agent
+    that the Reviewer's arithmetic should not be treated as authoritative for that
+    number.
+- id: M134
+  date: '2026-09-15'
+  category: resource_misuse
+  severity: medium
+  summary: Two Workers failed on trivial single-step tasks (a three-fact cost probe
+    and a one-clause JSON edit); the edit did not land and needed re-routing
+  root_cause: Trivial single-step tasks (a one-clause JSON field edit; a three-fact
+    cost lookup) were dispatched as Workers, whose fixed startup cost and broader
+    tool surface exceed the work and produced two failures. The cost probe also received
+    an open-ended investigation brief rather than a bounded question list, so it began
+    a two-tree reconciliation sweep instead of answering three questions.
+  prevention: Two lessons. (a) Do not dispatch a Worker for a task that is a single
+    field edit or a three-fact lookup — the fixed overhead (context load, environment
+    probe) dwarfs the task and the failure surface is larger than the work; route
+    trivial edits to the owning role directly. (b) When probing for a cost or a count,
+    give the probe a bounded question list (what to read, what to report) rather than
+    an open investigation brief; the first failed worker appears to have interpreted
+    a narrow cost question as a mandate for a full two-tree reconciliation sweep.
+  status: active
+  context: 'Two Workers dispatched for single-step tasks both terminated with status=failed.
+    (1) worker_Cost_investigation_M-ladder_per-pair_rerun_20260915T064101 — result
+    payload contained only one opening narration sentence ("I''m checking both trees
+    because this project has a known local/remote divergence risk…"), i.e. it died
+    during initial reconnaissance and never reached a count or timing. (2) worker_Document_cluster-bootstrap_construction_in_artifact_20260915T065309
+    — failed, and I verified directly that the intended edit did NOT land: ci_main_table_1ea3c0.json
+    still carries resampling_unit = "services (cluster bootstrap; 45 services drawn
+    with replacement)" with no dedup clause, and no newer artifact exists. A third
+    worker (pin/re-run) was cancelled deliberately when its premise was settled.'
+  fix: Flagged to Main Agent (which owns Worker lifecycle) to inspect activity signals
+    for a systematic cause rather than relaunching blindly, and told it to make the
+    one-clause JSON documentation edit directly instead of dispatching a third Worker
+    for a trivial task. Also narrowed the M-ladder probe spec to three concrete facts
+    so a relaunch is less likely to wander into a broad reconciliation sweep.
+- id: M135
+  date: '2026-09-15'
+  category: agent_behavior
+  severity: high
+  summary: False defect reports from my own probes (single-root path sweep twice;
+    str() on a missing key), then a git checkout that reverted the owning role's manifest
+    reconciliation
+  root_cause: 'I repeatedly treated my own tool output as evidence about the object
+    rather than about my method: a single-directory path probe as evidence of missing
+    files, str() on a missing key as evidence of a literal "None" in the file, and
+    then a blanket git checkout as a safe undo when it reverted another role''s committed-this-turn
+    work that had never been committed.'
+  prevention: Three rules. (a) Resolve paths against EVERY file in the tree, never
+    one directory - a nested layout will produce false "missing" reports, and I made
+    this error twice in a row. (b) Never call str() on a possibly-absent dict key
+    when checking for defects; use `e.get(k)` and test for None, or the absent key
+    becomes the string "None" and manufactures a defect that does not exist. Verify
+    a claimed defect exists in the RAW text (grep) before writing a fix for it. (c)
+    Take a backup before any bulk rewrite, and prefer `git stash`/targeted restore
+    over `git checkout -- <file>` on a file another role may have edited this turn
+    - an undo of my own no-op destroyed their real work.
+  status: active
+  context: Three instances this session of a defect I reported that was actually in
+    my own tooling or reasoning, not in the object I was inspecting. (1) Twice I probed
+    the manifest for unresolved paths using a single root (flat data dir, then two
+    roots) and reported "20 missing" and then "45 missing" artifacts; a whole-repo
+    search showed the true count was 8 - the rest live in nested dirs. (2) I "found"
+    73 manifest entries carrying a literal string "None" as retirement_note and wrote
+    a cleanup that claimed to remove them; it removed 0. The "None" was my own artifact
+    - I was calling str() on a MISSING key, which yields the string "None". Only 10
+    entries have the field and all are legitimate. I then ran `git checkout -- artifacts/manifest.yaml`
+    to undo my own no-op write, which REVERTED the owning role's reconciliation work
+    (83 entries / 0 dangling back to 75 / 1 dangling). I restored it from a backup
+    I had taken immediately before, then verified 83 entries / 0 dangling / no duplicate
+    live entries and committed.
+  fix: Restored the reconciled manifest from the /tmp backup taken before the destructive
+    command; verified 83 entries, 0 dangling, exactly one live entry per artifact;
+    committed as 22fc351. Corrected an independent check's wrong retirement note for
+    art_20260915_240634 (it claimed the file "never existed"; I had deleted it and
+    its bytes are preserved in the canonical pair companion with the identical sha256)
+    - the note now records it as a deliberate duplicate removal rather than "registered
+    in error".
+- id: M136
+  date: '2026-09-15'
+  category: agent_behavior
+  severity: high
+  summary: Overwrote the 23-entry review tracker with a literal 'placeholder' via
+    a whole-file tool; recovered only because the content was still in context
+  root_cause: I passed a placeholder argument to a tool that performs a full-file
+    overwrite, without checking that the target was version-controlled or backed up
+    first. The tracker was untracked, so the write was unrecoverable from git.
+  prevention: 'Never call a whole-file-overwrite tool with a placeholder or probe
+    value. update_review_issues replaces the entire file, so any argument I pass must
+    be the complete intended content - there is no dry-run and no undo. If I want
+    to test the tool, use a throwaway project, never the live artefact. More generally:
+    before a whole-file overwrite, confirm the target is under version control OR
+    take an explicit backup, because this project has now destroyed file content twice
+    (this, and the git checkout that reverted the manifest) and the second time only
+    survived because a backup existed.'
+  status: active
+  context: I called update_review_issues with the literal string 'placeholder' as
+    issues_yaml, which OVERWROTE the 23-entry cross-round review tracker with an 11-byte
+    file. The tracker was UNTRACKED in git, so there was no version-control copy to
+    restore. I rebuilt all 23 entries from the Round 1 report content I still had
+    in context, with their resolutions, then committed the file so it is now under
+    version control (d543c80). No permanent loss, but only because the content was
+    still in my context window — had it been an older file, the history would have
+    been gone.
+  fix: Reconstructed the tracker from the report content in context (23 issues, all
+    with resolutions and resolution_round), verified it parses, and committed it so
+    it can never again be destroyed by a bad write without a recoverable copy.
+- id: M137
+  date: '2026-09-15'
+  category: resource_misuse
+  severity: medium
+  summary: Left a stalled review gateway diagnosed-but-undriven and the GPU idle by
+    default instead of acting or verifying the no-work judgment
+  root_cause: I treated a diagnosis as if it were a resolution, and treated an idle
+    resource as acceptable by default instead of either filling it or getting the
+    no-work judgment verified. Under Auto Research mode with autonomous decisions
+    enabled, the standing instruction is to decide and drive; I had been waiting on
+    the review and on a user answer rather than acting on what was in my own control.
+  prevention: 'Two rules. (a) A diagnosis is not a resolution: when I identify a stalled
+    state, the same turn must name the concrete action AND its owner, or explicitly
+    record that no tool exists so the action passes to the platform - "I reported
+    it" is only an action if the report is the thing that unsticks it. (b) An idle
+    allocated resource is my responsibility to justify, not to leave dark by default:
+    either dispatch work or get the "nothing is runnable" judgment independently confirmed,
+    and do it in the same turn rather than deferring to a nudge. Under Auto Research
+    mode the default is to drive, not to park.'
+  status: active
+  context: A keepalive nudge caught that I had diagnosed the stalled Round 2 review
+    gateway and told the user about it, but taken no concrete unstick action, and
+    had left the one allocated GPU fully idle (0% compute, no processes) without either
+    dispatching work or having the "nothing is runnable" judgment independently confirmed.
+    I had also recorded a false manifest finding earlier in the same window.
+  fix: 'Established and recorded the concrete unstick action with its owner: no Director
+    tool retries or advances a round (only submit_paper_to_review, which would create
+    a duplicate), so the action is to report the stall for review-gateway recovery
+    and explicitly NOT resubmit, leaving the round counter and review sessions untouched.
+    Recorded this in the ROADMAP as a blocker with do-not-do items. For the GPU, put
+    the "nothing is worth running" judgment to the independent reviewer for confirmation
+    rather than leaving the card dark by default. Also re-verified the manifest by
+    FULL recorded path and found the two supposed path/hash inconsistencies were a
+    basename collision in my own sweep - all 83 entries resolve with matching hashes
+    - and I corrected the false ROADMAP item.'
+- id: M138
+  date: '2026-09-15'
+  category: communication
+  severity: medium
+  summary: Asserted the higher-k per-pair rows "were never persisted"; they exist
+    as hidden server-side dot-files
+  root_cause: I treated a local-tree search that excluded hidden dot-files as evidence
+    that the files did not exist anywhere, and I did not connect the x1_convention_check.json
+    record - which I had read and which documents the exact server-side glob for those
+    files - to the claim I was making.
+  prevention: 'Do not convert a failed search into a claim of non-existence. When
+    a sweep comes back empty, the accurate statement is "I did not find it at the
+    paths I checked" - not "it does not exist" - unless the search was exhaustive
+    over every surface including hidden files and the server tree. This is the same
+    class as the earlier single-directory path probes and the str() on an absent key:
+    my tool output describing my method, reported as a fact about the object. Concretely:
+    before asserting absence of any artefact, (a) search hidden files and the server
+    tree, not just the local working tree, and (b) re-read any provenance record in
+    context that might document the thing I am about to declare missing.'
+  status: active
+  context: 'I stated to the project owner, and repeated to the independent reviewer,
+    that the higher-k per-pair rows (k=15, k=30) "were never persisted" - and I used
+    that as part of the reasoning for why uncertainty on those cells was not estimable
+    and why no work could be done on them. It was wrong. Hidden intermediates DO exist
+    on the server: /root/eibo/artifacts/.x1_k15_m{1,2,4,8,16}.json (946 rows each)
+    and .x1_k30_m{1,2,4,8,16}.json (820 rows each), each carrying a full rows array
+    with per-pair tv_masked and fresh_h5_pass true. I had read the record in x1_convention_check.json
+    that documents exactly this glob earlier in the session, and then failed to connect
+    it to my own claim. My first local sweep missed them because they are dot-files
+    on the server tree, not in the local tree - but a limitation of my search became
+    a factual assertion about the data.'
+  fix: 'Corrected the record to the narrower, accurate statement: higher-k per-pair
+    TV rows DO exist in hidden intermediates; what is absent is the per-pair eps_hi
+    (the hidden rows carry tv_masked only, verified: row_keys = [M, n_a, n_b, service_a,
+    service_b, tv_masked]), and the informative stratum is empty at k=15/k=30 regardless.
+    Authorised the assembly path that this correction makes possible, asked for the
+    limitation to be stated explicitly in the item write-up so no reader thinks a
+    higher-k containment panel is now within reach, and asked for the hidden dot-files
+    to be promoted to canonical names since a name-based reader cannot see them.'
+- id: M139
+  date: '2026-09-16'
+  category: experiment_design
+  severity: high
+  summary: Derived and dispatched a radius-constant change that would have weakened
+    a published guarantee while keeping the stronger 0.95 label; caught by the independent
+    Reviewer, verified, reverted
+  root_cause: 'I mis-assigned which component of the bounded-differences formula carries
+    the union: I read the factor of 2 inside the logarithm as the tail-shape factor
+    and the union as separately carried, which inverted the conclusion. I then asserted
+    it with more confidence than the arithmetic supported, dispatched it, and rewrote
+    the paper''s explanation to match - rather than first checking it against the
+    repository''s own guard, which already encoded the opposite convention.'
+  prevention: 'Three rules. (a) When a derivation of mine contradicts an existing
+    guard test, THE GUARD IS EVIDENCE and must be consulted BEFORE the derivation
+    is propagated - tests/test_q1_thresholds.py::test_under_split_guard exists precisely
+    to reject the unsplit convention, and I had read that file earlier in the session
+    without connecting it to my own derivation. (b) Prefer the conservative direction
+    when the label and the guarantee could disagree: under the status quo 0.95 was
+    exact-or-conservative; under my change it was exact-or-optimistic. A possible
+    0.975 published as 0.95 costs nothing; a possible 0.90 published as 0.95 is a
+    false guarantee. Before changing a stated confidence level, ask which way the
+    error can fall. (c) Do not rewrite the explanatory sentence to license a numerical
+    change - that is putting the justification after the conclusion, and it is what
+    made this hard to see.'
+  status: active
+  context: 'I derived that the radius constant sqrt(2 ln(2/alpha_law)) = 2.9604 certifies
+    a joint 0.975 rather than the paper''s stated 0.95, and instructed the team to
+    switch to sqrt(2 ln(1/alpha_law)) = 2.7162, which I computed would raise the headline
+    counts from 340/336 to 342/338. I then propagated this through four decisions
+    (D118, D120, D122), dispatched a recomputation of the detector table, and had
+    the mechanism sentence rewritten to license it. The independent Reviewer falsified
+    it with a decisive identity I verified myself: ln(1/0.025) = ln(2/0.05) = 3.688879,
+    so the "corrected" constant IS the original formula evaluated at the UNSplit per-law
+    level 0.05 - adopting it would have removed the union correction while the paper
+    continued to claim 0.95, i.e. attaching a 0.95 label to a 0.90 guarantee. My error
+    was in which part of the formula carries the union: I read the 2 in ln(2/alpha)
+    as the tail-shape factor and concluded the current constant over-delivers.'
+  fix: Retracted D118/D120/D122 as D123; instructed a full revert of the constant
+    to 2.9604 in Eq.(4), the lemma and the code path; deleted the mechanism sentence
+    I had rewritten, since it was what licensed the wrong constant; restored every
+    count to 340/336; flagged art_20260916_afbae4 and scripts/x12_k5_containment_corrected_342.py
+    as not citable for the headline while preserving the reproduction gate they contain;
+    corrected the stale "PENDING CORRECTION" line in the ROADMAP. Asked the Reviewer
+    for the correct wording of the mechanism sentence and whether to strengthen the
+    guard with an assertion tying the constant to its stated joint level.
+- id: M140
+  date: '2026-09-16'
+  category: communication
+  severity: medium
+  summary: 'Two defects in Round 5 caused by my own instructions: internal review-process
+    reference in footnote (W1) and reversed null-direction claim (W5)'
+  root_cause: 'The §4.4 footnote instruction included ''see the settled computation
+    in the review record'' — an internal process reference that has no meaning to
+    a reader and exposes that the paper has been through review. Separately, the ''stricter
+    direction'' claim was backwards: at 0.975 level the expected rate is 2.5%, so
+    5% is more lenient, not stricter.'
+  prevention: Never include internal review-process references in paper text. Grep
+    the final tex for 'review record', 'review report', 'settled computation' before
+    dispatch. For direction claims (stricter/lenient, easier/harder), verify the claim
+    against the inequality direction before writing it.
+  status: active

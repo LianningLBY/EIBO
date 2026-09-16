@@ -1,7 +1,7 @@
 paper:
   title: ''
-  version: 23
-  generated_at: '2026-09-15T04:51:48.024258+00:00'
+  version: 60
+  generated_at: '2026-09-16T01:15:50.540502+00:00'
 claims:
 - id: C001
   location:
@@ -186,7 +186,7 @@ claims:
     metric: gate_fraction
     value: 0.3393939394
   decisions: []
-  deprecated: false
+  deprecated: true
 - id: C028
   location:
     section: conclusion
@@ -205,7 +205,7 @@ claims:
       '8': 0
       '16': 0
   decisions: []
-  deprecated: false
+  deprecated: true
 - id: C031
   location:
     section: conclusion
@@ -221,7 +221,7 @@ claims:
       fitted_curve: sublinear on exactly-linear truth
       passed: true
   decisions: []
-  deprecated: false
+  deprecated: true
 - id: C032
   location:
     section: introduction
@@ -340,7 +340,7 @@ claims:
     metric: arms.plain_iid.levels[0].fit.exponent_p
     value: 0.651
   decisions: []
-  deprecated: false
+  deprecated: true
 - id: C039
   location:
     section: measurement_design
@@ -536,7 +536,7 @@ claims:
     metric: gate_fraction
     value: 0.3393939394
   decisions: []
-  deprecated: false
+  deprecated: true
 - id: C060
   location:
     section: abstract
@@ -551,7 +551,7 @@ claims:
     metric: arms.plain_iid.levels[0].fit.verdict
     value: SUBLINEAR
   decisions: []
-  deprecated: false
+  deprecated: true
 - id: C061
   location:
     section: related_work
@@ -620,6 +620,844 @@ claims:
   - exp_id: X11
     metric: upper_fraction
     value: 0.16079494128274616
+  decisions: []
+  deprecated: false
+- id: C065
+  location:
+    section: introduction
+    paragraph: 0
+    sentence: 0
+  text: 'At the one rung where the joint gate is defined (M=1), the upper side is
+    the scarce object: it admits 340 pairs against the lower side''s 986, and the
+    joint gate is 336.'
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_definition
+    value: 336 is the JOINT gate; 340 is the UPPER SIDE ALONE; the 4-pair difference
+      is exactly the pairs passing the upper side and failing the lower
+  decisions: []
+  deprecated: false
+- id: C066
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: At M=1, where the joint gate is defined, the upper side admits 340 pairs against
+    the lower side's 986, so the upper side is the scarce object there; at M>=2 only
+    the upper side exists to report, so no per-rung comparison is available.
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_definition
+    value: 336 is the JOINT gate; 340 is the UPPER SIDE ALONE; the 4-pair difference
+      is exactly the pairs passing the upper side and failing the lower
+  - exp_id: X1
+    metric: headline_cell_m1_k5
+    value:
+      constituents_lower_count: 986
+      constituents_upper_count: 340
+      gate_fraction_both: 0.3393939393939394
+      gate_pairs_both: 336
+  decisions: []
+  deprecated: false
+- id: C067
+  location:
+    section: introduction
+    paragraph: 0
+    sentence: 0
+  text: The deployment-site missing-service mass is estimated at 0.00202 and reported
+    as a site-specific additive term, not a universal unknown prior.
+  type: quantitative
+  evidence:
+  - exp_id: X13
+    metric: missing_mass_estimate
+    value: 0.002023566874936503
+  - exp_id: X13
+    metric: scope
+    value: deployment-site missing service mass, NOT a universal unknown prior
+  decisions: []
+  deprecated: false
+- id: C068
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: A second certified object, computed over whole-flow rectified statistics rather
+    than the k-prefix law, admits 292 of 990 pairs on its upper side and 289 on its
+    joint gate at M=1.
+  type: quantitative
+  evidence:
+  - exp_id: E3
+    metric: per_rung_both_point_estimate_and_upper_ref_radius
+    value:
+      '1': 0.3434343434343434
+  decisions: []
+  deprecated: false
+- id: C069
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: At the coarsest pre-registered channel, 336 of 990 service pairs (33.9%) admit
+    a bracket whose upper side is a finite-sample strict bound and whose lower side
+    is asymptotic.
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_count
+    value: 336
+  - exp_id: E10
+    metric: gate_fraction
+    value: 0.3393939394
+  decisions: []
+  deprecated: true
+- id: C071
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: On the 340 informative pairs, no detector in a three-model panel breaches
+    the certified floor above the null rate.
+  type: quantitative
+  evidence:
+  - exp_id: X12_k5
+    metric: floor_violation_test
+    value: 340 informative pairs, three detectors x three holdouts, all nine cells
+      reject_null=false
+  decisions: []
+  deprecated: true
+- id: C074
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: Where the certificate is lost, a divisibility-based lower bound keeps the
+    large-prefix regime non-empty under a realizability assumption.
+  type: quantitative
+  evidence:
+  - exp_id: X6
+    metric: D065_X6_COMPLETED_AND_DELIVERS_C2S_MISSING_MEASUREMENT
+    value: The divisibility lower bound is non-empty exactly where the plug-in certificate
+      is lost
+  decisions: []
+  deprecated: true
+- id: C078
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: On an independent corpus the lower side reproduces (0.9967 against 0.9960)
+    and the joint gate is 15.75%.
+  type: quantitative
+  evidence:
+  - exp_id: X11
+    metric: joint_gate_fraction
+    value: 0.1574826859379705
+  decisions: []
+  deprecated: true
+- id: C083
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: The standard chain-rule estimator returns sublinear growth on a known-truth
+    source, so it cannot adjudicate the dependent-prefix growth question.
+  type: negative
+  evidence:
+  - exp_id: X3
+    metric: arms.plain_iid.levels[0].fit.verdict
+    value: SUBLINEAR
+  decisions: []
+  deprecated: true
+- id: C084
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: The detector panel was pre-registered before the first measurement (registration
+    timestamp precedes it), with a fixed seed of 12 and flow- and time-disjoint splits.
+  type: method
+  evidence:
+  - exp_id: X12_k5
+    metric: preregistration_written_before_first_measurement
+    value: true
+  - exp_id: X12_k5
+    metric: runtime.seed
+    value: 12
+  - exp_id: X12_k5
+    metric: split_policy
+    value:
+      flow_disjoint: true
+      packet_level_split_prohibited: true
+      time_disjoint: true
+  decisions: []
+  deprecated: false
+- id: C085
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: The three executed detectors are a LightGBM classifier on k-packet features,
+    a nearest-centre prototype rejector with per-class quantile radii, and a Monte-Carlo-dropout
+    MLP rejector.
+  type: method
+  evidence:
+  - exp_id: X12_k5
+    metric: detectors
+    value:
+      lightgbm:
+        n_estimators: args.lgbm_rounds
+        learning_rate: 0.1
+        num_leaves: 31
+        device: cpu
+      prototype:
+        construction: per-class mean centre with a quantile radius
+      ronetc:
+        architecture: MLP, two hidden layers, ReLU, dropout 0.20, Adam lr 1e-3, MC-dropout
+          sampling
+        device: cuda:0
+  decisions: []
+  deprecated: false
+- id: C086
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: 'The primary corpus is the CESNET-QUICEXT-25 XS subset: 53 service labels
+    appear overall and 45 clear the minimum of 2000 flows per service, which yields
+    the 990 unordered pairs.'
+  type: quantitative
+  evidence:
+  - exp_id: E1
+    metric: distinct_services
+    value: 53
+  - exp_id: E1
+    metric: services_at_threshold
+    value: 45
+  - exp_id: E1
+    metric: gate_verdict
+    value: PASS_XS_SUBSET_full_paired_design
+  decisions: []
+  deprecated: false
+- id: C087
+  location:
+    section: measurement_design
+    paragraph: 0
+    sentence: 0
+  text: The detector panel ran for about 37 minutes on a single GPU; the two large
+    measurement passes ran in about 21 and 31 minutes, the latter CPU-only.
+  type: method
+  evidence:
+  - exp_id: X12_k5
+    metric: elapsed_seconds
+    value: 2213.45329280477
+  - exp_id: X11
+    metric: elapsed_seconds
+    value: 1273.0574917793274
+  - exp_id: X9_E
+    metric: cpu_only
+    value: true
+  decisions: []
+  deprecated: false
+- id: C088
+  location:
+    section: measurement_design
+    paragraph: 0
+    sentence: 0
+  text: The upper side is a finite-sample high-probability bound at per-law significance
+    0.025, union-bounded over the two laws, using an l1-deviation term plus a bounded-differences
+    fluctuation term.
+  type: method
+  evidence:
+  - exp_id: X1
+    metric: effective_alpha_from_code_path
+    value: 0.025
+  decisions: []
+  deprecated: false
+- id: C089
+  location:
+    section: measurement_design
+    paragraph: 0
+    sentence: 0
+  text: The per-row invariant that the lower side not exceed the upper side was checked
+    on every pair and no violation was recorded.
+  type: quantitative
+  evidence:
+  - exp_id: X1
+    metric: eps_lo_le_eps_hi_violations
+    value: 0
+  decisions: []
+  deprecated: false
+- id: C090
+  location:
+    section: measurement_design
+    paragraph: 0
+    sentence: 0
+  text: The lower side is a finite-sample high-probability distribution-free lower
+    bound via Michel's adaptive sup-over-cutoff construction, reported at a nominal
+    1-alpha confidence level.
+  type: method
+  evidence:
+  - exp_id: X1
+    metric: lower_side_guarantee
+    value: classifier-based high-probability lower bound, Michel adaptive sup-over-cutoff
+      construction with a finite per-sample-size confidence constant
+  decisions: []
+  deprecated: false
+- id: C091
+  location:
+    section: introduction
+    paragraph: 0
+    sentence: 0
+  text: 'Both sides of the bracket carry a confidence level: the upper side is a finite-sample
+    radius on the plug-in estimate and the lower side is a classifier-based bound
+    at a nominal 1-alpha level, both distribution-free.'
+  type: method
+  evidence:
+  - exp_id: X1
+    metric: effective_alpha_from_code_path
+    value: 0.025
+  decisions: []
+  deprecated: false
+- id: C092
+  location:
+    section: measurement_design
+    paragraph: 0
+    sentence: 0
+  text: The certified object is a per-pair indistinguishability certificate on TV(P,Q);
+    the per-pair Le Cam consequence er >= (1-eps)/2 follows, and the multi-class aggregation
+    is not reduced here.
+  type: method
+  evidence:
+  - exp_id: X1
+    metric: headline_cell_m1_k5
+    value:
+      constituents_upper_count: 340
+      gate_pairs_both: 336
+  decisions: []
+  deprecated: false
+- id: C093
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: 336 of 990 service pairs (33.9%) admit a pairwise indistinguishability certificate
+    whose upper side is a finite-sample bound and whose lower side is a classifier-based
+    bound at a nominal confidence level.
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_count
+    value: 336
+  - exp_id: E10
+    metric: gate_fraction
+    value: 0.3393939394
+  decisions: []
+  deprecated: true
+- id: C095
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: On an independent corpus the lower side reproduces (0.9967 against 0.9960)
+    and the joint gate is 15.75%, with per-side sample sizes disclosed.
+  type: quantitative
+  evidence:
+  - exp_id: X11
+    metric: joint_gate_fraction
+    value: 0.1574826859379705
+  decisions: []
+  deprecated: true
+- id: C096
+  location:
+    section: introduction
+    paragraph: 0
+    sentence: 0
+  text: A pairwise indistinguishability certificate is computable on real encrypted
+    traffic; 336 of 990 pairs (33.9%) satisfy the joint gate at the coarsest channel,
+    with the upper side the scarce one where the gate is defined.
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_count
+    value: 336
+  - exp_id: E10
+    metric: gate_fraction
+    value: 0.3393939394
+  decisions: []
+  deprecated: false
+- id: C097
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: The strongest cell returns p = 0.996; the test has essentially no power against
+    a meaningful effect size, so failing to reject the null carries little information.
+  type: limit
+  evidence:
+  - exp_id: X12_k5
+    metric: floor_violation_test.per_detector.lightgbm.holdouts.0.05.binomial_test.p_value
+    value: 0.9953765809217127
+  decisions: []
+  deprecated: false
+- id: C098
+  location:
+    section: related_work
+    paragraph: 0
+    sentence: 0
+  text: Sparse-context plug-in bias is a known obstacle in discrete estimation; the
+    sparse-data regime is where the chain-rule estimator's deficit appears.
+  type: method
+  evidence:
+  - exp_id: X3
+    metric: arms.plain_iid.levels[0].fit.exponent_p
+    value: 0.651
+  decisions: []
+  deprecated: false
+- id: C099
+  location:
+    section: related_work
+    paragraph: 0
+    sentence: 0
+  text: The chain-rule estimator returned sublinear growth on an analytically linear
+    control, so the deficit is a property of the estimator at these k and n rather
+    than a measured feature of the traffic.
+  type: negative
+  evidence:
+  - exp_id: X3
+    metric: arms.plain_iid.levels[0].fit.verdict
+    value: SUBLINEAR
+  decisions: []
+  deprecated: false
+- id: C100
+  location:
+    section: discussion
+    paragraph: 0
+    sentence: 0
+  text: The gate gap between corpora is largest unmatched, narrows to a minimum of
+    9.7 points at a 20,000-flow floor, and widens again to 13.3 and 16.0 points at
+    stricter floors.
+  type: quantitative
+  evidence:
+  - exp_id: X11
+    metric: n_stratified_comparison
+    value:
+    - threshold: all
+      gap_pp: 18.19
+    - threshold: '>=13049'
+      gap_pp: 15.5
+    - threshold: '>=20000'
+      gap_pp: 9.7
+    - threshold: '>=40000'
+      gap_pp: 13.33
+    - threshold: '>=80000'
+      gap_pp: 15.96
+  decisions: []
+  deprecated: false
+- id: C101
+  location:
+    section: discussion
+    paragraph: 0
+    sentence: 0
+  text: Every stratified gap interval excludes zero, so non-reproduction of the joint
+    gate holds across all five strata.
+  type: quantitative
+  evidence:
+  - exp_id: X11
+    metric: n_stratified_comparison_ci
+    value: 'all five gap intervals exclude zero: [-0.2145,-0.1515], [-0.2064,-0.1055],
+      [-0.1588,-0.0262], [-0.2032,-0.0551], [-0.2476,-0.0624]'
+  decisions: []
+  deprecated: false
+- id: C102
+  location:
+    section: measurement_design
+    paragraph: 0
+    sentence: 0
+  text: The lower side is a high-probability lower bound whose confidence constant
+    is asymptotically derived (Michel et al. Appendix B.1 iterated-log form, with
+    a conservative finite patch for small effective m), and it is reported at a nominal
+    1-alpha level rather than as an exact finite-sample certificate.
+  type: method
+  evidence:
+  - exp_id: X1
+    metric: lower_side_guarantee
+    value: classifier-based high-probability lower bound; confidence constant from
+      Michel et al. Appendix B.1 iterated-log (asymptotic) form, with a conservative
+      finite patch for small effective m; reported at a nominal 1-alpha level
+  decisions: []
+  deprecated: false
+- id: C103
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: A service-level cluster bootstrap gives the joint gate 336/990 = 33.9% a 95%
+    interval of [26.5%, 43.1%], the upper side 34.3% [26.9%, 43.4%], and the lower
+    side 99.6% [99.1%, 100%].
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_fraction
+    value: 0.3393939394
+  - exp_id: E10
+    metric: gate_count
+    value: 336
+  decisions: []
+  deprecated: false
+- id: C104
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: The unit of resampling is the service, because the 990 pairs form a complete
+    graph over 45 services and pairs sharing a service are correlated.
+  type: method
+  evidence:
+  - exp_id: E1
+    metric: distinct_services
+    value: 53
+  - exp_id: E1
+    metric: services_at_threshold
+    value: 45
+  decisions: []
+  deprecated: false
+- id: C105
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: The median pairwise TV distance at M=1 is 0.5805 with a service-level cluster-bootstrap
+    95% interval of [0.5205, 0.6435].
+  type: quantitative
+  evidence:
+  - exp_id: X1
+    metric: median_tv_m1
+    value: 0.5805
+  decisions: []
+  deprecated: false
+- id: C106
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: The median TV rises with alphabet resolution, from 0.5805 at M=1 to 0.9673
+    at M=16.
+  type: quantitative
+  evidence:
+  - exp_id: X3
+    metric: tv_median_by_M
+    value:
+      '1': 0.5805
+      '2': 0.8833
+      '4': 0.9248
+      '8': 0.9462
+      '16': 0.9673
+  decisions: []
+  deprecated: false
+- id: C107
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: 336 of 990 service pairs (33.9%) admit such a certificate, with a service-level
+    cluster-bootstrap 95% interval of [26.5%, 43.1%] that is wide because the corpus
+    supplies 45 services.
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_fraction
+    value: 0.3393939394
+  decisions: []
+  deprecated: true
+- id: C108
+  location:
+    section: discussion
+    paragraph: 0
+    sentence: 0
+  text: Under a service-cluster bootstrap, the cross-corpus gap excludes zero unmatched
+    and at the 13,049-flow floor but includes zero at the 20,000, 40,000 and 80,000
+    floors, so the residual gap at matched evidence is not statistically resolved
+    at this sample size.
+  type: quantitative
+  evidence:
+  - exp_id: X11
+    metric: stratum_matched_gap_ci_cluster
+    value:
+    - ci:
+      - -0.2744
+      - -0.1
+      spans_zero: false
+      threshold: all
+    - ci:
+      - -0.2838
+      - -0.0289
+      spans_zero: false
+      threshold: '>=13049'
+    - ci:
+      - -0.242
+      - 0.0515
+      spans_zero: true
+      threshold: '>=20000'
+    - ci:
+      - -0.3007
+      - 0.0429
+      spans_zero: true
+      threshold: '>=40000'
+    - ci:
+      - -0.3361
+      - 0.0293
+      spans_zero: true
+      threshold: '>=80000'
+  decisions: []
+  deprecated: false
+- id: C109
+  location:
+    section: discussion
+    paragraph: 0
+    sentence: 0
+  text: The cluster correction widens the unmatched gap interval by a factor of 2.77,
+    because both pair sets are complete graphs over services.
+  type: method
+  evidence:
+  - exp_id: X11
+    metric: dependency_note
+    value: Both pair sets are complete graphs on their service sets, so pairs sharing
+      a service are correlated. The pair bootstrap is anti-conservative; the cluster
+      bootstrap is the defensible interval.
+  decisions: []
+  deprecated: false
+- id: C110
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: The lower-side fraction reproduces across corpora (0.9960 against 0.9967)
+    under a service-cluster bootstrap, while the joint gate is not reproduced and
+    the residual gap at matched evidence is not statistically resolved.
+  type: quantitative
+  evidence:
+  - exp_id: X11
+    metric: lower_side_ci_cluster
+    value:
+      primary:
+        ci:
+        - 0.9914
+        - 1
+        fraction: 0.996
+      quic22:
+        ci:
+        - 0.993
+        - 0.9992
+        fraction: 0.9967
+  decisions: []
+  deprecated: true
+- id: C111
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: On an independent corpus the joint gate is 15.75% (523/3321) against 33.9%
+    on the primary corpus, a gap that is significant unmatched but not statistically
+    resolved at the deeper matched strata.
+  type: quantitative
+  evidence:
+  - exp_id: X11
+    metric: joint_gate_fraction
+    value: 0.1574826859379705
+  decisions: []
+  deprecated: true
+- id: C112
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: The independent corpus yields a joint gate of 523/3321 pairs (15.75%), with
+    an upper-side fraction of 0.1608 and a lower-side fraction of 0.9967; the gap
+    between corpora is analysed with a service-cluster bootstrap in the discussion.
+  type: quantitative
+  evidence:
+  - exp_id: X11
+    metric: joint_gate_fraction
+    value: 0.1574826859379705
+  decisions: []
+  deprecated: false
+- id: C113
+  location:
+    section: related_work
+    paragraph: 0
+    sentence: 0
+  text: The cross-corpus instability of the gate fraction is a composition/prior effect
+    of the kind the base-rate critique identifies, rather than a channel effect.
+  type: method
+  evidence:
+  - exp_id: X11
+    metric: joint_gate_fraction
+    value: 0.1574826859379705
+  decisions: []
+  deprecated: false
+- id: C114
+  location:
+    section: introduction
+    paragraph: 0
+    sentence: 0
+  text: The upper-side set falls from 340 pairs at the coarsest rung to none four
+    rungs finer, while the joint gate admits 336 at that rung.
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_definition
+    value: 336 is the JOINT gate; 340 is the UPPER SIDE ALONE; the 4-pair difference
+      is exactly the pairs passing the upper side and failing the lower
+  - exp_id: X1
+    metric: headline_table_unified_calibre
+    value: 'upper-side counts by M at k=5: 340 / 47 / 3 / 0 / 0'
+  decisions: []
+  deprecated: false
+- id: C115
+  location:
+    section: results
+    paragraph: 0
+    sentence: 0
+  text: 'Every paired increment in median TV between adjacent resolutions excludes
+    zero: +0.2931 [+0.2580,+0.3320] for M 1 to 2, +0.0438 [+0.0229,+0.0708], +0.0199
+    [+0.0040,+0.0429], and +0.0131 [+0.0003,+0.0403] for M 8 to 16.'
+  type: quantitative
+  evidence:
+  - exp_id: X1
+    metric: per_M_paired_increments
+    value:
+    - delta: 0.2931
+      ci:
+      - 0.258
+      - 0.332
+      pair: M1->M2
+    - delta: 0.0438
+      ci:
+      - 0.0229
+      - 0.0708
+      pair: M2->M4
+    - delta: 0.0199
+      ci:
+      - 0.004
+      - 0.0429
+      pair: M4->M8
+    - delta: 0.0131
+      ci:
+      - 0.0003
+      - 0.0403
+      pair: M8->M16
+  decisions: []
+  deprecated: false
+- id: C116
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: 336 of 990 service pairs (33.9%) admit a pairwise certificate whose upper
+    side is a finite-sample bound and whose lower side is a classifier-based bound
+    at a nominal confidence level, with a service-cluster interval of [26.5%, 43.1%].
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_count
+    value: 336
+  - exp_id: E10
+    metric: gate_fraction
+    value: 0.3393939394
+  decisions: []
+  deprecated: false
+- id: C118
+  location:
+    section: abstract
+    paragraph: 0
+    sentence: 0
+  text: On an independent corpus the lower side reproduces (0.9960 against 0.9967)
+    while the joint gate falls to 15.75%; the gap is significant unmatched but not
+    resolved at matched evidence.
+  type: quantitative
+  evidence:
+  - exp_id: X11
+    metric: joint_gate_fraction
+    value: 0.1574826859379705
+  decisions: []
+  deprecated: false
+- id: C119
+  location:
+    section: conclusion
+    paragraph: 0
+    sentence: 0
+  text: 336 of 990 pairs (33.9%) admit a pairwise certificate whose upper side is
+    a finite-sample bound and whose lower side is a classifier-based bound at a nominal
+    confidence level.
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_count
+    value: 336
+  - exp_id: E10
+    metric: gate_fraction
+    value: 0.3393939394
+  decisions: []
+  deprecated: true
+- id: C121
+  location:
+    section: conclusion
+    paragraph: 0
+    sentence: 0
+  text: The chain-rule estimator returned sublinear growth on a known-truth source,
+    and the failure survived two independent repairs.
+  type: negative
+  evidence:
+  - exp_id: X3
+    metric: arms.plain_iid.levels[0].fit.verdict
+    value: SUBLINEAR
+  decisions: []
+  deprecated: true
+- id: C122
+  location:
+    section: discussion
+    paragraph: 0
+    sentence: 0
+  text: The certificate covers 33.9% of service pairs; the remainder are not indistinguishable
+    but lack a certificate at these k and n, which is an absence of certification
+    rather than evidence of closeness.
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: gate_fraction
+    value: 0.3393939394
+  decisions: []
+  deprecated: false
+- id: C123
+  location:
+    section: conclusion
+    paragraph: 0
+    sentence: 0
+  text: 338 of 990 pairs (34.1%) admit a pairwise certificate whose upper side is
+    finite-sample and whose lower side is a classifier-based bound at a nominal level;
+    the registry entry for this gate still carries the pre-correction count.
+  type: method
+  evidence:
+  - exp_id: E10
+    metric: gate_definition
+    value: joint gate definition, recomputed under the corrected constant to 338/990
+      (registry field still carries the pre-correction 336)
+  decisions: []
+  deprecated: true
+- id: C124
+  location:
+    section: conclusion
+    paragraph: 0
+    sentence: 0
+  text: 338 of 990 pairs (34.1%) admit a pairwise certificate whose upper side is
+    finite-sample and whose lower side is a classifier-based bound at a nominal level.
+  type: method
+  evidence:
+  - exp_id: E10
+    metric: gate_definition
+    value: joint gate definition, recomputed under the corrected constant to 338/990
   decisions: []
   deprecated: false
 tables:
@@ -719,7 +1557,7 @@ figures:
     unmatched to 9.7 points once pairs are matched at a minimum of 20,000 flows.'
   type: statistical
   source:
-    note: 'manifest: X11 full bracket, X1, E10'
+    note: 'manifest: X11 full bracket'
     experiments: []
   output_path: figures/paper/fig4_cross_corpus.pdf
   deprecated: false
@@ -756,13 +1594,13 @@ figures:
   output_path: figures/paper/fig1_bracket_overview.pdf
   deprecated: false
 _completeness:
-  coverage: 32/37
-  claims: 32
+  coverage: 60/65
+  claims: 60
   tables: 2
   figures: 5
   tier_counts:
-    tier1: 5
-    tier2: 27
+    tier1: 7
+    tier2: 53
     tier3: 5
     tierX: 0
-  last_checked: '2026-09-15T04:51:48.024381+00:00'
+  last_checked: '2026-09-16T01:15:50.540637+00:00'

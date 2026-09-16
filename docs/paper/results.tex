@@ -250,9 +250,8 @@ the nearest centre falls inside that centre's radius.
 $\min(128, 2d)$, ReLU activations and dropout $0.20$, trained with Adam at
 $10^{-3}$ for a fixed epoch budget and scored by Monte-Carlo dropout sampling
 (64 passes), with rejection driven by predictive uncertainty.
-A fourth intended detector (\texttt{pcap\_encoder}, a packet-capture encoder
-model) did not run (\texttt{ModuleNotFoundError}); it contributes no cells and is
-not counted as a pass.
+A fourth detector, a Pcap-Encoder adapter, was not run (its optional dependency
+was absent); it contributes no cells and is not counted as a pass.
 
 \paragraph{Multiplicity and power.}
 The nine cells are three detectors crossed with three holdout levels, and the

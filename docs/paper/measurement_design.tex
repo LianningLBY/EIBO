@@ -280,12 +280,11 @@ its cost does not grow with model capacity. Every bracket, sweep, and estimator
 computation is CPU-only: the independent-corpus bracket ran in about 21 minutes
 on eight CPU workers, the channel-sensitivity sweep in about 31 minutes, and the
 known-truth estimator control reuses a cached occupancy table and finishes in
-under a minute. The detector panel is the only step that touches a GPU, and even
-there the device is mixed: LightGBM and the prototype rejector ran on CPU (the
-LightGBM OpenCL attempt found no device and fell back), while only the RoNeTC
-neural rejector used the accelerator. The host carries 208 CPU cores, 32\,GB of
-accelerator memory, and a 90\,GB memory limit, and the panel itself ran in about
-37 minutes.
+under a minute. Detector training and validation ran mostly on CPU: LightGBM and
+the prototype rejector both executed on CPU (the LightGBM OpenCL attempt found no
+device and fell back), and only the RoNeTC neural rejector ran on the
+accelerator (NVIDIA GeForce RTX 5090 D, 32\,GB). The panel completed in about 37
+minutes, so no result here depends on a large-scale cluster.
 
 Splits are flow-disjoint and time-disjoint throughout, so no flow appears on
 both sides and the test period follows the training period with a discarded

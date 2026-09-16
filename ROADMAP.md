@@ -137,6 +137,9 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D128 | 2026-09-16 | D128: Round 6 action — convergence warning address | E10 |
+| D127 | 2026-09-16 | D127: Round 5 action matrix — 8 writing fixes, W6  | E10 |
+| D126 | 2026-09-16 | D126: Round 4 action matrix — 12 writing/declarati | E10 |
 | D125 | 2026-09-16 | D125: paper is at 342/338 but every artifact is at | — |
 | D124 | 2026-09-16 | D124: constant FROZEN at the ledger value — neithe | — |
 | D123 | 2026-09-16 | D123: RETRACT D118/D120/D122 — my constant "fix" w | — |
@@ -144,7 +147,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D121 | 2026-09-16 | D121: routed the per-pair CSV pull to the executio | — |
 | D120 | 2026-09-16 | D120: W4 has a downstream effect on the detector s | — |
 | D119 | 2026-09-16 | D119: remaining three judgment items settled — W6  | — |
-| D118 | 2026-09-15 | D118: W4 settled analytically — the current radius | — |
-| D117 | 2026-09-15 | D117: Round 3 weak-reject — scientific core intact | — |
-| D116 | 2026-09-15 | D116: re-review submitted and accepted — Round 2's | — |
 
