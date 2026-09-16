@@ -86,8 +86,12 @@ saturates, and the matched difference in the radius-free estimate grows with the
 identifier cardinality, from $0.0271$ at $B{=}2$ through $0.0885$ and $0.2271$ to
 $0.3136$ at $B{=}256$ on the test split, then falls to $0.0150$ at $B{=}65{,}536$
 where both arms saturate and the comparison loses its content
-(\Cref{fig:sensitivity}). The cardinality-only arm does not produce a comparable
-separation, so the effect tracks identifier content and not merely alphabet size.
+(\Cref{fig:sensitivity}). Below that saturation point the cardinality-only arm does
+not produce a comparable separation — it is two to three orders of magnitude smaller
+at every rung up to $B{=}256$ — so the effect tracks identifier content and not
+merely alphabet size. The qualifier matters: at $B{=}65{,}536$ the cardinality arm
+reaches $0.3829$ against the identifier arm's $0.3920$, so the claim is scoped to
+the rungs below saturation and is not made in the saturated tail.
 
 The scope of this result is narrow and we keep it that way. The identifier
 effect is established at the level of the radius-free estimate $\widehat{tv}$,
