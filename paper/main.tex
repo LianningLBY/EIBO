@@ -96,16 +96,14 @@ current dataset's collection protocol.
 This appendix lists the artifacts needed to evaluate the paper's core
 contributions and how the review committee can reach each one. Artifacts are
 accessible through the submission system's supplementary-material channel;
-anonymous URLs are not provided to preserve double-blind integrity. The
-provenance chain below is stated so that a reader can check it without following
-any link.
+anonymous URLs are not provided, to preserve double-blind integrity.
 
 \textbf{Worked provenance example.}
-Every quantitative claim in this paper resolves through an experiment identifier
-to a manifest entry carrying a \texttt{content\_sha256} over the artifact's
-bytes. Three examples, each a real entry whose recorded hash we verified against
-the file's own bytes. The hashes below are the full 64 hexadecimal characters,
-broken across lines where needed so they do not stretch the spacing:
+Every quantitative claim resolves through an experiment identifier to a manifest
+entry carrying a \texttt{content\_sha256} over the artifact's bytes. The three
+real entries below were each verified against the file's own bytes; the hashes
+are the full 64 hexadecimal characters, broken across lines so they do not
+stretch the spacing:
 \begin{itemize}
   \item the per-pair bracket table behind \Cref{tab:bracket} is registered as
   \texttt{art\_20260913\_e5ebac} (the artifact
@@ -157,10 +155,9 @@ measurement. That ordering, not the word itself, is the claim.
 \end{description}
 
 \textbf{Content-addressed chain of record.}
-The manifest hash, rather than any working copy, is the artifact of record.
-Where a claim cites a nested field, the full path is recorded in the paper's
-provenance crosswalk so a reviewer can follow the number to its source without
-tooling.
+The manifest hash, rather than any working copy, is the artifact of record, and a
+nested-field citation is recorded in the paper's provenance crosswalk so a
+reviewer can follow the number to its source without tooling.
 
 \textbf{Data.}
 The primary corpus is publicly released by its operators and requires no
@@ -191,7 +188,7 @@ conditions by a margin.
 Table~\ref{tab:endpoints} gives the distributional summary of the bracket
 endpoints.
 
-\begin{table}[t]
+\begin{table}[!htbp]
 \centering
 \small
 \caption{Both endpoints across all 990 pairs at $k{=}5$, $M{=}1$. The lower

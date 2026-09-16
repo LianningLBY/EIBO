@@ -7,7 +7,10 @@ whether 99\% is reachable with a longer observation window, whether 97\% is
 already at the limit the channel permits, or whether the remaining 3\% is
 irreducible for reasons that have nothing to do with the classifier. Detectors
 in this area are evaluated by their own error rates, and an error rate is a
-statement about one system rather than a statement about the problem.
+statement about one system rather than a statement about the problem. We call the
+object this paper builds \emph{certification-grade}: every number it reports is
+tied to a stated confidence level and a stated assumption, each named rather than
+borrowing strength from the other.
 
 What a practitioner needs is the other direction: a bound on how well
 \emph{any} classifier can do, at a stated observation window, for a stated pair
@@ -20,10 +23,6 @@ error decay requires repeated conditionally independent observations, and the
 frontier is proved inside a stationary-memoryless class. Real packet prefixes
 are neither independent nor stationary, and the gap between what those results
 assume and what a trace provides is exactly the gap a practitioner must cross.
-
-We call the resulting object \emph{certification-grade}: every number it reports
-is tied to a stated confidence level and a stated assumption, each named rather
-than borrowing strength from the other.
 
 We measure a two-sided indistinguishability bracket on real encrypted traffic
 instead, and we give each side a confidence level rather than pairing a proven

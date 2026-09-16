@@ -55,9 +55,9 @@ zero as the alphabet is refined, which is the mechanism
 The headline fraction is a stratum statement, not a property of traffic in
 general: it says that 33.9\% of pairs on this corpus, at this channel, admit a
 two-sided interval whose upper side is finite-sample and whose lower side clears
-the gate. It does not say the remaining 66.1\% are indistinguishable;
-\Cref{sec:results/horizon} shows that for most of them no certificate
-\emph{exists} here, which is a different and stronger statement.
+the gate. It does not say the remaining 66.1\% are indistinguishable: for most of
+them no certificate \emph{exists} here, which \Cref{sec:results/horizon} shows is
+a different and stronger statement.
 
 \paragraph{Uncertainty on the headline.}
 The 990 pairs are not independent observations: they form a complete graph over
@@ -143,7 +143,7 @@ $0.9462$ to $0.9673$ at $M{=}16$.
 
 The rise is tested with paired increments rather than by comparing marginal
 intervals, since the same service draws are reused at every rung and the
-marginals overlap at the finer resolutions. The increment at a step is the
+marginals overlap at the finer resolutions. A paired increment at a step is the
 median of the paired differences
 $\Delta_i = \widehat{tv}(M,\ \text{pair}_i) - \widehat{tv}(M-1,\ \text{pair}_i)$
 taken over pairs, \emph{not} the difference of the two rungs' medians; the two
@@ -156,8 +156,8 @@ The per-replicate change in median
 $\tv$ excludes zero at every step: $+0.2931$ $[+0.2580,+0.3320]$ from $M{=}1$
 to $2$; $+0.0438$ $[+0.0229,+0.0708]$ to $4$; $+0.0199$ $[+0.0040,+0.0429]$ to
 $8$; and $+0.0131$ $[+0.0003,+0.0403]$ to $16$. The increase is statistically
-supported at every rung and the increment shrinks by over an order of magnitude
-across the ladder. One confound must be named: the increments establish that the medians rise with
+supported at every rung and the paired increment shrinks by over an order of
+magnitude across the ladder. One confound must be named: the increments establish that the medians rise with
 significance, but do not by themselves separate genuine resolution from sparse
 inflation at fixed $n$, since a finer alphabet spreads the same flows over more
 symbols. The saturating column is the tell (\Cref{tab:bracket} / \Cref{fig:horizon}a). The last
@@ -206,7 +206,7 @@ accordingly throughout.
 
 A bracket is useful only if real detectors respect it. We test this with a
 pre-registered one-sided binomial comparison restricted to the informative
-stratum, the pairs on which a certificate exists, against the predicted floor
+stratum, the pairs with $\epshi < 0.5$, against the predicted floor
 $(1-\epshi)/2$. The stratum is populated at $k{=}5$: 340 informative pairs, 540
 secondary, and 110 excluded, summing exactly to the 990-pair denominator of
 \Cref{tab:bracket}. At $k{=}15$ and $k{=}30$ the stratum is empty, so those
@@ -225,9 +225,12 @@ observable than the $m{=}(2M)^k{=}32$-cell quantized alphabet on which the
 certificate's radius is computed. A detector that fails to breach the certified
 floor is therefore evidence about a more informative observable than the one the
 bracket covers. This is a second object substitution beyond the
-closed-set/open-set one declared below this paragraph; both run in the
-same direction (the validated object is harder to detect on than the certified
-one) and we scope the claim to the validated object.
+closed-set/open-set one declared below. Both substitutions run in
+the same direction: at finer resolution both the plug-in divergence and the
+confidence radius increase, which lowers the predicted floor and makes a
+violation easier to observe, so a non-breach on the finer object is the stronger
+statement. A breach on the finer channel would not, however, falsify the coarser
+certificate; this validation is a consistency check, not a falsifiable test.
 \emph{Prototype} is a nearest-centre rejector in the style of prototype-radius
 open-set methods \citep{qu2026sepspace}: one mean centre per service, with a
 per-service acceptance radius set at a fixed distance quantile of the training
@@ -248,18 +251,15 @@ raw one-sided $p$-value against its own null and do not combine cells; the
 strongest cell is $p = 0.9765$, so no correction for multiplicity could change
 the verdict, and we make no family-wise claim beyond that.
 
-Power is the more serious limitation, and it cuts against the test. The null is
-a $5\%$ violation rate\footnote{The null is pre-registered at $5\%$. The $0.975$
-joint level uses the larger constant ($2.9604$), which produces a smaller
-predicted floor and makes violations less likely; the $5\%$ null is therefore the
-stricter direction. No cell rejects at either rate (see the settled computation
-in the review record).}; 8 violations in 340 pairs gives $p = 0.9954$, so the
-design has very little power against a modest excess. Reading ``not falsified''
-as evidence that the floor is tight would be a mistake: the test supports only
-the weaker statement that no gross violation is present. Detecting a two- or
-three-point excess would need more informative pairs than this channel supplies,
-which is a consequence of the short certificate horizon rather than a fixable
-choice.
+Power is the more serious limitation. The null is a $5\%$ violation rate, and
+8 violations in 340 pairs gives $p = 0.9954$, so the design has little power
+against a modest excess. The observed rates ($0.6\%$--$2.9\%$) sit below both
+null rates: under the $5\%$ null the strongest cell (10 violations) gives
+$p = 0.9765$, and under the $2.5\%$ null implied by the $0.975$ joint level it
+gives $p = 0.346$. Neither rejects, so reading ``not falsified'' as evidence that
+the floor is tight would be a mistake: the test supports only the weaker
+statement that no gross violation is present, and detecting a two- or three-point
+excess would need more informative pairs than this channel supplies.
 
 \Cref{tab:detectors} reports the outcome. No cell rejects the null: observed
 violation rates run from $0.6\%$ to $2.9\%$ against a null rate of $5\%$, all

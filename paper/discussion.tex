@@ -23,12 +23,16 @@ reproduces across the two corpora, $0.9967$ against $0.9960$, which is not a
 foregone conclusion: it is computed by a different method from the upper side and
 on different data.
 
+The comparison pairs the primary corpus's full-$n$ $33.9\%$ against QUIC22's
+capped $15.75\%$; the replication run estimates its lower side at a
+$20{,}000$-flow per-service cap where the primary corpus uses every eligible flow,
+and we report each figure under its own convention without translating.
+
 The upper side does not reproduce, and we state the two facts that govern how it
-should be read. First, the joint gate combines a full-$n$ upper side with a
-lower side capped at 20,000 flows per service. On the \emph{replication} corpus
-the cap binds on 2{,}145 of the 3{,}321 pairs, and across that corpus the cap
-lowers $\epslo$ in aggregate and therefore understates the gate, so the reported
-figure is a floor and the bias runs in the conservative direction.
+should be read. First, that cap binds on 2{,}145 of the replication corpus's
+3{,}321 pairs, and on that corpus it lowers $\epslo$ in aggregate and therefore
+understates the gate, so the reported figure is a floor and the bias runs in the
+conservative direction.
 
 The direction is aggregate rather than per-pair, and the two corpora are
 separate statements here. On the \emph{primary} corpus, where the cap also
@@ -54,7 +58,7 @@ Whether the gap survives at matched evidence turns on the dependence structure.
 The 990 pairs form a complete graph over 45 services ($\binom{45}{2}$), as do the
 $3{,}321$ replication pairs over 82 services, so pairs sharing a service are
 correlated and a pair-level bootstrap is anti-conservative. Under a
-service-cluster bootstrap, non-reproduction remains significant unmatched
+service-cluster bootstrap, non-reproduction remains significant before matching
 ($-18.3$ points, interval $[-27.4,-10.0]$) and at the $13{,}049$-flow floor
 ($-15.5$, $[-28.4,-2.9]$), but the intervals at the $20{,}000$, $40{,}000$, and
 $80{,}000$ floors are $[-24.2,+5.2]$, $[-30.1,+4.3]$, and $[-33.6,+2.9]$, all of
@@ -120,8 +124,8 @@ fractions are numerically close, but presenting that as a cross-check would be
 wrong: they agree only where each uses its own radius convention, and holding the
 convention common separates them by hundreds of pairs. The statistics differ by
 about $2.7\times$ and the radius constants by about $7.3\times$ in opposite
-directions, so the near-equality is cancellation rather than corroboration. We
-report both without ranking them.
+directions, so the near-equality is cancellation, not corroboration. We report
+both without ranking them.
 
 \subsection{Limitations}
 \label{sec:discussion/limitations}
@@ -135,8 +139,8 @@ absence of certification, not as evidence of closeness.
 Every number here is measured on a subset whose occupancy pass is provisional
 pending full-corpus confirmation, and on a single protocol. Both sides carry a
 confidence level and the lower side's is conditional on the fitted decision
-function, so when read as a two-sided statement the interval is only as strong as
-its weaker endpoint. The growth question that motivated the estimator study
+function, so as a two-sided statement the interval is only as strong as its
+weaker endpoint. The growth question that motivated the estimator study
 remains open, and we present no estimate of the growth rate anywhere. The
 large-$k$ divisibility bound is conditional on a realizability assumption: useful
 exactly where the plug-in certificate is lost, but not distribution-free, which
@@ -154,10 +158,10 @@ The bracket is simultaneously an auditing instrument and a map: it shows an
 operator which pairs are near the detection limit and an adversary which are
 cheap to distinguish. At the finest rung the paper demonstrates detection is
 possible, so the publishable content is the existence claim rather than a new
-capability, and the identifier result (\Cref{sec:discussion/sensitivity})
-indicates that metadata beyond the declared channel carries separation the
-certificate does not cover, which argues for the certificate as a lower bound on
-the honest channel rather than a new attack vector.
+capability, and the identifier result (\Cref{sec:discussion/sensitivity}) shows
+that metadata beyond the declared channel carries separation the certificate
+does not cover --- an argument for the certificate as a lower bound, not a new
+attack vector.
 
 \begin{figure*}[t]
 \centering
