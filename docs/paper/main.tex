@@ -163,16 +163,14 @@ reviewer can follow the number to its source without tooling.
 
 \textbf{Compute.}
 \label{sec:appendix/compute}
-Every bracket, sweep, and estimator computation is CPU-only: the
-independent-corpus bracket ran in about 21 minutes on eight CPU workers, the
-channel-sensitivity sweep in about 31 minutes, and the known-truth estimator
-control reuses a cached occupancy table and finishes in under a minute. Detector
-training and validation ran mostly on CPU. Per-detector device assignments:
-LightGBM on CPU (its OpenCL attempt found no device and fell back), the
-prototype rejector on CPU, and RoNeTC on the accelerator --- NVIDIA GeForce
-RTX 5090 D, 32\,GB. The panel completed in about 37 minutes. The host carries
-208 CPU cores, 32\,GB of accelerator memory, and a 90\,GB memory limit, so no
-result here depends on a large-scale cluster.
+Per-step timings and per-detector device assignments. The independent-corpus
+bracket ran in about 21 minutes on eight CPU workers, the channel-sensitivity
+sweep in about 31 minutes, and the known-truth estimator control reuses a
+cached occupancy table and finishes in under a minute. LightGBM and the
+prototype rejector executed on CPU (the LightGBM OpenCL attempt found no device
+and fell back); RoNeTC ran on the accelerator, an NVIDIA GeForce RTX 5090 D with
+32\,GB. The host carries 208 CPU cores and a 90\,GB memory limit, so no result
+here depends on a large-scale cluster.
 
 \textbf{Data.}
 The primary corpus is publicly released by its operators and requires no

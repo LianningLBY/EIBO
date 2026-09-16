@@ -276,10 +276,12 @@ the ledger alone.
 
 The measurements are cheap relative to the detector panel they are compared
 against, which is the intended shape: the bracket is a property of the data, so
-its cost does not grow with model capacity. The bracket computation runs on CPU;
-the detector panel uses mixed devices (one GPU, two CPU). Hardware details,
-per-step timings, and the per-detector device assignments are in
-\Cref{sec:appendix/compute}.
+its cost does not grow with model capacity. Every bracket, sweep, and estimator
+computation is CPU-only. Detector training and validation ran mostly on CPU:
+LightGBM and the prototype rejector both executed on CPU, and only the RoNeTC
+neural rejector ran on the accelerator. The panel completed in about 37 minutes,
+so no result here depends on a large-scale cluster; per-step timings and the
+per-detector device assignments are in \Cref{sec:appendix/compute}.
 
 Splits are flow-disjoint and time-disjoint throughout, so no flow appears on
 both sides and the test period follows the training period with a discarded
