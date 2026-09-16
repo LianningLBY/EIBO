@@ -1,4 +1,4 @@
-_next_id: 47
+_next_id: 48
 constraints:
 - id: C001
   added: 2026-09-13 11:37 UTC
@@ -701,4 +701,22 @@ constraints:
     — a design withdrawn before it ran, not GPU work and not runnable. So the idle
     GPU is a property of the plan, not an omission, and this is now a checked finding
     rather than a belief.'
+  decision_id: D137
+- id: C047
+  added: 2026-09-16 21:27 UTC
+  summary: 'To decide whether an experiment used the accelerator, read the DEVICE
+    FIELD in its artifact, not the compute-class prose in the plan or registry. Most
+    GPU mentions in this project''s specs are negative (''CPU-only ... no GPU used'')
+    and a substring search reads them as positive, inflating the apparent GPU count
+    roughly eightfold. Also: get_gpu_health returns stale/no data after a server restart,
+    so never assert a card is currently idle from a stale reading — say only that
+    the registry shows no GPU job.'
+  scope: all
+  reason: 'An independent check found that grepping the registry for ''GPU'' misclassifies
+    entries: most specs that mention GPU say ''CPU-only ... no GPU used'', a negative
+    phrasing that reads as positive in a substring search. A first pass on this basis
+    judged 8 entries to be GPU-classed; the true count is one. The reliable discriminator
+    is the device field recorded in an entry''s own artifact (X12''s panel records
+    ronetc device ''cuda:0'' while lightgbm and prototype record ''cpu'', with LightGBM''s
+    GPU attempt failing on ''No OpenCL device found''), not the compute_class prose.'
   decision_id: D137
