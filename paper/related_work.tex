@@ -1,0 +1,119 @@
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Information-theoretic bounds on traffic analysis}
+\label{sec:related/bounds}
+
+Bounding what traffic analysis can achieve, rather than measuring a particular
+analyzer, is well established, and the results split by the structure they
+assume. \citet{cherubin2017bayes} gives feature-set-conditional Bayes-error
+bounds for website fingerprinting, a closed-set floor and the closest precedent
+for our upper side, though conditional on the analyst's chosen feature set. The
+anonymity and quantitative-information-flow literature takes the complementary
+route, toward a bound on inference
+\citep{serjantov2003metric,ghaderi2010anonymous,venkitasubramaniam2008eavesdroppers,venkitasubramaniam2008chaum,chatzikokolakis2007error,chatzikokolakis2008noisy},
+but evaluates bounds on models or synthetic channels. The nearest recent results
+are the leakage-inevitability theorem of \citet{liu2026inevitability} and the
+rate-distortion frontier of \citet{liu2026rate}, both single-letter in a sense
+that matters here: exponential error decay in the first requires conditionally
+i.i.d.\ repeated observations, and the frontier in the second holds inside a
+stationary-memoryless class. Packet prefixes satisfy neither, so neither applies
+without an assumption the data does not satisfy; our upper side is
+distribution-free precisely so the argument does not depend on one.
+
+\subsection{Total variation estimation and lower bounds}
+\label{sec:related/tv}
+
+Finite-sample control of the empirical distribution is what turns a radius into
+a usable statement: the confidence-band family supplies that control
+\citep{wei2011dkwtwo,reeve2024dkwmassart}, and the minimax analysis under
+$\ell_1$ loss gives the tightest constants we know
+\citep{han2015l1distribution,jiao2018l1distance}. For whether two samples come
+from the same or nearby distributions, optimal-testing and closeness testing are
+relevant \citep{diakonikolas2020highprob,chan2013closeness}. For lower bounds,
+\citet{michel2020high} gives the adaptive high-probability form we use, and
+\citet{tao2024discriminative} connects discriminative total-variation estimation
+to classification risk under a hypothesis-class assumption, which is the route
+our conditional large-prefix bound follows. Our contribution composes these into
+an explicit two-sided interval and reports the sides separately, since the
+composition is where their difference becomes visible.
+
+\subsection{Estimation bias and certified indistinguishability}
+\label{sec:related/growth}
+
+Two further lines of work bear on our choices. The first explains the negative
+result in \Cref{sec:results/estimator}. \citet{paninski2003entropy} shows that
+plug-in estimators of information-theoretic functionals are severely biased when
+the sample is small relative to the support, and that no estimator avoids this
+without a prior; \citet{nemenman2002entropy} gives the constructive form. Both
+apply here: the contexts of a length-$k$ prefix law multiply as the prefix
+lengthens while the flow count is fixed, driving the estimator into the
+undersampled regime even though the corpus is large. Estimators with explicit
+sample complexity exist for entropy and support size
+\citep{valiant2011estimating}, but do not transfer to the conditional-divergence
+quantity we need, which is why we report a limits result rather than a remedy.
+
+The second supplies the vocabulary our certificate belongs to. Differential
+privacy \citep{dwork2006differential} and its metric generalization
+\citep{andres2013geo} bound the distinguishability of two inputs to a mechanism
+relative to a declared observable, which is the structure our bracket has, with
+two services in place of two inputs and the prefix channel in place of the
+mechanism. Traffic-analysis defenses apply the same reasoning to shaping the
+observable, either by morphing packet features \citep{wright2009traffic} or by
+padding and shaping at a stated cost \citep{cai2014systematic}; the optimal
+quantitative-information-flow solutions for the same problem are worked out for
+website fingerprinting by \citep{athanasiou2025selfdefense}; and the recurring
+result that simple defenses fail under stronger analysis
+\citep{dyer2012peekaboo} is the empirical form of the question we make
+measurable.
+
+One of these deserves a specific connection. \citet{juarez2014critical} show
+that fingerprinting evaluations are highly sensitive to the base rate and
+composition of the candidate set, so a figure can move without any change to the
+channel measured. That frames our cross-corpus result: the gate falls from
+$34.1\%$ to $15.75\%$, and \Cref{sec:discussion/robustness} finds the
+difference stratum-dependent rather than a uniform shift, which is why we report a
+stratification study rather than two headline numbers. Randomized-smoothing
+certification \citep{cohen2019certified} shares the presentation principle we
+adopt.
+
+\subsection{Open-set recognition and its comparators}
+\label{sec:related/openset}
+
+Open-set recognition is the framing this setting inherits.
+\citet{scheirer2013toward} introduced the risk of novel classes at deployment,
+and generalization and learnability analyses \citep{fang2021learning,garov2025closer}
+characterize what can be guaranteed for detectors that must reject unknowns;
+those bound the risk of a learning procedure, while a bracket bounds the
+separation present in the data. Unknown-traffic identification in the encrypted
+setting applies the same rejection framing and reports detector-level metrics
+\citep{hu2022opencbd,li2023facing}.
+
+Two comparators bear directly on our positioning.
+\citet{shamsimukhametov2023indistinguishability} studies indistinguishability
+under open TLS parameters with Encrypted ClientHello, the closest
+protocol-privacy precedent and the work our channel declaration must answer to:
+it addresses how much of the observable survives parameter changes, while we
+report an interval on the observable as declared. Our knowledge of it is
+abstract-level, and \Cref{sec:related/novelty} states the boundary accordingly.
+RoNeTC \citep{wang2025reliable} represents uncertainty-aware reliable open-set
+classification, and a detector of that family is one arm of our validation panel.
+Against these and prototype-radius rejection \citep{qu2026sepspace}, the
+distinction is not that their detectors are weak but that their reported
+quantities are accuracy-style metrics with no stated limit. Our evaluation
+discipline comes from the data-hygiene literature: \citet{zhao2025sweet}
+documents shortcut features and leakage in data organization, \citet{wang2026bias}
+gives a model-agnostic detector for dataset-specific shortcuts, and
+\citet{wickramasinghe2025sok} systematizes the critique across the classifier
+literature, which is what makes it load-bearing rather than redundant, since it
+shows the problem is a property of the field's practice; a fourth line turns
+critique into an audit procedure by randomizing address fields
+\citep{zhao2026shortcutcatcher}.
+
+To our knowledge, no prior work measures a two-sided bracket with asymmetric
+guarantee strength on real encrypted traffic, the asymmetry being the one in
+\Cref{sec:design/asymmetry}: different constant provenance and a
+nominal-versus-exact level, not a proven-versus-unproven pair. That is a knowledge
+claim, not a search result, and each work above reports a bound on synthetic
+channels, a closed-set floor, or an accuracy-style metric rather than a per-pair
+interval. \label{sec:related/novelty}

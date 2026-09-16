@@ -3,7 +3,7 @@
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.92\columnwidth]{figures/paper/fig5_channel_sensitivity.pdf}
+\includegraphics[width=0.68\columnwidth]{figures/paper/fig5_channel_sensitivity.pdf}
 \caption{Channel sensitivity. Matched difference in the radius-free estimate
 $\widehat{tv}$ between the identifier-dependent and identifier-independent arms
 against alphabet cardinality $B$; it grows before both arms saturate. The
@@ -21,8 +21,7 @@ $0.1608$ ($534/3321$), a lower-side fraction of $0.9967$ ($3310/3321$), and a
 joint gate of $0.1575$ ($523/3321$) (\Cref{fig:cross_corpus}a). The lower side
 reproduces across the two corpora, $0.9967$ against $0.9960$, which is not a
 foregone conclusion: it is computed by a different method from the upper side and
-on different data, and a construction agreeing only by accident would not hold to
-three decimal places.
+on different data.
 
 The upper side does not reproduce, and we state the two facts that govern how it
 should be read. First, the joint gate combines a full-$n$ upper side with a
@@ -47,8 +46,8 @@ correlated and a pair-level bootstrap is anti-conservative. Under a
 service-cluster bootstrap, non-reproduction remains significant unmatched
 ($-18.3$ points, interval $[-27.4,-10.0]$) and at the $13{,}049$-flow floor
 ($-15.5$, $[-28.4,-2.9]$), but the intervals at the $20{,}000$, $40{,}000$, and
-$80{,}000$ floors are $[-24.2,+5.2]$, $[-30.1,+4.3]$, and $[-33.6,+2.9]$, **all of
-which include zero**. The residual gap at deep matching is therefore not
+$80{,}000$ floors are $[-24.2,+5.2]$, $[-30.1,+4.3]$, and $[-33.6,+2.9]$, all of
+which include zero. The residual gap at deep matching is therefore not
 statistically resolved at this sample size: it is negative at every stratum as a
 point estimate, and the scale-matched defence of it does not survive a
 defensible interval. The correction is itself informative, in that it widens the
@@ -67,9 +66,10 @@ appends a hash of a random per-flow identifier. Both use the same flows and the
 same splits. At matched resolution the two arms separate before either
 saturates, and the matched difference in the radius-free estimate grows with the
 identifier cardinality, from $0.0271$ at $B{=}2$ through $0.0885$ and $0.2271$ to
-$0.3136$ at $B{=}256$ on the test split (\Cref{fig:sensitivity}). The
-cardinality-only arm does not produce a comparable separation, so the effect
-tracks identifier content and not merely alphabet size.
+$0.3136$ at $B{=}256$ on the test split, then falls to $0.0150$ at $B{=}65{,}536$
+where both arms saturate and the comparison loses its content
+(\Cref{fig:sensitivity}). The cardinality-only arm does not produce a comparable
+separation, so the effect tracks identifier content and not merely alphabet size.
 
 The scope of this result is narrow and we keep it that way. The identifier
 effect is established at the level of the radius-free estimate $\widehat{tv}$,
@@ -115,7 +115,7 @@ report both without ranking them.
 \subsection{Limitations}
 \label{sec:discussion/limitations}
 
-The certificate covers 33.9\% of service pairs on the primary corpus. The
+The certificate covers 34.1\% of service pairs on the primary corpus. The
 remaining pairs are not indistinguishable; for most of them no certificate
 exists at these $k$ and $n$, which \Cref{sec:results/horizon} establishes as a
 consequence of the radius rather than of the traffic. That should be read as an
@@ -142,7 +142,7 @@ defensive auditing instrument; the appendix sets out the full considerations.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.82\textwidth]{figures/paper/fig4_cross_corpus.pdf}
+\includegraphics[width=0.68\textwidth]{figures/paper/fig4_cross_corpus.pdf}
 \caption{Robustness across corpora. (a) Per-side fractions on the primary corpus
 and on CESNET-QUIC22: the lower side reproduces almost exactly ($0.9960$ against
 $0.9967$) while the upper side and joint gate differ. The QUIC22 joint gate

@@ -1,0 +1,225 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EIBO: Certification-Grade epsilon-Indistinguishability Brackets for Open-Set
+% Encrypted-Traffic Recognition
+%
+% Target: USENIX Security 2027, Cycle 2.
+% Template: official USENIX Security 2027 LaTeX author kit (usenix.sty).
+% Body limit: 13 pages. References and appendices unlimited.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{usenix}
+% natbib must come after usenix.sty: usenix loads the `cite` package, and
+% natbib redefines the citation commands on top of it.
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{seqsplit}
+\usepackage{cleveref}
+
+% cleveref must be told about the natbib-style theorem of equations/tables
+\crefname{table}{Table}{Tables}
+\crefname{figure}{Figure}{Figures}
+\crefname{section}{Section}{Sections}
+\crefname{equation}{Equation}{Equations}
+\newtheorem{lemma}{Lemma}
+
+% shorthands used throughout the paper
+\newcommand{\tv}{\mathrm{TV}}
+\newcommand{\epslo}{\ensuremath{\epsilon_{\mathrm{lo}}}}
+\newcommand{\epshi}{\ensuremath{\epsilon_{\mathrm{hi}}}}
+\newcommand{\alaw}{\ensuremath{\alpha_{\mathrm{law}}}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+
+\title{\Large \bf Certification-Grade $\epsilon$-Indistinguishability Brackets\\
+  for Open-Set Encrypted-Traffic Recognition}
+
+\author{Anonymous Submission}
+\date{}
+
+\begin{document}
+\maketitle
+
+\input{abstract}
+
+\input{introduction}
+
+\input{background}
+
+\input{measurement_design}
+
+\input{results}
+
+\input{discussion}
+
+\input{related_work}
+
+\input{conclusion}
+
+\appendix
+
+\clearpage
+\section*{Ethical Considerations}
+\addcontentsline{toc}{section}{Ethical Considerations}
+\label{sec:appendix/ethics}
+
+All measurements in this paper are computed on a public research corpus of
+backbone traffic collected and released by its operators under their own ethics
+and data-handling framework. We consume flow-level metadata only. We do not
+attempt to identify users, reconstruct content, or deanonymize any flow, and we
+report no per-flow identifier values. The identifier analysis in the channel
+sensitivity study compares a hashed destination address against a random
+per-flow identifier at matched declared resolution and reports only an aggregate
+separation statistic.
+
+The result is a defensive and auditing instrument. A certified lower bound on
+the error floor tells an operator what detection performance cannot be improved
+past at a stated observation window, which is the information needed to judge
+whether a reported detection gain is close to the limit the channel supports. We
+see no path by which the published bracket enables an attack that is not already
+available to anyone with the same observable channel.
+
+\clearpage
+\section*{Open Science}
+\addcontentsline{toc}{section}{Open Science}
+
+
+This appendix lists the artifacts needed to evaluate the paper's core
+contributions and how the review committee can reach each one. Access links are
+anonymized to preserve double-blind review; they are provided through the
+submission system's artifact channel. The provenance chain below is stated so
+that a reader can check it without following any link.
+
+\textbf{Worked provenance example.}
+Every quantitative claim in this paper resolves through an experiment identifier
+to a manifest entry carrying a \texttt{content\_sha256} over the artifact's
+bytes. Three examples, each a real entry whose recorded hash we verified against
+the file's own bytes. The hashes below are the full 64 hexadecimal characters,
+broken across lines where needed so they do not stretch the spacing:
+\begin{itemize}
+  \item the per-pair bracket table behind \Cref{tab:bracket} is registered as
+  \texttt{art\_20260913\_e5ebac} (the artifact
+  \texttt{q1\_lower\_side\_full\_n.json}, 990 rows), with
+  \texttt{\seqsplit{9fe81e271a386335a9526563ca03631bcdf832fa5d66d3861b2e22ec079256f5}};
+  \item the headline gate count is \texttt{art\_20260914\_443901}
+  (\texttt{x1\_headline\_table.json}), with
+  \texttt{\seqsplit{c9f840a94644687e50e672f6cdd3c65fd0469a9045ca55d1881d11a8afd41c9c}};
+  \item the uncertainty intervals are \texttt{art\_20260915\_27333a}
+  (\texttt{ci\_main\_table.json}), with
+  \texttt{\seqsplit{2d87922190e21f06fbd7e47ebe62f22f494c45252d84578c3ff9f888176b2c86}}.
+\end{itemize}
+
+\textbf{What ``pre-registered'' means here.}
+Four commitments, each fixed before the measurement it governs: the coarsest
+channel ($k{=}5$, $M{=}1$) before the gate was measured; the informative-pair
+criterion ($\epshi < 0.5$, the 342-pair stratum) before the detector validation;
+the one-sided binomial test with its null rate of $0.05$ and its nine cells
+before that test ran; and the split policy (flow- and time-disjoint,
+packet-level splitting prohibited) before any evaluation. These are recorded in
+the project's decision log, and the ordering is checkable against the artifacts
+themselves: the detector panel's registration is timestamped
+\nolinkurl{2026-09-14T09:35:32Z}, its first measurement
+\nolinkurl{2026-09-14T09:36:33Z} — one minute later, in the same artifact that
+carries both fields alongside a boolean asserting the registration preceded the
+measurement. That ordering, not the word itself, is the claim.
+
+\textbf{Released artifacts.}
+\begin{description}
+  \item[Measurement code.] The statcore module implementing the upper-side
+  bound (\texttt{tv\_upper\_bound}) and the classifier-based lower bound
+  (\texttt{tv\_lower\_bound}), together with the channel packer that maps a
+  (direction, size) prefix into a symbol index for a given $M$ and $k$.
+  \item[Per-pair ledgers.] The 990-row per-pair bracket table at $k{=}5$,
+  $M{=}1$, carrying the upper-side bound, the lower-side bound, the saturation
+  flag, and the per-side flow counts. This is the artifact behind
+  \Cref{tab:bracket} and \Cref{tab:boundary}.
+  \item[Detector-validation payload.] The per-pair join for the nine-cell
+  containment test, the stratum assignment (342 informative, 538 secondary,
+  110 excluded), the pre-registered one-sided binomial results in
+  \Cref{tab:detectors}, and the trained-detector configurations.
+  \item[Estimator study artifacts.] The chain-rule control on a known-truth
+  source, both arms (plain and real-occupancy), and the two repair attempts
+  with their known-truth gates.
+  \item[Cross-corpus and sensitivity artifacts.] The independent-corpus bracket
+  with its stratification table, and the channel-sensitivity dose-response.
+  \item[Figure generators.] Scripts rebuilding every figure from its artifact,
+  plus the provenance map of each series' source file and hash.
+\end{description}
+
+\textbf{Content-addressed chain of record.}
+The manifest hash, rather than any working copy, is the artifact of record.
+Where a claim cites a nested field, the full path is recorded in the paper's
+provenance crosswalk so a reviewer can follow the number to its source without
+tooling.
+
+\textbf{Data.}
+The primary corpus is publicly released by its operators and requires no
+credential to obtain; the independent replication corpus is likewise public. We
+redistribute neither, and instead document the acquisition steps and the
+preprocessing applied to produce the flow-level tables used here.
+
+\clearpage
+\section*{Appendix: Supplementary Material}
+\addcontentsline{toc}{section}{Supplementary Material}
+
+\subsection*{A.1\quad Per-Pair Ledger and Boundary Pairs}
+
+The headline result rests on a 990-row per-pair ledger at $k{=}5$, $M{=}1$,
+carrying for each pair the upper-side bound, the lower-side bound at full $n$,
+the per-side flow counts, and the saturation flag. Recomputing the upper-side
+condition row-by-row from that ledger reproduces the 342-pair count and the
+338-pair joint gate, and the four pairs that separate them are listed in
+\Cref{tab:boundary}. We report them because they are the only rows whose verdict
+depends on the lower side at this rung; every other certified pair clears both
+conditions by a margin.
+
+\input{tab_boundary}
+
+\label{sec:appendix/context}
+\subsection*{A.1b\quad Endpoint Distributions}
+\label{sec:appendix/endpoints}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Both endpoints across all 990 pairs at $k{=}5$, $M{=}1$. The lower
+bound's median sits ten times above the gate, which is what "the lower side
+saturates" means quantitatively, and no bracket has negative width.}
+\label{tab:endpoints}
+\begin{tabular}{lrrrrr}
+\toprule
+ & min & p25 & median & p75 & max \\
+\midrule
+$\epslo$ & 0.0151 & 0.3411 & 0.5548 & 0.6990 & 0.9729 \\
+width $\epshi-\epslo$ & 0.0137 & 0.0420 & 0.0771 & 0.1097 & 0.2173 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection*{A.2\quad Protocol Context and Unknown-Class Machinery}
+
+A bracket over observed services says nothing about services that are absent
+from the corpus, and the unseen-species literature supplies the machinery for
+that gap \citep{orlitsky2016optimal,eriksson2026unseen}, which we use for the
+deployment-site missing-service-mass term in \Cref{sec:discussion/missing_mass}.
+
+On the protocol side, QUIC's wire image and its operational implications are
+documented by \citet{kuhlewind2022rfc}; the corpus we measure on is released with
+its companion dataset \citep{cesnet2025cesnet,luxemburk2023cesnet}, and its
+deployment has since been measured passively at scale \citep{mucke2025waiting};
+and classifiers are now applied to it across a range of architectures
+\citep{luxemburk2023encryptedquic,zhang2023applicationquic,lin2022etbert,zhao2023yatc,meng2023netgpt,cui2025trafficllm,hu2022opencbd,smith2021website,li2023facing,jerabek2025simple}.
+Our contribution is orthogonal to those architectures, since it concerns what any
+of them can achieve on a declared observable rather than how one of them is
+built.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

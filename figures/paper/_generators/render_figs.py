@@ -168,7 +168,7 @@ def fig2():
               ncol=1, frameon=False, handlelength=1.5, fontsize=6.6,
               borderaxespad=0.25)
     ax.annotate(f"{jg['upper_count']}/990 upper side\n"
-                f"{jg['joint_gate_count']}/990 joint gate (33.9\\%)",
+                f"{jg['joint_gate_count']}/990 joint gate (34.1\\%)",
                 xy=(0, upper[0]), xytext=(0.62, 0.52), fontsize=6.8,
                 color=BLUE,
                 arrowprops=dict(arrowstyle="-", color=BLUE, lw=0.8))

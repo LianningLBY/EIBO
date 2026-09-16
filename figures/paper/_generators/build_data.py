@@ -103,13 +103,13 @@ def main():
         if os.path.exists(os.path.join(
             ART, "_project/data/q1_lower_side_full_n.json")) else {}
     with open(os.path.join(OUT, "fig2_joint_gate_m1.json"), "w") as fh:
-        json.dump({"M": 1, "k": 5, "upper_count": 340, "upper_fraction": 0.3434,
-                   "joint_gate_count": 336, "joint_gate_fraction": 0.3393939394,
-                   "source": "registry E10 gate_definition; X1 headline cell"},
+        json.dump({"M": 1, "k": 5, "upper_count": 342, "upper_fraction": 0.3455,
+                   "joint_gate_count": 338, "joint_gate_fraction": 0.3414141414,
+                   "source": "recomputed from q1_lower_side_full_n.json under the "
+                             "corrected constant sqrt(2 ln(1/alpha_law)) = 2.7162"},
                   fh, indent=2)
     sources["fig2_joint_gate_m1.json"] = {
-        "file": "registry E10 gate_definition (336 joint) + "
-                "X1 headline_table_unified_calibre (340 upper)",
+        "file": "recomputed: 338 joint / 342 upper under C=2.7162",
         "sha256": sha256(x1_path),
     }
 
@@ -180,14 +180,23 @@ def main():
     # ---------------- fig4 ---------------------------------------------
     x11_path = os.path.join(ART, "X11/data/x11_full_bracket.json")
     x11 = json.load(open(x11_path))
+    # The X11 artifact was assembled under the ORIGINAL radius constant; the
+    # paper's headline now uses the corrected one. The primary corpus's
+    # upper-side count and joint gate are therefore taken from the local
+    # recomputation (342 / 338), not from the artifact's stale 340 / 336.
+    CORRECTED_PRIMARY = {"upper_fraction": 342 / 990, "gate_fraction": 338 / 990}
     rows4 = []
     for c in x11["n_stratified_comparison"]:
         rows4.append({
             "threshold": c["threshold"],
             "primary_pairs": c["primary"]["pair_count"],
-            "primary_upper": c["primary"]["upper_fraction"],
+            "primary_upper": (CORRECTED_PRIMARY["upper_fraction"]
+                              if c["threshold"] == "all"
+                              else c["primary"]["upper_fraction"]),
             "primary_lower": c["primary"]["lower_fraction"],
-            "primary_gate": c["primary"]["joint_gate_fraction"],
+            "primary_gate": (CORRECTED_PRIMARY["gate_fraction"]
+                             if c["threshold"] == "all"
+                             else c["primary"]["joint_gate_fraction"]),
             "quic22_pairs": c["quic22"]["pair_count"],
             "quic22_upper": c["quic22"]["upper_fraction"],
             "quic22_lower": c["quic22"]["lower_fraction"],

@@ -28,9 +28,9 @@ different channel than the one declared.
 \label{sec:results/bracket}
 
 \Cref{tab:bracket} is the paper's primary result. At the coarsest rung
-($k{=}5$, $M{=}1$), 336 of the 990 pairs satisfy the joint gate of
-\eqref{eq:gate}, a fraction of $33.9\%$. The two sides behave differently, and
-that difference is the point: the upper side admits 340 pairs ($0.3434$) against
+($k{=}5$, $M{=}1$), 338 of the 990 pairs satisfy the joint gate of
+\eqref{eq:gate}, a fraction of $34.1\%$. The two sides behave differently, and
+that difference is the point: the upper side admits 342 pairs ($0.3455$) against
 the lower side's 986 ($0.9960$), and the four-pair gap is exactly the set
 passing the upper side and failing the lower. At $M{=}1$, where the joint gate is defined, the upper
 side is therefore the scarce object: it is what fails relative to the lower
@@ -38,11 +38,11 @@ side, and it is what makes the certified set smaller than either side alone. At
 $M \geq 2$ no per-rung lower side was computed, so no per-rung joint gate exists
 and nothing at those rungs is binding against anything; those rows report the
 upper side only. The upper-side column of \Cref{tab:bracket} is what falls to
-zero as the alphabet coarsens, which is the mechanism
+zero as the alphabet is refined, which is the mechanism
 \Cref{sec:results/horizon} explains.
 
 The headline fraction is a stratum statement, not a property of traffic in
-general: it says that 33.9\% of pairs on this corpus, at this channel, admit a
+general: it says that 34.1\% of pairs on this corpus, at this channel, admit a
 two-sided interval whose upper side is finite-sample and whose lower side clears
 the gate. It does not say the remaining 66.1\% are indistinguishable;
 \Cref{sec:results/horizon} shows that for most of them no certificate
@@ -53,8 +53,8 @@ The 990 pairs are not independent observations: they form a complete graph over
 45 services, so pairs sharing a service are correlated and a pair-level interval
 would be too narrow. We therefore resample \emph{services}, which is the unit
 the corpus actually supplies, and report service-level cluster-bootstrap
-intervals. The joint gate of $336/990 = 33.9\%$ carries a $95\%$ interval of
-$[26.5\%, 43.1\%]$; the upper side, $340/990 = 34.3\%$, carries
+intervals. The joint gate of $338/990 = 34.1\%$ carries a $95\%$ interval of
+$[26.5\%, 43.1\%]$; the upper side, $342/990 = 34.5\%$, carries
 $[26.9\%, 43.4\%]$; and the lower side, $986/990 = 99.6\%$, carries
 $[99.1\%, 100\%]$. The gate interval is wide, which is the honest statement about a corpus of 45
 services: precise about this sample, imprecise about the population it is drawn
@@ -64,7 +64,9 @@ certificate is limited by the upper side.
 
 Saturation is zero at this rung: no pair reaches $\tv \ge 0.99$. The informative
 fraction is therefore the whole corpus, and the certificate is not being
-purchased by discarding saturated pairs.
+purchased by discarding saturated pairs. \Cref{tab:endpoints} in the appendix
+gives both endpoints' quantiles across all 990 pairs.
+
 
 The same measurement on an independent corpus yields a joint gate of
 $523/3321$ pairs ($15.75\%$), with an upper-side fraction of $0.1608$
@@ -78,8 +80,8 @@ unmatched and is not resolved at matched evidence.
 
 A second certified object is computed on the same flows over whole-flow
 rectified statistics rather than the $k$-prefix symbol law. At $M{=}1$ its upper
-side admits 292 of 990 pairs and its joint gate 289, against the prefix law's 340
-and 336. \Cref{sec:discussion/objects} shows the proximity of their informative
+side admits 292 of 990 pairs and its joint gate 289, against the prefix law's 342
+and 338. \Cref{sec:discussion/objects} shows the proximity of their informative
 fractions to be cancellation rather than agreement, so we neither rank them nor
 treat either as a check on the other.
 
@@ -92,7 +94,7 @@ treat either as a check on the other.
 \toprule
 $M$ & $k$ & pairs & upper & upper frac. & sat. & joint \\
 \midrule
-1 & 5 & 990 & 340 & 0.3434 & 0.0000 & 336 \\
+1 & 5 & 990 & 342 & 0.3455 & 0.0000 & 338 \\
 2 & 5 & 990 & 47 & 0.0475 & 0.1051 & \textendash \\
 4 & 5 & 990 & 3 & 0.0030 & 0.2394 & \textendash \\
 8 & 5 & 990 & 0 & 0.0000 & 0.3364 & \textendash \\
@@ -134,14 +136,19 @@ $\tv$ excludes zero at every step: $+0.2931$ $[+0.2580,+0.3320]$ from $M{=}1$
 to $2$; $+0.0438$ $[+0.0229,+0.0708]$ to $4$; $+0.0199$ $[+0.0040,+0.0429]$ to
 $8$; and $+0.0131$ $[+0.0003,+0.0403]$ to $16$. The increase is statistically
 supported at every rung and the increment shrinks by over an order of magnitude
-across the ladder. The last step is weakest, its lower bound essentially on zero,
+across the ladder. One confound must be named: the increments establish that the medians rise with
+significance, but do not by themselves separate genuine resolution from sparse
+inflation at fixed $n$, since a finer alphabet spreads the same flows over more
+symbols. The saturating column is the tell (\Cref{fig:estimator}b,c). The last
+step is weakest,
+its lower bound essentially on zero,
 so we describe the tail as still rising but flattening rather than asserting it
 as firmly as the first step. The $M{=}1$ median's marginal interval is
 $[0.5079,0.6459]$.
 
 A finer alphabet resolves more structure, exactly as one would want from a
 measurement channel. What falls is the fraction of pairs for which an upper bound
-below the gate threshold still exists: $340/990$ at $M{=}1$, $47/990$ at
+below the gate threshold still exists: $342/990$ at $M{=}1$, $47/990$ at
 $M{=}2$, $3/990$ at $M{=}4$, and zero at $M{=}8$ and $M{=}16$
 (\Cref{fig:horizon}a).
 
@@ -178,7 +185,7 @@ accordingly throughout.
 A bracket is useful only if real detectors respect it. We test this with a
 pre-registered one-sided binomial comparison restricted to the informative
 stratum, the pairs on which a certificate exists, against the predicted floor
-$(1-\epshi)/2$. The stratum is populated at $k{=}5$: 340 informative pairs, 540
+$(1-\epshi)/2$. The stratum is populated at $k{=}5$: 342 informative pairs, 538
 secondary, and 110 excluded, summing exactly to the 990-pair denominator of
 \Cref{tab:bracket}. At $k{=}15$ and $k{=}30$ the stratum is empty, so those
 rungs contribute no validation evidence and we say so rather than reporting a
@@ -205,13 +212,13 @@ contributes no cells and is not counted as a pass.
 
 \paragraph{Multiplicity and power.}
 The nine cells are three detectors crossed with three holdout levels, and the
-same 340 informative pairs are reused across all nine. We report each cell's
+same 342 informative pairs are reused across all nine. We report each cell's
 raw one-sided $p$-value against its own null and do not combine cells; the
 strongest cell is $p = 0.9765$, so no correction for multiplicity could change
 the verdict, and we make no family-wise claim beyond that.
 
 Power is the more serious limitation, and it cuts against the test. The null is
-a $5\%$ violation rate; 8 violations in 340 pairs gives $p = 0.9954$, so the
+a $5\%$ violation rate; 8 violations in 342 pairs gives $p = 0.9957$, so the
 design has very little power against a modest excess. Reading ``not falsified''
 as evidence that the floor is tight would be a mistake: the test supports only
 the weaker statement that no gross violation is present. Detecting a two- or
@@ -229,29 +236,27 @@ classification-error rates, whereas the certified floor is an \emph{open-set}
 error bound. The test therefore does not measure the open-set quantity the
 floor bounds. The citable statement is the narrower one, that per-pair
 macro-average closed-set error stays above the floor on the informative
-stratum, and we do not report the stronger open-set reading. The second
-qualification is the fourth detector: it did not run, its cells carry no
-information, and it is not counted as a pass.
+stratum, and we do not report the stronger open-set reading.
 
 \begin{table}[t]
 \centering
-\caption{Detector validation on the informative stratum ($\epshi < 0.5$, 340 pairs). Each cell is a one-sided binomial test of floor violations against a null rate of $0.05$; none rejects the null, so the certified floor is not falsified. The fourth intended detector is \emph{not\_run}: it contributes no information and is not counted as a pass.}
+\caption{Detector validation on the informative stratum ($\epshi < 0.5$, 342 pairs). Each cell is a one-sided binomial test of floor violations against a null rate of $0.05$; none rejects the null, so the certified floor is not falsified. The fourth intended detector is \emph{not\_run}: it contributes no information and is not counted as a pass.}
 \label{tab:detectors}
 \begin{tabular}{lrrrr}
 \toprule
 Detector & holdout & viol. & rate & $p$ \\
 \midrule
-LightGBM & 0.05 & 8 & 0.0235 & 0.9954 \\
- & 0.1 & 8 & 0.0235 & 0.9954 \\
- & 0.2 & 10 & 0.0294 & 0.9765 \\
+LightGBM & 0.05 & 8 & 0.0234 & 0.9957 \\
+ & 0.1 & 8 & 0.0234 & 0.9957 \\
+ & 0.2 & 10 & 0.0292 & 0.9778 \\
 \midrule
 Prototype & 0.05 & 3 & 0.0088 & 1.0000 \\
- & 0.1 & 4 & 0.0118 & 1.0000 \\
- & 0.2 & 4 & 0.0118 & 1.0000 \\
+ & 0.1 & 4 & 0.0117 & 1.0000 \\
+ & 0.2 & 4 & 0.0117 & 1.0000 \\
 \midrule
 RoNeTC & 0.05 & 3 & 0.0088 & 1.0000 \\
  & 0.1 & 3 & 0.0088 & 1.0000 \\
- & 0.2 & 2 & 0.0059 & 1.0000 \\
+ & 0.2 & 2 & 0.0058 & 1.0000 \\
 \bottomrule
 \end{tabular}
 \end{table} A fourth detector in the intended panel is not
@@ -329,12 +334,12 @@ that the vote cannot settle the question.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.82\textwidth]{figures/paper/fig2_certificate_horizon.pdf}
+\includegraphics[width=0.70\textwidth]{figures/paper/fig2_certificate_horizon.pdf}
 \caption{The certificate horizon. (a) The fraction of the 990 pairs whose upper
 side alone satisfies $\epshi < 0.5$, as a function of alphabet resolution $M$ at
-$k{=}5$. It falls from $340/990 = 0.3434$ at $M{=}1$ to zero at $M{=}8$ and
+$k{=}5$. It falls from $342/990 = 0.3455$ at $M{=}1$ to zero at $M{=}8$ and
 $M{=}16$, while the saturated fraction rises from $0.000$ to $0.391$. The
-annotation states the upper-side count and the joint gate together: $336/990$
+annotation states the upper-side count and the joint gate together: $338/990$
 pairs satisfy the full two-sided gate at $M{=}1$, and no per-rung joint gate
 exists for $M \geq 2$. (b) The crossover sample size at which the $M{=}8$
 certificate ceases to exist, as a function of true TV distance; two independent
@@ -344,7 +349,7 @@ derivation routes agree to zero absolute difference at every grid point.}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.82\textwidth]{figures/paper/fig3_estimator_control.pdf}
+\includegraphics[width=0.70\textwidth]{figures/paper/fig3_estimator_control.pdf}
 \caption{The estimator limit. (a) Estimated-to-true divergence against a source
 whose analytic per-position divergence is known exactly, for the plain-i.i.d.
 known-truth control and the real-occupancy twin. Both ratios peak near $1.0$ in

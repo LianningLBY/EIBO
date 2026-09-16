@@ -162,9 +162,9 @@ def build():
             linespacing=1.35)
 
     # branch guarantee labels, placed clear of every box
-    ax.text(0.5625, 0.695, "finite-sample strictly valid", fontsize=6.8,
+    ax.text(0.5625, 0.695, "finite-sample, joint 0.95", fontsize=6.8,
             color=BLUE, ha="center", va="bottom")
-    ax.text(0.5625, 0.195, "asymptotic", fontsize=6.8, color=ORANGE,
+    ax.text(0.5625, 0.195, "nominal 1-alpha level", fontsize=6.8, color=ORANGE,
             ha="center", va="top")
 
     ok = check(fig, "fig1_bracket_overview", boxes)
