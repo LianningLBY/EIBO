@@ -161,17 +161,6 @@ The manifest hash, rather than any working copy, is the artifact of record, and 
 nested-field citation is recorded in the paper's provenance crosswalk so a
 reviewer can follow the number to its source without tooling.
 
-\textbf{Compute.}
-\label{sec:appendix/compute}
-Per-step timings and per-detector device assignments. The independent-corpus
-bracket ran in about 21 minutes on eight CPU workers, the channel-sensitivity
-sweep in about 31 minutes, and the known-truth estimator control reuses a
-cached occupancy table and finishes in under a minute. LightGBM and the
-prototype rejector executed on CPU (the LightGBM OpenCL attempt found no device
-and fell back); RoNeTC ran on the accelerator, an NVIDIA GeForce RTX 5090 D with
-32\,GB. The host carries 208 CPU cores and a 90\,GB memory limit, so no result
-here depends on a large-scale cluster.
-
 \textbf{Data.}
 The primary corpus is publicly released by its operators and requires no
 credential to obtain; the independent replication corpus is likewise public. We
@@ -237,7 +226,6 @@ of them can achieve on a declared observable rather than how one of them is
 built.
 
 \subsection*{A.3\quad Preprocessing and Service Selection}
-\label{sec:appendix/preprocessing}
 
 Flows follow the corpus's own five-tuple and idle-timeout convention, with no
 resegmentation of our own. From each flow we read the leading packet sequence and
@@ -254,7 +242,6 @@ why the stricter rule was adopted. Masking is likewise verified rather than
 assumed, as \Cref{sec:results/datasets} reports.
 
 \subsection*{A.4\quad Supporting Detail for the Limitations}
-\label{sec:appendix/limitations}
 
 Three limitations are stated in one sentence each in the body; the supporting
 detail is collected here.
@@ -280,6 +267,17 @@ excess: at a $5\%$ null the strongest cell gives $p = 0.9765$, and at the
 $2.5\%$ threshold implied by the joint level, $p = 0.346$. The growth question
 that motivated the estimator study also remains open
 (\Cref{sec:results/detector_validation,sec:results/estimator}).
+
+\subsection*{A.5\quad Compute Resources}
+
+Per-step timings and per-detector device assignments. The independent-corpus
+bracket ran in about 21 minutes on eight CPU workers, the channel-sensitivity
+sweep in about 31 minutes, and the known-truth estimator control reuses a
+cached occupancy table and finishes in under a minute. LightGBM and the
+prototype rejector executed on CPU (the LightGBM OpenCL attempt found no device
+and fell back); RoNeTC ran on the accelerator, an NVIDIA GeForce RTX 5090 D with
+32\,GB. The host carries 208 CPU cores and a 90\,GB memory limit, so no result
+here depends on a large-scale cluster.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
