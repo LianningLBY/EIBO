@@ -24,9 +24,9 @@ foregone conclusion: it is computed by a different method from the upper side an
 on different data.
 
 The comparison pairs the primary corpus's full-$n$ $33.9\%$ against QUIC22's
-capped $15.75\%$; the replication run estimates its lower side at a
-$20{,}000$-flow per-service cap where the primary corpus uses every eligible flow,
-and we report each figure under its own convention without translating.
+capped $15.75\%$; the replication run caps its lower side at
+$20{,}000$ flows per service where the primary corpus uses every eligible flow, and
+we report each figure under its own convention.
 
 The upper side does not reproduce, and we state the two facts that govern how it
 should be read. First, that cap binds on 2{,}145 of the replication corpus's
@@ -120,12 +120,11 @@ not fold it into the bracket.
 
 Two certified objects coexist: the $k$-prefix symbol law carrying the headline
 bracket, and a whole-flow rectified object on the same flows. Their informative
-fractions are numerically close, but presenting that as a cross-check would be
-wrong: they agree only where each uses its own radius convention, and holding the
-convention common separates them by hundreds of pairs. The statistics differ by
-about $2.7\times$ and the radius constants by about $7.3\times$ in opposite
-directions, so the near-equality is cancellation, not corroboration. We report
-both without ranking them.
+fractions are numerically close, but that is not a cross-check: they agree only
+where each uses its own radius convention, and holding it common separates them by
+hundreds of pairs. The statistics differ by about $2.7\times$ and the radius
+constants by about $7.3\times$ in opposite directions, so the near-equality is
+cancellation, not corroboration.
 
 \subsection{Limitations}
 \label{sec:discussion/limitations}
@@ -137,14 +136,28 @@ consequence of the radius rather than of the traffic. That should be read as an
 absence of certification, not as evidence of closeness.
 
 Every number here is measured on a subset whose occupancy pass is provisional
-pending full-corpus confirmation, and on a single protocol. Both sides carry a
-confidence level and the lower side's is conditional on the fitted decision
-function, so as a two-sided statement the interval is only as strong as its
-weaker endpoint. The growth question that motivated the estimator study
-remains open, and we present no estimate of the growth rate anywhere. The
-large-$k$ divisibility bound is conditional on a realizability assumption: useful
-exactly where the plug-in certificate is lost, but not distribution-free, which
-limits how strongly it may be worded.
+pending full-corpus confirmation, and on a single protocol. Three further
+limitations are raised in the body and collected here.
+
+Three further limitations are raised in the body and collected here.
+
+\emph{Coverage and construction.} Both sides carry a confidence level and the
+lower side's is conditional on the fitted decision function, so as a two-sided
+statement the interval is only as strong as its weaker endpoint, and that level is
+nominal rather than exact (\Cref{sec:design/lower}): $1-\alpha$ is what the
+construction reports, not the finite-sample guarantee the upper side provides. The
+large-$k$ divisibility bound is conditional on a realizability assumption ---
+useful exactly where the plug-in certificate is lost, but not distribution-free.
+
+\emph{Cross-corpus comparison.} The corpora use different lower-side
+conventions, the primary at full $n$ and the replication capped, so the headline
+comparison is mixed-strength by construction
+(\Cref{sec:discussion/robustness}).
+
+\emph{Test power.} The detector validation is a consistency check with limited
+power: on 340 informative pairs it detects a gross violation but not a two- or
+three-point excess (\Cref{sec:results/detector_validation}), and the growth
+question that motivated the estimator study remains open.
 
 \subsection{Dual-use considerations}
 \label{sec:discussion/ethics}
@@ -159,9 +172,9 @@ operator which pairs are near the detection limit and an adversary which are
 cheap to distinguish. At the finest rung the paper demonstrates detection is
 possible, so the publishable content is the existence claim rather than a new
 capability, and the identifier result (\Cref{sec:discussion/sensitivity}) shows
-that metadata beyond the declared channel carries separation the certificate
-does not cover --- an argument for the certificate as a lower bound, not a new
-attack vector.
+that metadata beyond the declared channel carries separation the certificate does
+not cover --- an argument for the certificate as a lower bound, not a new attack
+vector.
 
 \begin{figure*}[t]
 \centering

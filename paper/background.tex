@@ -47,15 +47,16 @@ certifiable about the dependent prefix law as it stands.
 Turning a bound like \eqref{eq:upper} into a usable statement requires a
 confidence radius for the empirical distribution, and the classical
 Kolmogorov-Smirnov style constructions supply exactly that
-\citep{wei2011dkwtwo,reeve2024dkwmassart}, with high-probability and two-sample
-refinements that make the constant tight enough to be informative
-\citep{diakonikolas2020highprob,han2015l1distribution,jiao2018l1distance}. Two
-further routes are relevant. Classifier-based methods give lower bounds from a
-decision function's error rate, and \citet{michel2020high} provides the adaptive
-high-probability form we use for the lower side. \citet{tao2024discriminative}
-relates discriminative estimation of total variation to classification risk
-under a hypothesis-class assumption, which is the route we take for the
-conditional large-prefix bound where the plug-in certificate is unavailable.
+\citep{wei2011dkwtwo,reeve2024dkwmassart}, while the minimax analysis under
+$\ell_1$ loss gives the tightest constants we know
+\citep{han2015l1distribution,jiao2018l1distance}. For the testing question the
+closeness-testing line is the relevant one
+\citep{chan2013closeness,diakonikolas2020highprob}. Two further routes give lower
+bounds: classifier-based methods read a decision function's error rate, with
+\citet{michel2020high} providing the adaptive high-probability form we use, and
+\citet{tao2024discriminative} relating discriminative estimation to
+classification risk under a hypothesis-class assumption, the route we take for the
+conditional large-prefix bound.
 
 Open-set generalization results \citep{fang2021learning,garov2025closer} bound
 the risk of a learning procedure, whereas ours bounds the separation available in

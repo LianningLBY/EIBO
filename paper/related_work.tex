@@ -78,39 +78,33 @@ adopt.
 
 Open-set recognition is the framing this setting inherits.
 \citet{scheirer2013toward} introduced the risk of novel classes at deployment,
-\citet{bendale2016towards} made the boundary operational for deep networks
-through OpenMax, and \citet{geng2021recent} surveys the field since.
-Generalization analyses \citep{fang2021learning,garov2025closer} characterize
-what can be guaranteed for detectors that must reject unknowns: those bound the
-risk of a learning procedure, while a bracket bounds the separation present in
-the data, and all report detector-level quantities rather than an interval on the
-observable. Unknown-traffic identification applies the same rejection framing
-\citep{hu2022opencbd,li2023facing}.
+\citet{bendale2016towards} made the boundary operational through OpenMax, and
+\citet{geng2021recent} surveys the field since; generalization analyses
+\citep{fang2021learning,garov2025closer} bound the risk of a learning procedure,
+whereas a bracket bounds the separation in the data. All report detector-level
+quantities rather than an interval on the observable, as does
+unknown-traffic identification \citep{hu2022opencbd,li2023facing}.
 
-In the fingerprinting context, \citet{sirinam2018deep} showed a deep model
-undermining defenses measured against feature-based attacks and
-\citet{rimmer2018automated} automated that pipeline; both report accuracy-style
-metrics, so neither bounds what the channel permits.
+In the fingerprinting context, learned models undermined defenses measured
+against feature-based attacks \citep{sirinam2018deep,rimmer2018automated}; both
+report accuracy-style metrics, so neither bounds the channel.
 
-Two comparators bear directly on our positioning.
-\citet{shamsimukhametov2023indistinguishability} studies indistinguishability
-under open TLS parameters with Encrypted ClientHello: it asks how much of the
-observable survives parameter changes, while we report an interval on the
-observable as declared, and our knowledge of it is abstract-level. RoNeTC
-\citep{wang2025reliable} is uncertainty-aware reliable open-set classification,
-one arm of our validation panel. Against these and prototype-radius rejection
+Two comparators bear on our positioning.
+\citet{shamsimukhametov2023indistinguishability} asks how much of the observable
+survives parameter changes under open TLS, while we report an interval on the
+observable as declared; RoNeTC \citep{wang2025reliable} is one arm of our
+validation panel. Against these and prototype-radius rejection
 \citep{qu2026sepspace}, the distinction is not that their detectors are weak but
-that their reported quantities are accuracy-style metrics with no stated limit. Our evaluation
-discipline comes from the data-hygiene literature:
-\citet{zhao2025sweet} documents shortcut leakage in data organization,
-\citet{wang2026bias} detects dataset-specific shortcuts, and
-\citet{wickramasinghe2025sok} shows the problem is a property of the field's
-practice rather than a single dataset's; \citet{zhao2026shortcutcatcher} turns
+that their quantities are accuracy-style metrics with no stated limit. Our evaluation
+discipline comes from the data-hygiene literature: \citet{zhao2025sweet}
+documents shortcut leakage, \citet{wang2026bias} detects dataset-specific
+shortcuts, \citet{wickramasinghe2025sok} shows this is a property of the field's
+practice rather than one dataset's, and \citet{zhao2026shortcutcatcher} turns
 the critique into an audit procedure by randomizing address fields.
 
 To our knowledge, no prior work measures a two-sided bracket with asymmetric
 guarantee strength on real encrypted traffic, the asymmetry being the one in
 \Cref{sec:design/asymmetry}: different constant provenance and a
 nominal-versus-exact level, not a proven-versus-unproven pair. Each work above
-reports a bound on synthetic channels, a closed-set floor, or an accuracy-style
-metric rather than a per-pair interval. \label{sec:related/novelty}
+reports a bound on synthetic channels, a closed-set floor, or an accuracy metric
+rather than a per-pair interval. \label{sec:related/novelty}

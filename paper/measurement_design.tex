@@ -156,14 +156,13 @@ finite and pre-declared.
 
 That sampling hypothesis is a threat rather than an implicit assumption. Flows
 from one service arrive in bursts and cluster in time, so same-service
-observations are correlated, and correlation inflates the variance of
-$\widehat{tv}$ relative to the i.i.d.\ value the radius assumes; the resulting
-error direction is coverage below nominal, not above it. We report the bound on
-flow- and time-disjoint splits, which limits but does not eliminate clustering,
-and we treat the i.i.d.\ hypothesis as the upper side's binding assumption. A
-coverage check on near-identical synthetic pairs would not test it, since
-$\widehat{tv}$ is itself upward-biased there, so we do not offer one; the
-derivation is what supports the bound.
+observations are correlated, which inflates the variance of $\widehat{tv}$
+relative to the i.i.d.\ value the radius assumes; the error direction is coverage
+below nominal, not above it. Flow- and time-disjoint splits limit but do not
+eliminate clustering, and we treat the i.i.d.\ hypothesis as the upper side's
+binding assumption. A coverage check on near-identical synthetic pairs would not
+test it, since $\widehat{tv}$ is itself upward-biased there, so we do not offer
+one.
 
 The left-hand column of \Cref{tab:bracket} is computed at this setting for all
 990 pairs, with a per-row invariant check that $\epslo \le \epshi$; no violation
@@ -265,16 +264,28 @@ table, and the estimator cross-variant comparison. Every quantitative claim is
 tied to an experiment identifier and resolved through a content-addressed
 manifest, whose hash rather than any working copy is the artifact of record.
 
+One artifact carries both sides of the headline bracket: the 990-row per-pair
+ledger records, per row, the recomputed upper side
+(\texttt{upper\_recomputed.eps\_hi}, holding on the 340-pair informative
+stratum) and the lower side (\texttt{eps\_lo} and its capped variant), whose
+conjunction is the 336-pair joint gate --- so the headline number reproduces from
+the ledger alone.
+
 \subsection{Compute, splits, and cost}
 \label{sec:design/compute}
 
 The measurements are cheap relative to the detector panel they are compared
 against, which is the intended shape: the bracket is a property of the data, so
-its cost does not grow with model capacity. The independent-corpus bracket ran in
-about 21 minutes (eight CPU workers); the channel-sensitivity sweep in about 31
-minutes with no GPU; the known-truth estimator control reuses a cached occupancy
-table and finishes in under a minute. The detector panel is the only GPU-eligible
-step, training three models in about 37 minutes on a single consumer GPU.
+its cost does not grow with model capacity. Every bracket, sweep, and estimator
+computation is CPU-only: the independent-corpus bracket ran in about 21 minutes
+on eight CPU workers, the channel-sensitivity sweep in about 31 minutes, and the
+known-truth estimator control reuses a cached occupancy table and finishes in
+under a minute. The detector panel is the only step that touches a GPU, and even
+there the device is mixed: LightGBM and the prototype rejector ran on CPU (the
+LightGBM OpenCL attempt found no device and fell back), while only the RoNeTC
+neural rejector used the accelerator. The host carries 208 CPU cores, 32\,GB of
+accelerator memory, and a 90\,GB memory limit, and the panel itself ran in about
+37 minutes.
 
 Splits are flow-disjoint and time-disjoint throughout, so no flow appears on
 both sides and the test period follows the training period with a discarded

@@ -30,12 +30,11 @@ side with an unproven one. The upper side is a finite-sample bound on the total
 variation distance between two services' prefix laws, with a radius whose two
 terms we derive explicitly. The lower side is a classifier-based bound at a
 nominal confidence level, distribution-free in the same sense. The two sides
-differ in construction and in tightness, not in whether a guarantee is
-available: the upper radius is fixed by the alphabet and the flow counts, while
-the lower bound must hold against an adversarial choice of decision function and
-is correspondingly wider. It is the upper side that an error-floor claim needs
-and the upper side that in practice binds, which is a statement about this
-construction rather than about what is provable.
+differ in construction and in tightness, not in whether a guarantee is available:
+the upper radius is fixed by the alphabet and the flow counts, while the lower
+bound must hold against an adversarial choice of decision function and is
+correspondingly wider. It is the upper side that an error-floor claim needs and
+that in practice binds.
 
 The bracket is computable, and it is computable at a resolution that is
 deliberately coarse. On the CESNET-QUICEXT-25 XS subset, at the coarsest channel
@@ -91,7 +90,7 @@ the reason stated in numbers.
   (\Cref{sec:results/estimator}).
   \item \textbf{Bracket validation against real detectors and an independent
   corpus.} On the informative stratum the panel's floor-violation rates fall
-  below the null rate, so no detector breaches the certified floor
+  below the null rate, so no detector's violation rate exceeds the floor
   (\Cref{sec:results/detector_validation}). The lower side reproduces across
   corpora; the joint gate does not, and the difference is not statistically
   resolved at matched evidence (\Cref{sec:discussion/robustness}).

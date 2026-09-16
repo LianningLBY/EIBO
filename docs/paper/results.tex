@@ -14,15 +14,24 @@ The \textbf{990-pair denominator} comes from a flow-count threshold applied
 before any bracket is computed. Of the 53 service labels present, 45 carry at
 least 2{,}000 flows in the retained period, and those 45 form
 $\binom{45}{2} = 990$ unordered pairs, all surviving the hygiene filters. The
-gate passes on this subset, and the pass is provisional in a sense that travels
-with every number here: a subset pass, not a full-corpus confirmation.
+2{,}000-flow rule is pre-registered rather than tuned: it was fixed before the
+gate was measured so that one rule governs every rung, replacing an earlier
+53-service / 1{,}378-pair selection with a 617-flow minimum, since two selection
+rules on one capture would make the artifacts mutually non-citable. The gate
+passes on this subset, and the pass is provisional: a subset pass, not a
+full-corpus confirmation.
 
-The masking regime is verified rather than assumed. The padding sweep reports a
-histogram with a single zero-valued bin across the sampled tail slots, 990 usable
-pairs at $k{=}5$, and no services lost to the prefix-length filter; masked and
-unmasked symbol counts are identical at every rung. A bracket over a channel that
-silently includes padding or address structure would be a bracket over a
-different channel than the one declared.
+Flows follow the corpus's own five-tuple and idle-timeout convention, with no
+resegmentation of our own. From each we read the leading packet sequence and
+reduce it to the (direction, size) prefix the channel declares; no payload is
+parsed, and the acquisition steps are recorded in the released notes.
+
+The masking regime is verified rather than assumed: the padding sweep reports a
+single zero-valued bin across the sampled tail slots, 990 usable pairs at
+$k{=}5$, no services lost to the prefix-length filter, and identical masked and
+unmasked symbol counts at every rung. A bracket over a channel that silently
+included padding or address structure would be a different channel than the one
+declared.
 
 The headline $336/990$ is computed under the full-$n$ convention: every eligible
 flow contributes, with no per-service cap. Both corpora were measured under both
@@ -88,7 +97,7 @@ and replication results are analysed together in
 difference, the conservative direction of its mixed-side sample sizes, and a
 service-cluster bootstrap of the resulting gap are set out. The lower side
 reproduces across the two corpora; the gap in the joint gate is significant
-unmatched and is not resolved at matched evidence.
+before matching and is not resolved at matched evidence.
 
 A second certified object is computed on the same flows over whole-flow
 rectified statistics rather than the $k$-prefix symbol law. At $M{=}1$ its upper
@@ -152,8 +161,7 @@ give $+0.2931$ (median of differences, what we report) against $+0.3028$
 (difference of the two rungs' median divergences, $0.8833 - 0.5805$ from the
 first line above). The paired form is the one that controls for pair identity
 and carries the interval.
-The per-replicate change in median
-$\tv$ excludes zero at every step: $+0.2931$ $[+0.2580,+0.3320]$ from $M{=}1$
+The paired increment excludes zero at every step: $+0.2931$ $[+0.2580,+0.3320]$ from $M{=}1$
 to $2$; $+0.0438$ $[+0.0229,+0.0708]$ to $4$; $+0.0199$ $[+0.0040,+0.0429]$ to
 $8$; and $+0.0131$ $[+0.0003,+0.0403]$ to $16$. The increase is statistically
 supported at every rung and the paired increment shrinks by over an order of
@@ -224,13 +232,14 @@ the $k{=}5$ prefix positions (10 dimensions), which is a strictly finer
 observable than the $m{=}(2M)^k{=}32$-cell quantized alphabet on which the
 certificate's radius is computed. A detector that fails to breach the certified
 floor is therefore evidence about a more informative observable than the one the
-bracket covers. This is a second object substitution beyond the
-closed-set/open-set one declared below. Both substitutions run in
-the same direction: at finer resolution both the plug-in divergence and the
-confidence radius increase, which lowers the predicted floor and makes a
-violation easier to observe, so a non-breach on the finer object is the stronger
-statement. A breach on the finer channel would not, however, falsify the coarser
-certificate; this validation is a consistency check, not a falsifiable test.
+bracket covers. The resolution substitution runs in the direction of an easier
+test: at finer resolution both the plug-in divergence and the confidence radius
+increase, which lowers the predicted floor and makes a violation easier to
+observe, so a non-breach on the finer object is the stronger statement. A breach
+on the finer channel would not, however, falsify the coarser certificate; this
+validation is a consistency check, not a falsifiable test. The closed-set /
+open-set substitution declared below runs the other way, narrowing the citable
+statement to the surrogate actually measured.
 \emph{Prototype} is a nearest-centre rejector in the style of prototype-radius
 open-set methods \citep{qu2026sepspace}: one mean centre per service, with a
 per-service acceptance radius set at a fixed distance quantile of the training
@@ -241,8 +250,9 @@ the nearest centre falls inside that centre's radius.
 $\min(128, 2d)$, ReLU activations and dropout $0.20$, trained with Adam at
 $10^{-3}$ for a fixed epoch budget and scored by Monte-Carlo dropout sampling
 (64 passes), with rejection driven by predictive uncertainty.
-A fourth intended detector did not run (\texttt{ModuleNotFoundError}); it
-contributes no cells and is not counted as a pass.
+A fourth intended detector (\texttt{pcap\_encoder}, a packet-capture encoder
+model) did not run (\texttt{ModuleNotFoundError}); it contributes no cells and is
+not counted as a pass.
 
 \paragraph{Multiplicity and power.}
 The nine cells are three detectors crossed with three holdout levels, and the
@@ -251,12 +261,14 @@ raw one-sided $p$-value against its own null and do not combine cells; the
 strongest cell is $p = 0.9765$, so no correction for multiplicity could change
 the verdict, and we make no family-wise claim beyond that.
 
-Power is the more serious limitation. The null is a $5\%$ violation rate, and
+Power is the more serious limitation. The test's null rate is
+$\ptest = 0.05$, distinct from the confidence level $\alpha$ used elsewhere, and
 8 violations in 340 pairs gives $p = 0.9954$, so the design has little power
 against a modest excess. The observed rates ($0.6\%$--$2.9\%$) sit below both
-null rates: under the $5\%$ null the strongest cell (10 violations) gives
-$p = 0.9765$, and under the $2.5\%$ null implied by the $0.975$ joint level it
-gives $p = 0.346$. Neither rejects, so reading ``not falsified'' as evidence that
+null rates: under $\ptest = 0.05$ the strongest cell (10 violations) gives
+$p = 0.9765$. A threshold of $0.025$ is implied by the joint level rather than
+pre-registered; we report it for transparency, and under it the same cell gives
+$p = 0.346$. Neither rejects, so reading ``not falsified'' as evidence that
 the floor is tight would be a mistake: the test supports only the weaker
 statement that no gross violation is present, and detecting a two- or three-point
 excess would need more informative pairs than this channel supplies.
@@ -275,7 +287,7 @@ stratum, and we do not report the stronger open-set reading.
 
 \begin{table}[t]
 \centering
-\caption{Detector validation on the informative stratum ($\epshi < 0.5$, 340 pairs). Each cell is a one-sided binomial test of floor violations against a null rate of $0.05$; none rejects the null, so the certified floor is not falsified. The fourth intended detector is \emph{not\_run}: it contributes no information and is not counted as a pass.}
+\caption{Detector validation on the informative stratum ($\epshi < 0.5$, 340 pairs). Each cell is a one-sided binomial test of floor violations against a null rate $\ptest = 0.05$; none rejects the null, so no detector's violation rate exceeds the certified floor. The fourth intended detector is \emph{not\_run}: it contributes no information and is not counted as a pass.}
 \label{tab:detectors}
 \begin{tabular}{lrrrr}
 \toprule
