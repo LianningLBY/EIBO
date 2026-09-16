@@ -26,7 +26,13 @@ on different data.
 The comparison pairs the primary corpus's full-$n$ $33.9\%$ against QUIC22's
 capped $15.75\%$; the replication run caps its lower side at
 $20{,}000$ flows per service where the primary corpus uses every eligible flow, and
-we report each figure under its own convention.
+we report each figure under its own convention. Both corpora were measured under
+both conventions, so the matched contrast is available: with the primary corpus
+also capped, its joint gate is $33.8\%$ against QUIC22's $15.75\%$, the entire
+difference being the single pair $(21,23)$ crossing the lower-side threshold. The
+direction and rough magnitude of the gap are therefore unchanged by the
+convention, and the unmatched pairing above is the conservative presentation
+rather than the only one.
 
 The upper side does not reproduce, and we state the two facts that govern how it
 should be read. First, that cap binds on 2{,}145 of the replication corpus's
