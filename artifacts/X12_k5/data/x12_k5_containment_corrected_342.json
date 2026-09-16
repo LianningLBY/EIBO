@@ -1,0 +1,192 @@
+{
+  "constant_old": 2.9604,
+  "constant_new": 2.7162,
+  "stratum": {
+    "old_pairs": 340,
+    "new_pairs": 342,
+    "upper_corrected": 342,
+    "joint_corrected": 338
+  },
+  "reproduction_of_original_340": {
+    "lightgbm": [
+      {
+        "informative_count": 340,
+        "violations": 8,
+        "p_value": 0.9953765809217127,
+        "holdout": "0.05"
+      },
+      {
+        "informative_count": 340,
+        "violations": 8,
+        "p_value": 0.9953765809217127,
+        "holdout": "0.1"
+      },
+      {
+        "informative_count": 340,
+        "violations": 10,
+        "p_value": 0.9765466666425009,
+        "holdout": "0.2"
+      }
+    ],
+    "prototype": [
+      {
+        "informative_count": 340,
+        "violations": 3,
+        "p_value": 0.9999952384510165,
+        "holdout": "0.05"
+      },
+      {
+        "informative_count": 340,
+        "violations": 4,
+        "p_value": 0.9999699914928466,
+        "holdout": "0.1"
+      },
+      {
+        "informative_count": 340,
+        "violations": 4,
+        "p_value": 0.9999699914928466,
+        "holdout": "0.2"
+      }
+    ],
+    "ronetc": [
+      {
+        "informative_count": 340,
+        "violations": 3,
+        "p_value": 0.9999952384510165,
+        "holdout": "0.05"
+      },
+      {
+        "informative_count": 340,
+        "violations": 3,
+        "p_value": 0.9999952384510165,
+        "holdout": "0.1"
+      },
+      {
+        "informative_count": 340,
+        "violations": 2,
+        "p_value": 0.9999994960741397,
+        "holdout": "0.2"
+      }
+    ]
+  },
+  "corrected_342": {
+    "per_detector": {
+      "lightgbm": {
+        "0.05": {
+          "informative_count": 342,
+          "violations": 8,
+          "p_value": 0.995664381890498
+        },
+        "0.1": {
+          "informative_count": 342,
+          "violations": 8,
+          "p_value": 0.995664381890498
+        },
+        "0.2": {
+          "informative_count": 342,
+          "violations": 10,
+          "p_value": 0.9777744481804183
+        }
+      },
+      "prototype": {
+        "0.05": {
+          "informative_count": 342,
+          "violations": 3,
+          "p_value": 0.9999956547624103
+        },
+        "0.1": {
+          "informative_count": 342,
+          "violations": 4,
+          "p_value": 0.999972463715326
+        },
+        "0.2": {
+          "informative_count": 342,
+          "violations": 4,
+          "p_value": 0.999972463715326
+        }
+      },
+      "ronetc": {
+        "0.05": {
+          "informative_count": 342,
+          "violations": 3,
+          "p_value": 0.9999956547624103
+        },
+        "0.1": {
+          "informative_count": 342,
+          "violations": 3,
+          "p_value": 0.9999956547624103
+        },
+        "0.2": {
+          "informative_count": 342,
+          "violations": 2,
+          "p_value": 0.999999542673245
+        }
+      }
+    }
+  },
+  "newly_included_pairs": [
+    {
+      "pair": "22:36",
+      "service_a": 22,
+      "service_b": 36,
+      "detector_errors": {
+        "lightgbm": {
+          "0.05": 0.6734405521610021,
+          "0.1": 0.6690603386755771,
+          "0.2": 0.6689831203464429
+        },
+        "prototype": {
+          "0.05": 0.9998466022396073,
+          "0.1": 0.9998466022396073,
+          "0.2": 0.9991592622747708
+        },
+        "ronetc": {
+          "0.05": 0.7591655161834637,
+          "0.1": 0.7632689062739684,
+          "0.2": 0.7628087129927903
+        }
+      }
+    },
+    {
+      "pair": "32:52",
+      "service_a": 32,
+      "service_b": 52,
+      "detector_errors": {
+        "lightgbm": {
+          "0.05": 0.8539287391031376,
+          "0.1": 0.8479451507347016,
+          "0.2": 0.8499065197683324
+        },
+        "prototype": {
+          "0.05": 0.5902696365767878,
+          "0.1": 0.5956011730205278,
+          "0.2": 0.5797653958944282
+        },
+        "ronetc": {
+          "0.05": 1.0,
+          "0.1": 1.0,
+          "0.2": 1.0
+        }
+      }
+    }
+  ],
+  "verdict_changes": [],
+  "source_csv": "artifacts/X12_k5/data/x12_detector_validation_per_pair_k5.csv",
+  "runner_path": "scripts/x12_k5_containment_corrected_342.py",
+  "runner_sha256": "647d203a33415899dc1b32a74e4012c82b1cf6c7fee8a9c4d754a923bfadaf58",
+  "method": {
+    "eps_hi_old_field": "upper_recomputed.eps_hi",
+    "eps_hi_new": "tv_hat + radius_new(n1) + radius_new(n2), clipped to [0,1]",
+    "radius_reference": "eibo.statcore.tv_upper_bound",
+    "floor_violation": "pair_error_surrogate < (1 - eps_hi) / 2",
+    "binomial_test": {
+      "null_rate": 0.05,
+      "alpha": 0.05,
+      "alternative": "greater",
+      "split_convention": "one-sided; alpha is not split"
+    },
+    "joint_gate": "eps_hi < 0.5 and eps_lo > 0.05",
+    "constant_exact_old": 2.9604143746015965,
+    "constant_exact_new": 2.716203031481239
+  }
+}
