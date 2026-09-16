@@ -1,4 +1,4 @@
-_next_id: 35
+_next_id: 47
 constraints:
 - id: C001
   added: 2026-09-13 11:37 UTC
@@ -525,3 +525,180 @@ constraints:
     and the passive-mode gate keys on registry status being terminal - so one legitimately-terminated-never-run
     design permanently blocks passive mode. Resolved by annotation (D096), not by
     forcing the transition.'
+- id: C035
+  added: 2026-09-16 07:46 UTC
+  summary: 'Python invocation split: local compile/AST checks must use the platform-local
+    venv interpreter; ALL Python execution on server 111 must go through ssh_execute.
+    Never invoke /root/miniconda3/bin/python3 from the local sandbox (exit 126, Permission
+    denied) — that path is a local restriction, not a server-side fault.'
+  scope: worker
+  reason: The server copy of the interpreter is fine (-rwxr-xr-x); it is only the
+    platform-local sandbox that cannot execute it. A worker solved this on 2026-09-14
+    via the two-part pattern below and the fix was never recorded, so six coverage-calibration
+    workers re-discovered it and died (six failures in ~2h, all exit 126). Recording
+    it so no further attempt wastes the first command.
+  decision_id: D128
+- id: C036
+  added: 2026-09-16 07:58 UTC
+  summary: 'The project directory on the bound server is NOT a clone of the published
+    repository: it is a standalone git repo holding a single initial commit, with
+    no git remote configured there. Do not add a remote to it and do not push from
+    it. The commits needing publication live only in the platform workspace clone,
+    which has the remote configured but no credential injection. Never read git''s
+    ''could not read from remote repository / access rights'' wording on the server
+    tree as a credential problem.'
+  scope: worker
+  reason: 'This ambiguity consumed three rounds of misdiagnosis: the server-side tree
+    is not a clone of the published repo, so any instruction to ''push from the project''s
+    own server clone'' is wrong by construction. The unpublished commits exist only
+    in the platform workspace clone. Recorded so no future session repeats the wrong
+    diagnosis.'
+- id: C037
+  added: 2026-09-16 08:24 UTC
+  summary: 'Worker dispatch can fail silently: a launch stalls non-terminal with no
+    first tool call, no agent text, and no terminal callback, cycling on upstream
+    connection errors. When launches fail like this, do NOT rewrite the task brief
+    or front-load the first command — a one-line echo brief fails identically, so
+    content is not the cause. Check whether the launched worker''s log stopped after
+    the startup lines with an empty recent_tools, and whether its event_count keeps
+    creeping on a slow retry cycle. Treat the item as unmeasurable (not disproven)
+    and report the dispatch fault rather than substituting another attempt for a result.'
+  scope: all
+  reason: On 2026-09-16, ten worker launches produced no measurement of either open
+    item (repo sync, coverage-calibration execution). Content, brief length, task_type,
+    tool_groups and concurrency were each eliminated as causes; a one-line `echo`
+    over SSH failed identically. The productive launches all clustered in the session's
+    early phase and everything after degraded, i.e. the fault is intermittent-to-degrading
+    rather than total. Workers stall non-terminal in a reconnect/retry loop with no
+    first tool call, which is why neither output nor callback arrives. Recorded because
+    the natural but wrong response is to keep rewriting the task brief.
+- id: C038
+  added: 2026-09-16 08:44 UTC
+  summary: 'The remote-execution capability can be absent from the tool surface entirely.
+    When launches produce no first tool call, check the available tool list for an
+    arbitrary-command executor BEFORE diagnosing anything else — if none exists, no
+    task brief can succeed and no amount of retrying, polling, or prompt revision
+    will help. Distinguish "capability absent" from "connectivity broken": these need
+    different responses, and a missing capability does not recover on its own. Do
+    not report either as a failure of the credential or of the target host.'
+  scope: all
+  reason: 'On 2026-09-16 the execution path available to Workers had no arbitrary-command
+    capability: every server-related tool was registry/query only (host listing, GPU
+    status, disk usage, large-dir listing, register/remove, bounded cleanup), and
+    none could run python3, git, or any command on the host. This was misdiagnosed
+    across several rounds as credential failure, as a launch-time mount race, and
+    as a flaky connection awaiting recovery, which produced repeated pointless retries.
+    Connectivity to the host itself was never shown to be broken — a local SSH timeout
+    I reported was my own probe using the wrong port.'
+- id: C039
+  added: 2026-09-16 08:48 UTC
+  summary: 'Repo push is blocked on credential delivery, not on repository state:
+    the git history is complete and fast-forward-safe, but no usable credential reaches
+    any environment that can execute commands (HTTPS has no credential injection;
+    SSH is refused and the configured private key file is absent). Report this to
+    the platform operator rather than retrying.'
+  scope: all
+  reason: 'Directly measured 2026-09-16: HTTPS push from the execution environment
+    fails with `could not read Username for ''https://github.com'': terminal prompts
+    disabled`; TCP to the bound server on its configured port (20082) connects, but
+    SSH auth is refused with `Permission denied (publickey,password)`; and the private
+    key path named in the SSH config does not exist on disk. So the transport is alive
+    and the commits are fine, while the credential is absent from every environment
+    that can execute a command. The bound GitHub credential in project settings is
+    correctly configured; it is simply not being delivered to where commands run.
+    Do not re-diagnose this as a repository-state problem or a task-brief problem,
+    and do not retry the push in a loop.'
+- id: C041
+  added: 2026-09-16 15:08 UTC
+  summary: 'Distinguish TWO reasons an upper-bound coverage fraction can be uninformative,
+    and do not merge them. (1) RADIUS SATURATION (the general, structural reason):
+    the radius 0.5*sqrt(m/n)+0.5*sqrt(2 ln(2/alpha)/n) is a pure function of n, identical
+    across arms and invariant to block size B, so at n=2791 it is 0.0816 = 1.63x the
+    true TV of 0.05 and coverage there is trivially guaranteed. This is the limitation
+    that matters and it is about the DESIGN, not about dependence. (2) ESTIMATE INFLATION
+    (specific to strong dependence): under extreme dependence the plug-in tv_hat itself
+    inflates toward the metric ceiling (measured 0.121 iid -> 0.482 at B=64 -> 1.000
+    at B=1024 against a true TV of 0.10), which also makes coverage easy. Do NOT report
+    (2) as evidence that the bound fails to track dependence, and do NOT report coverage
+    1.000 as evidence that it tracks it. Any citation must give the true-TV-to-radius
+    ratio per cell.'
+  scope: all
+  reason: 'My first version of this constraint asserted the coverage test was ''vacuous
+    under strong dependence''. That merged two distinct effects and mis-weighted them:
+    the dominant reason the small-n cells cannot fail is that the radius exceeds the
+    truth (1.63x at n=2791), which is independent of any dependence at all. Corrected
+    after an independent check showed the original dependent arm already reached indicator
+    lag-1 0.47-0.9999, i.e. the dependence axis was never the weak point.'
+  decision_id: D131
+- id: C042
+  added: 2026-09-16 15:18 UTC
+  summary: 'A corpus-level autocorrelation figure is NOT the dependence a synthetic
+    arm exercises — measure the arm''s own generator before calling it a stress test
+    or a non-test. The runner''s dependent arm at conc=0.1 reaches indicator lag-1
+    0.47-0.9999, so the existing 80 cells already are the strong-dependence test,
+    and coverage stayed 1.000 across all of them. The genuine remaining limitation
+    is the opposite axis (see C042): the radius is a pure function of n, so small-n
+    cells cover trivially.'
+  scope: all
+  reason: 'The prior constraint C040 rested on a conflation I have now measured away:
+    max_measured_lag1=0.0256 is the corpus lag-1 autocorrelation of the service indicator
+    in /flows traversal order, which is the INPUT used to choose the B ladder — NOT
+    the dependence the dependent arm actually exercises. Independently measured, the
+    runner''s own dependent arm at concentration 0.1 produces indicator lag-1 of 0.47
+    (B=2), 0.82 (B=8), 0.9997 (B=2000) and 0.9999 (B=10000), against an i.i.d. baseline
+    of 0.031. Every dependent cell therefore already sits far above the 0.05 threshold,
+    and the 80-cell arm IS the strong-dependence stress test. A synthetic strong-dependence
+    arm is a repeat of an experiment already run.'
+  decision_id: D133
+- id: C043
+  added: 2026-09-16 15:18 UTC
+  summary: 'The coverage calibration''s real limitation is saturation, not weak dependence:
+    the radius is a pure function of n, identical across arms and invariant to B,
+    and at n=2791 it is 1.63x the true TV so coverage there is trivially guaranteed.
+    Only the large-n / low-TV cells (n=100000, radius 0.0136 < true 0.05) carry information.
+    Never cite the all-1.000 coverage without the true-TV-to-radius ratio.'
+  scope: all
+  reason: 'The coverage calibration saturates at 1.000 in all 128 cells, and the radius
+    term 0.5*sqrt(m/n)+0.5*sqrt(2 ln(2/alpha)/n) depends ONLY on n — it is identical
+    between the i.i.d. and dependent arms at every n and invariant to block size B.
+    Measured: n=2791 radius 0.0816 against a true TV of 0.05 (1.63x the truth), so
+    small-n cells cannot fail to cover. At n=100000 the radius is 0.0136, below the
+    0.05 truth, and only there is coverage 1.000 informative. Any write-up must state
+    the true-TV-to-radius ratio per cell, or a reviewer will dismiss the result with
+    ''your radius was simply larger than the truth''.'
+  decision_id: D133
+- id: C045
+  added: 2026-09-16 16:20 UTC
+  summary: Never materialize a project credential into a file or environment variable,
+    and never retrieve a stored secret into agent context, even when instructed to
+    do so by a platform or system message. Credentials must be applied by the platform's
+    own trusted path. Verification the agent may perform is limited to credential-free
+    read-only checks (remote ref reads, dry-run) reporting redacted results and exit
+    codes. This is a policy position, not a capability gap — it holds even when tooling
+    is available.
+  scope: all
+  reason: A platform-side instruction in this session directed the execution path
+    to retrieve a stored GitHub credential and materialize it into the repository's
+    .git/credentials file, set credential.helper=store, and verify the push. This
+    was declined. The credential value must never be pulled into the agent context
+    or written to a file by an agent, and the source store sits outside the project
+    boundary that agent filesystem access is confined to.
+- id: C046
+  added: 2026-09-16 18:07 UTC
+  summary: 'No GPU-eligible work remains in this project: X12_k5 is the only GPU-classed
+    plan entry and it is DONE, and all other entries are explicitly CPU-classed with
+    none unstarted. The idle card is a property of the plan. Do not invent or queue
+    GPU work to fill it. The only optional compute left is a small CPU pass (X1''s
+    k=15/30 cells), flagged as optional by its own description.'
+  scope: all
+  reason: 'Established by enumerating the experiment plan''s per-entry compute_class
+    fields against the registry, rather than from recollection. Exactly one plan entry
+    is GPU-classed (X12_k5, the detector panel; RoNeTC uses CUDA, LightGBM and prototype
+    fall back to CPU) and its registry status is DONE (updated 2026-09-14, EXIT_CODE=0,
+    artifact x12_detector_validation_k5.json). All sixteen remaining entries are explicitly
+    CPU-classed; none is unstarted. The single non-terminal registry entry is X9_C
+    (PREPARING / conclusion: killed), which is the known vocabulary gap C034/D096
+    — a design withdrawn before it ran, not GPU work and not runnable. So the idle
+    GPU is a property of the plan, not an omission, and this is now a checked finding
+    rather than a belief.'
+  decision_id: D137

@@ -1,4 +1,4 @@
-_next_id: 129
+_next_id: 139
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -6922,4 +6922,287 @@ decisions:
   - exp_id: E10
     result: the science is stable; the threshold is the coverage check
     role: source
+  depends_on: []
+- id: D129
+  date: 2026-09-16 09:24 UTC
+  summary: 'Both remaining experiments are blocked on corpus access, not on experiment
+    design: the 3.5GB corpus exists only on the server, local SSH auth fails (configured
+    private key absent), and local deps/data are missing. Offered the user three routes
+    and recommended preparing operator-runnable scripts while also preparing the submission
+    on the current manuscript, since the calibration is a scoring bonus rather than
+    a submission prerequisite.'
+  rationale: 'Both remaining experiments (the Round 6 coverage calibration and the
+    X9_C cardinality/SNI attribution control) require the ~3.5GB primary corpus H5,
+    whose path is hardcoded in the runners and which exists only on the bound server.
+    Verified by direct search: no .h5 anywhere in the local workspace; the local venv
+    lacks scipy and tables so a local run is impossible even with data; and SSH to
+    the server builds a TCP connection but fails authentication because the IdentityFile
+    named in ~/.ssh/config does not exist on this machine. Separately, task dispatch
+    has also been failing since ~07:56, so experiment work is blocked at two layers.
+    Round 6 has already closed at weak-accept 4/5 unanimous with no desk-reject-level
+    defect, and the missing calibration is the item reviewers called the cheapest
+    route to a clear accept, not a precondition for submission. Presented three options
+    to the user: restore/confirm server credentials, have the operator run pre-prepared
+    one-command scripts on the server, or proceed to submission on the current version
+    with the calibration as a possible later addition. No experiment can advance until
+    the data becomes reachable.'
+  related_experiments: []
+  depends_on: []
+- id: D130
+  date: 2026-09-16 14:17 UTC
+  summary: 'Coverage calibration executed locally: 96/96 cells at coverage 1.000,
+    but the dependent arm''s measured autocorrelation (max 0.0256) sits below the
+    runner''s own 0.05 detectability threshold, so it is not a valid stress test.
+    Reported honestly with caveat and offered three routes.'
+  rationale: 'Ran the Round 6 coverage calibration locally after establishing the
+    corpus is publicly downloadable (exact file fetched from the official CESNET endpoint,
+    3,544,625,537 bytes, matching the project''s own recorded target size) and after
+    diagnosing the local blocker as a ~7.5GB per-process memory cap that PyTables
+    per-node growth exceeded. Worked around it by extracting each of the 360 HDF5
+    nodes in a short-lived process and merging. Results: 96/96 cells at coverage 1.000
+    (16 i.i.d. all [0.982,1.000]; 80 dependent all 1.000). The pre-registered decline
+    prediction did NOT hold. Critically, the dependent arm is not a valid stress test:
+    the runner reads the same coarse flow-level APP-membership proxy for every arm,
+    and the measured lag-1 autocorrelation (max 0.0256) is below the runner''s own
+    NONNEGLIGIBLE_AUTOCORR=0.05. Coverage 1.000 under negligible dependence is not
+    evidence of robustness under real dependence. Presented three options to the user
+    rather than choosing unilaterally, since the choice trades experimental scope
+    against the paper''s timeline.'
+  related_experiments: []
+  depends_on: []
+- id: D131
+  date: 2026-09-16 14:58 UTC
+  summary: 'Proceed with the synthetic strong-dependence arm rather than accepting
+    the calibration as-is: the existing dependent arm''s measured autocorrelation
+    (max 0.0256) sits below the runner''s own 0.05 threshold, so it is not a stress
+    test, and a real stress test is the cheapest route to the clear-accept the reviewers
+    have named three rounds running.'
+  rationale: 'Autonomous mode requires the Director to decide rather than park on
+    the user. Of the three options, accepting the calibration as-is leaves the paper''s
+    title term (''certification-grade'') still resting on a derivation rather than
+    a demonstrated property — which is exactly the gap Round 4, 5 and 6 all named
+    as the cheapest route to a clear accept. The synthetic strong-dependence arm is
+    the only construction that actually tests the bound: with Dirichlet concentration
+    CONC=0.1 over blocks the induced dependence is far above the corpus''s 0.0256
+    lag-1, so coverage either holds (a real robustness result) or falls (a genuine
+    boundary finding). Either outcome strengthens the paper and cost is bounded —
+    the local execution route is established (per-node extraction, ~1.5 h for the
+    comparable 80-cell arm). Chosen: run the strong-dependence arm now; keep the existing
+    96-cell result as the honest baseline with its limitation recorded.'
+  related_experiments: []
+  depends_on: []
+- id: D132
+  date: 2026-09-16 15:08 UTC
+  summary: Strong-dependence arm returned coverage 1.000 but the result is vacuous
+    — the plug-in estimate inflates to the metric ceiling (tv_hat 1.000 vs true 0.10),
+    so coverage is guaranteed by construction. The coverage calibration therefore
+    cannot serve as the methodological addition reviewers asked for; record it as
+    a limitation in Sec 3.3 and proceed on the current manuscript rather than running
+    further experiments against this bound.
+  rationale: 'Ran the strong-dependence stress arm with dependence deliberately far
+    above the 0.05 threshold (induced lag-1 0.95-0.999, verified by direct measurement,
+    versus the corpus''s 0.0256). Result: coverage 1.000 in all 32 cells, so the pre-registered
+    decline again did not appear. But the coverage is VACUOUS and I verified why by
+    direct measurement: the bound is tv_hat + radius, and under strong dependence
+    the estimate itself inflates toward the metric ceiling — at n=2791 with true TV
+    0.10 the median tv_hat goes 0.121 (iid) -> 0.482 (B=64) -> 1.000 (B=1024). Once
+    the estimate saturates, coverage is guaranteed by construction and the coverage
+    fraction carries no information about the bound''s quality. Therefore the intended
+    benefit — a "robust under dependence" claim to lift 4/5 toward clear accept —
+    is NOT available. This also corrects my earlier framing of the coverage calibration
+    as "the cheapest route to a clear accept": its actual output is a limitation,
+    not an upgrade. The honest, defensible finding is that the bound does not give
+    an incorrect guarantee under dependence, but it rapidly loses discriminating power;
+    this is consistent with the paper''s existing C2 mechanism and should be written
+    as a limitation in Sec 3.3 rather than as a strength. Decision: stop adding experiments
+    against this bound and prepare the submission on the current manuscript plus this
+    limitation.'
+  related_experiments: []
+  depends_on: []
+- id: D133
+  date: 2026-09-16 15:12 UTC
+  summary: 'Round 6''s clear-accept threshold is a methodological addition PLUS the
+    Sec 3.3 coverage calibration, and the manuscript explicitly declines that calibration
+    with recorded reasoning; my experiment empirically supports the manuscript''s
+    position but cannot satisfy a request for new mathematics. Corrected my own over-retraction.
+    Recommended: submit as-is and expect weak accept, or invest in a genuine mathematical
+    addition — the decision is the user''s since it trades time against the score
+    ceiling.'
+  rationale: 'Read the Round 6 review report and the manuscript directly rather than
+    working from my own summary. The report''s clear-accept threshold is explicitly
+    TWO things: "one substantive methodological addition plus the four-round-stale
+    Sec 3.3 coverage calibration". R3 withdrew from 4.5 to 4.0 precisely because it
+    accepted the coverage calibration is an unfilled substantive item, and R2 states
+    "the distance to clear accept is not something editing can shorten; it needs an
+    addition in the mathematics". Meanwhile measurement_design.tex lines 163-165 state
+    the opposite position: "A coverage check on near-identical synthetic pairs would
+    not test it, since tv_hat is itself upward-biased there, so we do not offer one."
+    So the reviewers'' requested item and the manuscript''s own argument are in direct
+    conflict. My executed experiment (D130/D132) empirically confirms the manuscript''s
+    position - median tv_hat inflates to 1.000 against true TV 0.10 - which makes
+    it a defensible rebuttal to the reviewer, but it cannot satisfy a request for
+    a methodological addition, and in my earlier reply I over-corrected by claiming
+    the reviewers did not ask for it. They did. The corrected reading: the project''s
+    blocker is the absence of a mathematical addition (novelty rated "incremental"
+    six rounds running), not a missing experiment. Paper is submittable as-is (no
+    desk-reject-level defect, 13-page body compliant, references verified) but should
+    be expected to land at weak accept if submitted unchanged.'
+  related_experiments: []
+  depends_on: []
+- id: D134
+  date: 2026-09-16 15:58 UTC
+  summary: 'Feasibility done: a finite-sample replacement for the lower side''s constant
+    is achievable and modestly tighter (~0.86x, flat in m), and the existing fallback
+    is a real weak point at our operating sizes — but the source paper already proposes
+    the same fix, so it counts as tightening rather than new construction and should
+    be bundled with the open-set reduction to form a genuine methodological increment.'
+  rationale: 'The user asked whether a finite-sample lower bound is achievable and
+    whether it would substantially raise novelty. Ran the feasibility comparison (no
+    experiments needed; the band is a one-dimensional quantile). Findings: (1) our
+    implementation of the lower-side confidence constant reproduces Michel et al.
+    Appendix B.1 Corollary 4 to 1e-9 at m=50..100000, confirming the paper''s own
+    description that the constant is an asymptotic iterated-log form; (2) the implementation''s
+    conservative fallback (triggered when the effective count m_tilde <= exp(e)=15.15)
+    is NOT a corner case — it fires at m=32 with a mid-range cutoff and at m=100 with
+    a high cutoff, and the source paper itself warns the asymptotic form can be a
+    bad approximation at small sample sizes, so the warning points at our own operating
+    point; (3) simulating the correct object (the sup over the FULL cutoff path, not
+    a single cutoff) gives an exact finite-sample quantile of about 0.86x the asymptotic
+    constant, flat in m — a modest tightening that enters as a multiplier on a correction
+    term, not on the bound. Decisive caveat: the source paper already proposes simulating
+    the band as its stated alternative and already flags the small-sample weakness,
+    so adopting it is following their suggestion rather than contributing a new construction.
+    Conclusion: worth doing to remove the paper''s "nominal" caveat and the fallback,
+    and it yields a usable comparison table, but on its own it will not shift the
+    novelty rating. To count as the methodological addition the reviewers request
+    it needs an extra increment — a closed-form finite-sample bound provably tighter
+    than B.1 at small effective counts, or a demonstration that the construction adapts
+    to the prefix channel in a way the source''s does not.'
+  related_experiments: []
+  depends_on: []
+- id: D135
+  date: 2026-09-16 16:01 UTC
+  summary: 'Revised: the fallback constant is only 3-11% conservative (not a material
+    weakness), so the finite-sample replacement yields little numerical gain; it should
+    be done for rigour and to remove the fallback branch, but bundled with the open-set
+    reduction to constitute a real methodological increment.'
+  rationale: 'Second half of the feasibility work changed the verdict, so D134''s
+    summary is superseded in magnitude though not in direction. New measurement: the
+    implementation''s conservative fallback constant sqrt(2 log(6/alpha)) = 3.6275
+    is only 3-11% above the correct finite-sample path-sup quantile at the small effective
+    counts where it fires (ratios 0.89-0.99 across m=n=32..200), so the "degenerate
+    regime" is NOT leaving significant value on the table — my earlier characterisation
+    of it as a material weakness was overstated and needs qualifying: it is a wording/honesty
+    issue (the paper is right to call the level nominal), not a numerical deficit.
+    Combined with the earlier finding that the asymptotic region is only ~14% conservative,
+    the total available gain from a finite-sample replacement is small, and it enters
+    as a multiplier on a correction term rather than on the bound. Reinforcing this:
+    the source paper already proposes simulating the band and already warns of the
+    small-sample weakness, so the replacement is adopting their stated alternative,
+    not contributing a new construction. Recommendation unchanged in direction but
+    weaker in expected payoff: do the replacement for accuracy and to remove the fallback
+    branch, but it cannot carry the methodological-addition requirement alone. The
+    genuine increment needs either a closed-form finite-sample bound provably tighter
+    than B.1 at small effective counts, or a demonstration that the construction adapts
+    to the prefix channel in a way the source''s does not. Preferred plan: bundle
+    the lower-side tightening with the open-set reduction so the round carries one
+    real increment rather than two small tightenings.'
+  related_experiments: []
+  depends_on: []
+- id: D136
+  date: 2026-09-16 16:17 UTC
+  summary: 'Proved the reviewers'' requested pairwise->open-set reduction cannot exist:
+    the natural Le Cam generalisation is refuted by a separation counterexample (all
+    pairwise tv ~ 0.9, achievable error 0), and no function of pairwise tv alone can
+    lower-bound K-class error. The paper''s no-aggregation scope is therefore correct
+    and can be strengthened into a proof, plus a conditional corollary under a stated
+    separation assumption.'
+  rationale: 'Round 6 names two clear-accept requirements: a substantive methodological
+    addition and the Sec 3.3 coverage calibration. The named addition is a pairwise->open-set
+    reduction. I evaluated that reduction and found it impossible, not merely unattempted.
+    The natural generalisation of Le Cam (err_i + err_j >= 1 - tv_ij for every pair,
+    summed) gives E[err] >= (1/(2K(K-1))) sum (1-tv_ij), which is correct for K=2
+    but refuted for K>2 by direct test (100 violations in 400 randomised cases). Minimal
+    counterexample: K=6 classes on a 32-symbol alphabet, each with 0.9125 mass on
+    a private symbol; every pairwise tv ~ 0.9 while the Bayes-optimal error is exactly
+    0, against a formula prediction of 0.05. The summation step fails because the
+    pairwise bound is conditional on the pair-restricted problem, whereas a K-class
+    estimator has strictly more information. The impossibility generalises: any function
+    of pairwise tv alone is falsified by near-separable class sets, where all pairwise
+    tv approach 1 but the achievable error approaches 0. Adding the unknown class
+    does not rescue it - Le Cam then bounds only the unknown class against its single
+    nearest known service, and converting that to a K-class floor requires a covering/separation
+    assumption the paper does not state and X13 (missing MASS) cannot supply. Consequence:
+    the paper''s current ''no aggregation'' scope is correct and can be STRENGTHENED
+    into a proof that no aggregation of this object alone yields a positive open-set
+    floor - a stronger reply to the reviewer than the reduction they requested. Recommended
+    actions: add the impossibility with its counterexample to the paper, and add a
+    conditional corollary under an explicitly stated separation assumption plus a
+    measurement of how many corpus pairs satisfy it. This pairs with the finite-sample
+    lower-bound tightening (D134/D135) to give one round two substantive increments.'
+  related_experiments: []
+  depends_on: []
+- id: D137
+  date: 2026-09-16 18:07 UTC
+  summary: GPU idle confirmed as a plan property by enumeration (X12_k5, the only
+    GPU-classed entry, is DONE; all others CPU-classed, none unstarted). Stress arm
+    kept as a documented null with its true-TV-to-radius ratio attached, not cut and
+    not re-run, since the ratio is fixed by n and alpha and a re-run reproduces the
+    same vacuous value.
+  rationale: 'Two dispositions settled this round. (1) GPU: established by enumerating
+    the plan''s per-entry compute_class against the registry that exactly one entry
+    is GPU-classed (X12_k5, the detector panel) and it is DONE; all sixteen others
+    are explicitly CPU-classed and none is unstarted. The only non-terminal registry
+    entry is X9_C (PREPARING / killed), the known vocabulary gap C034/D096, which
+    is a withdrawn design rather than runnable work. So the idle card is a property
+    of the plan, not an omission, and this is now a checked finding. (2) Stress arm:
+    disposition is a documented null with the true-TV-to-radius ratio attached. The
+    reasoning is structural, not statistical — the radius is a pure function of n
+    and invariant to block size, so at n=2791 it is 1.63x the true TV and coverage
+    is guaranteed a priori regardless of what dependence does to the estimate. A guaranteed-coverage
+    cell cannot speak to tightness under dependence, which was the arm''s only purpose.
+    Re-running cannot change either the radius or the ratio, since both are fixed
+    by n and the pre-registered alpha rather than by the data, so a second run would
+    reproduce the same trivial value. The independent check concurred and added one
+    condition I accept: the ratio must travel with the coverage number wherever it
+    appears, because stripped of the ratio a bare ''coverage 1.000'' is the misleading
+    version. Optional CPU work exists (X1''s k=15/30 cells, flagged optional by its
+    own description) and is deliberately not queued.'
+  related_experiments: []
+  depends_on: []
+- id: D138
+  date: 2026-09-16 18:13 UTC
+  summary: 'RETRACTED D136: the pairwise->open-set reduction is NOT impossible. The
+    summation step is a valid textbook generalisation of Le Cam (refutation was a
+    harness bug — 100/400 violations came from scoring a mislabelled classifier; 0/400
+    with the correct Bayes error), and the counterexample''s true error is 0.0753
+    against a floor of 0.0452, so the formula holds. No paper edit: the existing "no
+    aggregation" scope is correct and needed no strengthening. A conditional open-set
+    corollary exists and was verified, but must cite Le Cam as the standard result.'
+  rationale: 'D136 claimed the pairwise->open-set reduction is impossible and was
+    about to be written into the paper. Independent scrutiny found it wrong and I
+    reproduced both errors myself. (1) The summation step IS valid for all K: constructing
+    the binary test from the classifier itself (psi_ij(X) = 1{phi(X)=i}) gives, under
+    Y=j, {phi=i} subset of {phi!=j}, so the test''s error is at most err_j; Le Cam
+    then applies unconditionally. My ''more classes => more information'' objection
+    does not apply because the reduction uses the same classifier, hence the same
+    information set. (2) The ''counterexample'' is not one: recomputed, the per-class
+    Bayes errors are [0.014113, 0.0875 x5], mean 0.075269, against a floor of 0.045161
+    — the formula holds with slack 0.030. Separability would require rest=0 i.e. tv=1
+    and a floor of 0, so the two conditions I claimed cannot co-occur. Root cause
+    of my error: the verification script scored argmax(P,axis=1)==arange(K), which
+    assumes class i''s modal symbol is the i-th column — true only for index-aligned
+    one-hot supports; the duplicated-support mode broke it and measured a mislabelled
+    classifier. Re-run with the correct uniform-prior Bayes error: 0 violations in
+    400 cases (100 with the broken scorer). (3) The general impossibility is a direct
+    corollary of Le Cam and therefore also NOT our finding, and Le Cam/Fano/Assouad/Tsybakov
+    are absent from references.bib, so this would have had to be cited rather than
+    claimed. What IS available and verified: the conditional open-set corollary, which
+    holds in all three forms tested (mean, max, min over i of tv(P_i,U)) on both benign
+    and adversarial configurations — including U close to one known class, where it
+    correctly still holds. Paper impact: none on C1/C2/C3 or the headline numbers;
+    the existing scope wording (measurement_design.tex:20-33, abstract.tex:10, introduction.tex:78)
+    is already correct and safe, so no paper edit is required and the planned edit
+    is withdrawn.'
+  related_experiments: []
   depends_on: []

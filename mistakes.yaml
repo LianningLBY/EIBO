@@ -1,4 +1,4 @@
-_next_id: 141
+_next_id: 147
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -6930,3 +6930,224 @@ mistakes:
     dispatch. For direction claims (stricter/lenient, easier/harder), verify the claim
     against the inequality direction before writing it.
   status: active
+- id: M141
+  date: '2026-09-16'
+  category: communication
+  severity: medium
+  summary: Spent multiple rounds diagnosing a credential-transport failure when the
+    credential was simply never assigned to the project; the user's screenshot settled
+    it in one look.
+  root_cause: 'I diagnosed downward from the error message (auth failures) instead
+    of upward from the configuration. Two rounds of "the credential is not reaching
+    the git process" were built on evidence that only showed auth failing in an environment
+    with no credential injection — which was expected and proved nothing about whether
+    the project had a credential assigned. I never verified the most basic precondition:
+    that a credential was bound to the project at all. Compounding it, the user had
+    to volunteer a screenshot to make me look at the config UI.'
+  prevention: 'When a configured resource "exists but doesn''t work," first check
+    the assignment/binding control, not just the inventory. And when the user offers
+    evidence (screenshot, file), read it before running further diagnostic rounds
+    — the artifact may collapse an entire investigation. Also: when announcing "I
+    will stop probing and hand back to the user," actually stop; do not schedule one
+    more exhaustive test first.'
+  status: active
+  context: User asked repeatedly whether the repo could be pushed. I ran ~4 rounds
+    of investigation into credential delivery, credential helpers, transport protocols,
+    and server-clone remotes, and told the user in one reply that I would "stop probing
+    and take it back to them" only after another exhaustive test. The user then sent
+    a screenshot of the project settings page. The top "GitHub 凭证" selector read "无"
+    (none) while the credential list below showed `eibo` defined. The credential was
+    never assigned to the project.
+  fix: 'Told the user exactly which two controls to change (select eibo in the dropdown,
+    save) and that I would re-test immediately on the notification. Recorded the diagnostic
+    rule in memory: verify a credential is ASSIGNED, not merely CREATED, and read
+    a user-supplied screenshot before theorising further. Told the agent to hold off
+    all repo actions until the binding lands.'
+- id: M142
+  date: '2026-09-16'
+  category: agent_behavior
+  severity: medium
+  summary: Rewrote task briefs repeatedly to fix worker failures that were actually
+    an execution-path fault; 9 of 14 launches never produced a tool call.
+  root_cause: I diagnosed each silent launch as a per-task problem (preamble too long,
+    first action not front-loaded, worker spent a turn reading files) and fixed the
+    prompt each time. The fixes were reasonable but the outcome never changed, which
+    was the signal that the defect was not in the prompt. I kept attributing a systemic
+    pattern to task-level causes for several rounds without counting the pattern,
+    and spent user-visible turns reporting "another task-specific failure" instead
+    of stopping to test the path in isolation.
+  prevention: 'When launches fail repeatedly, count the failure pattern across launches
+    before rewriting the task: if the failures correlate with something about the
+    launch (length, duration, timing) rather than with the brief''s content, stop
+    revising the brief and test the path in isolation with a minimal no-op job. Do
+    not spend more than two brief revisions on a suspected infrastructure fault.'
+  status: active
+  context: 'Across ~3 hours, 14 worker launches for two items (repo sync, coverage-calibration
+    execution). I counted them: 9 stopped after the two startup log lines with no
+    tool call and no agent message; 5 executed real commands (logs 20KB-122KB). I
+    replaced each silent launch and rewrote the brief each time — front-loading the
+    first command, forbidding context-reading, naming the exact command to run. None
+    of that changed the outcome, including the most aggressively front-loaded version.'
+  fix: 'Stopped launching substitutes and dispatched one minimal discriminating test
+    instead: a worker whose only action is a single trivial command over SSH with
+    verbatim output and exit code. Also asked for callback/launch correlation to determine
+    whether silent launches ever produce a terminal callback (notification-path fault
+    vs worker fault). Told the user plainly that the blocker is at the execution layer,
+    that no further user action is required, and that neither the push nor the calibration
+    has yet been measured.'
+- id: M143
+  date: '2026-09-16'
+  category: agent_behavior
+  severity: high
+  summary: Spent multiple rounds rewriting worker briefs for a failure whose cause
+    was a missing execution capability, and meanwhile reported editable files as blocked.
+  root_cause: 'Two distinct errors. First, I diagnosed downward from the failure symptom
+    (no tool call) instead of checking the precondition (does the required capability
+    exist at all), so I spent several rounds fixing the wrong layer. Second, I over-generalised
+    one blocked path into a global block: I reported the paper''s no-experiment editorial
+    items as blocked by the same fault, when they were ordinary edits I could have
+    made at any time. Both are the same defect named in earlier memories — verifying
+    a neighbouring object instead of the one that decides the action.'
+  prevention: 'Before revising a task brief in response to a repeated failure, enumerate
+    the available tool surface and confirm the required capability is present. If
+    it is absent, no brief will work — stop revising. Separately: before declaring
+    any piece of work blocked by an execution fault, ask whether it actually requires
+    remote execution, or whether it can be done with local file edits; do not let
+    one blocked path imply all paths are blocked.'
+  status: active
+  context: When launches began failing (~07:56), I treated it as a task-configuration
+    problem and rewrote the worker briefs four times — front-loading the first command,
+    forbidding context reading, shortening the brief, then reducing it to a single
+    `echo`. All failed identically. I then attributed the cause to a missing tool
+    mount and told the user it was a launch-time race that might clear. I only looked
+    at the tool inventory (and found no arbitrary-command executor) after several
+    more rounds. Separately, when the user asked why the paper's editorial fixes were
+    not applied, I had been treating them as blocked by the same fault even though
+    they are plain text edits to files in my own working tree.
+  fix: Confirmed with an independent subagent probe that the tool surface genuinely
+    lacks an arbitrary-command executor; stopped all launches and polling; applied
+    the paper edits directly rather than routing them through the blocked path; recorded
+    constraint C038 so the capability check comes first next time.
+- id: M144
+  date: '2026-09-16'
+  category: experiment_design
+  severity: high
+  summary: Ran a full experiment to close a review item the manuscript had already
+    addressed and explicitly declined — the paper's own text predicted my "finding".
+  root_cause: 'I inferred the content of a review gap from the review reports and
+    my own summary of them, rather than checking the authoritative source (the manuscript''s
+    own text). I then compounded it by presenting that inference to the user as settled
+    fact ("cheapest route to a clear accept") and acting on it. This is the same defect
+    class as the earlier push diagnosis: reasoning from a neighbouring document instead
+    of reading the object that decides the question.'
+  prevention: Before designing or running ANY experiment intended to close a review
+    item, first grep the manuscript for the item's subject and read what the paper
+    already says about it. Review reports describe gaps as the reviewer sees them;
+    the manuscript may have already addressed or argued against the proposed remedy.
+    Prior belief about "what the reviewer wants" is not a substitute for reading the
+    current text.
+  status: active
+  context: 'Across the last several turns I treated "the coverage calibration" as
+    the missing item that would lift Round 6 from weak accept 4/5 to clear accept,
+    and I told the user three times it was the cheapest route to a clear accept. I
+    then spent ~1 hour executing it, first diagnosing a memory cap and fetching a
+    3.5GB corpus, then running 128 cells. Only after reporting the result did I open
+    measurement_design.tex and find lines 163-165: "A coverage check on near-identical
+    synthetic pairs would not test it, since tv_hat is itself upward-biased there,
+    so we do not offer one." The paper had already anticipated and articulated precisely
+    the mechanism my experiments "discovered". My vacuity finding (median tv_hat 1.000
+    against true TV 0.10 under strong dependence) is an empirical confirmation of
+    a claim the manuscript already makes.'
+  fix: 'Retracted the framing to the user: the paper does not lack a coverage check,
+    it explicitly declines to offer one and explains why. Corrected my own earlier
+    claim that this was the cheapest route to clear accept, and noted that the reviewers''
+    "methodological addition" may not refer to the coverage check at all — I had assumed
+    that. Recorded the result as an optional empirical footnote supporting an existing
+    sentence, not as a new limitation section, since the limitation is already in
+    the text.'
+- id: M145
+  date: '2026-09-16'
+  category: experiment_design
+  severity: high
+  summary: Mislabelled a passing strong-dependence stress test as a non-test by conflating
+    a corpus-level autocorrelation with the arm's induced dependence, then ran a duplicate
+    experiment on the false premise.
+  root_cause: 'I read a scalar out of the artifact (max_measured_lag1 = 0.0256) and
+    assumed it characterised the experiment''s dependence, without checking that it
+    measured the same object. It did not: it is a corpus-level input used to CHOOSE
+    the block-size ladder. I then propagated that single error into three places —
+    a constraint, the ROADMAP, and a user-facing report — and acted on it by running
+    a duplicate experiment.'
+  prevention: 'When a generator or arm is described by a single scalar ''strength'',
+    verify WHICH quantity that scalar measures before using it to judge the arm. Here
+    a corpus-level property (lag-1 of the service indicator in traversal order) was
+    silently substituted for the arm''s own induced dependence. The rule: measure
+    the arm''s own output, not an input parameter that feeds it. Also: before reporting
+    a limitation, check that the axis named is the axis measured — the real limitation
+    (radius as a pure function of n) was on a different axis from the one I reported.'
+  status: active
+  context: 'After running the coverage calibration I recorded, in both the ROADMAP
+    and a constraint (C040), that the dependent arm was NOT a valid stress test because
+    ''the maximum measured lag-1 autocorrelation is 0.0256, below the runner''s own
+    0.05 threshold''. An independent check then measured the arm''s own generator.
+    Result: the runner''s dependent arm at concentration 0.1 produces indicator lag-1
+    of 0.47 (B=2), 0.82 (B=8), 0.9997 (B=2000) and 0.9999 (B=10000) against an i.i.d.
+    baseline of 0.031. I re-ran the measurement myself and confirmed those figures.
+    So all 80 dependent cells were already run under dependence far above the threshold:
+    the arm WAS the stress test, and it passed. I then spent additional time designing
+    and executing a redundant ''strong-dependence'' arm whose only unique output was
+    the estimate-inflation table.'
+  fix: 'Removed the erroneous constraint C040 and replaced it with C042 (a corpus-level
+    autocorrelation figure is not the dependence a synthetic arm exercises) and C043
+    (the genuine limitation is radius saturation: the radius is a pure function of
+    n, invariant to B, and at n=2791 is 1.63x the true TV so coverage there is trivially
+    guaranteed). Rewrote C041 to separate radius saturation from estimate inflation
+    instead of merging them. Corrected the ROADMAP entry. Closed the artifact''s provenance
+    gaps (seed, original and executed runner sha256, explicit deviations list) and
+    registered the artifact in the project manifest (91 entries).'
+- id: M146
+  date: '2026-09-16'
+  category: experiment_design
+  severity: high
+  summary: Reported a false impossibility proof (and wrote it into the roadmap, a
+    constraint, and a user report) because my test harness scored a mislabelled classifier;
+    the true Bayes error was 0.075 against a 0.045 floor.
+  root_cause: I treated a randomized numerical test as authoritative without validating
+    its scorer, and I did not sanity-check the "counterexample" by hand even though
+    its per-class error was analytically trivial. Compounding it, I promoted the result
+    to a hard constraint and to user-facing language ("proved") within the same turn,
+    so a harness bug propagated into the project's durable record and nearly into
+    the manuscript.
+  prevention: Before reporting a NEGATIVE mathematical result as proof, reproduce
+    it against a construction whose answer can be computed in closed form. Here one
+    hand-check of the counterexample (per-class error for a private-symbol construction
+    is just the shared mass, 5*0.002823=0.0141) would have exposed the harness bug
+    immediately. And when a randomized test reports violations, FIRST verify the test's
+    own scoring function on a case with a known analytic answer, before interpreting
+    any violation as evidence about the claim.
+  status: active
+  context: 'I claimed a mathematical impossibility (pairwise TV certificates cannot
+    aggregate into an open-set floor), stored it as a constraint (C044) forbidding
+    future attempts, wrote it into the ROADMAP as a finding, told the user it was
+    "proved", and was about to have it written into the paper. Independent scrutiny
+    found two errors and I reproduced both. (1) The summation step IS valid for all
+    K: constructing the binary test from the classifier itself, psi_ij(X)=1{phi(X)=i},
+    gives under Y=j that {phi=i} is a subset of {phi!=j}, so the test error is at
+    most err_j; Le Cam then applies unconditionally. My objection ("more classes means
+    more information") was invalid because the reduction uses the same classifier,
+    hence the same information set. (2) The counterexample was not one: its true Bayes
+    error is 0.075269 against a floor of 0.045161, so the formula holds with slack;
+    separability would require rest=0, i.e. tv=1 and a floor of 0. Root cause: my
+    verification script scored argmax(P,axis=1)==arange(K), which assumes class i''s
+    modal symbol is the i-th column. True only for index-aligned one-hot supports;
+    the duplicated-support generator broke that assumption, so the script measured
+    a mislabelled classifier and reported inflated errors. Re-run with the correct
+    uniform-prior Bayes error: 0 violations in 400 cases versus 100 with the broken
+    scorer.'
+  fix: 'Removed constraint C044. Logged D138 superseding D136. Marked artifacts/pairwise_to_openset_impossibility.md
+    "DO NOT CITE — RETRACTED" with the corrected reasoning and the true numbers. Rewrote
+    the ROADMAP feasibility section: the impossibility is withdrawn, the correct Le
+    Cam generalisation is a textbook result that must be cited not claimed, and paper
+    impact is NONE (the existing scope wording was already correct, so the planned
+    edit is cancelled). Verified the alternative conditional corollary in three variants
+    on benign and adversarial cases before adopting it.'

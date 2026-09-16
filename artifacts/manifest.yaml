@@ -2134,3 +2134,51 @@
     convention is the ledger constant 2.9604 with 340 upper / 336 joint (D124/D125).
     Retained as an archive of the rejected convention and for the known-truth reproduction
     gate it contains.
+- id: art_20260916_covcal
+  name: 'Coverage calibration, known-truth (i.i.d. + dependent arms)'
+  type: data
+  description: 'Known-truth coverage calibration of the finite-alphabet TV upper bound: 16 i.i.d. plus 80 dependent cells at 200 replicates, a strong-dependence arm, and a direct estimate-inflation measurement. Coverage 1.000 in all cells. The informative limitation is saturation: the radius is a pure function of n (1.63x the true TV at n=2791), so small-n coverage is trivially guaranteed.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/coverage_calibration.json
+  content_sha256: ae1ee222603086cf4040fd78fbdfb261c596dead7f4592cd60a5f259298641c0
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-16T18:56:00Z'
+  tags: [calibration, coverage, known-truth, round6]
+- id: art_20260916_fslb_feas
+  name: 'Feasibility: finite-sample lower-bound constant'
+  type: report
+  description: 'Compares the asymptotic iterated-log confidence constant against a simulated exact finite-sample path-sup quantile. Implementation reproduces Michel et al. B.1 to 1e-9; the asymptotic region is ~14% conservative and the fallback constant only 3-11% conservative. Conclusion: achievable but a tightening, not a new construction.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/finite_sample_lower_bound_feasibility.md
+  content_sha256: 547e076a70e0a7a52761d5d556f611eb914d17fba3b226b13cb2131bb3cdb959
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-16T18:56:00Z'
+  tags: [feasibility, round6]
+- id: art_20260916_osagg
+  name: 'Pairwise-to-open-set aggregation: corrected analysis'
+  type: report
+  description: 'CORRECTED after an independent check found the original impossibility claim wrong. Records the true standard Le Cam generalisation (valid for all K; textbook, must be cited not claimed), the harness bug that produced the false refutation (100/400 violations from scoring a mislabelled classifier; 0/400 corrected), the corrected counterexample arithmetic, and the conditional open-set corollary. Paper impact: none.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/pairwise_to_openset_aggregation.md
+  content_sha256: 28e0bdc3f20d1e17d9814097906e9e6098f3bb1a1467ce65c233d2300269c849
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-16T18:56:00Z'
+  tags: [corrected, round6, open-set]
+- id: art_20260916_osimp_arch
+  name: 'ARCHIVED: retracted pairwise-to-open-set impossibility claim'
+  type: report
+  description: 'Retracted 2026-09-16: the impossibility claim was wrong. Kept only as a record of what was asserted and why it failed. Do not cite.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_archive_retracted_pairwise_to_openset_impossibility.md
+  content_sha256: 2cb2265f2f1884151f1ba8099541231b4ef68b26b4dee8d8bbc642c32d3c7dbb
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-16T18:56:00Z'
+  tags: [archived, retracted, do-not-cite]
