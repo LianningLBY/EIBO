@@ -26,9 +26,14 @@ on different data.
 The upper side does not reproduce, and we state the two facts that govern how it
 should be read. First, the joint gate combines a full-$n$ upper side with a
 lower side capped at 20,000 flows per service, and the cap binds on 2,145 of the
-3,321 pairs. Because a lower bound computed from less data is weaker, the cap
-can only shrink $\epslo$ and therefore can only understate the gate; the
-reported figure is a floor, and the bias runs in the conservative direction.
+3,321 pairs. Across the corpus the cap lowers $\epslo$ in aggregate and therefore
+understates the gate, so the reported figure is a floor and the bias runs in the
+conservative direction. The direction is aggregate rather than per-pair: capping
+raises $\epslo$ on 38 of the 990 pairs, one of them being pair 35--49 (full-$n$
+$0.042725$ against capped $0.043732$ in \Cref{tab:boundary}). The construction
+selects its cutoff $\lambda$ adaptively, and on a subsample that selection can
+move far enough to raise the bound, which is why the claim is stated in
+aggregate and not as a universal monotonicity.
 Second, the comparison depends on how much evidence per pair is required, and
 the dependence is not monotone. On the $\epshi < 0.5$ stratum the gap is $-18.3$
 percentage points unmatched, $-15.5$ at a $13{,}049$-flow floor, $-9.3$ at
@@ -115,7 +120,7 @@ report both without ranking them.
 \subsection{Limitations}
 \label{sec:discussion/limitations}
 
-The certificate covers 34.1\% of service pairs on the primary corpus. The
+The certificate covers 33.9\% of service pairs on the primary corpus. The
 remaining pairs are not indistinguishable; for most of them no certificate
 exists at these $k$ and $n$, which \Cref{sec:results/horizon} establishes as a
 consequence of the radius rather than of the traffic. That should be read as an
@@ -147,7 +152,7 @@ defensive auditing instrument; the appendix sets out the full considerations.
 and on CESNET-QUIC22: the lower side reproduces almost exactly ($0.9960$ against
 $0.9967$) while the upper side and joint gate differ. The QUIC22 joint gate
 combines a full-$n$ upper side with a lower side capped at $20{,}000$ flows per
-service, shown hatched; capping can only weaken $\epslo$, so the bias is
+service, shown hatched; the cap lowers $\epslo$ in aggregate, so the bias is
 conservative, and this is a mixed-strength measurement rather than an exact
 finite-sample certificate. (b) The gate gap by minimum per-pair flow count,
 plotted as the joint-gate fraction difference over the pairs present at each

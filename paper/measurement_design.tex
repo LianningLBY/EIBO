@@ -85,7 +85,7 @@ The upper side is a plug-in estimate plus a confidence radius,
 \begin{equation}
   \epshi \;=\; \widehat{tv} + r_a + r_b, \qquad
   r_i \;=\; \tfrac{1}{2}\sqrt{\tfrac{m}{n_i}}
-        + \tfrac{1}{2}\sqrt{\tfrac{2\ln(1/\alaw)}{n_i}},
+        + \tfrac{1}{2}\sqrt{\tfrac{2\ln(2/\alaw)}{n_i}},
   \label{eq:upper}
 \end{equation}
 where $n_i$ is the flow count available to service $i$, $m$ is the declared
@@ -102,7 +102,7 @@ $\widehat{tv} = \tfrac{1}{2}\lVert \widehat{P}_n - \widehat{Q}_n\rVert_1$.
 Then for any $\alpha \in (0,1)$, each side satisfies
 \begin{equation}
   \tv(P,Q) \;\le\; \widehat{tv}
-  + \tfrac{1}{2}\sqrt{\tfrac{m}{n}} + \tfrac{1}{2}\sqrt{\tfrac{2\ln(1/\alpha)}{n}}
+  + \tfrac{1}{2}\sqrt{\tfrac{m}{n}} + \tfrac{1}{2}\sqrt{\tfrac{2\ln(2/\alpha)}{n}}
   \label{eq:lem}
 \end{equation}
 with probability at least $1-\alpha$, and summing the two sides' radii gives
@@ -133,20 +133,17 @@ differences, and McDiarmid's inequality gives
 \begin{equation}
   \lVert P - \widehat{P}_n\rVert_1
   \;\le\; \mathbb{E}\lVert P - \widehat{P}_n\rVert_1
-  + \sqrt{\tfrac{2\ln(1/\alpha')}{n}}
+  + \sqrt{\tfrac{2\ln(2/\alpha')}{n}}
   \label{eq:mcdiarmid}
 \end{equation}
-with probability at least $1-\alpha'$. The factor of $2$ inside the logarithm
-is the \emph{tail-shape} factor of the bounded-differences bound, not a union
-bound: since $\tv$ is nonnegative, the deviation above the mean is what matters
-and the one-sided form suffices, for which
-$t = \sqrt{2\ln(1/\alpha')/n}$. The union over the two laws is carried
-separately, by evaluating each law at the per-law level $\alaw$ and requiring
-both to hold simultaneously. With $\alaw = 0.025$ each law holds with
-probability at least $0.975$, so by the union bound the upper side is a joint
-$0.95$ statement. This level belongs to the upper side; the lower side's level
-is set by its own construction in \Cref{sec:design/lower} and is not $0.95$ by
-this argument. $\square$
+with probability at least $1-\alpha'$. The factor of $2$ is the two-sided
+deviation factor of the bounded-differences bound; the union over the two laws is
+carried by the per-law level $\alaw = \alpha/2 = 0.025$, which fixes the
+constant through $2e^{-C^{2}/2} = \alaw$. Each law then holds with probability
+$1 - e^{-C^{2}/2} = 0.9875$, and requiring both to hold simultaneously makes the
+upper side a joint $1 - \alaw = 0.975$ statement. This level belongs to the upper
+side; the lower side's level is set by its own construction in
+\Cref{sec:design/lower} and is not inherited from this argument. $\square$
 
 Two remarks on what the lemma does and does not require. It is an $\ell_1$
 deviation bound, not a sup-norm bound, and we do not attribute it to
