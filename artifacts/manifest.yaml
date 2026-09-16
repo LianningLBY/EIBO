@@ -2182,3 +2182,27 @@
   skill: null
   created_at: '2026-09-16T18:56:00Z'
   tags: [archived, retracted, do-not-cite]
+- id: art_20260916_bandgate
+  name: 'Finite-sample band: impact on the gate'
+  type: report
+  description: 'Measures whether adopting the finite-sample band would move any published number. The constant raises the inferred eps_lo by 12.7% on a representative instance, but the gate count is 986 of 990 before and after every scaling tested, because only 4 pairs fail eps_lo > 0.05 and the nearest sits at 0.0151. Strictly better rigour, strict no-op on every reported count.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/finite_sample_band_gate_impact.md
+  content_sha256: ac285dfe513df7fd6ab61004243cf018737ba39adeac2f8151cd5d15007539c1
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-16T19:40:00Z'
+  tags: [rigour, round6, no-op]
+- id: art_20260916_ucorr
+  name: 'Conditional corollary: the missing measurement, checked'
+  type: report
+  description: 'Checks whether the conditional open-set corollary has its required input already. X13 measures missing MASS over destination-IP identifiers (Good-Turing, 0.0020, scope deployment-site), not the distance from an unknown class to the known laws, and records identifier_enters_declared_channel: False. The required measurement is genuinely absent and would need a new corpus pass; running it would most likely return a vacuous delta. Disposition: do not run.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/conditional_corollary_missing_measurement.md
+  content_sha256: 685ee0241f6c023ae07ff7d582615bf1938e1979b496f98572c963d7edd8e15d
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-16T19:40:00Z'
+  tags: [corollary, round6, checked]
