@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-15 22:05 UTC | Round 3: W4 SETTLED BY ME (radius certifies 0.975 not 0.95; fix raises headline to 342/338); other 3 judgment items + reflow still held.
+> Last updated: 2026-09-15 22:45 UTC | Round 3: W4 settled + its downstream detector-stratum effect found (340→342); recomputation authorised (cheap, not a re-run); ONE combined reflow in progress.
 
 ## Core direction
 
@@ -15,7 +15,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 ## Current progress
 
 - **Research phase COMPLETE.** All three claims fully backed; evidentiary coverage 100%. (The coverage tool labels `conclusion: negative` as "failed", so it under-reports C1/C3 — the negatives ARE the evidence; noted, not "fixed" in the tool.)
-- **Paper in FORMAL REVIEW — Round 3 active** (`review_id 06cc5857`). Sequence: Round 1 returned reject (resubmit-worthy) with 23 items, all fixed; Round 2 then stalled at cross-sharing with no report and reconciled to **failed**, which cleared the content de-duplication that had blocked resubmission; the owner-requested re-review was submitted from the unchanged manuscript and accepted as a new round. Round 1's 23 items are all fixed and recorded resolved. Deliverables: `docs/paper/main.tex` + `main.pdf`, **18 pages with the body on 1–13 and References from page 14** (13-page limit satisfied — measured from RENDERED pages, not the compile log, which cannot show where the body ends).
+- **Paper in FORMAL REVIEW — Round 3 active** (`review_id 06cc5857`). **W4 DOWNSTREAM (D120):** the detector validation's informative stratum is defined by `eps_hi < 0.5`, the very predicate the constant changes ⇒ the stratum moves **340 → 342**, so §4.4/Table 2 must be recomputed too, not just the headline. Also the boundary set's **membership** changes while its size stays 4 (two pairs join: 22–36, 32–52). The per-pair detector errors already exist (`x12_detector_validation_per_pair_k5.csv`, 11,880 rows), so this is a **CPU-only re-aggregation over new stratum membership — not a re-run**; the Agent's original "new experiment" framing overstated it. Option (b) (label the table as a conservative-constant run) rejected: it would leave the paper's headline and its own stratum differing by construction. Sequence: Round 1 returned reject (resubmit-worthy) with 23 items, all fixed; Round 2 then stalled at cross-sharing with no report and reconciled to **failed**, which cleared the content de-duplication that had blocked resubmission; the owner-requested re-review was submitted from the unchanged manuscript and accepted as a new round. Round 1's 23 items are all fixed and recorded resolved. Deliverables: `docs/paper/main.tex` + `main.pdf`, **18 pages with the body on 1–13 and References from page 14** (13-page limit satisfied — measured from RENDERED pages, not the compile log, which cannot show where the body ends).
 - **Pre-submission verification (all mine, not relayed):** 3 pdflatex passes + bibtex exit 0, 53 bibitems, 0 undefined, 0 overfull; **visual review 18/18 pages passed** (receipt bound to sha256 `5edd8928`); headline numbers independently re-derived — C1 336/990 with cluster CI [26.5%, 43.1%], X11 523/3321, chain-rule per-position truth `0.3389191441548814`; every page rendered and read.
 - **Two CFP checks — one holds, one I got WRONG (corrected 2026-09-15):** ✅ there is genuinely **no abstract word limit**, so not cutting was right. ❌ **I claimed the appendix/reference order is unspecified — that was wrong.** USENIX's artifact policy states the ethics and open-science sections must appear **immediately preceding the reference section**, each within one page; the reviewers are right and Round 3 raises it as a possible desk-rejection (W3). The fix is to move both mandatory appendices before the references and compress each to ≤1 page. Camera-ready ceiling is 20 pages incl. appendices; we are at 18.
 - **Claim boundaries honoured in the prose**: X9_E's identifier finding scoped to `tv_hat` only (D087); X11's joint gate discloses its per-side sample sizes and the **conservative** bias direction (D093); X8's DPI check is a smoke-test, never cited as theorem verification (D091); C3 reframed as a methods/limits finding (D046); novelty stated as a knowledge claim ("to our knowledge"), never "exhaustive search".
@@ -137,6 +137,8 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D120 | 2026-09-16 | D120: W4 has a downstream effect on the detector s | — |
+| D119 | 2026-09-16 | D119: remaining three judgment items settled — W6  | — |
 | D118 | 2026-09-15 | D118: W4 settled analytically — the current radius | — |
 | D117 | 2026-09-15 | D117: Round 3 weak-reject — scientific core intact | — |
 | D116 | 2026-09-15 | D116: re-review submitted and accepted — Round 2's | — |
@@ -145,6 +147,4 @@ The first bootstrap resampled **pairs**, but the 990 pairs are the **complete gr
 | D113 | 2026-09-15 | D113: higher-k ladder manifest defects closed — ha | — |
 | D112 | 2026-09-15 | D112: higher-k ladder saturates (median 1.0 by M=4 | — |
 | D111 | 2026-09-15 | D111: higher-k median-TV ladder verified (monotone | X1, X12_k5 |
-| D110 | 2026-09-15 | D110: Item 2's cited source surface was wrong (no  | — |
-| D109 | 2026-09-15 | D109: dispatch pre-staging (higher-k per-pair rows | X1, X12_k5 |
 
