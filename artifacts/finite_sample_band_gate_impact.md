@@ -1,8 +1,7 @@
 # Finite-sample band: what adopting it would actually change
 
-Prepared 2026-09-16. Companion to `finite_sample_lower_bound_feasibility.md`. This note answers the
-actionable question the feasibility note left open: **if we replaced the asymptotic confidence
-constant with a finite-sample one, would any published number move?**
+Prepared 2026-09-16, corrected after an independent recount. Companion to
+`finite_sample_lower_bound_feasibility.md`.
 
 ## The mechanism, measured end to end
 
@@ -13,8 +12,7 @@ upper(z) = q_m + z~ * m~/T + beta * sqrt( (m~/T)(n~/T)(T - z~) z~ / (T - 1) )
 ```
 
 A **smaller** `beta` makes the constraint `V_m(z) <= upper(z)` easier to satisfy at every cutoff, so
-the inferred adaptive `lambda` can only **increase**, and `eps_lo` rises with it — a tighter
-(better) lower bound.
+the inferred adaptive `lambda` can only **increase**, and `eps_lo` rises with it.
 
 Measured on the real implementation (`_michel_bound`, m = n = 1000, separating classifier):
 
@@ -23,39 +21,57 @@ Measured on the real implementation (`_michel_bound`, m = n = 1000, separating c
 | asymptotic (current) | 0.106599 |
 | finite-sample, 0.86x | **0.120175** |
 
-**That is +12.7% on the bound** — far larger than the ~2% the raw constant ratio (0.86) suggests,
-because `beta` multiplies a term comparable in size to the rest of the envelope at these scales.
+**+12.7% on the bound.** Note this figure is a representative-instance measurement and is not
+recoverable from the per-pair artifact; if it is ever quoted in the paper it needs its own provenance.
 
-## But it moves nothing at the gate
+## The decisive argument: the band touches only the lower side
 
-The gate is `eps_lo > 0.05 AND eps_hi < 0.5`. Per-pair `eps_lo` for all 990 pairs is available in
-`q1_lower_side_full_n.json` (min 0.0151, median 0.5548, max 0.9729). Applying the measured scaling:
+`beta` is a correction to the **lower**-side construction. The paper's headline is the **joint gate**,
+and that is bounded by the **upper** side. Verified by independent recomputation over all 990 rows of
+`q1_lower_side_full_n.json`:
 
-| scaling of `eps_lo` | pairs above 0.05 |
+| condition | count |
 |---|---|
-| 1.0 (current) | **986** |
-| 1.02 (+2%) | **986** |
-| 1.05 (+5%) | **986** |
-| 1.127 (+12.7%) | **986** |
+| `eps_lo > 0.05` | 986 |
+| `eps_hi < 0.5` (upper) | **340** |
+| both (joint gate) | **336** |
 
-**Identical at every level.** The reason is that only **4 of 990** pairs fail the `eps_lo > 0.05`
-condition, and their `eps_lo` values are nowhere near the line — the nearest is 0.0151, so a 12.7%
-raise leaves it at 0.017, still far below. There is no pair in the flip zone.
+The artifact's own `joint_gate.gate_count` is also **336**. Since only 340 pairs pass the upper
+condition, the joint gate can never exceed 340 no matter how far `eps_lo` rises:
 
-So: **adopting the finite-sample band is a strict improvement in rigour (it removes the "nominal"
-caveat and the undefined-region fallback) and a strict no-op on every reported count.** It cannot
-change 336/990, 340/990, the cluster CI, or any gate count.
+| scaling of `eps_lo` | joint gate |
+|---|---|
+| 1.0 | 336 |
+| 1.127 | 336 |
+| 1.5 | 337 |
+| 3.4 | 340 |
 
-## Consequence
+**So the band's influence on the headline is structurally excluded, not merely empirically small.**
 
-This closes the second of the two rigour items the nudge flagged:
+## Correction: the flip boundary is +17.0%, not "no pair nearby"
 
-- **Do it** — it is cheap, needs no experiments, and removes a live caveat from the paper's weakest
-  side. The comparison tables above are the evidence to cite.
-- **Do not justify it as a score play.** It moves no number the reviewers saw. It is a correctness
-  improvement on the derivation, and should be presented as exactly that.
+An earlier version of this note said "the nearest is 0.0151, so there is no pair in the flip zone".
+**That was wrong on both the value and the reasoning** — 0.0151 is the *smallest* `eps_lo` among the
+four failures, whereas the pair *closest to the threshold* is a different one. The four failing pairs:
 
-Combined with `pairwise_to_openset_aggregation.md` (no new content available there either), the
-picture is now consistent: **every remaining computable improvement to this paper is a rigour
-improvement, not a claim change.** That is the honest basis on which to decide between submitting as
-is and investing in genuinely new mathematics.
+| pair | `eps_lo` | needed to cross 0.05 |
+|---|---|---|
+| **35–49** | **0.042725** | **×1.170 (+17.0%)** |
+| 27–29 | 0.028705 | ×1.742 (+74.2%) |
+| 11–51 | 0.022607 | ×2.212 (+121.2%) |
+| 39–44 | 0.015071 | ×3.318 (+231.8%) |
+
+At the measured +12.7% every one of them stays below the line (35–49 reaches 0.048151), so the count
+remains 986 — but **the margin is +17.0%, not comfortable**. A band improvement of more than 17%
+would flip pair 35–49 and take the lower-side count to 987. That changes nothing in the headline
+(see above), but the earlier note's "no pair in the flip zone" was wrong and its scaling table
+(×1.02, ×1.05, ×1.127 all showing 986) was misleading, since those three are one data point repeated;
+the real critical point is ×1.170.
+
+## Conclusion
+
+The finite-sample band is **rigour-only**, and the reason is structural: it acts on the lower side,
+which the joint gate does not bind on. It removes the "nominal" caveat and the undefined-region
+fallback, and it should be presented as a correctness improvement on the derivation — never as a play
+for a better verdict. Its own +12.7% magnitude is a representative-instance figure and needs
+separate provenance if quoted.

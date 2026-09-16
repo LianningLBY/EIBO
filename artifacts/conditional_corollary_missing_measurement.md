@@ -35,6 +35,25 @@ corpus that (a) forms the unknown-class prefix law on the declared channel and (
 distance to each of the known service laws. That is a real experiment, not an aggregation of
 existing artifacts.
 
+### Stronger than "not measured": not derivable in kind
+
+An independent check searched the artifact key-by-key for any distance-like quantity — `tv`,
+`total_variation`, `distance`, `lecam`, `unknown_class`, `dist_` — and found **none**. Everything
+present is a mass, count, or coverage quantity.
+
+That distinction is worth stating precisely, because it upgrades the finding from "X13 happened not to
+measure this" to **"the quantity X13 measures cannot yield the quantity the corollary needs."**
+Missing *mass* and distance-to-known-laws are **orthogonal**: knowing what fraction of traffic belongs
+to unknown services says nothing about how far those services sit from the known ones. A `U` holding
+50% of the mass but lying near some `P_i` and a `U` holding 0.2% of the mass but far from every `P_i`
+have opposite consequences for the corollary, and X13 cannot distinguish those cases.
+
+The artifact is also explicit that it does not supply a bound: its
+`bound_comparison.interpretation` reads *"isolated additive unknown-class term; base X1/X12 bound not
+supplied"*, its Chao1 note states the 18,149.95 unseen-species figure is *not* used as an interval
+endpoint, and its scope is recorded as *"deployment-site missing service mass, NOT a universal
+unknown prior."*
+
 ## Why it is not worth running now
 
 Even if it were run, the result would be a **conditional** statement — "if the unknown class is at

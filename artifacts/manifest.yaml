@@ -2187,7 +2187,7 @@
   type: report
   description: 'Measures whether adopting the finite-sample band would move any published number. The constant raises the inferred eps_lo by 12.7% on a representative instance, but the gate count is 986 of 990 before and after every scaling tested, because only 4 pairs fail eps_lo > 0.05 and the nearest sits at 0.0151. Strictly better rigour, strict no-op on every reported count.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/finite_sample_band_gate_impact.md
-  content_sha256: ac285dfe513df7fd6ab61004243cf018737ba39adeac2f8151cd5d15007539c1
+  content_sha256: 902ebe74dbae736df85563047c4d29a0511606ea0a70f6cb2c1da1096baf4a19
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
@@ -2199,7 +2199,7 @@
   type: report
   description: 'Checks whether the conditional open-set corollary has its required input already. X13 measures missing MASS over destination-IP identifiers (Good-Turing, 0.0020, scope deployment-site), not the distance from an unknown class to the known laws, and records identifier_enters_declared_channel: False. The required measurement is genuinely absent and would need a new corpus pass; running it would most likely return a vacuous delta. Disposition: do not run.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/conditional_corollary_missing_measurement.md
-  content_sha256: 685ee0241f6c023ae07ff7d582615bf1938e1979b496f98572c963d7edd8e15d
+  content_sha256: 8fb7dd3fb060fde622c41d4a642f5ec481e125188e773241a091f11a46547180
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
