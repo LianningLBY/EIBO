@@ -1,4 +1,4 @@
-_next_id: 48
+_next_id: 49
 constraints:
 - id: C001
   added: 2026-09-13 11:37 UTC
@@ -720,3 +720,25 @@ constraints:
     ronetc device ''cuda:0'' while lightgbm and prototype record ''cpu'', with LightGBM''s
     GPU attempt failing on ''No OpenCL device found''), not the compute_class prose.'
   decision_id: D137
+- id: C048
+  added: 2026-09-16 21:33 UTC
+  summary: 'Figure 2''s three copies are NOT byte-identical and the manifest''s registered
+    hash matches none of them, so the figure the paper compiles with is not the figure
+    the provenance index attests to. This is pre-existing drift from an earlier session,
+    caused by PDF metadata byte differences on regeneration. Before this figure is
+    relied on in any submission artifact, resolve it one way: either re-register the
+    hash of the copy the paper actually includes, or regenerate all three copies from
+    the same run and confirm they are byte-identical. Do not silently overwrite; the
+    choice depends on the intended convention.'
+  scope: all
+  reason: 'While refreshing manifest hashes I found figure 2''s registration is broken:
+    the entry art_20260915_8d56b5 points at artifacts/_project/chart/fig2_certificate_horizon.pdf
+    and registers a hash (7654b8f4...) that matches neither the current file at that
+    path (41e0a022...), nor figures/paper/fig2_certificate_horizon.pdf (e78c85f1...,
+    31454 bytes), nor the copy the paper actually includes, docs/paper/figures/paper/fig2_certificate_horizon.pdf
+    (081eb402..., 31454 bytes). The three copies are not byte-identical, differing
+    in PDF metadata bytes, so regenerating the figure produces drift rather than a
+    detectable content change. The drift predates today''s session. This is the project''s
+    own reproduced-figure rule failing silently, which matters because the paper''s
+    evidentiary claim rests on every number mapping to bytes.'
+  decision_id: D133
