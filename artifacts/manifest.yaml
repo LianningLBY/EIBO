@@ -1796,7 +1796,7 @@
   - paper
   - results
   - statistical
-  content_sha256: 7654b8f43cfc25c7dda07da5aa7af8c4cd7164ed349ad327a7a3048161f0e632
+  content_sha256: e89bd555085b7a605ae53da808b52ac98aab61cd8f2e4b563490f1955a170b3c
 - id: art_20260915_9f6690
   name: fig3_estimator_control
   type: chart
