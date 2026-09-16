@@ -1777,7 +1777,7 @@
   - introduction
   - conceptual
   - hero
-  content_sha256: 5b34a288aeeb5d02a842442c1a14388a588f10bb72f534c62e16a706ddc49ce2
+  content_sha256: a86961b8150f56dd75cfc57bb658ce6dc676497ac028251bf43e767898b2bf13
 - id: art_20260915_8d56b5
   name: fig2_certificate_horizon
   type: chart
@@ -1816,7 +1816,7 @@
   - paper
   - results
   - statistical
-  content_sha256: 661f43794804ab0f47f244dbc568253c72f89057c51782b2e0a73da36c2ffc37
+  content_sha256: 38bce392f1faa62a12c8de3aba0eef32b9a1350cc1baf53e47c59721f53e8feb
 - id: art_20260915_f2b327
   name: fig4_cross_corpus
   type: chart
@@ -1837,7 +1837,7 @@
   - discussion
   - statistical
   - BC2
-  content_sha256: 779018eef5997265858387f8146082d07bead6f15225055b462eaf72ebab6a5b
+  content_sha256: 3b57ade8125796eedf147cca00b2dafb6fc40ad89c0df7e31c6397c02bab0101
 - id: art_20260915_1f7aa3
   name: fig5_channel_sensitivity
   type: chart
@@ -1858,7 +1858,7 @@
   - discussion
   - statistical
   - BC1
-  content_sha256: 2e6c94a5273aaa3fb8649f91a8b6fb7a627f3ef9619731c2a40b19f6b2120ad1
+  content_sha256: 6a6a91c16ffd204ece755baaa048fcf079df96036967695ebb5149a8d622d9a6
 - id: art_20260915_27333a
   name: ci_main_table
   type: data
