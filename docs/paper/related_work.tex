@@ -83,11 +83,10 @@ Open-set recognition is the framing this setting inherits.
 \citep{fang2021learning,garov2025closer} bound the risk of a learning procedure,
 whereas a bracket bounds the separation in the data. All report detector-level
 quantities rather than an interval on the observable, as does
-unknown-traffic identification \citep{hu2022opencbd,li2023facing}.
-
-In the fingerprinting context, learned models undermined defenses measured
-against feature-based attacks \citep{sirinam2018deep,rimmer2018automated}; both
-report accuracy-style metrics, so neither bounds the channel.
+unknown-traffic identification \citep{hu2022opencbd,li2023facing}. In
+fingerprinting, learned models undermined defenses measured against
+feature-based attacks \citep{sirinam2018deep,rimmer2018automated}, again
+reporting accuracy-style metrics rather than bounds.
 
 Two comparators bear on our positioning.
 \citet{shamsimukhametov2023indistinguishability} asks how much of the observable
@@ -95,16 +94,15 @@ survives parameter changes under open TLS, while we report an interval on the
 observable as declared; RoNeTC \citep{wang2025reliable} is one arm of our
 validation panel. Against these and prototype-radius rejection
 \citep{qu2026sepspace}, the distinction is not that their detectors are weak but
-that their quantities are accuracy-style metrics with no stated limit. Our evaluation
-discipline comes from the data-hygiene literature: \citet{zhao2025sweet}
-documents shortcut leakage, \citet{wang2026bias} detects dataset-specific
-shortcuts, \citet{wickramasinghe2025sok} shows this is a property of the field's
-practice rather than one dataset's, and \citet{zhao2026shortcutcatcher} turns
-the critique into an audit procedure by randomizing address fields.
+that their quantities are accuracy-style metrics with no stated limit. Our
+evaluation discipline follows the data-hygiene literature
+\citep{zhao2025sweet,wang2026bias,wickramasinghe2025sok,zhao2026shortcutcatcher},
+which documents shortcut leakage and turns the critique into an audit procedure
+by randomizing address fields.
 
 To our knowledge, no prior work measures a two-sided bracket with asymmetric
 guarantee strength on real encrypted traffic, the asymmetry being the one in
-\Cref{sec:design/asymmetry}: different constant provenance and a
-nominal-versus-exact level, not a proven-versus-unproven pair. Each work above
-reports a bound on synthetic channels, a closed-set floor, or an accuracy metric
-rather than a per-pair interval. \label{sec:related/novelty}
+\Cref{sec:design/asymmetry}; each work above reports a bound on synthetic
+channels, a closed-set floor, or an accuracy metric rather than a per-pair
+interval, and none gives an open-set floor as \Cref{sec:appendix/aggregation}
+does. \label{sec:related/novelty}

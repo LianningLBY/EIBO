@@ -5,9 +5,11 @@ observation window. We measure a two-sided $\epsilon$-indistinguishability
 bracket on real QUIC wire data, one certificate per service pair, whose upper
 side is a finite-sample bound on the total variation distance between that
 pair's prefix laws and whose lower side is a classifier-based bound at a nominal
-confidence level. The certified object is pairwise: its decision-theoretic
-content is the two-point bound on a test between those services, and we claim no
-multi-class or open-set reduction.
+confidence level. The certified object is pairwise, but those per-pair bounds
+aggregate without further assumption: summing them gives an open-set error floor
+of $0.118$ over the certified services, so no classifier that must place a flow
+among them or reject it as unknown errs on fewer than roughly one flow in nine,
+on average.
 
 At the coarsest pre-registered channel, 336 of 990 service pairs (33.9\%) admit
 such a certificate, the upper side being the scarce one at the rung where the

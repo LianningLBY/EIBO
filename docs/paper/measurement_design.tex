@@ -26,12 +26,15 @@ observation,
   \label{eq:lecam}
 \end{equation}
 so a certified upper bound on $\tv$ gives a certified lower bound on the error
-of the best possible pairwise test. We state this consequence per pair and
-nowhere claim a multi-class reduction: aggregating pairwise certificates into an
-open-set floor over $K$ classes would require an argument we do not give, and
-the validation in \Cref{sec:results/detector_validation} accordingly tests a
-pair-level surrogate rather than the open-set quantity. Every statement we make
-about distinguishability is phrased in the terms of \eqref{eq:lecam}.
+of the best possible pairwise test. This aggregates without further assumption,
+and it aggregates to an open-set floor: summing over ordered pairs gives
+$\mathbb{E}[\mathrm{err}] \ge S/(M(M-1))$ for $M$ classes under a uniform prior,
+and with the unknown class included the unknown-class pairs enter $S$ with
+positive sign, so dropping them only loosens the bound. On the certified stratum
+that floor is $0.118$: no classifier that must place a flow among those services
+or reject it as unknown can do better.
+\Cref{sec:appendix/aggregation} gives the derivation, its limits, and why a
+separation assumption would tighten rather than licence it.
 
 We report a two-sided interval
 \begin{equation}

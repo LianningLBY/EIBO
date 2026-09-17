@@ -208,6 +208,41 @@ width $\epshi-\epslo$ & 0.0139 & 0.0428 & 0.0784 & 0.1119 & 0.2214 \\
 \end{table}
 
 
+\subsection*{A.1b\quad Aggregation of Pairwise Certificates}
+
+\label{sec:appendix/aggregation}
+
+\Cref{eq:aggregate} follows from \eqref{eq:lecam} by a two-point reduction
+applied to the classifier itself. Let there be $M$ classes under a uniform prior
+and let $\mathrm{err}_i$ be the error rate of $\phi$ on class $i$. For each
+ordered pair $(i,j)$ define the binary test $\psi_{ij}(X)=\mathbf{1}\{\phi(X)=i\}$.
+Under $Y{=}i$, $\psi_{ij}$ errs exactly when $\phi$ errs, so its error is
+$\mathrm{err}_i$; under $Y{=}j$ it errs only when $\phi(X)=i$, and since
+$\{\phi{=}i\}\subseteq\{\phi\neq j\}$ its error is at most $\mathrm{err}_j$.
+Applying \eqref{eq:lecam} to this pair gives
+$\mathrm{err}_i+\mathrm{err}_j\ge 1-\tv(P_i,P_j)$ for every ordered pair and
+every $M$. Summing, each $\mathrm{err}_i$ is counted $2(M-1)$ times, so the left
+side is $2(M-1)M\,\mathbb{E}[\mathrm{err}]$ against $2S$ on the right, giving
+\eqref{eq:aggregate}.
+
+For the open-set reading, take $M=K+1$: the $K$ certified services plus the
+unknown class. The sum $S$ then splits into the pairs our certificates bound and
+the pairs involving the unknown class, which we cannot bound. Both enter with a
+positive sign, so discarding the unknown-class group only loosens the bound and
+never invalidates it, and $S_{\text{known}}/((K+1)K)$ is a valid floor. This is
+the point worth stating explicitly: an assumption separating the unknown class
+from the known ones is needed to \emph{recover the discarded mass} and tighten
+the floor, not to state one.
+
+Three limits apply. The floor is loose by construction, since it averages over
+all pairs rather than concentrating on the hardest and discards every
+unknown-class term; the uniform prior is required for $\mathbb{E}[\mathrm{err}]$
+to equal the average of the per-class rates; and the average is dominated by
+well-separated services, so a classifier may be near-perfect on most services and
+still satisfy it. The floor is a statement about the certified stratum and is not
+a measurement of the pair-level surrogate in
+\Cref{sec:results/detector_validation}.
+
 \subsection*{A.2\quad Protocol Context and Unknown-Class Machinery}
 
 A bracket over observed services says nothing about services that are absent
