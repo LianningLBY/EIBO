@@ -2242,3 +2242,15 @@
   skill: null
   created_at: '2026-09-17T02:40:00Z'
   tags: [open-set, looseness, exploration]
+- id: art_20260917_oslp
+  name: 'Open-set floor under optimal weighting: 0.363, up from 0.186'
+  type: report
+  description: 'The open-set floor nearly doubles under the same assumptions once the equal weighting is relaxed. The derivation never required equal weights; any non-negative weights with uniform row sums give E[err] >= [max over feasible w of sum w(1 - tv)]/M, a linear program whose optimum is computable from the certified bounds alone. Equal weights are the feasible point w=1/(2(M-1)), recovering the previous bound exactly, so the LP is a strict generalisation. On the corpus the floor goes from 0.186 to 0.363, +95.4%. Verified on 200 randomised configurations with zero violations against the exact Bayes error, and on 8 heterogeneous cases with 9-67% gains. Limits: still Le Cam-based, so incremental rather than a new bound; weights are data-dependent so the LP is re-solved per configuration; uniform prior still required; not compared against measurement since no multi-class run exists.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_optimal_weighting.md
+  content_sha256: 9d16e6ad93299c5ae3b9816f851b9830fd3a1dbb6db20e6ec442026c8884f644
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-17T03:05:00Z'
+  tags: [open-set, lp, exploration]
