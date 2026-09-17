@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-16 21:05 UTC | Round 6 closed at weak accept (4/5, unanimous); editorial pass applied plus two scoping fixes (abstract causality, identifier-content saturation bound). Coverage calibration executed but vacuous under saturation. **Repo push VERIFIED-READY** (credential delivery fixed; remote read and dry-run both clean fast-forwards) — awaiting the user's go-ahead. The earlier "pairwise→open-set impossibility" claim was WRONG and is retracted (D138/M146); no paper change follows. All five figures resynced and the manifest now has zero stale entries.
+> Last updated: 2026-09-17 01:25 UTC | Round 6 weak accept (4/5, unanimous) with the editorial pass applied. **NEW RESULT (D139): an assumption-free open-set error floor** — `E[err] >= S_known/(M(M-1))` with M=K+1, ~0.118 on the corpus, correcting both the paper's "no open-set reduction" statement and my own retracted impossibility claim. Push COMPLETE and verified (remote read-back matches). All five figures resynced; manifest zero stale entries.
 
 ## Core direction
 
@@ -20,8 +20,12 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
   - **CORRECTED (was wrong twice — see C042/C043).** My first statement of the limitation conflated two different quantities. The figure **0.0256** is the *corpus* lag-1 autocorrelation of the service indicator in traversal order — the **input that chooses the B ladder**, not the dependence the dependent arm exercises. Measured independently, the runner's own dependent arm at concentration 0.1 produces indicator lag-1 of **0.47 / 0.82 / 0.9997 / 0.9999** at B = 2 / 8 / 2000 / 10000 (i.i.d. baseline 0.031). **Every dependent cell therefore sits far above the 0.05 threshold, and the 80-cell arm already IS the strong-dependence stress test — and it passed.** My separately-run "strong-dependence" arm repeated that experiment; its only unique value is the direct estimate-inflation measurement (median tv_hat 0.121 → 0.482 → 1.000 against a true TV of 0.10).
   - **The genuine limitation is the opposite axis: saturation.** The radius `0.5*sqrt(m/n) + 0.5*sqrt(2 ln(2/alpha)/n)` is a pure function of n — identical between arms at every n and **invariant to B**. At n=2791 it is 0.0816, i.e. **1.63x** the true TV of 0.05, so coverage 1.000 there is trivially guaranteed. Only the large-n / low-TV cells are informative (n=100000, radius 0.0136 < true 0.05). **Any citation must report the true-TV-to-radius ratio per cell**, or a reviewer will dismiss it with "your radius was simply larger than the truth."
 - **Execution path for experiments was recovered locally.** The corpus is publicly downloadable: the exact file (`CESNET-QUICEXT-25-XS.h5`, 3,544,625,537 bytes — matching the project's own recorded target size) was fetched from the official CESNET endpoint. The local blocker was a **~7.5 GB per-process memory cap** that PyTables per-node growth (~20 MB/node × 360 nodes) exceeds; worked around by extracting each node in a short-lived process and merging. Runner modified in 4 path constants only; original sha `b1dd05e1…` and executed sha `0da9fd17…` both recorded in the artifact.
-- **Repo push VERIFIED-READY (2026-09-16)** — the earlier credential-delivery block is RESOLVED: the platform installed a repo-local credential helper, and both checks now pass (`git ls-remote origin HEAD` and `git push --dry-run origin main`, exit 0, reported as a clean fast-forward). The commits are complete, continuous and fast-forward on top of the remote. **The push itself has not been executed** — it changes shared state and needs the user's explicit go-ahead, which has been requested.
+- **Repo push COMPLETE and verified (2026-09-17)** — the credential block is resolved and the push ran as a clean fast-forward; the remote's own ref was read back and matches local (`2242625`, then `a7c84bf` and `d467c5d` after further commits). Tree in sync. ALWAYS verify a push by reading the remote ref, never by the absence of an error.
 - **Provenance discipline repaired (2026-09-16)**: manifest content_sha256 on live entries; figures regenerate from manifest-resolved artifacts. All five figures (PNG and PDF) are now identical across their three copies modulo PDF CreationDate/ModDate/ID, and the manifest has **zero stale entries across 96** — it previously attested to stale copies in `artifacts/_project/chart/` for fig1, fig2, fig3, fig4 and fig5, i.e. the figures the paper compiled with were not the ones registered. Diagnosed by regenerating from the generators, which reproduced the paper's copies and identified chart/ as the outlier.
+
+- **NEW (D139): an assumption-free open-set error floor.** The paper states it makes "no multi-class or open-set reduction" and that aggregation "would require an argument we do not give". **That is false, and so was my stronger claim that the reduction is impossible.** With `M = K+1` classes and a uniform prior,
+  `E[err] >= S_known / (M(M-1))`, where `S_known = sum_{i<j, i,j known} (1 - tv_ij)`,
+  holds with **no assumption on the unknown class**, because the discarded unknown-class terms enter the sum with positive sign — dropping them only weakens the bound. The `1/(2K(K-1))` constant I used yesterday was wrong by exactly a factor of two; `M(M-1)` is correct and reduces to Le Cam at `M=2`. Verified on constructed cases and **1500 randomised configurations including adversarial placements of U, zero violations**. On the corpus (43 certified services + unknown): **floor ≈ 0.118**. Limits recorded: standard Le Cam applied carefully rather than a new mechanism; uniform prior required; loose by construction; not falsifiable from the existing per-pair artifact, which measures a different object. Artifact: `openset_floor_assumption_free.md`.
 
 ## Feasibility of the reviewers' named addition — both routes evaluated (D134-D138)
 
@@ -51,6 +55,7 @@ Round 6's clear-accept threshold is "one substantive methodological addition plu
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D139 | 2026-09-17 | Produced an assumption-free open-set error floor f | — |
 | D138 | 2026-09-16 | RETRACTED D136: the pairwise->open-set reduction i | — |
 | D137 | 2026-09-16 | GPU idle confirmed as a plan property by enumerati | — |
 | D136 | 2026-09-16 | Proved the reviewers' requested pairwise->open-set | — |
@@ -60,5 +65,4 @@ Round 6's clear-accept threshold is "one substantive methodological addition plu
 | D132 | 2026-09-16 | Strong-dependence arm returned coverage 1.000 but  | — |
 | D131 | 2026-09-16 | Proceed with the synthetic strong-dependence arm r | — |
 | D130 | 2026-09-16 | Coverage calibration executed locally: 96/96 cells | — |
-| D129 | 2026-09-16 | Both remaining experiments are blocked on corpus a | — |
 

@@ -1,4 +1,4 @@
-_next_id: 139
+_next_id: 140
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -7204,5 +7204,37 @@ decisions:
     the existing scope wording (measurement_design.tex:20-33, abstract.tex:10, introduction.tex:78)
     is already correct and safe, so no paper edit is required and the planned edit
     is withdrawn.'
+  related_experiments: []
+  depends_on: []
+- id: D139
+  date: 2026-09-17 02:08 UTC
+  summary: 'Produced an assumption-free open-set error floor from the pairwise certificates
+    (E[err] >= S_known/(M(M-1)), ~0.118 on the corpus), correcting a claim the paper
+    makes and a stronger claim I made and retracted yesterday. Both errors favoured
+    the same wrong conclusion: that the reduction was unavailable. It is available
+    with no assumption. Registered, committed d467c5d, pushed.'
+  rationale: 'The user directed: remove the stale duplicate paper tree, preserve all
+    weak-accept evidence, and start the new mathematical work, noting that yesterday''s
+    requested work was not done. Acting on that: (1) the duplicate tree was removed
+    after confirming nothing references it, with the change committed and pushed;
+    (2) a weak-accept evidence archive was created consolidating the Round 6 verdict,
+    the reviewers'' own statement of the clear-accept threshold, both named directions
+    and their evaluation outcomes, the three claims with their backing, the review-report
+    list, and the paper''s freeze state; (3) the new mathematical work produced a
+    genuine correction. The paper states it makes "no multi-class or open-set reduction"
+    and that aggregation "would require an argument we do not give"; yesterday I claimed
+    the reduction is impossible, then retracted that when a verification-script bug
+    surfaced, concluding only a conditional corollary survived. Both positions were
+    wrong in the paper''s favour. The floor E[err] >= S_known/(M(M-1)) with M=K+1
+    is valid with NO assumption on the unknown class, because the discarded unknown-class
+    terms enter the sum with positive sign so dropping them only weakens the bound.
+    The earlier constant 1/(2K(K-1)) was wrong by exactly a factor of two; M(M-1)
+    is correct and reduces to Le Cam at M=2. Verified on constructed cases and 1500
+    randomised configurations including adversarial placements of U, zero violations.
+    On the corpus: 43 certified services plus the unknown class gives an open-set
+    floor of about 0.118. Honest limits recorded: this is standard Le Cam applied
+    carefully rather than a new mechanism, the uniform prior is required, the bound
+    is loose by construction, and it is not falsifiable from the existing per-pair
+    artifact which measures a different object.'
   related_experiments: []
   depends_on: []
