@@ -2277,3 +2277,27 @@
   skill: null
   created_at: '2026-09-17T03:35:00Z'
   tags: [open-set, measurement, exploration]
+- id: art_20260917_osmix
+  name: 'A third construction: mixture bound and metric short-cut, 0.385'
+  type: report
+  description: >-
+    Leaves the pairwise-summation family and beats it twice. Construction A replaces pairwise
+    distances with distances to the mixture distribution (P-bar), giving an assumption-free bound
+    E[err] >= (M-1)/M - (1/M^2) sum eps_hi_ij that contains no optimisation and agrees with the LP
+    to three decimals on the corpus (0.3635 vs 0.3631) -- two structurally different arguments
+    landing on the same number, which is evidence that 0.363 was a genuine ceiling of the pairwise
+    class. Construction B then uses the metric property of total variation to replace those
+    distances with shortest-path bounds over the service graph (Bellman-Ford; every path is a valid
+    upper bound so the minimum is too), reaching 0.3847 = 52.2% of the measured error, up from
+    49.3%. Verified: mixture valid on 10 cases, shortest-path mixture valid on 300 randomised
+    configurations with zero violations. Limits: ingredients are all standard, so the contribution
+    is the composition plus the observation that the metric property was available and unused;
+    uniform prior still required; a factor of 1.9 to the measured error remains.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_mixture_bound.md
+  content_sha256: 8d8376aa418e1265fde38499e50726ea8b73656aecfac89a7e7ba737881f91d4
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-17T04:05:00Z'
+  tags: [open-set, mixture, metric, exploration]
