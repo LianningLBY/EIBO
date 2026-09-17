@@ -1,4 +1,4 @@
-_next_id: 49
+_next_id: 50
 constraints:
 - id: C001
   added: 2026-09-13 11:37 UTC
@@ -720,3 +720,22 @@ constraints:
     ronetc device ''cuda:0'' while lightgbm and prototype record ''cpu'', with LightGBM''s
     GPU attempt failing on ''No OpenCL device found''), not the compute_class prose.'
   decision_id: D137
+- id: C049
+  added: 2026-09-17 01:08 UTC
+  summary: 'The GitHub push works as of 2026-09-16. Remote main confirmed at b368cd7
+    by ls-remote, equal to local HEAD, working tree in sync (0/0 ahead-behind), 70
+    commits published as a clean fast-forward from 4d39762. The earlier block was
+    purely credential delivery (GIT_TERMINAL_PROMPT=0, IdentityFile=/dev/null, no
+    credential material anywhere) and was resolved platform-side by a repo-local credential
+    helper. ALWAYS verify a push by reading the remote''s own ref (git ls-remote origin
+    main), never by the absence of an error. Separately: a stale duplicate paper/
+    tree with an older references.bib (58 vs 60 entries) exists alongside the live
+    docs/paper/; it is not referenced by anything but would silently publish a pre-correction
+    manuscript if any tooling resolved it.'
+  scope: all
+  reason: Only a *successful* fetch makes the local remote-tracking ref current; after
+    the credential fix the fetch and push both ran clean, so the repository can now
+    be read and written normally. Recording the verified end state so no future session
+    re-diagnoses the credential block that consumed most of 2026-09-16, and so the
+    one real trap found along the way is on the record.
+  decision_id: D138
