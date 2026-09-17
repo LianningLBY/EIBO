@@ -2254,3 +2254,26 @@
   skill: null
   created_at: '2026-09-17T03:05:00Z'
   tags: [open-set, lp, exploration]
+- id: art_20260917_osmeas
+  name: 'Open-set floor vs measured multi-class error: 0.363 vs 0.737'
+  type: report
+  description: >-
+    Closes the gap the earlier notes flagged: the floor is now compared against a
+    MEASURED multi-class error, using a measurement that already existed in the project
+    (x12_detector_validation_k5.json fits multiclass classifiers and records per-service
+    classification_error, whose uniform average is the macro-average multi-class error
+    under the same uniform prior). On matched services (all 45 of the floor graph, none
+    missing): measured error 0.7366, uniform floor 0.1858 (25.2 percent of measured),
+    LP-optimal floor 0.3631 (49.3 percent). Both bounds hold; the LP weighting closes
+    32.2 percent of the remaining slack. Establishes validity and substance against real
+    measurement; does NOT establish a certificate on that classifier, nor an open-set
+    evaluation (models are closed-set over 53 labels, unknown class not exercised as a
+    rejection target). pcap_encoder did not import; prototype and ronetc give 0.816 and 0.856.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_vs_measured.md
+  content_sha256: b8faadc18bbc1e41aafca28374f7a000d8016cb8c6a2a3919df77f71e4638a17
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-17T03:35:00Z'
+  tags: [open-set, measurement, exploration]
