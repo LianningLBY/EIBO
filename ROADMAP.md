@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-17 01:25 UTC | Round 6 weak accept (4/5, unanimous) with the editorial pass applied. **NEW RESULT (D139): an assumption-free open-set error floor** — `E[err] >= S_known/(M(M-1))` with M=K+1, ~0.118 on the corpus, correcting both the paper's "no open-set reduction" statement and my own retracted impossibility claim. Push COMPLETE and verified (remote read-back matches). All five figures resynced; manifest zero stale entries.
+> Last updated: 2026-09-17 03:10 UTC | Paper FROZEN at the weak-accept version (no open-set content; Round-6 editorial fixes retained). **Exploration line (separate from the paper): the assumption-free open-set floor now stands at 0.363, up from 0.186, after relaxing the equal weighting to an LP.** The earlier 0.118 figure is superseded twice. Push complete and verified; manifest at 100 entries, zero stale.
 
 ## Core direction
 
