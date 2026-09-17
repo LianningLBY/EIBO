@@ -1,3 +1,15 @@
+# ⚠️ NUMBER SUPERSEDED — see `openset_floor_tightened.md`
+
+The floor value below (**0.118**) is **too small**. This note computed `S` over only the pairs with
+`eps_hi <= 0.5`, which is the certification *gate* rather than a requirement of the derivation; every
+pair's `1 - eps_hi` is a valid term, because `eps_hi` bounds `tv` from above at any value. Over the
+full 45-service graph the correct figures are **0.1858** at `M = K+1` (and 0.1942 at `M = K`).
+
+**Everything structural in this note stands** — the derivation, the positive-sign argument for
+discarding unknown-class terms, and the four limits. Only the number changes.
+
+---
+
 # An assumption-free open-set error floor from pairwise certificates
 
 Prepared 2026-09-17. This **corrects a claim I made and retracted yesterday**, and it produces a

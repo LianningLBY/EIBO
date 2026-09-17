@@ -2211,7 +2211,7 @@
   type: report
   description: 'Corrects a claim made and retracted on 2026-09-16. A positive open-set error floor follows from the pairwise certificates with NO assumption on the unknown class, because the discarded unknown-class terms enter the sum with positive sign: E[err] >= S_known/(M(M-1)) with M = K+1. Verified on constructed cases and under 1500 randomised configurations including adversarial placements of U; zero violations. On the corpus this gives ~0.118 for 44 classes. Notes the limits: standard Le Cam applied carefully rather than new mechanism, uniform prior required, loose by construction, rare-class behaviour not captured.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_assumption_free.md
-  content_sha256: 32c60ffc10994404d96b96e80d2b1b8c3484dd91e50e0ab9c1b5a5b5efe851d7
+  content_sha256: a6ddab80b79da4483e7be2511303a7dd8f4a04eae8e32d3ae53ed7440e65af32
   url: null
   project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
   exp_id: null
