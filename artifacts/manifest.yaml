@@ -2230,3 +2230,15 @@
   skill: null
   created_at: '2026-09-17T02:10:00Z'
   tags: [open-set, corrected, exploration]
+- id: art_20260917_osloose
+  name: 'Open-set floor: how loose, measured against ground truth'
+  type: report
+  description: 'Characterises how loose the assumption-free open-set floor is, and corrects an invalid sweep in my own first attempt (I varied M while holding S fixed; S must move with M since it sums over the pairs among those M classes). Redone: on the corpus the floor rises as the class set shrinks, 0.433 at M=2 to 0.186 at M=46. Against ground truth the bound is exactly tight at M=2 (reproducing Le Cam) and degrades steadily with class count, recovering about a fifth of the true error at M=20 -- intrinsic to the construction, since the 1/(M(M-1)) averaging that buys the assumption-free property also caps sharpness. Records explicitly that no measured multi-class run exists in the project, so the corpus value cannot be compared against an observed multi-class error.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_looseness.md
+  content_sha256: f3e5e95ac514981061659567a1c20535ac5f33aa6d0b6cacc8b53b4615df40b2
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-17T02:40:00Z'
+  tags: [open-set, looseness, exploration]
