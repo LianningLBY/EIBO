@@ -2301,3 +2301,27 @@
   skill: null
   created_at: '2026-09-17T04:05:00Z'
   tags: [open-set, mixture, metric, exploration]
+- id: art_20260917_osfour
+  name: 'Four constructions; a normalisation bug caught in the comparison'
+  type: report
+  description: >-
+    Adds a fourth construction and records a normalisation error caught during the comparison.
+    New: excluding the unknown class from the mixture (it had been folded in at the trivial bound
+    tv(P_i,U)<=1, silently inflating the average). Excluded, U enters only through the prior factor
+    K/M, giving 0.37155 = 50.4 percent of the measured error, up from the LP's 0.3631. Verified on
+    400 randomised configurations with zero violations. The bug: my first comparison produced 0.3715
+    for the UNIFORM bound -- double the correct 0.1858 -- because I summed over ordered pairs (each
+    unordered pair counted twice) but divided by the unordered normaliser M(M-1); the correct
+    denominator for an ordered sum is 2M(M-1). Same defect class as the earlier 1/(2K(K-1)) slip and
+    the 0.118 input-filter error: a factor of two in the normalisation rather than the sum. Rule now
+    written into the check: an ordered-pair sum equals sum_i err_i * r_i with r_i the row sum, so the
+    bound divides by r*M. The clustering of LP, mixture and exclude-U within 2.3 percent across
+    structurally different arguments is evidence that ~0.37 is the ceiling of this family.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_four_constructions.md
+  content_sha256: 0ace3222da0fad188b9382dcbf97121c5513344db6f098672d29022e3cbe003b
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: null
+  created_at: '2026-09-17T04:40:00Z'
+  tags: [open-set, normalisation, exploration]
