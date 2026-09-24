@@ -81,3 +81,17 @@ artifacts/_project/chart/_scratch/
 # --- PDF render scratch (visual-review working files) ---
 docs/paper/_pdf_images/
 _pdf_images/
+# The hi-DPI variant renders the same pages; without this line the rule above
+# misses it and ~0.8 MB of page images per review round enters the repository.
+_pdf_images_hi/
+
+# --- Working scratch (regenerable; NOT part of the evidence chain) ---
+# Same class as artifacts/tmp/ above: intermediate builds and probes whose
+# conclusions live in the cited artifacts, not in these files.
+artifacts/_project/scratch/
+
+# --- Raw discussion attachments (never reviewed evidence) ---
+# Screenshots pasted into chat. None is registered in the artifact manifest, so
+# none is cited by the paper. One is a private project-settings panel showing a
+# credential name — keeping that out of git history is deliberate.
+artifacts/_discussion/
