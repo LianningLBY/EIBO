@@ -1,0 +1,36 @@
+{
+ "B": 64,
+ "arm": "Arm A - block bootstrap",
+ "below_nominal": false,
+ "conc": 0.1,
+ "coverage": 0.994,
+ "coverage_ci95": [
+  0.9869865767290255,
+  0.9977950175148487
+ ],
+ "covered": 994,
+ "cp_lower_clears_nominal": true,
+ "excludes_nominal": true,
+ "excludes_nominal_direction": "from_above",
+ "falsifier": "Fails if the CP lower endpoint remains below nominal 0.975, or if the median block-bootstrap radius is not larger than the i.i.d. radius at n=60000.",
+ "falsifier_fired": false,
+ "iid_radius_value": 0.03517985184254251,
+ "method_description": "Each sample is partitioned into contiguous B=64 blocks; B-sized blocks are resampled with replacement, with a residual block to preserve n=60000. The radius is recomputed per replicate.",
+ "n": 60000,
+ "notes": "Median radius is larger than the i.i.d. reference; CP lower endpoint clears nominal 0.975; Required replicates recomputed from p0=0.95, p1=0.9825, two-sided alpha=0.05, target power=0.95: ceil(N)=800; the displayed dispatcher approximation 897 does not follow from the displayed formula, which evaluates to 799.44.",
+ "radius_description": "r_boot = Quantile_0.975(|TV_hat_boot - TV_hat|) over 128 block-bootstrap resamples.",
+ "radius_max": 0.05567625000000003,
+ "radius_mean": 0.041272220000000005,
+ "radius_min": 0.029112083333333347,
+ "radius_relation_to_iid": "larger",
+ "radius_value": 0.04109708333333338,
+ "replicates": 1000,
+ "required_replicates": 392,
+ "required_replicates_labelled": {
+  "design": "one-sample (observed coverage vs FIXED nominal 0.975)",
+  "note": "Correct structure for this test. The earlier field value 800 used the two-sample pooled form, which is conservative here by 2.04x; it does not invalidate any run (1000 replicates were used) but must not be quoted as the requirement for this coverage test. Two-sample equivalent = 800.",
+  "value": 392
+ },
+ "runner_sha256": "d50d15a30247ddd32903d94dd538121787088c70bfcbb3ce72fdaca9aeb36065",
+ "true_tv": 0.4
+}

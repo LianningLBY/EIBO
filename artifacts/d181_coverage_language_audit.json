@@ -1,0 +1,49 @@
+{
+  "instances": [
+    {
+      "file": "discussion.tex",
+      "line_number": 140,
+      "text": "The breach is a widening \\emph{lower tail}, not a shifting \\emph{centre}: cells fail when $\\widehat{tv}$ falls \\emph{below} the truth, the thresholds ($0.339$--$0.374$) sitting $6$--$15\\%$ under a true $\\tv$ of $0.400$, while every median $\\widehat{tv}$ stays flat at or above $0.400$.",
+      "issue": "Uses \"breach\" and \"cells fail\" in the 400-replicate discussion without distinguishing individual lower-tail misses from coverage failure; the measured coverage is 0.9825, above the 0.975 nominal level.",
+      "suggested_direction": "Describe the result as lower-tail misses that leave empirical coverage slightly conservative, and state explicitly that 0.9825 exceeds 0.975."
+    },
+    {
+      "file": "discussion.tex",
+      "line_number": 145,
+      "text": "Within-block dependence thickens that tail relative to the i.i.d.\\ radius, and a thinner radius cannot exempt a tail it did not create: coverage plateaus at $0.9825$ across",
+      "issue": "Frames the 0.9825 coverage plateau as evidence of a problematic tail or ineffective bound, although 0.9825 > 0.975 means the observed coverage is slightly conservative.",
+      "suggested_direction": "Reframe the plateau as stable, slightly conservative coverage under the tested dependence condition, with the nominal comparison written as $0.9825 > 0.975$."
+    },
+    {
+      "file": "discussion.tex",
+      "line_number": 147,
+      "text": "Past $n{=}60{,}000$ shrinkage buys nothing, so a correction would have to change the estimator, not the sample size.",
+      "issue": "Implies that the bound or estimator has failed because additional samples do not improve the measured coverage, but the measured 0.9825 is already above nominal.",
+      "suggested_direction": "State that further radius shrinkage does not materially change an already nominal-or-better result; reserve an estimator-correction claim for evidence of under-coverage."
+    },
+    {
+      "file": "discussion.tex",
+      "line_number": 148,
+      "text": "The shortfall also sits near the edge of what",
+      "issue": "Calls the 400-replicate result a shortfall without identifying the reference level; against the nominal 0.975 level, 0.9825 is not a coverage shortfall.",
+      "suggested_direction": "Replace \"shortfall\" with \"sampling uncertainty around the coverage estimate\" or explicitly say that the point estimate is 0.0075 above nominal."
+    },
+    {
+      "file": "discussion.tex",
+      "line_number": 150,
+      "text": "report the direction and the plateau, not the magnitude.",
+      "issue": "The surrounding paragraph treats the plateau as a residual problem, but the reported direction is conservative relative to nominal rather than a bound failure.",
+      "suggested_direction": "Report the direction as slight conservatism and give the nominal comparison, e.g. coverage remains 0.9825 versus 0.975 nominal."
+    }
+  ],
+  "total_instances": 5,
+  "body_ever_states_above_nominal": false,
+  "body_nominal_comparison_note": "The body reports coverage = 0.9825 and nominal = 0.975 in separate places but never explicitly states the comparison 0.9825 > 0.975. The body also contains genuinely sub-nominal 200-replicate cells (0.9725 and 0.9496); those are distinct from the 400-replicate 0.9825 result and are not included as misleading instances here.",
+  "scope": [
+    "introduction.tex",
+    "results.tex",
+    "discussion.tex",
+    "conclusion.tex",
+    "measurement_design.tex"
+  ]
+}

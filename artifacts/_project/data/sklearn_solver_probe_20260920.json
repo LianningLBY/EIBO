@@ -1,0 +1,20 @@
+{
+  "deprecation_warnings": [],
+  "hostname": "autodl-container-pypkyfrgxr-c84bc8f0",
+  "interpreter": "/root/miniconda3/bin/python3",
+  "l1_ratio": 0.0,
+  "notes": "Warnings were captured with warnings.catch_warnings(record=True) and simplefilter('always') around construction and fit. Prefit values were read from the same estimator before fit when readable.",
+  "numpy_file": "/root/miniconda3/lib/python3.12/site-packages/numpy/__init__.py",
+  "numpy_version": "2.3.2",
+  "penalty_prefit": "deprecated",
+  "python_version": "3.12.3 | packaged by Anaconda, Inc. | (main, May  6 2024, 19:46:43) [GCC 11.2.0]",
+  "resolved_penalty": "deprecated",
+  "resolved_solver": "lbfgs",
+  "scipy_file": "/root/miniconda3/lib/python3.12/site-packages/scipy/__init__.py",
+  "scipy_version": "1.18.1",
+  "sklearn_file": "/root/miniconda3/lib/python3.12/site-packages/sklearn/__init__.py",
+  "sklearn_version": "1.9.0",
+  "solver_prefit": "lbfgs",
+  "toy_fit_note": "Fitted LogisticRegression(max_iter=1000, random_state=0) with no solver or penalty argument on an 8-row, 2-class toy array before reading post-fit attributes.",
+  "utc_timestamp": "2026-09-20T06:46:08.275021Z"
+}

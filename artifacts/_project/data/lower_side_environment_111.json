@@ -1,0 +1,58 @@
+{
+  "host": {
+    "hostname": "autodl-container-pypkyfrgxr-c84bc8f0",
+    "node": "autodl-container-pypkyfrgxr-c84bc8f0",
+    "cwd": "/root"
+  },
+  "interpreter": "/root/miniconda3/bin/python3",
+  "python_version": "3.12.3",
+  "sklearn_version": "1.9.0",
+  "numpy_version": "2.3.2",
+  "scipy_version": "1.18.1",
+  "dist_info_dirs": [
+    {
+      "path": "/root/miniconda3/lib/python3.12/site-packages/scikit_learn-1.9.0.dist-info",
+      "version": "1.9.0",
+      "mtime": "2026-09-11T17:43:13.432761Z"
+    }
+  ],
+  "other_sklearn_installs": [
+    {
+      "kind": "dist-info",
+      "path": "/root/autodl-tmp/open-set-nids/.venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info",
+      "version": "1.7.2",
+      "mtime": "2026-09-06T10:49:00.118257Z"
+    },
+    {
+      "kind": "dist-info",
+      "path": "/root/autodl-tmp/tcrm-pilot-2026-09-06/venv/lib/python3.12/site-packages/scikit_learn-1.9.0.dist-info",
+      "version": "1.9.0",
+      "mtime": "2026-09-06T12:15:54.717374Z"
+    },
+    {
+      "kind": "dist-info",
+      "path": "/root/miniconda3/lib/python3.12/site-packages/scikit_learn-1.9.0.dist-info",
+      "version": "1.9.0",
+      "mtime": "2026-09-11T17:43:13.432761Z"
+    },
+    {
+      "kind": "sklearn_init",
+      "path": "/root/autodl-tmp/open-set-nids/.venv/lib/python3.12/site-packages/sklearn/__init__.py",
+      "mtime": "2026-09-06T10:48:58.446286Z"
+    },
+    {
+      "kind": "sklearn_init",
+      "path": "/root/autodl-tmp/tcrm-pilot-2026-09-06/venv/lib/python3.12/site-packages/sklearn/__init__.py",
+      "mtime": "2026-09-06T12:15:52.961490Z"
+    },
+    {
+      "kind": "sklearn_init",
+      "path": "/root/miniconda3/lib/python3.12/site-packages/sklearn/__init__.py",
+      "mtime": "2026-09-11T17:43:11.668664Z"
+    }
+  ],
+  "canonical_ledger_path": "/root/eibo/artifacts/q1_eps_lo_symbol_map.json",
+  "canonical_ledger_mtime": "2026-09-13T18:45:39.720678Z",
+  "live_probe_matches_dist_info": true,
+  "notes": "The live lower-side interpreter is sklearn 1.9.0, not 1.9.1, and agrees with the miniconda dist-info. Three sklearn installations were found under /root: miniconda 1.9.0, the tcrm-pilot venv 1.9.0, and the open-set-nids venv 1.7.2. The search excluded the corpus data directories and did not read corpus contents. The live sklearn origin was /root/miniconda3/lib/python3.12/site-packages/sklearn/__init__.py."
+}

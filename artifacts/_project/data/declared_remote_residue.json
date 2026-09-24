@@ -1,0 +1,18 @@
+{
+  "artifact": "declared_remote_residue",
+  "purpose": "Register of known, harmless non-artifact files left on experiment hosts by tooling. Each entry is DECLARED here rather than deleted on the remote host, per the standing no-remote-deletion rule. A file listed here has no manifest identity and no evidentiary value; it must not be mistaken for an experiment output.",
+  "project": "epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade",
+  "entries": [
+    {
+      "path": "/root/eibo/artifacts/_project/intermediate/sklearn_solver_probe_20260920.py.upload.guard",
+      "host": "111",
+      "kind": "upload_transfer_guard",
+      "declared_utc": "2026-09-20T07:20:00Z",
+      "declared_by": "director",
+      "note": "Transfer guard left by an upload of the probe script sklearn_solver_probe_20260920.py. Not an artifact; no manifest identity; safe to ignore. Retained rather than deleted per the standing no-remote-deletion rule for housekeeping files.",
+      "action": "none_required"
+    }
+  ],
+  "rule": "Declare, do not delete. A remote deletion is irreversible and is not authorised for a housekeeping file; a declaration is sufficient and reversible. If a future sweep wants a clean tree, the correct move is to note the file here and leave it.",
+  "created_utc": "2026-09-20T07:20:00Z"
+}

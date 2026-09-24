@@ -21,6 +21,7 @@
 \usepackage{multirow}
 \usepackage{seqsplit}
 \usepackage{cleveref}
+% Keeps appendix floats from drifting past the References heading.
 
 % cleveref must be told about the natbib-style theorem of equations/tables
 \crefname{table}{Table}{Tables}
@@ -68,7 +69,6 @@
 \clearpage
 \section*{Ethical Considerations}
 \addcontentsline{toc}{section}{Ethical Considerations}
-\label{sec:appendix/ethics}
 
 All measurements in this paper are computed on a public research corpus of
 backbone traffic collected and released by its operators under their own ethics
@@ -91,14 +91,28 @@ anonymization where the address space is enumerable: a salt rotated per
 measurement window would prevent cross-window linkage but is not part of the
 current dataset's collection protocol.
 
+\clearpage
 \section*{Open Science}
 \addcontentsline{toc}{section}{Open Science}
 
 
 This appendix lists the artifacts needed to evaluate the paper's core
-contributions and how the review committee can reach each one. Artifacts are
-accessible through the submission system's supplementary-material channel;
-anonymous URLs are not provided, to preserve double-blind integrity.
+contributions and how the review committee can reach each one.
+
+The artifacts this paper depends on (the complete per-pair ledgers, the
+calibration and estimator payloads, and the figure generators) are carried in
+the supplementary-material archive included with this submission, and are
+reachable through the submission system's own artifact materials.
+
+Every claim in this paper can be checked from the submitted bytes, without
+tooling and without contacting the authors. As a factual matter about the files
+themselves, none of the recognized grounds for withholding artifacts applies
+here: there is no licensing restriction, no harm to study subjects, and no NDA
+or legal constraint on them. The artifacts are per-pair statistics over a
+publicly released corpus, derived from the same channel the paper declares and
+carrying nothing beyond it, so publishing them adds no capability to what
+\Cref{sec:discussion/ethics} already treats as a dual-use measurement: any
+reader of the paper can recompute them from the corpus.
 
 \textbf{Worked provenance example.}
 Every quantitative claim resolves through an experiment identifier to a manifest
@@ -121,15 +135,17 @@ stretch the spacing:
 
 \textbf{What ``pre-registered'' means here.}
 Four commitments, each fixed before the measurement it governs: the coarsest
-channel ($k{=}5$, $M{=}1$) before the gate was measured; the informative-pair
-criterion ($\epshi < 0.5$, the 340-pair stratum) before the detector validation;
-the one-sided binomial test with its null rate of $0.05$ and its nine cells
-before that test ran; and the split policy (flow- and time-disjoint,
-packet-level splitting prohibited) before any evaluation. These are recorded in
-the project's decision log, and the ordering is checkable against the artifacts
-themselves: the detector panel's registration is timestamped
+channel ($k{=}5$, $M{=}1$) before the gate was measured; the $0.5$ upper
+threshold as the informative-stratum criterion for the detector validation, a
+later timepoint and a different role from the gate itself, whose $0.05$ lower
+threshold was not pre-registered
+(\eqref{eq:gate}); the one-sided binomial test with its null rate of
+$0.05$ and its nine cells before that test ran; and the split policy (flow- and
+time-disjoint, packet-level splitting prohibited) before any evaluation. The
+ordering is checkable against the artifacts themselves: the detector panel's
+registration is timestamped
 \nolinkurl{2026-09-14T09:35:32Z}, its first measurement
-\nolinkurl{2026-09-14T09:36:33Z} — one minute later, in the same artifact that
+\nolinkurl{2026-09-14T09:36:33Z}, one minute later, in the same artifact that
 carries both fields alongside a boolean asserting the registration preceded the
 measurement. That ordering, not the word itself, is the claim.
 
@@ -152,14 +168,87 @@ measurement. That ordering, not the word itself, is the claim.
   with their known-truth gates.
   \item[Cross-corpus and sensitivity artifacts.] The independent-corpus bracket
   with its stratification table, and the channel-sensitivity dose-response.
+  \item[LP artifact.] The LP-optimal weighting construction behind the
+  comparison floor cited in \Cref{sec:design/problem}, with its derivation, the
+  equal-weight recovery of the uniform bound, and the 200-configuration validity
+  check. Registered as \texttt{art\_20260918\_fd1598} with content hash
+  \texttt{\seqsplit{9d16e6ad93299c5ae3b9816f851b9830fd3a1dbb6db20e6ec442026c8884f644}}.
+  \item[Constructions comparison.] The four lower-bound constructions on the
+  shared per-pair input (the uniform form, the LP-weighted aggregation, the
+  mixture bound and the exclude-$U$ variant), with the weights and inputs each
+  consumes. Registered as \texttt{art\_20260918\_f27ba9} with content hash
+  \texttt{\seqsplit{0ace3222da0fad188b9382dcbf97121c5513344db6f098672d29022e3cbe003b}}.
+  \item[Joint-coverage reaggregation.] The D181 headline floors: the uniform
+  open-set error floor $0.197$ at the simultaneous level $0.95$ (Bonferroni over
+  the $990$ pairs, $\alpha_{\mathrm{pair}} = 0.05/990$), the matched $M{=}45$
+  floor $0.206$, the $M{=}46$ gap $0.63$, and the LP-weighted floor $0.375$,
+  with the falsifier result ($984/990$ pairs non-vacuous, $6$ vacuous, zero
+  $\epsilon_{\mathrm{lo}} > \epsilon_{\mathrm{hi}}$ violations). Registered as
+  \texttt{art\_20260922\_f7853e} with content hash
+  \texttt{\seqsplit{c05735901f4bb714c55446ee324afe354716bc0a8cd4de5df4120aae042fc218}}.
+  \item[Same-channel validation.] The balanced-accuracy risk interval for the
+  same-channel check in \Cref{sec:results/detector_validation}. Each pair's
+  balanced error is compared against \emph{that pair's own} certified error floor
+  $(1-\epsilon_{\mathrm{hi}})/2$, a per-pair quantity (median $0.198$, range
+  $0$--$0.467$), not a single threshold held against all $990$: the
+  zero-violation result ($0/990$) is that per-pair comparison. Registered as
+  \texttt{art\_20260922\_764458} with content hash
+  \texttt{\seqsplit{06c0e766f4a47280e4245ef41f72f89ade3fc6337be76a8e196074732de1e40d}}.
+  \item[Upper-side coverage calibration.] The i.i.d.\ control arm and the
+  dependent-contamination arm behind \Cref{tab:coverage} and the coverage
+  statement in \Cref{sec:discussion/limitations}:
+  \begin{itemize}
+    \item \texttt{art\_20260918\_a408c2}
+    (\texttt{coverage\_calibration\_v2.json}):
+    \texttt{\seqsplit{b4e7f8b0755a09561736ab7bfc39318980548a0ae0cfda7243e9de48a5b399dc}}
+    \item \texttt{art\_20260918\_17c1b0}
+    (\texttt{coverage\_calibration\_ladder.json}):
+    \texttt{\seqsplit{86bd86a27a6efe8edacfbe5cafd2b38c5b4724e5f95de8f9afa5355e3c43d29a}}
+    \item companion write-ups \texttt{art\_20260918\_4b3dc7}
+    (\texttt{coverage\_calibration\_v2.md}):
+    {\raggedright\texttt{\seqsplit{7cb28ef9022730d21b99545fb39126dcd7c957fd9cd873333bca244e28273e08}}\par}
+    and \texttt{art\_20260918\_9821af}
+    (\texttt{coverage\_calibration\_ladder.md}):
+    {\raggedright\texttt{\seqsplit{bf82aa240795ebdbab1cdd6170c86552daa20433a6a363103be7c7e9b88bb55f}}\par}
+  \end{itemize}
+  \item[Analysis loads.] The four further analyses this paper adds,
+  each registered with its own content hash:
+  \begin{itemize}
+    \item the $5000$-replicate skewness follow-up behind \Cref{sec:appendix/track5}:
+    \texttt{art\_20260920\_0e4cdb} (\texttt{track5\_skewness\_n5000.json}):
+    \texttt{\seqsplit{6558da3814befb13c9d86105b973b2f5e528d9c921fd125fdd800492db329ee9}}
+    \item the $400$-replicate dependence ladder behind the coverage statement in
+    \Cref{sec:discussion/limitations}:
+    \texttt{art\_20260918\_17c1b0} (\texttt{coverage\_calibration\_ladder.json}),
+    \texttt{\seqsplit{86bd86a27a6efe8edacfbe5cafd2b38c5b4724e5f95de8f9afa5355e3c43d29a}}
+    \item the full $(M,k)$ grid behind \Cref{tab:grid}:
+    \texttt{art\_20260918\_a73525} (\texttt{eth\_full\_mk\_grid.json}):
+    \texttt{\seqsplit{522e25ff05b7ef84fe49bdc69ea6a2bd8fc50e56a7d26c7952c3f726adb89d7f}}
+    \item the threshold-sensitivity sweep behind \Cref{tab:thresholds}:
+    \texttt{art\_20260918\_b5a5cd} (\texttt{eth\_T2\_T3\_results.json}):
+    \texttt{\seqsplit{cee50b40b7913279144c537cc632610a28c352606c0994bda5b2e62d72bc2d17}}
+  \end{itemize}
+  \item[Three dependence-aware radii.] The block bootstrap, cluster-robust
+  sandwich and leave-one-block-out arms of \Cref{sec:appendix/track5}, one
+  artifact each:
+  \texttt{art\_20260919\_17d7d3} (\texttt{track5\_armA\_block\_bootstrap.json}),
+  \texttt{\seqsplit{b7bd97063a694c80d35147e1ada07a00abb573f01f1d142848936e14e62a32c8}};
+  \texttt{art\_20260919\_b84113} (\texttt{track5\_armB\_sandwich.json}),
+  \texttt{\seqsplit{741b321095e0aab0e7ca3a3a62f7412757a33588b5eb37caeb5ab83e4a221965}};
+  \texttt{art\_20260919\_fc043c} (\texttt{track5\_armC\_lobo.json}),
+  \texttt{\seqsplit{775ceede475a2f19f09ef398afe29632b02a4d8495b77270022716c013923c41}}.
   \item[Figure generators.] Scripts rebuilding every figure from its artifact,
   plus the provenance map of each series' source file and hash.
 \end{description}
 
 \textbf{Content-addressed chain of record.}
-The manifest hash, rather than any working copy, is the artifact of record, and a
-nested-field citation is recorded in the paper's provenance crosswalk so a
-reviewer can follow the number to its source without tooling.
+The artifacts cited in this paper are content-addressed: each carries a
+\texttt{content\_sha256} over its own bytes, and that hash, rather than any
+working copy, is the artifact of record. A nested-field citation is recorded in
+the paper's provenance crosswalk so a reviewer can follow the number to its
+source without tooling. The manifest also holds display entries that no claim in
+this paper cites; those are registered for completeness and are not
+content-addressed, since only the cited chain needs to be.
 
 \textbf{Data.}
 The primary corpus is publicly released by its operators and requires no
@@ -171,7 +260,10 @@ preprocessing applied to produce the flow-level tables used here.
 \section*{Appendix: Supplementary Material}
 \addcontentsline{toc}{section}{Supplementary Material}
 
-\subsection*{A.1\quad Per-Pair Ledger and Boundary Pairs}
+\setcounter{subsection}{0}
+\renewcommand{\thesubsection}{A.\arabic{subsection}}
+
+\subsection{Per-Pair Ledger and Boundary Pairs}
 
 The headline result rests on a 990-row per-pair ledger at $k{=}5$, $M{=}1$,
 carrying for each pair the upper-side bound, the lower-side bound at full $n$,
@@ -184,6 +276,22 @@ conditions by a margin.
 
 \input{tab_boundary}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.86\columnwidth]{figures/paper/fig1_bracket_overview.pdf}
+\caption{The EIBO measurement. Cited from \Cref{sec:intro} and
+\Cref{sec:design/frontier}; relocated here from the Introduction. Raw QUIC flow records are quantized into a
+$k$-prefix symbol over a (direction, size) alphabet at resolution $M$. The
+quantized symbol feeds two branches that carry different certification
+strength: an upper branch combining a plug-in TV estimate with a confidence
+radius, which is finite-sample, and a lower branch built from a
+classifier-based high-probability lower bound whose constant is asymptotically
+derived, so its level is nominal. The
+branches meet at the per-pair interval, whose gate is the conjunction
+$\epslo > 0.05$ and $\epshi < 0.5$.}
+\label{fig:bracket}
+\end{figure}
+
 \label{sec:appendix/context}
 \label{sec:appendix/endpoints}
 
@@ -193,22 +301,23 @@ endpoints.
 \begin{table}[!htbp]
 \centering
 \small
-\caption{Both endpoints across all 990 pairs at $k{=}5$, $M{=}1$. The lower
-bound's median sits ten times above the gate, which is what "the lower side
-saturates" means quantitatively, and no bracket has negative width.}
+\caption{Both endpoints across all 990 pairs at $k{=}5$, $M{=}1$, with width
+defined as $\epshi-\epslo$. The lower bound's median sits ten times above the
+gate, which is what "the lower side saturates" means quantitatively, and no
+bracket has negative width.}
 \label{tab:endpoints}
 \begin{tabular}{lrrrrr}
 \toprule
  & min & p25 & median & p75 & max \\
 \midrule
 $\epslo$ & 0.0151 & 0.3411 & 0.5548 & 0.6990 & 0.9729 \\
-width $\epshi-\epslo$ & 0.0139 & 0.0428 & 0.0784 & 0.1119 & 0.2214 \\
+width & 0.0139 & 0.0428 & 0.0784 & 0.1119 & 0.2214 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 
-\subsection*{A.2\quad Protocol Context and Unknown-Class Machinery}
+\subsection{Protocol Context and Unknown-Class Machinery}
 
 A bracket over observed services says nothing about services that are absent
 from the corpus, and the unseen-species literature supplies the machinery for
@@ -225,7 +334,8 @@ Our contribution is orthogonal to those architectures, since it concerns what an
 of them can achieve on a declared observable rather than how one of them is
 built.
 
-\subsection*{A.3\quad Preprocessing and Service Selection}
+\subsection{Preprocessing and Service Selection}
+\label{sec:appendix/preprocessing}
 
 Flows follow the corpus's own five-tuple and idle-timeout convention, with no
 resegmentation of our own. From each flow we read the leading packet sequence and
@@ -241,17 +351,125 @@ on one capture would make the resulting artifacts mutually non-citable, which is
 why the stricter rule was adopted. Masking is likewise verified rather than
 assumed, as \Cref{sec:results/datasets} reports.
 
-\subsection*{A.4\quad Supporting Detail for the Limitations}
+\subsection{The Two-Sided Bracket by Rung}
+\label{sec:appendix/bracket_table}
+
+This table reports, for each resolution $M$ and prefix length $k$, the number of
+pairs whose upper side alone clears the gate, that count as a fraction of the
+pairs available at that $(M,k)$, the saturated fraction, and the joint-gate count
+where both sides were evaluated. It prints the figure behind
+\Cref{sec:results/bracket} in full.
+
+\begin{table}[t]
+\centering
+\small
+\caption{The two-sided bracket on the primary corpus by resolution $M$ and prefix length $k$ (this appendix, \Cref{sec:appendix/bracket_table}). \emph{Upper} is the count and fraction of pairs whose upper side alone satisfies $\epshi < 0.5$; \emph{sat.} is the fraction with $\widehat{tv} \geq 0.99$. The joint gate is reported where both sides were evaluated, at the cells
+named in \Cref{sec:results/bracket}; rows carrying only the upper side are marked as such, and zero cells are listed rather than omitted. Counts here carry no uncertainty; service-cluster bootstrap intervals for the headline figures are in \Cref{sec:results/bracket}.}
+\label{tab:bracket}
+\begin{tabular}{rr rr rr r}
+\toprule
+$M$ & $k$ & pairs & upper & upper frac. & sat. & joint \\
+\midrule
+1 & 5 & 990 & 340 & 0.3434 & 0.0000 & 336 \\
+2 & 5 & 990 & 47 & 0.0475 & 0.1051 & \textendash \\
+4 & 5 & 990 & 3 & 0.0030 & 0.2394 & \textendash \\
+8 & 5 & 990 & 0 & 0.0000 & 0.3364 & \textendash \\
+16 & 5 & 990 & 0 & 0.0000 & 0.3909 & \textendash \\
+\midrule
+1 & 10 & 990 & 28 & 0.0283 & 0.0061 & \textendash \\
+2 & 10 & 990 & 0 & 0.0000 & 0.2909 & \textendash \\
+4 & 10 & 990 & 0 & 0.0000 & 0.5929 & \textendash \\
+8 & 10 & 990 & 0 & 0.0000 & 0.6384 & \textendash \\
+16 & 10 & 990 & 0 & 0.0000 & 0.6889 & \textendash \\
+\midrule
+1 & 15 & 946 & 0 & 0.0000 & 0.0391 & \textendash \\
+2 & 15 & 946 & 0 & 0.0000 & 0.5761 & \textendash \\
+4 & 15 & 946 & 0 & 0.0000 & 0.6966 & \textendash \\
+8 & 15 & 946 & 0 & 0.0000 & 0.7526 & \textendash \\
+16 & 15 & 946 & 0 & 0.0000 & 0.8076 & \textendash \\
+\midrule
+1 & 30 & 820 & 0 & 0.0000 & 0.7280 & \textendash \\
+2 & 30 & 820 & 0 & 0.0000 & 0.8500 & \textendash \\
+4 & 30 & 820 & 0 & 0.0000 & 0.9195 & \textendash \\
+8 & 30 & 820 & 0 & 0.0000 & 0.9561 & \textendash \\
+16 & 30 & 820 & 0 & 0.0000 & 0.9720 & \textendash \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Supporting Detail for the Limitations}
+\label{sec:appendix/limitations}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.64\textwidth]{figures/paper/fig3_estimator_control.pdf}
+\caption{The estimator limit. (a) Estimated-to-true divergence on a source whose
+analytic per-position divergence is known, for the plain-i.i.d.\ control and the
+real-occupancy twin: both peak near $1.0$ then fall to $0.6769$ and $0.8820$ at
+$k{=}30$. (b) Fraction of contexts with fewer than five transitions, rising to
+$0.998$. (c) Median context count, falling from $200{,}000$ to $1$. The estimator
+deflates divergence exactly where contexts are sparse.}
+\label{fig:estimator}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.62\textwidth]{figures/paper/fig4_cross_corpus.pdf}
+\caption{Robustness across corpora. (a) Per-side fractions on the primary corpus
+and on CESNET-QUIC22: the lower side reproduces almost exactly ($0.9960$ against
+$0.9967$) while the upper side and joint gate differ. The QUIC22 joint gate
+combines a full-$n$ upper side with a capped lower side (hatched), so it is a
+mixed-strength measurement rather than an exact finite-sample certificate. (b)
+The gate gap by minimum per-pair flow count: largest unmatched, at a minimum at
+$20{,}000$, then widening again, so the series is not monotone and ``matched
+evidence'' is not one point. Under a service-cluster bootstrap the unmatched gap
+excludes zero while the deeper strata do not.}
+\label{fig:cross_corpus}
+\end{figure*}
+
+\emph{The certificate horizon.} The rung-ladder result behind \Cref{sec:results/horizon} is shown in \Cref{fig:horizon}.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.64\textwidth]{figures/paper/fig2_certificate_horizon.pdf}
+\caption{The certificate horizon. (a) The fraction of the 990 pairs whose upper
+side alone satisfies $\epshi < 0.5$ against resolution $M$ at $k{=}5$: it falls
+from $340/990 = 0.3434$ at $M{=}1$ to zero at $M{=}8$, while the saturated
+fraction rises from $0.000$ to $0.391$. The annotation gives both the upper-side
+count and the joint gate ($336/990$), which exists at $M{=}1$ only. (b) The
+crossover sample size at which the $M{=}8$ certificate ceases to exist, against
+true TV distance; two derivation routes agree to zero absolute difference.}
+\label{fig:horizon}
+\end{figure*}
 
 Three limitations are stated in one sentence each in the body; the supporting
 detail is collected here.
+
+\emph{The frontier's closed form, and its limit.} The closed form is \eqref{eq:mmax},
+derived and displayed once in \Cref{sec:appendix/thresholds}; what belongs here
+is its limit. It is the certifiability criterion $\widehat{tv} +
+\text{radius} < 0.5$, not the radius alone, which is necessary but not
+sufficient; the two coincide only at $\widehat{tv} = 0$. We report the crossover
+only alongside the scale it was evaluated at, since the projection scale and the
+measured scale differ by more than an order of magnitude.
+
+The closed form is derived from \eqref{eq:upper}, so it inherits that bound's
+$\sqrt{m/n}$ term and describes the frontier \emph{of that route}, not of the
+problem. The same criterion written with \eqref{eq:mfree} has no $m$ in it at
+all: $0.5 - \widehat{tv} - \sqrt{\ln(2/\delta)/2}\,
+\bigl(n_a^{-1/2}+n_b^{-1/2}\bigr) > 0$, which no alphabet size can satisfy once
+$\widehat{tv}$ saturates, however large $k$ grows. The $1/k$ exponent is
+therefore a property of the alphabet-priced route rather than a fact about the
+channel, and the operative constraint at fine resolution is alphabet sparsity in
+the plug-in estimate of $\widehat{tv}$ (\Cref{sec:results/horizon}), which
+neither form can repair.
 
 \emph{Lower-side status.} The lower side's constant is asymptotically derived
 and a conservative finite value is substituted only in the degenerate regime
 where the effective alphabet is too small for the asymptotic expression to be
 defined (\Cref{sec:design/lower}). The $1-\alpha$ label is therefore what the
 construction reports rather than a finite-sample guarantee, and the large-$k$
-divisibility bound is separately conditional on a realizability assumption ---
+divisibility bound is separately conditional on a realizability assumption:
 useful exactly where the plug-in certificate is lost, but not distribution-free.
 
 \emph{Convention dependence.} The corpora use different lower-side conventions,
@@ -268,16 +486,293 @@ $2.5\%$ threshold implied by the joint level, $p = 0.346$. The growth question
 that motivated the estimator study also remains open
 (\Cref{sec:results/detector_validation,sec:results/estimator}).
 
-\subsection*{A.5\quad Compute Resources}
+\emph{Coverage calibration.} The cells behind the coverage statement in
+\Cref{sec:discussion/limitations} are tabulated in \Cref{tab:coverage}, with
+their two-sided Clopper--Pearson endpoints.
+
+\emph{The estimator control.} The control behind \Cref{sec:results/estimator} is shown in \Cref{fig:estimator}: the estimated-to-true divergence for the plain-i.i.d.\ and real-occupancy arms, the context-sparsity fraction, and the median context count.
+
+\begin{table}[t]
+\centering
+\caption{The chain-rule estimator on its known-truth control, whose per-position divergence is known analytically, so growth in $k$ is linear by construction; a ratio below $1.0$ is the estimator deflating large-$k$ divergence. Selected prefix lengths are shown; the full $k{=}5..30$ series is in the artifact.}
+\label{tab:estimator}
+\begin{tabular}{rr rr rr}
+\toprule
+$k$ & truth & plain & ratio & twin & ratio \\
+\midrule
+5 & 1.69 & 1.69 & 1.0002 & 1.68 & 0.9938 \\
+10 & 3.39 & 3.44 & 1.0161 & 3.39 & 0.9997 \\
+15 & 5.08 & 4.90 & 0.9643 & 5.13 & 1.0096 \\
+20 & 6.78 & 5.57 & 0.8216 & 6.76 & 0.9970 \\
+25 & 8.47 & 6.23 & 0.7347 & 8.02 & 0.9466 \\
+30 & 10.17 & 6.88 & 0.6769 & 8.97 & 0.8820 \\
+\midrule
+\multicolumn{6}{@{}p{\columnwidth}@{}}{\footnotesize Contexts with $<5$
+transitions, at $k=5,10,15,20,25,30$: $0.000$, $0.000$, $0.017$, $0.594$,
+$0.949$, $0.998$.} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\emph{Channel sensitivity.} The dose-response behind \Cref{sec:discussion/sensitivity} is shown in \Cref{fig:sensitivity}.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.52\columnwidth]{figures/paper/fig5_channel_sensitivity.pdf}
+\caption{Channel sensitivity. Matched difference in the radius-free estimate
+$\widehat{tv}$ between the identifier-dependent and identifier-independent arms
+against alphabet cardinality $B$; it grows before both arms saturate. The
+quantity is the radius-free estimate only, and no certificate-level implication
+follows.}
+\label{fig:sensitivity}
+\end{figure}
+
+\emph{The full $(M,k)$ grid.} The measured grid behind \Cref{sec:results/horizon} is tabulated in \Cref{tab:grid}.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{The full $(M,k)$ grid, recomputed from the released per-pair ledgers with $m=(2M)^k$ per $M$: pairs clearing the upper-side gate under each bound, and the saturated count ($\widehat{tv}\ge0.99$).}
+\label{tab:grid}
+\begin{tabular}{r|rrrr|rrrr}
+\toprule
+& \multicolumn{4}{c|}{clearing Eq.~\eqref{eq:upper}} & \multicolumn{4}{c}{clearing Eq.~\eqref{eq:mfree}} \\
+$M$ & $k{=}5$ & $k{=}10$ & $k{=}15$ & $k{=}30$ & $k{=}5$ & $k{=}10$ & $k{=}15$ & $k{=}30$ \\
+\midrule
+1  & 340 & 28 & 0 & 0 & 363 & 98 & 18 & 0 \\
+2  & 47  & 0  & 0 & 0 & 127 & 20 & 4  & 0 \\
+4  & 3   & 0  & 0 & 0 & 111 & 10 & 1  & 0 \\
+8  & 0   & 0  & 0 & 0 & 94  & 6  & 0  & 0 \\
+16 & 0   & 0  & 0 & 0 & 80  & 5  & 0  & 0 \\
+\midrule
+\multicolumn{9}{l}{\emph{saturated}, $\widehat{tv}\ge0.99$ (of 990 / 990 / 946 / 820)} \\
+\midrule
+1  & 0   & 6   & 37  & 597 & \multicolumn{4}{c}{(independent of the radius)} \\
+2  & 104 & 288 & 545 & 697 & & & & \\
+4  & 237 & 587 & 659 & 754 & & & & \\
+8  & 333 & 632 & 712 & 784 & & & & \\
+16 & 387 & 682 & 764 & 797 & & & & \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Threshold Sensitivity}
+\label{sec:appendix/thresholds}
+
+The gate is a conjunction of an upper and a lower threshold, and the certified
+count is driven almost entirely by the upper one. Sweeping each threshold with
+the other held at its registered value, on the primary corpus at $k{=}5$,
+$M{=}1$, under both lower-side conventions:
+
+\begin{table}[t]
+\centering
+\small
+\caption{Threshold sensitivity at $k{=}5$, $M{=}1$, sweeping each gate threshold with the other held at its registered value, under both lower-side conventions.}
+\label{tab:thresholds}
+\begin{tabular}{lrr}
+\toprule
+threshold & full-$n$ & capped \\
+\midrule
+\multicolumn{3}{l}{\emph{upper threshold}, lower fixed $>0.05$} \\
+$<0.30$ & 113 & 112 \\
+$<0.40$ & 221 & 220 \\
+$<0.50$ & 336 & 335 \\
+$<0.60$ & 454 & 453 \\
+$<0.70$ & 580 & 579 \\
+$<0.80$ & 748 & 747 \\
+\midrule
+\multicolumn{3}{l}{\emph{lower threshold}, upper fixed $<0.5$} \\
+$>0.01$ & 340 & 340 \\
+$>0.05$ & 336 & 335 \\
+$>0.10$ & 320 & 312 \\
+$>0.20$ & 239 & 229 \\
+$>0.30$ & 140 & 125 \\
+$>0.40$ & 35 & 20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The closed form promised in \Cref{sec:design/frontier} is obtained by solving
+\eqref{eq:upper} for the largest $M$ at which $\epshi$ can still fall below the
+gate. With equal per-side counts $n$ the surviving margin is
+$B(k,n,\alpha) = 0.5 - \widehat{tv} - \sqrt{2\ln(2/\alpha)/n}$, and requiring
+$B>0$ turns $m=(2M)^k$ into
+\begin{equation}
+  M_{\max} \;=\; \Bigl\lfloor \tfrac{1}{2}\bigl(nB^{2}\bigr)^{1/k} \Bigr\rfloor ,
+  \label{eq:mmax}
+\end{equation}
+the largest positive integer satisfying the strict inequality, and $0$ if none
+does. This is the same criterion the sweep above evaluates numerically.
+
+The two columns differ only through the lower side's sample cap, and
+the full-$n$ column is the paper's convention throughout. Note the asymmetry: on
+the upper sweep the cap costs exactly one pair at every rung, while on the lower
+sweep it costs nothing until the threshold passes $0.05$ and then costs up to
+fifteen, because a stricter lower threshold excludes pairs whose bound the cap
+had already lowered.
+
+\subsection{Planning Count and Dependence-Aware Radii}
+\label{sec:appendix/track5}
+
+\emph{A planning corollary.} Inverting \eqref{eq:mfree} at equal flow counts
+gives the count a pair needs before its interval can close at the gate,
+$n > C/(0.5-\widehat{tv})^2$ with $C = 2\ln(2/\alaw) = 8.764$. The constant
+enters as $C$, not as $\sqrt{C}$: $\sqrt{C}$ sits inside the radius, so applying
+it linearly to the solved form would understate the requirement by $2.96\times$.
+Feasibility is a large fraction at coarse resolution and vanishes at fine:
+$380$ of $990$ pairs at $k{=}5$, $114$ of $990$ at $k{=}10$, $20$ of $946$ at
+$k{=}15$, and none of $820$ at $k{=}30$. Each median must travel with its
+feasible fraction, because the conditional distribution is strongly bimodal (at
+$k{=}5$ the required count spans $42$ to $2.1\times10^{9}$ with median
+$285$), so a bare median would describe a population that does not exist.
+The count is a property of a pair's own $\widehat{tv}$, not a budget for the
+corpus, and it is reported as a per-pair planning aid rather than a claim.
+
+\emph{Three dependence-aware radii, and why they are not a ranking.} The
+upper side's radius assumes i.i.d.\ sampling, so we also measured whether a
+radius built for dependence recovers the nominal level at a fixed $n$. At $n{=}60{,}000$, $B{=}64$,
+contamination $0.1$ and true $\tv = 0.400$, over $1000$ replicates, a block
+bootstrap covers $0.9940$ $[0.9870, 0.9978]$, a cluster-robust sandwich $0.9780$
+$[0.9669, 0.9862]$, and a leave-one-block-out Studentized radius $0.9780$
+$[0.9669, 0.9862]$. The reading is \emph{not} that one arm works and two fail.
+The sandwich takes $z$-multiples of an influence-function standard error and the
+leave-one-block-out arm takes $t$-multiples of a jackknife standard error, so the
+two are genuinely different constructions, yet they land on the same coverage
+count, $978$ of $1000$, with radii $0.033172$ against $0.033117$. That count is
+the fact being reported, not the interval agreement that follows from it: a
+Clopper--Pearson interval is a function of the successes and $n$ alone, so an
+equal count forces an equal interval by construction, and the shared interval is
+one number reported twice rather than two independent confirmations. The two code
+paths are genuinely distinct: a cluster-robust influence-function variance with
+a normal quantile against a leave-one-out jackknife with a $t$ quantile. What
+the arms support is therefore a negative: at this nominal level and this replicate
+count the two dependence-aware radius forms are indistinguishable, so neither may
+be ranked above the other. Judged by the exact two-sided binomial against nominal, the
+sandwich and leave-one-block-out coverages are indistinguishable from $0.975$
+($978/1000$, $p{=}0.61$) and only the bootstrap deviates ($994/1000$,
+$p{<}0.0001$), in the conservative direction. Both readings are reported
+because they differ by criterion rather than by result: the Clopper--Pearson
+lower endpoint is the \emph{stricter} test, and by it those two arms fall just
+below nominal ($0.9669$) while the bootstrap clears it, so an endpoint-based
+verdict would call two of three arms failures and a count-based one would not. Two further facts belong with
+these numbers. The criterion is one-sided, a replicate is covered when
+$\widehat{tv}$ plus its radius reaches the truth, so the i.i.d.\ reference's
+design target is $\Phi(r/\mathrm{sd}) = 0.9809$, not the nominal $0.975$; that
+$0.0059$ gap is a property of the design, not a coverage failure. And a
+follow-up at $5000$ replicates tests whether the signed deviation is
+asymmetric, which would be the natural reason for a one-sided radius to differ
+from a symmetric one: it is essentially symmetric (skewness $-0.0089$, standard error $0.0346$,
+$95\%$ interval $[-0.0768, +0.0590]$, containing zero). A third moment
+indistinguishable from zero does not by itself settle whether the interval's
+form matters, since those are different functionals: on these draws the two
+forms differ by about $11\%$ (both quantiles taken on the mean-centred
+deviation), so they are not interchangeable, against a normal-theory gap
+of $12.6\%$. Whether that difference changes
+a \emph{coverage} verdict is a separate question, and one we did not test: these
+are quantiles of the realised $D$ array, which establish that the forms differ,
+not that a computable per-replicate one-sided radius closes any gap. \textbf{What these arms validate is a modelled block law only.}
+They are synthetic block-law draws at one block size and one divergence; we did
+not test coverage on real traffic, and nothing here says coverage holds on the
+corpus.
+
+\subsection{Compute Resources}
+\label{sec:appendix/compute}
 
 Per-step timings and per-detector device assignments. The independent-corpus
 bracket ran in about 21 minutes on eight CPU workers, the channel-sensitivity
 sweep in about 31 minutes, and the known-truth estimator control reuses a
 cached occupancy table and finishes in under a minute. LightGBM and the
-prototype rejector executed on CPU (the LightGBM OpenCL attempt found no device
-and fell back); RoNeTC ran on the accelerator, an NVIDIA GeForce RTX 5090 D with
-32\,GB. The host carries 208 CPU cores and a 90\,GB memory limit, so no result
-here depends on a large-scale cluster.
+prototype rejector executed on CPU; RoNeTC ran on a single consumer-grade GPU.
+No result here depends on a large-scale cluster.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Upper-side coverage calibration (seed 20260917), $200$ replicates per cell. Both arms share one generator, $Q=(1-\delta)P+\delta\,\mathbb{1}_{0}$ over a $32$-symbol alphabet, and the same reported radius; the i.i.d.\ column is the control and the $B$ columns inject within-service dependence (contamination $0.1$). Entries are covered replicates out of $200$ with the two-sided $95\%$ Clopper--Pearson lower endpoint in parentheses, and the criterion is whether that endpoint falls below the nominal $0.975$. Triviality depends on $(\mathrm{TV}, n)$ alone: both arms use one radius, and a cell is trivial when that radius reaches the true distance ($\mathrm{TV}/\mathrm{radius}\le 1$), so every column of a trivially-guaranteed cell is marked `--': there coverage is certain, not measured. Every cell that is neither trivial nor one of the two $(\mathrm{TV},n)=(0.40,50953)$ and $(0.40,107065)$ cells is identical, $200/200$ with lower endpoint $0.9817$ in all four columns; those two rows differ from $200/200$ only in their $B{=}64$ column, which carries the confirmation loss of \Cref{sec:discussion/limitations}. The $15$ folded cells are the $20$ rows minus the $3$ trivially-guaranteed rows and the $2$ breach rows, namely $\mathrm{TV}=0.05$ at $n\ge 50953$; $\mathrm{TV}\in\{0.10,0.20,0.30,0.40\}$ at $n=10988$; $\mathrm{TV}\in\{0.10,0.20,0.30\}$ at $n\in\{50953,107065\}$; and $\mathrm{TV}\in\{0.20,0.30,0.40\}$ at $n=2791$. Each is $200/200$ with lower endpoint $0.9817$ in all four columns.}
+\label{tab:coverage}
+\begin{tabular}{rrrrrr}
+\toprule
+$\mathrm{TV}$ & $n$ & i.i.d. & $B{=}1$ & $B{=}8$ & $B{=}64$ \\
+\midrule
+0.05 & 2791 & -- & -- & -- & -- \\
+0.05 & 10988 & -- & -- & -- & -- \\
+0.10 & 2791 & -- & -- & -- & -- \\
+\midrule
+\multicolumn{2}{l}{15 further cells (see caption)} & 200/200 (0.9817) & 200/200 (0.9817) & 200/200 (0.9817) & 200/200 (0.9817) \\
+\midrule
+0.40 & 50953 & 200/200 (0.9817) & 200/200 (0.9817) & 200/200 (0.9817) & 199/200 (0.9725) \\
+0.40 & 107065 & 200/200 (0.9817) & 200/200 (0.9817) & 200/200 (0.9817) & 196/200 (0.9496) \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\emph{The LP-weighted floor.} The comparison floor quoted in
+\Cref{sec:design/problem} comes from a linear program over the same $990$-pair
+input. Its variables are non-negative weights $w_{ij}\ge 0$ on ordered pairs;
+the constraint is that every class's total weight be uniform,
+$\sum_{j\ne i}(w_{ij}+w_{ji})=1$ for each of the $K$ known classes and $0$ for
+the unknown class. Grouping by $i$ gives
+$\sum_{i\ne j}w_{ij}(\mathrm{err}_i+\mathrm{err}_j)=\sum_i \mathrm{err}_i$ over the
+$K$ known classes, since the constraint is that inner sum for each of them. That
+left side is therefore the known-class error total, so
+$\sum_{i\ne j}w_{ij}(\mathrm{err}_i+\mathrm{err}_j)\le M\,\mathbb{E}[\mathrm{err}]$
+with the expectation over all $M$ classes, the unknown term entering as zero,
+and strict by $K/M$ if it is averaged over the known classes alone. The objective is
+$\max\sum_{i\ne j}w_{ij}(1-\epsilon_{\mathrm{hi},ij})$, every term of
+which is a certified upper bound. The weights range over the $K$ known classes
+only, the unknown-class terms being discarded as before, while the denominator
+keeps $M = K+1$; the same assumption-free property is therefore preserved. The
+maximum over feasible weights is valid a fortiori: each weight is non-negative
+and each $1-\epsilon_{\mathrm{hi},ij}$ is no larger than the $1-\tv_{ij}$ it stands for,
+so the objective can only undershoot the true value. The uniform point under
+\emph{this} constraint is $w_{ij}=1/[2(K-1)]$, whose row sum $2(K-1)w$ is exactly
+$1$, and it recovers the uniform floor $0.1858$ of \eqref{eq:floor} up to the
+ratio $(M-1)/(K-1)$ between the two normalisations: $(M-1)/(K-1)=45/44$ here, so
+the two differ by about $2\%$ and neither is a feasible point of the other's
+problem. We quote each floor against the constraint that defines it rather than
+treating them as one point. We report the LP floor as a comparison rather than a
+headline for the reasons given in \Cref{sec:design/problem}.
+
+
+\subsection{Detector Validation Table}
+
+The nine-cell containment test behind \Cref{sec:results/detector_validation} is tabulated in \Cref{tab:detectors}.
+
+\begin{table}[t]
+\centering
+\caption{Detector validation on the informative stratum ($\epshi < 0.5$, 340 pairs). Each cell is a one-sided binomial test of floor violations against a pre-registered null rate $\ptest = 0.05$, that rate being the tolerable violation share rather than the certified floor; none rejects the null, so no detector's violation share is shown to exceed it, and failing to reject is not evidence that the floor is tight. The fourth intended detector is \emph{not\_run}: it contributes no information and is not counted as a pass.}
+\label{tab:detectors}
+\begin{tabular}{lrrrr}
+\toprule
+Detector & holdout & viol. & rate & $p$ \\
+\midrule
+LightGBM & 0.05 & 8 & 0.0235 & 0.9954 \\
+ & 0.1 & 8 & 0.0235 & 0.9954 \\
+ & 0.2 & 10 & 0.0294 & 0.9765 \\
+\midrule
+Prototype & 0.05 & 3 & 0.0088 & 1.0000 \\
+ & 0.1 & 4 & 0.0118 & 1.0000 \\
+ & 0.2 & 4 & 0.0118 & 1.0000 \\
+\midrule
+RoNeTC & 0.05 & 3 & 0.0088 & 1.0000 \\
+ & 0.1 & 3 & 0.0088 & 1.0000 \\
+ & 0.2 & 2 & 0.0059 & 1.0000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% The reference list is set one step smaller and without inter-item padding:
+% USENIX counts references outside the 13-page body, but the camera-ready cap of
+% 20 total pages is a hard bound and the list otherwise spills one page.
+% No content is dropped. The size/sep changes are applied through natbib's own
+% bibliography hooks rather than by wrapping \bibliography in a group, which
+% suppresses the \bibdata line in the .aux and leaves bibtex with nothing to do.
+\makeatletter
+\renewcommand{\bibfont}{\footnotesize}
+\setlength{\bibsep}{1.2pt plus 0.2ex}
+\makeatother
+
+
 
 \bibliographystyle{plainnat}
 \bibliography{references}

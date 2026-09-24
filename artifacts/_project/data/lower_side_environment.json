@@ -1,0 +1,33 @@
+{
+  "sklearn_version": "1.9.1",
+  "numpy_version": "2.5.3",
+  "scipy_version": "1.18.1",
+  "python_version": "3.12.14",
+  "resolved_solver": "lbfgs",
+  "resolved_penalty": "deprecated",
+  "deprecation_warning_text": "",
+  "diagnostics_surface_solver_or_version": false,
+  "which_artifacts_record_sklearn_version": {
+    "artifacts/_project/data/q1_eps_lo_symbol_map.json": null,
+    "artifacts/_project/intermediate/t1_lower_side_M1.json": "execution_environment.sklearn",
+    "artifacts/_project/intermediate/t1_lower_side_M2.json": "execution_environment.sklearn",
+    "artifacts/_project/intermediate/t1c_lower_side_M1_uncapped.json": null,
+    "artifacts/_project/intermediate/t1_pilot.json": "execution_environment.sklearn; protocol.sklearn_version"
+  },
+  "artifacts_recording_any_version": [
+    "artifacts/_project/data/t1b_lower_side_k_axis.json",
+    "artifacts/_project/intermediate/t1_lower_side_M1.json",
+    "artifacts/_project/intermediate/t1_lower_side_M2.json",
+    "artifacts/_project/intermediate/t1_pilot.json",
+    "artifacts/_project/intermediate/t1b_lower_side_k10.json",
+    "artifacts/_project/intermediate/t1b_lower_side_k5.json",
+    "artifacts/_project/intermediate/t1b_lower_side_k_axis.json",
+    "artifacts/X11/data/x11_feasibility.json"
+  ],
+  "notes": [
+    "Measured by fitting LogisticRegression(max_iter=1000, random_state=0) on a four-row synthetic dataset; no lower-side computation was rerun.",
+    "The fitted sklearn 1.9.1 estimator exposes solver='lbfgs' and penalty='deprecated'; the isolated fit emitted no warning.",
+    "tv_lower_bound diagnostics contain the fitted classifier object, so a caller can inspect its solver and penalty attributes indirectly, but diagnostics contain no explicit solver, penalty, or sklearn-version fields. The boolean reports no explicit diagnostic surface.",
+    "The X11 artifact contains embedded pip stdout reporting scikit-learn 1.9.0; it has no structured sklearn-version key. The other listed artifacts contain explicit sklearn or sklearn_version keys."
+  ]
+}

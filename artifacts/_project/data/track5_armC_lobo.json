@@ -1,0 +1,36 @@
+{
+ "B": 64,
+ "arm": "Arm C - LOBO",
+ "below_nominal": true,
+ "conc": 0.1,
+ "coverage": 0.978,
+ "coverage_ci95": [
+  0.9668803354850122,
+  0.9861625858279262
+ ],
+ "covered": 978,
+ "cp_lower_clears_nominal": false,
+ "excludes_nominal": false,
+ "excludes_nominal_direction": "not_excluded",
+ "falsifier": "Fails if the CP lower endpoint remains below nominal 0.975, or if the median LOBO Studentized radius is not larger than the i.i.d. radius at n=60000.",
+ "falsifier_fired": true,
+ "iid_radius_value": 0.03517985184254251,
+ "method_description": "For every contiguous B=64 block, TV_hat is recomputed after removing that block from both laws; the LOBO spread estimates the sampling variance.",
+ "n": 60000,
+ "notes": "Median radius is smaller than the i.i.d. reference; CP lower endpoint does not clear nominal 0.975; Required replicates recomputed from p0=0.95, p1=0.9825, two-sided alpha=0.05, target power=0.95: ceil(N)=800; the displayed dispatcher approximation 897 does not follow from the displayed formula, which evaluates to 799.44.",
+ "radius_description": "r_LOBO = t_0.975,K-1 * sqrt((K-1)/K * sum_j(TV_hat_-j - mean(TV_hat_-j))^2).",
+ "radius_max": 0.03704515749867352,
+ "radius_mean": 0.03324171941986475,
+ "radius_min": 0.030705322965186542,
+ "radius_relation_to_iid": "smaller",
+ "radius_value": 0.033117234031529524,
+ "replicates": 1000,
+ "required_replicates": 392,
+ "required_replicates_labelled": {
+  "design": "one-sample (observed coverage vs FIXED nominal 0.975)",
+  "note": "Correct structure for this test. The earlier field value 800 used the two-sample pooled form, which is conservative here by 2.04x; it does not invalidate any run (1000 replicates were used) but must not be quoted as the requirement for this coverage test. Two-sample equivalent = 800.",
+  "value": 392
+ },
+ "runner_sha256": "d50d15a30247ddd32903d94dd538121787088c70bfcbb3ce72fdaca9aeb36065",
+ "true_tv": 0.4
+}

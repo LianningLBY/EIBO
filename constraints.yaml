@@ -1,4 +1,4 @@
-_next_id: 50
+_next_id: 56
 constraints:
 - id: C001
   added: 2026-09-13 11:37 UTC
@@ -739,3 +739,151 @@ constraints:
     re-diagnoses the credential block that consumed most of 2026-09-16, and so the
     one real trap found along the way is on the record.
   decision_id: D138
+- id: C050
+  added: 2026-09-17 17:00 UTC
+  summary: Any recomputation that changes a radius must (a) re-apply the eps_hi<=1
+    cap afterwards and (b) reproduce a known submitted value as a control before any
+    changed value is reported.
+  scope: all
+  reason: Three separate numeric errors in this project were decided by a summation/normalisation
+    or cap-vs-widening convention, each caught only by reproducing a known value alongside
+    the changed one. Any recomputation that changes radii (e.g. a multiplicity correction)
+    lets eps_hi exceed 1.0, and a negative (1 - eps_hi) term silently ADDS mass, so
+    the sum is no longer a lower bound and the result is invalid rather than merely
+    different. Making the re-clamp explicit turns a silent-invalidity class into a
+    checkable step.
+  decision_id: D152
+- id: C051
+  added: 2026-09-17 18:41 UTC
+  summary: State the statistic AND the predicate in the same sentence as any threshold,
+    and confirm the threshold's own definition names that same object. "coverage 0.9825
+    >= 0.975" is ill-formed; "CP lower endpoint 0.9643 >= 0.975" is well-formed.
+  scope: all
+  reason: 'Four instances in one thread shared this exact structure: a statistic was
+    compared against a threshold belonging to a DIFFERENT statistic, and the mismatch
+    was invisible because both are reported in the same units on the same scale. Instances:
+    (1) an eps_hi value compared against a distance-to-line cutoff (both O(0.1));
+    (2) a width computed on the sum compared against a cap applied to the summand
+    (both O(1)); (3) ''exceeds 1.0'' (strict) asked where ''reaches 1.0'' (inclusive)
+    was the predicate, boundary at exactly 1.0; (4) a point estimate tested against
+    a threshold defined on the CP lower endpoint (both O(0.98)). Every one produced
+    a CLEAN or NULL reading that looked like a finding, and each was caught only by
+    an external reader. The operational rule is readable from the assertion itself
+    and needs no re-derivation, which is what makes it a default check rather than
+    a lesson. ''Check aimed at the neighbouring object'' is the symptom; this is the
+    rule.'
+  decision_id: D155
+- id: C052
+  added: 2026-09-19 20:57 UTC
+  summary: No two lower-side ledgers may be compared at ROW level without stating
+    which generation each is. Medians and gate counts may be compared; per-pair values
+    may not.
+  scope: all
+  reason: 'The lower-side classifier is version-dependent because src/eibo/statcore.py:427
+    constructs LogisticRegression(max_iter=1000, random_state=0) with no solver or
+    penalty pinned, inheriting sklearn defaults (and the penalty default is itself
+    deprecated in the installed version). Two ledgers of the SAME measurement were
+    found to be different generations: the canonical capped ledger q1_eps_lo_symbol_map.json
+    and the T1 capped ledger t1_lower_side_M1.json differ on 593 of 990 rows by more
+    than 0.005 (max 0.04317 at pair (8,49)) despite identical n_a on the differing
+    pairs. A retracted control claim in ROADMAP section 1 had asserted they "match",
+    supported only by median agreement. The hazard is asymmetric: the T1 generation
+    records sklearn 1.9.1 while BOTH canonical ledgers the paper cites record no version
+    at all, so the labeled file is the non-authoritative one. HOST is part of the
+    split, not only version: the canonical ledgers record source.python = /root/miniconda3/bin/python3
+    and cwd = /root/eibo, i.e. they were produced on server 111, whereas the T1 generation
+    ran on the platform-local container. An independent environment capture read sklearn
+    1.9.1 by standing in the local container, which is the WRONG HOST for the canonical
+    artifacts — do not treat that figure as theirs. RESOLVED BY DIRECT PROBE (D174):
+    the boundary is TWO ENVIRONMENTS, not one version change. Server 111 /root/miniconda3
+    (which produced the canonical ledgers) runs python 3.12.3, sklearn 1.9.0, numpy
+    2.3.2; the platform-local /app/.venv (T1/T1b) runs python 3.12.14, sklearn 1.9.1,
+    numpy 2.5.3. scikit_learn-1.9.0.dist-info on 111 has mtime 2026-09-11T17:43:13Z,
+    two days before the canonical run, and the live probe matches the dist-info. A
+    row-level comparison therefore requires reproducing the canonical ledgers ON 111,
+    not merely at ''the same 1.9.x''. Three inferences-from-a-sibling were made before
+    this probe; one read-only job settled all three. The defect class is the round''s
+    recurring one: a check that runs successfully while verifying a neighbouring object
+    (the environment it is standing in, rather than the environment that produced
+    the artifact). ***MECHANISM CLAIM SUPERSEDED 2026-09-20 — see C054: lbfgs/l2 are
+    sklearn''s own defaults and resolve IDENTICALLY on 1.9.0 and 1.9.1, so the divergence
+    is NOT solver/penalty selection; its cause is unexplained. This entry''s RULE
+    (never compare two lower-side ledgers at row level without naming the generation)
+    remains binding; only the stated mechanism is corrected.***'
+- id: C053
+  added: 2026-09-19 21:44 UTC
+  summary: Every register_artifact call yields a manifest entry with no content_sha256;
+    a manual hash pass is a standing step, taken over the path the entry names (which
+    may be an id-suffixed copy), never the source.
+  scope: all
+  reason: 'Traced twice this session with the same result. The platform tool register_artifact
+    writes manifest entries WITHOUT a content_sha256 field, and the write path is
+    outside the repository (no project-side registration helper exists; the only project
+    files mentioning content_sha256 or manifest.yaml are unrelated). Eight hash-less
+    entries have been produced so far — five from the Track 5 round and three from
+    the provenance round — by three different callers (two workers, one Agent) across
+    two rounds, while every entry that carries a hash had it inserted by hand afterwards.
+    So the field is never computed by the write path regardless of caller: a property
+    of the path, not of any session. The hash cannot be set from an Agent session.
+
+
+    Two traps a backfiller must avoid, both observed: (1) the hash must be taken over
+    THE PATH THE ENTRY NAMES, which is sometimes a copy carrying an id suffix (_30a7b4.json)
+    and sometimes the canonical file in place — 13 of 129 active entries are suffixed
+    copies, 116 are not, so the shape varies per entry and hashing the source instead
+    of the registered path is wrong wherever they diverge; (2) RETIRED entries may
+    hold a null path or a path with no file on disk, which is the NORMAL pattern (the
+    verifier skips RETIRED by design) and must not be "corrected" by a future auditor.
+    NOTE ON THE SELF-HASH MITIGATION: a file cannot contain the hash of itself, so
+    an embedded content_sha256 line never verifies its own container. Tested: track5_summary.md
+    embeds ba58986dd587380f... which is the hash of track5_armA_block_bootstrap.json,
+    a different object, not the summary''s own sha ae3e169e1483de38.... Three designs
+    render identically to a reader and must be distinguished: (1) hash of a STRIPPED
+    version (self-verifying only if the verifier blanks the line first), (2) hash
+    of a COMPONENT (pins a referenced artifact, says nothing about the container),
+    (3) hash of a stale sibling (verifies nothing current). Therefore any content_sha256
+    line must state which object it hashes; ''the artifact carries its own hash''
+    is ambiguous between cases that differ in what they detect. The only self-verifying
+    form is design 1 under an explicit stripped-hash convention.'
+- id: C054
+  added: 2026-09-20 06:58 UTC
+  summary: 'C052 reason corrected: lbfgs/l2 are sklearn''s own defaults and resolve
+    IDENTICALLY on 1.9.0 and 1.9.1, so the cross-generation ledger divergence is NOT
+    solver/penalty selection — its cause is unexplained. Pin l1_ratio=0.0 (never the
+    ''deprecated'' sentinel).'
+  scope: all
+  reason: 'SOURCE: read-only probe on server 111 with the canonical interpreter /root/miniconda3/bin/python3;
+    artifact artifacts/_project/intermediate/sklearn_solver_probe_20260920.json (sha256
+    b665dc3d4b45f715d4cf1290374b4425b34265b0cad18caaf4f04f93bd140767), 2026-09-20T06:46:08Z.
+    MEASURED: resolved_solver = ''lbfgs'' and l1_ratio = 0.0 on sklearn 1.9.0 (server
+    111) AND on sklearn 1.9.1 (local /app/.venv); no deprecation warning emitted on
+    either host. REMEDY CORRECTION: a literal reading of ''pin solver and penalty''
+    would write penalty=''deprecated'' into the code, but ''deprecated'' is a SENTINEL
+    resolved at fit time — with l1_ratio==0 it becomes penalty=''l2''. Pin l1_ratio=0.0
+    (the new interface), not the sentinel and not penalty=''l2''. MECHANISM CORRECTION:
+    C052''s original reason said the classifier is version-dependent BECAUSE no solver/penalty
+    is pinned. That inference was drawn from the code''s syntactic form and is refuted
+    by measurement — the constructor carries no solver argument, but lbfgs IS sklearn''s
+    default solver, so the parameter was never free, and the effective penalty resolves
+    to l2 identically on both installed versions. RULE UNAFFECTED AND STILL BINDING:
+    the cross-generation row split between the canonical (09-13) and T1 (09-19) ledger
+    generations is real (593/990 rows differ by >0.005, max 0.04317 at pair (8,49),
+    identical n_a on the differing pairs) and no two lower-side ledgers may be compared
+    at row level without naming the generation. The cause of that split is now UNEXPLAINED,
+    not solver/penalty resolution; do not carry a mechanism claim into a constraint
+    or a paper justification without measuring the resolved value on both sides. Root
+    cause of the error logged as M177.'
+  decision_id: D174
+- id: C055
+  added: 2026-09-20 09:11 UTC
+  summary: 'Do NOT re-triage the recurring [GPU IDLE] nudge for 111:cuda:0. It is
+    a known binding/timing mismatch: all experiment lines are CPU-only, 0 RUNNING
+    / 0 ALLOCATED / 0 QUEUED. Acknowledge once and move on; do not spawn a worker,
+    do not search for a job to fill the card, and do not report it as a blocker.'
+  scope: agent
+  reason: The [GPU IDLE] nudge has fired repeatedly and is re-triaged on every occurrence
+    even though the ROADMAP records it as a known per-project binding/timing mismatch.
+    All experiment lines in this project are CPU-only, so there is no GPU-eligible
+    job to dispatch and no ALLOCATED/QUEUED/RUNNING row to act on. Re-triaging it
+    consumes turns and produces stale state reports. Resolution, if any, is a platform-level
+    decision (unbind 111:cuda:0 or bind a project with GPU work), not an Agent action.

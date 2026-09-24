@@ -1,7 +1,7 @@
 paper:
   title: ''
-  version: 60
-  generated_at: '2026-09-16T01:15:50.540502+00:00'
+  version: 64
+  generated_at: '2026-09-17T07:56:17.349868+00:00'
 claims:
 - id: C001
   location:
@@ -1460,6 +1460,50 @@ claims:
     value: joint gate definition, recomputed under the corrected constant to 338/990
   decisions: []
   deprecated: false
+- id: C125
+  location:
+    section: measurement_design
+    paragraph: 0
+    sentence: 0
+  text: Summing the two-point consequence over ordered pairs of the K known services
+    plus one unknown class gives an open-set error floor E[err] >= S_known/(M(M-1))
+    with M = K+1, assumption-free because the discarded unknown-class terms are non-negative;
+    it reduces to Le Cam at M=2. It is a standard consequence of the two-point lemma
+    with the triangle inequality, not a new construction.
+  type: method
+  evidence: []
+  decisions: []
+  deprecated: false
+- id: C126
+  location:
+    section: measurement_design
+    paragraph: 0
+    sentence: 0
+  text: On this corpus, over the complete graph of all 990 pairs, the upper sides
+    sum to S_known = 384.55 and the open-set floor is 0.186.
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: full_n_run_artifact
+    value: q1_lower_side_full_n.json sha256 9fe81e271a386335a9526563ca03631bcdf832fa5d66d3861b2e22ec079256f5,
+      990 rows; artifact id art_20260913_e5ebac
+  decisions: []
+  deprecated: false
+- id: C127
+  location:
+    section: measurement_design
+    paragraph: 0
+    sentence: 0
+  text: 'The same 990-row per-pair ledger recomputes the open-set floor: its 990 upper
+    sides sum to S_known = 384.55 and hence to the 0.186 quoted in the problem formulation.'
+  type: quantitative
+  evidence:
+  - exp_id: E10
+    metric: full_n_run_artifact
+    value: q1_lower_side_full_n.json sha256 9fe81e271a386335a9526563ca03631bcdf832fa5d66d3861b2e22ec079256f5,
+      990 rows; artifact id art_20260913_e5ebac
+  decisions: []
+  deprecated: false
 tables:
 - id: tab1_headline_bracket
   location:
@@ -1594,13 +1638,16 @@ figures:
   output_path: figures/paper/fig1_bracket_overview.pdf
   deprecated: false
 _completeness:
-  coverage: 60/65
-  claims: 60
+  coverage: 62/68
+  claims: 63
   tables: 2
   figures: 5
   tier_counts:
     tier1: 7
-    tier2: 53
-    tier3: 5
+    tier2: 55
+    tier3: 6
     tierX: 0
-  last_checked: '2026-09-16T01:15:50.540637+00:00'
+  last_checked: '2026-09-22T19:01:46.268693+00:00'
+  unmapped_number_count: 462
+  unmapped_figure_count: 0
+  issue_count: 462

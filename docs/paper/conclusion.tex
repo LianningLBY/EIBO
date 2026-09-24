@@ -1,12 +1,19 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-We turned a detector score into a statement about what no detector can achieve on
-a given window, by measuring a two-sided bracket per service pair on real QUIC
-traffic. At the coarsest pre-registered channel, 336 of 990 pairs (33.9\%) admit
-one. The horizon is short and its failure arithmetical: the radius grows with the
-alphabet while the threshold does not, so the upper-side set falls from 340 pairs
-at $M{=}1$ to none at $M{=}8$; beyond it, a divisibility bound keeps the large-$k$
-regime non-empty. The standard chain-rule estimator saturates under a
-known-truth control at fine resolution, so the growth rate it reports cannot
-answer the question that motivated the certificate.
+We measured a two-sided indistinguishability bracket per service pair on real QUIC
+traffic: at the coarsest pre-registered channel 336 of 990 pairs (33.9\%) admit one,
+and aggregating \eqref{eq:floor} gives an open-set error floor of
+$0.197$ for any classifier there, held simultaneously over all $990$ pairs with
+probability $\ge 0.95$ (Bonferroni), under a uniform class prior and the upper
+side's within-service i.i.d.\ assumption. That assumption is calibrated rather than
+asserted: nominal coverage holds in every informative i.i.d.\ cell of
+\Cref{tab:coverage}, and the dependent-contamination arm loses confirmation only
+at the largest block size and divergence tested. The certificate's frontier has two
+regimes: at coarse resolution the alphabet price binds and an alphabet-free bound
+buy headroom, while at fine resolution alphabet sparsity in the estimator sets
+the frontier regardless of which radius is used. The floor also holds against real
+detectors: on the 340 informative pairs a three-model panel's violation rates
+($0.6\%$--$2.9\%$) fall below the $5\%$ null rate, though the test has limited
+power against a two- or three-point excess and the compared quantity is a closed-set
+surrogate. The chain-rule estimator cannot settle the growth question.

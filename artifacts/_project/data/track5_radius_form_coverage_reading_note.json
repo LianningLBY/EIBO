@@ -1,0 +1,31 @@
+{
+ "artifact": "track5_radius_form_coverage",
+ "registered_id": "art_20260920_f18204",
+ "companion_summary_id": "art_20260920_16d79f",
+ "purpose": "Correction/clarification of a contradiction inside the parent entry's description field.",
+ "contradiction_in_parent_entry": "The parent description opens with the literal words 'PRE-REGISTERED FALSIFIER FIRED' and then immediately continues '(falsifier_fired=false means it did NOT fire)'. Both cannot be read as written. The field value in the JSON is falsifier_fired=false.",
+ "correct_reading": {
+  "what_the_falsifier_was": "Coverage identical across conventions within CI => the radius-form convention is cosmetic for coverage and the ~11% gap carries no coverage implication.",
+  "what_was_observed": "Coverage is NOT identical across conventions. Every computable-vs-computable paired coverage-difference CI excludes zero.",
+  "did_the_falsifier_fire": false,
+  "meaning_of_that_boolean": "falsifier_fired=false means the falsified proposition (identical coverage / cosmetic convention) was NOT supported. It does NOT mean 'nothing happened'. The convention is NOT cosmetic for coverage.",
+  "plain_sentence": "The falsifier did not fire. The convention affects coverage: the radius form is not cosmetic."
+ },
+ "on_the_number_11_percent": {
+  "reproduced_here": false,
+  "closest_pairing": "sym_vs_uncentred_endpoint at 12.65%",
+  "sym_vs_centred_one_sided": "8.73%",
+  "note": "No tested pairing reproduces the recorded ~11.39% on these 1000 replicates. The qualitative claim (forms differ, not interchangeable) is confirmed and if anything understated; the specific percentage is not reproduced and should not be restated as reproduced."
+ },
+ "oracle_caveat": "sym_pooled, one_sided_pooled and uncentred_pooled use the realised D_rep distribution and therefore TRUE_TV; their coverage is near-target by construction and must never be cited as an achievable coverage. Only normal_theory_per_rep and sym_bootstrap_per_rep are computable per-replicate coverage measurements. NOTE: this restriction is now encoded in the parent rule string, which is why the corrected flag is true.",
+ "why_this_note_exists": "The manifest is generated and cannot be hand-edited from an Agent session, and re-registering would create a suffixed duplicate rather than a correction. This sibling note is therefore the correction of record.",
+ "status": "SUPERSEDED 2026-09-20 by the Director: the parent artifact\u2019s falsifier flag and rule string were corrected in place. This note is retained for history; its \"did_the_falsifier_fire\" section no longer describes the parent.",
+ "did_the_falsifier_fire": true,
+ "correction_2026_09_20": {
+  "what_changed": "The parent JSON originally carried falsifier_fired=false alongside the rule \"fired iff at least one paired 95% CI excludes zero\". Those are inconsistent: 8 of the 10 paired differences have CIs excluding zero. The parent was corrected to falsifier_fired=true with a rule string that names the oracle restriction actually applied, and both prior values were preserved under key `falsifier_flag_correction`.",
+  "pairs_excluding_zero": "8 of 10 total; 1 of 1 among computable-only pairs",
+  "why_it_mattered": "A false-negative flag beside a rule it does not satisfy is the \"summary field is a claim, not an observation\" failure this project has logged before. A later reader would have concluded no coverage difference exists, which is the opposite of the finding.",
+  "underlying_numbers": "UNCHANGED. Only the flag and the rule text were corrected.",
+  "caught_by": "independent review, not by the producing run."
+ }
+}

@@ -169,7 +169,7 @@ def fig2():
               borderaxespad=0.25)
     ax.annotate(f"{jg['upper_count']}/990 upper side\n"
                 f"{jg['joint_gate_count']}/990 joint gate "
-                f"({100*jg['joint_gate_fraction']:.1f}\\%)",
+                f"({100*jg['joint_gate_fraction']:.1f}%)",
                 xy=(0, upper[0]), xytext=(0.62, 0.52), fontsize=6.8,
                 color=BLUE,
                 arrowprops=dict(arrowstyle="-", color=BLUE, lw=0.8))
@@ -232,8 +232,8 @@ def fig3():
     axb = axes[1]
     axb.plot(k, frac, "o-", color=ORANGE, markersize=3.3)
     axb.set_xlabel("Prefix length $k$")
-    axb.set_ylabel("Fraction of contexts with $<5$ transitions")
-    axb.set_ylim(-0.04, 1.14)
+    axb.set_ylabel("Fraction of contexts\nwith $<5$ transitions")
+    axb.set_ylim(0.0, 1.14)
     axb.set_title("(b) Sparse contexts", loc="left")
     axb.text(30, 1.02, "0.998", fontsize=6.4, color=ORANGE, ha="right",
              va="bottom")
@@ -246,8 +246,10 @@ def fig3():
     axc.set_title("(c) Collapsed occupancy", loc="left")
     axc.text(30, effp[-1] * 1.5, f"{effp[-1]:.0f}", fontsize=6.4, color=SKY,
              ha="right", va="bottom")
-    axc.text(5.5, effp[0] * 0.34, f"{int(effp[0])}", fontsize=6.4, color=SKY,
-             ha="left", va="top")
+    # Anchor the k=5 annotation to the upper-left of its marker: the curve
+    # descends steeply here, so any lower or rightward placement lands on it.
+    axc.text(4.2, effp[0] * 2.2, f"{int(effp[0])}", fontsize=6.4, color=SKY,
+             ha="left", va="bottom")
 
     ok = check_collisions(fig, "fig3_estimator_control")
     save(fig, "fig3_estimator_control")
@@ -331,7 +333,7 @@ def fig5():
     mean = [float(r["delta_tv_hat_mean"]) for r in rows]
 
     fig, ax = plt.subplots(figsize=(3.55, 2.65))
-    fig.subplots_adjust(left=0.235, right=0.965, top=0.90, bottom=0.215)
+    fig.subplots_adjust(left=0.315, right=0.965, top=0.90, bottom=0.215)
 
     xs = np.arange(len(B))
     ax.axvspan(len(B) - 1.5, len(B) - 0.5, color=VERM, alpha=0.07, zorder=0)
@@ -351,7 +353,27 @@ def fig5():
     return ok
 
 
+def scan_escape_leak(pdf_path: str) -> list[str]:
+    """Return leaked backslash-escape tokens from a figure PDF's OWN text layer.
+
+    A leaked escape (e.g. a literal `\\%`) is a glyph in the figure's vector
+    text, so it is invisible in the compiled paper's text layer, where the
+    figure is an embedded raster. The check has to read the figure file itself.
+    """
+    import re
+    import subprocess
+    text = subprocess.run(
+        ["pdftotext", "-layout", pdf_path, "-"],
+        capture_output=True, text=True, errors="replace",
+    ).stdout
+    tokens: list[str] = []
+    for pat in (r"\\%", r"\\&", r"\\_", r"\\#", r"\\[a-zA-Z]{2,}"):
+        tokens.extend(m.group(0) for m in re.finditer(pat, text))
+    return tokens
+
+
 if __name__ == "__main__":
+    import shutil
     results = {}
     for fn in (fig2, fig3, fig4, fig5):
         try:
@@ -359,5 +381,35 @@ if __name__ == "__main__":
         except Exception as exc:  # noqa: BLE001
             print(f"[ERROR] {fn.__name__}: {exc}")
             results[fn.__name__] = False
+
+    # The paper compiles `figures/paper/<name>` relative to docs/paper/, i.e.
+    # docs/paper/figures/paper/ — a SEPARATE COPY, not OUT. Regenerating into
+    # OUT alone never reaches the PDF. Sync first, then gate on BOTH trees, so
+    # a clean source cannot mask a stale copy in the compiled path.
+    compiled = os.path.normpath(os.path.join(OUT, "..", "..", "docs", "paper",
+                                            "figures", "paper"))
+    names = ("fig1_bracket_overview", "fig2_certificate_horizon",
+             "fig3_estimator_control", "fig4_cross_corpus",
+             "fig5_channel_sensitivity")
+    for name in names:
+        src = f"{OUT}/{name}.pdf"
+        if os.path.exists(src) and os.path.isdir(compiled):
+            shutil.copy2(src, f"{compiled}/{name}.pdf")
+            png = f"{OUT}/{name}.png"
+            if os.path.exists(png):
+                shutil.copy2(png, f"{compiled}/{name}.png")
+
+    for tree, label in ((OUT, "source"), (compiled, "compiled")):
+        for name in names:
+            path = f"{tree}/{name}.pdf"
+            if not os.path.exists(path):
+                continue
+            leaked = scan_escape_leak(path)
+            if leaked:
+                print(f"[FAIL] escape leak in {label} {name}.pdf: "
+                      f"{sorted(set(leaked))}")
+                results[f"escape:{label}:{name}"] = False
+            else:
+                print(f"[OK]   {label} {name}.pdf: 0 leaked escapes")
     print("\nsummary:", results)
     sys.exit(0 if all(results.values()) else 1)

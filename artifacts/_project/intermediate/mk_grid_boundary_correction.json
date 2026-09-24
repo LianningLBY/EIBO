@@ -1,0 +1,60 @@
+{
+  "artifact": "mk_grid_boundary_correction",
+  "date": "2026-09-20",
+  "corrects": {
+    "path": "eth_full_mk_grid.json",
+    "sha256": "522e25ff05b7ef84fe49bdc69ea6a2bd8fc50e56a7d26c7952c3f726adb89d7f",
+    "why_not_edited_in_place": "The corrected artifact is hash-cited in the paper (main.tex:209-210, art_20260918_a73525 = 522e25ff...). Editing it in place would break that citation. This sibling carries the correction; the cited file is unchanged."
+  },
+  "defect": "The cited artifact's own prose contradicts its own table. Its `finding` field asserts the m-free advantage is an 'M=1 phenomenon' and that 'at M>=8 the frontier is set by plug-in saturation', and its first falsifier's `resolution` reads 'zero from M=8 on'. The table in the same file shows the advantage at M>=8 is 94 and 80 at k=5, and 6 and 5 at k=10. Both the ROADMAP and the paper's Introduction inherited the prose claim without checking it against the table.",
+  "corrupted_claims": [
+    "ROADMAP (round 13-14): 'The supported boundary is the M one: the advantage disappears at M>=8 at every k'. FALSE.",
+    "ROADMAP (pre-round-13): 'the advantage vanishes from k>=15 onward at every M'. FALSE.",
+    "paper Introduction contribution 2: 'the advantage weakens as resolution increases rather than vanishing at any single resolution'. FALSE against k=30.",
+    "artifact `finding`: 'the extended horizon is an M=1 phenomenon'. FALSE - it is present in 13 of 20 cells.",
+    "artifact falsifier[0].resolution: 'zero from M=8 on'. FALSE - 94, 80, 6, 5 at M>=8."
+  ],
+  "verified_table": {
+    "note": "advantage = mfree - eq6; sat_frac = share of pairs with tv_hat >= 0.99",
+    "columns": ["k", "M", "eq6", "mfree", "advantage", "pairs", "sat_frac"],
+    "rows": [
+      [5, 1, 340, 363, 23, 990, 0.0000],
+      [5, 2, 47, 127, 80, 990, 0.1051],
+      [5, 4, 3, 111, 108, 990, 0.2394],
+      [5, 8, 0, 94, 94, 990, 0.3364],
+      [5, 16, 0, 80, 80, 990, 0.3909],
+      [10, 1, 28, 98, 70, 990, 0.0061],
+      [10, 2, 0, 20, 20, 990, 0.2909],
+      [10, 4, 0, 10, 10, 990, 0.5929],
+      [10, 8, 0, 6, 6, 990, 0.6384],
+      [10, 16, 0, 5, 5, 990, 0.6889],
+      [15, 1, 0, 18, 18, 946, 0.0391],
+      [15, 2, 0, 4, 4, 946, 0.5761],
+      [15, 4, 0, 1, 1, 946, 0.6966],
+      [15, 8, 0, 0, 0, 946, 0.7526],
+      [15, 16, 0, 0, 0, 946, 0.8076],
+      [30, 1, 0, 0, 0, 820, 0.7280],
+      [30, 2, 0, 0, 0, 820, 0.8500],
+      [30, 4, 0, 0, 0, 820, 0.9195],
+      [30, 8, 0, 0, 0, 820, 0.9561],
+      [30, 16, 0, 0, 0, 820, 0.9720]
+    ]
+  },
+  "corrected_boundary": {
+    "statement": "The m-free advantage is present in 13 of the 20 cells and absent in 7. It is NOT confined to any single axis: it persists at M=8 and M=16 for k=5 (94, 80) and k=10 (6, 5), and it vanishes at k=15 from M=8 and at k=30 everywhere.",
+    "separating_quantity": "saturation fraction (share of pairs with tv_hat >= 0.99)",
+    "separation": {
+      "with_advantage": "13 cells, sat_frac in [0.0000, 0.6966]",
+      "without_advantage": "7 cells, sat_frac in [0.7280, 0.9720]",
+      "gap": "0.6966 < 0.7280 - perfect separation, no exceptions across all 20 cells"
+    },
+    "reading": "The frontier is set by plug-in saturation, not by an axis. Where saturation is low (<~0.70) the alphabet-free route certifies strictly more pairs; where saturation is high (>=~0.73) both routes have collapsed and the radius form is irrelevant. Both prior single-axis statements (k>=15, and M>=8) were attempts to summarise a 2-D effect on one axis; neither holds.",
+    "paper_safe_wording": "The advantage weakens as resolution increases and is absent at the finest rung tested. The abstract already says this correctly and is unchanged."
+  },
+  "falsifier": {
+    "claim": "the m-free advantage is present exactly where the saturation fraction is below ~0.70",
+    "falsifier": "find any cell with sat_frac < 0.70 and mfree <= eq6, or any cell with sat_frac > 0.73 and mfree > eq6",
+    "result": "none: the separation is perfect on all 20 cells (max sat_frac with advantage 0.6966, min without 0.7280)"
+  },
+  "process_lesson": "An artifact's prose summary is a CLAIM, not an observation. When an artifact carries both a summary field and the table it summarises, re-derive any boundary claim from the table. This defect propagated: the artifact prose was inherited by the ROADMAP, and then by the paper's Introduction, across two rounds."
+}

@@ -367,7 +367,7 @@ experiments:
     conclusion: success
     metrics:
       c016_violations_reference_radius: 0
-      full_n_run_artifact: q1_lower_side_full_n.json sha256 bbf5aa4e2cbf84be2c4544fa393c7518588940888e0d712114f4cc570d386467,
+      full_n_run_artifact: q1_lower_side_full_n.json sha256 9fe81e271a386335a9526563ca03631bcdf832fa5d66d3861b2e22ec079256f5,
         990 rows; artifact id art_20260913_e5ebac
       full_n_run_discharges: 'The ''half-measured'' caveat and the [333, 336] range
         are DISCHARGED: lower side measured at full n for ALL 990 pairs, assumed_pair_count
@@ -2467,10 +2467,10 @@ experiments:
         reported as saturated and EXCLUDED from every delta.'
     completed_at: '2026-09-14T13:04:23.657Z'
   X9_C:
-    status: PREPARING
+    status: DONE
     retry_count: 0
     created_at: '2026-09-14T13:02:08.927Z'
-    updated_at: '2026-09-15T00:20:03.336Z'
+    updated_at: '2026-09-24T06:24:56.262Z'
     hypothesis: 'The +0.39 TV / eps_hi shift measured by X9 is attributable to ALPHABET
       CARDINALITY, not to SNI dependence. MECHANISM UNDER TEST: X9''s ARM B partitions
       on (packed k=5 prefix, full fixed-width DST_IP storage value), giving a FIXED
@@ -2514,6 +2514,12 @@ experiments:
       recorded as a tool-vocabulary limitation, not unfinished work. Do not read any
       transition checkpoints as evidence of a run.'
     conclusion: killed
+    completed_at: '2026-09-24T06:24:20.592Z'
+    failure_reason: Design withdrawn before execution; never ran. The confound (SNI
+      dependence vs alphabet cardinality) was resolved by the factorial grid analysis
+      (D201), which established saturation as the separating quantity. Status reached
+      DONE via PREPARING→QUEUED→DONE (no ALLOCATED/RUNNING intermediate); no GPU was
+      used, no script executed, no artifact produced.
   X9_E:
     status: DONE
     retry_count: 1
@@ -2728,3 +2734,48 @@ experiments:
       are legitimately None. Do not read the checkpoints as evidence of a managed
       run. (M131)
     completed_at: '2026-09-14T20:51:22.801Z'
+  track5_dependence_aware_radius:
+    status: DONE
+    retry_count: 0
+    created_at: '2026-09-19T20:38:25.245Z'
+    updated_at: '2026-09-19T20:39:57.584Z'
+    hypothesis: 'A dependence-aware variance/radius restores nominal coverage (0.975)
+      at fixed n where the i.i.d. radius does not. MECHANISM UNDER TEST: the i.i.d.
+      radius understates the variance of tv_hat under block dependence, so a radius
+      that accounts for the dependence should restore coverage at n=60000, B=64, conc=0.1,
+      true TV=0.4, without changing n. FALSIFIABLE BY: any arm whose CP95 interval
+      excludes nominal 0.975 from below (it has not fixed the shortfall) or from above
+      (it has over-corrected rather than calibrated).'
+    conclusion: success
+    result_note: 'SPLIT RESULT, and the mechanism is NOT the one under test. Arm A
+      block bootstrap 0.9940 [0.9870, 0.9978] radius 2.422x the empirical SD (over-covers);
+      Arm B sandwich 0.9780 [0.9669, 0.9862] radius 1.955x; Arm C LOBO 0.9780 same
+      CI radius 1.951x. Direct measurement (track5b diagnosis) shows the i.i.d. reference
+      is a union-bound CONFIDENCE RADIUS, 2.07x the empirical SD of tv_hat, not a
+      standard error - so B and C are correctly scaled standard errors, recover the
+      true SD to within 0.1% (ratios 1.0007 / 1.0000), and land at coverage statistically
+      indistinguishable from nominal (978/1000 vs 0.975, exact two-sided binomial
+      p=0.61). Only Arm A deviates significantly (994/1000, p<0.0001). The "shrink
+      -> fail" reading is RETRACTED. Power: 392 required (one-sample design), not
+      800 - see M172. The _255351/_df25a3 suffixed scripts are byte-identical copies
+      of one generation. CLAIM BOUNDARY: modelled block law only, never "coverage
+      holds on real traffic".'
+    spec:
+      command: python3 artifacts/_project/intermediate/track5_variance_radius.py;
+        diagnosis python3 artifacts/_project/intermediate/track5_between_block_diagnosis.py
+      data_count: 1000
+      data_path: artifacts/_project/intermediate/coverage_calibration_ladder.py (data-generating
+        harness); outputs to artifacts/_project/data/track5_arm{A,B,C}*.json plus
+        artifacts/track5_diagnosis_between_block.json and artifacts/track5b_summary.md
+      model_name: coverage calibration under modelled shared-Dirichlet block law;
+        true TV 0.4, alphabet 32, alpha 0.025, n=60000, B=64, concentration 0.1
+      seed: 20260919
+      server: local container (CPU-only, no GPU; server 111 has no python3)
+      checkpoint_path: artifacts/_project/report/track5_summary.md (no model checkpoint
+        - CPU calibration; artifacts are the three arm JSONs + summary + diagnosis
+        JSON)
+      log_path: logs/workers/worker_Track_5__three_dependence-aware_radius_arms_vs_i_i_d__covera_20260919T195321.log
+      related_worker: logs/workers/worker_Track_5_diagnosis___conditional_Arm_D__between-block_varianc_20260919T202908.log
+      arm_d_status: NOT RUN - the pre-committed diagnosis gate fired negative (between-block
+        variance already captured by B and C); no armD artifact exists
+    completed_at: '2026-09-19T20:39:57.584Z'

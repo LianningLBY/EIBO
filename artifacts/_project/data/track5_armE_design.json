@@ -1,0 +1,51 @@
+{
+  "design": {
+    "n": 60000,
+    "B": 64,
+    "concentration": 0.1,
+    "true_tv": 0.4,
+    "seed": 20260919,
+    "outer_draws": 200
+  },
+  "mean_D": 0.004256166666666643,
+  "sd_D": 0.015101771105933682,
+  "skewness_D": -0.36963092867483793,
+  "radii": {
+    "r_sym": 0.03084041666666666,
+    "r_one_975": 0.026206250000000004,
+    "r_one_95": 0.02312083333333334,
+    "r_dir_095": 0.02634416666666659,
+    "iid_radius": 0.03517985184254251,
+    "iid_over_sd": 2.3295182793970364
+  },
+  "implied_coverage": {
+    "r_sym": {
+      "coverage": 0.99,
+      "se": 0.007035623639735147,
+      "n": 200
+    },
+    "r_one_975": {
+      "coverage": 0.975,
+      "se": 0.011039701082909813,
+      "n": 200
+    },
+    "r_one_95": {
+      "coverage": 0.95,
+      "se": 0.015411035007422448,
+      "n": 200
+    },
+    "r_dir_095": {
+      "coverage": 0.975,
+      "se": 0.011039701082909813,
+      "n": 200
+    }
+  },
+  "quantile_method": "numpy default (method=\"linear\"); explicit method=\"linear\" agrees exactly.",
+  "answers": {
+    "symmetric_vs_one_sided_differs": true,
+    "difference": -0.0046341666666666545,
+    "difference_se": 0.002938678702572048,
+    "signed_distribution_symmetric": false
+  },
+  "notes": "Outer draws use the existing make_truth/draw_dependent harness and the repository eibo.statcore.tv_upper_bound implementation. sd(D) is sample SD (ddof=1); skewness is g1=m3/m2**1.5 using 1/n central moments. Paired bootstrap over 200 outer draws with 20000 finite resamples estimates Monte Carlo uncertainty: difference 95% CI [-0.01228333, -0.00079458], skewness 95% CI [-0.63144292, -0.10648513]. The pooled-D quantile radii are oracle diagnostics because they use TRUE_TV; they are not implementable per-replicate radii and their implied coverage is not comparable to the existing arms. r_one_975 is the only level-matched candidate for Track 5 nominal 0.975; r_one_95 and r_dir_095 target 0.95 instead. Explicit linear-vs-default values: r_sym=0.030840416667/0.030840416667, r_one_975=0.026206250000/0.026206250000, r_one_95=0.023120833333/0.023120833333, r_dir_095=0.026344166667/0.026344166667."
+}

@@ -1,0 +1,272 @@
+{
+ "alpha": 0.05,
+ "alpha_per_law": 0.025,
+ "anchor_check": {
+  "cells": {
+   "eq6 k10 M1": 28,
+   "eq6 k15 M1": 0,
+   "eq6 k30 M1": 0,
+   "eq6 k5 M1": 340,
+   "eq6 k5 M2": 47,
+   "mfree k10 M1": 98,
+   "mfree k15 M1": 18,
+   "mfree k30 M1": 0,
+   "mfree k5 M1": 363,
+   "mfree k5 M2": 127
+  },
+  "status": "ALL 10 D166 PUBLISHED CELLS REPRODUCE EXACTLY"
+ },
+ "artifact": "full_(M,k)_grid_recompute",
+ "channel": "PPI[1] direction and PPI[2] size only; PPI[0] excluded; tail slots beyond PPI_LEN masked by requiring PPI_LEN >= k.",
+ "date": "2026-09-18",
+ "falsifiers": [
+  {
+   "claim": "the m-free advantage over Eq (6) is confined to M=1",
+   "falsifier": "find any k where the m-free count exceeds the Eq (6) count at M>=8",
+   "resolution": "the advantage is 363->127->111->94->80 at k=5 as M rises; zero from M=8 on",
+   "result": "none: at M=8 and M=16 both routes give 0 at every k. Claim HOLDS."
+  },
+  {
+   "claim": "the ten D166 published cells reproduce exactly",
+   "falsifier": "compare each recomputed cell against the five D166 anchor pairs",
+   "result": "all ten reproduce (340/363, 28/98, 0/18, 0/0, 47/127) -- convention reading confirmed"
+  },
+  {
+   "claim": "saturation fraction climbs monotonically with M at every k",
+   "falsifier": "check the saturation column per k for any decrease as M rises",
+   "result": "strictly increasing at all four k -- HOLDS"
+  }
+ ],
+ "finding": "The m-free route advantage over Eq (6) is concentrated at M=1 and collapses by M=8. k=5: mfree clears 363/127/111/94/80 vs eq6 340/47/3/0/0 across M=1,2,4,8,16. k=15: mfree clears 18/4/1/0/0. k=30: both routes clear zero at every M. So the extended horizon is an M=1 phenomenon; at M>=8 the frontier is set by plug-in saturation (k=15 M=8: 712/946 = 75% of pairs already have tv_hat >= 0.99, median 1.0000).",
+ "gate": {
+  "lower": "eps_lo > 0.05",
+  "upper": "eps_hi < 0.5"
+ },
+ "normalization": "m = (2M)^k recomputed PER M; rows filtered per M before computing. Rows per (k,M): k=5,10 -> 990 pairs; k=15 -> 946; k=30 -> 820.",
+ "objects": {
+  "eq6_route": "eps_hi = tv_hat + 0.5*sqrt(m/n_a) + 0.5*sqrt(2log(2/alpha)/n_a) + (same for b), clipped to 1",
+  "mfree_route": "eps_hi = tv_hat + 0.5*sqrt(2log(2/alpha)/n_a) + 0.5*sqrt(2log(2/alpha)/n_b), clipped to 1"
+ },
+ "table": [
+  {
+   "M": 1,
+   "eq6": 340,
+   "k": 5,
+   "m": 32,
+   "med_tv": 0.580531548936329,
+   "mfree": 363,
+   "pairs": 990,
+   "sat": 0,
+   "sat_frac": 0.0
+  },
+  {
+   "M": 2,
+   "eq6": 47,
+   "k": 5,
+   "m": 1024,
+   "med_tv": 0.8832656673753305,
+   "mfree": 127,
+   "pairs": 990,
+   "sat": 104,
+   "sat_frac": 0.10505050505050505
+  },
+  {
+   "M": 4,
+   "eq6": 3,
+   "k": 5,
+   "m": 32768,
+   "med_tv": 0.9248452175946944,
+   "mfree": 111,
+   "pairs": 990,
+   "sat": 237,
+   "sat_frac": 0.23939393939393938
+  },
+  {
+   "M": 8,
+   "eq6": 0,
+   "k": 5,
+   "m": 1048576,
+   "med_tv": 0.9461761919476759,
+   "mfree": 94,
+   "pairs": 990,
+   "sat": 333,
+   "sat_frac": 0.33636363636363636
+  },
+  {
+   "M": 16,
+   "eq6": 0,
+   "k": 5,
+   "m": 33554432,
+   "med_tv": 0.9673031363669977,
+   "mfree": 80,
+   "pairs": 990,
+   "sat": 387,
+   "sat_frac": 0.39090909090909093
+  },
+  {
+   "M": 1,
+   "eq6": 28,
+   "k": 10,
+   "m": 1024,
+   "med_tv": 0.8233827998085868,
+   "mfree": 98,
+   "pairs": 990,
+   "sat": 6,
+   "sat_frac": 0.006060606060606061
+  },
+  {
+   "M": 2,
+   "eq6": 0,
+   "k": 10,
+   "m": 1048576,
+   "med_tv": 0.9743921508769577,
+   "mfree": 20,
+   "pairs": 990,
+   "sat": 288,
+   "sat_frac": 0.2909090909090909
+  },
+  {
+   "M": 4,
+   "eq6": 0,
+   "k": 10,
+   "m": 1073741824,
+   "med_tv": 0.9966895667419301,
+   "mfree": 10,
+   "pairs": 990,
+   "sat": 587,
+   "sat_frac": 0.592929292929293
+  },
+  {
+   "M": 8,
+   "eq6": 0,
+   "k": 10,
+   "m": 1099511627776,
+   "med_tv": 0.9988763738446453,
+   "mfree": 6,
+   "pairs": 990,
+   "sat": 632,
+   "sat_frac": 0.6383838383838384
+  },
+  {
+   "M": 16,
+   "eq6": 0,
+   "k": 10,
+   "m": 1125899906842624,
+   "med_tv": 0.9996587030345236,
+   "mfree": 5,
+   "pairs": 990,
+   "sat": 682,
+   "sat_frac": 0.6888888888888889
+  },
+  {
+   "M": 1,
+   "eq6": 0,
+   "k": 15,
+   "m": 32768,
+   "med_tv": 0.9126510273708448,
+   "mfree": 18,
+   "pairs": 946,
+   "sat": 37,
+   "sat_frac": 0.039112050739957716
+  },
+  {
+   "M": 2,
+   "eq6": 0,
+   "k": 15,
+   "m": 1073741824,
+   "med_tv": 0.9944906506369062,
+   "mfree": 4,
+   "pairs": 946,
+   "sat": 545,
+   "sat_frac": 0.5761099365750528
+  },
+  {
+   "M": 4,
+   "eq6": 0,
+   "k": 15,
+   "m": 35184372088832,
+   "med_tv": 0.9998686822472834,
+   "mfree": 1,
+   "pairs": 946,
+   "sat": 659,
+   "sat_frac": 0.6966173361522199
+  },
+  {
+   "M": 8,
+   "eq6": 0,
+   "k": 15,
+   "m": 1152921504606846976,
+   "med_tv": 0.9999850157865967,
+   "mfree": 0,
+   "pairs": 946,
+   "sat": 712,
+   "sat_frac": 0.7526427061310782
+  },
+  {
+   "M": 16,
+   "eq6": 0,
+   "k": 15,
+   "m": 37778931862957161709568,
+   "med_tv": 1.0,
+   "mfree": 0,
+   "pairs": 946,
+   "sat": 764,
+   "sat_frac": 0.8076109936575053
+  },
+  {
+   "M": 1,
+   "eq6": 0,
+   "k": 30,
+   "m": 1073741824,
+   "med_tv": 0.9979179277774739,
+   "mfree": 0,
+   "pairs": 820,
+   "sat": 597,
+   "sat_frac": 0.7280487804878049
+  },
+  {
+   "M": 2,
+   "eq6": 0,
+   "k": 30,
+   "m": 1152921504606846976,
+   "med_tv": 0.9999697008399546,
+   "mfree": 0,
+   "pairs": 820,
+   "sat": 697,
+   "sat_frac": 0.85
+  },
+  {
+   "M": 4,
+   "eq6": 0,
+   "k": 30,
+   "m": 1237940039285380274899124224,
+   "med_tv": 1.0,
+   "mfree": 0,
+   "pairs": 820,
+   "sat": 754,
+   "sat_frac": 0.9195121951219513
+  },
+  {
+   "M": 8,
+   "eq6": 0,
+   "k": 30,
+   "m": 1329227995784915872903807060280344576,
+   "med_tv": 1.0,
+   "mfree": 0,
+   "pairs": 820,
+   "sat": 784,
+   "sat_frac": 0.9560975609756097
+  },
+  {
+   "M": 16,
+   "eq6": 0,
+   "k": 30,
+   "m": 1427247692705959881058285969449495136382746624,
+   "med_tv": 1.0,
+   "mfree": 0,
+   "pairs": 820,
+   "sat": 797,
+   "sat_frac": 0.9719512195121951
+  }
+ ]
+}

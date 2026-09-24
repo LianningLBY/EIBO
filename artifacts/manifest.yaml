@@ -2135,9 +2135,13 @@
     Retained as an archive of the rejected convention and for the known-truth reproduction
     gate it contains.
 - id: art_20260916_covcal
-  name: 'Coverage calibration, known-truth (i.i.d. + dependent arms)'
+  name: Coverage calibration, known-truth (i.i.d. + dependent arms)
   type: data
-  description: 'Known-truth coverage calibration of the finite-alphabet TV upper bound: 16 i.i.d. plus 80 dependent cells at 200 replicates, a strong-dependence arm, and a direct estimate-inflation measurement. Coverage 1.000 in all cells. The informative limitation is saturation: the radius is a pure function of n (1.63x the true TV at n=2791), so small-n coverage is trivially guaranteed.'
+  description: 'Known-truth coverage calibration of the finite-alphabet TV upper bound:
+    16 i.i.d. plus 80 dependent cells at 200 replicates, a strong-dependence arm,
+    and a direct estimate-inflation measurement. Coverage 1.000 in all cells. The
+    informative limitation is saturation: the radius is a pure function of n (1.63x
+    the true TV at n=2791), so small-n coverage is trivially guaranteed.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/coverage_calibration.json
   content_sha256: ae1ee222603086cf4040fd78fbdfb261c596dead7f4592cd60a5f259298641c0
   url: null
@@ -2145,11 +2149,19 @@
   exp_id: null
   skill: null
   created_at: '2026-09-16T18:56:00Z'
-  tags: [calibration, coverage, known-truth, round6]
+  tags:
+  - calibration
+  - coverage
+  - known-truth
+  - round6
 - id: art_20260916_fslb_feas
   name: 'Feasibility: finite-sample lower-bound constant'
   type: report
-  description: 'Compares the asymptotic iterated-log confidence constant against a simulated exact finite-sample path-sup quantile. Implementation reproduces Michel et al. B.1 to 1e-9; the asymptotic region is ~14% conservative and the fallback constant only 3-11% conservative. Conclusion: achievable but a tightening, not a new construction.'
+  description: 'Compares the asymptotic iterated-log confidence constant against a
+    simulated exact finite-sample path-sup quantile. Implementation reproduces Michel
+    et al. B.1 to 1e-9; the asymptotic region is ~14% conservative and the fallback
+    constant only 3-11% conservative. Conclusion: achievable but a tightening, not
+    a new construction.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/finite_sample_lower_bound_feasibility.md
   content_sha256: 547e076a70e0a7a52761d5d556f611eb914d17fba3b226b13cb2131bb3cdb959
   url: null
@@ -2157,11 +2169,18 @@
   exp_id: null
   skill: null
   created_at: '2026-09-16T18:56:00Z'
-  tags: [feasibility, round6]
+  tags:
+  - feasibility
+  - round6
 - id: art_20260916_osagg
   name: 'Pairwise-to-open-set aggregation: corrected analysis'
   type: report
-  description: 'CORRECTED after an independent check found the original impossibility claim wrong. Records the true standard Le Cam generalisation (valid for all K; textbook, must be cited not claimed), the harness bug that produced the false refutation (100/400 violations from scoring a mislabelled classifier; 0/400 corrected), the corrected counterexample arithmetic, and the conditional open-set corollary. Paper impact: none.'
+  description: 'CORRECTED after an independent check found the original impossibility
+    claim wrong. Records the true standard Le Cam generalisation (valid for all K;
+    textbook, must be cited not claimed), the harness bug that produced the false
+    refutation (100/400 violations from scoring a mislabelled classifier; 0/400 corrected),
+    the corrected counterexample arithmetic, and the conditional open-set corollary.
+    Paper impact: none.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/pairwise_to_openset_aggregation.md
   content_sha256: 28e0bdc3f20d1e17d9814097906e9e6098f3bb1a1467ce65c233d2300269c849
   url: null
@@ -2169,11 +2188,15 @@
   exp_id: null
   skill: null
   created_at: '2026-09-16T18:56:00Z'
-  tags: [corrected, round6, open-set]
+  tags:
+  - corrected
+  - round6
+  - open-set
 - id: art_20260916_osimp_arch
   name: 'ARCHIVED: retracted pairwise-to-open-set impossibility claim'
   type: report
-  description: 'Retracted 2026-09-16: the impossibility claim was wrong. Kept only as a record of what was asserted and why it failed. Do not cite.'
+  description: 'Retracted 2026-09-16: the impossibility claim was wrong. Kept only
+    as a record of what was asserted and why it failed. Do not cite.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_archive_retracted_pairwise_to_openset_impossibility.md
   content_sha256: 2cb2265f2f1884151f1ba8099541231b4ef68b26b4dee8d8bbc642c32d3c7dbb
   url: null
@@ -2181,11 +2204,18 @@
   exp_id: null
   skill: null
   created_at: '2026-09-16T18:56:00Z'
-  tags: [archived, retracted, do-not-cite]
+  tags:
+  - archived
+  - retracted
+  - do-not-cite
 - id: art_20260916_bandgate
   name: 'Finite-sample band: impact on the gate'
   type: report
-  description: 'Measures whether adopting the finite-sample band would move any published number. The constant raises the inferred eps_lo by 12.7% on a representative instance, but the gate count is 986 of 990 before and after every scaling tested, because only 4 pairs fail eps_lo > 0.05 and the nearest sits at 0.0151. Strictly better rigour, strict no-op on every reported count.'
+  description: Measures whether adopting the finite-sample band would move any published
+    number. The constant raises the inferred eps_lo by 12.7% on a representative instance,
+    but the gate count is 986 of 990 before and after every scaling tested, because
+    only 4 pairs fail eps_lo > 0.05 and the nearest sits at 0.0151. Strictly better
+    rigour, strict no-op on every reported count.
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/finite_sample_band_gate_impact.md
   content_sha256: 902ebe74dbae736df85563047c4d29a0511606ea0a70f6cb2c1da1096baf4a19
   url: null
@@ -2193,11 +2223,19 @@
   exp_id: null
   skill: null
   created_at: '2026-09-16T19:40:00Z'
-  tags: [rigour, round6, no-op]
+  tags:
+  - rigour
+  - round6
+  - no-op
 - id: art_20260916_ucorr
   name: 'Conditional corollary: the missing measurement, checked'
   type: report
-  description: 'Checks whether the conditional open-set corollary has its required input already. X13 measures missing MASS over destination-IP identifiers (Good-Turing, 0.0020, scope deployment-site), not the distance from an unknown class to the known laws, and records identifier_enters_declared_channel: False. The required measurement is genuinely absent and would need a new corpus pass; running it would most likely return a vacuous delta. Disposition: do not run.'
+  description: 'Checks whether the conditional open-set corollary has its required
+    input already. X13 measures missing MASS over destination-IP identifiers (Good-Turing,
+    0.0020, scope deployment-site), not the distance from an unknown class to the
+    known laws, and records identifier_enters_declared_channel: False. The required
+    measurement is genuinely absent and would need a new corpus pass; running it would
+    most likely return a vacuous delta. Disposition: do not run.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/conditional_corollary_missing_measurement.md
   content_sha256: 8fb7dd3fb060fde622c41d4a642f5ec481e125188e773241a091f11a46547180
   url: null
@@ -2205,11 +2243,21 @@
   exp_id: null
   skill: null
   created_at: '2026-09-16T19:40:00Z'
-  tags: [corollary, round6, checked]
+  tags:
+  - corollary
+  - round6
+  - checked
 - id: art_20260917_osfloor
-  name: 'An assumption-free open-set error floor from pairwise certificates'
+  name: An assumption-free open-set error floor from pairwise certificates
   type: report
-  description: 'Corrects a claim made and retracted on 2026-09-16. A positive open-set error floor follows from the pairwise certificates with NO assumption on the unknown class, because the discarded unknown-class terms enter the sum with positive sign: E[err] >= S_known/(M(M-1)) with M = K+1. Verified on constructed cases and under 1500 randomised configurations including adversarial placements of U; zero violations. On the corpus this gives ~0.118 for 44 classes. Notes the limits: standard Le Cam applied carefully rather than new mechanism, uniform prior required, loose by construction, rare-class behaviour not captured.'
+  description: 'Corrects a claim made and retracted on 2026-09-16. A positive open-set
+    error floor follows from the pairwise certificates with NO assumption on the unknown
+    class, because the discarded unknown-class terms enter the sum with positive sign:
+    E[err] >= S_known/(M(M-1)) with M = K+1. Verified on constructed cases and under
+    1500 randomised configurations including adversarial placements of U; zero violations.
+    On the corpus this gives ~0.118 for 44 classes. Notes the limits: standard Le
+    Cam applied carefully rather than new mechanism, uniform prior required, loose
+    by construction, rare-class behaviour not captured.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_assumption_free.md
   content_sha256: a6ddab80b79da4483e7be2511303a7dd8f4a04eae8e32d3ae53ed7440e65af32
   url: null
@@ -2217,11 +2265,24 @@
   exp_id: null
   skill: null
   created_at: '2026-09-17T01:20:00Z'
-  tags: [open-set, corollary, claim-correction]
+  tags:
+  - open-set
+  - corollary
+  - claim-correction
 - id: art_20260917_ostight
   name: 'Open-set floor tightened: 0.186, correcting 0.118'
   type: report
-  description: 'Two tightenings of the assumption-free open-set floor, one of which corrects the earlier number. (a) The earlier computation filtered S to pairs with eps_hi <= 0.5, which is the certification gate and not a requirement of the bound; every pair contributes a valid 1 - eps_hi term at any eps_hi value, so dropping 650 of 990 pairs discarded real mass. Corrected: S = 384.6 over the full graph, giving 0.1858 at M=K+1 (0.1942 at M=K), versus the 0.1176 reported earlier. Validity of the unfiltered form checked on 1200 randomised configurations with zero violations. (b) A subset refinement was tested and gives no gain, returning exactly the full-set value, so that axis is closed. Also records that recovering the unknown-class mass under an anchoring assumption moves the floor by at most +0.023, leaving it robust.'
+  description: 'Two tightenings of the assumption-free open-set floor, one of which
+    corrects the earlier number. (a) The earlier computation filtered S to pairs with
+    eps_hi <= 0.5, which is the certification gate and not a requirement of the bound;
+    every pair contributes a valid 1 - eps_hi term at any eps_hi value, so dropping
+    650 of 990 pairs discarded real mass. Corrected: S = 384.6 over the full graph,
+    giving 0.1858 at M=K+1 (0.1942 at M=K), versus the 0.1176 reported earlier. Validity
+    of the unfiltered form checked on 1200 randomised configurations with zero violations.
+    (b) A subset refinement was tested and gives no gain, returning exactly the full-set
+    value, so that axis is closed. Also records that recovering the unknown-class
+    mass under an anchoring assumption moves the floor by at most +0.023, leaving
+    it robust.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_tightened.md
   content_sha256: fdb2c15d3e33a773e10bcc5e182c9d00b6411b2032c651e23798f2a52ec99e86
   url: null
@@ -2229,11 +2290,23 @@
   exp_id: null
   skill: null
   created_at: '2026-09-17T02:10:00Z'
-  tags: [open-set, corrected, exploration]
+  tags:
+  - open-set
+  - corrected
+  - exploration
 - id: art_20260917_osloose
   name: 'Open-set floor: how loose, measured against ground truth'
   type: report
-  description: 'Characterises how loose the assumption-free open-set floor is, and corrects an invalid sweep in my own first attempt (I varied M while holding S fixed; S must move with M since it sums over the pairs among those M classes). Redone: on the corpus the floor rises as the class set shrinks, 0.433 at M=2 to 0.186 at M=46. Against ground truth the bound is exactly tight at M=2 (reproducing Le Cam) and degrades steadily with class count, recovering about a fifth of the true error at M=20 -- intrinsic to the construction, since the 1/(M(M-1)) averaging that buys the assumption-free property also caps sharpness. Records explicitly that no measured multi-class run exists in the project, so the corpus value cannot be compared against an observed multi-class error.'
+  description: 'Characterises how loose the assumption-free open-set floor is, and
+    corrects an invalid sweep in my own first attempt (I varied M while holding S
+    fixed; S must move with M since it sums over the pairs among those M classes).
+    Redone: on the corpus the floor rises as the class set shrinks, 0.433 at M=2 to
+    0.186 at M=46. Against ground truth the bound is exactly tight at M=2 (reproducing
+    Le Cam) and degrades steadily with class count, recovering about a fifth of the
+    true error at M=20 -- intrinsic to the construction, since the 1/(M(M-1)) averaging
+    that buys the assumption-free property also caps sharpness. Records explicitly
+    that no measured multi-class run exists in the project, so the corpus value cannot
+    be compared against an observed multi-class error.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_looseness.md
   content_sha256: f3e5e95ac514981061659567a1c20535ac5f33aa6d0b6cacc8b53b4615df40b2
   url: null
@@ -2241,11 +2314,25 @@
   exp_id: null
   skill: null
   created_at: '2026-09-17T02:40:00Z'
-  tags: [open-set, looseness, exploration]
+  tags:
+  - open-set
+  - looseness
+  - exploration
 - id: art_20260917_oslp
   name: 'Open-set floor under optimal weighting: 0.363, up from 0.186'
   type: report
-  description: 'The open-set floor nearly doubles under the same assumptions once the equal weighting is relaxed. The derivation never required equal weights; any non-negative weights with uniform row sums give E[err] >= [max over feasible w of sum w(1 - tv)]/M, a linear program whose optimum is computable from the certified bounds alone. Equal weights are the feasible point w=1/(2(M-1)), recovering the previous bound exactly, so the LP is a strict generalisation. On the corpus the floor goes from 0.186 to 0.363, +95.4%. Verified on 200 randomised configurations with zero violations against the exact Bayes error, and on 8 heterogeneous cases with 9-67% gains. Limits: still Le Cam-based, so incremental rather than a new bound; weights are data-dependent so the LP is re-solved per configuration; uniform prior still required; not compared against measurement since no multi-class run exists.'
+  description: 'The open-set floor nearly doubles under the same assumptions once
+    the equal weighting is relaxed. The derivation never required equal weights; any
+    non-negative weights with uniform row sums give E[err] >= [max over feasible w
+    of sum w(1 - tv)]/M, a linear program whose optimum is computable from the certified
+    bounds alone. Equal weights are the feasible point w=1/(2(M-1)), recovering the
+    previous bound exactly, so the LP is a strict generalisation. On the corpus the
+    floor goes from 0.186 to 0.363, +95.4%. Verified on 200 randomised configurations
+    with zero violations against the exact Bayes error, and on 8 heterogeneous cases
+    with 9-67% gains. Limits: still Le Cam-based, so incremental rather than a new
+    bound; weights are data-dependent so the LP is re-solved per configuration; uniform
+    prior still required; not compared against measurement since no multi-class run
+    exists.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_optimal_weighting.md
   content_sha256: 9d16e6ad93299c5ae3b9816f851b9830fd3a1dbb6db20e6ec442026c8884f644
   url: null
@@ -2253,22 +2340,25 @@
   exp_id: null
   skill: null
   created_at: '2026-09-17T03:05:00Z'
-  tags: [open-set, lp, exploration]
+  tags:
+  - open-set
+  - lp
+  - exploration
 - id: art_20260917_osmeas
   name: 'Open-set floor vs measured multi-class error: 0.363 vs 0.737'
   type: report
-  description: >-
-    Closes the gap the earlier notes flagged: the floor is now compared against a
-    MEASURED multi-class error, using a measurement that already existed in the project
-    (x12_detector_validation_k5.json fits multiclass classifiers and records per-service
-    classification_error, whose uniform average is the macro-average multi-class error
-    under the same uniform prior). On matched services (all 45 of the floor graph, none
-    missing): measured error 0.7366, uniform floor 0.1858 (25.2 percent of measured),
-    LP-optimal floor 0.3631 (49.3 percent). Both bounds hold; the LP weighting closes
-    32.2 percent of the remaining slack. Establishes validity and substance against real
-    measurement; does NOT establish a certificate on that classifier, nor an open-set
-    evaluation (models are closed-set over 53 labels, unknown class not exercised as a
-    rejection target). pcap_encoder did not import; prototype and ronetc give 0.816 and 0.856.
+  description: 'Closes the gap the earlier notes flagged: the floor is now compared
+    against a MEASURED multi-class error, using a measurement that already existed
+    in the project (x12_detector_validation_k5.json fits multiclass classifiers and
+    records per-service classification_error, whose uniform average is the macro-average
+    multi-class error under the same uniform prior). On matched services (all 45 of
+    the floor graph, none missing): measured error 0.7366, uniform floor 0.1858 (25.2
+    percent of measured), LP-optimal floor 0.3631 (49.3 percent). Both bounds hold;
+    the LP weighting closes 32.2 percent of the remaining slack. Establishes validity
+    and substance against real measurement; does NOT establish a certificate on that
+    classifier, nor an open-set evaluation (models are closed-set over 53 labels,
+    unknown class not exercised as a rejection target). pcap_encoder did not import;
+    prototype and ronetc give 0.816 and 0.856.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_vs_measured.md
   content_sha256: b8faadc18bbc1e41aafca28374f7a000d8016cb8c6a2a3919df77f71e4638a17
   url: null
@@ -2276,23 +2366,27 @@
   exp_id: null
   skill: null
   created_at: '2026-09-17T03:35:00Z'
-  tags: [open-set, measurement, exploration]
+  tags:
+  - open-set
+  - measurement
+  - exploration
 - id: art_20260917_osmix
   name: 'A third construction: mixture bound and metric short-cut, 0.385'
   type: report
-  description: >-
-    Leaves the pairwise-summation family and beats it twice. Construction A replaces pairwise
-    distances with distances to the mixture distribution (P-bar), giving an assumption-free bound
-    E[err] >= (M-1)/M - (1/M^2) sum eps_hi_ij that contains no optimisation and agrees with the LP
-    to three decimals on the corpus (0.3635 vs 0.3631) -- two structurally different arguments
-    landing on the same number, which is evidence that 0.363 was a genuine ceiling of the pairwise
-    class. Construction B then uses the metric property of total variation to replace those
-    distances with shortest-path bounds over the service graph (Bellman-Ford; every path is a valid
-    upper bound so the minimum is too), reaching 0.3847 = 52.2% of the measured error, up from
-    49.3%. Verified: mixture valid on 10 cases, shortest-path mixture valid on 300 randomised
-    configurations with zero violations. Limits: ingredients are all standard, so the contribution
-    is the composition plus the observation that the metric property was available and unused;
-    uniform prior still required; a factor of 1.9 to the measured error remains.
+  description: 'Leaves the pairwise-summation family and beats it twice. Construction
+    A replaces pairwise distances with distances to the mixture distribution (P-bar),
+    giving an assumption-free bound E[err] >= (M-1)/M - (1/M^2) sum eps_hi_ij that
+    contains no optimisation and agrees with the LP to three decimals on the corpus
+    (0.3635 vs 0.3631) -- two structurally different arguments landing on the same
+    number, which is evidence that 0.363 was a genuine ceiling of the pairwise class.
+    Construction B then uses the metric property of total variation to replace those
+    distances with shortest-path bounds over the service graph (Bellman-Ford; every
+    path is a valid upper bound so the minimum is too), reaching 0.3847 = 52.2% of
+    the measured error, up from 49.3%. Verified: mixture valid on 10 cases, shortest-path
+    mixture valid on 300 randomised configurations with zero violations. Limits: ingredients
+    are all standard, so the contribution is the composition plus the observation
+    that the metric property was available and unused; uniform prior still required;
+    a factor of 1.9 to the measured error remains.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_mixture_bound.md
   content_sha256: 8d8376aa418e1265fde38499e50726ea8b73656aecfac89a7e7ba737881f91d4
   url: null
@@ -2300,23 +2394,28 @@
   exp_id: null
   skill: null
   created_at: '2026-09-17T04:05:00Z'
-  tags: [open-set, mixture, metric, exploration]
+  tags:
+  - open-set
+  - mixture
+  - metric
+  - exploration
 - id: art_20260917_osfour
-  name: 'Four constructions; a normalisation bug caught in the comparison'
+  name: Four constructions; a normalisation bug caught in the comparison
   type: report
-  description: >-
-    Adds a fourth construction and records a normalisation error caught during the comparison.
-    New: excluding the unknown class from the mixture (it had been folded in at the trivial bound
-    tv(P_i,U)<=1, silently inflating the average). Excluded, U enters only through the prior factor
-    K/M, giving 0.37155 = 50.4 percent of the measured error, up from the LP's 0.3631. Verified on
-    400 randomised configurations with zero violations. The bug: my first comparison produced 0.3715
-    for the UNIFORM bound -- double the correct 0.1858 -- because I summed over ordered pairs (each
-    unordered pair counted twice) but divided by the unordered normaliser M(M-1); the correct
-    denominator for an ordered sum is 2M(M-1). Same defect class as the earlier 1/(2K(K-1)) slip and
-    the 0.118 input-filter error: a factor of two in the normalisation rather than the sum. Rule now
-    written into the check: an ordered-pair sum equals sum_i err_i * r_i with r_i the row sum, so the
-    bound divides by r*M. The clustering of LP, mixture and exclude-U within 2.3 percent across
-    structurally different arguments is evidence that ~0.37 is the ceiling of this family.
+  description: 'Adds a fourth construction and records a normalisation error caught
+    during the comparison. New: excluding the unknown class from the mixture (it had
+    been folded in at the trivial bound tv(P_i,U)<=1, silently inflating the average).
+    Excluded, U enters only through the prior factor K/M, giving 0.37155 = 50.4 percent
+    of the measured error, up from the LP''s 0.3631. Verified on 400 randomised configurations
+    with zero violations. The bug: my first comparison produced 0.3715 for the UNIFORM
+    bound -- double the correct 0.1858 -- because I summed over ordered pairs (each
+    unordered pair counted twice) but divided by the unordered normaliser M(M-1);
+    the correct denominator for an ordered sum is 2M(M-1). Same defect class as the
+    earlier 1/(2K(K-1)) slip and the 0.118 input-filter error: a factor of two in
+    the normalisation rather than the sum. Rule now written into the check: an ordered-pair
+    sum equals sum_i err_i * r_i with r_i the row sum, so the bound divides by r*M.
+    The clustering of LP, mixture and exclude-U within 2.3 percent across structurally
+    different arguments is evidence that ~0.37 is the ceiling of this family.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_floor_four_constructions.md
   content_sha256: 0ace3222da0fad188b9382dcbf97121c5513344db6f098672d29022e3cbe003b
   url: null
@@ -2324,4 +2423,1653 @@
   exp_id: null
   skill: null
   created_at: '2026-09-17T04:40:00Z'
-  tags: [open-set, normalisation, exploration]
+  tags:
+  - open-set
+  - normalisation
+  - exploration
+- id: art_20260917_2598d1
+  name: 'Open-set Δ: measured multiclass error minus floor, service-clustered CI'
+  type: report
+  description: 'Δ = measured multiclass error − floor for three detectors (lightgbm/prototype/ronetc),
+    macro over the 45 graph services selected by explicit label membership, with cluster
+    bootstrap over the 45 SERVICES (B=10000). Headline: Δ=0.5424 (lightgbm) / 0.6248
+    (prototype) / 0.6360 (ronetc), ratios 3.79x/4.22x/4.27x against floor 0.19422
+    (M=45) / 0.18577 (M=46), 95% CIs all excluding zero with floor <= CI_low. Records
+    that the bound is loose by ~4x on this corpus and that Δ tracks classifier quality
+    only weakly (+17% across a 14% error swing). Documents why the open-set rejection
+    arm was NOT run: thin U (8 outsiders, total 3539 test flows, gate verdict a threshold
+    artifact) and Δ pinned by construction (~2% movement across the full range from
+    perfect rejection to none). NOT an open-set evaluation; the unknown class is not
+    exercised.'
+  content_sha256: 1b599af5e3a1c9d454ecf69b2c53ef0262abcf82c28f5f2945e47b5f56b4d0a5
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_delta/report/openset_delta.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: openset_delta
+  skill: ''
+  created_at: '2026-09-17T09:22:29.694467+00:00'
+  tags:
+  - openset
+  - delta
+  - floor-looseness
+  - cluster-bootstrap
+  - not-an-openset-evaluation
+- id: art_20260917_3d691b
+  name: 'Open-set Δ: machine-readable results (per-detector Δ, ratios, clustered CIs)'
+  type: data
+  description: Machine-readable companion to openset_delta.md. Per-detector macro
+    error over the 45 graph services (explicit label set, never range(45)), Δ vs both
+    floors at M=45 (0.19422) and M=46 (0.18577), ratios, and service-clustered bootstrap
+    CIs (B=10000 over the 45 services, not the 990 pairs). Also carries the U-thinness
+    table for the 8 outside-services (7,12,24,30,42,45,46,47; test flows 1000/828/389/326/320/258/249/169,
+    total 3539) recorded as the reason the rejection arm was dropped, not as a result.
+  content_sha256: 3dce3369ec0dafce22939c0d3fde636c30bc341e33ec50dbc62640b4d4e7e5d5
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_delta/data/openset_delta.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: openset_delta
+  skill: ''
+  created_at: '2026-09-17T09:22:34.090043+00:00'
+  tags:
+  - openset
+  - delta
+  - data
+  - cluster-bootstrap
+- id: art_20260917_705aa5
+  name: Capacity-axis limitation — the ladder was not run (D143)
+  type: report
+  description: 'Capacity-axis limitation note (D143). Records that the capacity axis
+    was NOT measured on this hardware within the session — stated as a limitation,
+    not a result, and explicitly not substituted by any capacity claim derived from
+    the architecture table. Carries: the three infrastructure deaths (LightGBM smoke
+    rejected by the content guard; RoNeTC ladder v1 dead pre-execution; RoNeTC ladder
+    v2 dead mid-wrapper-authoring 09:44:34 with no rungs and no deliverable), all
+    from `stream disconnected before completion`; the two facts kept apart (capacity
+    answered WEAKLY by the three-detector tier axis, and NOT AT ALL by a dedicated
+    ladder); the redundancy-of-the-ladder argument as the decisive reason for not
+    re-attempting; the single-script nohup transport reserved for future remote needs;
+    and the provenance note that train error is unreadable from the reviewed runner
+    and must come from a measurement-only second forward pass, with epochs=5 required
+    to reproduce 0.8302. NOTE: this file itself now matches the `**/openset_capacity_ladder*`
+    pattern it cites as returning zero files, so that sentence is stale as of creation.'
+  content_sha256: 2a2c007bc053f9754a9b01d29c056d36c9c11caf9cbd2c7fba6d9cea656b28db
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_delta/report/openset_capacity_ladder.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: openset_delta
+  skill: ''
+  created_at: '2026-09-17T09:56:21.902129+00:00'
+  tags:
+  - openset
+  - capacity-axis
+  - limitation
+  - not-measured
+  - D143
+- id: art_20260917_4a12ea
+  name: Open-set probe result (server-side) — corpus/runner identity corroboration
+  type: data
+  description: 'Server-side read-only probe (produced 09:04 by the dead probe Worker;
+    the file survived on the server after the Worker''s stream died). Corroborating
+    evidence for corpus/runner identity: corpus sha MATCH (6b323c4c...); runner sha
+    3f2563b6... at 1296 lines, equal to the local x12_detector_validation.py at the
+    same line count, so local and server runners are in sync on that file; 53 services,
+    10,000,000 flows, with per-service counts whose 8 outsider values match the local
+    extraction. Independently re-derived by the Director as svc 47 full-corpus count
+    = 1501 by streaming all 360 nodes locally, matching exactly — so this file is
+    retained as the second host''s evidence. NOT in the manifest prior to this registration.'
+  content_sha256: 98eb82694d88461ec315b84f4ebdd9bfcec15089469cbf5dbcff213270718dc0
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_delta/data/openset_probe_result.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: openset_delta
+  skill: ''
+  created_at: '2026-09-17T10:08:01.076026+00:00'
+  tags:
+  - openset
+  - probe
+  - corroboration
+- id: art_20260917_e41246
+  name: 'Open-set Δ: measured multiclass error minus floor, service-clustered CI (re-registered)'
+  type: report
+  description: 'Δ = measured multiclass error − floor for three detectors (lightgbm/prototype/ronetc),
+    macro over the 45 graph services selected by explicit label membership, service-clustered
+    bootstrap (B=10000 over the 45 services). Headline: Δ=0.5424 lightgbm / 0.6248
+    prototype / 0.6360 ronetc; ratios 3.79x (certified uniform floor) / 4.22x / 4.27x.
+    Floor 0.19422 at M=45, 0.18577 at M=46, S_known=384.5529, 0 violations. Bound
+    is loose by ~4x on this corpus; Δ tracks classifier quality only weakly (+17%
+    across a 14% error swing). Re-registered to refresh the manifest hash after the
+    Director corrected the gate/window paragraph (test window named; full-corpus column
+    added as context-only; ratio labels carried).'
+  content_sha256: 1b599af5e3a1c9d454ecf69b2c53ef0262abcf82c28f5f2945e47b5f56b4d0a5
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/openset_delta/report/openset_delta_e41246.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: openset_delta
+  skill: ''
+  created_at: '2026-09-17T10:19:18.671604+00:00'
+  tags:
+  - openset
+  - delta
+  - floor-looseness
+  - cluster-bootstrap
+  - not-an-openset-evaluation
+- id: art_20260918_a408c2
+  name: coverage_calibration_v2
+  type: data
+  description: 'Upper-side coverage calibration (Round 8): i.i.d. control arm and
+    a dependent-contamination arm at block sizes B=1,8,64, 200 replicates per cell,
+    reporting covered replicates and two-sided 95% Clopper-Pearson endpoints. Backs
+    the coverage conditional clause in Sec 5.5 and Table 6.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X1/data/coverage_calibration_v2.json
+  content_sha256: b4e7f8b0755a09561736ab7bfc39318980548a0ae0cfda7243e9de48a5b399dc
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X1
+  skill: ''
+  created_at: '2026-09-18T00:25:58.623037+00:00'
+  tags:
+  - paper
+  - coverage
+  - calibration
+  - round8
+- id: art_20260918_17c1b0
+  name: coverage_calibration_ladder
+  type: data
+  description: 'Coverage calibration ladder (Round 8): block-size stress ladder summary
+    accompanying coverage_calibration_v2. Supports the dependent-arm cells in Sec
+    5.5.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X1/data/coverage_calibration_ladder.json
+  content_sha256: 86bd86a27a6efe8edacfbe5cafd2b38c5b4724e5f95de8f9afa5355e3c43d29a
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X1
+  skill: ''
+  created_at: '2026-09-18T00:25:59.353920+00:00'
+  tags:
+  - paper
+  - coverage
+  - calibration
+  - round8
+- id: art_20260918_4b3dc7
+  name: coverage_calibration_v2_notes
+  type: data
+  description: 'Companion write-up for coverage_calibration_v2.json (Round 8): verdict,
+    the informative/trivially-guaranteed split, per-cell coverage with two-sided 95%
+    Clopper-Pearson intervals, and the deviations recorded for the run.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X1/data/coverage_calibration_v2.md
+  content_sha256: 7cb28ef9022730d21b99545fb39126dcd7c957fd9cd873333bca244e28273e08
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X1
+  skill: ''
+  created_at: '2026-09-18T00:44:41.507624+00:00'
+  tags:
+  - paper
+  - coverage
+  - calibration
+  - round8
+  - notes
+- id: art_20260918_9821af
+  name: coverage_calibration_ladder_notes
+  type: data
+  description: 'Companion write-up for coverage_calibration_ladder.json (Round 8):
+    the block-size stress ladder summary supporting the dependent-arm cells cited
+    in Sec 5.5.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/coverage_calibration_ladder.md
+  content_sha256: bf82aa240795ebdbab1cdd6170c86552daa20433a6a363103be7c7e9b88bb55f
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X1
+  skill: ''
+  created_at: '2026-09-18T00:44:42.116225+00:00'
+  tags:
+  - paper
+  - coverage
+  - calibration
+  - round8
+  - notes
+- id: art_20260918_fd1598
+  name: openset_floor_lp_optimal_weighting
+  type: report
+  description: LP-optimal weighting construction for the open-set floor (0.36307 at
+    M=46 on the 990-pair input), with its derivation, the equal-weight recovery of
+    the uniform bound, and the 200-configuration validity check. Registered so the
+    comparison floor cited in Sec 3.1 is retrievable.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X1/report/openset_floor_optimal_weighting.md
+  content_sha256: 9d16e6ad93299c5ae3b9816f851b9830fd3a1dbb6db20e6ec442026c8884f644
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X1
+  skill: ''
+  created_at: '2026-09-18T01:33:00.715772+00:00'
+  tags:
+  - paper
+  - openset-floor
+  - construction
+  - round9
+- id: art_20260918_f27ba9
+  name: openset_floor_four_constructions
+  type: report
+  description: 'Four-construction comparison for the open-set floor: uniform 0.18577,
+    LP 0.36307, mixture+metric 0.36347, exclude-U 0.37155, each as a fraction of the
+    measured 0.7366. Includes the ordered/unordered normalisation rule and the verification
+    counts. Registered so the mixture and exclude-U values cited in Sec 3.1 are retrievable.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/X1/report/openset_floor_four_constructions.md
+  content_sha256: 0ace3222da0fad188b9382dcbf97121c5513344db6f098672d29022e3cbe003b
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: X1
+  skill: ''
+  created_at: '2026-09-18T01:33:04.631040+00:00'
+  tags:
+  - paper
+  - openset-floor
+  - construction
+  - round9
+- id: art_20260918_4ec36d
+  name: EIBO-usenix27-draft.pdf
+  type: paper
+  description: Sent to user via upload_file
+  content_sha256: 36475efe41db041d2c605ef9cb7a0c85c079a94e9ebc35dd62ed278986f2f0ce
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/paper/main.pdf
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: upload_file
+  created_at: '2026-09-18T03:52:10.028391+00:00'
+  tags:
+  - sent-to-user
+- id: art_20260918_a7ff6c
+  content_sha256: 440fd68817a0d6fb0d8a29a61703d367bc97460144a55f69a3205095e3c1fef9
+  name: 'finite_sample_lower_bound_probe.md — finite-sample TV lower-bound probe (D165:
+    joint verdict (b))'
+  type: report
+  description: 'Decision memo for the finite-sample TV lower-bound probe (research
+    line, CPU-only, non-experimental). Concludes that an assumption-free finite-sample
+    lower endpoint DOES exist and is valid: a held-out witness-event bound, TV(P,Q)
+    >= Q(A) - P(A) using one-sided Clopper-Pearson limits on a disjoint held-out split,
+    with the asymptotic step REMOVED rather than replaced since CP is exact. Its headline
+    grid, however, tests only the single-point-mass deviation shape (P uniform, Q=(1-delta)P+delta*e_0)
+    — the best case for a one-witness bound — and the memo''s own verdict line states
+    (a). Per D165 the JOINT VERDICT IS (b), not (a): at the real, spread deviation
+    structure the bound captures only ~5-17% of true TV, so the paper''s admitted
+    asymmetry is not removable at this rung. The memo''s headline value 0.1330 DOES
+    NOT REPRODUCE (three independent derivations give 0.171/0.1723/0.1716) and MUST
+    NOT be recorded as a result; the adopted value is 0.1723 with its construction
+    spelled out. Preserved unchanged as the Producer''s own conclusion, including
+    its (a) verdict line, so the D165 discrepancy remains visible rather than being
+    rewritten.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/finite_sample_lower_bound_probe/report/finite_sample_lower_bound_probe.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: finite_sample_lower_bound_probe
+  skill: ''
+  created_at: '2026-09-18T08:39:28.570894+00:00'
+  tags:
+  - research-line
+  - finite-sample
+  - tv-lower-bound
+  - D165
+  - verdict-b
+  - cpu-only
+- id: art_20260918_c16da7
+  content_sha256: db7cd183dcf47cf959078760d4109f2cf93330409a6d9caa24ca6c52dfc61bce
+  name: finite_sample_lower_bound_addendum.md — spread-structure grid, 0.1330/0.1723
+    reconciliation, real-pair concentration
+  type: report
+  description: 'Addendum to the finite-sample TV lower-bound probe (research line,
+    CPU-only, non-experimental). Answers three tasks. TASK 3 (decisive, real pairs):
+    over the 990 real service pairs (M=1, k=5) from q1_absolute_dense_counts_m1_m2.json,
+    with a dense-count cross-check agreeing to 2.22e-16 — per-pair concentration of
+    the L1 distance: top-1 share median 0.4009, top-2 0.6472, top-4 0.8605, top-8
+    0.9677; median effective support 3.8556 of 32 symbols. Its verdict line says CONCENTRATED
+    with implication (a). TASK 1 (structure grid at fixed true TV 0.19375, ratio =
+    bound/trueTV): k=1 -> 0.8894; k=2 -> 0.4051; k=4 -> 0.1689; k=8 -> 0.0522; k=16
+    -> -0.0059 (vacuous); k=32 -> 0.0367. Its k=1 control does NOT agree with the
+    probe memo (0.1723 vs 0.1330). TASK 2 (reconciled): agreed value 0.1723, construction
+    spelled out (m=32, P uniform, Q=(1-0.20)P+0.20*e_0, true TV 0.193750, 70/30 split,
+    singleton witness selected on train by largest empirical gap, evaluated on a DISJOINT
+    held-out split, one-sided CP alpha/2=0.025 per law, 1000 replications); 0.1330
+    does not reproduce across variants. Same-data selection hole visible: invalid-rate
+    0.001 at n=2791, and 0.000/0.007/0.015 at n=100/1000/10000, rising with n. Worker
+    status is failed (transport-only, stream disconnect ~07:51) but the deliverable
+    is complete and sound; it stands on its own. NOTE: the addendum''s Task 3 statistic
+    (effective support 3.86/32) places real pairs at its own k~4 row, whose ratio
+    is 0.1689, so its two tables cross-read as (b), not the (a) its conclusion line
+    states — per D165. Preserved unchanged as the Producer''s conclusion.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/finite_sample_lower_bound_probe/report/finite_sample_lower_bound_addendum.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: finite_sample_lower_bound_probe
+  skill: ''
+  created_at: '2026-09-18T08:39:45.800647+00:00'
+  tags:
+  - research-line
+  - finite-sample
+  - spread-structure
+  - D165
+  - verdict-b
+  - cpu-only
+  - transport-failed-but-delivered
+- id: art_20260918_d34a40
+  content_sha256: f6572257c33aecf700a4ac8ca34d9b7cb60af926f3f6ad1542d4b5ac9bb8ad34
+  name: 'alphabet_penalty_scout.md — alphabet-penalty feasibility scout (verdict (c):
+    horizon inherent to method class)'
+  type: report
+  description: 'Alphabet-penalty feasibility scout (research line, CPU-only, non-experimental):
+    can the sqrt(m/n) alphabet penalty in the finite-sample TV upper certificate be
+    beaten under a DECLARED (a-priori) alphabet, per C005? VERDICT: (c) — polynomial
+    declared-alphabet dependence in the finite-sample TV/L1 bound is unavoidable up
+    to logarithmic improvements, so the short certificate horizon is INHERENT TO THE
+    ASSUMPTION-FREE METHOD CLASS, not a defect of our implementation. DECIDING BASIS:
+    Jiao-Han-Weissman 2018 (IEEE TIT, "Minimax Estimation of the L1 Distance") Thms
+    3-6 — minimax squared error S/(n log n) in the stated large-alphabet regime —
+    with the matching Omega(sqrt(S/n)) lower bound from han2015l1distribution Thm
+    2 (arbitrary S-symbol laws). CAVEAT THAT MUST TRAVEL WITH IT: "Do not claim that
+    the exact sqrt(m/n) exponent is unimprovable" — the honest claim is inherent polynomial
+    dependence, not optimality of our exponent. ONE LIVE THREAD FOUND AND NOT CLOSED:
+    the bounded-entropy route (Han-Jiao-Weissman 2015 Thms 3-4), finite-sample risk
+    controlled by H/log n, requires an APRIORI ENTROPY CLASS rather than realized
+    support (so it satisfies C005) — but H is not established for our corpus and it
+    is a risk bound, not a certificate. ADAPTIVE-PARTITION ROUTE CLOSED HONESTLY:
+    sample splitting can make a selected partition conditionally fixed, but it then
+    certifies the COARSENED partition''s TV; no complexity/approximation correction
+    with logarithmic dependence in the full declared alphabet was verified. Also records
+    that the scout EXCLUDED OUR OWN DKW CITATIONS (wei2011dkwtwo, reeve2024dkwmassart)
+    ON OBJECT-MISMATCH GROUNDS — they bound the ordered-CDF sup-norm, not the full
+    subset supremum that categorical TV requires; first time those citations were
+    explicitly ruled out of scope rather than assumed applicable. FULL VERSION WORTH
+    BUILDING: no (2-4 weeks estimated). BLOCKERS: none. Theorem statements were checked
+    in the cited papers'' full text, not abstracts (D001 discipline). No .tex opened
+    or modified. Registering as a new entry; the existing similar-named entries are
+    not merged or repointed.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/alphabet_penalty_scout/report/alphabet_penalty_scout.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: alphabet_penalty_scout
+  skill: ''
+  created_at: '2026-09-18T11:29:04.213505+00:00'
+  tags:
+  - research-line
+  - alphabet-penalty
+  - verdict-c
+  - method-class-limit
+  - cpu-only
+  - theorem-level-checked
+- id: art_20260918_07841e
+  name: EIBO-USENIX-Sec-2027-Cycle2-final.pdf
+  type: paper
+  description: Sent to user via upload_file
+  content_sha256: ffbbd430cc8db5a113fb7d95e481d6a57dbdd713d24777e330a73a3356df06e8
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/paper/main_07841e.pdf
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: upload_file
+  created_at: '2026-09-18T14:57:49.124866+00:00'
+  tags:
+  - sent-to-user
+- id: art_20260918_a73525
+  name: eth_full_mk_grid — full 20-cell (M,k) upper-bound grid, Eq(6) vs m-free side
+    by side
+  type: data
+  description: 'Full 20-cell (M,k) grid recompute of the finite-sample TV upper certificate,
+    comparing the L1/Eq(6) route against the m-free Hoeffding route. CPU-only, local
+    ledgers (artifacts/_project/data/q1_absolute_counts{,_k10,_k15,_k30}.json), zero
+    corpus access. Grid M in {1,2,4,8,16} x k in {5,10,15,30}. Convention verified:
+    all ten D166 published cells reproduce exactly (340/363 at k5 M1, 28/98 at k10
+    M1, 0/18 at k15 M1, 0/0 at k30 M1, 47/127 at k5 M2). m=(2M)^k recomputed per M;
+    rows filtered per M before computing. Pair counts per k: 990 (k=5,10), 946 (k=15),
+    820 (k=30) by construction. KEY FINDING: the m-free advantage is CONCENTRATED
+    AT M=1 and collapses by M=8. k=15 clears Eq(6)/m-free = 0/18, 0/4, 0/1, 0/0, 0/0
+    across M=1,2,4,8,16; k=30 gives 0/0 at every M. Saturation fraction (tv_hat>=0.99)
+    at k=15 runs 4%->58%->70%->75%->81%; at k=30 73%->85%->92%->96%->97%. So at M>=8
+    both routes give zero and the frontier is set by plug-in saturation identically
+    for both routes; the extended k=15 reach is an M=1 phenomenon, not a general property
+    of the route. FRAMING CONSEQUENCE: the paper must NOT imply the horizon is dissolved;
+    D166''s win is real but narrower than ''the alphabet price was the only barrier''
+    - the barrier is a function of position on the M ladder. HASH: content_sha256
+    was re-derived from these bytes by the Director on 2026-09-18 and is identical
+    for the original and this registered copy (cmp reports byte-identical; both hash
+    to the value below). Convention: per-side radius L1 = 0.5*sqrt(m/n) + 0.5*H0/sqrt(n);
+    m-free = 0.5*H0/sqrt(n); H0 = sqrt(2*ln(2/0.025)) = 2.9604. Verified against the
+    paper''s published radii at n=2791 (0.081557 L1, 0.028018 m-free).'
+  content_sha256: 522e25ff05b7ef84fe49bdc69ea6a2bd8fc50e56a7d26c7952c3f726adb89d7f
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/eth_full_mk_grid_a73525.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-18T19:26:01.841424+00:00'
+  tags:
+  - recompute
+  - full-grid
+  - M-k-grid
+  - eq6-vs-mfree
+  - cpu-only
+  - D166
+  - hash-verified
+- id: art_20260918_31cbed
+  name: eth_full_mk_grid
+  type: data
+  description: 'DUPLICATE of art_20260918_a73525 (same artifact, registered twice
+    from two Director messages). Superseded - prefer art_20260918_a73525, which carries
+    the populated content_sha256. Retained rather than deleted for audit continuity.
+    Full 20-cell (M,k) upper-bound grid recomputed from local ledgers, pair counts
+    990/990/946/820 by k, all ten D166 published cells reproducing exactly, and the
+    finding that the m-free advantage is confined to M=1 (k=15 clears 18/4/1/0/0 across
+    M=1..16, zero from M=8, saturation-caused). Grid M in {1,2,4,8,16} x k in {5,10,15,30}.
+    m=(2M)^k recomputed per M; rows filtered per M before computing. Per-side radius
+    (verified against the paper''s published radii at n=2791: 0.081557 L1, 0.028018
+    m-free): L1 = 0.5*sqrt(m/n) + 0.5*H0/sqrt(n); m-free = 0.5*H0/sqrt(n); H0 = sqrt(2
+    ln 80) = 2.960414. NOTE: a doubled form of this radius, (sqrt(m)+H0)/sqrt(n),
+    is WRONG by exactly 2.000x at n=2791 and still satisfies the M=1 anchor counts,
+    so anchors are necessary but not sufficient - the two-published-radii gate is
+    the check that catches it. HASH VERIFIED: sha256 8f434930ad491b2e3370b0518c176e06ec1e2bc7d8e597cb68a806d72013badb
+    was re-derived by the Director over ALL THREE copies of these bytes (original,
+    _a73525, _31cbed); cmp reports them byte-identical, so the hash holds for whichever
+    path an entry points at.'
+  content_sha256: 522e25ff05b7ef84fe49bdc69ea6a2bd8fc50e56a7d26c7952c3f726adb89d7f
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/eth_full_mk_grid_31cbed.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-18T19:31:57.808540+00:00'
+  tags:
+  - d166
+  - m-k-grid
+  - horizon
+- id: art_20260918_c962b4
+  name: eth_T2_T3_results — threshold sensitivity (both eps_lo conventions) + flow-count
+    planning tool
+  type: data
+  description: 'Tracks 2 and 3 combined results artifact. T2 = threshold-sensitivity
+    sweep on the lower-side ledger (q1_lower_side_full_n.json rows filtered M=1,k=5,
+    n=990), computed under BOTH eps_lo conventions and reported side by side. KEY:
+    the 335-vs-336 gap is a CONVENTION LABEL, not a discrepancy - 336 is the full-n
+    eps_lo convention (the paper''s headline) and 335 is capped; the single-pair difference
+    is the known boundary pair (21,23), capped 0.0498 fails the 0.05 gate while full-n
+    0.0588 passes. Upper-threshold sweep (eps_hi < t with lower > 0.05), capped/full-n:
+    112/113, 220/221, 335/336, 453/454, 579/580, 747/748. Lower-threshold sweep (eps_lo
+    > t with upper < 0.5), capped/full-n: 340/340, 338/339, 335/336, 312/320, 229/239,
+    125/140, 20/35. Segments at the real gate: 335 capped / 336 full-n joint, 650
+    fail-upper. FINDING: gate counts are driven almost entirely by the UPPER threshold;
+    the lower threshold is nearly inert over 0.01-0.10. ANY PUBLISHED TABLE MUST STATE
+    WHICH CONVENTION IT USES or it will not reconcile with the paper''s 336. T3 =
+    flow-count planning tool, m-free route, per-side, gate 0.5, equal-n approximation.
+    k=5/M=1 380/990 feasible (median n 285, p90 5.6e3, max 2.1e9); k=10/M=1 114/990
+    (median 1.86e3, p90 9.7e4, max 2.1e6); k=15/M=1 20/946 (median 2.35e3, max 2.2e5);
+    k=30/M=1 0/820. CAUTION WRITTEN INTO THE ARTIFACT: medians are CONDITIONAL ON
+    FEASIBILITY and the distribution is bimodal (k=5/M=1 spans 42 to 2.09e9), so a
+    median reported without its feasible fraction misleads. HASH NOTE: the sha256
+    quoted in the Director message (275aa73e...) was not independently verified by
+    the registering agent - it appears nowhere else in the tree at registration time
+    - so it must be re-derived from the file before being relied upon.'
+  content_sha256: cee50b40b7913279144c537cc632610a28c352606c0994bda5b2e62d72bc2d17
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/eth_T2_T3_results_c962b4.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-18T23:53:18.043312+00:00'
+  tags:
+  - track2
+  - track3
+  - threshold-sensitivity
+  - planning-tool
+  - convention-capped-vs-fulln
+  - hash-unverified
+- id: art_20260918_b5a5cd
+  name: eth_T2_T3_results (v2, corrected constant statement) — threshold sensitivity
+    + planning tool
+  type: data
+  description: 'UPDATED BYTES (v2) of the T2/T3 combined results artifact. Supersedes
+    the earlier registration art_20260918_c962b4, which held the pre-correction prose.
+    T2 (threshold-sensitivity, ledger q1_lower_side_full_n.json rows filtered M=1,k=5,
+    n=990): reported under BOTH eps_lo conventions. The 335-vs-336 gap is a CONVENTION
+    LABEL, not a discrepancy - 336 is the full-n eps_lo convention (the paper''s headline)
+    and 335 is capped; the one-pair difference is the boundary pair (21,23), capped
+    0.0498 fails the 0.05 gate while full-n 0.0588 passes. Upper-threshold sweep (eps_hi
+    < t, lower > 0.05) capped/full-n: 112/113, 220/221, 335/336, 453/454, 579/580,
+    747/748. Lower-threshold sweep (eps_lo > t, upper < 0.5) capped/full-n: 340/340,
+    338/339, 335/336, 312/320, 229/239, 125/140, 20/35. Segments at the real gate:
+    335 capped / 336 full-n joint, 650 fail-upper. FINDING: gate counts are driven
+    almost entirely by the UPPER threshold; the lower threshold is nearly inert over
+    0.01-0.10. CONVENTION MUST BE STATED in any published table. T3 (flow-count planning
+    tool, m-free route, per-side, gate 0.5, equal-n approximation) values UNCHANGED:
+    k=5/M=1 380/990 feasible; k=10/M=1 114/990; k=15/M=1 20/946; k=30/M=1 0/820. CORRECTED
+    FORMULA STATEMENT (the only substantive change in v2): route is eps_hi = tv_hat
+    + sqrt(2*ln(2/alpha)/n); solving at eps_hi < gate gives n > C/(gate - tv_hat)^2
+    with C = 2*ln(2/alpha) = 8.764053. The earlier prose wrote H0 = 2.9604 (which
+    is sqrt(C), the constant INSIDE the radius) as though it divided the squared slack,
+    which understates n by exactly sqrt(C) ~ 2.96x. The NUMBERS were always correct
+    and are unchanged - the algebraic identity (sqrt(C)/slack)^2 = C/slack^2 confirms
+    the implementation used the right constant. Caution carried forward: medians are
+    CONDITIONAL ON FEASIBILITY and the distribution is bimodal (k=5/M=1 spans 42 to
+    2.09e9), so a median without its feasible fraction misleads. HASH VERIFIED: content_sha256
+    below was re-derived from these bytes by the Director on 2026-09-19 and matches
+    the registered copy exactly. NOTE ON A MISLABEL THE REGISTERING AGENT CAUGHT:
+    an earlier Director instruction attached a138eb6e... to art_20260918_c962b4; that
+    was WRONG. a138eb6e... belongs to THIS entry (b5a5cd, the corrected bytes); the
+    superseded entry c962b4 holds 275aa73e... The agent verified the difference in
+    the copies themselves (b5a5cd carries the constant_definition block, c962b4 does
+    not) and declined to apply either hash. Do not tag c962b4 with the v2 hash.'
+  content_sha256: cee50b40b7913279144c537cc632610a28c352606c0994bda5b2e62d72bc2d17
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/eth_T2_T3_results_b5a5cd.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-18T23:58:18.570811+00:00'
+  tags:
+  - track2
+  - track3
+  - threshold-sensitivity
+  - planning-tool
+  - v2-supersedes-c962b4
+  - constant-corrected
+  - hash-verified
+- id: art_20260919_177723
+  name: t1_lower_side_M1
+  type: data
+  description: 'T1 M=1 control/rerun of the classifier-based (Michel) TV lower bound
+    on the packed k-prefix SYMBOL law at k=5, alphabet (2M)^k = 32 categorical cells,
+    one-hot rows - the symbol-map construction matching the published M=1 eps_lo object,
+    NOT the four-marginal 32-vector object. 990 pairs. Summary: eps_lo_median 0.5367661114520015,
+    q5 0.1412188439987076, q95 0.8946878687815538, lower_side_pairs_gt_0point05 986,
+    seconds 1170.4. ***CRITICAL PROVENANCE CAVEAT***: this run used sample_cap_per_service
+    = 20000 with EQUAL n_a = n_b = 20000 on every row, whereas the published M=1 ledger
+    (q1_lower_side_full_n.json) used FULL per-pair samples (e.g. n_a 1375270 / n_b
+    359864 on pair 0-1, cap_is_none true). So the control is a 20000-cap subsample,
+    not a full-n replica, and the comparison to the published column is capped-vs-full-n,
+    not subsample-vs-subsample. Supporting evidence that it is nonetheless matched
+    to the published CAPPED convention: the published ledger records capped_eps_lo
+    on pair (0,1) = 0.3418828087963921 (eps_lo 0.37868436739299793) and this control
+    records eps_lo 0.3486498491801904 - a 0.007 difference attributable to resampling.
+    The 986 gate count matches the published capped count.'
+  content_sha256: 8a577aeb47dce454d0b9f355e1838814446ee959f4ca78e4922a17a8c3d24d28
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/t1_lower_side_M1.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T03:27:06.075623+00:00'
+  tags:
+  - t1
+  - lower-side
+  - m-ladder
+  - d167
+  - capped-20000-not-full-n
+- id: art_20260919_b25526
+  name: t1_lower_side_M2
+  type: data
+  description: 'T1 M=2 classifier-based (Michel) TV lower bound, alphabet (2M)^k =
+    1024 categorical cells, one-hot rows, sparse, same construction as M=1. 990 pairs.
+    Summary: eps_lo_median 0.8535222796984163, q5 0.3052917290753932, q95 0.9893836170480934,
+    lower_side_pairs_gt_0point05 990, seconds 3029.3. FINDING: the lower side does
+    not collapse at finer resolution - 990/990 pairs clear the 0.05 lower gate at
+    M=2 (vs 986/990 at M=1), and the median rises 0.537 -> 0.854. The lower side stops
+    being the BINDING side: the JOINT gate at k=5/M=2 is 127/990 (12.8%) and is set
+    ENTIRELY by the upper side, matching the 127 m-free upper-bound clears already
+    in the 20-cell grid (eth_full_mk_grid.json, k=5 M=2 row). Invariant eps_lo <=
+    eps_hi: 990/990 rows, zero violations. CAVEAT: same 20000-per-service cap as the
+    M=1 control (equal n_a = n_b = 20000 on every row), so the M=2 column is internally
+    comparable to the M=1 control but NOT directly comparable to the published full-n
+    M=1 column.'
+  content_sha256: 26d471e742487093ed34f56bb51b1b41ce388ff5c4d415f1add3f3b924c0653b
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/t1_lower_side_M2.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T03:27:11.820887+00:00'
+  tags:
+  - t1
+  - lower-side
+  - m-ladder
+  - d167
+  - joint-gate-127
+  - zero-invariant-violations
+- id: art_20260919_45d2f8
+  name: t1_pilot
+  type: data
+  description: 'T1 pilot: throughput and control record, run BEFORE the full 990-pair
+    job to obtain a measured rate rather than an invented ETA. Establishes the 45-service
+    gate and the 32-symbol alphabet; rung counts cached. Records that the M=1 object
+    is the packed k-prefix SYMBOL law at k=5 over the a-priori-fixed categorical alphabet
+    (2M)^k, one-hot rows, i.e. the symbol-map construction that produced the published
+    M=1 eps_lo (median 0.534945) and NOT the four-marginal 32-vector object. CAUTION
+    RECORDED IN THE FILE: the pilot pairs are the first 12 of itertools.combinations
+    over the 45 gated services, NOT a random sample, so any claim rests on the full
+    run. Pilot medians: 0.3924 at width 32, 0.568 at width 1024 (12 pairs only). sample_cap_per_service
+    20000. Also records that M=4 cost was PROJECTED, not measured.'
+  content_sha256: 01e39e3e6aa99e076354b8eafe19684a1fe97b719334e7e51c33e0abdbc3e0b9
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/t1_pilot.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T03:27:17.194692+00:00'
+  tags:
+  - t1
+  - lower-side
+  - m-ladder
+  - d167
+  - pilot
+  - pilot-pairs-not-random
+- id: art_20260919_760c69
+  name: 't1_pilot (updated: DO_NOT_COMPARE field added)'
+  type: data
+  description: 'UPDATED BYTES of the T1 pilot record. Supersedes art_20260919_45d2f8,
+    which held the pre-update copy. CHANGE: the file now carries a machine-readable
+    DO_NOT_COMPARE field stating that the pilot medians are 12-PAIR PILOT values on
+    the first 12 of itertools.combinations over the 45 gated services - NOT a random
+    sample, NOT the full-990 result - and that placing pilot[name].M1.eps_lo_median
+    beside the full-run M=2 median mixes a pilot with a full run and understates the
+    M=1 value. It names the correct like-for-like contrast: M=1 full-run median 0.53677
+    vs M=2 full-run median 0.85352, from t1_lower_side_M1.json and t1_lower_side_M2.json.
+    Retains the original caution (pilot pairs not random; M=4 cost projected not measured).
+    Establishes the 45-service gate (of 53 services) and the 32-symbol alphabet (symbol_index_max
+    31); rung counts cached; total_masked_flows 9258925. sample_cap_per_service 20000,
+    so the pilot shares the capped convention of the M=1/M=2 legs. CONTEXT: this field
+    was added because the pre-update copy''s warning lived only in prose, and a prose
+    caution did not prevent a 12-pair pilot median being reported alongside a 990-pair
+    full median.'
+  content_sha256_retired: d9c670399adbb0fdf5d84400866a1b22389b6595f6fed6b603839530d9d8a778
+  path: null
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T03:34:03.629275+00:00'
+  tags:
+  - t1
+  - lower-side
+  - m-ladder
+  - d167
+  - pilot
+  - do-not-compare
+  - supersedes-45d2f8
+  - hash-unverified
+  note: RETIRED 2026-09-19 - duplicate registration of the pilot artifact. It named
+    a copy (data/t1_pilot_760c69.json) holding a PRE-execution_environment revision
+    of the same content now canonical at intermediate/t1_pilot.json (entry art_20260919_45d2f8).
+    The stale copy was removed; this entry is retained for audit continuity and must
+    not be cited.
+  retirement_note: 'BROKEN POINTER, annotated 2026-09-20. The named file artifacts/_project/data/t1_pilot_760c69.json
+    does not exist anywhere in the tree, and the sha d9c670399adbb0fd... matches no
+    file. The CONTENT is not lost: the DO_NOT_COMPARE field this entry describes is
+    present and machine-readable at artifacts/_project/intermediate/t1_pilot.json,
+    which is the live path. The protection this entry exists to enforce (never place
+    a 12-pair pilot median beside a 990-pair full-run median; the M165 class) therefore
+    still holds at the live path. Retained rather than deleted so the supersession
+    chain stays readable; cite intermediate/t1_pilot.json, not this path.'
+- id: art_20260919_fa717f
+  name: t1c_lower_side_M1_uncapped
+  type: data
+  description: 'T1c: the UNCAPPED M=1 lower side at k=5, computed from the stored
+    rung histogram (no corpus read; width 32 needs only ~0.72 GB). This is the artifact
+    D168 rests on - it establishes that the paper''s own UNCAPPED convention (full
+    per-service flow counts, no sample cap) is reproduced by our lower-side pipeline.
+    CONVENTION: UNCAPPED, sample_cap_per_service null, cap_is_none true. 990 pairs.
+    RESULTS: median eps_lo 0.5554959462078262; 987/990 pairs clearing the 0.05 lower
+    gate; m-free upper; joint gate 360; invariant violations 0. AGREEMENT WITH THE
+    PUBLISHED UNCAPPED M=1 COLUMN: published median 0.55480 and gate 986; this run
+    gives 0.55550 and 987; n_a identical in 990/990 pairs; median per-pair difference
+    0.004. The relationship is AGREES WITHIN RESAMPLING NOISE - NOT a bit-identical
+    reproduction, and it must not be described as one. Carries a `falsifiers` field.
+    SIGNIFICANCE: this is the M=1 anchor for the T1 ladder, and it is the uncapped
+    counterpart of the capped symbol-map control (art_20260919_177723, median 0.53677),
+    which was 0.5368 capped vs 0.5555 uncapped - so the convention choice raises the
+    M=1 median, and uncapped can only RAISE lower values, which is why the T1 conclusion
+    (joint == upper-only, 127 at M=2, 98 at k=10) is convention-invariant in substance.'
+  content_sha256: be60d3d189d67ac66d16674bb9d89e7d901c50f3309ee4f6d7fd317d7c418498
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/t1c_lower_side_M1_uncapped.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T13:42:48.252562+00:00'
+  tags:
+  - t1c
+  - lower-side
+  - uncapped
+  - m1
+  - d168
+- id: art_20260919_17d7d3
+  name: Track 5 Arm A block bootstrap
+  type: data
+  description: 1,000-replicate dependence-block bootstrap coverage calibration at
+    n=60000, B=64.
+  content_sha256: b7bd97063a694c80d35147e1ada07a00abb573f01f1d142848936e14e62a32c8
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_armA_block_bootstrap.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T20:05:48.013315+00:00'
+  tags:
+  - track5
+  - coverage
+  - bootstrap
+  - cpu
+- id: art_20260919_b84113
+  name: Track 5 Arm B sandwich
+  type: data
+  description: 1,000-replicate cluster-robust sandwich coverage calibration at n=60000,
+    B=64.
+  content_sha256: 741b321095e0aab0e7ca3a3a62f7412757a33588b5eb37caeb5ab83e4a221965
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_armB_sandwich.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T20:05:48.869846+00:00'
+  tags:
+  - track5
+  - coverage
+  - sandwich
+  - cpu
+- id: art_20260919_fc043c
+  name: Track 5 Arm C LOBO
+  type: data
+  description: 1,000-replicate leave-one-block-out Studentized coverage calibration
+    at n=60000, B=64.
+  content_sha256: 775ceede475a2f19f09ef398afe29632b02a4d8495b77270022716c013923c41
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_armC_lobo.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T20:05:49.910759+00:00'
+  tags:
+  - track5
+  - coverage
+  - lobo
+  - cpu
+- id: art_20260919_0d6e56
+  name: Track 5 summary
+  type: report
+  description: Side-by-side Track 5 coverage results, independently recomputed power
+    requirement, falsifiers, and JSON content hashes.
+  content_sha256: ae3e169e1483de38f52303bb1d75da231aaa0bac215e384cade1f87c4be28bf6
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/report/track5_summary.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T20:05:50.807180+00:00'
+  tags:
+  - track5
+  - coverage
+  - summary
+  - cpu
+- id: art_20260919_ca0519
+  name: Track 5 between-block diagnosis
+  type: intermediate
+  description: Direct 200-draw CPU diagnosis of block-level between/within variance
+    and Arm B/C implied standard deviations. Arm D was conditionally not run.
+  content_sha256: d5ae2602dd215ed9a2719273d3ea72ba27a0711999e90ee0194bc2202d181145
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/track5_diagnosis_between_block.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T20:36:58.878920+00:00'
+  tags:
+  - track5
+  - diagnosis
+  - cpu
+  - negative-result
+- id: art_20260919_73eefc
+  name: Track 5b summary
+  type: report
+  description: Concise Step 1 diagnosis report and conditional Arm D decision for
+    Track 5.
+  content_sha256: 84eb0ccd4bfb9a89d36385c02a4eca07ac90a4eccdf7ce06b83036e0de7073e0
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/report/track5b_summary.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T20:36:59.739917+00:00'
+  tags:
+  - track5
+  - summary
+  - negative-result
+- id: art_20260919_555351
+  name: Track 5 between-block diagnosis runner
+  type: intermediate
+  description: Tracked companion runner that reuses the existing Track 5 runner and
+    coverage harness for direct diagnosis and conditional Arm D execution.
+  content_sha256: 8dce408856d3d4406b83a675df277b06fd1b95b8abc60448e0f6caa47f4ea203
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/track5_between_block_diagnosis_555351.py
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T20:37:00.593986+00:00'
+  tags:
+  - track5
+  - runner
+  - reproducibility
+- id: art_20260919_30eeea
+  name: Track 5b summary corrected
+  type: report
+  description: Corrected concise Step 1 diagnosis report and conditional Arm D decision
+    for Track 5; observed factor label distinguishes B/C implied SD from the i.i.d.
+    confidence radius.
+  content_sha256: 84eb0ccd4bfb9a89d36385c02a4eca07ac90a4eccdf7ce06b83036e0de7073e0
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/report/track5b_summary_30eeea.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T20:37:48.607459+00:00'
+  tags:
+  - track5
+  - summary
+  - negative-result
+  - corrected
+- id: art_20260919_df25a3
+  name: Track 5 between-block diagnosis runner corrected
+  type: intermediate
+  description: Corrected tracked companion runner for direct diagnosis and conditional
+    Arm D execution; preserves the distinction between confidence radius and empirical
+    standard deviation.
+  content_sha256: aa5f5b48dde036c116f775c7c8d120db95d170bb6f3a78fb0fa2483aa18c910c
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/track5_between_block_diagnosis_df25a3.py
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T20:37:49.524572+00:00'
+  tags:
+  - track5
+  - runner
+  - reproducibility
+  - corrected
+- id: art_20260919_8576b4
+  name: lower_side_environment
+  type: data
+  description: 'Local environment and artifact metadata audit for the classifier-based
+    lower-side bound: installed versions, resolved LogisticRegression attributes,
+    diagnostics exposure, and sklearn-version coverage.'
+  content_sha256: dad4db9a6694991ca7d7fe1da75a76ff4f24cbe4f91b32f5821995bab54dda8b
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/lower_side_environment.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T20:59:34.863740+00:00'
+  tags:
+  - environment
+  - lower-side
+  - sklearn
+  - reproducibility
+- id: art_20260919_db0d6f
+  name: lower_side_environment_111.json
+  type: data
+  description: Read-only environment capture for the canonical lower-side ledger execution
+    host, including interpreter versions, sklearn dist-info mtimes, host identity,
+    ledger mtime, and coexistence of other sklearn installs.
+  content_sha256: b55ca876a62a0cac495b7609117a3d4f15c596517928c344662b3f9a081da945
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/lower_side_environment_111.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T21:13:51.470140+00:00'
+  tags:
+  - environment
+  - server-111
+  - lower-side
+  - sklearn
+  - reproducibility
+- id: art_20260919_30a7b4
+  name: t1_runner_provenance_registration
+  type: data
+  description: Registration manifest for the three T1 provenance runner revisions,
+    including the real pilot preservation-guard demonstration, observed execution_environment
+    key counts, and runner SHA-256 hashes.
+  content_sha256: a34545bc667ab4a11d434cbc758071997509fb5b86d35e9ccd916638d3f331ef
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/t1_runner_provenance_registration.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-19T21:30:47.990844+00:00'
+  tags:
+  - t1
+  - provenance
+  - guard
+  - sklearn-versioning
+- id: art_20260920_0e4cdb
+  name: track5_skewness_n5000
+  type: data
+  description: 'Track 5 signed-deviation skewness at n=5000, the well-powered measurement
+    that closes the Track 5 line. MEASURED (n=5000 outer replicates, seed 20260919,
+    n=60000, B=64, concentration 0.1, true TV 0.4): sd_D 0.016078662416248272, mean_D
+    0.0024295366666666437, skewness_D -0.00889332930149822 (g1 = m3/m2**1.5, 1/n central
+    moments), se_skewness 0.0346306299062346, CI95 [-0.07676936391771803, 0.05898270531472159]
+    CONTAINING ZERO, bootstrap CI95 [-0.07163561421837167, 0.05398868734350119] also
+    containing zero, z -0.25680529997801577, falsifier_fired true. RESULT: the proposition
+    that D = tv_hat - TRUE_TV is negatively skewed is NOT supported; the signed distribution
+    is essentially symmetric at this power, so a symmetric and a one-sided radius
+    coincide and the two-sided form was never the binding issue. The one-sided radius
+    arm is therefore pointless and the line closes on a well-powered negative. CONTROL
+    CORRECTION (recorded in the artifact): sd_control_ok was initially false because
+    the pre-registered band [0.0168,0.0171] was mis-specified - the defect is that
+    it did NOT SCALE with n, not that it was narrow. SE(sd)=sd/sqrt(2(n-1)) makes
+    the identical numbers a different test at every replicate count (~0.35 SE wide
+    at n=5000 but ~0.09 SE at n=200). Correct band [0.015275, 0.018669]; the observed
+    value is inside; the superseded band is retained as sd_control_band_as_briefed.
+    The one real discriminating success of the control is EXCLUDING the known-wrong
+    no-inner-draws stream value 0.0151017711, which falls below 0.015275 - so it is
+    ''excludes the known-wrong stream'', not a tight validation. STREAM CONFIRMED
+    by an independent 5000-replicate reproduction of the same loop and seed agreeing
+    on sd, mean and skewness to every printed digit; no fork exists. TRAJECTORY (recorded,
+    non-monotone): sd 0.0169715358 (n=200) -> 0.0167711400 (500) -> 0.0162722914 (1000)
+    -> 0.0161860482 (2000) -> 0.0159308502 (3000) -> 0.0160786624 (5000), dipping
+    at n=3000 - so NO single window is a checkpoint at any n, which is the primary
+    reason to anchor a control to a convergent estimate with an n-scaled band rather
+    than to a prefix. Skew sequence -0.139556 -> -0.103819 -> 0.055349 -> 0.036285
+    -> 0.025623 -> -0.008893 CROSSES ZERO TWICE, making the sign non-resolvable concrete
+    as a sequence. canonical_sd_D 0.0160787 (well-powered) with the n=200 value 0.0169715
+    recorded alongside, 1.03 SE high. lengths_construction_all_identical: all three
+    producers use [64]*937 + [32]; an earlier agent claim of a differing construction
+    is retracted. CLAIM BOUNDARY: modelled block law at this design only, never real
+    traffic.'
+  content_sha256: 6558da3814befb13c9d86105b973b2f5e528d9c921fd125fdd800492db329ee9
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_skewness_n5000.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:01:28.504844+00:00'
+  tags:
+  - track5
+  - skewness
+  - signed-deviation
+  - n5000
+  - well-powered-negative
+  - stream-confirmed
+  - control-band-corrected
+  - excludes-known-wrong-stream
+- id: art_20260920_e3fb4b
+  name: track5_skewness_n5000.py (producer)
+  type: data
+  description: 'Track 5 family producer: the runner that computed the n=5000 signed-deviation
+    skewness measurement, including the reproduction of the diagnosis-of-record loop
+    order (shared Generator, A draw, B draw, then 32 inner multinomial redraw pairs
+    consumed per outer replicate). Registered because a result should be traceable
+    to its producer (C033). The producer was previously unregistered while two suffixed
+    copies of a different diagnosis script were - which is backwards; the plain-named
+    file is the one a reader looks for.'
+  content_sha256: 0ca2f02d14c1e0c44eb2835a663a4c06876d12cf3f65fb856782ec8b63aef0b7
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_skewness_n5000.py
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:01:32.681261+00:00'
+  tags:
+  - track5
+  - producer
+  - runner
+  - skewness
+- id: art_20260920_07bb52
+  name: track5_skewness_n5000 (markdown summary)
+  type: report
+  description: 'Track 5 family: the n=5000 skewness summary in markdown form. Companion
+    to track5_skewness_n5000.json. Records the measured statistics (sd_D 0.0160786624,
+    mean_D 0.0024295367, skewness_D -0.0088933, CI containing zero, falsifier fired),
+    the corrected stream-control band PASSED under [0.015275, 0.018669], the non-monotone
+    sd trajectory across n=200/500/1000/2000/3000/5000, and the skew sequence crossing
+    zero twice. Claim boundary: modelled block law at this design only.'
+  content_sha256: 543f083a2a0563d55601dab77b5cbe6ad17d3539eabde23ab9fa9b7cf4dda6bb
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/report/track5_skewness_n5000.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:02:03.843871+00:00'
+  tags:
+  - track5
+  - skewness
+  - summary
+  - n5000
+- id: art_20260920_5beddf
+  name: track5_diagnosis_between_block
+  type: data
+  description: 'Track 5b: the between-block vs within-block variance diagnosis that
+    preceded the conditional Arm D. Measures mean between-block variance 0.0264282997,
+    mean conditional within-block variance 7.74215125e-05, empirical sd of tv_hat
+    0.0169715358, and each arm''s implied sd against it: Arm B 0.0169826453 (ratio
+    1.00065), Arm C 0.0169719990 (ratio 1.00003). VERDICT: neither a wrong denominator
+    nor an absent between-block term is supported, so Arm D was NOT run (the gate
+    fired negative). Also records that the i.i.d. reference radius 0.0351798518 is
+    a CONFIDENCE radius, 2.07x the empirical SD, not a standard error. Registered
+    because this is the artifact backing a decision and it was previously unregistered.'
+  content_sha256: d5ae2602dd215ed9a2719273d3ea72ba27a0711999e90ee0194bc2202d181145
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_diagnosis_between_block.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:02:08.833765+00:00'
+  tags:
+  - track5
+  - diagnosis
+  - between-block
+  - arm-d-not-run
+  - design-check
+- id: art_20260920_f5c06b
+  name: track5_armE_design (radii void; skewness superseded)
+  type: data
+  description: 'Arm E phase 1 (kept, labelled, radii discarded): the signed-deviation
+    design check that measured skewness and compared candidate radii. Report as a
+    DISTRIBUTION DIAGNOSTIC ONLY - the radii are pooled-quantile values that use TRUE_TV
+    and are therefore ORACLE quantities whose coverage is near-target by construction,
+    never an achievable result. Also void as a radius comparison: the comparator r_sym
+    was mixed-form (Arm A is a genuine |D| @ 0.975 quantile while Arms B and C are
+    z/t x SE) and the 200-draw design''s quantile noise (~9.2% relative error) exceeded
+    the 8.2% gap under test. The skewness value here (-0.3696) is on a stream that
+    omitted the generator''s inner draws and is NOT a property of the law - superseded
+    by track5_skewness_n5000 at -0.0088933. Retained for the record of the design
+    check.'
+  content_sha256: b46c2cd17a75ade7ec4ac2928486743fe57754326f3b6a6a062a3d168326ca2b
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_armE_design.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:02:14.298791+00:00'
+  tags:
+  - track5
+  - arm-e
+  - design-check
+  - oracle-radii-void
+  - skewness-superseded
+- id: art_20260920_637e76
+  name: track5_armE_design (markdown)
+  type: report
+  description: 'Arm E phase 1 markdown companion. Same caveats as the JSON: radii
+    are oracle quantities (pooled quantiles using TRUE_TV) and void as an implementable
+    comparison; the skewness value is on a forked stream and superseded by track5_skewness_n5000.
+    Kept for the record of the design check and the three flags it produced (the literal
+    ''95th percentile'' points the wrong way; a pooled-quantile radius is near-target
+    by construction; the 200-draw noise floor exceeded the gap under test).'
+  content_sha256: 42f4a4182aca6e5a80d8b1ba806fb173ce2bb4820442995b9a63e4191b82c3f9
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/report/track5_armE_design.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:02:18.126207+00:00'
+  tags:
+  - track5
+  - arm-e
+  - design-check
+- id: art_20260920_4364ea
+  name: track5_variance_radius.py (producer)
+  type: data
+  description: 'Track 5 family producer: the runner that computed the dependence-aware
+    radii for arms A/B/C and the Track 5 coverage calibration at n=60000. Registered
+    because a result should be traceable to its producer (C033). Note the arms'' radius
+    forms are NOT uniform: Arm A is a genuine |D| @ 0.975 quantile (np.quantile(|boot_tv
+    - tv_hat|, 1-ALPHA_UPPER)) while Arms B and C are z(0.975) x SE and t(0.975) x
+    SE respectively - so there is no single ''the symmetric radius'' and no single
+    valid joint comparator.'
+  content_sha256: d50d15a30247ddd32903d94dd538121787088c70bfcbb3ce72fdaca9aeb36065
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_variance_radius.py
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:03:20.571331+00:00'
+  tags:
+  - track5
+  - producer
+  - runner
+  - arms-abc
+- id: art_20260920_5a4d8f
+  name: track5_between_block_diagnosis.py (producer)
+  type: data
+  description: 'Track 5b producer: the runner that measured the between-block vs within-block
+    variance decomposition and ran the conditional Arm D gate. Registered as the plain-named
+    original because only two SUFFIXED copies (_555351, _df25a3) were registered before,
+    which is backwards - the plain-named file is the one a reader looks for and the
+    one the suffixed copies derive from. Reproduces the diagnosis-of-record stream
+    including the 32 inner multinomial redraw pairs per outer replicate that consume
+    the shared generator''s state.'
+  content_sha256: aa5f5b48dde036c116f775c7c8d120db95d170bb6f3a78fb0fa2483aa18c910c
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_between_block_diagnosis.py
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:03:24.942909+00:00'
+  tags:
+  - track5
+  - producer
+  - runner
+  - diagnosis
+  - between-block
+- id: art_20260920_d54add
+  name: track5_summary
+  type: report
+  description: 'Track 5 summary: side-by-side coverage results for the i.i.d. reference
+    and arms A/B/C at the fixed design (n=60000, B=64, concentration 0.1, true TV
+    0.4, 1000 replicates), with falsifiers and JSON content hashes. RESULT: Arm A
+    (block bootstrap) clears nominal by OVER-covering (0.9940, CP lower 0.98699);
+    Arms B (sandwich) and C (LOBO) do not (0.9780, CP lower 0.96688) but recover the
+    empirical SD to within 0.4% (ratios 1.00065 / 1.00003), so their slight under-coverage
+    is against a nominal 0.975 the radius was never built to hit - the i.i.d. reference
+    targets Phi(2.0729) = 0.9809 under the one-sided criterion. CLAIM BOUNDARY: modelled
+    block law at this design only, never ''coverage holds on real traffic''.'
+  content_sha256: ae3e169e1483de38f52303bb1d75da231aaa0bac215e384cade1f87c4be28bf6
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/report/track5_summary_d54add.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:03:29.815954+00:00'
+  tags:
+  - track5
+  - summary
+  - coverage
+  - arms-abc
+  - split-result
+  retirement_note: REDUNDANT DUPLICATE, retired 2026-09-20. Byte-identical to the
+    corrected track5_summary at _project/report/track5_summary.md (sha ae3e169e1483de38...),
+    which art_20260919_0d6e56 already binds. Created when this same content was registered
+    a second time; the file on disk is retained, only the entry is superseded. Cite
+    the 0d6e56 entry for the Track 5 summary.
+- id: art_20260920_500feb
+  name: track5_skewness_prefixes.py (producer)
+  type: data
+  description: Single-pass producer for the Track 5 signed-deviation sd/skew prefix
+    series. It draws A, draws B, then consumes 32 inner rng.multinomial(lengths, theta)
+    pairs per outer replicate on one shared generator. Its output was verified against
+    a pre-registered control of twelve values (six sd, six skew) with zero mismatches.
+  content_sha256: db2dedec2265f37f8e66094ae46df0b94b0227d06ad9aff3a843f1187f467b05
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_skewness_prefixes.py
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:54:50.950242+00:00'
+  tags:
+  - track5
+  - producer
+  - runner
+  - prefix-series
+- id: art_20260920_7376cc
+  name: track5_skewness_prefixes_D
+  type: data
+  description: Track 5 raw 5,000-element signed-deviation stream D_i = tv_hat_i -
+    TRUE_TV, with the matching design, explicit [64]*937 + [32] lengths vector, and
+    the exact Python/package environment used by the single permitted recovery run.
+    The stream passed the producer's pre-registered six-sd/six-skew control with zero
+    mismatches.
+  content_sha256: d52f58aaf63bfc9d3de3b8e73ea69fa7800e7dad551649df8dcd1830feec622e
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_skewness_prefixes_D.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T00:56:21.546800+00:00'
+  tags:
+  - track5
+  - prefix-series
+  - raw-deviations
+  - producer-conditions
+- id: art_20260920_a6e233
+  name: track5_skewness_D_5000
+  type: data
+  description: CANONICAL 5,000-element signed-deviation stream D_i = tv_hat_i - TRUE_TV
+    for the Track 5 skewness measurement (design n=60000, B=64, concentration 0.1,
+    true TV 0.4, seed 20260919). Recovered from the original correct-loop run and
+    is the stream that produced the twelve control values (six sd, six skew), verified
+    by reproducing all twelve from it. An independent re-run reproduced it BIT-IDENTICALLY,
+    with max absolute difference 0.000e+00 across all 5,000 values. The equivalent
+    contents are also available as track5_skewness_prefixes_D.json (art_20260920_7376cc),
+    retained as the CONFIRMING reproduction, not as a duplicate. This note tells readers
+    comparing the two artifacts' hashes that the contents match rather than leaving
+    them to discover it.
+  content_sha256: 2445c86671dc8236f6f81da4def50631f46b005b3eedb72448c859b7008faf88
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_skewness_D_5000.npy
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T01:02:33.598875+00:00'
+  tags:
+  - track5
+  - prefix-series
+  - raw-deviations
+  - canonical-stream
+- id: art_20260920_69abb9
+  name: sklearn_solver_probe_111
+  type: data
+  description: 'Read-only environment probe on the host that produced the canonical
+    lower-side ledgers (server 111, interpreter /root/miniconda3/bin/python3). Records
+    sklearn 1.9.0 / numpy 2.3.2 / scipy 1.18.1 and the classifier''s solver (lbfgs)
+    and l1_ratio (0.0). NOTE: the file records penalty as the sentinel string ''deprecated''
+    - a sentinel is not a regularisation type. The EFFECTIVE penalty was established
+    BY MEASUREMENT, not inference: fitting the bare sentinel and fitting an explicit
+    penalty=''l2'' on the same data gives BIT-IDENTICAL coefficients (max abs diff
+    0.0), so with l1_ratio=0.0 the effective penalty is l2. The estimator ATTRIBUTE
+    retains the sentinel after fit because fit() assigns the resolution to a local
+    variable and never writes it back to self.penalty (zero `self.penalty =` assignments
+    in fit()), so reading the attribute - before or after fitting - cannot answer
+    this question. Pre-fit and post-fit attributes agree; no deprecation warning was
+    emitted on this host (a bare sentinel emits none; writing penalty=''l2'' explicitly
+    is what warns). All resolution paths point under /root/miniconda3/lib/python3.12/site-packages,
+    confirming the miniconda install answered rather than either venv on that host.
+    Evidence for constraint C052''s wording correction and for the finding that sklearn
+    1.9.0 and 1.9.1 resolve the classifier identically (no solver/penalty mechanism
+    explains the ledger generation split; cause unexplained). The coefficients used
+    here were measured on the local container (sklearn 1.9.1), where the same sentinel->l2
+    resolution applies.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/sklearn_solver_probe_20260920.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T06:58:17.247827+00:00'
+  tags:
+  - provenance
+  - environment
+  - sklearn
+  - c052
+  content_sha256: b665dc3d4b45f715d4cf1290374b4425b34265b0cad18caaf4f04f93bd140767
+- id: art_20260920_7f5f57
+  name: sklearn_solver_probe_20260920.py (producer)
+  type: data
+  description: 'Producer script for the sklearn solver/penalty environment probe (sklearn_solver_probe_20260920.py).
+    Fits sklearn.linear_model.LogisticRegression(max_iter=1000, random_state=0) with
+    NO solver and NO penalty argument on an 8-row 2-class toy array, then reads solver
+    / penalty / l1_ratio off the FITTED estimator, wrapping construction and fit in
+    warnings.catch_warnings(record=True) with simplefilter(''always'') so any deprecation
+    text is captured verbatim. Registered because a result should be traceable to
+    its producer (C033) - registering only the output JSON leaves the script unregistered,
+    the same backwards ordering already corrected for the Track 5 producer and the
+    recovered D array. Output: sklearn_solver_probe_20260920.json. NOTE: the file
+    is not itself the measurement; it is the recipe that produced it on server 111''s
+    canonical interpreter.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/sklearn_solver_probe_20260920.py
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T07:04:29.887805+00:00'
+  tags:
+  - provenance
+  - environment
+  - sklearn
+  - producer
+  - c052
+  content_sha256: b141e33b0780229f41ef7c26f4d605de005c255ab4585a1c0b5a6b3bbe835058
+- id: art_20260920_e84e87
+  name: lower_side_classifier_environment_canonical_111
+  type: data
+  description: 'Environment and classifier-resolution record for the canonical 2026-09-13
+    lower-side runs on server 111: sklearn 1.9.0, numpy 2.3.2, scipy 1.18.1, default
+    solver lbfgs, estimator penalty attribute "deprecated" (sentinel) with l1_ratio
+    0.0 and effective penalty l2 verified by coefficient equivalence (max abs diff
+    0.0). Sibling record: describes server 111 and leaves the hash-cited ledger and
+    the local-container execution_environment dicts untouched. Asserts no mechanism
+    for the cross-generation ledger split. PATH NOTE (2026-09-20): the router appended
+    an _e84e87 suffix on collision, leaving two byte-identical files. This entry was
+    repointed to the UNSUFFIXED canonical path lower_side_classifier_environment_canonical_111.json;
+    the suffixed copy is a redundant duplicate of the same bytes (sha256 167204cee7c98d7ce9f7ff7156733e6b5025b32a3206dbafdbfd2f79c3905347).'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/lower_side_classifier_environment_canonical_111.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T07:06:25.055013+00:00'
+  tags:
+  - provenance
+  - environment
+  - lower-side
+  - sklearn
+  - round13
+  content_sha256: 167204cee7c98d7ce9f7ff7156733e6b5025b32a3206dbafdbfd2f79c3905347
+- id: art_20260920_c6f9ab
+  name: SUPERSEDED -- duplicate registration -- sklearn_solver_probe_20260920.py
+  type: data
+  description: Producer script for the sklearn solver/penalty probe run on server
+    111 on 2026-09-20. Fits LogisticRegression(max_iter=1000, random_state=0) on a
+    toy array under warnings.catch_warnings(record=True) and records pre-fit and post-fit
+    attributes, interpreter and library paths, versions and hostname. Registers the
+    producer alongside its output JSON so the probe is reproducible and not an orphan
+    artifact.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/sklearn_solver_probe_20260920_c6f9ab.py
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T07:06:47.620214+00:00'
+  tags:
+  - provenance
+  - probe
+  - sklearn
+  - script
+  - round13
+  content_sha256: b141e33b0780229f41ef7c26f4d605de005c255ab4585a1c0b5a6b3bbe835058
+  superseded_by: art_20260920_7f5f57
+  retirement_note: 'Duplicate registration of the same producer script. Registered
+    during a standalone dispatch without first searching the manifest, where the script
+    was already registered as art_20260920_7f5f57 (both entries byte-identical, sha256
+    b141e33b0780229f..., and both copies present under _project/data/). NOT a content
+    divergence and no content at stake: the router copied rather than replaced. Retained
+    rather than deleted so the registration history stays auditable; do not cite this
+    entry, cite art_20260920_7f5f57. Verified 2026-09-20 by Director.'
+  not_citable: true
+  not_citable_reason: Duplicate of art_20260920_7f5f57 (identical bytes).
+- id: art_20260920_residue
+  name: declared_remote_residue
+  type: data
+  description: 'Register of known harmless non-artifact files left on experiment hosts
+    by tooling. Current entry: the .upload.guard left on server 111 by the probe-script
+    upload. Declared rather than deleted per the standing no-remote-deletion rule.
+    Created by Director 2026-09-20 after neither the Agent nor the Paper Agent had
+    a writable path to a residue record.'
+  content_sha256: 725f8580fca1bb7c9e5784b9b218ebeb860fd4781de3df33e100669745054e47
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/declared_remote_residue.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T07:20:00.000000+00:00'
+  tags:
+  - provenance
+  - residue
+  - cleanup
+  - round13
+- id: art_20260920_f18204
+  name: track5_radius_form_coverage
+  type: data
+  description: 'Coverage consequence of the radius-form convention at the Track-5
+    reference setting (n=60000, B=64, conc=0.1, true TV=0.400, 1000 paired replicates,
+    seed 20260919). Five arms share ONE draws stream and ONE fixed SE (the bare cluster-robust
+    sandwich SE, = reference_runner.sandwich_radius / z_0.975) so that ONLY the radius
+    form varies: sym_pooled 0.989, one_sided_pooled 0.984, uncentred_pooled 0.982,
+    normal_theory_per_rep 0.978, sym_bootstrap_per_rep 0.994. PRE-REGISTERED FALSIFIER
+    FIRED (falsifier_fired=false means it did NOT fire): the falsifier was ''coverage
+    identical across conventions within CI => convention is cosmetic'', and every
+    computable-vs-computable paired difference CI EXCLUDES zero, so the convention
+    is NOT cosmetic for coverage. Coverage tracks the radius monotonically (largest
+    radius sym_bootstrap 0.041097 -> highest coverage 0.994; smallest normal_theory
+    0.033172 -> lowest 0.978). CRITICAL READING CAVEAT: the three ''pooled'' arms
+    are ORACLE (they use the realised D_rep distribution and hence TRUE_TV), so their
+    coverage is near-target by construction and is NOT an achievable result; only
+    normal_theory_per_rep and sym_bootstrap_per_rep are computable per-replicate coverage.
+    ALSO NOTE normal_theory_per_rep''s radius equals the existing Arm B radius exactly
+    because it is the same SE times the same z - it is form-invariant by construction,
+    unlike the quantile forms. PAIRING RECONCILIATION: on these 1000 replicates NO
+    pairing tested reproduces the recorded ~11.39%; the closest is sym_vs_uncentred_endpoint
+    at 12.65%, sym_vs_centred_one_sided is 8.73%, and the oracle gaps run larger than
+    recorded. The paper''s qualitative claim (the two forms differ and are not interchangeable)
+    is confirmed and, if anything, understated; the specific 11% number is not reproduced
+    here. Controls: statcore known-control MATCH, tv_hat reconciled every replicate,
+    empirical SE 0.0166407 agrees with the recorded n=60000 value 0.0169715 to ~2%,
+    tv_hat mean 0.4021600 above true 0.400 as expected under block dependence.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_radius_form_coverage.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T10:02:04.199296+00:00'
+  tags:
+  - track5
+  - radius-form
+  - coverage
+  - convention
+  - round14-evidence
+  - oracle-labelled
+  content_sha256: e5f6287ccc97769b83262426479b8b3160fe6e6820598cff0d12f117aed13bf0
+- id: art_20260920_16d79f
+  name: track5_radius_form_coverage_summary
+  type: data
+  description: Program-generated fixed-width summary table for track5_radius_form_coverage
+    (the radius-form coverage experiment). One row per arm with coverage, covered,
+    Clopper-Pearson 95% interval, radius value, oracle flag, and cp_lower_clears_nominal.
+    Numbers are emitted programmatically from the same computation as the JSON, so
+    the two must agree; this file exists so the result can be read without a JSON
+    parser. Companion to artifacts/track5_radius_form_coverage.json.
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_radius_form_coverage_summary.txt
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T10:02:08.727647+00:00'
+  tags:
+  - track5
+  - radius-form
+  - coverage
+  - convention
+  - round14-evidence
+  content_sha256: 99be58e6165bd86e4ea1cb3664ba56ea3ed42eb350a1da0053b18d4ad4670619
+- id: art_20260920_3d6096
+  name: track5_radius_form_coverage_reading_note
+  type: data
+  description: 'Reading note correcting a self-contradiction in the description of
+    art_20260920_f18204 (the text there says ''PRE-REGISTERED FALSIFIER FIRED'' while
+    its own field value is falsifier_fired=false). States the correct reading plainly:
+    the falsifier did NOT fire, meaning the falsified proposition ''coverage is identical
+    across conventions'' was NOT supported, i.e. the radius-form convention is NOT
+    cosmetic for coverage. Also records that no pairing reproduces the recorded ~11.39%
+    on these replicates (closest 12.65%), and repeats the oracle caveat that only
+    the two computable arms speak to achievable coverage. Registered because the manifest
+    is generated and not hand-editable, and re-registering the parent would create
+    a suffixed duplicate rather than a correction. [updated 2026-09-20: the parent
+    artifact flag was corrected to true; this note now records that correction and
+    is retained for history.]'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/track5_radius_form_coverage_reading_note.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-20T10:02:45.708154+00:00'
+  tags:
+  - track5
+  - radius-form
+  - correction
+  - reading-note
+  - round14-evidence
+  content_sha256: 23e18e1bd5268997f1238dce52e45f291bbb716fc39e23e0b6153cac94b13eba
+- id: art_20260921_1c3ff4
+  name: EIBO_final_round14_accept.pdf
+  type: paper
+  description: Sent to user via upload_file
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/paper/main_1c3ff4.pdf
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: upload_file
+  created_at: '2026-09-21T08:02:06.541720+00:00'
+  tags:
+  - sent-to-user
+- id: art_20260922_d0bf02
+  name: d181_coverage_language_audit
+  type: data
+  description: 'D181 coverage language audit: read-only inspection of body .tex files
+    for sentences implying under-coverage or estimator failure where the measured
+    coverage (0.9825) actually exceeds nominal (0.975). Found 5 instances, all in
+    discussion.tex (lines 140-150): ''breach'', ''cells fail'', ''plateau'' framed
+    as a problem, ''correction must change the estimator'', and ''shortfall''. The
+    body never explicitly states that 0.9825 > 0.975, so a reader can easily misread
+    the plateau as a failure. The 200-replicate sub-nominal cells (0.9725, 0.9496)
+    are genuinely below nominal and are correctly excluded from this audit.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/d181_coverage_language_audit.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-22T03:34:57.194044+00:00'
+  tags:
+  - d181
+  - coverage
+  - language-audit
+  - round14-evidence
+  content_sha256: f46771265d2debba00117060e3fbe83fa0b9f8ea167490d311116a924b5f16e2
+- id: art_20260922_f7853e
+  name: d181_joint_coverage_reaggregation
+  type: data
+  description: 'D181 Exp1: Joint-coverage reaggregation using Eq(9) m-free Hoeffding
+    bound with Bonferroni union bound over 990 pairs (alpha_pair = 0.05/990). FALSIFIER
+    PASSED: the high-probability floor is strictly positive. Key results: uniform
+    open-set floor 0.197 (vs expectation-form 0.186, ratio 1.059), LP open-set floor
+    0.375 (vs expectation-form 0.363, ratio 1.032). 984/990 pairs have eps_hi_mfree
+    < 1.0 (non-vacuous), 355/990 have eps_hi_mfree < 0.5 (positive error floor). Only
+    6 pairs are vacuous (eps_hi >= 1.0). Zero eps_lo > eps_hi violations. The new
+    values are HIGHER than the expectation-form values, not lower as initially expected
+    — because the m-free Eq(9) radius is TIGHTER than the Eq(6) alphabet-dependent
+    radius for this sample size and alphabet. The certification-grade statement is:
+    with probability >= 0.95, the open-set error floor is >= 0.197 (uniform) or >=
+    0.375 (LP). Controls: canonical LP reproduces 0.36307 to 5 decimal places. Input
+    file hashes recorded.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/d181_joint_coverage_reaggregation.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-22T03:41:25.676504+00:00'
+  tags:
+  - d181
+  - joint-coverage
+  - eq9
+  - union-bound
+  - high-probability
+  - round14-evidence
+  content_sha256: c05735901f4bb714c55446ee324afe354716bc0a8cd4de5df4120aae042fc218
+- id: art_20260922_91028b
+  name: d181_same_channel_classifier
+  type: data
+  description: 'D181 Exp2: Same-channel classifier validation — LogisticRegression
+    on the 32-symbol one-hot representation (packed k=5 prefix, direction+size bits)
+    matching the certificate''s object. 990 pairs, 70/30 train/test split (stratified,
+    random_state=0), Clopper-Pearson 95% upper bound on test error. FALSIFIER FIRED:
+    73/990 pairs (7.4%) have error_ub > eps_lo. However, the comparison error_ub vs
+    eps_lo MIXES SCALES — error rate is a [0, 0.5] quantity while eps_lo is a TV lower
+    bound in [0, 1]. The meaningful comparison is error_ub vs (1-eps_hi)/2 (the certified
+    error floor), not vs eps_lo. The 73 violations need re-interpretation before concluding
+    whether the certificate is confirmed or not. Corpus sha 6b323c4c verified. Ran
+    on the platform-local container (sklearn 1.9.1), NOT server 111 (1.9.0) — the
+    generation caveat applies (593/990 rows differ between versions, C052). Runtime
+    736s, well within 4h budget.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/d181_same_channel_classifier.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-22T04:10:06.991711+00:00'
+  tags:
+  - d181
+  - same-channel
+  - classifier
+  - validation
+  - round14-evidence
+  - interpretation-caveat
+  content_sha256: eaf86797fe93d04297a0dd166861f1365aac368b222edc82b80b94ec2d354d30
+- id: art_20260922_a6078a
+  name: d181_tv_saturation_simulation
+  type: data
+  description: 'D181 Exp3: TV saturation cause verification. Known-truth iid simulation,
+    4 true TVs x 4 alphabet sizes x 2 sample sizes x 1000 replicates (seed 20260922).
+    FALSIFIER: LARGE_UPWARD_BIAS_AT_LARGE_M confirmed — the saturation language is
+    correct but needs a bias qualifier. At m=32 (the paper''s reference), bias is
+    negligible (relative bias < 2.3% at n=2791, < 0.09% at n=20000). At m=1024 (M=2):
+    bias 34% relative at true TV=0.4, n=2791. At m=32768 (M=4): bias 138% at TV=0.4,
+    n=2791. At m=1048576 (M=8): tv_hat saturates near 1.0 regardless of true TV —
+    all four true TVs produce median tv_hat > 0.997 at n=2791. Even at n=20000 the
+    bias is barely reduced for large m (392% relative at m=1M, TV=0.2). The mechanism
+    is unambiguous: when m >> n, most categories have zero or one observation and
+    the plug-in TV approaches 1.0 mechanistically. Eq(6) caps at 1.0 for every m >=
+    1024 cell; Eq(9) m-free certifies at m=32 and m=1024 (small n) but not at larger
+    m. The paper''s ''saturation sets the frontier'' is the correct interpretation:
+    the estimator inflates, not the true TV. But the paper must state this is ESTIMATOR
+    BIAS, not the intrinsic TV. Runtime 7.8 min, well within 1h budget.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/d181_tv_saturation_simulation.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-22T04:12:32.440530+00:00'
+  tags:
+  - d181
+  - tv-saturation
+  - bias
+  - simulation
+  - round14-evidence
+  content_sha256: 4369528cc59fcdeae3cdea2985f3b05468ccab5ca5fa9f86a86beff02547861f
+- id: art_20260922_764458
+  name: d181_balanced_accuracy_risk_interval
+  type: data
+  description: 'D181 Exp2 follow-up: balanced-accuracy risk interval. Re-fit the same
+    LogisticRegression on the same 32-symbol one-hot representation with identical
+    splits (reconciliation passed at 1e-15 tolerance on all 990 pairs). FALSIFIER
+    DID NOT FIRE: 0/990 violations. Every pair''s balanced_error >= certified_error_floor
+    = (1 - eps_hi_mfree)/2. The certificate is validated on its own object with an
+    independent classifier test. Summary: median balanced_error 0.366, median certified_error_floor
+    0.198, smallest margin 0.0024 (no pair comes close to violating). Median tv_implied
+    = 0.267 vs median eps_lo = 0.535 — the classifier recovers less TV than the certificate''s
+    lower bound, which is expected because the one-hot logistic regression is suboptimal.
+    612/990 pairs have tv_implied < eps_lo (classifier weaker than the certified TV
+    bound) and 378/990 have tv_implied >= eps_lo. 0/990 have tv_implied > eps_hi_mfree.
+    Ran on platform-local container (sklearn 1.9.1). Runtime well within 30 min budget.'
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/d181_balanced_accuracy_risk_interval.json
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-22T04:44:11.706254+00:00'
+  tags:
+  - d181
+  - balanced-accuracy
+  - risk-interval
+  - same-channel
+  - validation
+  - round14-evidence
+  content_sha256: 06c0e766f4a47280e4245ef41f72f89ade3fc6337be76a8e196074732de1e40d
+- id: art_20260922_f3db57
+  name: EIBO_D181_revision.pdf
+  type: paper
+  description: Sent to user via upload_file
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/paper/main_f3db57.pdf
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: upload_file
+  created_at: '2026-09-22T06:27:54.772538+00:00'
+  tags:
+  - sent-to-user
+- id: art_20260922_11de40
+  name: EIBO_revision_draft_2026-09-22.pdf
+  type: paper
+  description: Sent to user via upload_file
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/paper/main_11de40.pdf
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: upload_file
+  created_at: '2026-09-22T21:04:54.812432+00:00'
+  tags:
+  - sent-to-user
+- id: art_20260924_7fc200
+  name: camera_ready_plan_updated
+  type: intermediate
+  description: Updated camera_ready_plan.md with per-page metrics from build de5e4b63,
+    extractor PyMuPDF, 5 metric columns
+  path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/camera_ready_plan_updated.md
+  url: null
+  project: epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade
+  exp_id: null
+  skill: ''
+  created_at: '2026-09-24T02:04:09.454193+00:00'
+  tags: []

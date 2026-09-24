@@ -1,672 +1,946 @@
-# Cross-round review issue tracker — EIBO
-# Cumulative through Round 6. Round 6 is the third genuinely revised manuscript (18 pages).
-# Panel position at Round 6: R1 4/5, R2 4/5, R3 4.5 (format/ethics/repro remit only).
-# The 4.5 is a remit-scoped tier, NOT a consensus upgrade: R1 and R2 hold 4/5 because
-# the shared clear-accept threshold has not been crossed (see R5-W7 and R4-W7).
-
-# ============ CLOSED (kept for the record) ============
-
-- id: RT-W1
-  summary: "Reference [4] machine-residue author field and its spread into Appendix A.2b."
-  category: format
-  severity: critical
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 4
-    reviewers: [1, 2, 3]
-    note: "Fixed and externally verified; no regression at Rounds 5-6."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 4
-
-- id: RT-W2
-  summary: "Literal unrendered Markdown bold marker in Sec 5.1."
-  category: format
-  severity: critical
-  status: resolved
-  first_raised_round: 2
-  last_seen_round: 5
-  mentions:
-  - round: 4
-    reviewers: [1, 3]
-    note: "Render-confirmed clear."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 4
-
-- id: RT-W3
-  summary: "Mandatory appendix placement and length; the individual-page-start convention."
-  category: format
-  severity: critical
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 5
-    reviewers: [1, 2, 3]
-    note: "Length settled as compliant by R3 column count; R1 withdrew the over-limit claim."
-  - round: 6
-    reviewers: [1, 3]
-    note: "Placement and length confirmed at Round 6."
-  action_items:
-  - round: 6
-    action: "Confirm whether each mandatory appendix must start a fresh page (venue convention, unconfirmed from the PDF)."
-    assigned_to: Research Director
-    status: open
-  resolution: "Placement and length closed; only the page-start convention remains unconfirmed."
-  resolution_round: 5
-
-- id: RT-W4
-  summary: "Stated joint level (0.95) versus the radius constant (0.975)."
-  category: method
-  severity: critical
-  status: resolved
-  first_raised_round: 1
-  last_seen_round: 6
-  mentions:
-  - round: 5
-    reviewers: [1, 2, 3]
-    note: "Figure 1 synced to 0.975."
-  - round: 6
-    reviewers: [1, 2, 3]
-    note: "CLOSED. Sec 4.4 now reports both nulls (5 percent null p = 0.9765; 2.5 percent null p = 0.346); all three reviewers recomputed independently and agree. Lemma 1 statement verified TRUE BUT NOT TIGHT, hence not a defect."
-  action_items: []
-  resolution: "Closed with independent arithmetic confirmation."
-  resolution_round: 6
-
-- id: RT-W5
-  summary: "Table 4 row 35-49 contradicted the conservative-bias monotonicity claim."
-  category: method
-  severity: critical
-  status: resolved
-  first_raised_round: 2
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [1, 2, 3]
-    note: "Closed, no regression; pair (21,23) added to Table 4 caption."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 6
-
-- id: RT-W6
-  summary: "The epslo distribution and bracket width were never reported."
-  category: method
-  severity: critical
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 5
-  mentions:
-  - round: 4
-    reviewers: [1, 2, 3]
-    note: "Closed by Table 5."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 4
-
-- id: RT-W7
-  summary: "Novelty-boundary wording in tension with the revised Sec 1 and Sec 3.5."
-  category: framing
-  severity: warning
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 4
-    reviewers: [2, 3]
-    note: "Rewritten to name the kind asymmetry and cite Sec 3.5; C-1 withdrawn as resolved."
-  - round: 6
-    reviewers: [2]
-    note: "No regression at Round 6."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 4
-
-- id: RT-W9
-  summary: "Positional fixes: the certification-grade definition placement."
-  category: writing
-  severity: warning
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [1, 2, 3]
-    note: "CLOSED. The definition now sits in Sec 1's first paragraph."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 6
-
-- id: RT-W11
-  summary: "Sec 4.3 finer-alphabet claim confounded by sparse inflation."
-  category: method
-  severity: warning
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 5
-  mentions:
-  - round: 5
-    reviewers: [1, 3]
-    note: "Confound named and the causal claim downgraded to association."
-  action_items: []
-  resolution: "Closed in the body; the ABSTRACT was not synced - see R6-W1."
-  resolution_round: 5
-
-- id: RT-W12
-  summary: "Sec 4.2 closing direction word inverted."
-  category: writing
-  severity: warning
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 4
-  mentions:
-  - round: 4
-    reviewers: [1]
-    note: "Fixed."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 4
-
-- id: RT-W14
-  summary: "Abstract conflated 340/336 and carried no power caveat."
-  category: writing
-  severity: warning
-  status: partially_resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [1, 2, 3]
-    note: "340/336 conflation CLOSED (abstract now says 'the 340 pairs in the informative stratum'). RESIDUAL: the abstract still lacks the power caveat and the convention dependence."
-  action_items:
-  - round: 6
-    action: "Add the power caveat and a convention-dependence clause to the abstract."
-    assigned_to: Research Director
-    status: open
-  resolution: "Conflation fixed; two qualifiers still missing."
-  resolution_round: null
-
-- id: RT-W16
-  summary: "Sec 6.2 grouping of closeness-testing refs under the Kolmogorov-Smirnov family."
-  category: novelty
-  severity: warning
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 4
-    reviewers: [1, 2, 3]
-    note: "Fixed in Sec 6.2 via the three-way split."
-  - round: 6
-    reviewers: [2]
-    note: "Sec 6.2 is correct, BUT the same grouping survives in Sec 2.3 - see R6-W6."
-  action_items: []
-  resolution: "Closed in Sec 6.2; the Sec 2.3 residue is tracked as R6-W6."
-  resolution_round: 4
-
-- id: RT-W17
-  summary: "Reference [5] (Chan et al.) wrong DOI, reversed author order, missing pages."
-  category: format
-  severity: warning
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 4
-    reviewers: [1, 2, 3]
-    note: "Fixed and CrossRef-verified; no regression at Rounds 5-6."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 4
-
-- id: RT-W18
-  summary: "Sec 6.4 self-reference; 'beyond the fourth rung' off-by-one."
-  category: writing
-  severity: warning
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 5
-    reviewers: [1, 2, 3]
-    note: "Both fixed; no regression at Round 6."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 5
-
-- id: RT-W19
-  summary: "Reproducibility: truncated hashes, no timestamps, no URLs."
-  category: format
-  severity: warning
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 5
-    reviewers: [1, 3]
-    note: "64-hex hashes and timestamps verified; explicit non-provision of URLs judged venue-acceptable."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 5
-
-- id: RT-W21
-  summary: "Sec 5.2 dual-use ethics statement; IP-hash reversibility."
-  category: ethics
-  severity: warning
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 5
-    reviewers: [1, 2, 3]
-    note: "Sec 5.6 'Dual-use considerations' and the A.1 hash-salting paragraph added."
-  - round: 6
-    reviewers: [3]
-    note: "Confirmed intact, second consecutive round with no regression."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 5
-
-- id: RT-W22
-  summary: "Provenance bullets stretched word spacing."
-  category: format
-  severity: warning
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 4
-  mentions:
-  - round: 4
-    reviewers: [3]
-    note: "Fixed."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 4
-
-- id: R4-W1
-  summary: "SETTLED DISPUTE: whether relabelling to 0.975 forces Sec 4.4's null to 2.5 percent and changes any verdict."
-  category: method
-  severity: info
-  status: resolved
-  first_raised_round: 4
-  last_seen_round: 6
-  mentions:
-  - round: 4
-    reviewers: [1, 3]
-    note: "R1 computed it; R3 reproduced and withdrew. No cell rejects at either null."
-  - round: 6
-    reviewers: [1, 2, 3]
-    note: "Fully closed: both nulls are now reported in the body with p-values all three reviewers independently reproduced."
-  action_items: []
-  resolution: "Closed; settled by computation, not seniority."
-  resolution_round: 6
-
-- id: R4-W2
-  summary: "The 20k-flow cap's corpus attribution; the headline's construction convention undeclared."
-  category: method
-  severity: critical
-  status: resolved
-  first_raised_round: 4
-  last_seen_round: 6
-  mentions:
-  - round: 5
-    reviewers: [1, 2, 3]
-    note: "Sec 4.1 declares the full-n convention, the 335 capped variant, the 814/990 bind count, and the 776-down/38-up split; arithmetic verified."
-  - round: 6
-    reviewers: [1, 2]
-    note: "CLOSED. Pair (21,23) now appears in Table 4's caption. The cross-corpus convention-matched comparison is a separate residual - see R6-W2."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 6
-
-- id: R4-W3
-  summary: "Detector-validation input channel finer than the certified M=1 channel; undeclared second object substitution."
+issues:
+- id: L8-W1
+  summary: Convention-effect constant (0.0072 / 3.5x / 38 pairs) alleged stale in results.tex:93; claimed true values 40/990 and -0.007846 at pair (22,37).
   category: experiment
-  severity: critical
-  status: resolved
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 5
-    reviewers: [1, 2, 3]
-    note: "Substitution declared, but the direction parenthesis was written backwards."
-  - round: 6
-    reviewers: [1, 2, 3]
-    note: "CLOSED and the rewrite exceeds what was asked: 'so a non-breach on the finer object is the stronger statement. A breach on the finer channel would not, however, falsify the coarser certificate; this validation is a consistency check, not a falsifiable test.' R1 calls it beyond requirement; R2 WITHDREW its competing H-2 conclusion in full; R3 notes both its direction objection and R2's falsifiability concern are answered in one sentence."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 6
-
-- id: R4-W5
-  summary: "Appendix A.1b empty heading; Table 5 floated out of place."
-  category: format
-  severity: minor
-  status: resolved
-  first_raised_round: 4
-  last_seen_round: 5
-  mentions:
-  - round: 5
-    reviewers: [1, 2, 3]
-    note: "Heading deleted; Table 5 cited and placed."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 5
-
-- id: R4-W6
-  summary: "Abstract overclaim residuals (340/336 and the missing power caveat)."
-  category: writing
-  severity: warning
-  status: open
-  first_raised_round: 4
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [1, 2]
-    note: "Half closed (340/336 fixed); the power caveat remains. Tracked with RT-W14 and R6-W3."
-  action_items: []
-  resolution: "Merged into RT-W14."
-  resolution_round: null
-
-- id: R4-W8
-  summary: "Four reference additions missing (Bendale and Boult, Geng et al., Sirinam, Rimmer)."
-  category: novelty
   severity: warning
   status: resolved
-  first_raised_round: 1
-  last_seen_round: 5
+  first_raised_round: 8
+  last_seen_round: 8
   mentions:
-  - round: 5
-    reviewers: [1, 2, 3]
-    note: "All four added, integrated into the argument, and CrossRef-verified; no regression at Round 6."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 5
-
-- id: R5-W1
-  summary: "SETTLED DISPUTE: the direction of the finer-channel validation argument."
+  - round: 8
+    reviewers:
+    - reviewer-loop8
+    note: Raised as a stale-constant propagation into the manuscript.
+  - round: 8
+    reviewers:
+    - reviewer-loop8-fresh
+    note: 'RETRACTED by the reviewer itself: it had read the T1-generation ledgers (intermediate/t1_lower_side_M1.json vs intermediate/t1c_lower_side_M1_uncapped.json) rather than the canonical pair the paper''s hash chain cites. On the canonical pair its numbers reproduce the paper exactly.'
+  action_items:
+  - round: 8
+    action: 'Re-derived independently from data/q1_eps_lo_symbol_map.json vs data/q1_lower_side_full_n.json: 776 raise / 176 unchanged / 38 lower; worst -0.00721019 at (11,17); safety 3.529x; single crossing at (21,23). Paper stands.'
+    assigned_to: director
+    status: done
+  - round: 8
+    action: 'Fresh reviewer independently reproduced the same reading and confirmed the predecessor''s cited pair values (22,37: 0.66710376/0.65925822) appear in no file outside the T1 generation, and that (22,37) RISES (+0.00197).'
+    assigned_to: reviewer
+    status: done
+  - round: 13
+    action: 'Resolution text corrected: the parenthetical attributing the false finding to an ''unpinned sklearn solver'' is retracted. CORRECTED 2026-09-20: the earlier statement that this divergence came from an unpinned sklearn solver/penalty is WRONG. lbfgs IS sklearn''s default solver, so no solver was ever unpinned, and the effective penalty resolves to l2 identically on 1.9.0 (server 111) and 1.9.1 (local) - verified by coefficient equivalence, max abs diff 0.0. Solver/penalty therefore does NOT explain the generation split, whose cause is unexplained. Constraint corrected as C054; root cause of the error logged as M177.'
+    assigned_to: director
+    status: open
+  resolution: 'No edit to results.tex. The paper''s printed 0.0072 and 3.5x are correct. Root cause of the false finding: comparing a different generation of the same measurement (unpinned sklearn solver, see C052).'
+  resolution_round: 8
+- id: L8-W2
+  summary: M=1 control claim 'the rerun matches the published capped column' rested on median + gate-count agreement while 593/990 rows differ across generations.
+  category: experiment
+  severity: warning
+  status: resolved
+  first_raised_round: 8
+  last_seen_round: 8
+  mentions:
+  - round: 8
+    reviewers:
+    - reviewer-loop8-fresh
+    note: 'Surfaced as the residual after its own retraction: the ROADMAP control sentence implicitly treats two generations as interchangeable.'
+  action_items:
+  - round: 8
+    action: 'Verified directly: 593/990 rows differ by >0.005, max 0.04317 at (8,49), with identical n_a on the differing pairs. Retracted the ''matches'' claim in ROADMAP section 1.'
+    assigned_to: director
+    status: done
+  - round: 8
+    action: 'Root-caused: src/eibo/statcore.py:427 pins neither solver nor penalty; version changed 1.9.0 (X11, 09-14) -> 1.9.1 (T1, 09-19) with the canonical pair (09-13) unlabeled. Recorded as constraint C052.'
+    assigned_to: director
+    status: done
+  - round: 8
+    action: Add version-capture (sklearn.__version__, resolved solver, resolved penalty) to the lower-side runner metadata; additive, moves no numbers.
+    assigned_to: main_agent
+    status: in_progress
+  - round: 13
+    action: '''statcore.py:427 pins neither solver nor penalty'' corrected: the constructor passes no solver ARGUMENT, but sklearn''s default solver is lbfgs and the effective penalty is l2. CORRECTED 2026-09-20: the earlier statement that this divergence came from an unpinned sklearn solver/penalty is WRONG. lbfgs IS sklearn''s default solver, so no solver was ever unpinned, and the effective penalty resolves to l2 identically on 1.9.0 (server 111) and 1.9.1 (local) - verified by coefficient equivalence, max abs diff 0.0. Solver/penalty therefore does NOT explain the generation split, whose cause is unexplained. Constraint corrected as C054; root cause of the error logged as M177.'
+    assigned_to: director
+    status: open
+  - round: 13
+    action: If pinning is ever taken, the correct pin is l1_ratio=0.0 - never the sentinel penalty='deprecated', and not penalty='l2' explicitly (which emits a FutureWarning). The RULE of C052 remains binding.
+    assigned_to: director
+    status: open
+  resolution: Claim retracted; constraint C052 active; pinning decision deferred with the re-run cost attached (pinning would move every published lower-side number).
+  resolution_round: 8
+- id: L8-W3
+  summary: 'Track 5 shape tension: a radius built from a larger SE apparently still under-covered, suggesting a heavy-tailed tv_hat.'
   category: experiment
   severity: info
   status: resolved
-  first_raised_round: 5
-  last_seen_round: 6
+  first_raised_round: 8
+  last_seen_round: 8
   mentions:
-  - round: 5
-    reviewers: [1, 2, 3]
-    note: "R1 and R3 rebutted R2; R3 supplied a minimal counterexample."
-  - round: 6
-    reviewers: [2]
-    note: "R2 formally WITHDREW its H-2 conclusion, stating the derivation breakdown was its own. The paper now states the correct direction and the non-falsifiability caveat."
-  action_items: []
-  resolution: "Closed; the paper reflects the settled position."
-  resolution_round: 6
-
-- id: R5-W2
-  summary: "Table 2 footnote contained an internal review-process reference."
+  - round: 8
+    reviewers:
+    - reviewer-loop8-fresh
+    note: 'Clean negative: skewness -0.140, excess kurtosis +0.081; no detectable shape effect; the tension was a criterion artifact, not a distributional one.'
+  action_items:
+  - round: 8
+    action: 'Corrected the reframing: the coverage criterion is ONE-SIDED (runner line 271), so the Gaussian target is Phi(r/s). For the i.i.d. reference that is Phi(2.0729)=0.9809, not 0.989 (which used an unexplained z=2.2975). Arms sit slightly ABOVE their targets (+0.0017/+0.0033/+0.0035).'
+    assigned_to: director
+    status: done
+  - round: 8
+    action: Recorded the target table in ROADMAP section 6b and retracted the 0.989 figure; D172 logged. Sent back to the reviewer to name how 2.2975 was derived.
+    assigned_to: director
+    status: done
+  resolution: 'No shape effect. Design gap is 0.0029 (0.9809 - 0.978), not 0.014. What binds is a measurement-design point: the arms are scored against a nominal 0.975 the confidence radius was never built to hit. ''Under-covers''/''overshoots'' must name their baseline.'
+  resolution_round: 8
+- id: L8-W4
+  summary: 'Registry row track5_dependence_aware_radius lagged the science: conclusion ''success'' with null metrics, spec omitting the diagnosis artifact and Arm D''s cancellation.'
+  category: writing
+  severity: info
+  status: resolved
+  first_raised_round: 8
+  last_seen_round: 8
+  mentions:
+  - round: 8
+    reviewers:
+    - reviewer-loop8-fresh
+    note: The conclusion of record understated the work; a registry query would never reveal the reinterpretation.
+  action_items:
+  - round: 8
+    action: Added result_note with the split result, z-multiples, corrected interpretation, 392 power figure, retraction of the shrink->fail reading, and the claim boundary; extended spec with the diagnosis script/artifact, the second worker log, and arm_d_status NOT RUN with the gate reason.
+    assigned_to: director
+    status: done
+  resolution: Registry row now describes the actual run. conclusion stays 'success' (the enum cannot carry the narrative, which the result_note supplies).
+  resolution_round: 8
+- id: L8-W5
+  summary: 'Duplicate/divergent artifact copies: top-level artifacts/track5_* byte-identical to artifacts/_project/data/ equivalents, and two registered suffixed copies of one script generation.'
+  category: format
+  severity: info
+  status: resolved
+  first_raised_round: 8
+  last_seen_round: 13
+  mentions:
+  - round: 8
+    reviewers:
+    - reviewer-loop8-fresh
+    note: The M166 one-artifact-one-path pattern re-forming; manifest will accumulate suffixed script copies per rerun.
+  - round: 13
+    reviewers:
+    - reviewer_3
+    - reviewer_1
+    - reviewer_2
+    note: 'R3: NOT ADJUDICABLE from the PDF — the blind namespace exposes only submission material, so copies cannot be checked. R1: the paper-level declaration is unambiguous and CONTENT-ADDRESSING is itself the disambiguation (any copy passing the published hash is equivalent; no numbers affected) — so this stays a project-side hygiene item, not a paper defect. Residual risk is limited to UNREFERENCED script copies. R2 concurs with R1. Added ask: the Open Science list should name the single in-package path for each cited artifact so the declaration is independently checkable.'
+  action_items:
+  - round: 8
+    action: Confirm which location is canonical for track5 outputs and deduplicate; no numbers affected.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: Add 'the single in-package path' for each cited artifact to the Open Science list; ensure one canonical path per output in the archive.
+    assigned_to: director
+    status: open
+  resolution: 'RESOLVED 2026-09-20: the duplicate/divergence question was settled by content-addressing. Router-suffixed duplicates were consolidated (one retired with superseded_by, one entry repointed to the canonical unsuffixed path); every live manifest entry now hash-verifies against its file (0 mismatches).'
+  resolution_round: 13
+- id: L13-CR1
+  summary: 'P0 / SUBMISSION-BLOCKING: the Open Science appendix prints an unfilled placeholder, ''...will additionally be made available through an anonymous repository at [ANONYMOUS-REPO-URL-TO-INSERT].'' Open Science is a MANDATORY USENIX ''27 appendix; a literal placeholder inside it is a hard submission defect. Note the direction of travel: in the previous round the same sentence read ''anonymous URLs are not provided, to preserve double-blind integrity''; this round it promises an anonymous repository — an improvement — but the promise is a placeholder.'
   category: format
   severity: critical
   status: resolved
-  first_raised_round: 5
-  last_seen_round: 6
+  first_raised_round: 13
+  last_seen_round: 13
   mentions:
-  - round: 6
-    reviewers: [1, 2, 3]
-    note: "CLOSED. The footnote is deleted; 'review record' has zero occurrences. Its content was promoted into the body, which also fixed R5-W3."
-  action_items: []
-  resolution: "Closed; the hard gate is cleared."
-  resolution_round: 6
-
-- id: R5-W3
-  summary: "Footnote's 'the 5 percent null is the stricter direction' wording reversed."
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: 'Found independently by all three (R1-N1 = R2-W2 = R3-N2). Two valid fixes, either acceptable: (a) insert a real anonymous repository (anonymous.4open.science, conference ID SEC27 is the USENIX-recommended path), or (b) revert to a formulation that does not depend on an external URL (artifacts available within the submission system only). R3 adds: whichever is chosen, review the adjacent ''no adversarial risk'' phrase (see L13-W11e).'
+  action_items:
+  - round: 13
+    action: Fill the URL or drop the external-link promise; no placeholder may ship.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: 'D177: the external anonymous-repository promise was REMOVED rather than a URL inserted. Neither (a) standing one up nor (b) supplying a URL was available — no account could source one, and a promise of infrastructure that must exist by the submission date is an unverifiable forward promise that contradicts the paper''s own ''every claim checkable from the submitted bytes'' standard. The clause now states only that the artifacts travel with the submission and are reachable through the submission system''s own materials. Verified in the render: no URL, no ''anonymous'' wording, no placeholder. RESOLVED 2026-09-20 on the FINAL bytes (sha256 cd34c2800f9746c9835fd2718d4cd81047b27d0f1b463e623ae08d1115ad1680, 24 pages, body p.13). Visual gate passed 24/24. Verified by the Director in the render and at source.'
+    assigned_to: director
+    status: done
+  resolution: Placeholder removed per D177. No external-link promise ships.
+  resolution_round: 13
+- id: L13-CR2
+  summary: 'P0 / SUBMISSION-BLOCKING: five cross-references render EMPTY in the PDF (not ''??'' — the section number is simply absent), and one leaves an orphan bracket. Locations and intended targets (all three reviewers agree on the mapping): Sec 3.7 ''Section prints the closed form'' -> A.5; Sec 3.9 ''per-step timings are in Section .'' -> A.8; Sec 4.1 ''(Section ),'' -> A.3; Sec 4.5 ''(Table 4 and Figure 2a, both in Section ).'' -> A.5; Sec 5.2 ''(Figure 5, in Section .'' -> A.5 AND the right paren is missing. This is the M153 defect class (the build does not error, the PDF looks plausible, only a reader sees the break) — the same class that produced one instance at R11 and none at R12; the count has risen because the appendix was renumbered to A.1-A.9 without propagating.'
+  category: format
+  severity: critical
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: 'R1-N2 = R2-W1 = R3-N1, positions and targets independently convergent. R3''s acceptance procedure should be adopted: a full-render scan for ''Section|Table|Figure + space + punctuation'' rather than fixing only these five — renumbering passes have historically left a sixth reference that RESOLVES but points WRONG.'
+  action_items:
+  - round: 13
+    action: Repair the five \ref targets (and the Sec 5.2 parenthesis), then run a whole-PDF empty/wrong-reference scan before submission.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-CR3
+  summary: 'P1 / three-surface contradiction about the lower side at M>=2, and an unlabelled route mix in Sec 4.2. Sec 3.4 still says the lower side is ''evaluated at M=1 only'' and calls a finer M ''a computation we have not run''; Sec 4.2 states ''at M=2 every pair clearing the upper bound also clears the lower gate, so both counts are 127, and at k=10 both are 98 ... the smallest lower bound among the 127 is 0.0755 ... zero violations on 990/990 rows at every cell''; Table 3''s caption says ''The joint gate is defined at M=1 only, so later rows are upper-only'' with M>=2 joint cells as ''-''. At most one of these is true. R1''s sharper diagnosis (adopted by R2, superseding R2''s milder ''Sec 3.4 stale'' framing): the 127/98 sentence MIXES ROUTES — 127 = Eq (9) at (M=2,k=5) while Table 3''s Eq (6) upper at that cell is 47; 98 = Eq (9) at (M=1,k=10) while Eq (9) at (M=2,k=10) is 20. As printed, the paratactic sentence invites the reader to take 98 as M=2/k=10. This is also the resolution
+    of the R7-W6 long-running item: the lower side WAS computed at M>=2, and neither Sec 3.4 nor the Table 3 caption was brought along.'
+  category: method
+  severity: critical
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: 'R1-N3 (route-mix diagnosis) = R2-W4 (stale scope statement), R2 adopting R1''s reading. R1''s supporting argument: ''the smallest lower bound among the 127 is 0.0755'' is only obtainable if the M=2 lower side was actually computed (the M=1 minimum is 0.0151). Repair must (i) label the route per sentence, (ii) realign the Table 3 caption, (iii) realign Sec 3.4''s scope statement — all three, once.'
+  action_items:
+  - round: 13
+    action: Decide the facts (which (M,k) lower sides were computed), label the route in every sentence of the Sec 4.2 passage, and realign Sec 3.4 + the Table 3 caption to match.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-W1
+  summary: '''nothing/zero from M=8 on'' is over-broad and is refuted by the paper''s own Table 5. The claim appears three times (Abstract; Contribution 2; Sec 4.3 ''it is zero from M=8 on at every k''). Table 5''s Eq (9) column gives M=8 as 94/6/0/0 and M=16 as 80/5/0/0 over k=5,10,15,30. R1''s refinement (adopted): the substantive claim IS true of the k=15 frontier extension (Table 5 at k=15 is 18/4/1/0/0, zero from M=8), and the defect is the qualifier ''at every k''. R1 also flags the REVERSE risk R2 did not: read literally, ''the advantage does not generalize in M'' UNDERSTATES (9) — at fixed k the advantage is strongly present in M (M=8,k=5: Eq (9) certifies 94 where Eq (6) certifies 0). Fix: ''the extension at k>=15 does not generalize in M''.'
+  category: writing
+  severity: warning
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: 'R1-W1 = R2-W3. R2''s cautionary observation: R3, whose remit is elsewhere, had already restated this sentence as a virtue (''honestly reports the advantage only at the coarsest rung'') — a wrong self-deprecating qualifier is as persuadable as a wrong boast, which is why it must be fixed.'
+  action_items:
+  - round: 13
+    action: Restate as 'at k>=15 ... from M=8 on' in all three surfaces.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-W2
+  summary: Sec 3.1's 'The 336/990 and 340/990 counts are insensitive to small threshold movements' is contradicted by the round's own new Table 6 (0.5->0.6 moves the count 336->454, +35%; 0.4->0.5 moves 221->336). Only the LOWER threshold is near-inert in its neighbourhood (<=20 over 0.01-0.10). R2's finding; R3 (whose own review missed it) calls it the round's sharpest text-vs-data conflict — the two conflicting sentences sit in the SAME paragraph.
+  category: writing
+  severity: warning
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 14
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_2
+    - reviewer_3
+    note: 'R2-W5 = R3''s marked confirmation. R1 DOWNGRADED it to should-fix on a defensible ground: the same paragraph''s closing sentence already carries the correction (''the count is driven almost entirely by the upper threshold, and the lower threshold is nearly inert''), so the defect is a stale clause, not a blocking inconsistency. Panel disposition: fix by deleting the stale clause; severity as R1 (should-fix).'
+  - round: 14
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: R1+R3 reported the clause as residual while R2 reported it deleted; adjudicated from the bytes as RESOLVED (zero matches for insensitive across all ten .tex files). R1+R3 read a stale copy. See R14-M1.
+  action_items:
+  - round: 13
+    action: Delete the stale 'insensitive to small threshold movements' clause; keep the corrected statement.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-W3
+  summary: 'NEW must-fix from the R2-requested / R1-executed cross-check: the appendix''s LP row-sum identity is printed as an EQUALITY where only an INEQUALITY holds. Printed constraint: r_i = sum_{j!=i}(w_ij + w_ji) = 1 for the K known classes and 0 for the unknown class. Then sum_{i!=j} w_ij(err_i+err_j) = sum_{i in known} err_i, whereas M E[err] = sum_{i in all} err_i = sum_{known} + err_U. The printed ''...= M E[err]'' therefore holds only if err_U = 0, which is false in general — and is exactly what Eq (3)''s discarded unknown-class term acknowledges. Correct relation: sum_{known} err_i <= M E[err]; the a-fortiori argument runs unchanged in that direction, so the LP''s validity and the 0.363 value are unaffected — only the printed justification word is wrong. R1 notes this is the SAME defect family as the R9 ''no smaller / no larger'' item, and was in fact INTRODUCED by the R12 fix that made the U-class row-sum explicit (the older, vaguer text did not expose the equality).'
   category: method
   severity: warning
   status: resolved
-  first_raised_round: 5
-  last_seen_round: 6
+  first_raised_round: 13
+  last_seen_round: 13
   mentions:
-  - round: 6
-    reviewers: [1, 2, 3]
-    note: "CLOSED, improved on what was asked: both nulls are reported rather than adjudicated. R2 notes the method is now better than the wording it replaced."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 6
-
-- id: R5-W4
-  summary: "p15 was about 90 percent blank."
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    note: 'R2 raised it as Q3 asking R1 to adjudicate; R1 confirmed. Independently corroborated by R3 from the rendered text as a fact-observation (the equality implies err_U = 0). Fix: one symbol (= -> <=) plus half a sentence reusing Eq (3)''s existing discarded-term argument.'
+  action_items:
+  - round: 13
+    action: Change the equality to <= and add the discarded-unknown-class justification.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-W4
+  summary: Appendix A.7's 'that 0.0029 gap' has no resoluble antecedent and is arithmetically inconsistent with its own attribution. 0.9809 - 0.975 = 0.0059 (design target minus nominal); 0.9809 - 0.9780 = 0.0029 (design target minus measured sandwich coverage). The sentence attributes it to 'a property of the design, not a coverage failure' — under that attribution the value must be 0.0059, since 0.0029 already contains one part coverage shortfall. Either print 0.0059 or name the antecedent.
+  category: writing
+  severity: warning
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    note: R1's finding, missed by R2 and R3 in their own passes; R2 independently reproduced both arithmetic readings and agrees the attribution and the number are mutually exclusive.
+  action_items:
+  - round: 13
+    action: Print 0.0059 with the design attribution, or name which difference 0.0029 is.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-W5
+  summary: 'Appendix A.7 reports two dependence-aware radii that ''do not share a radius form'' (z-multiple vs Studentized t) yet give byte-identical coverage intervals: 0.9780 [0.9669, 0.9862] for both, over 1000 replicates. Equal success counts producing equal Clopper-Pearson intervals is necessary; two different radius FORMS producing the identical success COUNT needs explanation (shared code path, or coincidence). The paper itself set the standard thirty lines earlier — it hedged the 0.363 agreement with ''independent as derivations but not as inputs'' precisely because equal values may be coincidence — and applies no such hedge here.'
+  category: method
+  severity: warning
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: R1-W3 = R2-W10 (partial); R3 endorses with the internal-standard argument. The segment's 'cannot be ranked' argument depends on the two arms being genuinely distinct implementations.
+  action_items:
+  - round: 13
+    action: State whether the two radii share an implementation or are coincident, in the same register used for the 0.363 clause.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-W6
+  summary: Sec 4.4's newly added '43 distinct services with a maximum pair-degree of 27' is not reconciled with the paper's 45 services / 990 pairs used throughout Sec 4.1/5.1. 43 is the informative stratum's service count (two services carry no informative pair) — a coherent fact, but unstated, and it sits in a paragraph where 45 and 990 recur.
+  category: writing
+  severity: warning
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    note: R1's finding; R2 confirms as its own miss and supplies the correct reconciliation (43 is the informative stratum's denominator; 45/990 remains the corpus denominator).
+  action_items:
+  - round: 13
+    action: One clause naming 43 as the informative stratum's service count.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-W7
+  summary: 'PROVENANCE DEGRESSION (R3''s own remit, missed by R1 and R2): several NEW Round-13 quantitative loads have neither an experiment identifier in the text nor an entry in the Open Science released-artifacts list — the 400-replicate dependence ladder in Sec 5.5 (threshold 0.339-0.374, plateau 0.9825, radius 0.0352->0.0263); the three dependence-aware radii in A.7 (0.9940 / 0.9780 / 0.9780 at 1000 replicates); the 5000-replicate skewness follow-up (-0.0089); the A.7 planning-corollary grid (380/114/20/0, median 285, span 42-2.1e9); the A.6 threshold-sensitivity table; and Sec 4.3''s ''both cover at nominal in 3000 draws''. By contrast, Table 5''s Eq (9) grid IS covered (each cell is drawn from the released per-pair ledgers, as the text says). The distinction is precisely that within one round''s additions some loads are chained and some are not — against the paper''s own standard that every quantitative claim resolves through a content-addressed manifest. This is the same class R3
+    reported at R8 (calibration and LP then had no artifacts), so it is a recurrence, concentrated in the newest and most load-bearing analysis.'
+  category: format
+  severity: critical
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_3
+    note: R3's U1; R1 and R2 independently note the '3000 draws' figure as the single coverage-class number with no generator, no n and no artifact (R1 minor, R2 concurs) — a partial convergent hit.
+  action_items:
+  - round: 13
+    action: Name and register an artifact for each new load, or state in the text why one is not needed.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: 'PARKED 2026-09-20 by Director: provenance-class, not wording. A separate Director-run provenance pass will name/register an artifact per load or state why none is needed.'
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'RESOLVED: this was a CITATION gap, not a registration gap — all flagged loads already carried registered, hash-verified artifacts. Added to the Open Science list: art_20260920_0e4cdb (5000-replicate skewness), art_20260918_17c1b0 (400-replicate ladder), art_20260918_a73525 (20-cell grid), art_20260918_b5a5cd (threshold sweep), and the three arms art_20260919_17d7d3/b84113/fc043c. Director verified all 15 ids cited in the paper resolve, hash-match their files, and none is superseded. The ''3000 draws'' claim had NO artifact anywhere (the calibration family is 200 and 400 replicates) and was replaced by a sentence scoped to the alphabet-priced upper side, which IS what the calibration measured (method.upper_call = statcore.tv_upper_bound, 200 replicates). RESOLVED 2026-09-20 on the FINAL bytes (sha256 cd34c2800f9746c9835fd2718d4cd81047b27d0f1b463e623ae08d1115ad1680, 24 pages, body p.13). Visual gate passed 24/24. Verified by the Director in the render and at source.'
+    assigned_to: director
+    status: done
+  resolution: Citations completed; the unsourced 3000-draw claim removed and replaced by a scoped, sourced sentence.
+  resolution_round: 13
+- id: L13-W8
+  summary: 'Appendix A.4 is an EMPTY section: the heading ''A.4 The Two-Sided Bracket by Rung'' (p17) is followed by no text at all, and its table floats three pages later (p20), so the reader meets a title, three pages of other appendix material, then the table. R3 distinguishes this from a mere float placement issue: the section has no lead-in sentence. Fix by adding one and pinning the table (or by folding A.4 into A.5).'
   category: format
   severity: warning
   status: resolved
-  first_raised_round: 5
-  last_seen_round: 6
+  first_raised_round: 13
+  last_seen_round: 13
   mentions:
-  - round: 6
-    reviewers: [1, 2, 3]
-    note: "CLOSED. p15 is now a full page; Tables 4 and 5 were moved up. Page count fell 19 to 18; the body remains exactly 13 pages."
-  action_items: []
-  resolution: "Closed."
-  resolution_round: 6
-
-- id: R5-W5
-  summary: "Optional strengthening notes: monotone-shrink statement, pair (21,23) in Table 4, statistic naming."
-  category: writing
-  severity: minor
-  status: partially_resolved
-  first_raised_round: 5
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [1]
-    note: "Pair (21,23) added to Table 4 caption; the statistic naming is still doubled - see R6-W8."
-  action_items: []
-  resolution: "Mostly addressed."
-  resolution_round: null
-
-- id: R5-W6
-  summary: "Certification-grade definition placement; cross-corpus convention match; abstract convention dependence."
-  category: writing
-  severity: minor
-  status: partially_resolved
-  first_raised_round: 5
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [2]
-    note: "Definition placement CLOSED. The convention match and abstract clause remain - see R6-W2 and R6-W3."
-  action_items: []
-  resolution: "Split into R6-W2 and R6-W3."
-  resolution_round: null
-
-# ============ OPEN ============
-
-- id: R4-W7
-  summary: "Sec 3.3 coverage calibration still declined; the Sec 4.3 estimator definition is closed."
-  category: method
-  severity: warning
-  status: open
-  first_raised_round: 3
-  last_seen_round: 6
-  mentions:
-  - round: 5
-    reviewers: [1, 3]
-    note: "Estimator defined; coverage calibration open."
-  - round: 6
-    reviewers: [1, 2]
-    note: "STILL OPEN - the Sec 3.3 passage is VERBATIM UNCHANGED for a fourth consecutive round. Both R1 and R2 name it the FIRST item on the shared clear-accept threshold and stress it is LOW COST: the known-truth apparatus already exists (Sec 3.5 and Sec 4.5), so a true-TV scan over the open interval plus a dependent-data arm could be added without new method. It is described as the last unbacked support for the certification-grade label."
+  - round: 13
+    reviewers:
+    - reviewer_3
+    - reviewer_1
+    - reviewer_2
+    note: R3-N5 (empty shell) = R1 minor (three-page separation) = R2-W6's second half; combined into one entry at the severity R3 establishes.
   action_items:
-  - round: 6
-    action: "Add the coverage calibration over a range of true TV including a dependent arm - the lowest-cost item on the clear-accept threshold."
-    assigned_to: Research Director
+  - round: 13
+    action: Add a lead-in sentence; keep the table adjacent.
+    assigned_to: director
     status: open
-  resolution: ""
-  resolution_round: null
-
-- id: R5-W7
-  summary: "The panel's clear-accept threshold: one substantive methodological addition (most cost-effectively a finite-sample two-sided lower bound via the already-cited closeness-testing route), plus the Sec 3.3 coverage calibration."
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-W9
+  summary: 'SELF-CONTAINMENT: the body (p1-13) now contains no table at all and only Figure 1, while the paper''s PRIMARY results table (Table 3, the two-sided bracket) sits in Appendix A.4 (p20), cited five times from the body as ''Table 3, in Sec A.4''. Figures 2-5 and Tables 1-8 are likewise appendix-only. USENIX requires the body to be self-contained without optional appendices, and a reviewer is not obliged to read them; for a measurement study, having the 33.9% headline''s evidence in an appendix is a structural weakness. Also noted: table numbering is non-monotone in appearance (1, 2 on p17; 4, 3 on p20; 5-8 on p21-22) and runs by order of appearance rather than importance, so a body reader meeting ''Table 1'' sees the boundary-pair table, not the primary result. | ROUND 14: re-tiered by the Reviewer as SHEPHERD-LEVEL, confirmed non-blocking; tracked with R14-M7/R14-M10.'
+  category: format
+  severity: warning
+  status: in_progress
+  first_raised_round: 13
+  last_seen_round: 14
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: 'R1-W5 = R2-W6 = R3-N4 = R3-W7 (numbering). R3''s framing is the most complete (body CONTAINS vs body CITES). R2''s observation that this compounds L13-W1 — a body-only reader has no table at hand with which to catch ''from M=8 on'' — argues the two fixes support each other. Suggested: return the key rows (M=1 row + sat. column, or the single M=1/k=5 340/336/990 line) to Sec 4.2; or renumber the primary table first.'
+  - round: 14
+    reviewers:
+    - reviewer_1
+    - reviewer_3
+    note: 'Re-tiered shepherd-level: substantive presentation gap and a real acceptance risk, but not a correctness defect and not a submission blocker.'
+  action_items:
+  - round: 13
+    action: Return a compact version of the primary results table to the body; reconsider numbering so the primary table reads first.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: 'DEFERRED 2026-09-20 by Director: returning a primary table to the body is a STRUCTURAL body change that collides with the 13-page body target and the no-new-numbers constraint. Camera-ready-stage work; not submission-blocking.'
+    assigned_to: director
+    status: open
+  resolution: ''
+- id: L13-W10
+  summary: 'Artifact-list hygiene: art_20260918_fd1598 (the LP artifact, cited in Sec 3.1) is not listed in Open Science''s released-artifacts list, which carries only f27ba9. Additionally the SAME object is named twice across surfaces — ''the four-construction note'' in Sec 3.1, ''Aggregation-constructions note'' in Open Science — so a reader cannot tell whether the two refer to one artifact.'
+  category: format
+  severity: warning
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_3
+    note: R1-W6 (missing list entry); R3's addition (two names for one artifact), both verified against the rendered pages.
+  action_items:
+  - round: 13
+    action: List fd1598; use one name for the constructions note across all surfaces.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-W11
+  summary: 'Batch (framing/writing/minor): (a) Sec 1''s compressed characterisation of Cherubin — ''Both locate the phenomenon and bound its sign rather than quantifying it at a flow count'' — is wrong about a QUANTITATIVE prior bound, and is the only place in the paper that weakens the nearest precedent; Sec 6.1 itself correctly calls Cherubin ''the closest precedent for our upper side''. Keep the second half (''neither returns an interval on one pair''s distance at the flows a trace actually provides''). (b) Revision-narrative residue in A.7: ''A follow-up asked whether...'' and ''...bears on the obvious objection'' have no referent in a first submission and imply prior external rounds — R3 confirms this is NOT an anonymity violation (no venue or process is named) but should be rephrased reader-facing (''A natural next question is...''). (c) R1 PARTIALLY REBUTS the same critique as applied to Sec 4.3''s ''We first attributed this to the radius, and that attribution was wrong'' — that is
+    the authors'' own hypothesis history, stated to pre-empt the reader''s first guess, and matches the paper''s consistent honest register; keep it. (d) Sec 4.4''s ''the cell above'' is ambiguous (the cell is in Table 8) — name it (p = 0.9765). (e) Abstract ''a two-point excess'' vs Sec 4.4 ''a two- or three-point excess'' — pick one. (f) Sec 4.3''s ''both cover at nominal in 3000 draws'' has no design statement (which nominal, which generator, which n) and no artifact — see L13-W7. (g) Page total is 23 (body still exactly 13): the camera-ready 20-page cap needs 3 pages removed; R3''s ranked plan: merge the A.7 dependence radii with Sec 5.5''s 400-replicate ladder (heavy overlap, ~0.8-1 page), compress the A.6 threshold table to its key rows, return a compact primary table to the body, and compress the 3-page bibliography. A written plan should exist before submission; this does NOT block submission (appendices/refs are uncapped at that stage). (h) The Open Science phrase ''no adversarial
+    risk'' sits awkwardly beside Sec 5.6''s own dual-use statement (the bracket is ''a map'' of which services are cheap to distinguish); scope it to ''no adversarial risk in releasing these artifacts''.'
+  category: writing
+  severity: minor
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: Aggregated; (c) is the round's only partial inter-reviewer disagreement (R1 vs R2 on one of three phrases) and is resolved as stated. (h) is R3's ethics-side observation.
+  action_items:
+  - round: 13
+    action: Batch at the same edit as the P0/P1 items.
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: 'DEFERRED 2026-09-20 by Director: sub-item (g) (23->20 page camera-ready plan) is camera-ready work and does not block submission. (a)(b)(d)(e) in scope and applied; (c) KEPT as the authors'' own hypothesis history per R1''s partial rebuttal; (h) resolved by the accepted W11e rewrite.'
+    assigned_to: director
+    status: open
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: L13-W12
+  summary: 'SOLVER-PINNING RECURRENCE (R1, from this project''s own root cause): the Seeds-and-replicates paragraph pins random_state = 0 for the lower side, but pins NEITHER the solver NOR the penalty. This project has already established (L8-W2 / constraint C052) that an unpinned sklearn solver/penalty changed 593/990 rows across generations while leaving medians and gate counts intact. Sec 4.2''s new claim ''every pair clearing the upper bound also clears the lower gate, so both counts are 127'' is exactly the ''two counts agree'' evidentiary form that proved fragile before. If the lower-side solve ran on a different solver generation, 127 = 127 may be coincidence rather than conclusion. Recommend recording sklearn version, resolved solver and resolved penalty in the ledger and gate artifact — the pinning decision itself was deferred at L8 (pinning would move every published lower-side number), but recording is additive and moves nothing.'
+  category: experiment
+  severity: warning
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
+  mentions:
+  - round: 13
+    reviewers:
+    - reviewer_1
+    note: R1's own finding, tied to the brief's request to re-test the two near-miss classes (the convention-effect constant and the M=1 cross-generation control). The first class re-tests clean; this is the second class re-forming at a new site.
+  action_items:
+  - round: 13
+    action: Record sklearn version / solver / penalty in the lower-side runner metadata and the gate artifact (additive; no numbers move).
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: 'RULED 2026-09-20 after the probe returned. The mechanism this item implied is REFUTED: lbfgs is sklearn''s default solver and the effective penalty is l2 (measured by coefficient equivalence, max abs diff 0.0), identically on 1.9.0 and 1.9.1. The writer records the values as plain provenance with NO solver/penalty mechanism claim. Target changed to a NEW SIBLING artifact: the lower-side ledger''s sha is cited in Open Science, so its bytes must not change. The four existing execution_environment dicts correctly describe the LOCAL container and are left untouched. Reviewer also found the probe artifact unregistered; registration dispatched. C054 / M177.'
+    assigned_to: director
+    status: open
+  - round: 13
+    action: 'RESOLVED 2026-09-20: sibling environment record registered as art_20260920_e84e87 (lower_side_classifier_environment_canonical_111), hash-verified, with effective_penalty l2 backed by coefficient-equivalence evidence and NO mechanism claim. The hash-cited ledger was left untouched. Duplicate registration retired; manifest audited with 0 hash mismatches.'
+    assigned_to: director
+    status: done
+  resolution: Provenance recorded without touching a hash-cited artifact. The underlying cross-generation divergence remains unexplained and is recorded as such.
+  resolution_round: 13
+- id: L13-W13
+  summary: 'REFERENCE-DEPENDENT NOVELTY CLAIM: Sec 2.2 / Sec 6.1 re-characterise Liu et al. [31] from ''single-letter, requiring conditionally i.i.d. repeated observations'' to ''its hypotheses admit correlated, non-stationary observations, and the conditional-independence assumption enters only its multi-session additivity corollaries''. This is a re-statement of a published work''s assumptions and one of the supports of the novelty boundary (their sign vs our interval at a fixed flow count). If the re-characterisation is wrong, the novelty claim loses a support. Run a full reference check on [31] (assumption text, not just fields) with the submission.'
   category: novelty
   severity: warning
-  status: open
-  first_raised_round: 5
-  last_seen_round: 6
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
   mentions:
-  - round: 6
-    reviewers: [1, 2]
-    note: "STILL OPEN and confirmed by both: a section-by-section comparison of Round 5 against Round 6 finds ZERO methodological content added. R2: 'the distance to clear accept is not something editing can shorten; it needs an addition in the mathematics.'"
+  - round: 13
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: R1-W7; R2 and R3 endorse the load-bearing nature of the re-characterisation.
   action_items:
-  - round: 6
-    action: "Optional this cycle: add a finite-sample lower bound, or explicitly scope the paper as a mixed-strength pairwise certificate."
-    assigned_to: Research Director
+  - round: 13
+    action: Verify [31]'s hypothesis statement against the published text.
+    assigned_to: director
     status: open
-  resolution: ""
-  resolution_round: null
-
-- id: R6-W1
-  summary: "The abstract still asserts the causality Sec 4.3 retracted: the abstract says raising alphabet resolution 'resolves more structure', while Sec 4.3 now says 'associated with higher median divergence, but the confound named above leaves the causal claim open'."
-  category: writing
-  severity: warning
-  status: open
-  first_raised_round: 6
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [1]
-    note: "R1's own finding; neither R2 nor R3 reported it. Same propagation pattern as the Round 5 defects: a body correction not carried to the framing surface."
-  action_items:
-  - round: 6
-    action: "Change the abstract to 'raises the median divergence', matching Sec 4.3."
-    assigned_to: Research Director
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: 'VERIFIED 2026-09-20 by Director against the published text: [31]''s main theorem assumes only bounded metric deviation, Lipschitz robustness and non-degenerate observation; the paper states it proceeds ''without making strong assumptions... (such as independence or stationarity)'', and conditional independence appears ONLY in the multi-session additivity results (Sec 5.1). The paper''s re-characterisation is CORRECT and the novelty support HOLDS. No edit needed.'
+    assigned_to: director
     status: open
-  resolution: ""
-  resolution_round: null
-
-- id: R6-W2
-  summary: "The cross-corpus comparison still pairs the primary's full-n 33.9 percent against QUIC22's capped 15.75 percent. Sec 5.1 now discloses this, but since both corpora were measured under both conventions a convention-matched contrast is immediately available (33.8 vs 15.75) and costs one sentence. R2 calls disclosing rather than translating defensible but not optimal."
-  category: method
-  severity: warning
-  status: open
-  first_raised_round: 6
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [2]
-    note: "R2's finding."
-  action_items:
-  - round: 6
-    action: "Add the convention-matched contrast, or state why translation is methodologically unavailable."
-    assigned_to: Research Director
-    status: open
-  resolution: ""
-  resolution_round: null
-
-- id: R6-W3
-  summary: "The abstract still carries neither the power caveat nor the capped/full-n convention dependence, both of which the body states."
-  category: writing
-  severity: minor
-  status: open
-  first_raised_round: 6
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [1, 2]
-    note: "Reported by both; a one-clause addition."
-  action_items:
-  - round: 6
-    action: "Add both qualifiers to the abstract."
-    assigned_to: Research Director
-    status: open
-  resolution: ""
-  resolution_round: null
-
-- id: R6-W4
-  summary: "Sec 4.4's 'Both substitutions run in the same direction' covers only the second substitution: the mechanism given applies to the resolution substitution, while the closed-set/open-set substitution is described in the same section as producing 'the narrower citable statement', i.e. the opposite direction."
-  category: writing
-  severity: warning
-  status: open
-  first_raised_round: 6
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [1, 2]
-    note: "R1's finding, strengthened by R2 with the intra-paragraph evidence ('the stronger statement' of one, 'the narrower one' of the other, then 'Both run in the same direction'). R2 declines to assert a structural claim about the closed-set direction since its sign depends on whether those rates are multi-class, which the paper does not fully specify."
-  action_items:
-  - round: 6
-    action: "Drop 'Both' or argue the two substitutions separately."
-    assigned_to: Research Director
-    status: open
-  resolution: ""
-  resolution_round: null
-
-- id: R6-W5
-  summary: "The body calls the detector validation 'a consistency check, not a falsifiable test', while Table 2's caption says 'the certified floor is not falsified' and Contributions entry 4 says 'no detector breaches the certified floor'. The same experiment is described both as unfalsifiable and as not-falsified."
-  category: writing
-  severity: warning
-  status: open
-  first_raised_round: 6
-  last_seen_round: 6
-  mentions:
-  - round: 6
-    reviewers: [1, 2]
-    note: "R1's finding; R2 concurs and proposes 'not contradicted' or 'no breach observed'. A direct consequence of the correct new wording in Sec 4.4 - the surrounding captions were not brought along."
-  action_items:
-  - round: 6
-    action: "Unify the wording to 'not contradicted' or 'no breach observed'."
-    assigned_to: Research Director
-    status: open
-  resolution: ""
-  resolution_round: null
-
-- id: R6-W6
-  summary: "Sec 2.3 still groups [11] Diakonikolas and [19, 22] under 'Kolmogorov-Smirnov style refinements', while Sec 6.2 now correctly separates 'closeness testing' [5, 11] from 'l1 minimax' [19, 22]. The RT-W16 fix was applied at one site and not the other, and conflicts with Sec 3.3's own disclaimer."
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  - round: 13
+    action: 'RESOLVED 2026-09-20, Director-reverified. Online reference check on the FINAL bytes (ran 07:22, after the last edit at 07:12): 64 bib entries, 64 unique cited keys, 89 citations, 0 missing, 0 orphan, 0 duplicate keys, 0 not-found, 56 verified online, 8 flagged ''mismatch''. DIRECTOR VERIFICATION OF ALL 8: every one is a LaTeX-normalisation artifact, not a metadata error. I resolved each flagged DOI directly against CrossRef/the issuing registry: lecam1973convergence 10.1214/aos/1193342380 -> correct title/year/venue (author ''LeCam'' vs ''Le Cam'' - the API drops the space because the .bib writes {{Le Cam}}); sirinam2018deep 10.1145/3243734.3243768 -> correct, API returns the TRUNCATED title ''Deep Fingerprinting''; jiao2018l1distance 10.1109/TIT.2018.2846245 -> correct, API title is HTML-escaped math markup; andres2013geo 10.1145/2508859.2516735 -> correct, API title truncated to ''Geo-indistinguishability''; valiant2011estimating 10.1145/1993636.1993727 -> correct, API title
+      truncated to ''Estimating the unseen''; mucke2025waiting 10.1145/3768988 -> correct title/year/venue; kuhlewind2022rfc 10.17487/RFC9312 -> correct, RFC exists; cesnet2025cesnet 10.5281/zenodo.17249078 -> correct, Zenodo API confirms title, creators and DOI (publication date 2025-10-02). The ''entry type mismatch'' flags (dataset/report/proceedings-article vs @misc/@inproceedings) are the registry''s own type vocabulary, not BibTeX errors. NO .bib EDIT MADE and none needed. The reference list is sound on the submission bytes.'
+    assigned_to: director
+    status: done
+  resolution: 'RESOLVED 2026-09-20, Director-reverified. Online reference check on the FINAL bytes (ran 07:22, after the last edit at 07:12): 64 bib entries, 64 unique cited keys, 89 citations, 0 missing, 0 orphan, 0 duplicate keys, 0 not-found, 56 verified online, 8 flagged ''mismatch''. DIRECTOR VERIFICATION OF ALL 8: every one is a LaTeX-normalisation artifact, not a metadata error. I resolved each flagged DOI directly against CrossRef/the issuing registry: lecam1973convergence 10.1214/aos/1193342380 -> correct title/year/venue (author ''LeCam'' vs ''Le Cam'' - the API drops the space because the .bib writes {{Le Cam}}); sirinam2018deep 10.1145/3243734.3243768 -> correct, API returns the TRUNCATED title ''Deep Fingerprinting''; jiao2018l1distance 10.1109/TIT.2018.2846245 -> correct, API title is HTML-escaped math markup; andres2013geo 10.1145/2508859.2516735 -> correct, API title truncated to ''Geo-indistinguishability''; valiant2011estimating 10.1145/1993636.1993727 -> correct, API title
+    truncated to ''Estimating the unseen''; mucke2025waiting 10.1145/3768988 -> correct title/year/venue; kuhlewind2022rfc 10.17487/RFC9312 -> correct, RFC exists; cesnet2025cesnet 10.5281/zenodo.17249078 -> correct, Zenodo API confirms title, creators and DOI (publication date 2025-10-02). The ''entry type mismatch'' flags (dataset/report/proceedings-article vs @misc/@inproceedings) are the registry''s own type vocabulary, not BibTeX errors. NO .bib EDIT MADE and none needed. The reference list is sound on the submission bytes.'
+  resolution_round: 13
+- id: L13-W14
+  summary: 'Attribution gap on the new bound: the paper positions Eq (9) honestly as ''a route choice, not a new theorem'', but the two-event deviation argument carries no citation, breaking the paper''s otherwise rigorous attribution discipline (every constant''s provenance is named). Suggest pointing to Tsybakov [52] (the Le Cam deviation mechanism already cited) and connecting (9) to the closeness-testing line [6,12], whose theme is exactly ''avoid the l1 alphabet term'' — which also strengthens the ''the alphabet price can be avoided'' argument by showing it is a known tradition rather than an isolated trick.'
   category: novelty
-  severity: warning
-  status: open
-  first_raised_round: 6
-  last_seen_round: 6
+  severity: minor
+  status: resolved
+  first_raised_round: 13
+  last_seen_round: 13
   mentions:
-  - round: 6
-    reviewers: [2]
-    note: "R2's finding, in its own remit. Shows the related-work correction was applied at one site only."
+  - round: 13
+    reviewers:
+    - reviewer_2
+    note: R2's novelty-remit suggestion; no new reference required (both are already in the bibliography).
   action_items:
-  - round: 6
-    action: "Align Sec 2.3 with Sec 6.2's three-way split."
-    assigned_to: Research Director
+  - round: 13
+    action: Add the attribution clause.
+    assigned_to: director
     status: open
-  resolution: ""
-  resolution_round: null
-
-- id: R6-W7
-  summary: "Sec 4.2's closing sentence still reads 'significant unmatched' while the abstract and Sec 4.2's opening read 'significant before matching'."
+  - round: 13
+    action: 'Dispatched 2026-09-20 in one consolidated Paper-Agent pass: heading counter fix + unstar, the five refs plus a whole-tree scan and .aux label-map check, the FOUR M>=2 surfaces aligned with per-count route labels, the k>=15 qualifier at three sites, the stale threshold clause deleted, the LP row-sum changed to <= with E[err] defined rather than the discarded-term explanation, W5 one-liner, plus W4/W6/W8/W9/W10/W11/W13/W14 and the W7/W12 additive provenance records. Placeholder deliberately excluded (user gate).'
+    assigned_to: paper_agent
+    status: in_progress
+  - round: 13
+    action: NOT APPLIED as of 2026-09-20 - re-dispatched. No attribution clause exists on Eq (9).
+    assigned_to: director
+    status: open
+  - round: 13
+    action: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+    assigned_to: director
+    status: done
+  resolution: RESOLVED 2026-09-20, verified by Director at source and in the rendered PDF (sha256 28c42fc88e1fe5e9c248a21e42a1cc61c52a96b6858929008784fbe45ddc273c, 24 pages, body p.13). Visual gate passed 24/24 pages.
+  resolution_round: 13
+- id: R14-C1
+  summary: 'INTERNAL PROCESS LEAK in the submitted bytes: the Open Science appendix prints a bolded item label ''Round-13 analysis loads.'' followed by ''the four further analyses this revision adds''. Rendered p16 verified by the Director and independently confirmed by the Reviewer. Not a CFP violation and not an identity leak, but it exposes an internal revision counter in a double-blind submission; a reviewer reading it infers prior submission history.'
+  category: format
+  severity: critical
+  status: resolved
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: 'Audit-tier finding #5. Reviewer audit: real, in the rendered PDF; a one-line edit, to be folded into the same final pass as the still-pending Open Science item so the SHA-bound receipt is taken once.'
+  action_items:
+  - round: 14
+    action: 'Rename the item label to [Analysis loads.] and reword "the four further analyses this revision adds" to "the four further analyses this paper adds". MANDATORY: any source edit voids the SHA-bound receipt; batch with L13-CR1 and take one fresh full render plus a 24/24 visual gate afterwards.'
+    assigned_to: director
+    status: done
+  resolution: 'FIXED and verified in source and render on final bytes sha256 789fa982e040a9a2ed8798f1a0d0f7a454ed49cfe280f582dbac341ebf4d4a9a (413,241 B, 24 pp, body p.13). main.tex:198 now reads \item[Analysis loads.] The four further analyses this paper adds. Whole-tree grep for Round/revision/this revision returned zero hits; a render-level scan for process vocabulary also returned zero. Visual gate passed 24/24 on the new bytes. Note: this supersedes the prior gate on cd34c2800f9746c9835fd2718d4cd81047b27d0f1b463e623ae08d1115ad1680.'
+  resolution_round: 14
+- id: R14-M1
+  summary: 'Sec 3.1 threshold-insensitive leading sentence: R1+R3 reported it as a residual contradiction while R2 reported it deleted. Adjudicated from the bytes as RESOLVED; redundant with L13-W2, which had already landed.'
   category: writing
   severity: minor
-  status: open
-  first_raised_round: 6
-  last_seen_round: 6
+  status: resolved
+  first_raised_round: 14
+  last_seen_round: 14
   mentions:
-  - round: 6
-    reviewers: [1, 2, 3]
-    note: "Found by R3; confirmed independently by R1 and R2."
+  - round: 14
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: R1+R3 vs R2 disagreement on whether the sentence remained.
   action_items:
-  - round: 6
-    action: "Use one phrasing throughout."
-    assigned_to: Research Director
-    status: open
-  resolution: ""
-  resolution_round: null
-
-- id: R6-W8
-  summary: "Sec 4.3 uses two names for one statistic: 'the median of the paired differences' in the defining sentence, 'the per-replicate change in median TV' in the next."
-  category: writing
+  - round: 14
+    action: 'Adjudicated by the Director and confirmed by the Reviewer: grep -rn insensitive over all ten .tex files returns zero matches; measurement_design.tex:141-144 carries only the correct statement. R1+R3 reviewed a stale copy.'
+    assigned_to: director
+    status: done
+  resolution: Already fixed in the submitted bytes under L13-W2; no edit needed. Verified by two independent greps.
+  resolution_round: 14
+- id: R14-M2
+  summary: 'Camera-ready 24pp to 20pp reduction. Reviewer warns the report-suggested path partially crosses the standing red line: merging A.7 with Sec 5.5 becomes a body-prose cut if any Sec 5.5 text is absorbed or shortened.'
+  category: format
   severity: minor
   status: open
-  first_raised_round: 6
-  last_seen_round: 6
+  first_raised_round: 14
+  last_seen_round: 14
   mentions:
-  - round: 6
-    reviewers: [1]
-    note: "R1's finding; a one-line unification."
+  - round: 14
+    reviewers:
+    - reviewer_1
+    - reviewer_3
+    note: 'Consensus path: merge A.7 with Sec 5.5, compress Table 6 to 3 rows, return Table 3 M=1 row to body Sec 4.2, reference compression.'
   action_items:
-  - round: 6
-    action: "Unify the statistic's name."
-    assigned_to: Research Director
+  - round: 14
+    action: 'Defer to camera-ready. Scope any A.7/Sec 5.5 merge as APPENDIX-SIDE ONLY; the body is at exactly p.13 against a 13pp cap and body prose must not be cut to buy a page. Not a submission blocker: submission-phase appendices are uncapped.'
+    assigned_to: director
     status: open
-  resolution: ""
+  resolution: ''
   resolution_round: null
+- id: R14-M3
+  summary: Sec 4.4 43-vs-45 services explanation is buried in a long sentence.
+  category: writing
+  severity: minor
+  status: resolved
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_1
+    note: Restructure, not a correctness fix.
+  action_items:
+  - round: 14
+    action: 'Replace with: The 340 informative pairs span 43 of the 45 services (the other 2 carry no informative pair). ALL THREE NUMBERS VERIFIED by the Reviewer from q1_lower_side_full_n.json (upper_recomputed.eps_hi < 0.5): 340 pairs, 43 distinct services, 2 with none (services 33 and 40). CAVEAT: true under the UNCAPPED convention the paper uses; the capped ledger gives 234 for the same query.'
+    assigned_to: director
+    status: done
+  resolution: 'LANDED and verified in source+render on sha256 789fa982e040a9a2ed8798f1a0d0f7a454ed49cfe280f582dbac341ebf4d4a9a: results.tex now reads "The 340 informative pairs span 43 of the 45 services, under the full-n convention of 4.1 (the other 2 carry no informative pair)." Convention named.'
+  resolution_round: 14
+- id: R14-M4
+  summary: Appendix A.7 reports sandwich and leave-one-block-out arms with identical count 978/1000 and identical Clopper-Pearson interval; the report asked whether to add numerical-coincidence wording.
+  category: writing
+  severity: minor
+  status: resolved
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_2
+    - reviewer_3
+    note: Suggested explaining the identical interval.
+  action_items:
+  - round: 14
+    action: 'Do NOT ship numerical coincidence: the Reviewer ruled it a causal claim of the class this project has retracted repeatedly, and a negative divergence run is not evidence of coincidence. The mechanism is structural: CP is a function of (k,n) alone, and both intervals were reproduced exactly from (978,1000). Ship instead: both arms cover 978 of 1000, so their Clopper-Pearson intervals coincide by construction; the radii differ (0.033172 vs 0.033117). The two radius code paths ARE genuinely different (cluster-robust influence-function variance with normal quantile vs leave-one-block-out jackknife with t quantile), verified at track5_variance_radius.py:98-131.'
+    assigned_to: director
+    status: done
+  resolution: 'LANDED and verified on sha256 789fa982e040a9a2ed8798f1a0d0f7a454ed49cfe280f582dbac341ebf4d4a9a: main.tex:612 states the count 978 of 1000 "with radii 0.033172 against 0.033117"; "an equal count forces an equal interval by construction"; the two code paths are named. Grep for "coincidence" in main.tex: 0.'
+  resolution_round: 14
+- id: R14-M5
+  summary: Sec 3.7 promises A.6 prints the closed form but A.6 gives derivation prose; measurement_design.tex:340 repeats the promise.
+  category: writing
+  severity: minor
+  status: resolved
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_1
+    note: Stronger fix available than softening to derives.
+  action_items:
+  - round: 14
+    action: 'Display the formula in A.6 rather than softening the promise: main.tex:416-428 already derives it and the 8.764053 constant is already in the paper, so the display closes both promises at once.'
+    assigned_to: director
+    status: done
+  resolution: 'LANDED and verified on sha256 789fa982e040a9a2ed8798f1a0d0f7a454ed49cfe280f582dbac341ebf4d4a9a: the closed form is displayed as Eq (10) in sec A.8 exactly once. A follow-up defect - the new display DUPLICATED an existing derivation in the limitations appendix - was caught by the Director and fixed in the same pass: the limitations passage now cross-references Eq (10) instead of restating it. Mmax formula appears once in source and once in render.'
+  resolution_round: 14
+- id: R14-M6
+  summary: Sec 4.2 on-the-same-route referent is momentarily ambiguous.
+  category: writing
+  severity: minor
+  status: resolved
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_1
+    note: Cosmetic; repeat the route name.
+  action_items:
+  - round: 14
+    action: Repeat the route name (on the m-free route at (M=1,k=10)) instead of on the same route.
+    assigned_to: director
+    status: done
+  resolution: 'LANDED and verified on sha256 789fa982e040a9a2ed8798f1a0d0f7a454ed49cfe280f582dbac341ebf4d4a9a: results.tex:52 now reads "on the m-free route at (M=1,k=10)".'
+  resolution_round: 14
+- id: R14-M7
+  summary: Primary result table (tab:bracket) sits in Sec A.4, ~3pp from its body citations; the report tier labels disagreed (audit said critical, tracker said shepherd-level).
+  category: format
+  severity: minor
+  status: open
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_1
+    - reviewer_3
+    note: Overlaps carried-forward L13-W9 self-containment.
+  action_items:
+  - round: 14
+    action: 'Re-tiered by the Reviewer as SHEPHERD-LEVEL: not a correctness defect (the table exists, is cited, and is correct) but a substantive presentation gap and a real acceptance risk if a reviewer cannot locate the primary evidence. Fix at camera-ready; do not block; do not drop. Needs its own page-budget decision.'
+    assigned_to: director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R14-M8
+  summary: MIS-TRIAGED AS COSMETIC; it is a numeric inconsistency. Abstract says two-point excess while main.tex:454 and Sec 4.4/5.5 say two- or three-point, and the two body passages describe different cells (8 vs 10 violations) for what reads as the same test.
+  category: writing
+  severity: minor
+  status: resolved
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_3
+    note: Reviewer ran both passages own tests; all three p-values correct but the cells unnamed and mismatched.
+  action_items:
+  - round: 14
+    action: 'Two-part fix. (1) WIDEN the abstract to two- or three-point: the substance is two-or-three, so the abstract two-point is a narrowing that understates; do not narrow the body instead. (2) Name the cell in both places (the strongest cell, 10 of 340). Verified p-values: 340 pairs k=8 null=0.05 -> 0.995377; 340 pairs k=10 null=0.05 -> 0.976547; 340 pairs k=10 null=0.025 -> 0.346192.'
+    assigned_to: director
+    status: done
+  resolution: 'LANDED and verified on sha256 789fa982e040a9a2ed8798f1a0d0f7a454ed49cfe280f582dbac341ebf4d4a9a: "two-point excess" now appears 0 times; "two- or three-point excess" 4 times (abstract, conclusion, results, main). The cell is named in both places - results.tex:268 now reads "the LightGBM holdout-0.2 cell, the most adverse of the nine". Widened, not narrowed, as directed.'
+  resolution_round: 14
+- id: R14-M9
+  summary: Open Science four-item compression verified as an intentional three-way sync with Sec 5.6.
+  category: writing
+  severity: minor
+  status: resolved
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: Intentional improvement.
+  action_items:
+  - round: 14
+    action: Closed as not-a-defect. No edit.
+    assigned_to: director
+    status: done
+  resolution: Verified intentional; the deleted phrase contradicted the Sec 5.6 dual-use statement.
+  resolution_round: 14
+- id: R14-M10
+  summary: Sec A.4 heading plus a one-sentence guide but Table 3 floats ~3 pages later; the report suggested a FloatBarrier.
+  category: format
+  severity: minor
+  status: open
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_1
+    note: Related to R14-M7 table placement.
+  action_items:
+  - round: 14
+    action: 'FOLD INTO R14-M7 rather than fixing separately: a FloatBarrier at A.4 and relocating the table are the same decision. If any float moves, a renumbering pass follows: re-check file -> label -> number -> prose (read newlabel from the .aux and grep the log for multiply defined), because ??-counting and bare grep are both blind to a resolving-but-wrong reference.'
+    assigned_to: director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R14-A1
+  summary: 'Audit-tier: symbol overload (M = K+1 = 46 in Sec 2.1 vs M = rung count in Sec 2.2; C = 46 classes vs the McDiarmid parameter), internal artifact IDs in body text, and ~70% whitespace on the Ethical Considerations page.'
+  category: format
+  severity: minor
+  status: open
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_1
+    - reviewer_2
+    - reviewer_3
+    note: Report listed these among six audit critical items; the Reviewer independently agreed they are cosmetic/presentational, not submission blockers.
+  action_items:
+  - round: 14
+    action: Camera-ready polish tier. All 15 cited art_ IDs resolve in the manifest, so the artifact-ID concern is aesthetic, not evidential.
+    assigned_to: director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R14-A2
+  summary: 'Bib hygiene carried across rounds: 18 metadata mismatches, 15 entry-type mismatches, 2 missing authors (luxemburk 2023), 4 unprotected acronyms.'
+  category: format
+  severity: minor
+  status: open
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_2
+    - reviewer_3
+    note: Persistent multi-round hygiene, explicitly not a Round-14 defect.
+  action_items:
+  - round: 14
+    action: 'Camera-ready bulk cleanup. Reviewer verified the blocking condition is ABSENT: 64 entries, 0 retracted, 0 cited-but-absent keys, 0 entries missing author/title/year.'
+    assigned_to: director
+    status: open
+  resolution: ''
+  resolution_round: null
+- id: R14-C2
+  summary: 'CORRECTNESS, in the submitted body: Introduction contribution 2 asserts the m-free advantage weakens "rather than vanishing at any single resolution". The grid refutes it - at k=30 the advantage is 0 at every M. The abstract states it correctly; only the Introduction overstates.'
+  category: writing
+  severity: critical
+  status: resolved
+  first_raised_round: 14
+  last_seen_round: 14
+  mentions:
+  - round: 14
+    reviewers:
+    - reviewer_1
+    note: Found by the Reviewer on a ROADMAP review and confirmed by the Director in both the source and the rendered PDF.
+  action_items:
+  - round: 14
+    action: Delete the clause "rather than vanishing at any single resolution" from introduction.tex:107-108, leaving "the advantage weakens as resolution increases" - which the abstract already says correctly. Queued as EDIT 7 in the batched final pass.
+    assigned_to: paper_agent
+    status: done
+  - round: 14
+    action: 'DIRECTOR ROOT-CAUSE: BOTH single-axis boundary summaries are false. "Vanishes from k>=15 onward" is false (k=15 shows +18/+4/+1 at M=1/2/4); its replacement "disappears at M>=8 at every k" is ALSO false (+94/+80 at k=5, +6/+5 at k=10 at M>=8). The advantage is present in 13 of 20 cells, absent in 7. Verified separator: saturation fraction, with PERFECT separation - every cell with the advantage has sat_frac <= 0.6966, every cell without >= 0.7280. Do not substitute any alternative single-axis boundary claim.'
+    assigned_to: director
+    status: done
+  - round: 14
+    action: The cited artifact eth_full_mk_grid.json carries the same false claim in its own `finding` and falsifier `resolution` prose while its table shows otherwise. It is hash-cited (main.tex:209-210, 522e25ff...) so it was NOT edited; a sibling correction (mk_grid_boundary_correction.json) carries the verified table and corrected boundary. Logged as M179.
+    assigned_to: director
+    status: done
+  resolution: 'FIXED and verified in source and render on final bytes sha256 789fa982e040a9a2ed8798f1a0d0f7a454ed49cfe280f582dbac341ebf4d4a9a. The clause "rather than vanishing at any single resolution" is deleted from introduction.tex (grep count 0 in source AND 0 in the rendered text layer). No substitute boundary claim was written: both single-axis forms had been verified false. The paper body (results.tex 4.3) was independently confirmed CORRECT and unchanged - it already stated the advantage "is present at every M for k=5 and k=10, is confined to M=1,2,4 at k=15, and is absent at k=30", which matches the full 20-cell grid exactly.'
+  resolution_round: 14

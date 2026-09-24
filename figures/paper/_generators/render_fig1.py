@@ -91,18 +91,34 @@ def build():
     ax.axis("off")
 
     # --- stage 1: raw records -------------------------------------------
+    # Every card is a containment target, not just the bottom one: the label
+    # must clear the TOPMOST card's edges, which is the rectangle a reader
+    # actually sees (cards are drawn back-to-front). Checking only the bottom
+    # card passed a label that visibly clipped the top card's right edge.
+    card_x, card_y, card_w, card_h = 0.010, 0.30, 0.142, 0.30
     for i, off in enumerate((0.030, 0.018, 0.006)):
         ax.add_patch(FancyBboxPatch(
-            (0.012 + off, 0.30 + off), 0.105, 0.30,
+            (card_x + off, card_y + off), card_w, card_h,
             boxstyle="round,pad=0,rounding_size=0.010",
             linewidth=1.0, edgecolor=GREY, facecolor="white", zorder=1 + i))
-    ax.text(0.075, 0.45, "Raw QUIC\nflow records", ha="center", va="center",
-            fontsize=7.4, color=INK, zorder=6, linespacing=1.35)
+    # The offsets run +0.030 .. +0.006, so the stack steps up and to the RIGHT:
+    # the card drawn last (smallest offset) supplies the visible left edge, and
+    # the card drawn first (largest offset) supplies the right edge. The label
+    # must clear BOTH, so centre it on the span of the whole stack and register
+    # that span as the containment target.
+    offs = (0.030, 0.018, 0.006)
+    span_x0 = card_x + min(offs)
+    span_x1 = card_x + max(offs) + card_w
+    t_cards = ax.text((span_x0 + span_x1) / 2, 0.45,
+                      "Raw QUIC\nflow records",
+                      ha="center", va="center", fontsize=8.6, color=INK,
+                      zorder=6, linespacing=1.35)
 
-    arrow(ax, (0.145, 0.45), (0.185, 0.45), color=GREY)
+    arrow(ax, (0.160, 0.45), (0.185, 0.45), color=GREY)
 
     # --- stage 2: channel quantization ----------------------------------
-    boxes = []
+    boxes = [((span_x0, card_y + min(offs), span_x1 - span_x0,
+               card_h + (max(offs) - min(offs))), t_cards)]
     boxes.append(box(ax, 0.170, 0.235, 0.230, 0.43,
         "Channel\nquantization\n\n$k$-prefix symbol\nresolution $M$\n$m=(2M)^k$",
         edge=INK, lw=1.4, fs=6.6, weight="normal"))
@@ -125,7 +141,7 @@ def build():
     ax.add_patch(Polygon(hexu, closed=True, edgecolor=BLUE, facecolor="#F2F8FC",
                          linewidth=1.5, zorder=2))
     ax.text(hx, 0.5875, r"$\epsilon_{hi}$", ha="center", va="center",
-            fontsize=7.6, color=BLUE, zorder=3)
+            fontsize=11.0, color=BLUE, zorder=3)
 
     # --- lower branch ---------------------------------------------------
     arrow(ax, (0.424, 0.3075), (0.452, 0.3075), color=ORANGE, ls=(0, (4, 2)))
@@ -139,7 +155,7 @@ def build():
     ax.add_patch(Polygon(hexl, closed=True, edgecolor=ORANGE, facecolor="#FDF6EC",
                          linewidth=1.5, zorder=2))
     ax.text(hx, 0.3075, r"$\epsilon_{lo}$", ha="center", va="center",
-            fontsize=7.6, color=ORANGE, zorder=3)
+            fontsize=11.0, color=ORANGE, zorder=3)
 
     # --- merge into the interval ----------------------------------------
     ax.plot([0.836, 0.868], [0.5875, 0.5875], color=BLUE, lw=1.3, zorder=1)
@@ -154,17 +170,17 @@ def build():
     ax.plot([0.908, 0.908], [0.4285, 0.4665], color=INK, lw=1.8, zorder=3)
     ax.plot([0.984, 0.984], [0.4285, 0.4665], color=INK, lw=1.8, zorder=3)
     ax.text(0.946, 0.378, "per-pair\n$\\epsilon$-bracket", ha="center",
-            va="top", fontsize=7.0, color=INK, linespacing=1.3)
+            va="top", fontsize=10.2, color=INK, linespacing=1.3)
 
     # gate
     ax.text(0.946, 0.612, "gate:\n$\\epsilon_{lo}>0.05$ AND $\\epsilon_{hi}<0.5$",
-            ha="center", va="bottom", fontsize=6.9, color=GREEN,
+            ha="center", va="bottom", fontsize=10.0, color=GREEN,
             linespacing=1.35)
 
     # branch guarantee labels, placed clear of every box
-    ax.text(0.5625, 0.695, "finite-sample, joint 0.975", fontsize=6.8,
+    ax.text(0.5625, 0.695, "finite-sample, joint 0.975", fontsize=9.9,
             color=BLUE, ha="center", va="bottom")
-    ax.text(0.5625, 0.195, "nominal 1-alpha level", fontsize=6.8, color=ORANGE,
+    ax.text(0.5625, 0.195, "nominal 1-alpha level", fontsize=9.9, color=ORANGE,
             ha="center", va="top")
 
     ok = check(fig, "fig1_bracket_overview", boxes)

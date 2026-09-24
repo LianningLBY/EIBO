@@ -1,0 +1,69 @@
+{
+ "DO_NOT_COMPARE": "These are 12-PAIR PILOT medians on the first 12 of itertools.combinations over the 45 gated services - NOT a random sample and NOT the full-990 result. Do NOT place pilot[name].M1.eps_lo_median beside the full-run M=2 median; that mixes a pilot with a full run and understates the M=1 value. Correct like-for-like contrast: M=1 full-run median 0.53677 vs M=2 full-run median 0.85352, from t1_lower_side_M1.json and t1_lower_side_M2.json.",
+ "caution": "pilot pairs are the first 12 of itertools.combinations over the 45 gated services, NOT a random sample; the full run is required before any claim. M=4 cost is projected, not measured.",
+ "control": {
+  "alphabet": 32,
+  "note": "confirms the 45-service gate and the 32-symbol alphabet; rung counts cached",
+  "rung_M": 1,
+  "services_all": 53,
+  "services_gated": 45,
+  "symbol_index_max": 31,
+  "total_masked_flows": 9258925
+ },
+ "date": "2026-09-19",
+ "execution_environment": {
+  "CommitLimit_kB": 16235420,
+  "MemTotal_kB": 32470844,
+  "WHY_THIS_MATTERS": "These runs executed on the platform-local container, not on server 111 where this project's experiments are configured to run. The corpus sha matches the published one, so the DATA is the same; only the machine differs. If the manuscript adopts the UNCAPPED lower-side convention, these T1/T1b runs must be repeated on server 111 (that host has the memory headroom the local container lacks). Under the capped convention they are usable as they stand.",
+  "cgroup_path": "name=systemd:/ecs/c55d9e9773ea4d899180f554566940d9/c55d9e9773ea4d899180f554566940d9-1313111959",
+  "corpus": "/efs/workspace/_corpus/CESNET-QUICEXT-25-XS.h5 sha256 6b323c4c...",
+  "execution_host": "platform-local container (NOT server 111)",
+  "measured_alloc_ceiling_GB": "~16 (OOM-killed SIGKILL/137, bisected 15 ok / 16 killed)",
+  "python": "/app/.venv/bin/python3",
+  "sklearn": "1.9.1"
+ },
+ "experiment": "T1 pilot \u2014 throughput and object check for the classifier lower side at M>1",
+ "finding": "the M=2 lower side DOES bind: median eps_lo 0.568 at width 1024 vs 0.392 at width 32, all 12 pilot pairs above the 0.05 lower gate. Direction is favourable \u2014 a finer symbol alphabet raises the classifier lower bound, consistent with X8 (the finer object carries more distinguishability). n=12 pairs is a pilot, not the full-990 result.",
+ "full_run_medians": {
+  "M1_eps_lo_median": 0.53677,
+  "M2_eps_lo_median": 0.85352,
+  "source": "t1_lower_side_M1.json / t1_lower_side_M2.json (990 pairs each, sample_cap_per_service 20000)"
+ },
+ "object": "packed k-prefix SYMBOL law at k=5 over the a-priori-fixed categorical alphabet (2M)^k, one-hot rows; the symbol-map construction that produced the published M=1 eps_lo (median 0.534945), NOT the four-marginal 32-vector object",
+ "pilot": {
+  "M1": {
+   "eps_lo_median": 0.3924,
+   "max": 0.5215,
+   "min": 0.2328,
+   "sec_per_pair": 1.19,
+   "width": 32
+  },
+  "M2": {
+   "eps_lo_median": 0.568,
+   "max": 0.7411,
+   "min": 0.446,
+   "sec_per_pair": 4.83,
+   "width": 1024
+  },
+  "pairs_per_rung": 12
+ },
+ "projected_full_run": {
+  "M1_minutes": 20,
+  "M2_minutes": 80,
+  "M4_minutes": [
+   451,
+   2550
+  ],
+  "basis": "measured per-pair rates at M=1 and M=2; M=4 projected by width scaling, banded"
+ },
+ "protocol": {
+  "alpha": 0.025,
+  "classifier": "LogisticRegression(max_iter=1000)",
+  "method": "michel",
+  "random_state": 0,
+  "sample_cap_per_service": 20000,
+  "sample_seed": 20260913,
+  "sklearn_version": "1.9.1",
+  "test_size": 0.3
+ }
+}

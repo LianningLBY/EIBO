@@ -1,0 +1,140 @@
+{
+  "axis_rationale": "axis is n, B held fixed at 64: B's effect is on the estimate (inflation, measured in v2b), n's effect is on the radius; only radius shrink can bring an inflated estimate across nominal.",
+  "block_size": 64,
+  "concentration": 0.1,
+  "control": {
+    "expected": 0.16311342728653244,
+    "got": 0.16311342728653244,
+    "status": "MATCH"
+  },
+  "experiment": "coverage_calibration_ladder",
+  "failures": [],
+  "n_ladder": [
+    20000,
+    40000,
+    60000,
+    80000,
+    107065
+  ],
+  "no_verdict_emitted": true,
+  "purpose": "locate the n at which coverage first falls below nominal at B=64",
+  "replicates": 400,
+  "rows": [
+    {
+      "B": 64,
+      "below_nominal": false,
+      "cap_hit_count": 0,
+      "capped_dominated": false,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "failure_threshold_tvhat_below": 0.3390667092059708,
+      "median_eps_hi": 0.4857332907940292,
+      "median_tv_hat": 0.4248,
+      "n": 20000,
+      "radius": 0.06093329079402921,
+      "replicates": 400,
+      "true_tv": 0.4,
+      "tvhat_inflation_over_true": 1.062
+    },
+    {
+      "B": 64,
+      "below_nominal": false,
+      "cap_hit_count": 0,
+      "capped_dominated": false,
+      "conc": 0.1,
+      "coverage": 0.9925,
+      "coverage_ci95": [
+        0.9782393314855828,
+        0.9984506410500943
+      ],
+      "covered": 397,
+      "failure_threshold_tvhat_below": 0.35691365687953014,
+      "median_eps_hi": 0.4493863431204699,
+      "median_tv_hat": 0.4063,
+      "n": 40000,
+      "radius": 0.04308634312046988,
+      "replicates": 400,
+      "true_tv": 0.4,
+      "tvhat_inflation_over_true": 1.01575
+    },
+    {
+      "B": 64,
+      "below_nominal": true,
+      "cap_hit_count": 0,
+      "capped_dominated": false,
+      "conc": 0.1,
+      "coverage": 0.9825,
+      "coverage_ci95": [
+        0.9642771264063807,
+        0.9929358717792461
+      ],
+      "covered": 393,
+      "failure_threshold_tvhat_below": 0.3648201481574575,
+      "median_eps_hi": 0.43752985184254245,
+      "median_tv_hat": 0.40235,
+      "n": 60000,
+      "radius": 0.03517985184254251,
+      "replicates": 400,
+      "true_tv": 0.4,
+      "tvhat_inflation_over_true": 1.0058749999999999
+    },
+    {
+      "B": 64,
+      "below_nominal": true,
+      "cap_hit_count": 0,
+      "capped_dominated": false,
+      "conc": 0.1,
+      "coverage": 0.9825,
+      "coverage_ci95": [
+        0.9642771264063807,
+        0.9929358717792461
+      ],
+      "covered": 393,
+      "failure_threshold_tvhat_below": 0.3695333546029854,
+      "median_eps_hi": 0.4310603953970146,
+      "median_tv_hat": 0.40059374999999997,
+      "n": 80000,
+      "radius": 0.030466645397014606,
+      "replicates": 400,
+      "true_tv": 0.4,
+      "tvhat_inflation_over_true": 1.0014843749999998
+    },
+    {
+      "B": 64,
+      "below_nominal": true,
+      "cap_hit_count": 0,
+      "capped_dominated": false,
+      "conc": 0.1,
+      "coverage": 0.9825,
+      "coverage_ci95": [
+        0.9642771264063807,
+        0.9929358717792461
+      ],
+      "covered": 393,
+      "failure_threshold_tvhat_below": 0.37366423909881513,
+      "median_eps_hi": 0.4265365734916674,
+      "median_tv_hat": 0.40020081259048246,
+      "n": 107065,
+      "radius": 0.026335760901184904,
+      "replicates": 400,
+      "true_tv": 0.4,
+      "tvhat_inflation_over_true": 1.000502031476206
+    }
+  ],
+  "runner": {
+    "gpu_used": false,
+    "path": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/coverage_calibration_ladder.py",
+    "sha256": "68d2f2d3fc0485a506c883b3998ce539cee0c6bd8d5bb4cca66c188d59544f07",
+    "ssh_used": false
+  },
+  "seed": 20260919,
+  "threshold_n": 60000,
+  "threshold_statement": "under the shared-Dirichlet block law at concentration 0.1 with B=64, and true TV 0.4, coverage first falls below nominal (0.975) at n = 60000",
+  "true_tv": 0.4,
+  "why_no_verdict": "A SUPPORTED/FAILED verdict invites the 'this design cannot fail' objection. The quantity of interest is a detection threshold, which is immune to that objection."
+}

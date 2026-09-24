@@ -1,0 +1,49 @@
+{
+  "artifact": "lower_side_classifier_environment_canonical_111",
+  "purpose": "Environment and classifier-resolution record for the canonical 2026-09-13 lower-side runs. Sibling record: it describes server 111 and leaves every hash-cited ledger and every existing execution_environment dict untouched.",
+  "describes_run": "canonical 2026-09-13 lower-side generation on server 111",
+  "host": {
+    "hostname": "autodl-container-pypkyfrgxr-c84bc8f0",
+    "node": "autodl-container-pypkyfrgxr-c84bc8f0",
+    "cwd": "/root/eibo",
+    "interpreter": "/root/miniconda3/bin/python3",
+    "cwd_note": "cwd is the working directory of the DESCRIBED canonical 2026-09-13 run, read from the source.cwd field of the canonical ledgers q1_eps_lo_symbol_map.json and q1_lower_side_full_n.json (both record /root/eibo). The probe process itself was launched from /root; this record describes the run, not the probe's own launch directory. Corrected 2026-09-20 by Director after the two fields were found to disagree."
+  },
+  "sklearn_version": "1.9.0",
+  "numpy_version": "2.3.2",
+  "scipy_version": "1.18.1",
+  "python_version": "3.12.3",
+  "sklearn_file": "/root/miniconda3/lib/python3.12/site-packages/sklearn/__init__.py",
+  "dist_info": {
+    "path": "/root/miniconda3/lib/python3.12/site-packages/scikit_learn-1.9.0.dist-info",
+    "version": "1.9.0",
+    "mtime": "2026-09-11T17:43:13.432761Z"
+  },
+  "classifier": {
+    "constructor": "LogisticRegression(max_iter=1000, random_state=0)",
+    "random_state": 0,
+    "resolved_solver": "lbfgs",
+    "resolved_solver_note": "sklearn's default solver; not a pinned choice.",
+    "penalty_attribute": "deprecated",
+    "penalty_attribute_note": "The sentinel as stored on the estimator. The resolution block in linear_model/_logistic.py assigns to a local variable and never writes back to self.penalty, so the attribute legitimately retains the sentinel after fit.",
+    "l1_ratio": 0.0,
+    "effective_penalty": "l2",
+    "effective_penalty_evidence": "Coefficient equivalence: LogisticRegression(max_iter=1000, random_state=0) and LogisticRegression(max_iter=1000, random_state=0, penalty='l2') fitted on the same toy array produce bit-identical coefficients (max abs diff = 0.0); the sentinel fit also matches an explicit l1_ratio=0.0 fit to 0.0.",
+    "deprecation_warnings_emitted": [],
+    "deprecation_warnings_note": "The bare sentinel emits no warning; passing penalty='l2' explicitly is what emits the FutureWarning. Hence an empty warning list is the expected reading and is not evidence of an unrun fit."
+  },
+  "cross_version_note": "Resolution is identical across the two installed sklearn versions: both 1.9.0 (server 111) and 1.9.1 (platform-local container) resolve the sentinel to l2 with l1_ratio 0.0, and both use the default solver lbfgs, emitting no warning. No solver or penalty mechanism is asserted here to explain any cross-generation divergence in the ledgers; the cause of that divergence is unexplained and is deliberately not characterised.",
+  "pointers": {
+    "local_container_dicts": "The execution_environment dicts in artifacts/_project/intermediate/t1_lower_side_M1.json, t1_lower_side_M2.json, t1b_lower_side_k10.json and t1b_lower_side_k5.json describe the platform-local container (sklearn 1.9.1) by design. They are true statements about a different machine and must not be overwritten with the values in this record.",
+    "probe_script": "sklearn_solver_probe_20260920.py",
+    "probe_output": "sklearn_solver_probe_20260920.json",
+    "environment_probe_111": "lower_side_environment_111.json"
+  },
+  "provenance": {
+    "measured_utc": "2026-09-20T06:46:08.275021Z",
+    "sources": [
+      "sklearn_solver_probe_20260920.json (probe on server 111)",
+      "lower_side_environment_111.json (host and install inventory)"
+    ]
+  }
+}

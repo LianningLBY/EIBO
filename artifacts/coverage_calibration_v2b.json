@@ -1,0 +1,381 @@
+{
+  "control": {
+    "expected": 0.16311342728653244,
+    "got": 0.16311342728653244,
+    "status": "MATCH"
+  },
+  "coverage_verdict_v2b": "SUPPORTED",
+  "deviations": [
+    "Added a near-binding arm (TV/radius <= 1.25) that the parent run lacked.",
+    "Added a mis-specified pipeline control (alphabet_size=1 on 32-symbol data).",
+    "Increased replicates to 400 for tighter CP endpoints at the binding boundary."
+  ],
+  "experiment": "coverage_calibration_v2b",
+  "failures": [],
+  "misspecified_pipeline_not_constructible": {
+    "attempted": "alphabet_size=1 (and 2,4,8,16) on 32-symbol data",
+    "interpretation": "the harness REFUSES to produce a bound when the declared alphabet is smaller than the observed support, so this family of mis-specification cannot yield a wrong bound. The pipeline control the reviewer proposed is therefore not constructible; the guard itself is the evidence that this failure mode is excluded by construction.",
+    "outcome": "ValueError: alphabet_size is smaller than the observed support"
+  },
+  "near_binding_dependent": [
+    {
+      "B": 1,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 0,
+      "capped": false,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.39999999999999997,
+      "median_eps_hi": 0.7953759684770043,
+      "n": 500,
+      "near_binding": true,
+      "radius": 0.3853759684770043,
+      "ratio_true_tv_over_radius": 1.0379474402121895,
+      "replicates": 400,
+      "true_tv": 0.4
+    },
+    {
+      "B": 8,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 60,
+      "capped": true,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.39999999999999997,
+      "median_eps_hi": 0.9453759684770042,
+      "n": 500,
+      "near_binding": true,
+      "radius": 0.3853759684770043,
+      "ratio_true_tv_over_radius": 1.0379474402121895,
+      "replicates": 400,
+      "true_tv": 0.4
+    },
+    {
+      "B": 64,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 388,
+      "capped": true,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.39999999999999997,
+      "median_eps_hi": 1.0,
+      "n": 500,
+      "near_binding": true,
+      "radius": 0.3853759684770043,
+      "ratio_true_tv_over_radius": 1.0379474402121895,
+      "replicates": 400,
+      "true_tv": 0.4
+    },
+    {
+      "B": 1,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 0,
+      "capped": false,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.39999999999999997,
+      "median_eps_hi": 0.8508634312046989,
+      "n": 400,
+      "near_binding": true,
+      "radius": 0.43086343120469883,
+      "ratio_true_tv_over_radius": 0.9283684133545418,
+      "replicates": 400,
+      "true_tv": 0.4
+    },
+    {
+      "B": 8,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 258,
+      "capped": true,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.39999999999999997,
+      "median_eps_hi": 1.0,
+      "n": 400,
+      "near_binding": true,
+      "radius": 0.43086343120469883,
+      "ratio_true_tv_over_radius": 0.9283684133545418,
+      "replicates": 400,
+      "true_tv": 0.4
+    },
+    {
+      "B": 64,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 395,
+      "capped": true,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.39999999999999997,
+      "median_eps_hi": 1.0,
+      "n": 400,
+      "near_binding": true,
+      "radius": 0.43086343120469883,
+      "ratio_true_tv_over_radius": 0.9283684133545418,
+      "replicates": 400,
+      "true_tv": 0.4
+    },
+    {
+      "B": 1,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 0,
+      "capped": false,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.30000000000000004,
+      "median_eps_hi": 0.8541849026466639,
+      "n": 300,
+      "near_binding": true,
+      "radius": 0.49751823597999734,
+      "ratio_true_tv_over_radius": 0.6029929725270642,
+      "replicates": 400,
+      "true_tv": 0.3
+    },
+    {
+      "B": 8,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 352,
+      "capped": true,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.30000000000000004,
+      "median_eps_hi": 1.0,
+      "n": 300,
+      "near_binding": true,
+      "radius": 0.49751823597999734,
+      "ratio_true_tv_over_radius": 0.6029929725270642,
+      "replicates": 400,
+      "true_tv": 0.3
+    },
+    {
+      "B": 64,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 399,
+      "capped": true,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.30000000000000004,
+      "median_eps_hi": 1.0,
+      "n": 300,
+      "near_binding": true,
+      "radius": 0.49751823597999734,
+      "ratio_true_tv_over_radius": 0.6029929725270642,
+      "replicates": 400,
+      "true_tv": 0.3
+    },
+    {
+      "B": 1,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 356,
+      "capped": true,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.19999999999999998,
+      "median_eps_hi": 1.0,
+      "n": 150,
+      "near_binding": true,
+      "radius": 0.7035970368508502,
+      "ratio_true_tv_over_radius": 0.28425361325448045,
+      "replicates": 400,
+      "true_tv": 0.2
+    },
+    {
+      "B": 8,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 400,
+      "capped": true,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.19999999999999998,
+      "median_eps_hi": 1.0,
+      "n": 150,
+      "near_binding": true,
+      "radius": 0.7035970368508502,
+      "ratio_true_tv_over_radius": 0.28425361325448045,
+      "replicates": 400,
+      "true_tv": 0.2
+    },
+    {
+      "B": 64,
+      "arm": "near_binding_dependent",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 399,
+      "capped": true,
+      "conc": 0.1,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.19999999999999998,
+      "median_eps_hi": 1.0,
+      "n": 150,
+      "near_binding": true,
+      "radius": 0.7035970368508502,
+      "ratio_true_tv_over_radius": 0.28425361325448045,
+      "replicates": 400,
+      "true_tv": 0.2
+    }
+  ],
+  "near_binding_iid": [
+    {
+      "arm": "near_binding_iid",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 0,
+      "capped": false,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.39999999999999997,
+      "median_eps_hi": 0.7953759684770043,
+      "n": 500,
+      "near_binding": true,
+      "radius": 0.3853759684770043,
+      "ratio_true_tv_over_radius": 1.0379474402121895,
+      "replicates": 400,
+      "true_tv": 0.4
+    },
+    {
+      "arm": "near_binding_iid",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 0,
+      "capped": false,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.39999999999999997,
+      "median_eps_hi": 0.8496134312046989,
+      "n": 400,
+      "near_binding": true,
+      "radius": 0.43086343120469883,
+      "ratio_true_tv_over_radius": 0.9283684133545418,
+      "replicates": 400,
+      "true_tv": 0.4
+    },
+    {
+      "arm": "near_binding_iid",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 0,
+      "capped": false,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.30000000000000004,
+      "median_eps_hi": 0.849184902646664,
+      "n": 300,
+      "near_binding": true,
+      "radius": 0.49751823597999734,
+      "ratio_true_tv_over_radius": 0.6029929725270642,
+      "replicates": 400,
+      "true_tv": 0.3
+    },
+    {
+      "arm": "near_binding_iid",
+      "call_alphabet_size": 32,
+      "cap_hit_count": 369,
+      "capped": true,
+      "coverage": 1.0,
+      "coverage_ci95": [
+        0.9908201954163347,
+        1.0
+      ],
+      "covered": 400,
+      "direct_true_tv": 0.19999999999999998,
+      "median_eps_hi": 1.0,
+      "n": 150,
+      "near_binding": true,
+      "radius": 0.7035970368508502,
+      "ratio_true_tv_over_radius": 0.28425361325448045,
+      "replicates": 400,
+      "true_tv": 0.2
+    }
+  ],
+  "nominal_coverage": 0.975,
+  "pipeline_control_passed": true,
+  "purpose": "companion arm closing W4: near-binding cells plus a mis-specified pipeline control",
+  "replicates": 400,
+  "runner": {
+    "gpu_used": false,
+    "path": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/coverage_calibration_v2b.py",
+    "sha256": "f2ef594c82ee1713e15cf0692f4d5d92648442c26ad010883823ec498793c02c",
+    "ssh_used": false
+  },
+  "seed": 20260918,
+  "timestamp_utc": "2026-09-18T00:00:00Z",
+  "verdict_basis": "A near-binding cell (ratio <= 1.25) must cover at the nominal level via its CP lower endpoint, AND the mis-specified pipeline control must collapse; otherwise the parent run's 1.000 sweep cannot be interpreted as evidence."
+}

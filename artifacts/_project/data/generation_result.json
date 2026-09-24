@@ -1,0 +1,111 @@
+{
+  "schema_version": "generation_result_v1",
+  "generation_index": 0,
+  "candidate_count": 4,
+  "fixed_resolution": "2K",
+  "fixed_aspect_ratio": "16:9",
+  "reference_policy": "bundled-human-style-pair-v1",
+  "reference_version": "2.0.0",
+  "candidates": [
+    {
+      "candidate_id": "g0_candidate_01",
+      "image": "generation_0/g0_candidate_01.png",
+      "image_sha256": "5cf466e7b7db9f166dcfaeea7ed46cad870b7cae501a4fa9be9b59c9cffe8e6e",
+      "prompt_sha256": "63dc042a61045a860ddd6cfb58eea18cab5928c6fde25d43dee45edc3e9ed4ad",
+      "reference_ids": [
+        "hs4_054",
+        "hs4_006"
+      ],
+      "provider": {
+        "provider": "apex_api",
+        "protocol": "openai_chat_native_image",
+        "model": "gemini-3-pro-image-2k",
+        "resolution": "2K",
+        "aspect_ratio": "16:9",
+        "action": "edit",
+        "reference_count": 2,
+        "candidate_id": "g0_candidate_01",
+        "response_id": "chatcmpl-202609150123345029820168268d9d6B7vObhCe",
+        "elapsed_ms": 29491,
+        "image_bytes": 167038,
+        "image_sha256": "5cf466e7b7db9f166dcfaeea7ed46cad870b7cae501a4fa9be9b59c9cffe8e6e",
+        "secrets_persisted": false
+      }
+    },
+    {
+      "candidate_id": "g0_candidate_02",
+      "image": "generation_0/g0_candidate_02.png",
+      "image_sha256": "69d1f82a27267d1b72caa413c0d64e18b61f192043b300e52709b40e1e685633",
+      "prompt_sha256": "ed62fe5df1d0fd90f92d32bc571c81f0554aa8ddab8ef78db3710da5f223d217",
+      "reference_ids": [
+        "hs4_054",
+        "hs4_006"
+      ],
+      "provider": {
+        "provider": "apex_api",
+        "protocol": "openai_chat_native_image",
+        "model": "gemini-3-pro-image-2k",
+        "resolution": "2K",
+        "aspect_ratio": "16:9",
+        "action": "edit",
+        "reference_count": 2,
+        "candidate_id": "g0_candidate_02",
+        "response_id": "chatcmpl-202609150123345031276228268d9d6SXqFgZ0T",
+        "elapsed_ms": 35459,
+        "image_bytes": 279186,
+        "image_sha256": "69d1f82a27267d1b72caa413c0d64e18b61f192043b300e52709b40e1e685633",
+        "secrets_persisted": false
+      }
+    },
+    {
+      "candidate_id": "g0_candidate_03",
+      "image": "generation_0/g0_candidate_03.png",
+      "image_sha256": "851ed5e475aa68ff8d366bbaed4cf0d2b913f437ae615a5015dfdae1a5b91e9b",
+      "prompt_sha256": "c58f3bfcdf9ba86905ee0b3d27766b3aae802fb40cc196b6936f4694b5e751bc",
+      "reference_ids": [
+        "hs4_054",
+        "hs4_006"
+      ],
+      "provider": {
+        "provider": "apex_api",
+        "protocol": "openai_chat_native_image",
+        "model": "gemini-3-pro-image-2k",
+        "resolution": "2K",
+        "aspect_ratio": "16:9",
+        "action": "edit",
+        "reference_count": 2,
+        "candidate_id": "g0_candidate_03",
+        "response_id": "chatcmpl-202609150124038808068938268d9d6ZsDTeQDv",
+        "elapsed_ms": 28088,
+        "image_bytes": 172233,
+        "image_sha256": "851ed5e475aa68ff8d366bbaed4cf0d2b913f437ae615a5015dfdae1a5b91e9b",
+        "secrets_persisted": false
+      }
+    },
+    {
+      "candidate_id": "g0_candidate_04",
+      "image": "generation_0/g0_candidate_04.png",
+      "image_sha256": "e50b24e6014208447bdc8abf52d1ae1d1ed2b5a371ef93058f79d6004502c873",
+      "prompt_sha256": "1002a6d045b76f078efa6a68167183cf36ce68efbe6372cf9e08b648a9a81225",
+      "reference_ids": [
+        "hs4_054",
+        "hs4_006"
+      ],
+      "provider": {
+        "provider": "apex_api",
+        "protocol": "openai_chat_native_image",
+        "model": "gemini-3-pro-image-2k",
+        "resolution": "2K",
+        "aspect_ratio": "16:9",
+        "action": "edit",
+        "reference_count": 2,
+        "candidate_id": "g0_candidate_04",
+        "response_id": "chatcmpl-202609150124098923023488268d9d6z9M9L8DJ",
+        "elapsed_ms": 33709,
+        "image_bytes": 441652,
+        "image_sha256": "e50b24e6014208447bdc8abf52d1ae1d1ed2b5a371ef93058f79d6004502c873",
+        "secrets_persisted": false
+      }
+    }
+  ]
+}

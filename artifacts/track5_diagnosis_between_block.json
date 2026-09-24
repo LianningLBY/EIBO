@@ -1,0 +1,37 @@
+{
+  "armB_implied_sd": 0.01698264525085013,
+  "armB_ratio_to_empirical": 1.0006545904257012,
+  "armC_implied_sd": 0.016971998996650993,
+  "armC_ratio_to_empirical": 1.0000272898504463,
+  "design": {
+    "B": 64,
+    "K": 938,
+    "alpha_upper": 0.025,
+    "conc": 0.1,
+    "diagnosis_replicates": 200,
+    "diagnosis_seed": 20260919,
+    "n": 60000,
+    "nominal_coverage": 0.975,
+    "true_tv": 0.4,
+    "within_replicates": 32
+  },
+  "diagnosis_verdict": "B and C recover the directly measured tv_hat SD to within 10% (approximately 1.0x), so the diagnosis supports neither a wrong denominator nor an absent between-block term. The large block-level spread is not evidence that B/C omitted a variance component; Arm D must not be run.",
+  "empirical_sd": 0.01697153584597591,
+  "empirical_to_iid_radius_factor": 0.48242203866965877,
+  "formula_reconciliation": {
+    "armB_cluster": "(a_blocks @ influence) / N",
+    "armB_variance": "K/(K-1) * sum((cluster - mean(cluster))^2), summed over A and B laws",
+    "armC_variance": "(K-1)/K * sum((lobo_tv - mean(lobo_tv))^2)",
+    "reference_runner": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/track5_variance_radius.py",
+    "reference_runner_sha256": "d50d15a30247ddd32903d94dd538121787088c70bfcbb3ce72fdaca9aeb36065"
+  },
+  "iid_sd": 0.03517985184254251,
+  "mean_between": 0.026428299696549692,
+  "mean_within": 7.742151252111106e-05,
+  "notes": "mean_between is the outer-replicate mean of sample var(c_k, ddof=1); mean_within is the outer and block mean of an unbiased sample variance over 32 conditional multinomial redraws given each captured theta. K=938 includes the final 32-flow residual block, and c_k uses the requested /B scaling. Arm B/C implied SDs remove their critical values and use the formulas already in the Track 5 runner. The observed_factor is empirical_sd divided by the mean of the B/C implied SDs; it is the relevant wrong-denominator comparison. The empirical_to_iid_radius_factor is reported separately because the i.i.d. value is a finite-alphabet confidence radius, not a Gaussian SD.",
+  "observed_factor": 0.9996591760624866,
+  "prediction_for_armD_before_run": "Arm D prediction before run: radius larger than the i.i.d. radius, with CP95 coverage nearer nominal 0.975 than Arm A's 0.9940; a CP interval excluding nominal from either side is a falsifier.",
+  "supports_between_block_arm": false,
+  "total_var_of_tvhat": 0.0002880330289712452,
+  "wrong_denominator_predicted_factor": 8.0
+}

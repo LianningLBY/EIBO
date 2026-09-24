@@ -1,0 +1,18 @@
+{
+  "schema_version": "critic_failure_v1",
+  "generation_index": 0,
+  "candidate_ids": [
+    "g0_candidate_01",
+    "g0_candidate_02",
+    "g0_candidate_03",
+    "g0_candidate_04"
+  ],
+  "error": {
+    "type": "ProviderError",
+    "message": "Gemini critic returned no complete valid round after 3 attempts; last error: critic_truncated",
+    "details": {
+      "kind": "critic_exhausted",
+      "retryable": true
+    }
+  }
+}

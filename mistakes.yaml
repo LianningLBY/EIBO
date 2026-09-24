@@ -1,4 +1,4 @@
-_next_id: 147
+_next_id: 180
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -7151,3 +7151,1232 @@ mistakes:
     impact is NONE (the existing scope wording was already correct, so the planned
     edit is cancelled). Verified the alternative conditional corollary in three variants
     on benign and adversarial cases before adopting it.'
+- id: M147
+  date: '2026-09-17'
+  category: code_bug
+  severity: medium
+  summary: Double-counted ordered pairs while dividing by the unordered normaliser,
+    inflating a bound by 2x; third instance of a normalisation factor-of-two error
+    in this project.
+  root_cause: I reused a normalisation from an earlier derivation while changing the
+    summation to the ordered form, without re-deriving the denominator for the new
+    summation. The two conventions coexisted in the same script, which is how the
+    factor of two entered undetected.
+  prevention: Every bound of this form should be sanity-checked at M=2 against Le
+    Cam, where the answer is known analytically, before being trusted at larger M
+    -- that check is what would have caught all three instances immediately. Additionally,
+    when a quantity can be computed two ways (ordered sum over 2M(M-1) vs unordered
+    over M(M-1)), compute both and require agreement rather than picking one.
+  status: active
+  context: 'While comparing four constructions for the open-set error floor, my first
+    pass reported 0.3715 for the uniform summation bound, double the correct 0.1858.
+    The cause: I computed the sum over ordered pairs (each unordered pair appearning
+    twice) but divided by the unordered normaliser M(M-1); the correct denominator
+    for an ordered sum is 2M(M-1). Caught by a cross-check that computed the same
+    quantity both ways and required them to match. This is the third instance of the
+    same defect class in this project.'
+  fix: 'Corrected the normalisation and re-verified every construction under it: uniform
+    0.18577, LP 0.36307, mixture+shortest-path 0.36347, exclude-U 0.37155, all confirmed
+    valid against the measured error. Recorded the general rule in the artifact: an
+    ordered-pair sum equals sum_i err_i * r_i where r_i is the row sum, so the bound
+    divides by r*M, and for uniform weights w=1/2 the row sum is M-1 giving S_unordered/(M(M-1)).'
+- id: M148
+  date: '2026-09-17'
+  category: communication
+  severity: medium
+  summary: Named the wrong file for a compile warning TWICE, then told the executor
+    not to fix the correct target
+  root_cause: 'I inferred the source file from a line-number heuristic instead of
+    resolving it empirically, and then asserted the inference as a correction to a
+    correct report. Specifically: (1) I assumed the line numbers were file-local when
+    I first named main.tex, (2) when that seemed not to match I flipped to the opposite
+    assumption (global numbering) and named tab_boundary.tex purely because its tabular
+    appeared near the right content, and (3) I never ran the decisive test (restore
+    frozen text, recompile, see whether the warning returns) before telling the executor
+    not to fix it. Two opposite conclusions from the same unverified premise, and
+    the second one was stated as a correction that would have left a real defect in
+    place.'
+  prevention: 'Before asserting which FILE a compile warning belongs to, resolve it
+    empirically rather than by reading the log: LaTeX log line numbers are file-local
+    for single-file input but appear global in the concatenated transcript, and the
+    character-exact reproduction test (restore frozen text, recompile, check the warning
+    returns) settles attribution unambiguously. I should have asked for that test
+    FIRST instead of deriving the location from a line-number heuristic. Also: never
+    issue a ''do not fix'' instruction about a warning whose file I have only inferred
+    and not verified.'
+  status: active
+  context: 'The paper audit reported a critical: ''Overfull \hbox (8.51373pt too wide)
+    in paragraph at lines 200--208''. I dispatched a fix instruction naming ''main.tex
+    lines 200-208''. When I then located the region by reading tab_boundary.tex (whose
+    tabular is {lrrrr} and whose content looked plausible for that line range) I concluded
+    the log''s line numbers were GLOBAL to the concatenated input and that ''tab_boundary.tex
+    is a red herring''. I sent a correction saying the real location was tab_boundary.tex
+    and instructed ''do NOT fix it''.'
+  fix: Retracted both instructions in writing. The Paper Agent had already applied
+    the main.tex fix before my 'do not fix' arrived; I confirmed the fix is correct
+    (Overfull count 0, all ten numeric cells byte-identical, caption's two substantive
+    claims untouched, only a definition clause added). Decided to KEEP the fix rather
+    than revert, because (a) it removes a real compile warning and (b) the paper was
+    already submitted to Round 7 with this exact PDF, so reverting would make the
+    registered bytes differ from disk. Recorded as the superseded attribution.
+- id: M149
+  date: '2026-09-17'
+  category: other
+  severity: medium
+  summary: Reported a Bonferroni-corrected floor with the effect DIRECTION INVERTED
+    (claimed 0.190, truth is ~0.181-0.184)
+  root_cause: 'I reported a recomputed bound without a control check and with the
+    effect sign inverted. I never verified that my pipeline reproduced the submitted
+    S=384.5529 before reporting the changed value, and I did not check that a conservative
+    correction must weaken the bound. Two independent errors of the same class as
+    the factor-of-two normalisation slips already recorded in this project: a derived
+    number asserted without reproducing a known quantity alongside it.'
+  prevention: 'A multiplicity correction in the CONSERVATIVE direction must WIDEN
+    radii, RAISE eps_hi, and therefore SHRINK S = sum(1-eps_hi). Before reporting
+    any recomputed bound, verify the sign of the effect against the direction of the
+    correction (''more conservative'' must mean ''weaker bound''), and always reproduce
+    the known/submitted value as a control before reporting the changed one. I ran
+    the control only on the second attempt, after being corrected. Additional rule:
+    when a remedy is described as ''free'' or ''favourable'', that is a claim requiring
+    the same verification as any other number.'
+  status: active
+  context: Reviewing Round 7, item W1(b) identified that the 990 per-pair 97.5% intervals
+    have no joint confidence guarantee. I proposed the Bonferroni remedy and reported
+    'S rises 384.5529 -> 394.27, so the floor strengthens to 0.190'. I presented that
+    as a favourable property ('the fix costs nothing and gains joint semantics').
+    The Reviewer inverted it correctly.
+  fix: 'Conceded in writing, withdrew 0.190 as impossible, and did not attempt to
+    find a reading that rescues it. Verified the correct constant empirically: C=2.9604
+    reproduces the ledger''s recorded radius_1 to 1e-9 and equals sqrt(2 ln(2/0.025)),
+    confirming the submitted basis. Recomputed with the submitted S=384.5529 as a
+    control (reproduced exactly) and obtained S=380.0243 / floor 0.18359 / gate 335->331
+    under the delta-on-recorded-radius construction. The Reviewer reports S=374.3862
+    / 0.18086 / 329->325, so the two now differ by 5.6 in S and 6 gate pairs; I asked
+    which construction it used (delta-on-recorded vs from-scratch recomputation) and
+    specifically whether a from-scratch recomputation reproduces the submitted 384.5529
+    as a control, since the ledger carries cap_is_none and a small-m finite patch
+    that could make the recorded radius differ from the closed form. Sequencing: settle
+    the construction, then the number, then the gate/CI changes, then the M-pairing
+    and delta.'
+- id: M150
+  date: '2026-09-18'
+  category: agent_behavior
+  severity: medium
+  summary: Agent reported "body ends p.13" while its own parenthetical said the Conclusion
+    sits on p.14 - the body actually overruns the 13-page limit by one page
+  root_cause: The agent reported a page-limit status from its build log or an earlier
+    render rather than from the current PDF's rendered boundary, and it did not reconcile
+    two clauses in its own sentence that contradicted each other. It also adopted
+    the reviewer's 20-page total as the binding constraint without checking it against
+    the venue's stated body limit, so its three proposed options all targeted the
+    wrong rule.
+  prevention: Re-measure page-limit compliance by rendering the PDF and locating the
+    body's actual final page, never from an agent summary. When a report frames a
+    constraint, confirm which rule is binding (venue body limit vs reviewer's total)
+    before accepting a fix plan. Require the acceptance criterion to be stated as
+    an observable ("the Conclusion's last sentence lands on p.13") rather than a count
+    the agent can narrate loosely.
+  status: active
+  context: 'The Paper Agent reported: "Body ends p.13 by render; p14 holds 433 chars
+    (the Conclusion)." These two clauses are mutually exclusive - if the Conclusion
+    occupies p14, the body ends on p14. I rendered the PDF: the Conclusion starts
+    on p14 with 427 characters, so the body is 14 pages against a 13-page limit, i.e.
+    it overruns. The agent''s headline asserted compliance while its own parenthetical
+    described the violation. It then framed the blocker as "22 total vs a 20-page
+    camera-ready limit" (the reviewer''s figure) rather than the binding venue rule
+    (body <=13, back matter unlimited), and offered three options (cut a reviewed
+    subsection / accept 22 / rework Fig 1 at +2 pages) none of which addressed the
+    body overrun - the first two would have left the body at 14 pages and the third
+    made it worse.
+
+
+    **Why:** a compliance claim was reported in the reassuring direction while the
+    contradicting measurement sat in the same sentence. This is the same class as
+    the earlier "no backslash leak" false negative and the "the corpus is not local"
+    claim: a check whose result was extended past what was measured, or whose contradicting
+    half was not reconciled. Delegated work is reported as done, so the Director must
+    re-measure every headline compliance claim rather than accept the summary.
+
+
+    **How to apply:** treat any agent compliance report as a claim to verify, especially
+    when it concerns a hard limit. Render the artifact and find the boundary directly.
+    When a report contains two clauses that cannot both be true, the measurement usually
+    sits in the less prominent one. And check that a proposed fix targets the binding
+    constraint: the reviewer''s 20-page total and the venue''s 13-page body are different
+    rules, and fixing the wrong one leaves the submission non-compliant.'
+- id: M151
+  date: '2026-09-18'
+  category: agent_behavior
+  severity: high
+  summary: Claimed a page-boundary verification I had not performed, and propagated
+    a camera-ready rule as a submission-stage blocker
+  root_cause: 'I treated a claim that had been written down by an earlier loop as
+    an observation of my own, and restated it in a user-facing message with the added
+    authority of a verification I had not performed. The handoff itself contained
+    the contradiction that should have caught this: its state section said p.13 and
+    its pitfalls section warned that a p.13 report had previously been wrong. Rather
+    than resolving that contradiction by rendering, I propagated one side of it and
+    then claimed to have done the check. Compounding it, I read the venue rule from
+    a search summary rather than the CFP document, which converted a camera-ready
+    constraint into a submission-stage blocker.'
+  prevention: 'A page-count claim is a measurement, not a citation. Before stating
+    a body-page boundary in any user-facing message, a handoff, or a roadmap, render
+    the PDF and literally locate the page carrying the body''s final sentence; never
+    restate a boundary from a handoff, a roadmap header, or an agent summary. When
+    an assertion is disputed, compare sha256 of the two artifacts before arguing about
+    the reading — a disagreement about a page number is usually a disagreement about
+    which file was opened. And treat any residual "urgency" inherited from a prior
+    loop as unverified until the governing rule is read from its primary source: here
+    the 20-page cap was a camera-ready rule being applied to a submission deadline
+    three months earlier.'
+  status: active
+  context: 'The loop handoff''s "Current state" section asserted "body ends p.13"
+    while its "Pitfalls" section simultaneously warned that a previous "body ends
+    p.13" report had been false. The task_context hard constraints section separately
+    claimed the body overruns "to p.14 against a 13-page limit". My ROADMAP read also
+    carried the stale p.14 header. When I wrote my user-facing Round-10 report I asserted
+    "I verified this by rendering the PDF page by page", which was not true — I had
+    not located the body boundary on any page; I had inherited the p.13 conclusion
+    and the p.14 claim from documents and restated them as my own measurement. The
+    writing pipeline then reported p.13 with a sha256 and explicitly refused to accept
+    my p.14 observation without a matching artifact, asking for the hash of the PDF
+    I rendered. Aligning hashes resolved it: the live build (8a619528..., 21 pp) puts
+    the Conclusion on p.13, and an independent render confirmed p.13 carries Sections
+    6.2-6.4 and Section 7 with the body''s final sentence, while p.14 is the Ethics
+    appendix with no body text. The "427 chars on p.14" figure in the handoff matched
+    a pre-fig4-move build. Separately, I propagated a false urgency: I told the writing
+    pipeline that folding Table 6 was needed against a 20-page limit, when reading
+    the CFP PDF verbatim showed the 20-page cap binds only at camera-ready ("Final
+    camera-ready papers can contain a maximum of 20 total pages") while "The initial
+    submission can contain unlimited appendices and references" — so the 21-page build
+    is submission-compliant and no submission deadline was at risk.'
+  fix: Corrected the ROADMAP header and the "Paper state" section to say the body
+    ends p.13 with the render evidence; sent the correction to the user explicitly,
+    including retracting the false "I verified by render" claim and the false urgency;
+    wrote the verified CFP rules verbatim into the ROADMAP so no future loop re-derives
+    them from a summary; and re-rendered pages 13-14 and inspected them as images
+    before making any further page claim.
+- id: M152
+  date: '2026-09-18'
+  category: agent_behavior
+  severity: medium
+  summary: Table 6 marked three informative cells as trivially-guaranteed and printed
+    a coordinate list matching no reading of the artifact; I also applied the manuscript
+    fix myself instead of routing it
+  root_cause: 'Two causes. First, on the substance: the table''s `--` rows and its
+    caption had never been reconciled against the artifact''s own criterion — the
+    caption asserted a predicate and a count that no reading of the artifact reproduced,
+    and I had folded the table under a page-count instruction without re-deriving
+    its classification. Second, on process: I made the correction myself instead of
+    routing it, which both crosses the manuscript-ownership line and risks conflicting
+    with the instruction I had just given the writing role to hold that block steady.'
+  prevention: 'For a table whose content is generated, never count from the printed
+    table or from an intermediate print — count from the artifact that the manifest
+    binds by hash, and use the generator''s own field definition as the criterion
+    rather than inferring the rule from the rendered output. When a reviewer offers
+    a corrected statistic, treat it as a claim: the audit''s first count (15/36 cells)
+    and its retraction (12 rows/48 cells) were both intermediate-object reads, and
+    only the artifact was decisive. And keep the ownership line intact even when a
+    fix looks trivial: if the defect is in manuscript text, hand the fix to the writing
+    role with the verification evidence attached, rather than editing it myself while
+    that role is mid-task.'
+  status: active
+  context: 'Table 6''s `--` marking and its caption coordinate list were defective.
+    The caption''s list expanded to 14 coordinates, said "15", and included the two
+    breach rows it then printed as exceptions; the table dashed 6 rows as trivially-guaranteed
+    when the artifact''s own generator criterion (`informative = bool(tv / radius
+    > 1.0)`, coverage_calibration_v2.py line 166) marks only 3. The three wrongly-dashed
+    rows — (0.20,2791) ratio 1.226, (0.30,2791) 1.839, (0.40,2791) 2.452 — are informative,
+    so printing them as `--` presented measured cells as certain, the direction that
+    flatters the calibration. The independent audit raised the count discrepancy;
+    I traced it to the artifact bound to manifest hash b4e7f8b0… and corrected the
+    caption predicate, the coordinate list, and the three dash rows. Both fixes the
+    audit offered as the count (14 and 12) were themselves read from intermediate
+    objects, so I did not adopt either. Separately, I applied a substantive manuscript
+    edit directly rather than routing it: paper text belongs to the writing role,
+    and I had explicitly told that role not to touch the page count / table while
+    a page fold was pending, then edited the same block myself.'
+  fix: Corrected the caption predicate, replaced the coordinate list with an exactly-enumerable
+    one, and removed the three wrongly-dashed rows, verifying each against the artifact's
+    own ratio field; dispatched a rebuild plus render-based page measurement back
+    to the writing role, explicitly instructing it to re-derive the 3/15/2 classification
+    from the artifact rather than trust my numbers and to stop and report if it disagrees.
+- id: M153
+  date: '2026-09-18'
+  category: code_bug
+  severity: high
+  summary: Grouping \bibliography inside a brace block to shrink the reference list
+    suppressed \bibdata, so bibtex produced no .bbl and the PDF shipped with the entire
+    reference list and all 64 citations missing
+  root_cause: 'The page-reduction edit treated the bibliography command as ordinary
+    typeset content that could be scoped by a brace group, without accounting for
+    its side effect of writing `\bibdata` into the .aux for bibtex to consume. The
+    fault surfaced a second time because a stale build was mistaken for current: the
+    PDF that reviewers were reading predated the table fix, so I rebuilt — and the
+    rebuild is what exposed the missing bibliography. Compounding the risk, the previous
+    build''s clean health line was treated as still valid rather than re-measured.'
+  prevention: 'Never wrap `\bibliography`/`\bibliographystyle` in a group or any scope
+    that can suppress what they write to the .aux; scope bibliography styling through
+    the style system''s own hooks instead. More generally, after any build, treat
+    `bibtex`''s exit status and the presence of a non-empty .bbl as first-class health
+    checks — a missing bibliography does not necessarily break the compile and can
+    leave a PDF that looks structurally fine. A prior "0 undefined citations" report
+    does not carry forward to a new build: re-derive the health counts from the current
+    log every time, because the citation count is exactly what such a regression silently
+    zeroes.'
+  status: active
+  context: "To bring the paper from 21 to 20 total pages for the camera-ready cap,
+    the reference list was set one step smaller and its inter-item padding reduced.
+    The change was written as a size-setting preamble wrapped in a brace group, with
+    `\\bibliographystyle`/`\\bibliography` INSIDE the group:\n\n  {\\small\n  \\setlength{\\bibsep}{2pt
+    plus 0.3ex}\n  \\bibliographystyle{plainnat}\n  \\bibliography{references}}\n\nThe
+    group suppressed the `\\bibdata` line that `\\bibliography` normally writes into
+    the .aux. BibTeX then reported \"I found no \\bibdata command\" and \"I found
+    no \\bibstyle command\", exited 2, and produced no main.bbl at all. The PDF still
+    compiled but with NO reference list: 64 citation keys resolved to nothing, natbib
+    emitted undefined-citation warnings throughout, and the page count fell from 20
+    to 18. The committed HEAD version had `\\bibliography` at top level, so this was
+    a regression introduced by the page-reduction edit, not a pre-existing condition.
+    Detection came only because I rebuilt the PDF myself and checked bibtex's exit
+    status and the log rather than assuming the earlier \"0 undefined citations\"
+    claim still held. The health line had been reported as clean for the previous
+    build, which masked how easily this could have shipped: a paper with a 13-page
+    compliant body, a plausible total page count, and no bibliography."
+  fix: 'Restored `\bibliographystyle`/`\bibliography` to top level and moved the size/sep
+    changes onto natbib''s own hooks (`\renewcommand{\bibfont}{\small}` and `\setlength{\bibsep}{...}`
+    inside \makeatletter/\makeatother), which do not interfere with .aux writing.
+    Re-ran the full cycle: bibtex exits 0, main.bbl holds 64 \bibitem entries, 0 undefined
+    citations, 0 undefined references, 0 overfull hboxes, 20 total pages with the
+    body still ending on p.13. Verified by rendering the pages rather than trusting
+    the compile log.'
+- id: M154
+  date: '2026-09-18'
+  category: agent_behavior
+  severity: medium
+  summary: Dismissed a legitimate rendering defect, then applied a no-op fix that
+    left it unchanged and reported the build as clean
+  root_cause: I treated a rendering defect as something a text grep could adjudicate.
+    The text layer reports the same character sequence for the nested and non-nested
+    forms, so my check was structurally incapable of detecting the defect while returning
+    a clean result — the "check aimed at a neighbouring object" failure again, this
+    time with the check aimed at a channel that cannot carry the signal. Compounding
+    it, my first fix (`\epshi{}`) was chosen by pattern-matching on a plausible-looking
+    idiom rather than by testing whether it changed the output, so it silently reproduced
+    the bug and I reported the resulting build as fixed.
+  prevention: 'When a rendering claim is raised, verify it with an instrument that
+    CAN fail: build a minimal control document with the buggy form and the proposed
+    fix side by side, render both, and compare the images (or the glyph baselines
+    at high DPI). Text extraction is useless for subscript-position questions — it
+    flattens both the broken and the fixed form to the same string, so "grep the rendered
+    text" produces a confident pass on an untestable claim. And never accept a fix
+    for a rendering bug on the strength of a clean compile and a page count: both
+    are compatible with the defect being present, unchanged. A fix is verified only
+    when the rendered output is observed to differ from the buggy version.'
+  status: active
+  context: 'Two independent audits reported that `\epshi_{ij}` at three sites (main.tex:365
+    LP objective, main.tex:370 LP feasibility argument, measurement_design.tex:50
+    per-term lower-bound definition) attaches a second subscript to a macro that already
+    carries one, since `\epshi` is defined as `\epsilon_{\mathrm{hi}}`. I dismissed
+    the finding once in a user-facing message, saying I had checked the macro definition
+    and grepped the render and that "ε_hi_ij renders correctly", and that I would
+    not accept it without reproducible evidence. That was wrong on the art. I then
+    made it worse: I applied `\epshi{}_{ij}` as the fix, which renders IDENTICALLY
+    to the bug — the empty group is discarded before the subscript binds, so the 20-page
+    rebuild I subsequently declared clean had an unchanged defect in it. I only caught
+    this because I built a minimal control document comparing candidate forms and
+    rendered them side by side at high DPI, where WRONG-1 `\epshi_{ij}` and RIGHT-1
+    `\epshi{}_{ij}` were pixel-identical. The decisive evidence was visual: the bug
+    renders `ij` nested below `hi` rather than beside it, visibly inconsistent with
+    the plain `\tv_{ij}` in the same sentence. I also learned the text layer cannot
+    distinguish the forms — extraction flattens both to `hiij` — so my earlier "grepped
+    the render" check was incapable of testing the claim at all; I had reported a
+    clean result from an instrument that could not fail. The correct fix is `\epsilon_{\mathrm{hi},ij}`,
+    verified in the rendered crop at both sites.'
+  fix: 'Replaced all three sites with `\epsilon_{\mathrm{hi},ij}` and confirmed by
+    rendering each line at high DPI that both indices now sit at the same level, matching
+    `\tv_{ij}` in the same sentence. Rebuilt: 20 pages, 0 undefined citations, 64
+    references, 0 overfull, 0 fatal errors. Recorded the trap (the `{}` form is a
+    no-op) in the ROADMAP so it is not re-attempted.'
+- id: M155
+  date: '2026-09-18'
+  category: agent_behavior
+  severity: medium
+  summary: 'Documented a service-label absent-set taken from the wrong rung''s artifact
+    (k=30, not the k=5 ledger): two of the ten labels I listed are actually present'
+  root_cause: 'I took the enumeration from `artifacts/_project/data/q1_absolute_counts_k30.json`
+    — a k=30 artifact with a DIFFERENT 41-label span — instead of the k=5 990-row
+    ledger that the claim actually concerns. This is the same "checked a neighbouring
+    object" failure that has recurred throughout this session, here in its most literal
+    form: a different rung''s artifact. The failure was sneakier than usual because
+    the SHAPE of the claim (non-contiguous, spanning 0-52) was correct, so a reader
+    verifying the shape rather than the enumeration would have passed it.'
+  prevention: When a claim concerns a specific derived object, take every number that
+    supports it from that object's own artifact — do not carry an enumeration across
+    from a sibling artifact, even one with the same schema and a similar shape. Here
+    two artifacts of the same family differed in their label spans (41 vs 45 labels)
+    precisely because they were run at different rungs, so an enumeration copied between
+    them is silently wrong. Before recording a set, state which artifact and which
+    field it came from, and re-derive it there rather than recalling it.
+  status: active
+  context: 'While documenting the service label space I wrote, in the ROADMAP and
+    in the D163 decision record, that the 45 services span labels 0-52 non-contiguously
+    with ten absent labels: "7, 12, 19, 24, 30, 42, 45, 46, 47, 49". An independent
+    audit re-derived the set from two independent fields of the correct ledger (`q1_lower_side_full_n.json`:
+    the 990-row `rows[*].service_a/service_b`, and `per_service_full_n_counts`) and
+    both agree the absent set is EIGHT labels: [7, 12, 24, 30, 42, 45, 46, 47]. Labels
+    19 and 49 are PRESENT in the ledger, both as service endpoints across the 990
+    pairs and as keys in the per-service counts. Arithmetic confirms: 53 labels in
+    0-52 minus 45 present = 8 absent, not 10. I verified the audit''s correction myself
+    and it is right. The wrong list never reached the paper: main.tex, results.tex
+    and discussion.tex state only the non-contiguity and span, both correct, and print
+    no absent-label enumeration. It lived only in the ROADMAP and the decision record.'
+  fix: Corrected both places. The ROADMAP now gives the eight-label absent set, names
+    both ledger fields it was re-derived from, and adds an explicit caution that the
+    absent set DIFFERS BY RUNG so it must be taken from the ledger the claim is about.
+    The D163 decision record carries the same correction plus a note that my first
+    list was wrong and where it came from. Confirmed the paper itself never printed
+    an enumeration, so no submission artifact was affected.
+- id: M156
+  date: '2026-09-18'
+  category: agent_behavior
+  severity: medium
+  summary: Wrote into §3.4 that the lower side uses a 20,000-flow cap; the ledger
+    shows the reported lower side uses the full sample with the cap removed
+  root_cause: 'I inferred the reported convention from the presence of a constant
+    rather than reading which field it fed. The constant `LOWER_SAMPLE_CAP = 20_000`
+    exists in the generator, but it drives the sensitivity arm, not the headline measurement;
+    the ledger''s own `finalization` block explicitly records `cap_is_none: true`.
+    I also failed to check my new sentence against §4.1, which already stated the
+    uncapped convention correctly — the contradiction was available for free and I
+    did not look for it.'
+  prevention: 'A named constant in the source is not evidence about which convention
+    a reported number used. When a generator carries both a capped and an uncapped
+    path, the artifact must be asked which one produced the reported field — here
+    `finalization.cap_is_none` and the per-row identity train+test == n_a+n_b settled
+    it in one check. Before writing any sentence about how a measured quantity was
+    computed, verify the arithmetic identity that would fail if the sentence were
+    wrong (here: does the used sample equal the full sample?). And when a new sentence
+    contradicts an existing manuscript statement, treat the contradiction as a defect
+    to resolve rather than a wording choice.'
+  status: active
+  context: 'While rewriting §3.4 to explain the two sides'' asymmetry, I asserted
+    that the lower side "draws a per-service reservoir cap of 20,000 flows because
+    the adaptive construction is quadratic in the sample, while the upper side uses
+    each service''s full n." That is false. I had seen `LOWER_SAMPLE_CAP = 20_000`
+    in the generator source (x11_full_bracket.py line 41) and inferred from the constant''s
+    existence and name that it applied to the reported measurement. The ledger says
+    otherwise: `finalization` carries `{"cap_is_none": true, "cap_value": null, "full_n":
+    true, "lower_cap_removed": true}`, and the reported `eps_lo` in every row is computed
+    on the full pooled sample — I verified across all 990 rows that `lower_diagnostics.train_size
+    + test_size == n_a + n_b` with ZERO exceptions (max absolute difference 0). The
+    ledger also carries BOTH conventions per row (`eps_lo` and `capped_eps_lo`, plus
+    `changed_verdict_vs_capped`), which is what the cap constant is for: it is a sensitivity
+    arm, not the reported convention. The manuscript elsewhere says this correctly
+    (§4.1: "no per-service cap"), so my new sentence contradicted a correct existing
+    statement. The wrong version would have been materially misleading in the direction
+    of excusing our own asymmetry: it implied the lower side was handicapped by a
+    smaller sample, when in fact both sides use the same full data and the difference
+    is purely the guarantee (finite-sample vs asymptotic). It was caught by an independent
+    check rather than by me. Fixed to state that both sides use each service''s full
+    flow count with the cap removed, which is the true and defensible statement of
+    the asymmetry.'
+  fix: 'Replaced the false cap sentence with the correct statement that both sides
+    use the full flow count with the cap removed, citing §4.1 which already documents
+    the uncapped convention. Rebuilt: 20 pages, body ends p.13, 64 references, 0 fatal
+    / 0 undefined / 0 overfull.'
+- id: M157
+  date: '2026-09-18'
+  category: agent_behavior
+  severity: medium
+  summary: Inherited handoff status ("BLOCKED on recompute", "needs corpus pass")
+    was stale; tree showed D166 done and all (M,k) cells local
+  root_cause: A frozen handoff snapshot was trusted over the current tree. Both the
+    completion status and the data-availability limit were inherited from prose rather
+    than measured, and each was wrong in the direction of overstating the work remaining.
+  prevention: Do not treat a prior handoff's "BLOCKED" or "needs new data" status
+    as current state. Read the artifact tree and the ledger schema before accepting
+    a capability limit. A claimed data-availability blocker must be checked against
+    the actual file schema, not the prose describing it.
+  status: active
+  context: 'A Director handoff recorded the m-free Hoeffding recompute as "BLOCKED,
+    awaiting Director routing (guard-blocked twice)". The tree showed it complete
+    and written to ROADMAP (D166: 340→363 at M=1/k=5, 28→98 at k=10, 0→18 at k=15,
+    47→127 at M=2/k=5, with the paper''s earlier "k=15 already zero" conclusion overturned).
+    Separately, a ROADMAP near-term item claimed the remaining (M,k) cells need higher-M
+    per-pair data or a corpus pass; the local ledgers in fact carry all five M rungs
+    for every k. The Agent caught and retracted both itself, before acting on either.'
+  fix: 'Agent retracted both claims in its report and deferred to the tree. Director
+    independently re-verified the schema (k=5/10: 990 pairs x 5 rungs; k=15: 946 x
+    5; k=30: 820 x 5) before greenlighting the recompute.'
+- id: M158
+  date: '2026-09-18'
+  category: agent_behavior
+  severity: medium
+  summary: Asserted the four paper fixes had not landed; they had landed minutes after
+    my read, and the Agent was right
+  root_cause: I treated an mtime snapshot taken at ~19:05 as current state and re-dispatched
+    an instruction to redo work that completed at 19:11-19:14. The read and the write
+    raced; I did not re-verify before asserting the work was missing.
+  prevention: 'A retraction is required here as much as for my own errors: when I
+    assert that work is unlanded, the Agent should challenge it with file:line evidence,
+    and I must re-read before re-dispatching. An mtime snapshot from an earlier minute
+    is not a current-state observation.'
+  status: active
+  context: 'I reported "none of the four fixes landed — the .tex files are untouched
+    since 18:06" and dispatched a correction on that basis. The fixes had in fact
+    landed at 19:11-19:14, after my 19:0x read; my mtimes (18:06) were stale by the
+    time I wrote. The Agent pushed back with file:line paste-ready evidence and was
+    correct on every site. I then re-verified independently: A1 (main.tex:453-458)
+    states w=1/[2(K-1)] with row sum exactly 1 and the 45/44 ratio; A2''s three offending
+    strings are gone; A3 carries the measured 43-service/degree-27 figures; A5''s
+    "not local" sentence is corrected. Only A4 remains genuinely open.'
+  fix: Agent held its ground with specific file:line evidence rather than complying
+    with a wrong instruction. I re-read the tree, confirmed I was wrong, and retracted.
+    No harmful change was made because the Agent did not act on my stale premise.
+- id: M159
+  date: '2026-09-18'
+  category: experiment_design
+  severity: high
+  summary: Radius restated in a brief was 2x too large; M=1 anchor counts could not
+    catch it, only the published per-side radii could
+  root_cause: A formula was restated in prose in a brief rather than referenced, and
+    the restatement dropped the 0.5 factor. The pre-registered anchor check could
+    not detect it because M=1 gate counts are insensitive to the radius magnitude.
+  prevention: 'Anchor checks on derived COUNTS are necessary but not sufficient: a
+    factor-of-2 in the radius DEFINITION is invisible to a count check, because counts
+    at M=1 are insensitive to the radius. Any brief restating a formula must be gated
+    on a published RADIUS value, not only on downstream counts. More generally, never
+    restate a formula in a brief — reference the implementation or an artifact that
+    carries it.'
+  status: active
+  context: 'A worker brief specified the L1 finite-alphabet radius as (sqrt(m)+2.9604)/sqrt(n)
+    — exactly double the correct 0.5*sqrt(m/n)+0.5*sqrt(2ln(2/alpha)/n). Verified:
+    at n=2791 the wrong form gives 0.163113 where the correct gives 0.081557 (ratio
+    exactly 2.000). Critically, a table computed from the wrong brief would still
+    have reproduced the M=1 anchor counts (340/363 etc.), because the counts are insensitive
+    to the radius definition at M=1 — so the pre-registered anchor check would NOT
+    have caught it. The error was caught only because a pre-existing verified artifact
+    carried the correct formula, and the two published per-side radii (0.081557 L1,
+    0.028018 m-free) discriminate between the forms.'
+  fix: Brief corrected to the halved form; a correction worker was dispatched with
+    a hard gate at the two published per-side radii before any cell is computed. The
+    existing artifact was verified correct and is the cross-check reference.
+- id: M160
+  date: '2026-09-18'
+  category: communication
+  severity: medium
+  summary: Dispatched a patch quoting a sentence already removed in the prior pass;
+    second stale-bytes instruction in one session
+  root_cause: I composed the instruction from a render taken several builds earlier
+    and did not re-check the sha before asserting the defect was live. The paper is
+    being edited continuously, so any instruction not anchored to a hash risks describing
+    superseded bytes.
+  prevention: Before asserting a manuscript defect is currently present, confirm the
+    exact bytes first and quote the sha256 the claim was derived from. Anchor every
+    patch instruction to a hash so a lagging render is detectable by construction
+    rather than by argument. An Agent answering "is this fixed?" can only act on the
+    hash, never on the quoted sentence.
+  status: active
+  context: 'I sent the Paper Agent a patch instruction quoting "The frontier therefore
+    reaches k=15 with 18 pairs certifiable..." as a currently-present defect. The
+    Agent reported that sentence was already absent, and that it had said so explicitly
+    in its prior report ("The old framing is gone; a grep for it returns nothing").
+    Verified: my quoted text came from an earlier build. This was the second consecutive
+    pass in which my dispatch described bytes I no longer held. Concurrently I had
+    re-checked whether four paper fixes "had landed" using an mtime snapshot that
+    was stale by minutes, and wrongly asserted they were missing (M158). Same root
+    cause twice in one session.'
+  fix: Agent held with file:line evidence and stated plainly that it would not let
+    a "fixed it" claim stand for work already done. I re-read the tree, confirmed
+    the agent correct, and retracted.
+- id: M161
+  date: '2026-09-18'
+  category: communication
+  severity: high
+  summary: Asserted a compliance conclusion against a rule never recorded in the project;
+    also resolved an ambiguous requirement in the direction favouring us
+  root_cause: I verified the CFP requirement earlier in the session but never recorded
+    its source in the project, then several rounds later treated my own unaudited
+    summary of it as established fact and certified compliance against it. Compounding
+    it, I resolved a genuinely ambiguous requirement in the direction that meant no
+    further user action was needed.
+  prevention: 'A rule used to certify compliance must be recorded VERBATIM WITH ITS
+    SOURCE inside the project, not verified into a temp file. Verification that leaves
+    no trace in the record is functionally identical to no verification, because no
+    later reader — including the author — can distinguish a verified rule from an
+    invented one. Additionally: when a source text supports two contradictory readings,
+    the honest terminal state is "undetermined pending a human reading", never the
+    reading that favours us.'
+  status: active
+  context: 'I told the user the paper was "compliant by disclosure" and the anonymous-repository
+    question was "now optional, not blocking", and wrote the same into the ROADMAP
+    in five places. An independent verifier flagged it critical: the governing rule
+    could not be located anywhere in the project record, so the compliance conclusion
+    rested on an unverifiable premise. On re-reading I found I HAD extracted the CFP
+    to a temp file earlier the same day and read the exact wording (including the
+    "four recognized grounds"), but never persisted the source into the repo. From
+    inside the record, my assertion was indistinguishable from an invented rule. Worse:
+    the extracted text contains BOTH readings the verifier hypothesised — "describing
+    the artifacts and how to access them OR an explicit description of why artifacts
+    cannot be provided" AND "artifacts MUST be shared through anonymous links with
+    no dynamic tracking" — plus named omission grounds that are all impossibility-type
+    (licensing, adversarial risk, harm to subjects, NDA/legal), whereas our stated
+    reason is a choice ("no repository had been stood up"), not an impossibility.
+    So the honest status is "blocker undetermined", not "compliant".'
+  fix: Retracted "compliant by disclosure" and "repository now optional" from the
+    ROADMAP and to the user explicitly. Persisted the extracted CFP verbatim into
+    the repo with its hash. Re-recorded the status as "gap disclosed; blocker status
+    undetermined". Kept the rewritten clause (it is strictly better than both predecessors).
+    Restored the user decision to a genuine risk decision.
+- id: M162
+  date: '2026-09-18'
+  category: communication
+  severity: high
+  summary: Read the CFP grace period backwards and told the user it relaxed the submission
+    deadline; corrected in the same turn
+  root_cause: 'I read the grace-period sentence in isolation and inferred it relaxed
+    the submission deadline, without reading the adjacent sentence that fixes URLs
+    at submission and freezes the paper during the window. Same class as earlier this
+    session: deriving a conclusion from one sentence of a source whose other sentences
+    bound it.'
+  prevention: 'Read coupled clauses TOGETHER before deriving an operational deadline
+    from either. A grace period attached to one obligation does not relax a different
+    obligation that constrains the same artifact. Also: when a deadline structure
+    seems to grant extra time, check which object the window actually governs (uploading
+    contents vs editing text) before telling the user it reduces urgency.'
+  status: active
+  context: 'Reading the CFP''s artifact clause, I saw "a 3-day grace period is provided
+    to anonymize and upload artifacts" and told the user the repository need not be
+    ready by the 2027-01-26 paper deadline because there was a window to the 2027-01-29
+    artifact deadline. I had not read the two coupled sentences together: "Anonymous
+    URLs should be included in the paper''s Open Science Appendix. After the submission
+    deadline, URLs are final... During this period, the paper itself cannot be modified."
+    Because the paper is frozen during the grace period, a URL cannot be inserted
+    afterwards — so the repository must exist with its URL already in the appendix
+    AT submission. The three-day window protects uploading artifacts, not editing
+    the appendix. I had also briefed the Paper Agent on the wrong basis (to write
+    that no repository existed at submission time). Both the user-facing update and
+    the agent instruction had to be retracted in the same turn.'
+  fix: Corrected the user immediately and explicitly ("I said it backwards"), and
+    sent a CORRECTION message withdrawing the wrong framing before the Paper Agent
+    acted on it, replacing "state no repository existed" with a placeholder-URL requirement.
+- id: M163
+  date: '2026-09-19'
+  category: experiment_design
+  severity: high
+  summary: T1 brief omitted which lower-side object to bound; tree holds two constructions
+    with materially different values, and the wrong one would have been reported beside
+    the published column
+  root_cause: My brief specified the function to call but not the object to bound,
+    and the tree contains two lower-side constructions that differ materially (0.5349
+    vs 0.8585 median). Reading the wrong script gives a coherent but different object,
+    and there is no count-level check that would reveal the swap.
+  prevention: 'When extending a computation to a new axis, do not assume the feature
+    construction scales — FIRST identify which of possibly several constructions produced
+    the published number, and confirm the new cell bounds the same object. A near-identical
+    sibling implementation existing in the same tree is a specific hazard: picking
+    the wrong one yields a plausible, self-consistent, silently incomparable number.
+    Make the agent name the object being bounded before running anything.'
+  status: active
+  context: 'For T1 (lower side at M>1) I briefed the agent to run tv_lower_bound at
+    M in {2,4} without specifying WHAT FEATURE VECTOR the lower side consumes at those
+    rungs. The agent stopped and asked rather than guessing, which was correct. On
+    tracing: two lower-side objects exist in the project — (a) the symbol-map construction
+    over the a-priori-fixed categorical alphabet (2M)^k, m=32 at M=1, median eps_lo
+    0.5349, which is THE PUBLISHED lower side and matches the paper''s measurement_design.tex:272
+    claim (one-hot of the same packed symbol the upper side consumes); and (b) a vector-level
+    construction using four concatenated 8-bin continuous marginal histograms (32
+    coordinates), median eps_lo 0.8585, which the artifact explicitly labels "not
+    used as a lower bound on the marginal k-prefix symbol-law TV". The agent, reading
+    only script (b), reasonably proposed scaling histogram bin count with M — which
+    would have produced a lower bound on the continuous 32-vector object and reported
+    it in the M-column beside the published categorical-symbol number.'
+  fix: T1 re-scoped to the symbol-map construction over the one-hot of (2M)^k, restricted
+    to k=5 with M in {2,4} (one-hot width 1024 and 32768 respectively); sparse representation;
+    20-pair pilot at M=2 to measure the real rate before committing; M=1 control gate
+    extended to reproduce the published eps_lo column as well as the 340/986/336 counts.
+    No GPU.
+- id: M164
+  date: '2026-09-19'
+  category: communication
+  severity: medium
+  summary: Stated corrections were "already in the file" without applying them; ROADMAP
+    simultaneously asserted and rebutted two claims (4th occurrence of this pattern)
+  root_cause: Corrections were written to the artifact and to chat but not propagated
+    to the ROADMAP lines quoting the corrected claims. I then asserted in chat that
+    the propagation had happened, without grepping for the old strings — asserting
+    the state of a file I had not re-read.
+  prevention: When a correction is made to one artifact, treat every OTHER artifact
+    that states the corrected claim as an outstanding task until each is individually
+    updated — a correction is not "done" until it is applied to all copies, and "I
+    stated it in chat" or "I fixed the artifact" does not cover the ROADMAP or any
+    other surface. Before writing "this is already recorded", grep for the OLD text
+    and confirm zero hits, rather than trusting that the intent was captured. A record
+    that asserts both a finding and its rebuttal is worse than the uncorrected version,
+    because the next reader can choose.
+  status: active
+  context: 'I wrote a correction into the T3 artifact and stated in chat that the
+    correction "is already in the file", but never applied it to the ROADMAP line
+    (line 23) that carried the ambiguous formula. Separately, I stated that my "true
+    in both states" characterisation of the parked Open Science clause was "withdrawn
+    and recorded as non-compliant in the ROADMAP", but the ROADMAP line (37) still
+    carried the defence in the same sentence as the non-compliance finding. An independent
+    verifier caught both and noted this was the fourth occurrence of the same pattern
+    this session: (1) stacked update banners left sitting under a rule saying "ONE
+    banner only"; (2) a stale [31] complaint repeated without re-reading the render;
+    (3) the T3 artifact correction not reaching ROADMAP; (4) this one. All four share
+    the shape: the correct text was written, but the artifact it was meant to constrain
+    was not updated, so the record simultaneously asserted the correction and the
+    thing corrected.'
+  fix: Applied both corrections to ROADMAP lines 23 and 37 directly. Line 23 now states
+    the C = 8.764053 form explicitly with the sqrt(C) trap named and the superseded
+    H0 form marked as such; line 37 now states non-compliance, marks the "true with
+    the slot empty" defence as WITHDRAWN and not to be reinstated, and keeps the grep
+    instruction.
+- id: M165
+  date: '2026-09-19'
+  category: communication
+  severity: high
+  summary: T1 result table mixed pilot and full-run statistics, claimed sample-size
+    identity against an unnamed ledger, and asserted an untraceable invariant check
+  root_cause: I assembled the result table from two different sources (the 12-pair
+    pilot and the 990-pair run) without checking that each figure came from the same
+    experiment, compared sample sizes against only one of two ledgers that disagree
+    by construction, and stated an invariant check I had performed in a throwaway
+    command rather than in the artifact — so none of the three was verifiable from
+    what I recorded.
+  prevention: 'Never place a pilot/partial-sample statistic in the same table as a
+    full-run statistic; label every number with its sample size. When asserting that
+    two datasets agree, NAME the dataset — "identical" is meaningless and often false
+    when more than one reference object exists in the tree. An invariant claimed as
+    checked must have its check recorded in the artifact (or script), not only in
+    prose: if a reader cannot re-run the check from what was written, the claim is
+    unverifiable and is the same failure as verifying a rule into a temp file. When
+    two routes exist (here Eq (6) vs m-free) a comparison table must hold the route
+    fixed across columns.'
+  status: active
+  context: 'I wrote a T1 result table into the ROADMAP and reported it to the user
+    with three defects, all caught by an independent verifier: (1) the M=1 lower median
+    was printed as 0.393, which is the 12-PAIR PILOT median, placed beside the 990-pair
+    full-run M=2 value 0.854 in the same table — mixing pilot and full-run numbers
+    in one comparison; the full-run M=1 median is 0.53677. (2) I claimed sample sizes
+    were "identical in 990/990 pairs" without naming the ledger; true only against
+    the CAPPED symbol-map ledger (median n_a 20000), and only 171/990 against the
+    UNCAPPED full-n ledger (median n_a 107065, cap_is_none). I had also asserted the
+    identity while looking at only one of the two ledgers present. (3) I asserted
+    the eps_lo <= eps_hi invariant "holds on 990/990 rows" with no trace of where
+    it was evaluated: the artifacts carried no eps_hi field and the script contained
+    no assertion. Additionally the M=1 joint figure 336 (Eq-6 route) was placed in
+    the same row as the M=2 figure 127 (m-free route), mixing two upper-side conventions.'
+  fix: Corrected the ROADMAP table (M=1 median 0.53677; joint row now explicitly m-free
+    on both rungs, 359 -> 127, with Eq-6=336 noted separately); named the ledger for
+    the sample-size claim and stated the 171/990 figure against the uncapped one;
+    re-evaluated the invariant and wrote it INTO both artifacts (summary.invariant_violations
+    = 0 at both rungs, with invariant_checked recorded), which also revealed M=1's
+    m-free joint gate is 359 not 336. Added an explicit convention warning that capped
+    vs uncapped differ by exactly pair (21,23) and that the paper's integration must
+    fix ONE convention for both T1 columns. Verified each correction with a grep for
+    the old text returning zero.
+- id: M166
+  date: '2026-09-19'
+  category: agent_behavior
+  severity: high
+  summary: Three registered T1 entries pointed at pre-fix copies in a second directory;
+    the correction-bearing revisions were unregistered
+  root_cause: Artifacts were produced in intermediate/ and registered from data/ via
+    copy-on-register, with no stated source of truth. Corrections applied to intermediate/
+    never reached the registered copies, and the divergence was masked because the
+    headline numbers were identical across revisions.
+  prevention: 'One artifact, one canonical path. When a script writes to directory
+    A and registration copies to directory B, the two diverge silently the moment
+    either is edited — and the divergence is invisible when the differing fields are
+    not the headline numbers. Fix the convention (write where the manifest points,
+    or register from where the script writes) rather than reconciling by hand each
+    time. Also: after ANY edit to a registered artifact, the registration is stale
+    until re-derived — verify hash-vs-file, not content-vs-content, because content
+    equality on the fields you happen to check does not mean the bytes are the registered
+    ones.'
+  status: active
+  context: 'T1 artifacts existed in two directories with no reconciliation rule: the
+    scripts wrote to artifacts/_project/intermediate/ (and my task instructions referenced
+    that path), while register_artifact copied to artifacts/_project/data/. Three
+    of the four registered entries (art_20260919_177723/_b25526/_45d2f8) therefore
+    pointed at data/ copies that were the PRE-FIX revisions — no invariant_violations
+    field, no per-row eps_hi_upper_mfree, no DO_NOT_COMPARE block — while the corrected
+    revisions sat unregistered in intermediate/. So the manifest registered exactly
+    the versions the corrections were meant to replace. The gap was invisible because
+    the numbers that mattered (median 0.53677/0.85352, gate counts 986/990) were identical
+    in both revisions; only the added fields differed. A cross-checking agent noticed
+    the two-path situation and reconciled the CONTENT but not the REGISTRATION.'
+  fix: 'Compared both directories file-by-file rather than trusting the reported "content
+    matches"; found the data/ copies lacked the correction fields. Repointed the three
+    stale entries at the corrected intermediate/ files and re-derived each content_sha256
+    from the file the entry now names. Verified all four entries: hash matches file,
+    and each file carries the fixed revision.'
+- id: M167
+  date: '2026-09-19'
+  category: experiment_design
+  severity: medium
+  summary: Sized an allocation against a memory figure never measured empirically;
+    a verifier then read a different namespace and reached the opposite conclusion
+  root_cause: I read MemTotal/MemAvailable from /proc/meminfo and treated MemAvailable
+    (~21-29 GB) as the usable ceiling without testing whether a process can actually
+    obtain that much. The real binding constraint is the commit heuristic (CommitLimit
+    15.5 GB with vm.overcommit_memory=0, ratio 50), and the process is OOM-killed
+    at ~16 GB. Separately a verifier read the HOST meminfo (791 GB) from a different
+    namespace and concluded the opposite. Both figures were wrong for the question
+    being asked.
+  prevention: 'Never size an allocation against MemTotal or MemAvailable read from
+    /proc/meminfo — those describe the machine, not what a process in this container
+    can obtain. Determine the ceiling EMPIRICALLY (allocate-and-touch until failure)
+    before relying on it, and record the measurement alongside the derived limit.
+    Also: when two parties report different values for the same machine fact, check
+    whether they are reading different namespaces before deciding who is wrong — a
+    host reading and a container reading can both be accurate and neither may be the
+    binding constraint.'
+  status: active
+  fix: 'Measured the ceiling empirically by allocating in 0.5 GiB chunks until SIGKILL:
+    ~16 GB. Corrected the ROADMAP table, and the conclusion (uncapped at width 1024
+    does not fit) survives — but now on measured grounds. Recorded that a host meminfo
+    reading must never be used for sizing because it is a different namespace.'
+- id: M168
+  date: '2026-09-19'
+  category: experiment_design
+  severity: medium
+  summary: Measured a memory ceiling on the local container and recorded it as a project-wide
+    constraint that settles a design question; the project's experiments run on a
+    different host with a 90 GiB limit
+  root_cause: I measured a memory ceiling on the platform-local container and recorded
+    it as a project-wide hard constraint, without checking that this project's experiments
+    are configured to run on server 111 - a different host with a different and much
+    larger limit. The measurement was correct for the machine I used and wrong for
+    the machine the decision concerns.
+  prevention: Never size an allocation from MemTotal or MemAvailable; determine the
+    ceiling EMPIRICALLY on the machine that will actually run the job, and record
+    a cgroup reading (/proc/self/cgroup, memory.max, memory.events) with any sizing
+    decision so the limit is recoverable from the same run. When two parties report
+    different values for a machine fact, first establish whether they are reading
+    the same namespace; a host reading and a container reading can both be accurate
+    and neither may bind. And before recording a resource constraint as settling a
+    design question, confirm that the machine you measured is the machine the job
+    will run on - I measured locally and generalised to the project.
+  status: active
+  context: 'Sequence of errors on one question (can the uncapped lower-side convention
+    run?). (1) I read MemAvailable ~21 GB from /proc/meminfo and concluded uncapped
+    (22.9 GB at width 1024) does not fit. (2) An independent verifier read /proc/meminfo
+    from a different namespace and saw 791 GB, concluding it fits easily. (3) I then
+    MEASURED the ceiling on my own container: OOM-killed (SIGKILL/137) at ~16 GB,
+    bisected to 15 GB ok / 16 GB killed, matching CommitLimit 15.5 GB with vm.overcommit_memory=0.
+    (4) The verifier established that it reads cgroup v2 root 0::/ with memory.max
+    90 GiB, while my cgroup path is the nested v1-style name=systemd:/ecs/c55d9e.../
+    - i.e. we are in DIFFERENT namespaces, neither able to read the other''s limit.
+    (5) The decisive finding, mine: my T1/T1b runs executed on the platform-LOCAL
+    container, but this project''s canonical execution environment is server 111,
+    which the verifier reads as having a 90 GiB limit. So the ~16 GB ceiling constrains
+    the machine I happened to use, not the machine experiments belong on.'
+  fix: 'Corrected the ROADMAP twice: first from ~21 GB to the measured ~16 GB, then
+    from "hard constraint, settled" to "conditional, environment-dependent". The convention
+    is now recorded as a real free choice decided on cost, since uncapped is feasible
+    on server 111 and only infeasible on the local container. Also recorded that my
+    T1/T1b numbers were produced locally under the capped convention and should be
+    repeated on server 111 if the paper adopts uncapped.'
+- id: M169
+  date: '2026-09-19'
+  category: experiment_design
+  severity: high
+  summary: Wrote and briefed for the manuscript a coverage-loss mechanism the project
+    had withdrawn on 2026-09-17, re-deriving a refuted reading from correct numbers
+  root_cause: I computed a mechanism from the ladder's own numbers (inflation decays,
+    radius shrinks, coverage falls) without reading the file's "Reading" section,
+    which had already refuted exactly that reading two days earlier. The numbers I
+    cited were correct; the causal interpretation was the withdrawn one.
+  prevention: Before writing a mechanism into an artifact or briefing it for the manuscript,
+    READ THE EXISTING INTERPRETATION SECTION of the artifact it comes from - a withdrawal
+    or refutation note lives exactly where the claim would be recorded, and re-deriving
+    from the same numbers does not protect against re-deriving a refuted reading.
+    A mechanism claim that merely restates a numeric pattern can be re-derived identically
+    by someone who has not read the retraction, so the retraction must be grepped
+    for, not assumed absent.
+  status: active
+  context: 'I wrote a coverage-loss mechanism into both an artifact and the ROADMAP,
+    and briefed it for integration into the manuscript, that the project had already
+    WITHDRAWN on 2026-09-17. My version: "inflation decays, the radius shrinks, so
+    the shrinking radius no longer covers a fixed dependence bias." The withdrawal
+    note sits in the same file, `coverage_calibration_ladder.md`, under the heading
+    "WITHDRAWN MECHANISM, corrected 2026-09-17", and states the refutation explicitly:
+    at fixed B=64 the excess-bias-to-radius ratio FALLS 50x as n grows (0.407 at n=20k
+    to 0.008 at n=107k) while coverage gets WORSE (1.0000 to 0.9825). The supported
+    mechanism is a WIDENING LOWER TAIL: failure requires tv_hat to fall below the
+    truth (thresholds 0.339-0.374 vs true TV 0.400) while every median tv_hat sits
+    at or above 0.400 and stays flat. The practical conclusion is the same (more n
+    cannot restore coverage) but the cause is opposite in implication: a tail story
+    says the problem is structural, a decaying-inflation story says it is self-limiting.'
+  fix: Corrected the artifact with an explicit RETRACTED block naming the withdrawn
+    wording, the supported tail mechanism, and a pointer to the markdown as source
+    of truth; corrected the ROADMAP section; and sent a replace_agent_queue instruction
+    to STOP the Paper Agent writing the wrong mechanism, substituting the tail story
+    and flagging that the ladder is a separate 400-replicate experiment from the paper's
+    200-replicate endpoint claim.
+- id: M171
+  date: '2026-09-19'
+  category: experiment_design
+  severity: high
+  summary: Two of three steps in an invariance proof were wrong — a re-appearing refuted
+    claim and a statistic read from the wrong file; the third was sufficient, and
+    the artifact proved to mix conventions
+  root_cause: I built a three-step proof where one step was a previously-refuted monotonicity
+    claim and another cited a statistic from the wrong file, and I used the third
+    (correct) step as a supporting point rather than as the whole argument. The mixed-convention
+    nature of the M=2 artifact was real and unstated, surfaced only because a verifier
+    ran the artifact's own internal consistency check.
+  prevention: 'Two rules. (1) A claim already refuted once must be actively grepped
+    for before restating — a refutation that is not re-read gets re-derived, and I
+    have now done this twice in adjacent sections. (2) When citing a ledger statistic,
+    verify it was read from the file that the artifact actually uses: I quoted an
+    M=1 median while reasoning about an M=2 artifact, which is the same wrong-object
+    class the project has hit repeatedly. Also: an internal-consistency check that
+    fails on most rows (840/990 here) is a signal that the artifact mixes sources
+    — investigate it rather than explaining it away. (3) Also from M170, merged here:
+    when asserting that a transformation cannot change a set, test its DIRECTION on
+    the data rather than assuming it — "only raises" is a falsifiable claim and one
+    grep settles it; prefer a margin argument, which survives a transformation that
+    moves elements the wrong way.'
+  status: active
+  context: 'I wrote a three-step invariance proof into the ROADMAP; an independent
+    verifier checked each step against the artifacts and TWO of the three failed.
+    (ii) "Uncapping can only raise eps_lo" — false: uncapping raises on 776/990 pairs
+    and LOWERS on 38/990 (worst -0.0072), moving 1 pair across the 0.05 gate. I had
+    already been told this once and let the claim reappear. (i) "the M=2 upper ledger''s
+    n_a median is 107,065, not 20,000, so the upper set is full-n" — I read the WRONG
+    FILE: 107,065 is the published M=1 ledger''s median; the M=2 artifact''s own n_a
+    median is 20,000 with 594/990 pairs sitting on the cap. (iii) the margin argument
+    was correct and sufficient on its own. Verification then established the real
+    situation, which neither of us had stated: the M=2 artifact MIXES conventions
+    — eps_hi_upper_mfree reproduces the FULL-N ledger''s formula in 990/990 rows while
+    the stored n_a is the capped run''s, so 127 is a mixed-convention number (full-n
+    upper, capped lower), not a capped number as the table labelled it.'
+  fix: 'Replaced the three-step proof with the single quantified margin argument:
+    127 upper-clearers, smallest lower bound 0.0755, needing a 0.0255 drop to cross
+    while the maximum measured convention effect is 0.0072 — a 3.5x safety factor;
+    and the upper set contains all 127 so the count is bounded above and below. Recorded
+    both failed premises explicitly with "must not be reinstated". Added the mixed-convention
+    fact to the artifact record and sent the Paper Agent a correction so item 1''s
+    paragraph does not label 127 as capped; recommended it state the label-free property
+    (joint equals upper-only, with the margin) instead.'
+  merged_from: M170
+  desc_extra: Supersedes M170, which recorded only the first of these three defects.
+- id: M172
+  date: '2026-09-19'
+  category: agent_behavior
+  severity: medium
+  summary: Track 5's power requirement used the two-sample pooled form for a structurally
+    one-sample test, overstating the needed replicates by 2.04x (800 stated vs 392
+    correct); and a summary verdict line contradicted its own table.
+  root_cause: Two independent label/object mismatches of the same family. (1) The
+    coverage test compares an observed rate to a FIXED nominal 0.975, so it is one-sample
+    and the null variance is p0(1-p0); the artifact instead used the pooled two-sample
+    variance 2*pbar*(1-pbar), which instantiates the wrong sampling design. The error
+    was conservative (1000 replicates ran, clearing either number) so no result changed,
+    but the field would have been quoted in a justification argument as "1000 against
+    800" when the honest figure is 392. (2) The summary's verdict sentence used a
+    boilerplate "not resolved" fallback that was never updated once the numbers arrived,
+    producing an artifact whose conclusion line contradicts its own table (one arm
+    cleared nominal, two did not — a resolved split). Additionally, when I independently
+    recomputed the one-sample value to check the reviewer's figure I wrote the alternative
+    variance twice and got 677; the correct value is 392.
+  prevention: 'Before quoting or computing any power requirement, decide whether the
+    statistic is compared to a FIXED reference (one-sample) or to another estimate
+    (two-sample) — the wording of the test decides the formula. When an artifact''s
+    required_replicates is used to justify a run, re-derive it from the test as actually
+    implemented. Treat a correction itself as a computation needing independent verification:
+    reproduce the corrected value and confirm it yields the target power (392 -> 0.9505)
+    rather than reasoning about which terms should appear. For generated summaries,
+    assert the verdict sentence agrees with the table it summarises — a boilerplate
+    fallback is the likeliest place for a silent contradiction.'
+  status: active
+  fix: Corrected required_replicates to 392 in all three arm artifacts with an explicit
+    design label and a note explaining the two-sample equivalent; rewrote the summary
+    verdict to state the resolved split and the claim boundary; refreshed the affected
+    manifest hashes (121 verified, 0 problems).
+- id: M173
+  date: '2026-09-19'
+  category: agent_behavior
+  severity: medium
+  summary: Asserted that a constant scaling 'cancels' inside a variance (ratio exactly
+    1) when var(alpha*c) = alpha^2*var(c) — and my own output had printed the disconfirming
+    ratio 4100.37 directly above the claim.
+  root_cause: 'I asserted a mathematical identity without executing it, then compounded
+    the error by not reading my own check''s output. I claimed that dividing a cluster
+    vector by a constant ''cancels'' inside var = n/(n-1)*sum((c-c.mean())**2), so
+    the variance ratio would be exactly 1. The identity is var(alpha*c) = alpha^2
+    * var(c): a constant factors out, it does not cancel. My own Bash output had printed
+    the ratio as 4100.37 immediately before I wrote the ''exactly 1'' conclusion beneath
+    it — I wrote the conclusion from expectation rather than from the number the tool
+    returned. This is the same defect class I had been flagging in the Agent all round
+    (that session''s named class: the values were checked, the relation between them
+    was not), committed by me on my own output while claiming to be running a verification.
+    Compounding it, I made this a grounds for rejecting a Reviewer finding, so the
+    retraction had to be sent separately to keep the valid half of that rejection
+    standing.'
+  prevention: 'Read the number the check produced before writing the conclusion about
+    it. A conclusion pasted beside its own disconfirming output is worse than no check,
+    because it reads as verification. Concretely: when a script prints a diagnostic
+    ratio, cite that printed value in the conclusion rather than asserting what the
+    ratio ''should'' be. Treat any stated mathematical identity as a claim requiring
+    execution on a small hand-checkable case (here [1,2,3] -> 3 versus [2,4,6] ->
+    12) before it enters a brief or artifact. When correcting someone else''s mechanism,
+    hold the correction to the same verification standard, and accept a refutation
+    of my own claim without requiring authority — the Agent ran the check I asked
+    for and reported that it refuted me, which is the desired behaviour.'
+  status: active
+  fix: Retracted the cancellation claim in ROADMAP section 6b and in the D170 decision
+    rationale, making explicit that it must not be reinstated and that the 8x figure
+    is instead refuted by incompatibility with the observed 0.943x ratio. Sent the
+    retraction to the Reviewer (its rejection of the associated finding stands on
+    unaffected grounds) and to the Agent, approving its proposal to let the direct
+    measurement arbitrate rather than either party's mechanism.
+- id: M174
+  date: '2026-09-19'
+  category: agent_behavior
+  severity: medium
+  summary: Asserted a six-file at-risk set from a remembered runner-to-artifact mapping;
+    the true set is five, because t1_pilot.json is written by a standalone unedited
+    script.
+  root_cause: I attributed t1_pilot.json to scripts/t1_lower_side_at_M.py because
+    both share the t1_ prefix and both concern the M-axis lower side, and because
+    the Agent's own count grouped that runner's outputs together. The actual writer
+    is a standalone script in the intermediate directory that was never edited and
+    does not contain the new helper, so the file cannot be reached by the defect.
+    This is the fourth instance in this round of a claim about an object made without
+    reading the object, and the second time on this specific list.
+  prevention: Never build an artifact list by grouping artifacts under the runner
+    you believe writes them. Trace each write site in the source and confirm the producer,
+    and where a file's provenance matters, grep for the filename across all scripts
+    rather than matching on the script name. A runner-to-artifact mapping held in
+    memory has now produced two different wrong counts on the same list in one round.
+    When a file's writer is assumed rather than read, say so, or verify with one grep.
+  status: active
+  context: 'Determining which stored artifacts a write-site bug could damage. I first
+    accepted the Agent''s count of three, then "corrected" it to six by asserting
+    t1_pilot.json was written by t1_lower_side_at_M.py. The Agent traced writers and
+    showed t1_pilot.json is written by a standalone artifacts/_project/intermediate/t1_pilot.py
+    that is not in the edit scope at all; t1_lower_side_at_M.py contains zero mentions
+    of "pilot". I verified independently: grep -n "pilot" scripts/t1_lower_side_at_M.py
+    returns 0 matches, the standalone writer exists at t1_pilot.py:47, and t1_lower_side_all_rungs.json
+    (the other save site) does not exist on disk. The correct set is five files, all
+    with 9-key execution_environment blocks.'
+  fix: 'Retracted the correction explicitly to the Agent, confirmed its trace point
+    by point, and settled the exposure at five files. Converted the collateral finding
+    into the guard''s third demonstration case: t1_pilot.json should be checked to
+    confirm the guard WOULD fire for it while leaving its unedited producer untouched,
+    so an accidental safety becomes a checked one.'
+- id: M175
+  date: '2026-09-19'
+  category: experiment_design
+  severity: high
+  summary: 'Arm E was ill-posed twice over: the spec misdescribed the arms'' radius
+    level, and the phase-1 run reproduced a replicate stream that skipped the generator''s
+    inner draws (sd_D 0.01510 vs the correct 0.0169715), making every number in it
+    invalid.'
+  root_cause: Two unchecked steps in one dispatch. First, I described an existing
+    implementation from memory rather than from its defining line, producing a spec
+    whose premise was false -- the fifth unchecked mechanism this round and the third
+    that was mine. Second, I specified a recomputation without requiring the replicate
+    stream to be reproduced and without naming an expected control, so a stream that
+    silently skipped the generator's inner draws produced a full set of plausible-looking
+    numbers (sd 11% low, and a skewness value) that would have been recorded as facts
+    about the estimator had the discrepancy not been noticed. The stream error had
+    already been diagnosed once this round by the Reviewer, so the requirement was
+    known and simply not carried into this brief.
+  prevention: Read the line that defines a quantity before describing it in a brief,
+    even when it was read earlier in the same thread; the arm radius is norm.ppf(1
+    - ALPHA_UPPER) * sqrt(var), which is z(0.975)*SE and equals |D|@0.95 under Gaussianity,
+    not |D|@0.975. When a brief asks for a recomputation of an existing experiment,
+    require the generator's full draw stream to be reproduced and name the expected
+    control value in the brief so a stream error surfaces as a mismatch rather than
+    as an interpretable result. A specific numeric fingerprint (0.0151 instead of
+    0.01697) makes that check one comparison rather than a re-derivation.
+  status: active
+  context: 'I dispatched Arm E to test whether a one-sided quantile radius closes
+    Track 5''s residual coverage gap. Two independent defects, both mine: (1) the
+    spec described the existing arms'' symmetric radius as the 97.5th percentile of
+    |D| when the code computes z(0.975)*SE via norm.ppf(1 - ALPHA_UPPER) * sqrt(var)
+    at track5_variance_radius.py:115 -- a different level, so the comparison had no
+    valid reference; (2) I did not require the brief to reproduce the Track 5 replicate
+    stream, and phase 1 returned sd_D = 0.015101771 against Track 5b''s directly measured
+    0.016971536, an 11.0% discrepancy that matches exactly the value the Reviewer
+    identified earlier this round as produced by omitting the generator''s 32 inner
+    multinomial draws per outer replicate.'
+  fix: Stopped Arm E before the 1000-replicate run. Retracted the spec premise, discarded
+    phase 1 entirely including the skewness (computed on a mis-generated distribution,
+    so not a property of the estimator), and instructed that the artifact be marked
+    invalid with the reason. Closed the Track 5 line, since the residual question
+    I raised was based on the misdescribed radius. Recorded the 0.0151-vs-0.01697
+    fingerprint as a reusable stream check.
+- id: M176
+  date: '2026-09-20'
+  category: experiment_design
+  severity: high
+  summary: The paper's Track-5 appendix asserted that a near-zero skewness implies
+    a one-sided and a symmetric radius coincide; that entailment is false and the
+    measurement it replaced was void, so a reviewer objection was dismissed rather
+    than left open
+  root_cause: 'My integration brief cited the n=5000 skewness result as closing the
+    one-sided-versus-symmetric radius question. That entailment does not hold: a near-zero
+    third moment says nothing about whether the 2.5%-of-D and 97.5%-of-|D| quantiles
+    are equal, and I verified they still differ by about 12% on a perfectly symmetric
+    distribution. Compounding it, the only run that compared the two radius forms
+    was already labelled void in the manifest - radii from a forked stream, a mixed-form
+    comparator, and 200-draw quantile noise exceeding the gap - so the paper dismissed
+    a live objection using a result that does not bear on it. This is the same pattern
+    the session kept correcting: a conclusion drawn from a neighbouring quantity rather
+    than the one under claim.'
+  prevention: 'Two rules. (1) A near-zero third moment does not entail that other
+    functionals of the same distribution coincide: I verified by simulation that a
+    perfectly symmetric distribution still has roughly a 12% gap between the 2.5%-of-D
+    and 97.5%-of-|D| quantiles, so any sentence of the form "the distribution is symmetric,
+    therefore the one-sided and two-sided forms agree" needs the quantiles themselves
+    measured, not inferred. (2) Before citing an artifact in a manuscript, read its
+    manifest name and description for a void or superseded label - here the file was
+    registered as "radii void; skewness superseded" and carried the tell-tale forked-stream
+    sd_D of 0.01510. When a measurement is void, the reply is that the question is
+    untested, never that a neighbouring measurement settles it.'
+  status: active
+  context: A Reviewer raised as critical that the paper's new Track-5 appendix sentence
+    contradicted the project's own Arm E artifact. The Reviewer's severity was right
+    but its proposed fix was wrong, and investigating showed the paper sentence rested
+    on an error I introduced in the integration brief.
+  fix: 'Sent the corrected text to the paper: keep the skewness measurement (minus
+    0.0089, SE 0.0346, CI containing zero) but delete the clause asserting that a
+    one-sided and symmetric radius coincide, replacing it with a statement that the
+    third moment is indistinguishable from zero at this sample size, which does not
+    settle whether the interval''s form matters, and that the question was not tested.
+    Explicitly forbade quoting the void artifact''s 0.0046 radius difference. Required
+    a full re-render and a new visual-gate receipt, plus confirmation that the body
+    still ends p.13. Also rejected the Reviewer''s substitute sentence, showing that
+    its quoted bootstrap CI does not exclude zero at the difference and SE it published
+    (ratio 1.577, recomputed interval containing zero), and that the artifact it cited
+    is registered as radii-void.'
+- id: M177
+  date: '2026-09-20'
+  category: agent_behavior
+  severity: medium
+  summary: Attributed the ledger cross-generation split to an "unpinned sklearn solver/penalty";
+    a direct probe shows both sklearn versions resolve to solver=lbfgs, penalty='deprecated'
+    — sklearn's default solver IS lbfgs, so no solver was ever unpinned. The mechanism
+    claim was wrong.
+  root_cause: I inferred the root cause from the SYNTACTIC FORM of the code (`LogisticRegression(max_iter=1000,
+    random_state=0)` passes no solver or penalty) and treated the absence of an explicit
+    argument as an absence of a pin. sklearn's default solver is lbfgs, so the object
+    was always lbfgs on both versions. I never read the resolved attribute back from
+    the producing host before promoting the claim to a constraint and a paper-level
+    justification.
+  prevention: 'When a root cause names a dependency''s DEFAULT-VALUED parameter as
+    the source of a divergence, measure the resolved value on both sides before building
+    a constraint, a review item, or a paper sentence on it. "No solver argument passed"
+    does not mean "solver is unpinned" — the library''s default IS a pin. The cheap
+    check is one read: construct the object and read the attribute back. This project
+    had already established that comparing across generations requires reproducing
+    on the producing host; the same discipline applies to diagnosing WHY two generations
+    differ. Do not carry a mechanism claim into a constraint or a paper justification
+    on the strength of the code''s syntactic form alone.'
+  status: active
+  context: 'Across rounds I attributed the 593/990-row cross-generation split in the
+    lower-side ledgers to an "unpinned sklearn solver/penalty" (recorded as constraint
+    C052, cited in review_issues L8-W2 and L13-W12). This became a standing root cause
+    used to justify pinning as the fix. A read-only probe on the producing host (server
+    111, /root/miniconda3, sklearn 1.9.0) measured the resolved values directly: solver=lbfgs,
+    penalty=''deprecated'', l1_ratio=0.0 — and the local container''s sklearn 1.9.1
+    resolves identically (lbfgs / ''deprecated''). No deprecation warning was emitted
+    on either version for the bare construction. Artifact: artifacts/_project/intermediate/sklearn_solver_probe_20260920.json,
+    sha256 b665dc3d4b45f715d4cf1290374b4425b34265b0cad18caaf4f04f93bd140767.'
+  fix: Measured the resolved solver/penalty on the producing host instead of continuing
+    to assert an unpinned-solver cause. Recorded the literal strings. The generation
+    boundary remains real (593/990 rows differ between the 09-13 canonical pair and
+    the T1 09-19 pair), but its cause is NOT solver/penalty selection — both hosts
+    resolve identically. The remaining explanation is the sklearn VERSION difference
+    (1.9.0 vs 1.9.1), not a parameter default.
+  related_decisions:
+  - C052
+- id: M178
+  date: '2026-09-20'
+  category: experiment_design
+  severity: high
+  summary: 'A fix for an over-broad qualifier replaced it with a DIFFERENT false qualifier:
+    "the m-free advantage vanishes from k>=15 onward at every M" is refuted by the
+    grid''s own k=15 row (advantage present at M=1,2,4). The artifact''s pre-committed
+    falsifier already stated the correct M-boundary claim.'
+  root_cause: I replaced an over-broad claim ("zero from M=8 on at every k") with
+    a different over-broad claim ("vanishes from k>=15 onward at every M") without
+    testing the replacement against the grid's k=15 row, which still shows the advantage
+    at M=1,2,4. The artifact carried a pre-committed falsifier stating the correct
+    claim and I did not read it before writing the replacement. A later condensation
+    then truncated the clause, and the Reviewer's proposed fix reproduced the original
+    false wording, confirming the error was in the claim rather than the truncation.
+  prevention: 'When a fix replaces an over-broad qualifier, verify the REPLACEMENT
+    against the same artifact — a corrected claim can be false in a new direction,
+    and a wrong fix arrives with the authority of a correction. Specifically: read
+    the artifact''s own `falsifiers` field before inventing wording, since a pre-committed
+    falsifier usually already states the supported claim. And when summarizing a table
+    into prose, never abbreviate a bounded threshold into an unbounded one ("M>=8"
+    -> "M>="): a truncation can silently re-create the very defect the edit was fixing.'
+  status: active
+  context: 'In correcting a Round-13 finding (L13-W1: "''nothing/zero from M=8 on''
+    is over-broad"), a replacement clause was adopted reading "vanishes from k>=15
+    onward at every M" and placed at three sites (abstract.tex:26-27, introduction.tex:105-107,
+    results.tex:175-176). It was then truncated during a ROADMAP condensation into
+    a dangling "confined to M>=" with no bound. A Reviewer re-check caught the dangling
+    clause and proposed replacing it with "the m-free advantage is present at coarse
+    M and vanishes from k>=15 onward at every M" — the same false claim. Reading the
+    grid artifact directly (eth_full_mk_grid.json, `finding` + `falsifiers`) shows
+    the advantage is PRESENT at k=15 for M=1,2,4 (m-free 18/4/1 where Eq (6) is 0),
+    so "vanishes from k>=15 onward at every M" is falsified by the same table''s own
+    k=15 row. The true pattern: the advantage exists wherever Eq (6) has collapsed
+    to 0 while saturation has not — at k=5 it lives at the HIGH-M end (M=8: 0->94,
+    M=16: 0->80), at k=10 it spans M=2..16, at k=15 only M<=4, and at k=30 it is absent
+    because both routes are 0. The artifact''s own falsifier already stated the correct
+    claim: "the m-free advantage over Eq (6) is confined to M=1 ... zero from M=8
+    on".'
+  fix: 'Replaced the false clause at all three sites with the supported M-boundary
+    form: the advantage is where Eq (6) has collapsed while saturation has not; it
+    disappears at M>=8 at every k, where plug-in saturation sets the frontier for
+    both routes. ROADMAP corrected and the W9 reclassification recorded. No number
+    changed; the correction removes a false qualifier rather than adding a claim.'
+- id: M179
+  date: '2026-09-20'
+  category: experiment_design
+  severity: high
+  summary: My ROADMAP boundary claim "the advantage disappears at M>=8 at every k"
+    was false against the artifact's own grid (advantage is 94/80 at k=5 and 6/5 at
+    k=10 for M>=8). It replaced a different false claim, and the artifact's own prose
+    asserts the same false thing.
+  root_cause: 'The error survived because the ARTIFACT''S OWN PROSE asserts the same
+    thing: eth_full_mk_grid.json''s `finding` field reads "at M>=8 the frontier is
+    set by plug-in saturation", and its first falsifier''s `resolution` reads "zero
+    from M=8 on" -- while the table three lines above shows 94/80/6/5. My predecessor
+    and I both took the artifact''s prose summary and never checked it against the
+    table it annotates. A 2-D effect was summarised on one axis, and the one-axis
+    summary was carried forward as a boundary claim.'
+  prevention: 'A threshold or boundary claim over a 2-D grid must be checked against
+    EVERY cell of the grid before it is written, not against the axis that motivated
+    it. Concretely: when an artifact carries both a prose summary and the table it
+    summarises, TREAT THE PROSE AS UNVERIFIED and re-derive the claim from the table
+    -- the prose is written once and then inherited, while the table is the data.
+    Same class as "a count is a weak instrument for presence": the summary field is
+    a claim, not an observation.'
+  status: active
+  context: 'Round 13 corrected an over-broad claim ("the m-free advantage vanishes
+    from k>=15 onward at every M", false because at k=15 it is still present at M=1/2/4
+    as 18/4/1). The replacement I wrote into the ROADMAP was "The supported boundary
+    is the M one: the advantage disappears at M>=8 at every k, where plug-in saturation
+    sets the frontier for both routes." That is ALSO false: reading the artifact''s
+    own 20-cell table, the advantage at M>=8 is 94 and 80 at k=5, and 6 and 5 at k=10.
+    Only k=15 and k=30 are zero at M>=8.'
+  fix: 'Verified the full 20-cell table directly and derived the ACTUAL boundary:
+    the advantage is present in exactly the 13 cells where the saturation fraction
+    (share of pairs with tv_hat >= 0.99) is <= 0.697, and absent in exactly the 7
+    cells where it is >= 0.728. Perfect separation, no exceptions. The defensible
+    statement is the saturation condition, not an axis. Corrected at all three surfaces.'
+  related_decisions:
+  - D178
+  - D166

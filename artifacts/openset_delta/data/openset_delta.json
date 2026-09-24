@@ -1,0 +1,229 @@
+{
+  "object": "Delta = measured multiclass error - open-set floor, macro over the 45 graph services",
+  "sampling_unit": "service (cluster bootstrap over 45 services), NOT the 990 pairs",
+  "bootstrap_replicates": 10000,
+  "S_known": 384.5529,
+  "floor_M45": 0.19422,
+  "floor_M46": 0.18577,
+  "lp_floor_ref": 0.36307,
+  "mixture_ref": 0.36347,
+  "exclude_U_ref": 0.37155,
+  "per_row_invariant_violations": 0,
+  "detectors": {
+    "lightgbm": {
+      "0.05": {
+        "n_services": 45,
+        "macro_err": 0.7366,
+        "boot95": [
+          0.6482,
+          0.8207
+        ],
+        "delta_vs_M45": 0.5424,
+        "ratio_vs_M45": 3.79,
+        "delta_CI": [
+          0.454,
+          0.6265
+        ],
+        "floor_le_CI_low": true
+      },
+      "0.1": {
+        "n_services": 45,
+        "macro_err": 0.736,
+        "boot95": [
+          0.6469,
+          0.8219
+        ],
+        "delta_vs_M45": 0.5418,
+        "ratio_vs_M45": 3.79,
+        "delta_CI": [
+          0.4527,
+          0.6276
+        ],
+        "floor_le_CI_low": true
+      },
+      "0.2": {
+        "n_services": 45,
+        "macro_err": 0.7346,
+        "boot95": [
+          0.6453,
+          0.8181
+        ],
+        "delta_vs_M45": 0.5404,
+        "ratio_vs_M45": 3.78,
+        "delta_CI": [
+          0.4511,
+          0.6239
+        ],
+        "floor_le_CI_low": true
+      }
+    },
+    "prototype": {
+      "0.05": {
+        "n_services": 45,
+        "macro_err": 0.819,
+        "boot95": [
+          0.7282,
+          0.9017
+        ],
+        "delta_vs_M45": 0.6248,
+        "ratio_vs_M45": 4.22,
+        "delta_CI": [
+          0.534,
+          0.7075
+        ],
+        "floor_le_CI_low": true
+      },
+      "0.1": {
+        "n_services": 45,
+        "macro_err": 0.8164,
+        "boot95": [
+          0.7233,
+          0.9006
+        ],
+        "delta_vs_M45": 0.6222,
+        "ratio_vs_M45": 4.2,
+        "delta_CI": [
+          0.5291,
+          0.7064
+        ],
+        "floor_le_CI_low": true
+      },
+      "0.2": {
+        "n_services": 45,
+        "macro_err": 0.8187,
+        "boot95": [
+          0.7275,
+          0.9025
+        ],
+        "delta_vs_M45": 0.6245,
+        "ratio_vs_M45": 4.22,
+        "delta_CI": [
+          0.5333,
+          0.7083
+        ],
+        "floor_le_CI_low": true
+      }
+    },
+    "ronetc": {
+      "0.05": {
+        "n_services": 45,
+        "macro_err": 0.8302,
+        "boot95": [
+          0.7413,
+          0.9092
+        ],
+        "delta_vs_M45": 0.636,
+        "ratio_vs_M45": 4.27,
+        "delta_CI": [
+          0.5471,
+          0.7149
+        ],
+        "floor_le_CI_low": true
+      },
+      "0.1": {
+        "n_services": 45,
+        "macro_err": 0.8298,
+        "boot95": [
+          0.7395,
+          0.9085
+        ],
+        "delta_vs_M45": 0.6356,
+        "ratio_vs_M45": 4.27,
+        "delta_CI": [
+          0.5453,
+          0.7143
+        ],
+        "floor_le_CI_low": true
+      },
+      "0.2": {
+        "n_services": 45,
+        "macro_err": 0.837,
+        "boot95": [
+          0.7499,
+          0.9129
+        ],
+        "delta_vs_M45": 0.6428,
+        "ratio_vs_M45": 4.31,
+        "delta_CI": [
+          0.5557,
+          0.7187
+        ],
+        "floor_le_CI_low": true
+      }
+    }
+  },
+  "not_run": {
+    "open_set_rejection_arm": false,
+    "reason": [
+      "U (the 8 labels absent from the 45-member graph: 7,12,24,30,42,45,46,47) totals 3539 test flows, max 1000; the >=N-flows gate verdict flips between 8/8 and 1/8 purely with N",
+      "Delta is invariant to rejector quality: mean per-service error 0.7366 implies a 46-class equiprobable average of 0.7206 with a perfect rejector vs 0.7423 with never-reject (~2% spread), against a 0.186 floor",
+      "the read-only probe channel failed twice with stream disconnects"
+    ],
+    "does_not_show": [
+      "not an open-set evaluation; the unknown class is never exercised",
+      "not a certificate on any single classifier; the floor bounds any classifier from below",
+      "pcap_encoder exposes no per-service classification_error and is excluded"
+    ]
+  },
+  "floor_choice": {
+    "certified_floor": "uniform (M(M-1)) normalisation; floor_M45 = 0.19422, floor_M46 = 0.18577",
+    "why_this_floor": "the uniform form has a closed-form derivation verified at M=2 against Le Cam, and uses no re-solve. The three stronger constructions (LP 0.36307, mixture 0.36347, exclude-U 0.37155) stack techniques on a line where three normalisation errors were made and caught; they are recorded as references, NOT as the certified floor.",
+    "headline_by_floor": {
+      "vs_uniform_M45_0.19422": {
+        "delta": 0.5424,
+        "ratio": 3.79
+      },
+      "vs_LP_0.36307": {
+        "delta": 0.3735,
+        "ratio": 2.03
+      },
+      "vs_excludeU_0.37155": {
+        "delta": 0.3651,
+        "ratio": 1.98
+      }
+    },
+    "note": "the \"~4x loose\" headline is the uniform-floor reading; against the LP floor the same measurement is ~2x. The artifact reports the uniform floor deliberately, not by omission."
+  },
+  "registry_note": "artifact-only deliverable (no registry entry); manifest exp_id=copenset_delta/is a display key, not a resolvable registry id",
+  "rejection_arm_cancel_reasons": {
+    "reason_1_thin_U": {
+      "text": "U (the 8 labels absent from the 45-member graph: 7,12,24,30,42,45,46,47) totals 3,539 test flows, max single service 1,000; the >=N-flows gate verdict flips 8/8 -> 1/8 purely with N",
+      "verified": "counts reproduced from the corpus independently (test window 2025: 7:1000, 47:828, 42:389, 30:326, 12:320, 46:258, 24:249, 45:169)",
+      "window_statement": "TWO WINDOWS, BOTH CORRECT, MUST BE LABELLED (a bare gate number is ambiguous): TEST WINDOW (2025-01..05, all a classifier can be evaluated on): >=100 -> 8/8, >=300 -> 5/8, >=500 -> 2/8, >=1000 -> 1/8 (only svc 7), >=5000 -> 0/8. FULL CORPUS (all 12 months, 10M flows): >=100 -> 8/8, >=500 -> 8/8, >=1000 -> 3/8 (7, 30, 47), >=5000 -> 0/8. The go/no-go uses the TEST-window numbers, because an evaluation can only draw on the test window. A server-side probe independently reproduced the full-corpus counts (its 47:1501 matches a direct all-node read by the director)."
+    },
+    "reason_2_near_duplicate_outsider": {
+      "text": "svc 47 sits unusually close to known svc 37 on the certified channel, so a rejector would fail on 47 for reasons unrelated to open-set rejection",
+      "channel": "pack_rung_prefix(k=5, m=32, direction_row=1, size_row=2) - the certificate channel",
+      "measured_by_director": {
+        "train_2024": 0.2011,
+        "test_2025": 0.0414,
+        "all_corpus": 0.1132,
+        "note": "WINDOW-UNSTABLE: 0.0414 in the test window vs 0.2011 in the train window, a ~5x spread. The cited 0.0687 matches neither window cleanly."
+      },
+      "nearest_known_known_same_channel": {
+        "train_2024": "11-51 at 0.1677",
+        "test_2025": "27-29 at 0.0851",
+        "note": "the earlier citation of 21-23 at 0.1394 does NOT reproduce as a tv on this channel; 0.1394 appears in the artifacts as a distance-to-line cutoff, and 21-23 measures 0.1130 here."
+      },
+      "verdict": "QUALITATIVE CLAIM HOLDS IN THE EVALUATION WINDOW ONLY: 0.0414 (test) is below the nearest known-known 0.0851, but in the train window 0.2011 is ABOVE the nearest known pair. Report as window-dependent, not as a stable property of the pair."
+    }
+  },
+  "gate_counts": {
+    "test_window_2025": {
+      ">=100": "8/8",
+      ">=300": "5/8",
+      ">=500": "2/8",
+      ">=1000": "1/8 [7]",
+      ">=5000": "0/8",
+      "use": "this is the go/no-go window"
+    },
+    "full_corpus_all_months": {
+      ">=100": "8/8",
+      ">=300": "8/8",
+      ">=500": "8/8",
+      ">=1000": "3/8 [7,30,47]",
+      ">=5000": "0/8",
+      "use": "context only; not usable for evaluation"
+    }
+  }
+}

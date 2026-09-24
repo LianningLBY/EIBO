@@ -18,39 +18,36 @@ of services. The ingredients for that exist, but they share a limitation that
 matters here. Classical work gives feature-conditional bounds for closed-set
 fingerprinting, and recent work establishes that side-channel leakage is
 inevitable under explicit conditions and characterizes a rate-distortion
-frontier for defense. Both are single-letter or i.i.d.-conditional: exponential
-error decay requires repeated conditionally independent observations, and the
-frontier is proved inside a stationary-memoryless class. Real packet prefixes
-are neither independent nor stationary, and the gap between what those results
-assume and what a trace provides is exactly the gap a practitioner must cross.
+frontier for defense. Neither returns an interval on one pair's distance at the flows
+a trace actually provides, and that is the gap a practitioner must cross.
 
 We measure a two-sided indistinguishability bracket on real encrypted traffic
 instead, and we give each side a confidence level rather than pairing a proven
 side with an unproven one. The upper side is a finite-sample bound on the total
 variation distance between two services' prefix laws, with a radius whose two
-terms we derive explicitly. The lower side is a classifier-based bound at a
+terms we derive explicitly; the lower side is a classifier-based bound at a
 nominal confidence level, distribution-free in the same sense. The two sides
 differ in construction and in tightness, not in whether a guarantee is available:
 the upper radius is fixed by the alphabet and the flow counts, while the lower
-bound must hold against an adversarial choice of decision function and is
-correspondingly wider. It is the upper side that an error-floor claim needs and
-that in practice binds.
+bound must hold against an adversarial choice of decision function. It is the
+upper side that an error-floor claim needs and that in practice binds.
 
 The bracket is computable, and it is computable at a resolution that is
 deliberately coarse. On the CESNET-QUICEXT-25 XS subset, at the coarsest channel
 we pre-register, 336 of 990 service pairs (33.9\%) admit an interval whose upper
 side is finite-sample strict and whose lower side clears the gate
-(\Cref{tab:bracket}). \Cref{fig:bracket} shows the measurement end to end: raw
-flow records are quantized into a prefix symbol, the symbol feeds an upper and a
-lower branch that carry different certification strength, and the two branches
-meet only at the gate. The certificate is not free: raising the alphabet
-resolution makes the channel more informative and destroys the certificate at
-the same time, because the confidence radius grows with the alphabet size while
-the threshold does not. The upper-side set falls from 340 pairs at the coarsest rung
-to none four rungs finer, and the joint gate admits 336 at that rung because four
-pairs clear the upper side and fail the lower (\Cref{fig:horizon}). The coarse
-channel is therefore not a concession to tractability but the only regime in
-which a two-sided certificate exists at these prefix lengths and flow counts.
+(\Cref{tab:bracket}, in \S A.4). \Cref{fig:bracket} (in \S A.1) shows the measurement end to end. The
+certificate is not free: raising the alphabet resolution makes the channel more
+informative and destroys the certificate at the same time. The cause is not the
+confidence radius, as we first assumed, but the estimator's own upward bias on a
+fine alphabet: at $k{=}30$ the median empirical distance is already $0.9979$,
+with $597$ of $820$ pairs at or above $0.99$, so the plug-in estimate has
+saturated near one before any radius is added (\Cref{fig:horizon}). The
+upper-side set falls from 340 pairs at the coarsest rung to none three rungs
+finer, and the joint gate admits 336 at that rung because four pairs clear the
+upper side and fail the lower. The coarse channel is therefore not a concession
+to tractability but the regime in which a two-sided certificate exists at these
+prefix lengths and flow counts.
 
 We also report a negative result that we consider part of the contribution. The
 natural estimator for how divergence accumulates across dependent packet
@@ -60,11 +57,10 @@ exactly, the estimator returns sublinear growth, deflating its estimate to
 $0.6769$ of the truth on the plain arm at the longest prefix
 (\Cref{fig:estimator}). The cause is measured rather than conjectured: prefix
 occupancy collapses as the prefix lengthens, and a per-position smoothing bias
-accumulates exactly where contexts are sparse. Two independent repairs both fail
-their known-truth gate, and the repair that would work discards more than half
-the data at the upper end of the range. We report this as a methods and limits
-finding, not as an estimate of a growth rate, and the question is left open with
-the reason stated in numbers.
+accumulates where contexts are sparse. Two independent repairs both fail their
+known-truth gate, and the repair that would work discards more than half the data
+at the upper end of the range. We report this as a methods and limits finding,
+not as an estimate of a growth rate, with the reason stated in numbers.
 
 \paragraph{Contributions.}
 \begin{itemize}
@@ -75,14 +71,30 @@ the reason stated in numbers.
   (\Cref{sec:design}, \Cref{sec:results/bracket}). 33.9\% of pairs satisfy the
   joint gate, and at that rung the upper side is the scarce object. The
   certified object is the pair: its content is the two-point bound on a test
-  between those two services, and we make no multi-class claim.
-  \item \textbf{The certificate horizon, as a function rather than a number.}
-  We show that a finer alphabet is associated with higher median divergence and
-  certifies less, that the upper-side set is empty at and beyond the fourth rung, and that the boundary has a
-  closed form in resolution, sample size, and distance whose two derivation
-  routes agree to zero (\Cref{sec:results/horizon}). Where the certificate is
-  lost, a conditional divisibility bound keeps the large-prefix regime
-  non-empty.
+  between those two services, and summing that consequence over all 990 pairs,
+  each contributing its upper side certified or not, gives an open-set error
+  floor of
+  $0.197$, held simultaneously over all $990$ pairs with probability $\ge 0.95$.
+  The floor is consistent with, but well below, the $0.737$
+  multi-class error a three-detector panel measures on a strictly finer
+  observable. The two live on unmatched class spaces, so the ratio is
+  $3.74\times$--$4.21\times$ open-set and $3.58\times$--$4.03\times$ matched;
+  either way it bounds the floor's looseness, not a detector's quality. The
+  floor is also not the tightest available at this rung: a one-line combinatorial
+  bound needing no certificate exceeds it, so what the bracket contributes here
+  is the guarantee and the per-pair object rather than the number
+  (\Cref{sec:design}).
+  \item \textbf{The certificate horizon, and its two regimes.}
+  A finer alphabet is associated with higher median divergence and certifies
+  less. The published bound prices the alphabet, and its upper-side set falls
+  from 340 pairs to none three rungs finer. An alphabet-free bound on the same
+  data is valid and has a $2.9\times$ smaller confidence radius, but its
+  advantage is confined to coarse resolution: at $k{=}15$ it certifies $18$ pairs where the published bound
+  certifies none, and the advantage weakens as resolution increases. There the
+  frontier is set by alphabet sparsity in the plug-in estimate rather than by any radius
+  (\Cref{sec:results/horizon}), so removing the alphabet price does not dissolve
+  the horizon. Where the certificate is lost, a conditional divisibility bound
+  keeps the large-prefix regime non-empty.
   \item \textbf{A methods and limits finding for the growth question.} The
   standard chain-rule estimator cannot adjudicate whether divergence grows
   sublinearly here: its bias manufactures the effect it is meant to detect, and
@@ -94,18 +106,26 @@ the reason stated in numbers.
   (\Cref{sec:results/detector_validation}). The lower side reproduces across
   corpora; the joint gate does not, and the difference is not statistically
   resolved at matched evidence (\Cref{sec:discussion/robustness}).
-  \item \textbf{A confound that blocks the obvious corroboration.} A
-  heterogeneous-i.i.d.\ null, in which every flow draws its own rate and then
-  emits independent bits, reproduces the first-order-Markov vote that would
-  otherwise look like evidence of within-flow dependence; the vote is therefore
-  not diagnostic (\Cref{sec:results/estimator}).
-  \item \textbf{Two further measured quantities that bound the scope.} A second
-  certified object over whole-flow rectified statistics is reported alongside the
-  prefix law, and its agreement with it is cancellation rather than
-  corroboration, so the two may not be ranked (\Cref{sec:discussion/objects}).
-  The unknown-class mass a bracket omits is estimated as a deployment-site
-  quantity rather than a universal prior (\Cref{sec:discussion/missing_mass}).
 \end{itemize}
+
+\paragraph{Negative results we report.} Two findings bound the paper's claims rather than extend them. A heterogeneous-i.i.d.\ arm, in which every flow draws its own
+rate and then emits symbols conditionally independently at that rate, reproduces
+the first-order-Markov vote that would otherwise look like evidence of
+within-flow dependence, so that vote is not diagnostic
+(\Cref{sec:results/estimator}). The arm is homogeneous within a flow but not across flows and its draws are not
+independent: an alternative dependence mechanism, not a null that excludes
+dependence. And a second
+certified object
+over whole-flow rectified statistics is reported alongside the prefix law, but
+its agreement with it is cancellation rather than corroboration, so the two may
+not be ranked (\Cref{sec:discussion/objects}). The unknown-class mass a bracket
+omits is likewise estimated as a deployment-site quantity rather than a
+universal prior, reported with its sampling rate attached
+(\Cref{sec:discussion/missing_mass}). The channel-sensitivity
+study is a negative in the same sense: including an identifier changes the
+radius-free separation, so excluding it is a scoped choice rather than a claim of
+immateriality (\Cref{sec:discussion/sensitivity}). Taken with the growth-question
+finding above, these are what the measurements do \emph{not} establish.
 
 \paragraph{Novelty boundary.} To our knowledge, no prior work measures a
 two-sided bracket with asymmetric guarantee strength on real encrypted traffic,
@@ -119,17 +139,3 @@ what including an identifier would change rather than assuming it is immaterial.
 The certified fraction is a stratum statement, and we state the stratum wherever
 we quote it.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.86\columnwidth]{figures/paper/fig1_bracket_overview.pdf}
-\caption{The EIBO measurement. Raw QUIC flow records are quantized into a
-$k$-prefix symbol over a (direction, size) alphabet at resolution $M$. The
-quantized symbol feeds two branches that carry different certification
-strength: an upper branch combining a plug-in TV estimate with a confidence
-radius, which is finite-sample, and a lower branch built from a
-classifier-based high-probability lower bound whose constant is asymptotically
-derived, so its level is nominal. The
-branches meet at the per-pair interval, whose gate is the conjunction
-$\epslo > 0.05$ and $\epshi < 0.5$.}
-\label{fig:bracket}
-\end{figure}

@@ -1,0 +1,21 @@
+{
+ "check": "random-subsample reproducibility vs full M=2 run",
+ "closes_caveat": "the pilot artifact DO_NOT_COMPARE caution about non-random pair selection",
+ "falsifiers": [
+  {
+   "caveat": "the full run traversed pairs lexicographically while services differ in flow count ~500x, which is why the concern was live in the first place",
+   "claim": "the M=2 990/990 lower-gate result is not an artefact of pair ORDER",
+   "falsifier": "re-run a RANDOM subsample of M=2 pairs and compare per-pair against the full run",
+   "result": "60-pair random subsample (seed 99): max abs diff 0.0 vs the same pairs in the full run, 60/60 clear the gate. Claim HOLDS."
+  }
+ ],
+ "full_gate_rate_at_M2": 1.0,
+ "full_median_same_pairs": 0.8651863184877437,
+ "interpretation": "A RANDOM 60-pair subsample (seed 99) of the M=2 pairs reproduces the full-run values EXACTLY - max_abs_diff 0.0 against the same pairs in t1_lower_side_M2.json - and clears the 0.05 gate on 60/60 of them, as the full run does on 990/990. So the 990/990 lower-gate result is NOT an artefact of pair ORDER: the full run processed itertools.combinations lexicographically (all pairs of service 0 first), and services differ widely in flow count, so an order-correlated artefact was a live concern for the pilot I had flagged as non-random. It is now closed. Note the subsample median (0.8652) differs from the full-run median (0.8535) only because it is a different pair SET, not because of any order effect - the per-pair values are identical.",
+ "max_abs_diff": 0.0,
+ "pairs": 60,
+ "random_sub_gate_rate": 1.0,
+ "random_sub_median": 0.8651863184877437,
+ "seconds": 181.3,
+ "seed": 99
+}

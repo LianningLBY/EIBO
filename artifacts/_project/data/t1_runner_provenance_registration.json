@@ -1,0 +1,44 @@
+{
+  "runner_patches": [
+    {
+      "path": "scripts/t1_lower_side_at_M.py",
+      "sha256": "0002794225f0644100b7d0a11ff3b11dc253985bb99211671eed5700855ea014",
+      "note": "This revision adds execution_environment_provenance() (sklearn version / resolved solver / resolved penalty / python_version / python_path / host / cwd) under a NEW top-level provenance key, with a preservation guard that refuses to drop keys from a pre-existing execution_environment block."
+    },
+    {
+      "path": "scripts/t1b_lower_side_k_axis.py",
+      "sha256": "1a7e535fd59d4e3e3bdc19dc57b1b6a3267c312aeb7ebdfc1c78f3174aef74b7",
+      "note": "This revision adds execution_environment_provenance() (sklearn version / resolved solver / resolved penalty / python_version / python_path / host / cwd) under a NEW top-level provenance key, with a preservation guard that refuses to drop keys from a pre-existing execution_environment block."
+    },
+    {
+      "path": "scripts/t1c_lower_side_M1_uncapped.py",
+      "sha256": "88bd89ebcc274e96026b9a8decd293fc3d0fc82e558220581fd1cf6c08009d2b",
+      "note": "This revision adds execution_environment_provenance() (sklearn version / resolved solver / resolved penalty / python_version / python_path / host / cwd) under a NEW top-level provenance key, with a preservation guard that refuses to drop keys from a pre-existing execution_environment block."
+    }
+  ],
+  "pilot_guard_demonstration": {
+    "fired": true,
+    "lost_keys": [
+      "CommitLimit_kB",
+      "MemTotal_kB",
+      "WHY_THIS_MATTERS",
+      "cgroup_path",
+      "corpus",
+      "execution_host",
+      "measured_alloc_ceiling_GB",
+      "python"
+    ],
+    "pilot_sha256_before": "01e39e3e6aa99e076354b8eafe19684a1fe97b719334e7e51c33e0abdbc3e0b9",
+    "pilot_sha256_after": "01e39e3e6aa99e076354b8eafe19684a1fe97b719334e7e51c33e0abdbc3e0b9",
+    "pilot_unchanged": true
+  },
+  "existing_blocks_intact": {
+    "t1_lower_side_M1.json": 9,
+    "t1_lower_side_M2.json": 9,
+    "t1_pilot.json": 9,
+    "t1b_lower_side_k5.json": 9,
+    "t1b_lower_side_k10.json": 9,
+    "t1b_lower_side_k_axis.json": 9
+  },
+  "notes": "The guard was executed from the real function definition in scripts/t1_lower_side_at_M.py via AST extraction because importing the full runner is blocked by the local environment's missing tables package; no runner was executed and no corpus was read. The user-described seven lost keys were contradicted by the actual pilot block: its ninth non-provenance key is python, so the real guard reports eight lost keys. The candidate was passed directly to the guard and no write was attempted."
+}

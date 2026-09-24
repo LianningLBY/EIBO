@@ -1,0 +1,132 @@
+{
+ "T2": {
+  "basis": "q1_lower_side_full_n.json rows filtered M=1,k=5 (n=990)",
+  "finding": "gate counts are driven almost entirely by the UPPER threshold; the lower threshold is nearly inert over 0.01-0.10",
+  "lower_threshold_sweep": {
+   "0.01": {
+    "capped": 340,
+    "full_n": 340
+   },
+   "0.02": {
+    "capped": 338,
+    "full_n": 339
+   },
+   "0.05": {
+    "capped": 335,
+    "full_n": 336
+   },
+   "0.10": {
+    "capped": 312,
+    "full_n": 320
+   },
+   "0.20": {
+    "capped": 229,
+    "full_n": 239
+   },
+   "0.30": {
+    "capped": 125,
+    "full_n": 140
+   },
+   "0.40": {
+    "capped": 20,
+    "full_n": 35
+   }
+  },
+  "segments": {
+   "capped": 335,
+   "fail_upper": 650,
+   "headline_full_n": 336
+  },
+  "upper_threshold_sweep": {
+   "0.30": {
+    "capped": 112,
+    "full_n": 113
+   },
+   "0.40": {
+    "capped": 220,
+    "full_n": 221
+   },
+   "0.50": {
+    "capped": 335,
+    "full_n": 336
+   },
+   "0.60": {
+    "capped": 453,
+    "full_n": 454
+   },
+   "0.70": {
+    "capped": 579,
+    "full_n": 580
+   },
+   "0.80": {
+    "capped": 747,
+    "full_n": 748
+   }
+  }
+ },
+ "T3": {
+  "caution": "medians are conditional on feasibility and the distribution is bimodal; k=5/M=1 spans 42 to 2.09e9, so a median without its feasible fraction misleads",
+  "cells": {
+   "k=10,M=1": {
+    "feasible": 114,
+    "max_n": 2091730.234546733,
+    "median_n": 1855.6712300727609,
+    "p90_n": 96488.84085579845,
+    "pairs": 990
+   },
+   "k=15,M=1": {
+    "feasible": 20,
+    "max_n": 221324.22591484067,
+    "median_n": 2354.4502517964984,
+    "p90_n": 9524.106112340418,
+    "pairs": 946
+   },
+   "k=30,M=1": {
+    "feasible": 0,
+    "max_n": null,
+    "median_n": null,
+    "p90_n": null,
+    "pairs": 820
+   },
+   "k=5,M=1": {
+    "feasible": 380,
+    "max_n": 2094920306.0524788,
+    "median_n": 284.72864694708346,
+    "p90_n": 5601.1624675191615,
+    "pairs": 990
+   }
+  },
+  "constant_definition": {
+   "C_2ln2overalpha": 8.764053,
+   "sqrt_C": 2.960414,
+   "warning": "sqrt(C) appears inside the radius; after solving for n the constant is C, not sqrt(C)."
+  },
+  "gate": 0.5,
+  "route": "m-free per-side, equal n: eps_hi = tv_hat + sqrt(2*ln(2/alpha)/n). Setting eps_hi < gate and solving: n > C / (gate - tv_hat)^2 where C = 2*ln(2/alpha) = 8.764053 (alpha=0.025). NOTE: C is the constant; do NOT use sqrt(C)=2.960414 as if it divided slack^2 \u2014 that applies the constant linearly and understates n by exactly sqrt(C) ~ 2.96x."
+ },
+ "alpha": 0.05,
+ "artifact": "T2_threshold_sensitivity_and_T3_planning_tool",
+ "channel": "PPI[1] direction and PPI[2] size only; PPI[0] excluded",
+ "falsifiers": [
+  {
+   "claim": "the certified count is driven almost entirely by the UPPER threshold",
+   "falsifier": "sweep the lower threshold over 0.01-0.10 and see whether the count moves",
+   "result": "lower threshold nearly inert (340 at 0.01 -> 335 at 0.05); upper threshold moves it 335 -> 453 from 0.50 to 0.60. Claim HOLDS."
+  },
+  {
+   "claim": "the 335-vs-336 gap is a convention label, not a discrepancy",
+   "falsifier": "identify which pair differs and whether it crosses the gate between conventions",
+   "result": "exactly one pair, (21,23): capped 0.0498 fails the 0.05 gate, full-n 0.0588 passes. HOLDS."
+  },
+  {
+   "claim": "n > C/(0.5 - tv_hat)^2 with C = 2 ln(2/alpha)",
+   "falsifier": "apply sqrt(C) linearly instead and compare the resulting medians",
+   "result": "wrong form gives median 96 vs correct 285 -- a 2.96x understatement. The artifact states C explicitly because the earlier prose was ambiguous."
+  },
+  {
+   "claim": "medians of the planning tool describe the population",
+   "falsifier": "check whether the distribution is unimodal and what fraction is feasible",
+   "result": "FAILS as a standalone claim: medians are conditional on feasibility and the distribution is bimodal (k=5 spans 42 to 2.09e9), so every median must carry its feasible fraction"
+  }
+ ]
+}

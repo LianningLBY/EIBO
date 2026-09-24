@@ -15,9 +15,8 @@ before any bracket is computed. Of the 53 service labels present, 45 carry at
 least 2{,}000 flows in the retained period, and those 45 form
 $\binom{45}{2} = 990$ unordered pairs, all surviving the hygiene filters. Flow
 segmentation and service selection follow a pre-registered rule
-(Appendix~A.3); the 2{,}000-flow threshold was fixed before
-the gate was measured. The gate passes on this subset, and the pass is
-provisional: a subset pass, not a full-corpus confirmation.
+(\Cref{sec:appendix/preprocessing}), and the 2{,}000-flow threshold was fixed before the gate was
+measured; the subset pass is provisional rather than a full-corpus confirmation.
 
 The masking regime is verified rather than assumed: the padding sweep reports a
 single zero-valued bin across the sampled tail slots, 990 usable pairs at
@@ -40,19 +39,26 @@ see $\epsilon_{\rm lo}$ decrease under capping against 38 where it increases.
 \subsection{The two-sided bracket}
 \label{sec:results/bracket}
 
-\Cref{tab:bracket} is the paper's primary result. At the coarsest rung
+\Cref{tab:bracket} (in \S A.4) is the paper's primary result. At the coarsest rung
 ($k{=}5$, $M{=}1$), 336 of the 990 pairs satisfy the joint gate of
 \eqref{eq:gate}, a fraction of $33.9\%$. The two sides behave differently, and
 that difference is the point: the upper side admits 340 pairs ($0.3434$) against
 the lower side's 986 ($0.9960$), and the four-pair gap is exactly the set
-passing the upper side and failing the lower. At $M{=}1$, where the joint gate is defined, the upper
+passing the upper side and failing the lower. At the coarsest rung, where the joint gate is defined, the upper
 side is therefore the scarce object: it is what fails relative to the lower
 side, and it is what makes the certified set smaller than either side alone. At
-$M \geq 2$ no per-rung lower side was computed, so no per-rung joint gate exists
-and nothing at those rungs is binding against anything; those rows report the
-upper side only. The upper-side column of \Cref{tab:bracket} is what falls to
-zero as the alphabet is refined, which is the mechanism
-\Cref{sec:results/horizon} explains.
+finer resolution the lower side is not what binds: on the m-free route at
+$(M{=}2, k{=}5)$ every pair clearing the upper bound also clears the lower gate,
+so both counts are $127$, and on the m-free route at $(M{=}1, k{=}10)$ both are
+$98$. The coarsest cell is the exception, the lower side
+narrowing it by four pairs ($340\to336$). The invariant $\epslo \le \epshi$ has
+zero violations on $990/990$ rows at every cell, each row's m-free upper bound
+recorded. The smallest lower bound among the $127$ is $0.0755$, $0.0255$ above the
+gate, against a largest measured convention effect of $0.0072$: $3.5\times$
+clearance, so the identity is robust to that convention. The upper-side column of \Cref{tab:bracket} is what falls to
+zero as the alphabet is refined; \Cref{sec:results/horizon} shows that the cause
+is alphabet sparsity in the plug-in estimate at fine resolution rather than the
+alphabet-priced radius.
 
 The headline fraction is a stratum statement, not a property of traffic in
 general: it says that 33.9\% of pairs on this corpus, at this channel, admit a
@@ -64,76 +70,32 @@ a different and stronger statement.
 \paragraph{Uncertainty on the headline.}
 The 990 pairs are not independent observations: they form a complete graph over
 45 services, so pairs sharing a service are correlated and a pair-level interval
-would be too narrow. We therefore resample \emph{services}, which is the unit
-the corpus actually supplies, and report service-level cluster-bootstrap
-intervals. The joint gate of $336/990 = 33.9\%$ carries a $95\%$ interval of
-$[26.5\%, 43.1\%]$; the upper side, $340/990 = 34.3\%$, carries
-$[26.8\%, 43.4\%]$; and the lower side, $986/990 = 99.6\%$, carries
-$[99.1\%, 100\%]$. The gate interval is wide, which is the honest statement about a corpus of 45
-services: precise about this sample, imprecise about the population it is drawn
-from. The lower side's interval is tight by comparison, which is the same
-observation the gate makes, that most pairs are separable here and the
-certificate is limited by the upper side.
+would be too narrow. We therefore resample \emph{services} and report
+service-level cluster-bootstrap intervals. The joint gate of $336/990 = 33.9\%$
+carries a $95\%$ interval of $[26.5\%, 43.1\%]$; the upper side
+$[26.8\%, 43.4\%]$; and the lower side $[99.1\%, 100\%]$. The gate interval is
+wide, which is the honest statement about a corpus of 45 services; the lower
+side's is tight, the same observation the gate makes, that most pairs
+are separable here and the certificate is limited by the upper side.
 
 Saturation is zero at this rung: no pair's plug-in estimate $\widehat{tv}$
-reaches $0.99$. The informative
-fraction is therefore the whole corpus, and the certificate is not being
-purchased by discarding saturated pairs. \Cref{tab:endpoints} in the appendix
-gives both endpoints' quantiles across all 990 pairs.
-
+reaches $0.99$, so the informative fraction is the whole corpus and the
+certificate is not being purchased by discarding saturated pairs.
+\Cref{tab:endpoints} in the appendix gives both endpoints' quantiles.
 
 The same measurement on an independent corpus yields a joint gate of
-$523/3321$ pairs ($15.75\%$), with an upper-side fraction of $0.1608$
-($534/3321$) and a lower-side fraction of $0.9967$ ($3310/3321$). The primary
-and replication results are analysed together in
+$523/3321$ ($15.75\%$), an upper-side fraction of $0.1608$ and a lower-side
+fraction of $0.9967$. The two results are analysed together in
 \Cref{sec:discussion/robustness}, where the sample-size stratification behind the
 difference, the conservative direction of its mixed-side sample sizes, and a
-service-cluster bootstrap of the resulting gap are set out. The lower side
-reproduces across the two corpora; the gap in the joint gate is significant
-before matching and is not resolved at matched evidence.
+service-cluster bootstrap of the gap are set out.
 
-A second certified object is computed on the same flows over whole-flow
-rectified statistics rather than the $k$-prefix symbol law. At $M{=}1$ its upper
-side admits 292 of 990 pairs and its joint gate 289, against the prefix law's 340
-and 336. \Cref{sec:discussion/objects} shows the proximity of their informative
-fractions to be cancellation rather than agreement, so we neither rank them nor
-treat either as a check on the other.
-
-\begin{table*}[t]
-\centering
-\small
-\caption{The two-sided bracket on the primary corpus by resolution $M$ and prefix length $k$. \emph{Upper} is the count and fraction of pairs whose upper side alone satisfies $\epshi < 0.5$; \emph{sat.} is the fraction with $\widehat{tv} \geq 0.99$. The joint gate is defined at $M{=}1$ only, so later rows are upper-only; zero cells are listed rather than omitted.}
-\label{tab:bracket}
-\begin{tabular}{rr rr rr r}
-\toprule
-$M$ & $k$ & pairs & upper & upper frac. & sat. & joint \\
-\midrule
-1 & 5 & 990 & 340 & 0.3434 & 0.0000 & 336 \\
-2 & 5 & 990 & 47 & 0.0475 & 0.1051 & \textendash \\
-4 & 5 & 990 & 3 & 0.0030 & 0.2394 & \textendash \\
-8 & 5 & 990 & 0 & 0.0000 & 0.3364 & \textendash \\
-16 & 5 & 990 & 0 & 0.0000 & 0.3909 & \textendash \\
-\midrule
-1 & 10 & 990 & 28 & 0.0283 & 0.0061 & \textendash \\
-2 & 10 & 990 & 0 & 0.0000 & 0.2909 & \textendash \\
-4 & 10 & 990 & 0 & 0.0000 & 0.5929 & \textendash \\
-8 & 10 & 990 & 0 & 0.0000 & 0.6384 & \textendash \\
-16 & 10 & 990 & 0 & 0.0000 & 0.6889 & \textendash \\
-\midrule
-1 & 15 & 946 & 0 & 0.0000 & 0.0391 & \textendash \\
-2 & 15 & 946 & 0 & 0.0000 & 0.5761 & \textendash \\
-4 & 15 & 946 & 0 & 0.0000 & 0.6966 & \textendash \\
-8 & 15 & 946 & 0 & 0.0000 & 0.7526 & \textendash \\
-16 & 15 & 946 & 0 & 0.0000 & 0.8076 & \textendash \\
-\midrule
-1 & 30 & 820 & 0 & 0.0000 & 0.7280 & \textendash \\
-2 & 30 & 820 & 0 & 0.0000 & 0.8500 & \textendash \\
-4 & 30 & 820 & 0 & 0.0000 & 0.9195 & \textendash \\
-8 & 30 & 820 & 0 & 0.0000 & 0.9561 & \textendash \\
-16 & 30 & 820 & 0 & 0.0000 & 0.9720 & \textendash \\
-\bottomrule
-\end{tabular}
-\end{table*}
+A second certified object is computed on the same flows over whole-flow rectified
+statistics rather than the $k$-prefix symbol law. At $M{=}1$ its upper side admits
+292 of 990 pairs and its joint gate 289, against the prefix law's 340 and 336.
+\Cref{sec:discussion/objects} shows the proximity of their informative fractions
+to be cancellation, not agreement: we neither rank them nor treat either as a
+check on the other.
 
 \subsection{The certificate horizon}
 \label{sec:results/horizon}
@@ -156,16 +118,14 @@ first line above). The paired form is the one that controls for pair identity
 and carries the interval.
 The paired increment excludes zero at every step: $+0.2931$ $[+0.2580,+0.3320]$ from $M{=}1$
 to $2$; $+0.0438$ $[+0.0229,+0.0708]$ to $4$; $+0.0199$ $[+0.0040,+0.0429]$ to
-$8$; and $+0.0131$ $[+0.0003,+0.0403]$ to $16$. The increase is statistically
-supported at every rung and the paired increment shrinks by over an order of
-magnitude across the ladder. One confound must be named: the increments establish that the medians rise with
+$8$; and $+0.0131$ $[+0.0003,+0.0403]$ to $16$. The paired increment excludes
+zero at every rung and shrinks by over an order of magnitude across the ladder,
+though the last step is the thinnest, its lower bound
+essentially on zero, so we describe the tail as still rising but flattening
+rather than asserting it as firmly as the first step. One confound must be named: the increments establish that the medians rise with
 significance, but do not by themselves separate genuine resolution from sparse
 inflation at fixed $n$, since a finer alphabet spreads the same flows over more
-symbols. The saturating column is the tell (\Cref{tab:bracket} / \Cref{fig:horizon}a). The last
-step is weakest,
-its lower bound essentially on zero,
-so we describe the tail as still rising but flattening rather than asserting it
-as firmly as the first step. The $M{=}1$ median's marginal interval is
+symbols. The saturating column is the tell (\Cref{tab:bracket} / \Cref{fig:horizon}a). The $M{=}1$ median's marginal interval is
 $[0.5079,0.6459]$.
 
 A finer alphabet is associated with higher median divergence, but the confound
@@ -175,42 +135,84 @@ below the gate threshold still exists: $340/990$ at $M{=}1$, $47/990$ at
 $M{=}2$, $3/990$ at $M{=}4$, and zero at $M{=}8$ and $M{=}16$
 (\Cref{fig:horizon}a).
 
-The mechanism is arithmetical rather than statistical. The certified floor is
-$(1-\epshi)/2$, and $\epshi = \widehat{tv} + r_a + r_b$ with $r_i$ increasing in
-$m = (2M)^k$. A pair that is easy to distinguish on a fine channel has a large
-$\widehat{tv}$, hence a small floor, and a large radius; when their sum exceeds
-the gate threshold the certificate is lost. Resolving more and certifying less
-are two consequences of the same quantization step, and the coarse-grained rung
-is the only one on which the certificate survives at these $k$ and $n$.
+We first attributed this to the radius, and that attribution was wrong.
+The certified floor is $(1-\epshi)/2$ with $\epshi=\widehat{tv}+r_a+r_b$, and
+$r_i$ in \eqref{eq:upper} does grow with $m=(2M)^k$. But the estimator has
+already saturated before any radius is added: at $k{=}30$, $597$ of $820$ pairs
+carry $\widehat{tv}\ge 0.99$ with median $0.9979$, leaving no room under the
+gate threshold whatever the radius. The cause is the sparsity-driven upward bias
+of $\widehat{tv}$ at fine resolution, not the alphabet-priced radius.
 
-Beyond the measured ladder, the certificate has a boundary that can be stated in
-closed form. Solving \eqref{eq:upper} for the largest $M$ at which $\epshi$ can
-still clear the threshold gives $M_{\max}(k,n,\tv)$, and two independent
-derivation routes agree to zero absolute difference at every grid point
-(\Cref{fig:horizon}b). The boundary is therefore a property of the construction
-rather than a fitted artifact. We report it as a function of the three
-quantities that determine it, because the absolute crossover sample size depends
-on the scale at which it is evaluated: the projection scale and the measured
-scale differ by more than an order of magnitude, and the crossover figure is
-meaningful only alongside the scale it belongs to.
+That distinction matters because the alphabet price is avoidable. Our
+\eqref{eq:upper} bounds the $\ell_1$ norm, whose supremum runs over all $2^m$
+subsets, and $\sqrt{m/n}$ is that route's cost. Bounding instead the single
+population-optimal set $A^\ast=\{x:P(x)>Q(x)\}$, which depends only on the true
+$P,Q$, is a two-event statement rather than a $2^m$-event one, so one-sided
+Hoeffding applies directly to $P(A^\ast)$ and $Q(A^\ast)$ and no $m$ appears:
+\begin{equation}
+  \tv(P,Q) \;\le\; \widehat{tv}
+  + \sqrt{\tfrac{\ln(2/\delta)}{2n_a}} + \sqrt{\tfrac{\ln(2/\delta)}{2n_b}} .
+  \label{eq:mfree}
+\end{equation}
+This is a route choice, not a new theorem: both bounds are valid and certify
+the \emph{same} object, an interval on $\tv(P,Q)$ for the pair, differing only in
+derivation. The two-event deviation argument is the Le Cam mechanism already
+used above \citep{tsybakov2009introduction}, and avoiding the alphabet term this
+way is the theme of the closeness-testing line
+\citep{chan2013closeness,diakonikolas2020highprob} rather than a device particular
+to this paper. At our per-law level $\delta=\alaw=0.025$ the fluctuation terms
+coincide exactly, $\tfrac12\sqrt{2\ln(2/\alaw)/n}=\sqrt{\ln(2/\alaw)/(2n)}$, so
+the two forms differ only in $\sqrt{m/n}$ and no constant convention needs
+reconciling.
+
+Both are reported. On the same per-pair data \eqref{eq:mfree} is $2.9\times$
+tighter at the coarsest rung ($M{=}1$, $k{=}5$, $n{=}2791$; per-side radius
+$0.028018$ against $0.081557$), and the nominal coverage measured by the calibration design of
+\Cref{tab:coverage} applies to the alphabet-priced upper side. Recomputed over the full
+$(M,k)$ grid (\Cref{tab:grid}), the two bounds show two regimes rather than one. At coarse resolution the
+alphabet price is what binds, and removing it buys real headroom: at the coarsest
+rung ($M{=}1$) the frontier reaches $k{=}15$ with $18$ pairs certifiable where
+the published bound reports zero, and the m-free route also clears $4$ pairs at
+$M{=}2$ and $1$ at $M{=}4$ at that $k$. The advantage does not generalize to the finer
+prefix lengths: it is present at every $M$ for $k{=}5$ and $k{=}10$, is confined
+to $M{=}1,2,4$ at $k{=}15$, and is absent at $k{=}30$, so the extension is a
+property of the coarse rungs rather than of the frontier as a whole. At fine resolution
+sparsity reasserts the frontier regardless of the radius's form, though the
+transition is gradual rather than a threshold: at $k{=}10$, saturation is
+already $59\%$ at $M{=}4$ while the m-free route still certifies $10$ pairs.
+When $m \gg n$ most symbol cells hold $0$ or $1$ observation, so $\widehat{tv}$
+approaches $1$ mechanically: estimator bias, not a property of the traffic. A
+simulation at $n{=}2791$ confirms it: at $m{=}32$ the estimator is unbiased,
+while at $m{=}10^6$ its median exceeds $0.99$ even at true TV $0.2$. At
+$k{=}15$, $M{=}8$, $712$ of $946$
+pairs ($75\%$) already carry $\widehat{tv}\ge0.99$ with median $1.0000$, so no
+bound fits under the gate whatever its construction, and the saturated fraction
+climbs monotonically with $M$ at every $k$. The horizon is therefore not dissolved by dropping the alphabet
+price; the price binds at the coarse end, and saturation reasserts the boundary
+at the fine end, which is a boundary of the object rather than a defect of the
+construction. We keep
+\eqref{eq:upper} primary because the paper's counts and validations were computed
+on it, and report \eqref{eq:mfree} alongside rather than substituting, so the
+horizon claim rests on the comparison rather than a swap. Every cell of
+\Cref{tab:grid} comes from the released per-pair ledgers, which carry all five
+$M$-rungs for the same pairs at every $k$; we report the grid as measured and
+interpolate nothing.
 
 Where the plug-in certificate is lost, the large-$k$ side is not empty. A
-divisibility-based lower bound is nontrivial on every pair at $k{=}15,20,25,30$,
-so the pivot from a two-sided bracket to a one-sided statement is available
-precisely in the regime where the certificate fails. We report this bound as
-conditional on its realizability assumption and never as distribution-free; its
-validity gate is a separate matter from its existence, and we label it
-accordingly throughout.
+divisibility-based lower bound, evaluated on the rung set
+$k \in \{5,10,15,20,25,30\}$ (the chain-rule experiment's grid, which extends the
+bracket's), is nontrivial on every pair at $k{=}15,20,25,30$, so the pivot from a
+two-sided bracket to a one-sided statement is available precisely where the
+certificate fails. We report this bound as conditional on its realizability
+assumption and never as distribution-free.
 
 \subsection{Detector validation}
 \label{sec:results/detector_validation}
 
 A bracket is useful only if real detectors respect it. We test this with a
-pre-registered one-sided binomial comparison restricted to the informative
-stratum, the pairs with $\epshi < 0.5$, against the predicted floor
-$(1-\epshi)/2$. The stratum is populated at $k{=}5$: 340 informative pairs, 540
-secondary, and 110 excluded, summing exactly to the 990-pair denominator of
-\Cref{tab:bracket}. At $k{=}15$ and $k{=}30$ the stratum is empty, so those
+pre-registered one-sided binomial comparison on the informative stratum
+($\epshi < 0.5$) against the predicted floor $(1-\epshi)/2$. The stratum is populated at $k{=}5$ (340 informative, 540 secondary, 110
+excluded), summing to the 990-pair denominator of \Cref{tab:bracket}. At $k{=}15$ and $k{=}30$ the stratum is empty, so those
 rungs contribute no validation evidence and we say so rather than reporting a
 vacuous pass.
 
@@ -243,27 +245,36 @@ the nearest centre falls inside that centre's radius.
 $\min(128, 2d)$, ReLU activations and dropout $0.20$, trained with Adam at
 $10^{-3}$ for a fixed epoch budget and scored by Monte-Carlo dropout sampling
 (64 passes), with rejection driven by predictive uncertainty.
-A fourth detector, a Pcap-Encoder adapter, was not run (its optional dependency
-was absent); it contributes no cells and is not counted as a pass.
+A fourth detector, a Pcap-Encoder adapter, was not part of the evaluated
+panel; it contributes no cells and is not counted as a pass.
 
 \paragraph{Multiplicity and power.}
 The nine cells are three detectors crossed with three holdout levels, and the
 same 340 informative pairs are reused across all nine. We report each cell's
 raw one-sided $p$-value against its own null and do not combine cells; the
 strongest cell is $p = 0.9765$, so no correction for multiplicity could change
-the verdict, and we make no family-wise claim beyond that.
+the verdict, and we make no family-wise claim beyond that. The binomial treats
+the 340 pairs as independent draws, which they are not: they form a graph over
+the same services, with a maximum pair-degree of 27, so the effective
+independent sample size lies somewhere between 43 and 340. The $340$
+informative pairs span $43$ of the $45$ services, under the full-$n$ convention
+of \Cref{sec:results/datasets} (the other $2$ carry no informative pair). The reported
+$p$-values are therefore anti-conservative. That does not affect the
+no-rejection conclusion, which holds by the widest margin at the LightGBM
+holdout-$0.2$ cell ($p = 0.9765$ in \Cref{tab:detectors}), but
+it does mean the test has less power than the nominal figure suggests.
 
 Power is the more serious limitation. The test's null rate is
 $\ptest = 0.05$, distinct from the confidence level $\alpha$ used elsewhere, and
 8 violations in 340 pairs gives $p = 0.9954$, so the design has little power
 against a modest excess. The observed rates ($0.6\%$--$2.9\%$) sit below both
-null rates: under $\ptest = 0.05$ the strongest cell (10 violations) gives
-$p = 0.9765$. A threshold of $0.025$ is implied by the joint level rather than
-pre-registered; we report it for transparency, and under it the same cell gives
-$p = 0.346$. Neither rejects, so reading ``not falsified'' as evidence that
-the floor is tight would be a mistake: the test supports only the weaker
-statement that no gross violation is present, and detecting a two- or three-point
-excess would need more informative pairs than this channel supplies.
+null rates. A threshold of $0.025$ is implied by the joint level rather than
+pre-registered; under it the LightGBM holdout-$0.2$ cell, the most adverse of the
+nine, gives $p = 0.346$ on its $10$ violations.
+Neither rejects, so reading ``not falsified'' as evidence of a tight floor would
+be a mistake: the test supports only that no gross violation is present, and
+detecting a two- or three-point excess would need more informative pairs than
+this channel supplies.
 
 \Cref{tab:detectors} reports the outcome. No cell rejects the null: observed
 violation rates run from $0.6\%$ to $2.9\%$ against a null rate of $5\%$, all
@@ -271,36 +282,23 @@ nine cells are below the null, so no gross violation of the floor is present. Tw
 qualifications travel with the table, and the first is a scope restriction
 rather than a caveat. The compared quantity is a pair-level macro-average
 surrogate: it is the mean of the two constituent services' \emph{closed-set}
-classification-error rates, whereas the certified floor is an \emph{open-set}
-error bound. The test therefore does not measure the open-set quantity the
-floor bounds. The citable statement is the narrower one, that per-pair
-macro-average closed-set error stays above the floor on the informative
-stratum, and we do not report the stronger open-set reading.
+classification-error rates, whereas the certified floor of \eqref{eq:floor} is an
+\emph{open-set} error bound. The test therefore does not measure the open-set
+quantity the floor bounds; the citable statement is the narrower one, that
+per-pair macro-average closed-set error stays above the floor on the informative
+stratum.
 
-\begin{table}[t]
-\centering
-\caption{Detector validation on the informative stratum ($\epshi < 0.5$, 340 pairs). Each cell is a one-sided binomial test of floor violations against a null rate $\ptest = 0.05$; none rejects the null, so no detector's violation rate exceeds the certified floor. The fourth intended detector is \emph{not\_run}: it contributes no information and is not counted as a pass.}
-\label{tab:detectors}
-\begin{tabular}{lrrrr}
-\toprule
-Detector & holdout & viol. & rate & $p$ \\
-\midrule
-LightGBM & 0.05 & 8 & 0.0235 & 0.9954 \\
- & 0.1 & 8 & 0.0235 & 0.9954 \\
- & 0.2 & 10 & 0.0294 & 0.9765 \\
-\midrule
-Prototype & 0.05 & 3 & 0.0088 & 1.0000 \\
- & 0.1 & 4 & 0.0118 & 1.0000 \\
- & 0.2 & 4 & 0.0118 & 1.0000 \\
-\midrule
-RoNeTC & 0.05 & 3 & 0.0088 & 1.0000 \\
- & 0.1 & 3 & 0.0088 & 1.0000 \\
- & 0.2 & 2 & 0.0059 & 1.0000 \\
-\bottomrule
-\end{tabular}
-\end{table} A fourth detector in the intended panel is not
+ A fourth detector in the intended panel is not
 reported: it did not run, its cells carry no information, and it is not counted
 as a pass.
+
+\emph{A consistency check on the certificate's own object.} A logistic
+regression on the same $32$-symbol one-hot representation reaches a median
+balanced error of $0.366$ against a per-pair floor $(1-\epshi)/2$ (median
+$0.198$), clearing its own floor on every pair ($0/990$); its implied $\tv$
+(median $0.267$) is weaker than the certified lower bound (median $0.535$), so
+the certificate is consistent with, but not tight against, the classification
+risk.
 
 \subsection{The standard estimator cannot answer the growth question}
 \label{sec:results/estimator}
@@ -318,34 +316,12 @@ source the estimator returned sublinear growth in both arms, including a twin
 built on the real occupancy profile. Its estimate-to-truth ratio is not monotone:
 it peaks slightly above $1.0$ mid-range then falls to $0.6769$ on the plain arm
 and $0.8820$ on the twin at $k{=}30$, deflating divergence where the prefix is
-longest (\Cref{tab:estimator}, \Cref{fig:estimator}a). The mechanism is
+longest (\Cref{tab:estimator} and \Cref{fig:estimator}a, both in \Cref{sec:appendix/limitations}). The mechanism is
 measured, not asserted: occupancy collapses with $k$, the fraction of contexts
 with fewer than five transitions rising from $0.000$ at $k{=}5$ to $0.998$ at
 $k{=}30$, and the median transitions per context falling from $200{,}000$ to $1$
 (\Cref{fig:estimator}b,c). A per-position smoothing bias accumulates where
 contexts are sparse, biasing the fitted exponent downward.
-
-\begin{table}[t]
-\centering
-\caption{The chain-rule estimator on its known-truth control, whose per-position divergence is known analytically, so growth in $k$ is linear by construction; a ratio below $1.0$ is the estimator deflating large-$k$ divergence. Selected prefix lengths are shown; the full $k{=}5..30$ series is in the artifact.}
-\label{tab:estimator}
-\begin{tabular}{rr rr rr}
-\toprule
-$k$ & truth & plain & ratio & twin & ratio \\
-\midrule
-5 & 1.69 & 1.69 & 1.0002 & 1.68 & 0.9938 \\
-10 & 3.39 & 3.44 & 1.0161 & 3.39 & 0.9997 \\
-15 & 5.08 & 4.90 & 0.9643 & 5.13 & 1.0096 \\
-20 & 6.78 & 5.57 & 0.8216 & 6.76 & 0.9970 \\
-25 & 8.47 & 6.23 & 0.7347 & 8.02 & 0.9466 \\
-30 & 10.17 & 6.88 & 0.6769 & 8.97 & 0.8820 \\
-\midrule
-\multicolumn{6}{@{}p{\columnwidth}@{}}{\footnotesize Contexts with $<5$
-transitions, at $k=5,10,15,20,25,30$: $0.000$, $0.000$, $0.017$, $0.594$,
-$0.949$, $0.998$.} \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 Two independent repairs were attempted and both failed their known-truth gate.
 Replacing the estimator family with a Laplace-corrected, jackknife-debiased
@@ -363,35 +339,16 @@ asserting it.
 One further result is reported only to show the question is non-vacuous. A
 nested-model comparison of a first-order Markov law against an i.i.d. null
 favored the Markov model for 45 of 45 services at every tested prefix length.
-That vote is not evidence: a heterogeneous-i.i.d. arm, which has zero
-within-flow dependence by construction, reproduces the same vote at $k \ge 8$.
-The vote is therefore not diagnostic, and we report it as a measurement artifact
+That vote is not evidence: a heterogeneous arm, in which each flow draws its own
+rate and then emits symbols conditionally independently at that rate, reproduces
+the same vote at $k \ge 8$. That arm is homogeneous \emph{within} a flow but not
+across flows, and its symbols are not independent: two draws from one flow share
+a rate, so their covariance is $\mathrm{Var}(\theta) > 0$. It is therefore an
+alternative mechanism for dependence rather than a null that excludes it, and the
+vote cannot separate the two explanations. The vote is consequently not
+diagnostic, and we report it as a measurement artifact
 rather than as support for dependence. The magnitude of the real-data statistic
 does exceed what the null reproduces, so neither ``dependence is real'' nor
 ``heterogeneity explains it'' is the correct summary; what is established is
 that the vote cannot settle the question.
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.64\textwidth]{figures/paper/fig2_certificate_horizon.pdf}
-\caption{The certificate horizon. (a) The fraction of the 990 pairs whose upper
-side alone satisfies $\epshi < 0.5$ against resolution $M$ at $k{=}5$: it falls
-from $340/990 = 0.3434$ at $M{=}1$ to zero at $M{=}8$, while the saturated
-fraction rises from $0.000$ to $0.391$. The annotation gives both the upper-side
-count and the joint gate ($336/990$), which exists at $M{=}1$ only. (b) The
-crossover sample size at which the $M{=}8$ certificate ceases to exist, against
-true TV distance; two derivation routes agree to zero absolute difference.}
-\label{fig:horizon}
-\end{figure*}
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.64\textwidth]{figures/paper/fig3_estimator_control.pdf}
-\caption{The estimator limit. (a) Estimated-to-true divergence on a source whose
-analytic per-position divergence is known, for the plain-i.i.d.\ control and the
-real-occupancy twin: both peak near $1.0$ then fall to $0.6769$ and $0.8820$ at
-$k{=}30$. (b) Fraction of contexts with fewer than five transitions, rising to
-$0.998$. (c) Median context count, falling from $200{,}000$ to $1$. The estimator
-deflates divergence exactly where contexts are sparse.}
-\label{fig:estimator}
-\end{figure*}

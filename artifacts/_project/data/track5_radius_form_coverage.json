@@ -1,0 +1,305 @@
+{
+ "arms": {
+  "normal_theory_per_rep": {
+   "coverage": 0.978,
+   "coverage_ci95": [
+    0.9668803354850122,
+    0.9861625858279262
+   ],
+   "covered": 978,
+   "cp_lower_clears_nominal": false,
+   "description": "Computable per-replicate radius z_0.975 * SE_rep.",
+   "oracle": false,
+   "radius_value": 0.03317198933684909,
+   "replicates": 1000
+  },
+  "one_sided_pooled": {
+   "coverage": 0.984,
+   "coverage_ci95": [
+    0.9741467509186266,
+    0.9908276807307779
+   ],
+   "covered": 984,
+   "cp_lower_clears_nominal": false,
+   "description": "Oracle pooled centered one-sided radius -quantile(D - median(D), 0.025).",
+   "oracle": true,
+   "radius_value": 0.035477916666666644,
+   "replicates": 1000
+  },
+  "sym_bootstrap_per_rep": {
+   "coverage": 0.994,
+   "coverage_ci95": [
+    0.9869865767290255,
+    0.9977950175148487
+   ],
+   "covered": 994,
+   "cp_lower_clears_nominal": true,
+   "description": "Computable per-replicate 128-resample block-bootstrap symmetric radius.",
+   "oracle": false,
+   "radius_value": 0.04109708333333338,
+   "replicates": 1000
+  },
+  "sym_pooled": {
+   "coverage": 0.989,
+   "coverage_ci95": [
+    0.9804033717779835,
+    0.9944964058076864
+   ],
+   "covered": 989,
+   "cp_lower_clears_nominal": true,
+   "description": "Oracle pooled centered symmetric radius quantile(abs(D - median(D)), 0.975).",
+   "oracle": true,
+   "radius_value": 0.03857375000000002,
+   "replicates": 1000
+  },
+  "uncentred_pooled": {
+   "coverage": 0.982,
+   "coverage_ci95": [
+    0.9717009587509808,
+    0.9892980520705853
+   ],
+   "covered": 982,
+   "cp_lower_clears_nominal": false,
+   "description": "Oracle pooled uncentred endpoint radius quantile(D, 0.975).",
+   "oracle": true,
+   "radius_value": 0.034269999999999946,
+   "replicates": 1000
+  }
+ },
+ "controls": {
+  "iid_radius": 0.03517985184254251,
+  "reference_runner": "/efs/workspace/projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/intermediate/track5_variance_radius.py",
+  "reference_runner_sha256": "d50d15a30247ddd32903d94dd538121787088c70bfcbb3ce72fdaca9aeb36065",
+  "statcore_known_control": {
+   "expected_eps_hi": 0.16311342728653244,
+   "n": 2791,
+   "observed_eps_hi": 0.16311342728653244,
+   "status": "MATCH"
+  },
+  "tv_hat_reconciled_every_replicate": true
+ },
+ "experiment": "track5_radius_form_coverage",
+ "falsifier": "Coverage identical across conventions within the paired 95% CI would mean the radius-form convention is cosmetic for coverage and the about-11% gap carries no coverage implication. If coverage differs, the convention must be identified as conservative or less conservative using the paired coverage difference, its 95% CI, and the corresponding radius ratio.",
+ "falsifier_fired": true,
+ "falsifier_rule": "fired iff at least one paired 95% normal-approximation CI for an arm coverage difference excludes zero, restricted to pairs where BOTH arms are computable (oracle arms use the realised D and cannot speak to achievable coverage). Under this restriction the only computable pair is normal_theory_per_rep vs sym_bootstrap_per_rep, whose CI [-0.02378, -0.00822] excludes zero.",
+ "fixed_design": {
+  "B": 64,
+  "alpha_upper": 0.025,
+  "alphabet_size": 32,
+  "bootstrap_optional": false,
+  "bootstrap_resamples": 128,
+  "concentration": 0.1,
+  "max_wall_clock_seconds": 7200.0,
+  "n": 60000,
+  "nominal_coverage": 0.975,
+  "replicates": 1000,
+  "requested_replicates": 1000,
+  "seed": 20260919,
+  "true_tv": 0.4
+ },
+ "notes": "Oracle arms use the realised D_rep distribution and therefore establish the size and sign of the radius-form gap, not achievable coverage. Only normal_theory_per_rep and sym_bootstrap_per_rep are computable per-replicate coverage measurements. The fixed SE is reference_runner.sandwich_radius divided by z_0.975, i.e. the existing sandwich variance with its critical-value multiplier removed.",
+ "pairing_reconciliation": {
+  "closest_pairing": "sym_vs_uncentred_endpoint",
+  "matching_pairings": [],
+  "recorded_target_relative_gap": 0.1139,
+  "rows": {
+   "centred_sym_vs_uncentred_one_sided": {
+    "closest_to_recorded_11_39_percent": false,
+    "denominator": "-quantile(D, 0.025)",
+    "denominator_value": 0.032644583333333345,
+    "matches_recorded_11_39_percent": false,
+    "numerator": "quantile(abs(D - median(D)), 0.975)",
+    "numerator_value": 0.03857375000000002,
+    "relative_gap": 0.18162788619857828
+   },
+   "sym_vs_centred_one_sided": {
+    "closest_to_recorded_11_39_percent": false,
+    "denominator": "-quantile(D - median(D), 0.025)",
+    "denominator_value": 0.035477916666666644,
+    "matches_recorded_11_39_percent": false,
+    "numerator": "quantile(abs(D - median(D)), 0.975)",
+    "numerator_value": 0.03857375000000002,
+    "relative_gap": 0.08726085475706835
+   },
+   "sym_vs_normal_theory": {
+    "closest_to_recorded_11_39_percent": false,
+    "denominator": "median(z_0.975 * SE_rep)",
+    "denominator_value": 0.03317198933684909,
+    "matches_recorded_11_39_percent": false,
+    "numerator": "quantile(abs(D - median(D)), 0.975)",
+    "numerator_value": 0.03857375000000002,
+    "relative_gap": 0.16284102253555188
+   },
+   "sym_vs_uncentred_endpoint": {
+    "closest_to_recorded_11_39_percent": true,
+    "denominator": "quantile(D, 0.975)",
+    "denominator_value": 0.034269999999999946,
+    "matches_recorded_11_39_percent": false,
+    "numerator": "quantile(abs(D), 0.975)",
+    "numerator_value": 0.03860583333333335,
+    "relative_gap": 0.12651979379438028
+   },
+   "sym_vs_uncentred_one_sided": {
+    "closest_to_recorded_11_39_percent": false,
+    "denominator": "-quantile(D, 0.025)",
+    "denominator_value": 0.032644583333333345,
+    "matches_recorded_11_39_percent": false,
+    "numerator": "quantile(abs(D), 0.975)",
+    "numerator_value": 0.03860583333333335,
+    "relative_gap": 0.1826106934534828
+   },
+   "uncentred_sym_vs_centred_one_sided": {
+    "closest_to_recorded_11_39_percent": false,
+    "denominator": "-quantile(D - median(D), 0.025)",
+    "denominator_value": 0.035477916666666644,
+    "matches_recorded_11_39_percent": false,
+    "numerator": "quantile(abs(D), 0.975)",
+    "numerator_value": 0.03860583333333335,
+    "relative_gap": 0.08816517317110528
+   }
+  }
+ },
+ "pairwise_coverage_differences": {
+  "normal_theory_per_rep_vs_sym_bootstrap_per_rep": {
+   "coverage_difference_ci95_paired_normal": [
+    -0.023780775548822207,
+    -0.008219224451177794
+   ],
+   "coverage_difference_left_minus_right": -0.016,
+   "difference_ci_excludes_zero": true,
+   "left": "normal_theory_per_rep",
+   "radius_ratio_left_over_right": 0.8071616437545013,
+   "right": "sym_bootstrap_per_rep"
+  },
+  "one_sided_pooled_vs_normal_theory_per_rep": {
+   "coverage_difference_ci95_paired_normal": [
+    0.0012111176877667804,
+    0.01078888231223322
+   ],
+   "coverage_difference_left_minus_right": 0.006,
+   "difference_ci_excludes_zero": true,
+   "left": "one_sided_pooled",
+   "radius_ratio_left_over_right": 1.069514291301668,
+   "right": "normal_theory_per_rep"
+  },
+  "one_sided_pooled_vs_sym_bootstrap_per_rep": {
+   "coverage_difference_ci95_paired_normal": [
+    -0.01616996846310478,
+    -0.0038300315368952212
+   ],
+   "coverage_difference_left_minus_right": -0.01,
+   "difference_ci_excludes_zero": true,
+   "left": "one_sided_pooled",
+   "radius_ratio_left_over_right": 0.8632709133859848,
+   "right": "sym_bootstrap_per_rep"
+  },
+  "one_sided_pooled_vs_uncentred_pooled": {
+   "coverage_difference_ci95_paired_normal": [
+    -0.0007704200102400739,
+    0.004770420010240074
+   ],
+   "coverage_difference_left_minus_right": 0.002,
+   "difference_ci_excludes_zero": false,
+   "left": "one_sided_pooled",
+   "radius_ratio_left_over_right": 1.035247057679215,
+   "right": "uncentred_pooled"
+  },
+  "sym_pooled_vs_normal_theory_per_rep": {
+   "coverage_difference_ci95_paired_normal": [
+    0.004532151549865649,
+    0.017467848450134348
+   ],
+   "coverage_difference_left_minus_right": 0.011,
+   "difference_ci_excludes_zero": true,
+   "left": "sym_pooled",
+   "radius_ratio_left_over_right": 1.1628410225355519,
+   "right": "normal_theory_per_rep"
+  },
+  "sym_pooled_vs_one_sided_pooled": {
+   "coverage_difference_ci95_paired_normal": [
+    0.0006261700969317236,
+    0.009373829903068277
+   ],
+   "coverage_difference_left_minus_right": 0.005,
+   "difference_ci_excludes_zero": true,
+   "left": "sym_pooled",
+   "radius_ratio_left_over_right": 1.0872608547570684,
+   "right": "one_sided_pooled"
+  },
+  "sym_pooled_vs_sym_bootstrap_per_rep": {
+   "coverage_difference_ci95_paired_normal": [
+    -0.009373829903068277,
+    -0.0006261700969317227
+   ],
+   "coverage_difference_left_minus_right": -0.005,
+   "difference_ci_excludes_zero": true,
+   "left": "sym_pooled",
+   "radius_ratio_left_over_right": 0.938600671174961,
+   "right": "sym_bootstrap_per_rep"
+  },
+  "sym_pooled_vs_uncentred_pooled": {
+   "coverage_difference_ci95_paired_normal": [
+    0.00183001847473161,
+    0.012169981525268391
+   ],
+   "coverage_difference_left_minus_right": 0.007,
+   "difference_ci_excludes_zero": true,
+   "left": "sym_pooled",
+   "radius_ratio_left_over_right": 1.1255836008170435,
+   "right": "uncentred_pooled"
+  },
+  "uncentred_pooled_vs_normal_theory_per_rep": {
+   "coverage_difference_ci95_paired_normal": [
+    -0.000796905240143541,
+    0.008796905240143541
+   ],
+   "coverage_difference_left_minus_right": 0.004,
+   "difference_ci_excludes_zero": false,
+   "left": "uncentred_pooled",
+   "radius_ratio_left_over_right": 1.0331005370826867,
+   "right": "normal_theory_per_rep"
+  },
+  "uncentred_pooled_vs_sym_bootstrap_per_rep": {
+   "coverage_difference_ci95_paired_normal": [
+    -0.018752031227997498,
+    -0.0052479687720025005
+   ],
+   "coverage_difference_left_minus_right": -0.012,
+   "difference_ci_excludes_zero": true,
+   "left": "uncentred_pooled",
+   "radius_ratio_left_over_right": 0.8338791276753194,
+   "right": "sym_bootstrap_per_rep"
+  }
+ },
+ "pooled_quantities": {
+  "median_D": 0.002833333333333299,
+  "negative_quantile_centered_D_0025": 0.035477916666666644,
+  "negative_quantile_uncentred_D_0025": 0.032644583333333345,
+  "plain_quantile_uncentred_D_0975": 0.034269999999999946,
+  "quantile_abs_centered_D_0975": 0.03857375000000002,
+  "quantile_abs_uncentred_D_0975": 0.03860583333333335
+ },
+ "replicate_diagnostics": {
+  "bootstrap_radius_median": 0.04109708333333338,
+  "normal_radius_median": 0.03317198933684909,
+  "se_mean": 0.016932723860083224,
+  "se_median": 0.016924795352621536,
+  "tv_hat_count": 1000,
+  "tv_hat_mean": 0.40216003333333333,
+  "tv_hat_sd_ddof1": 0.01664073303992664
+ },
+ "runner_sha256": "6360e8773cb0a5c34e9d6cb40eddf6f3dc97ca4f8f2046d516f39657f49616cd",
+ "falsifier_flag_correction": {
+  "corrected": "2026-09-20",
+  "prior_value": false,
+  "prior_rule": "fired iff at least one paired 95% normal-approximation CI for an arm coverage difference excludes zero",
+  "why": "The flag read false while its own rule was satisfied: 8 of the 10 paired differences have CIs excluding zero. The rule text omitted the oracle restriction that the brief actually applied. Both flag and rule string are corrected here; the underlying numbers are unchanged. Caught by independent review, not by the producing run.",
+  "pairs_excluding_zero_total": 8,
+  "pairs_total": 10,
+  "computable_pairs": 1,
+  "computable_pair_ci": [
+   -0.023780775548822207,
+   -0.008219224451177794
+  ]
+ }
+}

@@ -1,0 +1,109 @@
+{
+  "bootstrap_ci95_skewness": [
+    -0.07163561421837167,
+    0.05398868734350119
+  ],
+  "canonical_sd_D": 0.016078662416248272,
+  "canonical_sd_D_note": "well-powered estimate from n=5000; the n=200 value 0.0169715 is 1.03 combined-across-counts SE high (the n=200 and n=5000 errors in quadrature) and should be recorded alongside, not replaced; see excursion_se_referents for the within-window_sd and within-window_mean SE referents",
+  "ci95_skewness": [
+    -0.07676936391771803,
+    0.05898270531472159
+  ],
+  "ci_contains_zero": true,
+  "control_band_defect_is_scale_not_width": "The defect was that the band did not scale with n, not that it was narrow. SE(sd) = sd/sqrt(2(n-1)), so [0.0168, 0.0171] is ~0.35 SE wide at n=5000 but only ~0.09 SE wide at n=200 \u2014 the same band is a DIFFERENT test at every replicate count, and it is that non-scaling which makes it near-certain to reject a valid re-run.",
+  "correction": {
+    "nested_prefix_warning": "a first-200 nested-prefix match is true BY CONSTRUCTION when the loops are identical and therefore is NOT a stream test; the stream control should be built from SE(sd) around the convergent estimate, not from a small-n point estimate",
+    "stream_confirmation_evidence": "an independent 5000-replicate reproduction of the same loop and seed produces sd=0.0160786624, mean=+0.0024295367, skew=-0.008893, matching this artifact to every printed digit",
+    "stream_confirmed": true,
+    "what": "sd_control_ok was false due to a mis-specified tolerance, not a measurement failure",
+    "why": "the band applied the n=5000 standard error (~1%) to a comparison whose reference is an n=200 point estimate (~5% standard error); a band ~0.35 SE wide around a 200-replicate estimate"
+  },
+  "design": {
+    "B": 64,
+    "concentration": 0.1,
+    "n": 60000,
+    "outer_draws": 5000,
+    "seed": 20260919,
+    "true_tv": 0.4
+  },
+  "excursion_se_referents": {
+    "combined_across_counts": 1.03,
+    "within_window_mean": 1.27,
+    "within_window_sd": 1.16
+  },
+  "excursion_se_referents_note": "combined_across_counts answers 'is the n=200 value consistent with the n=5000 value'; within_window_sd answers 'how far is the n=200 value from the convergent estimate in its own sampling units'.",
+  "falsifier_fired": true,
+  "lengths_construction_all_identical": {
+    "diagnosis_block_counts": "block_counts builds blocks from slices and lengths from their lengths, producing [64]*937 + [32] for N=60000 and B=64",
+    "earlier_200_replicate_probe": "the earlier 200-replicate probe likewise produced [64]*937 + [32]",
+    "n5000_runner": "full(938,64) with lengths[-1]=N-64*937 produces [64]*937 + [32]",
+    "verified_observation": "All three constructions are identical. An earlier claim of a differing construction was made in an agent message and is retracted; this artifact records the verified state."
+  },
+  "mean_D": 0.0024295366666666437,
+  "merge_note": "2026-09-20: this file previously lost se_convention, excursion_se_referents and excursion_se_referents_note when an edit REPLACED the block instead of merging it; they are restored here from the unregistered top-level copy. Do not rewrite this file without merging into the loaded dict.",
+  "notes": "Outer replicates reuse the diagnosis-of-record loop structure from track5_between_block_diagnosis.py: shared Generator, A draw, B draw, then 32 inner multinomial redraw pairs consumed before the next outer replicate. Outer seed 20260919 matches DIAGNOSIS_SEED=20260919. Bootstrap percentile CI uses 20000 resamples with bootstrap seed 20260920. Conclusion is about the modelled block law at this design, never about real traffic.",
+  "proposition_tested": "the signed deviation D = tv_hat - TRUE_TV is negatively skewed",
+  "sd_D": 0.016078662416248272,
+  "sd_D_by_replicate_count": {
+    "1000": 0.0162722914,
+    "200": 0.0169715358,
+    "2000": 0.0161860482,
+    "3000": 0.0159308502,
+    "500": 0.01677114,
+    "5000": 0.0160786624
+  },
+  "sd_D_by_replicate_count_note": "Independent reproduction of the same loop and seed; the convergence trajectory makes the shift from the n=200 point estimate visible.",
+  "sd_band_checks_at_other_counts": {
+    "n=200": {
+      "band_2se": [
+        0.014468,
+        0.017692
+      ],
+      "inside": true,
+      "se": 0.0008064,
+      "value": 0.0169715358
+    },
+    "n=3000": {
+      "band_2se": [
+        0.015665,
+        0.016495
+      ],
+      "inside": true,
+      "se": 0.0002076,
+      "value": 0.0159308502
+    }
+  },
+  "sd_band_checks_at_other_counts_note": "Only the un-scaled hand-set band rejects them; the n=3000 window is inside a correctly scaled band and is not evidence of control failure.",
+  "sd_control_band_as_briefed": [
+    0.0168,
+    0.0171
+  ],
+  "sd_control_band_correct": [
+    0.015275,
+    0.018669
+  ],
+  "sd_control_band_correct_derivation": "SE(sd|n=200, sd=0.0169715) = 0.0169715/sqrt(2*199) = 0.0008507; SE(sd|n=5000) = 0.0160787/sqrt(2*4999) = 0.0001608; combined = 0.0008658; band = 0.0169715 +/- 1.96*0.0008658",
+  "sd_control_expected": 0.0169715358,
+  "sd_control_ok": true,
+  "se_convention": "SE(sd) = V/sqrt(2(n-1)) with V the CONVERGENT estimate; a window's own sd is NOT used, since centring a band on the window's own value would make containment trivial and the control unable to fail.",
+  "se_skewness": 0.0346306299062346,
+  "skewness_D": -0.00889332930149822,
+  "skewness_by_replicate_count": {
+    "1000": 0.055349,
+    "200": -0.139556,
+    "2000": 0.036285,
+    "3000": 0.025623,
+    "500": -0.103819,
+    "5000": -0.008893
+  },
+  "skewness_by_replicate_count_note": "The sequence crosses zero TWICE, making the sign non-resolvable concrete as a sequence rather than a single number.",
+  "skewness_formula": "g1 = m3 / m2**1.5, with m2=mean((D-mean(D))**2) and m3=mean((D-mean(D))**3) using 1/n central moments",
+  "stream_reproduced": {
+    "method": "reused track5_between_block_diagnosis.py loop order with 32 rng.multinomial redraw pairs per outer replicate",
+    "reused_diagnosis_loop": true,
+    "used": "inner redraws consumed"
+  },
+  "trajectory_is_non_monotone": true,
+  "trajectory_note": "The sd does NOT converge monotonically (it dips at n=3000 before rising), so no single window is a checkpoint at any n \u2014 a run validated only at n=3000 lands FURTHER from the final estimate than the n=200 start does. That is the primary reason a control must be anchored to a convergent estimate with an n-scaled band, rather than to any prefix.",
+  "z_skewness": -0.25680529997801577
+}

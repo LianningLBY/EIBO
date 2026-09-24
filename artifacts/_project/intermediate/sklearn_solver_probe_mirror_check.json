@@ -1,0 +1,17 @@
+{
+  "remote_path": "/root/eibo/artifacts/_project/intermediate/sklearn_solver_probe_20260920.json",
+  "remote_exists": true,
+  "remote_sha256": "b665dc3d4b45f715d4cf1290374b4425b34265b0cad18caaf4f04f93bd140767",
+  "remote_mtime": "2026-09-20 14:46:08.271807945 +0800",
+  "local_sha256": "b665dc3d4b45f715d4cf1290374b4425b34265b0cad18caaf4f04f93bd140767",
+  "local_mtime": "2026-09-20 06:46:32.415000000 +0000",
+  "byte_identical": true,
+  "other_copies": [
+    "/root/eibo/artifacts/_project/intermediate/sklearn_solver_probe_20260920.py.upload.guard",
+    "/root/eibo/artifacts/_project/intermediate/sklearn_solver_probe_20260920.py",
+    "artifacts/_project/data/sklearn_solver_probe_20260920.json",
+    "artifacts/_project/intermediate/sklearn_solver_probe_20260920.py",
+    "artifacts/_project/intermediate/__pycache__/sklearn_solver_probe_20260920.cpython-312.pyc"
+  ],
+  "notes": "The remote mirror and local intermediate JSON are byte-identical; both are 1166 bytes. Other matching-prefix files were listed but not compared. Remote mtime is 2026-09-20 06:46:08.271807945 UTC; local mtime is 2026-09-20 06:46:32.415000000 UTC."
+}

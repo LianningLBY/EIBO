@@ -24,47 +24,39 @@ conjunction \eqref{eq:gate} rather than folding them into one number.
 \label{sec:background/prior}
 
 Bounding traffic-analysis performance from information-theoretic quantities,
-rather than measuring it, is well established. \citet{cherubin2017bayes} gives
-feature-set-conditional Bayes-error bounds for website fingerprinting, a
-closed-set floor and the closest precedent for our upper side. Work on anonymity
-and quantitative information flow follows the same route, from an entropy-like
-quantity or a metric on distributions toward a bound on inference
-\citep{serjantov2003metric,ghaderi2010anonymous,venkitasubramaniam2008eavesdroppers,venkitasubramaniam2008chaum,chatzikokolakis2007error,chatzikokolakis2008noisy}.
-Our construction differs in being an explicit interval on real trace data, with
-the difference between its endpoints kept visible rather than averaged away.
-
-The most directly relevant recent results are the side-channel leakage
-inevitability theorem of \citet{liu2026inevitability} and its rate-distortion
-companion \citep{liu2026rate}, both single-letter: the first requires
-conditionally i.i.d.\ repeated observations for its exponential error decay, and
-the second is proved within a stationary-memoryless class. Packet prefixes
-satisfy neither condition, so we make no such assumption and report what is
-certifiable about the dependent prefix law as it stands.
+rather than measuring it, is well established, and the precedents are collected
+with their assumptions in \Cref{sec:related/bounds}. What matters for the design
+here is what they require of the data: the classical bounds are conditional on an
+analyst's feature set or on a model class. The nearest recent result, the
+side-channel leakage-inevitability theorem of \citet{liu2026inevitability},
+is deliberately weaker in its hypotheses: its conditions permit correlated and
+non-stationary observations, and its additivity and exponential-decay corollaries
+are the part that assumes conditionally i.i.d.\ repetition. What it yields is the
+sign of the leakage, $I(X;Y)>0$ at an explicit lower bound, not an interval on
+$\tv$ at a stated flow count; the rate-distortion companion
+\citep{liu2026rate} is proved for an i.i.d.\ class. Our construction is an
+explicit interval on real trace data at the observed flow counts, with the
+difference between its endpoints kept visible rather than averaged away.
 
 \subsection{Estimating and testing total variation}
 \label{sec:background/tv_est}
 
 Turning a bound like \eqref{eq:upper} into a usable statement requires a
-confidence radius for the empirical distribution, and the classical
-Kolmogorov-Smirnov style constructions supply exactly that
-\citep{wei2011dkwtwo,reeve2024dkwmassart}, while the minimax analysis under
-$\ell_1$ loss gives the tightest constants we know
-\citep{han2015l1distribution,jiao2018l1distance}. For the testing question the
-closeness-testing line is the relevant one
-\citep{chan2013closeness,diakonikolas2020highprob}. Two further routes give lower
-bounds: classifier-based methods read a decision function's error rate, with
-\citet{michel2020high} providing the adaptive high-probability form we use, and
-\citet{tao2024discriminative} relating discriminative estimation to
-classification risk under a hypothesis-class assumption, the route we take for the
-conditional large-prefix bound.
+confidence radius for the empirical distribution, which the confidence-band
+family supplies \citep{wei2011dkwtwo,reeve2024dkwmassart}, and the minimax
+analysis under $\ell_1$ loss gives the tightest known constants
+\citep{han2015l1distribution,jiao2018l1distance}; testing two samples for
+closeness is its own line \citep{chan2013closeness,diakonikolas2020highprob}.
+For lower bounds, \citet{michel2020high} gives the adaptive high-probability form
+we use and \citet{tao2024discriminative} relates discriminative estimation to
+classification risk; \Cref{sec:related/tv} gives the full positioning.
 
-Open-set generalization results \citep{fang2021learning,garov2025closer} bound
-the risk of a learning procedure, whereas ours bounds the separation available in
-the data; the two are complementary, since a learnability bound says how well a
-detector can be trained while a bracket says how much room there is to train
-into. The unknown-class mass a bracket over observed services omits is a separate
-problem with its own literature \citep{orlitsky2016optimal,eriksson2026unseen},
-used for the site-level term in \Cref{sec:discussion/missing_mass}.
+Two adjacent lines bear on scope rather than machinery: open-set generalization
+results \citep{fang2021learning,garov2025closer} bound a learning procedure's risk
+rather than the separation in the data (\Cref{sec:related/openset}), and the
+unknown-class mass a bracket over observed services omits has its own literature
+\citep{orlitsky2016optimal,eriksson2026unseen}
+(\Cref{sec:discussion/missing_mass}).
 
 \subsection{The QUIC observable}
 \label{sec:background/quic}
