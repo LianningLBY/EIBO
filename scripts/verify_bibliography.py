@@ -268,10 +268,33 @@ def lookup_arxiv(aid: str) -> dict:
 # comparison
 # --------------------------------------------------------------------------- #
 
+# A leading document identifier is a citation convention, not part of the title:
+# `{RFC 9312}: Manageability of the QUIC Transport Protocol` and the publisher's
+# `Manageability of the QUIC Transport Protocol` are the SAME work. Without this,
+# adding a correct DOI to an RFC-style entry manufactured a false MISMATCH.
+DOC_ID_PREFIX_RE = re.compile(
+    r"^(?:rfc\s*\d+|arxiv[:\s]*[\w.\-]+|doi[:\s]*10\.\d{4,9}/\S+|ietf[-\s]?draft[-\s]?\S+)\s*[:\-—]?\s+",
+    re.IGNORECASE,
+)
+
+
+def strip_doc_id_prefix(t: str) -> str:
+    """Remove a leading `RFC nnnn:` / `arXiv:xxxx:` / `DOI:10.x/...` marker.
+
+    Only strips when something substantive FOLLOWS, so a title that is *only* an
+    identifier is not emptied into a vacuous match.
+    """
+    m = DOC_ID_PREFIX_RE.match(t)
+    if not m:
+        return t
+    rest = t[m.end():].strip()
+    return rest if rest else t
+
+
 def compare(entry: dict, rec: dict) -> dict:
     """Decide one entry. Crossref's title may be a prefix (subtitle truncation)."""
-    ours_t = norm_title(entry["title"])
-    reg_t = norm_title(rec.get("title", ""))
+    ours_t = strip_doc_id_prefix(norm_title(entry["title"]))
+    reg_t = strip_doc_id_prefix(norm_title(rec.get("title", "")))
     title_ok = bool(ours_t) and (reg_t == ours_t or reg_t.startswith(ours_t) or ours_t.startswith(reg_t))
 
     ours_f = set(entry["families"])
@@ -351,6 +374,22 @@ def self_test() -> int:
     )
     if not sub["ok"]:
         fails.append(f"subtitle-truncated title wrongly flagged: {sub}")
+
+    # A leading document identifier is a citation convention, not part of the title.
+    # Regression: adding a correct RFC DOI once manufactured a false MISMATCH here.
+    rfc = compare(
+        {"title": "{RFC 9312}: Manageability of the {QUIC} Transport Protocol",
+         "families": ["kuhlewind", "trammell"]},
+        {"title": "Manageability of the QUIC Transport Protocol",
+         "families": ["Kühlewind", "Trammell"]},
+    )
+    if not rfc["ok"]:
+        fails.append(f"RFC-prefixed title wrongly flagged: {rfc}")
+
+    # ...but a title that is ONLY an identifier must not normalise to empty and
+    # match everything vacuously.
+    if strip_doc_id_prefix("rfc 9312") == "":
+        fails.append("strip_doc_id_prefix emptied an identifier-only title")
 
     if fails:
         print("SELF-TEST FAILED")
