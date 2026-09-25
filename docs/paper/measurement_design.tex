@@ -144,7 +144,7 @@ across $0.30$--$0.80$, while varying only the lower threshold over
 $0.01$--$0.10$ moves it by at most twenty; the count is driven almost entirely by
 the upper threshold, and the lower threshold is nearly inert in the range where
 it sits (\Cref{tab:thresholds}).
-\Cref{fig:bracket} (in \S A.1) shows the pipeline.
+\Cref{fig:bracket} (in \Cref{sec:appendix/ledger}) shows the pipeline.
 
 \subsection{Channel definition and hygiene}
 \label{sec:design/channel}
@@ -331,49 +331,3 @@ second arm built on the real occupancy profile so the control shares the
 sparsity structure of the data it licenses. Only an estimator that reproduces
 the known growth there may answer the question on real traffic; in
 \Cref{sec:results/estimator} it did not pass.
-
-\subsection{The frontier as a function}
-\label{sec:design/frontier}
-
-The certificate is not a single number but a boundary, obtained by solving
-\eqref{eq:upper} for the largest $M$ at which $\epshi$ can still fall below the
-gate threshold; \Cref{sec:appendix/thresholds} prints the closed form. We report it as a function,
-not one dataset's operating point, and give the absolute crossover sample size
-only alongside the scale at which it was evaluated.
-
-\subsection{Reproducibility boundary}
-\label{sec:design/repro}
-
-The main text carries the protocol, channel definition, significance
-convention, gate, and frontier closed form; the appendix and released artifacts
-carry the per-pair ledgers, the 20-cell resolution table, the stratification
-table, and the estimator comparison. Every quantitative claim is tied to an
-experiment identifier and resolved through a content-addressed manifest, whose
-hash rather than any working copy is the artifact of record. The 990-row ledger
-(\texttt{upper\_recomputed.eps\_hi} and \texttt{eps\_lo}) reproduces both sides
-of the headline bracket from its own rows and recomputes \eqref{eq:floor}.
-
-\emph{Seeds and replicates.} The two sides differ in what randomness they carry.
-The upper side is a closed-form finite-sample bound on a plug-in estimate and
-consumes no random seed; the lower side's classifier fit takes
-\texttt{random\_state}~$0$, recorded in both the ledger and the gate artifact, so
-the headline bracket is deterministic given the corpus. The derivations that do
-consume randomness state it explicitly: the service-cluster interval reports its
-bootstrap, the coverage calibration prints seed $20260917$, and the detector
-panel's pre-registered split is seed $12$. The horizon ladder and the
-channel-sensitivity sweep are closed-form or exhaustive over their grids rather
-than sampled, so they carry no seed and no replicate count; where a reported
-quantity is neither, we say so at the point it is reported.
-
-\subsection{Compute, splits, and cost}
-\label{sec:design/compute}
-
-The measurements are cheap relative to the detector panel they are compared
-against: the bracket is a property of the data, so its cost does not grow with
-model capacity. Every bracket, sweep, and estimator computation is CPU-only, and
-detector training ran mostly on CPU, with only the RoNeTC neural rejector on the
-accelerator. The panel completed in about 37 minutes, so no result here depends
-on a large-scale cluster; per-step timings are in \Cref{sec:appendix/compute}. Splits are flow-
-and time-disjoint throughout, the test period following the training period
-across a discarded buffer month.
-
