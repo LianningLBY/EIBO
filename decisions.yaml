@@ -1,4 +1,4 @@
-_next_id: 257
+_next_id: 258
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -12997,3 +12997,76 @@ decisions:
   related_experiments: []
   depends_on:
   - D255
+- id: D257
+  date: 2026-09-25 15:17 UTC
+  summary: 'Verified the overfull fix independently (44→19 boxes, max 92.6→21.0pt,
+    zero over 30pt, hashes byte-exact) and resolved the apparent page discrepancy
+    — the writer''s p.13 and mine agree; my earlier p.12 came from a doubled-abstract
+    build and I had already retracted it. Found and dispatched a toolchain route that
+    may remove the content-cut cost entirely: cm-super is installable and would let
+    microtype expansion run, which packs lines tighter and could recover the missing
+    page. Asked the PI to hold their ruling pending that result.'
+  rationale: 'Verified the overfull-box fix, and found a toolchain route that may
+    remove the content-cut requirement from the venue decision altogether.
+
+
+    1. OVERFULL BOXES — FIXED, VERIFIED BY ME. I rebuilt from the current source (main.tex
+    sha ccad43c2…) in a clean scratch dir and measured: count 44 → **19**, max 92.6pt
+    → **21.0pt**, boxes over 30pt 11 → **0**, over 10pt 18 → 5. Top five are now 21.0/18.7/16.9/13.7/12.8pt
+    — all inside the margin. Mechanism is a `\begingroup\sloppy … \endgroup` scoped
+    to the Open Science section, letting the `\texttt{art\_…}` IDs and `\seqsplit{…}`
+    hashes break at word boundaries in acmart''s narrower column. **The three tested
+    artifact hashes survived byte-exact** (checked by whitespace-stripped substring
+    match), which was the constraint I set.
+
+    The writer''s FIRST summary called these "cosmetic — none exceeds 30pt" while
+    the log said 92.6pt; it has since accepted the correction and re-measured. Recording
+    because the pattern recurs: a summary line asserted about a log rather than read
+    from it.
+
+
+    2. PAGE-COUNT DISCREPANCY — RESOLVED, AND THE ERROR WAS MINE. The writer reported
+    "consistently p.13 across seven clean compiles" and flagged a disagreement with
+    my earlier p.12. There is no live disagreement: **my p.12 was measured on a build
+    with a DOUBLED ABSTRACT and I had already retracted it (D256).** Its p.13 and
+    my independent p.13 agree. Worth noting the writer behaved correctly here — it
+    refused to claim a number it could not reproduce and said so, which is exactly
+    right.
+
+
+    3. THE GENUINELY USEFUL FIND — A TOOLCHAIN FIX THAT MAY RECOVER THE PAGE WITH
+    NO CONTENT CUT. The writer explained that the build disables microtype character
+    EXPANSION via `\PassOptionsToPackage{expansion=false}{microtype}` because the
+    install errors with `auto expansion is only possible with scalable fonts`. Expansion
+    active packs lines slightly tighter; across a ~69,000-char body that can plausibly
+    shift pagination by a page. If it does, the venue switch no longer costs a 5.6%
+    body cut.
+
+    I verified the environment claims myself rather than taking them: **`cm-super`
+    is not installed but IS installable** (`apt-cache policy cm-super` → Candidate
+    0.3.4-17; both `apt-get` and `tlmgr` present); `ecrm1000.pfb` is absent from the
+    type1 tree; **`lmodern` is not installed either**, so the alternative-font route
+    is closed. I also TESTED that route to be sure: adding `\usepackage{lmodern}`
+    gives 3 errors and no output — and PoPETs'' author instructions forbid font-changing
+    packages regardless, so it is barred by the rules as well as broken.
+
+    **DISPATCHED an environment-only task** (Main Agent): install cm-super, re-enable
+    expansion, confirm no scalable-font error, and report total pages AND the body''s
+    last page plus, critically, **whether the two builds differ** — that comparison
+    is the entire point. Explicitly told it not to touch any .tex file, not to rebuild
+    the archive, and that "no change" is a complete and acceptable answer.
+
+
+    4. WHY THIS MATTERS FOR THE PENDING RULING. The venue tradeoff currently reads:
+    switching to PoPETs costs BOTH a 5.6% body cut AND a CCF A→C drop, where staying
+    at USENIX costs neither. If the toolchain fix recovers the page, the first cost
+    disappears and only the grade drop remains — a materially different decision for
+    the PI. I told the PI to hold their ruling until this result lands, and that it
+    requires no action from them.
+
+
+    NOT DONE: no content cut, no submission action, archive not rebuilt (layout unsettled).
+    The USENIX build remains committed at HEAD so the switch stays reversible.'
+  related_experiments: []
+  depends_on:
+  - D256
