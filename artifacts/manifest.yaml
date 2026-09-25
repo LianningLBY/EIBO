@@ -4091,7 +4091,7 @@
   description: 'Supplementary-material archive for the PoPETs 2027 submission: 91
     entries under supplementary/ — code (statcore, divisibility, channel packer, tests),
     54 per-pair ledger and calibration payloads, figure generators, and the LaTeX
-    sources plus the frozen main.pdf (b74b2c23). Built by the tracked script build_supplementary_archive.py;
+    sources plus the frozen main.pdf (8fea6b59). Built by the tracked script build_supplementary_archive.py;
     all cited artifact ids resolve; embedded main.pdf and references.bib byte-match
     the tree.'
   path: projects/epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade/artifacts/_project/data/supplementary.tar.gz
@@ -4104,4 +4104,4 @@
   - submission
   - supplementary
   - open-science
-  content_sha256: b9b443eff53bef7014f2614dede1821042c6dfb8d28cf166ccdfad760ee2f9b7
+  content_sha256: 57693b17175b0594fd6ba1aa835f36a653f457871344b406fc83704ecd654214

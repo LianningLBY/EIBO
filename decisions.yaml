@@ -1,4 +1,4 @@
-_next_id: 268
+_next_id: 269
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -13763,3 +13763,86 @@ decisions:
   depends_on:
   - D255
   - D266
+- id: D268
+  date: 2026-09-25 20:24 UTC
+  summary: 'Triaged the fresh audit on the current PoPETs build: its criticals are
+    false positives of its own heuristics (comma-list \Cref is valid and renders with
+    0 ??; the "orphan" bib keys are all cited in main.tex; the 0.375 and overfull
+    findings are the same non-issues as before), each verified against the artifact.
+    Found two genuine minor notation inconsistencies worth one batched fix — raw \epsilon_{\rm
+    lo} in results.tex vs the \epslo macro, and the paper''s only \varepsilon sitting
+    in the sentence that defines epsilon itself. Also removed my reappearing font
+    contamination and confirmed it never touched the deliverable (all-embedded Type
+    1 fonts, no bitmaps).'
+  rationale: 'Triaged the fresh audit (run on the CURRENT PoPETs build, input sha
+    cc427674…, 24 pp, compile OK). Most of its "critical" output is false positives
+    of its own heuristics; two genuine minor notation issues remain. Recording both
+    so no future reader files the false ones or misses the real ones.
+
+
+    FALSE POSITIVES — each verified against the artifact, not assumed:
+
+    1. **"`\ref{a,b}` has no matching label", 2 criticals at main.tex:573,580.** The
+    construct is `\Cref{sec:discussion/robustness,sec:discussion/limitations}` — cleveref''s
+    comma-list form, which is valid and renders correctly. Proof: the rendered PDF
+    has **0** `??` occurrences and the sentences read "Section 3", "Section 4.3/4.4/4.5"
+    etc. The checker''s label-existence test treats the comma-list as a single label
+    name, so it flags every such reference. Not a defect.
+
+    2. **10 "orphan_bib_key" warnings** (mucke2025waiting, luxemburk2023cesnet, smith2021website,
+    cui2025trafficllm, …). All are cited — in `main.tex`, e.g. `\citep{mucke2025waiting}`
+    at line 423. The checker appears to scan individual .tex files without resolving
+    multi-key `\citep` lists that span the assembled document. Not a defect.
+
+    3. **"0.375 in the abstract but not in Results"** (also raised by the stale run,
+    D267). Still a false positive: 0.375 is an LP-optimality derivation in `measurement_design.tex`,
+    not a measured result.
+
+    4. **"22 critical warnings: overfull \hbox"** — the checker labels >3pt as critical.
+    Measured: 20 boxes, max 21.0pt, **0 over 30pt**, all inside the margin. This is
+    the known post-conversion cosmetic set (D260/D264), not a defect.
+
+    5. **Page-24 "near-empty references page"** — a partial final references page
+    is normal. Not a defect.
+
+
+    GENUINE, MINOR, WORTH FIXING — both notation-consistency, both surfaced independently
+    by the content agent:
+
+    a. **`results.tex:32–37` writes raw `\epsilon_{\rm lo}` / `\epsilon_{\rm lo}^{\rm
+    capped}` / `^{\rm full\text{-}n}` in four places**, while the paper''s macro is
+    `\newcommand{\epslo}{\ensuremath{\epsilon_{\mathrm{lo}}}}` (main.tex:43). The
+    subscript font differs (`\rm` vs `\mathrm`) and the spelling `full\text{-}n` is
+    awkward against the paper''s `full-n` convention. Should use `\epslo` with a text
+    suffix.
+
+    b. **`introduction.tex:14` writes `$\varepsilon$`** where the entire rest of the
+    paper uses `\epsilon` (and the macros are built on `\epsilon`). It is the ONLY
+    `\varepsilon` in the repository, and the two glyphs render differently (ε vs ϵ)
+    — a visible inconsistency in the one place a reader is being told what ε means,
+    which is precisely where consistency matters most.
+
+
+    WHY THESE ARE WORTH A PASS despite being cosmetic: (b) sits in the sentence that
+    DEFINES epsilon, so a reader sees the defining symbol differ from every use of
+    it. And both are cheap to batch. I am having them fixed together with the overfull-box
+    leftovers (5 boxes 10–21pt, inside the margin) in ONE pass, because any source
+    edit voids the sha-bound visual receipt and forces a full render + 24-page gate
+    + archive rebuild — so one pass must carry everything. A one-token edit run alone
+    would cost the whole chain for almost no gain.
+
+    NOT DONE in this pass: the Related-Work-after-Discussion ordering and the long
+    abstract are deliberate style choices the content agent explicitly declined to
+    call defects (it says so for both), so I am not touching them.
+
+
+    ALSO: my font-experiment contamination (`/efs/home/.texlive2025`, recreated by
+    `updmap-user` during the D260/D261/D262 work) had reappeared and was generating
+    `.pk` bitmap fonts in some scratch builds. Removed again. Verified it did NOT
+    affect the deliverable: `pdffonts` on the shipped `main.pdf` shows all-embedded
+    **Type 1** fonts, no bitmaps. Recording because this is the third appearance and
+    it is regenerated on every `updmap-user` call — a future reader should not read
+    its return as a new problem, and should check `pdffonts` before worrying.'
+  related_experiments: []
+  depends_on:
+  - D267

@@ -144,6 +144,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D268 | 2026-09-25 | Triaged the fresh audit on the current PoPETs buil | — |
 | D267 | 2026-09-25 | Resolved the missing-acks question to its source:  | — |
 | D266 | 2026-09-25 | Ran the discriminating test D237 refused and it RE | — |
 | D265 | 2026-09-25 | Verified the reference fix on the render (prose no | — |
@@ -153,5 +154,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D261 | 2026-09-25 | Settled the font-fallback question with a controll | — |
 | D260 | 2026-09-25 | Retracted D259's "route is dead" claim — it was ba | — |
 | D259 | 2026-09-25 | Proved the font/toolchain route dead by running it | — |
-| D258 | 2026-09-25 | Extended the archive builder to ship the PoPETs bi | — |
 
