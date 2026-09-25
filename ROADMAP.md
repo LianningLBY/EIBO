@@ -8,7 +8,14 @@
 
 Certification-grade ε-indistinguishability brackets for open-set encrypted-traffic recognition: per service pair on real QUIC wire data, a two-sided interval on total variation whose **upper side is a finite-sample strict bound** and **lower side a classifier-based high-probability bound**. **Contribution type: measurement/rigour** (D180). See `paper_framing.md`.
 
-⚠️ **VENUE IS ASSUMED, NOT DECIDED — a PI call (D236, still open).** The project is shaped USENIX-first throughout (13 pp body cap, two mandatory one-page appendices, security-measurement framing) and every submission so far went in under **USENIX Security 2027 Cycle 2** (registration 2027-01-19, submission 2027-01-26, camera-ready 2027-06-03; per the CFP extract). **But Round 18's reviewers disagreed**: R2 recommended PoPETs with IMC second, and the consolidated assessment called USENIX "the weakest of the plausible venues" (relevance moderate-low; no attack, defense, vulnerability, or deployment). **No decision-log entry adopts or overrules that.** A late switch is a re-layout plus Abstract/Intro reframing, not an edit. `paper_framing.md`'s own rule: never silently downgrade the venue; that is a discussion with the PI. **Surfaced to the PI 2026-09-25 01:23.**
+🔄 **VENUE: PI DIRECTED A SWITCH TO PoPETs; CONVERSION DONE BUT BLOCKED ON A PAGE OVERFLOW — AWAITING THE PI'S RULING (D255/D256).**
+- ⚠️ **CORRECTED (D256): the body does NOT fit.** Measured by me on a clean rebuild of the current source (`main.tex` sha `9201e1f2…`): **body ends p.13, PoPETs' submission cap is 12 → one page over.** The overflow is ~**3,847 non-ws chars ≈ 5.6%** of the body's 69,129. An earlier "body p.12, no cut needed" reading was measured on a build with a **DOUBLED ABSTRACT** and is void. p.13 holds 2731 non-ws chars vs p.11/12's ~5600, so it is a real fraction of a column, not a stray line.
+- **EVERY lossless recovery RULED OUT BY EXPERIMENT (D256), not by reasoning:** (1) removing the body/appendix `\clearpage` → total 24→23 but body **still p.13**, so no back-matter trick absorbs it; (2) dropping the `review` line-number option → **still p.13**, costs nothing either way; (3) relocating a float → **structurally impossible**: the body's eight `\input` files contain **ZERO** figure/table environments (every float is in the appendix), which also closes the "move a float to the appendix" lever used in an earlier USENIX pass. **Trimming is therefore the only route to ≤12, and trimming is a content decision.**
+- 🔴 **THE TRADEOFF PUT TO THE PI (D256):** the body fits USENIX's 13-page cap **exactly** (it was typeset to that limit); PoPETs' submission cap is 12. So switching costs BOTH a **5.6% body cut** AND a **CCF two-grade drop (USENIX A → PETS C)**. Options offered: **(A) stay at USENIX** — my recommendation: no cut, A-rated, already complete; **(B) PoPETs with a line-by-line trim list** brought for approval, cutting no claim/number/qualifier; **(C) IMC** (CCF B) with re-positioning and unpublished 2027 dates. **NO CUT MADE, no submission action.**
+- **Conversion work is reversible and portable:** the USENIX build is committed at HEAD (`4e0a80a2`), so option A needs no rework; the template is now ACM/acmart, shared by PoPETs **and** IMC.
+- ⚠️ **Still-open adjacent question:** IMC is CCF **B** (filed under 计算机网络) vs PETS **C** — if the PI's real interest was *level*, IMC is the stronger target. **CCF 7th edition (2026-03-31) is current; my earlier 2022-based grades were stale.**
+- ⚠️ **Corrections to my own venue advice (M186 + independent fact-check):** "PETS has a timing advantage" is **WRONG** — IMC 2027's dates are unpublished and its cycle likely also ~Nov 2026, so the two do not differ on timing; PETS's real edge is **rolling quarterly issues** (reject → next issue), i.e. resilience not speed. CORE gives IMC **A** (my "A vs B conflict" conflated two different systems). The ~24.1% acceptance figure is a 2001–2014 mean; recent editions run ~19–25% and long/short tracks differ.
+- ✅ **Confirmed correct:** USENIX Security = CCF **A**, PETS = **C**; USENIX Sec 2027 C2 dates match our local CFP extract.
 
 ## Current paper state
 
@@ -126,6 +133,8 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D256 | 2026-09-25 | Independently verified the converted paper lands a | — |
+| D255 | 2026-09-25 | Started the PI-directed venue switch (PoPETs) and  | — |
 | D254 | 2026-09-25 | Reviewer was right: my D253 durability conclusion  | — |
 | D253 | 2026-09-25 | Committed the verifier fix so HEAD reproduces MISM | — |
 | D252 | 2026-09-25 | Accepted the Agent's forward obligation — the EIBO | — |
@@ -134,6 +143,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D249 | 2026-09-25 | Refuted the claim that docs/paper/main.fls leaks a | — |
 | D248 | 2026-09-25 | Audited commit f4badc6: the manuscript half is cor | — |
 | D247 | 2026-09-25 | Rebuilt the supplementary archive (new sha ed01a6d | — |
-| D246 | 2026-09-25 | Batched bibliography edit landed and independently | — |
-| D245 | 2026-09-25 | Built scripts/verify_bibliography.py — a field-lev | — |
 

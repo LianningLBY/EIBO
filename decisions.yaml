@@ -1,4 +1,4 @@
-_next_id: 255
+_next_id: 257
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -12839,3 +12839,161 @@ decisions:
   depends_on:
   - D250
   - D253
+- id: D255
+  date: 2026-09-25 14:19 UTC
+  summary: 'Started the PI-directed venue switch (PoPETs) and verified the conversion
+    myself: body lands p.12 of 24 — exactly PoPETs'' 12-page submission limit, with
+    no content cut — plus 0 undefined refs and full template compliance. Corrected
+    a false "cosmetic" claim about overfull boxes (11 exceed 30pt, worst 92.6pt, caused
+    by the appendix hashes in acmart''s narrower column) and dispatched a targeted
+    fix. Recorded three corrections to my own venue advice from an independent fact-check,
+    including that my "PETS timing advantage" framing was wrong, and left the PoPETs-vs-IMC
+    choice explicitly open for the PI.'
+  rationale: 'The PI directed a venue switch ("转一下吧") and I began converting the paper
+    to PoPETs 2027. Recording the state, the fact-check corrections, and the open
+    question.
+
+
+    WHAT THE PI SAID AND HOW I INTERPRETED IT. The message was "转一下吧，然后是不是要继续评审？"
+    — no target named, but the immediately preceding exchange had offered exactly
+    two options (PETS, or IMC as the alternate). I took the contextually strongest
+    reading: PoPETs. Flagged the ambiguity back to the PI because a wrong reading
+    wastes a conversion; also reported that the template work is largely portable
+    between the two (both ACM format).
+
+
+    CONVERSION RESULT — VERIFIED BY ME, NOT RELAYED. The Paper Agent swapped the template
+    (acmart + popets.sty + the six PoPETs metadata macros, bibliography style plainnat
+    -> ACM-Reference-Format, abstract reordered before \maketitle as acmart requires,
+    AI Use Statement added) and compiled. I independently confirmed: **body''s last
+    page = p.12 of 24**, found by per-page whitespace-normalised search for the conclusion''s
+    final sentence (a naive whole-document grep MISSES it because the sentence wraps
+    across a line). Body p.1-12, then Ethical Considerations p.13, Open Science p.14,
+    AI Use p.15, References p.20 — all outside the body, which is what PoPETs'' rules
+    require. 0 undefined refs / 0 multiply-defined / 0 missing citations / 0 `??`.
+    Template compliance checked: required macros present, no `\subtitle{}`, no `\usepackage{times}`,
+    no CCS tags, no usenix.sty reference.
+
+    **NO CONTENT WAS CUT** — the body fits PoPETs'' 12-page submission limit naturally.
+    It sits exactly AT the limit, so any future body addition overflows, same as under
+    USENIX''s 13.
+
+
+    CORRECTED A FALSE CLAIM IN THE WRITER''S REPORT. It summarised the compile as
+    "44 overfull boxes ... none exceeds 30pt ... cosmetic". Measured from the log:
+    43 boxes, **11 exceed 30pt, worst 92.6pt** — nearly a column inch, which in a
+    two-column ACM layout runs text off the margin. I diagnosed the cause (the 64-char
+    `\seqsplit` artifact hashes and adjacent long inline `\texttt` artifact IDs in
+    the Open Science appendix, which broke acceptably in USENIX''s wider column but
+    not in acmart''s) and dispatched a targeted fix with the constraint that every
+    artifact ID and hash must survive BYTE-EXACT — they are content-addressed identifiers,
+    so fix the line breaking, never the string.
+
+
+    TWO MECHANICAL ITEMS FOUND, one mine to fix: `usenix.sty` and `main.tex.usenix`
+    are still in docs/paper/ and WOULD SHIP (the snapshot takes the .tex+.sty set),
+    so they must move out; and `ACM-Reference-Format.bst` is a LOCAL file the archive
+    builder would NOT collect (it gathers only .tex/.bib/.sty), so the archive would
+    ship a paper whose bibliography cannot be rebuilt — a builder change I own and
+    will verify separately.
+
+
+    FACT-CHECK CORRECTIONS TO MY OWN VENUE ADVICE (D254 follow-up, M186). An independent
+    check corrected three of my statements: (1) **the CCF 7th edition, published 2026-03-31,
+    is current — I had used the 2022 edition.** USENIX=A and PETS=C both confirmed
+    correct; **IMC=B is correct but filed under 计算机网络, not 网络与信息安全**, a category distinction
+    I had omitted and which matters because many institutions evaluate by category.
+    (2) **CORE gives IMC an A** — my "sources conflict, A vs B" framing was wrong;
+    the apparent conflict was between two DIFFERENT systems (CORE A vs CCF B), not
+    within one. (3) **The ~24.1% acceptance rate I quoted is a 2001-2014 mean**; recent
+    editions run ~19-25% and long/short tracks differ by 5pp+ in the same year, so
+    it must be quoted per-track.
+
+    Most materially: **my "PETS has a timing advantage" framing was WRONG.** IMC 2027''s
+    CFP is not yet published (its 2027 page 404s), and if IMC keeps its two-cycle
+    rhythm its Cycle 1 likely also falls around Nov 2026 — so PETS and IMC do not
+    differ on timing at all. PETS''s real structural advantage is **rolling quarterly
+    issues** (four per year), meaning a reject can roll into the next issue — resilience,
+    not speed.
+
+
+    OPEN QUESTION PUT BACK TO THE PI. Because the PI''s preceding question was specifically
+    about the venue''s LEVEL, and IMC is a CCF B (a grade above PETS''s C), IMC may
+    be what they actually want — I had under-sold it as a mere compromise. Its countervailing
+    risk: IMC''s CFP rewards work that improves measurement PRACTICE, so entry would
+    require re-positioning the paper as "a measurement technique applied to real traffic"
+    rather than a statistical framework. I asked the PI to confirm: continue PoPETs,
+    switch to IMC, or wait for IMC 2027''s CFP. **Outstanding — do not treat the venue
+    as settled.**'
+  related_experiments: []
+  depends_on:
+  - D236
+  - D254
+- id: D256
+  date: 2026-09-25 15:01 UTC
+  summary: 'Independently verified the converted paper lands at body p.13 (one page
+    over PoPETs'' 12) with ~5.6% of body text overflowing, and ruled out every lossless
+    recovery by experiment — removing a clearpage leaves it at p.13, the review option
+    is free, and the body contains zero floats to relocate. Escalated to the PI with
+    the real tradeoff: switching costs both a body cut AND a CCF A→C drop, where staying
+    at USENIX costs neither. No content cut, no submission action.'
+  rationale: 'Verified the converted paper''s page count independently, ruled out
+    every lossless recovery, and escalated the resulting content decision to the PI
+    with concrete numbers. The conversion is now blocked on their ruling.
+
+
+    THE MEASUREMENT, VERIFIED MYSELF. I snapshotted the current source (main.tex sha
+    9201e1f2…), rebuilt it in a clean scratch directory (three passes + bibtex), and
+    measured: **24 pp total, body ends p.13**, Ethical Considerations p.14, 0 undefined
+    refs, 0 multiply-defined. Per-page non-whitespace char counts confirm the shape:
+    p.11 5755, p.12 5409, **p.13 2731**, p.14 1636 — so the body''s last page holds
+    a real fraction of a column, not a stray line. **The overflow is ~3,847 chars
+    ≈ 5.6% of the body''s 69,129 non-ws chars.** The Paper Agent''s corrected report
+    (p.13, not p.12) is right; its earlier p.12 came from a build with a DOUBLED ABSTRACT,
+    which I caught, and its reported "45 overfull / cosmetic" is still wrong in kind
+    (I measure 46, max 91.3pt, 9 over 30pt — text past the margin).
+
+
+    EVERY LOSSLESS RECOVERY RULED OUT BY EXPERIMENT, not by reasoning:
+
+    1. **Removing a `\clearpage`** (letting Appendix matter flow onto the body''s
+    partial page): tested — total drops 24→23 but the body STILL ends p.13. So the
+    overflow is genuine body content and no back-matter page-break trick can absorb
+    it.
+
+    2. **Dropping the `review` class option** (line numbers): tested — still p.13.
+    Costs nothing either way.
+
+    3. **Relocating a float out of the body:** ruled out structurally — measured that
+    the body''s eight `\input` files contain **ZERO** figure/table environments (all
+    floats live in the appendix), so there is nothing to move. This also closes off
+    the "move a float to the appendix" lever that worked in an earlier USENIX pass
+    on this project.
+
+    Therefore: **trimming is the only path to ≤12, and trimming is a content decision.**
+
+
+    THE TRADEOFF I PUT TO THE PI, and why it changes my earlier advice. The body fits
+    USENIX''s 13-page cap EXACTLY — it was typeset to that limit — while PoPETs''
+    submission cap is 12. So switching costs BOTH a **5.6% body cut** AND a **CCF
+    two-grade drop (USENIX A → PETS C)**. My original recommendation rested on "better
+    fit", which the Round-18 reviewers did endorse; but I made it without knowing
+    either cost. Offered three options: (A) stay at USENIX — no cut, A-rated, already
+    complete; (B) PoPETs with a specific line-by-line trim list I would bring for
+    approval, cutting no claim/number/qualifier; (C) IMC (CCF B) with re-positioning,
+    its 2027 dates unpublished. Recommended A, and stated plainly that the conversion
+    is fully reversible (the USENIX build is committed at HEAD).
+
+
+    NO CUT MADE, NO SUBMISSION ACTION. The standing rule against compressing body
+    prose to buy a page holds; per `paper_framing.md` a venue change is a PI discussion.
+
+
+    ALSO QUEUED (infrastructure, Main Agent, not manuscript): the archive builder
+    collects `.tex`/`.bib`/`.sty` but NOT `.bst`, so it would ship a paper whose bibliography
+    style — now a local `ACM-Reference-Format.bst` rather than the TeX Live `plainnat`
+    builtin — cannot be rebuilt. The fix must be verified on a good and a bad input
+    and must not run the full rebuild until the layout is final.'
+  related_experiments: []
+  depends_on:
+  - D255
