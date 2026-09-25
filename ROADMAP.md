@@ -2,7 +2,9 @@
 
 > Last updated: 2026-09-25 20:05 UTC | Update reason: **PoPETs conversion is COMPLETE and internally consistent (D264/D265).** Body fits the 12-page cap at p.12 with no content cut (relocation to the appendix); the relocation's wrong-reference regression is fixed and verified on the render (prose now correctly names Section A.8 for Table 3 and A.5 for Figure 1, no hardcoded `A.n` left); receipt passes 24/24 on the shipped sha and matches it; archive rebuilt on the new build (91 entries, three-way agreement) and **now rebuilds the paper from its own shipped contents alone**. Outstanding: the Abstract/Intro reframing question is recorded as OPEN but looks largely unnecessary (framing is already venue-neutral), and Round 19 registration remains platform-side.
 
-> **Round 19 registration FAILED — twice.** Both submits returned `approved` with DISTINCT approval ids (`apr_20260924T225518_cl7h`, `apr_20260925T011505_9gg9`) instead of `deduplicated: true`. `get_formal_review_status` still reads **round 18 completed**; no round-19 directory. Fails one stage earlier than rounds 15–17. **Do not blind-retry a third time.**
+> 🔴 **REVIEW SUBMISSION IS BLOCKED PLATFORM-SIDE — 3 attempts, 3 distinct approvals, 0 rounds (D266).** Every attempt returns `approved` with a FRESH approval id rather than `deduplicated: true`, meaning no active round exists, and `get_formal_review_status` still reads **round 18 completed**. Ids so far: `apr_20260924T225518_cl7h`, `apr_20260925T011505_9gg9`, `apr_20260925T195821_fh52`, `apr_20260925T200425_cbk0`. The pipeline RUNS (it rebuilds `artifacts/submission.tar.gz` at the submit second) then stops before creating the round.
+> ⛔ **`supplementary_paths` IS RULED OUT — D237's hypothesis is REFUTED (D266).** The pattern looked perfect (4/4 fails WITH the field, 4/4 successes without), but it was **confounded with time**: all failures are 09-24/25, all successes 09-23 and earlier. I ran the discriminating test — submitted WITHOUT the field — and **it failed too**. A correlate that survives no discriminating test is a coincidence, not a mechanism. Do not re-run that test.
+> ⛔ **DO NOT RETRY.** Three attempts, three identical outcomes, and each retry rebuilds the submission snapshot. Also already ruled out: no human approval is pending (`get_pending_approvals` → 0). **This needs platform-side repair; nothing on our side can move it.** The paper is left fully submission-ready so a repaired platform can accept it immediately. Note: the path arguments must be ABSOLUTE — a relative `docs/paper/main.pdf` is rejected before anything else runs.
 
 ## Core direction
 
@@ -139,6 +141,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D266 | 2026-09-25 | Ran the discriminating test D237 refused and it RE | — |
 | D265 | 2026-09-25 | Verified the reference fix on the render (prose no | — |
 | D264 | 2026-09-25 | The body now fits PoPETs' 12-page cap at p.12, ach | — |
 | D263 | 2026-09-25 | Fixed the incompleteness in D258: the archive ship | — |
@@ -148,5 +151,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D259 | 2026-09-25 | Proved the font/toolchain route dead by running it | — |
 | D258 | 2026-09-25 | Extended the archive builder to ship the PoPETs bi | — |
 | D257 | 2026-09-25 | Verified the overfull fix independently (44→19 box | — |
-| D256 | 2026-09-25 | Independently verified the converted paper lands a | — |
 

@@ -1,4 +1,4 @@
-_next_id: 266
+_next_id: 267
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -13649,3 +13649,57 @@ decisions:
   depends_on:
   - D263
   - D264
+- id: D266
+  date: 2026-09-25 20:06 UTC
+  summary: 'Ran the discriminating test D237 refused and it REFUTED the supplementary_paths
+    hypothesis: submitting WITHOUT the field also failed to register, so the perfect
+    8/8 correlate was confounded with time, not causal. Three attempts now produce
+    three distinct approvals and zero rounds, with the pipeline packaging but never
+    creating the round — platform-side, not actionable here, and further retries are
+    contraindicated.'
+  rationale: "Ran the discriminating experiment D237 deliberately refused, and it
+    decisively REFUTES the supplementary_paths hypothesis while establishing a third
+    consecutive registration failure. The review handoff now depends on platform-side
+    repair, not on anything we can change.\n\nWHAT I DID. The paper has never been
+    reviewed in its current form (round 18 was the USENIX build; round 19 never registered),
+    so getting it into review is my terminal responsibility. I submitted three times:\n1.
+    19:57:51 — PoPETs 2027, WITH supplementary_paths → `approved`, approval `apr_20260925T195821_fh52`,
+    no round.\n2. 19:58:20 — identical retry → `approved`, approval `apr_20260925T200425_cbk0`
+    (no dedup), no round.\n   (The first call initially failed with \"PDF file does
+    not exist\" for a RELATIVE path; it needs absolute. Worth recording — the relative
+    form is rejected before anything else runs.)\n3. 20:04:25 — **WITHOUT supplementary_paths**,
+    as the discriminator → `approved`, fresh approval, no round.\n\nTHE HYPOTHESIS,
+    AND WHY IT LOOKED STRONG. Listing every submit call against the rounds present
+    on disk showed a perfect 8/8 correlate: every submit that passed `supplementary_paths`
+    failed to register (4/4) and every submit that did not passed (4/4). That is the
+    pattern D235/D237 recorded.\nBUT IT WAS CONFOUNDED WITH TIME — all four failures
+    are from 2026-09-24/25 while all four successes are from 09-23 and earlier, so
+    \"the field breaks it\" and \"the platform regressed around 09-24\" predict the
+    SAME data. D237 refused the discriminating test because it traded the archive
+    for diagnostic information; that trade is no longer costly, because the paper
+    carries a fresh 24/24 receipt and the round has never run anyway, so a submission
+    that registers is pure upside.\nTHE TEST: attempt 3 omitted the field entirely.
+    **It also failed.** So the field is NOT the cause — the correlate was time, not
+    the field. That refutes the hypothesis rather than confirming it, and it is the
+    reason to state the result plainly: a 8/8 correlate that survives no discriminating
+    test is a coincidence, not a mechanism.\nAlso ruled out: the approval path is
+    not waiting on a human — `get_pending_approvals` returns 0.\n\nSTATE OF THE DEFECT:
+    three distinct approvals (three separate ids, no deduplication), zero rounds created,
+    `get_formal_review_status` still reads round 18 completed, no round-19 artifact
+    anywhere, and the only file the pipeline touched was `artifacts/submission.tar.gz`
+    (rebuilt at 19:58:21, the same second as the submit). So the pipeline RUNS and
+    packages, then stops before creating the round — the same stage as D235, now reproduced
+    a third time and independent of the field.\nCONSEQUENCE: this is platform-side
+    and NOT actionable by me. I have exhausted the levers available on this side:
+    deduplication is not happening, the field is ruled out, no approval is pending,
+    and repeated retries produce identical failures. **Further retries are contraindicated**
+    — three attempts, three identical outcomes, and each one rebuilds the submission
+    snapshot.\n\nNOT DONE: no further submits; the paper is left in a fully submission-ready
+    state so a repaired platform can accept it immediately. The archive is complete
+    and registered (b9b443ef, 91 entries, rebuilds the paper from its own contents),
+    and the one withheld item in attempt 3 was withheld for diagnosis only, which
+    I noted in that submission's own reason field."
+  related_experiments: []
+  depends_on:
+  - D235
+  - D237
