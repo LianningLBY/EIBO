@@ -36,7 +36,7 @@ updated: '2026-09-25T11:41:35+00:00'
 ### 4. 📋 To-do (condition-triggered)
 - **Any source edit lands → re-render + full 24/24 gate BEFORE delivery**, and rebuild the archive + update the manifest hash. Order is **render → gate → cleanup images → THEN submit**.
 - **If Round 19 ever registers** → regenerate `artifacts/submission.tar.gz` from the CURRENT tree (the on-disk one is the 01:15 snapshot of the failed attempt and is stale in all three paper files); also confirm the dropped scratch PNGs stay out.
-- **PI answers venue (D236)** → record explicitly (confirmed-with-reason or changed-with-reframing-plan). A PoPETs switch = re-layout + Abstract/Intro reframing, not an edit.
+- **PI rules on the PoPETs trim vs revert to USENIX** → the switch is DONE (D255); only the trim/revert question is open.
 - **PI answers the `liu2026inevitability` name** ("Guang Cheng" vs arXiv's "Guang Chen"; the sister paper 2607.17889 disagrees with 2602.14055) → edit only against an authoritative record.
 - **Next real edit pass** → batch the deferred one-liners: `main.tex:632` `√C ≈ 2.96×` half-clause; `results.tex:168` `tighter`; `main.tex:2` EIBO comment. Each alone is not worth a gate cycle.
 - **Anyone cites `0.186`/`0.363`/`0.194`** → superseded; correct to `0.197`/`0.375`.
