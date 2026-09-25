@@ -1,4 +1,4 @@
-_next_id: 186
+_next_id: 187
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -8720,3 +8720,67 @@ mistakes:
 
 
     Corrected in the tracker (R18-C6b resolution restated), ROADMAP and D252.'
+- id: M186
+  date: '2026-09-25'
+  category: communication
+  severity: high
+  summary: Gave the PI two unsupported figures (CORE "A 最高档"; acceptance "约22%") in
+    venue advice, and offered IMC as a compromise option without ever verifying IMC's
+    scope fit or 2027 deadline. The load-bearing fact for their decision — the CCF
+    grade — was omitted from the first recommendation entirely. Caught by self-audit,
+    not by any check; independently re-verifying now.
+  root_cause: I answered from recall rather than measurement, and built a "switch
+    venue" recommendation while checking only the evidence that supported it (reviewer
+    sentiment, topical fit, PETS timing) and omitting the dimension most likely to
+    oppose it (domestic CCF grade). I then offered IMC as a middle option without
+    verifying either of its gating facts — scope fit or deadline. Two figures I gave
+    (CORE A, 22% acceptance) were unsupported; sources for CORE actually disagreed
+    and the only acceptance figure available was a different number.
+  prevention: 'When a user asks a factual question whose answer will drive a costly
+    decision, verify EVERY number before asserting it, and state the source and its
+    date inline — do not answer from recall, and do not let a confident-sounding figure
+    stand because it is plausible. Specifically: (a) a ranking/grade claim needs a
+    primary source; if sources conflict, say they conflict rather than picking one;
+    (b) never offer an option (here IMC) without checking its two gating facts — scope
+    fit and deadline — because offering it implies I checked; (c) when recommending
+    a CHANGE to a costly-to-reverse decision, first check the dimension most likely
+    to make the change a bad idea (here: domestic evaluation grade), not just the
+    dimension that supports it. Generalisation: my own claims to the user have no
+    validation gate, so the discipline has to be mine.'
+  status: active
+  context: 'The PI asked "这是什么级别的期刊？" about PETS/PoPETs after I had recommended switching
+    there from USENIX Security. In my first answer I asserted "国际声誉 A 类（最高档）" for
+    the CORE rating and "录用率约 22%". On checking, CORE sources DISAGREE with each other
+    (I found both A and B), and the only acceptance-rate figure locatable was a 2006-2014
+    mean of ~24.1% (single years 18-32%), not 22%. I corrected both in a follow-up,
+    but only because I re-checked before being contradicted.
+
+
+    Worse, in recommending IMC as the middle option I asserted "测量类工作也合适" (measurement
+    work also suits IMC) with NO verification at all — I never checked IMC''s scope,
+    and never checked its 2027 deadlines, while simultaneously stressing the PETS
+    timing advantage that only makes sense in comparison to them.
+
+
+    WHY THIS MATTERS MORE THAN A NORMAL SLIP: this is advice feeding a decision the
+    PI must make and cannot easily verify — the venue choice is theirs and is expensive
+    to reverse (a switch means re-layout plus Abstract/Intro rewriting). An unverified
+    grade or an unverified fit claim, delivered confidently, pushes them toward a
+    costly action on a false basis. The CCF grade in particular is the load-bearing
+    fact for domestic evaluation, and I initially omitted it entirely from my first
+    recommendation: I built a "change venue" recommendation WITHOUT checking the one
+    dimension most likely to make it a bad idea.
+
+
+    CAUGHT BY: asking myself what I had asserted without checking, immediately after
+    the second correction. Not by any check — there is no mechanism that validates
+    a claim I make to the user. Assigned an independent verification of all four venue
+    claims (both CCF grades, IMC scope fit, IMC 2027 dates, and whether my corrected
+    CORE/acceptance figures are themselves right).
+
+
+    TIMING/PROCESS NOTE: I made both errors inside a flow where each turn was a "required
+    terminal delivery repair", i.e. composing a user-facing answer from a prior turn''s
+    tool results without new tool calls. Composing from remembered context rather
+    than re-measuring is the same defect class as the stale-read failures in the handoff
+    (a value carried forward instead of read at the moment of assertion).'
