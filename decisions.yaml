@@ -1,4 +1,4 @@
-_next_id: 265
+_next_id: 266
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -13557,4 +13557,95 @@ decisions:
   depends_on:
   - D255
   - D261
+  - D264
+- id: D265
+  date: 2026-09-25 19:51 UTC
+  summary: 'Verified the reference fix on the render (prose now correctly reads "Table
+    3, in Section A.8" and "Figure 1 (in Section A.5)", no hardcoded A.n remains,
+    body still p.12) and rebuilt the archive: b9b443ef, 91 entries, three-way agreement,
+    and — the property D263 was about — the archive now rebuilds the paper from its
+    own shipped contents alone (0 errors, 24 pages). The manifest re-pin also cleared
+    the three stale description values deferred in D263 (88→91 entries, the PDF prefix,
+    and the venue string). Left the Abstract/Intro reframing undispatched after measuring
+    that the framing is already venue-neutral and the reviewers recommended PoPETs
+    for exactly this framing.'
+  rationale: 'Rebuilt the supplementary archive on the PoPETs build and verified the
+    reference fix the writer applied. Everything is now consistent and the archive
+    is genuinely self-sufficient.
+
+
+    REFERENCE FIX — VERIFIED BY ME, not relayed. The writer replaced the four hardcoded
+    `Section~A.n` instances with `\Cref{}` on real labels, added the two missing labels
+    (`sec:appendix/ledger` on "Per-Pair Ledger and Boundary Pairs", `sec:appendix/detector_validation`
+    on "Detector Validation Table"), and swept for others (found only those four).
+    I confirmed on the RENDER: the prose now reads **"Table 3, in Section A.8"** and
+    **"Figure 1 (in Section A.5)"**, and those numbers are correct — A.8 IS "The Two-Sided
+    Bracket by Rung" (Table 3''s home) and A.5 IS "Per-Pair Ledger and Boundary Pairs"
+    (Figure 1''s home). No hardcoded `A.<n>` remains in any body file. Body still
+    ends p.12. So the wrong-reference regression from D264 is closed, and closed as
+    a mechanism (label-based references) rather than as three patched strings.
+
+
+    Its investigation of my two flagged oddities matches my own diagnosis: the "duplicate
+    A.5" is two orphan labels under one heading (functionally inert, referenced by
+    nothing), and the "plain 1 and 8" were table counters, not section numbers. Both
+    were my false alarms and I had already withdrawn them; the writer''s independent
+    arrival at the same reading is a useful confirmation.
+
+
+    ARCHIVE REBUILT — three-way agreement restored on the new build. Two-pass sequence
+    as designed: pass 1 wrote `b9b443eff53bef7014f2614dede1821042c6dfb8d28cf166ccdfad760ee2f9b7`
+    and exited 1 on the stale pin; I re-pinned the manifest; pass 2 exited 0 and mirrored.
+    The re-pin updated ONE entry and TWO fields (content_sha256 + description), 171
+    entries intact after re-parse.
+
+    **The re-pin also cleared the three stale description values I had flagged in
+    D263 and deliberately deferred:** entry count 88 → **91** (the archive now carries
+    `.bst`, `cc-by-4.pdf` AND `acmart.cls`), PDF prefix `4e0a80a2` → `b74b2c23`, and
+    the venue string "USENIX Security 2027 submission" → "**PoPETs 2027 submission**".
+    All three were asserted-but-wrong in the prose and none is covered by any hash
+    assert — the class that survives a fully green rebuild.
+
+    VERIFIED: both copies `b9b443ef…` and cmp-identical; manifest content_sha256 equals
+    the shipped bytes; embedded `main.pdf` == tree (b74b2c23) and embedded `references.bib`
+    == tree; 91 entries, 0 root-level files; guard suite 9 passed / 12 subtests.
+
+
+    ⭐ THE PROPERTY THAT MATTERS, NOW ACTUALLY TRUE: I unpacked the archive into an
+    empty directory and built the paper **from its own shipped contents alone** —
+    0 errors, 24 pages. This is the reproducibility claim the Open Science appendix
+    makes, and it is the property D263 was about: before that fix the archived sources
+    could not be compiled at all (missing `acmart.cls`). It now holds end to end,
+    and `.bst`/`acmart.cls`/`cc-by-4.pdf` are all confirmed present in the member
+    list.
+
+    One measurement note: my first rebuild showed "1–23" in the page footer versus
+    the tree''s "1–24" on p.1. Diagnosed as MY under-passing — the footer comes from
+    `\pageref{LastPage}`, so it needs one more run to settle; a further pass produced
+    "1–24", matching exactly. Not a defect, and worth remembering so a future reader
+    does not file it.
+
+
+    ALSO CLEARED: the stale `USENIX counts references outside the 13-page body` comment
+    at main.tex:858. I checked whether the code it explains is still needed — `\renewcommand{\bibfont}{\footnotesize}`
+    and the `\bibsep` setting are still active and still required for the two-column
+    reference list, so I left the CODE alone; only the explanatory comment is out
+    of date, and comments do not render (0 USENIX occurrences in the PDF). Not worth
+    a source edit that would void the receipt.
+
+
+    NOT DONE, deliberately: the Abstract/Intro "PoPETs reframing" I had earlier listed
+    as a pending step looks largely UNNECESSARY and I have not dispatched it. Measured:
+    the abstract and introduction contain no USENIX-specific wording (0 occurrences
+    in the PDF), the framing is already venue-neutral ("documentary evidence of the
+    measurement program" style rather than conference-tuned), and the Round-18 reviewers
+    who recommended PoPETs recommended it *for this framing*. The one genuine gap
+    I noticed — the abstract never says "privacy" or "anonymous" while PoPETs is a
+    privacy venue — is a judgement call about emphasis, not a defect, and inventing
+    a reframing to satisfy an assumed requirement is exactly the kind of unverified
+    action I have been correcting. Recording it as an open question rather than acting
+    on it.'
+  related_experiments: []
+  depends_on:
+  - D263
   - D264
