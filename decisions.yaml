@@ -1,4 +1,4 @@
-_next_id: 267
+_next_id: 268
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -13703,3 +13703,63 @@ decisions:
   depends_on:
   - D235
   - D237
+- id: D267
+  date: 2026-09-25 20:18 UTC
+  summary: 'Resolved the missing-acks question to its source: acmart deliberately
+    excludes the acks environment under the anonymous option, so its absence is CORRECT
+    for double-blind submission, not a compliance gap — and testing the documented
+    form showed it renders nothing in either position. Verified all other PoPETs formatting
+    requirements are present. Confirmed the stale 09-23 audit''s three criticals are
+    all non-issues on the current tree (including one false positive of its own heuristic)
+    and dispatched a fresh audit. Also caught and fixed the third recurrence of the
+    uncommitted-deliverable failure: the entire PoPETs conversion was uncommitted.'
+  rationale: "Cleared two things that looked like defects and are not, dispatched
+    a fresh audit, and fixed a repeat of the uncommitted-deliverable failure.\n\n1.
+    THE MISSING `acks` ENVIRONMENT IS CORRECT, NOT A GAP. PoPETs' author instructions
+    list `\\begin{acks}...\\end{acks}` as a requirement, and the paper has none. I
+    tested the documented form twice (before and after `\\appendix`) and it rendered
+    **nothing** in both positions — which looked like a silent compliance failure.
+    Diagnosed to the source: the local `acmart.cls` declares acks via `\\specialcomment`
+    and then, at lines 3589–3592,\n   `\\if@ACM@anonymous \\excludecomment{acks} \\else
+    ... \\fi`.\n   Our documentclass is `[sigconf,anonymous,review]`, so **acmart
+    deliberately excludes the acknowledgements environment under the anonymous option.**
+    Its absence is therefore CORRECT and required behaviour for a double-blind submission
+    — an anonymous paper must not name funding. The funding sentence becomes required
+    at camera-ready, when the paper is de-anonymised. **Do not \"fix\" this at submission.**
+    (The generic form is real — writing `\\begin{acks}` into an anonymous build would
+    silently vanish, which is the trap; the resolution is that it should.)\n   Why
+    I checked rather than assumed: a requirement in the venue's own instructions that
+    the paper does not satisfy is exactly the kind of thing worth one test, and the
+    test cost a scratch compile.\n\n2. OTHER PoPETs COMPLIANCE ITEMS VERIFIED PRESENT:
+    `\\documentclass[sigconf]{acmart}`, `\\usepackage{popets}`, `\\setcopyright{popets}`,
+    the exact `\\acmConference{Proceedings on Privacy Enhancing Technologies}`, `\\settopmatter{printacmref=false,printccs=false,printfolios=true}`,
+    and **zero** occurrences of the prohibited `\\subtitle{}`, `\\usepackage{times}`,
+    or CCS tags; no ALL-CAPS in titles or headings.\n\n3. THE STALE AUDIT'S CRITICALS
+    CHECKED AGAINST THE CURRENT TREE — all three are non-issues, and I verified rather
+    than carried them forward. The 2026-09-23 audit ran on the USENIX build. (a) Internal
+    experiment id `D181`: **absent** from every current `.tex` and **0** occurrences
+    in the rendered PDF. (b) The comma-separated `\\ref{a,b}` lines it flagged: gone.
+    (c) \"0.375 in the abstract but not in Results\": a **false positive of its own
+    heuristic** — it searched only `results.tex`, while 0.375 is an LP-optimality
+    **derivation** in `measurement_design.tex` (§3.1, lines 70–76 and 98–103), not
+    a measured result. Recorded so nobody edits the abstract on the strength of that
+    line. Dispatched a fresh audit (profile=standard) which is running on the CURRENT
+    build: `compile_success: true`, 24 pages, past the compile and consistency stages.\n\n4.
+    THE UNCOMMITTED-DELIVERABLE FAILURE RECURRED AND IS FIXED. The fit pass, the reference
+    fix and the archive rebuild were all sitting uncommitted — `git diff --quiet HEAD
+    -- docs/paper/main.tex` failed, so a fresh checkout would have produced the pre-PoPETs
+    sources. This is the third instance of the same class (M183 stale revision rode
+    in; D254 DOIs never committed; now the whole conversion). Committed with an explicit
+    pathspec as `0184f8b`. Verified after: HEAD's `main.tex`, `main.pdf` and `supplementary.tar.gz`
+    all match the worktree.\n   The pattern is stable enough to state plainly: **the
+    tool is reliably committed; the deliverable is not.** After every source edit,
+    check the DELIVERABLE, not just the scripts.\n\nNOT DONE: the Related-Work-after-Results
+    ordering the old audit flagged as unusual is a deliberate structural choice, and
+    moving it would reflow a paper sitting EXACTLY at the 12-page cap — so it is not
+    worth touching without a reason. The abstract-density and intro-length warnings
+    are stylistic and belong with the reframing question, which remains open and which
+    I have not acted on."
+  related_experiments: []
+  depends_on:
+  - D255
+  - D266
