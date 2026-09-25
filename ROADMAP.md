@@ -2,7 +2,8 @@
 
 > Last updated: 2026-09-25 20:35 UTC | Update reason: **Final consistency pass done (D268/D269).** A full paper audit ran on the current PoPETs build; I verified every "critical" it reported against the artifact and they are false positives of its own heuristics (comma-list `\Cref` renders fine with 0 `??`; the "orphan" bib keys are all cited in main.tex; 0.375 is an LP derivation not a result; overfull max 21pt, none past the margin). Two genuine minor notation issues were fixed in one batched pass: a raw `\epsilon_{\rm lo}` against the `\epslo` macro, and the paper's only `\varepsilon` — which sat in the sentence that DEFINES epsilon. Body still p.12; fresh 24/24 receipt at 20:29 on the shipped sha; archive rebuilt (57693b17, 91 entries, three-way agreement) and still rebuilds the paper from its own contents. **Only open item: the platform-side review registration failure (D266).**
 
-> 🔴 **REVIEW SUBMISSION IS BLOCKED PLATFORM-SIDE — 3 attempts, 3 distinct approvals, 0 rounds (D266).** Every attempt returns `approved` with a FRESH approval id rather than `deduplicated: true`, meaning no active round exists, and `get_formal_review_status` still reads **round 18 completed**. Ids so far: `apr_20260924T225518_cl7h`, `apr_20260925T011505_9gg9`, `apr_20260925T195821_fh52`, `apr_20260925T200425_cbk0`. The pipeline RUNS (it rebuilds `artifacts/submission.tar.gz` at the submit second) then stops before creating the round.
+> 🔴 **REVIEW SUBMISSION IS BLOCKED PLATFORM-SIDE — a clean TIME BOUNDARY, 5 attempts, 0 rounds (D266/D270).** Rounds on disk run 1, 3–14, 18; round 18 (the last to register) was created **2026-09-24 16:59**. **Every submit from 2026-09-24 22:55 onward has failed** — 5 attempts, 5 DISTINCT approval ids, zero rounds — spanning **two venues, three revisions, and both values of `supplementary_paths`**: `apr_20260924T225518_cl7h`, `apr_20260925T011505_9gg9`, `apr_20260925T195821_fh52`, `apr_20260925T200425_cbk0`, `apr_20260925T203501_k0ml`. So the failure is independent of the paper, the venue, the revision, and that field. Each attempt returns `approved` (never the documented `deduplicated: true`) and the pipeline RUNS — it rebuilds `artifacts/submission.tar.gz` at the submit second — then stops before creating the round.
+> ⛔ **DO NOT RETRY.** Five identical outcomes; each retry also rebuilds the submission snapshot. `supplementary_paths` is **ruled out** (attempt 4 omitted it and failed identically — do not re-run that test). **No human approval is pending** (`get_pending_approvals` → 0). Absolute paths are required (a relative path is rejected before anything runs). **Needs platform-side repair; the paper is ready the moment it is fixed.**
 > ⛔ **`supplementary_paths` IS RULED OUT — D237's hypothesis is REFUTED (D266).** The pattern looked perfect (4/4 fails WITH the field, 4/4 successes without), but it was **confounded with time**: all failures are 09-24/25, all successes 09-23 and earlier. I ran the discriminating test — submitted WITHOUT the field — and **it failed too**. A correlate that survives no discriminating test is a coincidence, not a mechanism. Do not re-run that test.
 > ⛔ **DO NOT RETRY.** Three attempts, three identical outcomes, and each retry rebuilds the submission snapshot. Also already ruled out: no human approval is pending (`get_pending_approvals` → 0). **This needs platform-side repair; nothing on our side can move it.** The paper is left fully submission-ready so a repaired platform can accept it immediately. Note: the path arguments must be ABSOLUTE — a relative `docs/paper/main.pdf` is rejected before anything else runs.
 
@@ -144,6 +145,8 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D270 | 2026-09-25 | Made a fifth submission on the materially changed  | — |
+| D269 | 2026-09-25 | Closed the final consistency pass: fixed two real  | — |
 | D268 | 2026-09-25 | Triaged the fresh audit on the current PoPETs buil | — |
 | D267 | 2026-09-25 | Resolved the missing-acks question to its source:  | — |
 | D266 | 2026-09-25 | Ran the discriminating test D237 refused and it RE | — |
@@ -152,6 +155,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D263 | 2026-09-25 | Fixed the incompleteness in D258: the archive ship | — |
 | D262 | 2026-09-25 | Replicated the D261 font experiment from a fresh e | — |
 | D261 | 2026-09-25 | Settled the font-fallback question with a controll | — |
-| D260 | 2026-09-25 | Retracted D259's "route is dead" claim — it was ba | — |
-| D259 | 2026-09-25 | Proved the font/toolchain route dead by running it | — |
 
