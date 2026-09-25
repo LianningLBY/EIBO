@@ -1,4 +1,4 @@
-_next_id: 187
+_next_id: 188
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -8784,3 +8784,70 @@ mistakes:
     tool results without new tool calls. Composing from remembered context rather
     than re-measuring is the same defect class as the stale-read failures in the handoff
     (a value carried forward instead of read at the moment of assertion).'
+- id: M187
+  date: '2026-09-25'
+  category: code_bug
+  severity: high
+  summary: 'My D258 archive-builder fix was incomplete: it shipped the bibliography
+    style and copyright badge but NOT acmart.cls, which is not in the system TeX Live
+    either. Proven by reconstructing the exact set the builder would ship and trying
+    to compile it — it fails with "File acmart.cls not found", so the archive could
+    not be rebuilt at all, contradicting the paper''s own reproducibility claim. Fixed
+    by collecting .cls; verified on both a good and a bad control.'
+  root_cause: I assumed acmart.cls was present in the system TeX Live without checking,
+    and therefore classified it as an optional version-pin rather than a required
+    dependency. My verification of the fix tested the builder's behaviour (member
+    counts, dry-run exit code, guard suite) but never tested its output, so a fundamentally
+    incomplete dependency set passed every check.
+  prevention: 'When modifying what a packaging step INCLUDES, verify the packaged
+    output by USING it — reconstruct exactly the set the tool would ship and perform
+    the consumer''s real operation (here: compile the paper from those files alone).
+    Counting members, confirming exit 0, and passing the guard suite all test the
+    tool''s behaviour, not its product''s adequacy; a complete dependency set is not
+    something a member count can express. Specifically for archives: list the consumer''s
+    requirements first (documentclass, style, bibliography style, included assets),
+    then check each is in the shipped set — do not reason about whether a file "is
+    probably available" without locating it.'
+  status: active
+  context: 'In D258 I widened the archive builder to ship the PoPETs/ACM template
+    dependencies: I added ".bst" to the collected suffix set and collected cc-by-4.pdf
+    explicitly. I stopped there, on the reasoning that acmart.cls "is in TeX Live,
+    so reviewers may already have it" — explicitly declining to add it, and telling
+    the Main Agent that the class file was a version-pinning nicety rather than a
+    hard dependency.
+
+
+    MEASURED, THAT REASONING IS FALSE FOR THIS IMAGE: `kpsewhich acmart.cls` finds
+    nothing, `kpsewhich ACM-Reference-Format.bst` finds nothing, and there is no /usr/share/texlive/texmf-dist/tex/latex/acmart
+    directory at all. Both files exist ONLY as local copies in docs/paper/. So they
+    are not version-pinning extras — they are the only copies.
+
+
+    CONSEQUENCE, PROVEN BY REBUILD: I reconstructed the exact set the fixed builder
+    would ship and tried to compile it. Result: `! LaTeX Error: File acmart.cls not
+    found. ! Emergency stop.` — NO PDF. The archive as configured could NOT be rebuilt,
+    which directly contradicts the Open Science appendix''s claim that the paper is
+    checkable from the submitted bytes. Adding the class file made the same set compile
+    with 0 errors to 24 pages.
+
+    So my D258 fix was INCOMPLETE: I shipped the bibliography style and the copyright
+    badge but not the document class — the most fundamental dependency of the three.
+
+
+    WHY I DID NOT CATCH IT IN D258: I verified the builder''s *behaviour* (entry_count
+    88→90, dry-run exit 0, guard suite 9/9) but never verified the builder''s *output*
+    — I never took the collected set and tried to compile it. Every check I ran asked
+    "did the builder do what I told it?" and none asked "does what it produced actually
+    work?" That is the same shape as the project''s recurring defect: a green check
+    on the wrong object.
+
+
+    FIXED: ".cls" added to the collected suffix set, to the freshness glob ("*.cls"),
+    and to TEXT_SUFFIXES so the census scans it. Verified on BOTH controls this time
+    — the collected set with .cls compiles to 24 pages with 0 errors; the same set
+    with .cls removed fails with exactly the predicted missing-file error. Guard suite
+    still 9 passed / 12 subtests. Confirmed acmart.cls carries none of the leak tokens
+    so it must NOT be added to EXPECTED_LEAK_BASELINE_FILES.'
+  fix: Added ".cls" to the three places ".bst" was added (collected suffix set, freshness
+    glob, TEXT_SUFFIXES). Verified the shipped set now rebuilds the paper cleanly,
+    with a negative control.

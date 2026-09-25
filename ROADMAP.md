@@ -15,11 +15,6 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 - **Work is reversible and portable:** the USENIX build is committed at HEAD (`4e0a80a2`), so option A needs no rework; the template is now ACM/acmart, shared by PoPETs **and** IMC. Conversion artefacts (`acmart.cls`, `popets.sty`, `ACM-Reference-Format.bst`, `cc-by-4.pdf`) are committed; `usenix.sty` removed (recoverable from `472cace`).
 - ⚠️ **Overfull boxes FIXED and verified: 44 → 19, max 92.6pt → 21.0pt, ZERO over 30pt.** Remaining 5 are 12–21pt line-breaking cosmetics inside the margin.
 - ⚠️ **Adjacent open question:** IMC is CCF **B** (filed under 计算机网络) vs PETS **C** — if the PI's interest was *level*, IMC is the stronger target. **CCF 7th edition (2026-03-31) is current; my earlier 2022-based grades were stale.** My "PETS has a timing advantage" claim was WRONG (IMC's dates are unpublished and likely also ~Nov 2026); PETS's real edge is rolling quarterly issues.
-- ⚠️ **Overfull boxes were FIXED and I verified it: 44 → 19 boxes, max 92.6pt → 21.0pt, ZERO over 30pt.** The writer's first summary called 92.6pt "cosmetic — none exceeds 30pt"; the log said otherwise and it has accepted that. Remaining 5 boxes are 12–21pt (line-breaking cosmetics, inside the margin), fixable with localised hints if ever wanted.
-- **Conversion work is reversible and portable:** the USENIX build is committed at HEAD (`4e0a80a2`), so option A needs no rework; the template is now ACM/acmart, shared by PoPETs **and** IMC.
-- ⚠️ **Still-open adjacent question:** IMC is CCF **B** (filed under 计算机网络) vs PETS **C** — if the PI's real interest was *level*, IMC is the stronger target. **CCF 7th edition (2026-03-31) is current; my earlier 2022-based grades were stale.**
-- ⚠️ **Corrections to my own venue advice (M186 + independent fact-check):** "PETS has a timing advantage" is **WRONG** — IMC 2027's dates are unpublished and its cycle likely also ~Nov 2026, so the two do not differ on timing; PETS's real edge is **rolling quarterly issues** (reject → next issue), i.e. resilience not speed. CORE gives IMC **A** (my "A vs B conflict" conflated two different systems). The ~24.1% acceptance figure is a 2001–2014 mean; recent editions run ~19–25% and long/short tracks differ.
-- ✅ **Confirmed correct:** USENIX Security = CCF **A**, PETS = **C**; USENIX Sec 2027 C2 dates match our local CFP extract.
 
 ## Current paper state
 
@@ -141,6 +136,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D263 | 2026-09-25 | Fixed the incompleteness in D258: the archive ship | — |
 | D262 | 2026-09-25 | Replicated the D261 font experiment from a fresh e | — |
 | D261 | 2026-09-25 | Settled the font-fallback question with a controll | — |
 | D260 | 2026-09-25 | Retracted D259's "route is dead" claim — it was ba | — |
@@ -150,5 +146,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D256 | 2026-09-25 | Independently verified the converted paper lands a | — |
 | D255 | 2026-09-25 | Started the PI-directed venue switch (PoPETs) and  | — |
 | D254 | 2026-09-25 | Reviewer was right: my D253 durability conclusion  | — |
-| D253 | 2026-09-25 | Committed the verifier fix so HEAD reproduces MISM | — |
 

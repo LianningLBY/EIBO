@@ -1,4 +1,4 @@
-_next_id: 262
+_next_id: 264
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -13377,3 +13377,118 @@ decisions:
   - D257
   - D259
   - D260
+- id: D262
+  date: 2026-09-25 17:30 UTC
+  summary: 'Replicated the D261 font experiment from a fresh environment because I
+    had recorded its numbers while an arm reported a non-zero error count. Exact replication:
+    32 -> 24 -> 16 spilled lines, body p.13 in all three arms; the "error" is non-fatal
+    (fatal=0, PDF produced, no TeX `^!` line) so the figures are sound. Also documented
+    two setup facts the rebuild exposed — the Libertine arm needs the newtx font MAPS
+    registered, not just the .sty files, and updmap-user recreates ~/.texlive2025
+    every run so its reappearance is not a cleanup failure. Tree verified identical
+    to HEAD.'
+  rationale: "Replicated D261 end-to-end from a fresh environment, because I recorded
+    its numbers while one arm reported a non-zero error count and I would not leave
+    a load-bearing figure standing on a run I could not reproduce. It replicates exactly;
+    the result is confirmed and the decision is closed.\n\nWHY I RE-RAN IT. D261's
+    arms B and C each reported `errors=1` while I read the spill figure from them
+    anyway. That is the precise pattern I keep flagging in others' work — a number
+    taken from a build whose health I had not confirmed. Rebuilding from scratch also
+    recreated a real risk: my second setup initially lacked the newtx font maps and
+    arm B failed outright (`Font txmiaX at 396 not found`), proving the earlier success
+    depended on map registration I had not documented. So the replication had two
+    jobs: confirm the numbers, and confirm the setup was reproducible at all.\n\nWHAT
+    THE REPLICATION SHOWED — identical to D261 to the line:\n  A baseline (CM fallback,
+    no expansion)          : 24pp, body p.13, spill 32\n  B + Libertine available
+    \                        : 23pp, body p.13, spill 24\n  C + Libertine + expansion
+    + \\S->Section         : 23pp, body p.13, spill 16\nAnd the `errors=1` in the
+    font arms is resolved: `fatal=0` in both, a PDF is produced, and the line is not
+    a TeX error (`grep '^!'` matches nothing in the log). So the arms B and C figures
+    are sound and were not resting on a broken build. One detail I should not have
+    left loose: the \"1\" came from my own counting pipeline, not from the document.\n\nTWO
+    SETUP FACTS WORTH KEEPING, both found by re-doing it:\n1. **The Libertine arm
+    requires the newtx font MAPS to be registered**, not just the .sty files installed.
+    Without `updmap-user --enable Map=newtx.map`, `liaeX`-class math fonts fail and
+    the build dies. My first D261 setup happened to have them; the rebuild did not,
+    and arm B failed until I registered them. Anyone reproducing must do both steps.\n2.
+    **`updmap-user` recreates `~/.texlive2025` every time it runs**, so deleting that
+    directory does not durably clean up — it reappeared three times. What matters
+    is that it holds no stale `.map`: verified, it contains only empty font dirs,
+    and a normal build is unaffected (reproduced 24pp with zero Libertine usage while
+    it was present). I removed it again and noted the recreation behaviour so a future
+    cleanup does not read its reappearance as a failure.\n\nCONCLUSION UNCHANGED,
+    now replicated: the acmart font fallback costs ~25% of the overflow (32 -> 24
+    lines; 32 -> 16 with expansion and the `\\S` fix) but the body ends p.13 in every
+    arm. No lossless route recovers the page; every lever is exhausted. The trim requirement
+    is ~2.2% as-is, or ~1.1% with both cosmetic changes accepted.\n\nTREE VERIFIED:
+    `docs/paper/` identical to HEAD, all three `\\S` present, main.tex sha `ccad43c2…`.
+    All scratch and the environment changes removed. Nothing in the paper was modified
+    by this work."
+  related_experiments: []
+  depends_on:
+  - D261
+- id: D263
+  date: 2026-09-25 17:39 UTC
+  summary: 'Fixed the incompleteness in D258: the archive shipped .bst and cc-by-4.pdf
+    but not acmart.cls, and acmart is NOT in this image''s TeX Live, so the shipped
+    sources could not be compiled at all (proven by reconstructing the exact set and
+    building it). Added .cls plus its two companion guard edits, verified on a good
+    and a bad control, guard suite 9/9. Also found that the manifest description will
+    assert three stale hardcoded values (88 vs 91 entries, the USENIX PDF prefix,
+    and the now-wrong venue string) at rebuild time — deliberately not fixed until
+    the PI''s venue ruling, since the correct values depend on it.'
+  rationale: 'Completed the archive-builder fix D258 left incomplete, and recorded
+    a second forward-looking defect in the manifest entry''s prose.
+
+
+    1. THE INCOMPLETENESS (M187). D258 shipped the PoPETs bibliography style (".bst")
+    and the copyright badge (cc-by-4.pdf), deliberately NOT the document class — I
+    reasoned that acmart.cls "is in TeX Live, so reviewers may already have it". MEASURED,
+    that is false for this image: `kpsewhich acmart.cls` finds nothing, `kpsewhich
+    ACM-Reference-Format.bst` finds nothing, and there is no acmart package directory
+    in the system texmf tree at all. Both files exist ONLY as local copies in docs/paper/,
+    so neither is a version-pinning extra — each is the only copy.
+
+    PROVEN BY REBUILD, not by reasoning: I reconstructed the exact set the fixed builder
+    would ship and compiled it. Result: `! LaTeX Error: File acmart.cls not found.
+    ! Emergency stop.` — no PDF. The archive as configured could NOT be rebuilt, which
+    directly contradicts the Open Science appendix''s claim that the paper is checkable
+    from the submitted bytes. Adding the class file made the same set compile with
+    0 errors to 24 pages.
+
+    Why D258 missed it: I verified the builder''s BEHAVIOUR (entry_count 88→90, dry-run
+    exit 0, guard suite 9/9) and never its OUTPUT. Every check asked "did the builder
+    do what I told it?"; none asked "does what it produced actually work?" — the project''s
+    recurring green-check-on-the-wrong-object shape.
+
+    FIX: ".cls" added to the collected suffix set, to the freshness glob ("*.cls"),
+    and to TEXT_SUFFIXES so the census scans it rather than skipping it. Verified
+    on BOTH controls: the collected set with .cls compiles to 24 pages / 0 errors;
+    the same set with .cls removed fails with exactly the predicted missing-file error.
+    Guard suite 9 passed / 12 subtests. Confirmed acmart.cls carries none of the leak
+    tokens, so it must NOT be added to EXPECTED_LEAK_BASELINE_FILES (that list is
+    for files that DO leak and have been reviewed).
+
+
+    2. MANIFEST DESCRIPTION NOW HOLDS THREE STALE HARDCODED VALUES, found while checking
+    this. The registered entry''s description reads "88 entries ... plus the frozen
+    main.pdf (4e0a80a2) ... 54 per-pair ledger and calibration payloads", but the
+    entry now records a USENIX build while the tree is a PoPETs conversion, and a
+    rebuild yields **91** entries (88 + .bst + cc-by-4.pdf + .cls). So the prose will
+    assert three wrong numbers the moment the archive is rebuilt: the entry count
+    (88 vs 91), the PDF prefix (points at the USENIX build), and the venue ("for the
+    USENIX Security 2027 submission" while the conversion targets PoPETs). This is
+    the same class as D247, where the description''s hardcoded PDF prefix would have
+    survived a fully green rebuild because the asserts check hashes, not sentences.
+    It is NOT fixed now and deliberately so: the correct values depend on the PI''s
+    venue ruling (USENIX keeps the old build; PoPETs changes both prefix and entry
+    count), and editing the description before that lands would just create a third
+    wrong value. Recorded so the rebuild pass re-pins all three together.
+
+
+    3. NOT DONE: no full rebuild (layout still frozen pending the PI), no content
+    cut, no submission action. The changed builder is committed separately with its
+    verification.'
+  related_experiments: []
+  depends_on:
+  - D258

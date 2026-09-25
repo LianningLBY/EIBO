@@ -228,7 +228,7 @@ EXPECTED_LEAK_BASELINE_FILES = (
     "supplementary/generators/render_figs.py",
     "supplementary/latex/main.tex",
 )
-TEXT_SUFFIXES = {".json", ".md", ".py", ".csv", ".tex", ".txt", ".sty", ".bib", ".bst"}
+TEXT_SUFFIXES = {".json", ".md", ".py", ".csv", ".tex", ".txt", ".sty", ".bib", ".bst", ".cls"}
 BINARY_SUFFIXES = {".pdf", ".png", ".npz", ".h5", ".pyc"}
 PDF_METADATA_KEYS = ("Author", "Producer", "Title", "Creator", "Subject", "Keywords")
 PDF_METADATA_REGEX = (
@@ -331,7 +331,15 @@ def latex_members(expected_main_pdf_sha256: str) -> list[Member]:
         # that style (ACM-Reference-Format) is a LOCAL file, not the TeX Live
         # builtin plainnat used previously, so without it the archive ships a
         # paper whose bibliography cannot be rebuilt.
-        if source.suffix in {".tex", ".bib", ".sty", ".bst"}:
+        #
+        # ".cls" is equally load-bearing and was missed on the first pass: the
+        # paper is `\documentclass{acmart}`, and acmart is NOT present in this
+        # image's TeX Live (verified: `kpsewhich acmart.cls` finds nothing), so
+        # the class file exists only as a local copy in docs/paper/. Without it
+        # the shipped sources cannot be compiled at all. Verified by rebuilding
+        # from exactly the collected set: with .cls present the build produces
+        # the 24-page PDF with 0 errors; without it, `File acmart.cls not found`.
+        if source.suffix in {".tex", ".bib", ".sty", ".bst", ".cls"}:
             members.append(Member("latex", source, Path("supplementary/latex") / source.name))
 
     figure_root = root / "figures/paper"
@@ -708,7 +716,7 @@ def assert_render_not_older_than_sources() -> list[str]:
         return [f"missing render: {main_pdf}"]
     pdf_mtime = main_pdf.stat().st_mtime
     newer: list[str] = []
-    for pattern in ("*.tex", "*.bib", "*.sty", "*.bst"):
+    for pattern in ("*.tex", "*.bib", "*.sty", "*.bst", "*.cls"):
         for source in sorted(paper_dir.glob(pattern)):
             if source.stat().st_mtime > pdf_mtime:
                 newer.append(f"{source.name} (source is newer than main.pdf)")
