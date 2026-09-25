@@ -1,4 +1,4 @@
-_next_id: 261
+_next_id: 262
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -13316,3 +13316,64 @@ decisions:
   depends_on:
   - D257
   - D259
+- id: D261
+  date: 2026-09-25 17:17 UTC
+  summary: 'Settled the font-fallback question with a controlled three-arm experiment:
+    Libertine availability cuts the body spill from 32 to 24 lines and total pages
+    from 24 to 23, and with expansion plus the section-symbol fix it reaches 16 lines
+    — but the body ends p.13 in every arm, so no lossless route recovers the page.
+    The acmart font fallback costs ~25% of the overflow, a real effect that is not
+    sufficient. Also caught two repeats of my own contamination error (a leaked TEXMFHOME
+    into the control arm, and a leftover .texlive2025), discarded the affected run,
+    and verified the tree is untouched and builds as committed.'
+  rationale: "Definitively settled the font question the Main Agent raised, with a
+    properly controlled experiment. Answer: the font fallback is REAL and it shrinks
+    the spill, but it does NOT recover the page. Every lossless route is now closed
+    and the ~2% trim stands.\n\nTHE HYPOTHESIS, and why it mattered. acmart warns
+    it cannot find libertine/newtxmath and silently falls back to Computer Modern;
+    acmart's layout metrics are designed for Libertine. If any of the 13-page overflow
+    were an artefact of that fallback, trimming prose would destroy content for nothing
+    — precisely what the no-compression red line exists to prevent. Worth a careful
+    test.\n\nTHE CONTROLLED COMPARISON (one self-contained script, environment set
+    per-run, no TEXMFHOME leak between arms — my first attempt leaked it into the
+    control and I discarded that run):\n  A  baseline (CM fallback, no expansion)
+    \     : total 24, body ends p13, spill 32 lines\n  B  + Libertine available (still
+    expansion off): total 23, body ends p13, spill 24 lines\n  C  + Libertine + expansion
+    ON + \\S->Section   : total 23, body ends p13, spill 16 lines\nAnchor used for
+    \"body ends\": the page holding \"Ethical Considerations\" minus one — robust
+    and identical across all three arms (p14, so body p13).\n\nWHAT THE FONT FALLBACK
+    ACTUALLY COSTS: **8 of the 32 spilled lines (~25%)**. Enabling Libertine is worth
+    ~25% of the gap. It is a real effect and it is not nothing — but it halves the
+    requirement rather than eliminating it, and the body never crosses to p12.\n\nCUMULATIVE
+    STATE OF ALL LEVERS, all measured:\n  - Libertine available           : spill
+    32 -> 24\n  - + microtype expansion (needs \\S removed): 24 -> 16\n  - net: 32
+    -> 16, i.e. the body is still p.13, still over the 12-page submission cap.\nSo
+    the honest headline figure is: the trim needed is ~16 lines (~1.1% of body) IF
+    both cosmetic changes are accepted, down from ~32 lines (~2.2%) as-is. Earlier
+    figures I gave the PI (5.6%, then 2.2%, then 1.7%) should be treated as superseded
+    by this ladder; the as-is number is ~2.2% and the with-both-fixes number is ~1.1%.\n\nTWO
+    PROCESS FAILURES OF MY OWN, both instances of the contamination class I logged
+    hours ago:\n1. My first comparison script exported TEXMFHOME before ALL arms,
+    so the \"baseline\" arm also ran with Libertine available. It reported identical
+    results for A and B — which is what a broken control looks like. I discarded the
+    run and rewrote the script to set the environment per-arm.\n2. My cleanup left
+    `/efs/home/.texlive2025` behind a second time (created by updmap-user at 16:49/17:03).
+    Removed again. The lesson is not \"remember to delete the index\" but \"make cleanup
+    verifiable\", which is why I now check for the directory explicitly rather than
+    trusting the rm.\nNo result from the contaminated run was reported upward; the
+    numbers above come only from the clean script.\n\nCLEANUP AND VERIFICATION: all
+    scratch dirs, /tmp/libtexmf, /tmp/libtexvar and /efs/home/.texlive2025 removed.
+    Paper tree UNTOUCHED — main.tex still sha ccad43c2…, all three `\\S` still present
+    (copies only were edited), and a clean build of the untouched tree reproduces
+    24 pp / body p.13 with no Libertine.\n\nBOTTOM LINE FOR THE PI: the font route
+    does not remove the cut, so the venue tradeoff stands as last stated — staying
+    at USENIX costs nothing; switching to PoPETs costs a body reduction plus a CCF
+    A->C drop. The reduction is smaller than any figure quoted so far if the two cosmetic
+    changes are accepted, but it is not zero and I am no longer pursuing further lossless
+    routes: I have tested the clearpage, the review option, float relocation, lmodern,
+    expansion, and the font family, and they are exhausted."
+  related_experiments: []
+  depends_on:
+  - D257
+  - D259
+  - D260
