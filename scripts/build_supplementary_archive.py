@@ -164,13 +164,27 @@ EXPECTED_LEAK_BASELINE = {
     "slug": 9,
     "slug_prefix": 11,
 }
-# PDF metadata values that indicate a toolchain, not a person or institution.
-# The project's own main.pdf carries empty-string Author/Title/Subject/Keywords,
-# so "" must be treated as absent rather than as a hit.
+# PDF metadata values that indicate a toolchain or the paper's own title, not a
+# person or institution. The project's own main.pdf carries empty-string
+# Author/Title/Subject/Keywords under plain LaTeX, so "" must be treated as
+# absent rather than as a hit.
+#
+# The acmart template populates Title and Creator where the previous USENIX
+# build left them empty, so the allowlist has to cover those too or EVERY
+# rebuild fails on a clean artifact — the guard would be reporting the
+# template's own behaviour as a leak. Values are decoded before comparison
+# (see decode_pdf_literal), so these are matched as real text.
 PDF_METADATA_ALLOWED_PREFIXES = (
     "pdfTeX-",
+    "pdfTeX,",
     "LaTeX with hyperref",
+    "LaTeX with acmart",
     "Matplotlib",
+    "GPL Ghostscript",
+    # The paper's own title. It is public (it is on the PDF's title page), so
+    # its presence in metadata identifies nothing the submission does not
+    # already disclose.
+    "Certification-Grade",
 )
 EXPECTED_LEAK_BASELINE_FILES = (
     "supplementary/code/__init__.py",
@@ -214,7 +228,7 @@ EXPECTED_LEAK_BASELINE_FILES = (
     "supplementary/generators/render_figs.py",
     "supplementary/latex/main.tex",
 )
-TEXT_SUFFIXES = {".json", ".md", ".py", ".csv", ".tex", ".txt", ".sty", ".bib"}
+TEXT_SUFFIXES = {".json", ".md", ".py", ".csv", ".tex", ".txt", ".sty", ".bib", ".bst"}
 BINARY_SUFFIXES = {".pdf", ".png", ".npz", ".h5", ".pyc"}
 PDF_METADATA_KEYS = ("Author", "Producer", "Title", "Creator", "Subject", "Keywords")
 PDF_METADATA_REGEX = (
@@ -304,7 +318,20 @@ def latex_members(expected_main_pdf_sha256: str) -> list[Member]:
             continue
         if source.name == "references.bib.prev" or source.name.endswith(".prev"):
             continue
-        if source.suffix in {".tex", ".bib", ".sty"}:
+        # The copyright badge is a hard dependency of popets.sty, which does
+        # \includegraphics{cc-by-4.pdf}. The PoPETs style bundle is NOT on CTAN,
+        # so the badge must travel with the archive or a fresh unpack cannot
+        # compile the paper at all. Collected explicitly rather than by adding
+        # ".pdf" to the suffix set, which would sweep in other root-level PDFs
+        # and entangle the binary-content metadata guard.
+        if source.name == "cc-by-4.pdf":
+            members.append(Member("latex", source, Path("supplementary/latex") / source.name))
+            continue
+        # ".bst" carries the bibliography style. Under the PoPETs/ACM template
+        # that style (ACM-Reference-Format) is a LOCAL file, not the TeX Live
+        # builtin plainnat used previously, so without it the archive ships a
+        # paper whose bibliography cannot be rebuilt.
+        if source.suffix in {".tex", ".bib", ".sty", ".bst"}:
             members.append(Member("latex", source, Path("supplementary/latex") / source.name))
 
     figure_root = root / "figures/paper"
@@ -548,6 +575,48 @@ def decode_pdf_hex_value(hex_value: str) -> str:
         return hex_value
 
 
+def decode_pdf_literal(literal: str) -> str:
+    """Decode a PDF literal string's escapes so the guard compares REAL text.
+
+    PDF literals encode non-ASCII bytes as `\\ooo` octal escapes, so a UTF-16BE
+    title arrives as `\\376\\377\\000C\\000e...`. Comparing that raw form against
+    a prefix allowlist is meaningless in both directions: a benign string never
+    matches, and a leaking one is compared as gibberish. Decoding first makes the
+    check strict about what it claims to check.
+    """
+    out = bytearray()
+    i = 0
+    while i < len(literal):
+        ch = literal[i]
+        if ch == "\\" and i + 1 < len(literal):
+            nxt = literal[i + 1]
+            if nxt.isdigit():                      # 1-3 octal digits
+                j = i + 1
+                digits = ""
+                while j < len(literal) and len(digits) < 3 and literal[j].isdigit():
+                    digits += literal[j]
+                    j += 1
+                out.append(int(digits, 8) & 0xFF)
+                i = j
+                continue
+            mapped = {"n": 10, "r": 13, "t": 9, "b": 8, "f": 12}
+            if nxt in mapped:                      # named escapes
+                out.append(mapped[nxt])
+                i += 2
+                continue
+            if nxt in "()\\":
+                out.append(ord(nxt))
+                i += 2
+                continue
+        out.extend(ch.encode("latin-1", errors="replace"))
+        i += 1
+    raw = bytes(out)
+    # UTF-16 with a BOM is what most TeX engines write for non-ASCII metadata.
+    if raw[:2] in (b"\xfe\xff", b"\xff\xfe"):
+        return raw.decode("utf-16", errors="replace")
+    return raw.decode("utf-8", errors="replace")
+
+
 def pdf_metadata(decoded: str) -> dict[str, str | None]:
     metadata: dict[str, str | None] = {key: None for key in PDF_METADATA_KEYS}
     for match in re.finditer(PDF_METADATA_REGEX, decoded):
@@ -555,7 +624,7 @@ def pdf_metadata(decoded: str) -> dict[str, str | None]:
         literal = match.group(2)
         hex_value = match.group(3)
         if literal is not None:
-            metadata[key] = literal
+            metadata[key] = decode_pdf_literal(literal)
         elif hex_value is not None:
             metadata[key] = decode_pdf_hex_value(hex_value)
     return metadata
@@ -639,7 +708,7 @@ def assert_render_not_older_than_sources() -> list[str]:
         return [f"missing render: {main_pdf}"]
     pdf_mtime = main_pdf.stat().st_mtime
     newer: list[str] = []
-    for pattern in ("*.tex", "*.bib", "*.sty"):
+    for pattern in ("*.tex", "*.bib", "*.sty", "*.bst"):
         for source in sorted(paper_dir.glob(pattern)):
             if source.stat().st_mtime > pdf_mtime:
                 newer.append(f"{source.name} (source is newer than main.pdf)")
