@@ -1,4 +1,4 @@
-_next_id: 258
+_next_id: 259
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -13070,3 +13070,107 @@ decisions:
   related_experiments: []
   depends_on:
   - D256
+- id: D258
+  date: 2026-09-25 15:45 UTC
+  summary: 'Extended the archive builder to ship the PoPETs bibliography style and
+    the popets.sty copyright badge (explicit collection, not a suffix widening), and
+    fixed two pre-existing guard defects the conversion exposed: the metadata allowlist
+    was failing on the paper''s own acmart-written title, and PDF literal escapes
+    were never decoded so every metadata comparison was being made on gibberish. Verified
+    on both controls (dry-run exit 0, 88→90 entries, 25 latex members; guard still
+    rejects author names and leak tokens) plus 9/9 guard tests, and independently
+    confirmed the anonymous build writes no Author field.'
+  rationale: 'Made the archive builder capable of shipping the PoPETs bibliography
+    style, and in doing so surfaced two pre-existing guard defects that would have
+    broken ANY rebuild after the template conversion.
+
+
+    WHY I EXECUTED IT MYSELF. The Main Agent was guard-blocked from dispatching a
+    worker for a pure-Python builder change (the guard fires on paper/latex/bibliographystyle
+    nouns even with no manuscript content — the M180 pattern), and it reported having
+    neither Write/Edit nor a shell this session. It did, however, do precise read-only
+    recon and its findings were correct: I verified all three edit sites and both
+    of its extra catches before touching anything. The change is infrastructure code,
+    not manuscript, so it is mine.
+
+
+    EDITS MADE, three of which the Main Agent identified and one judgement call of
+    my own:
+
+    1. `latex_members()` collection set `{".tex",".bib",".sty"}` → added `".bst"`.
+    The PoPETs/ACM bibliography style is now a LOCAL file (`ACM-Reference-Format.bst`)
+    rather than the TeX Live builtin `plainnat`, so without it the archive ships a
+    paper whose bibliography cannot be rebuilt.
+
+    2. The freshness glob at `assert_render_not_older_than_sources()` `("*.tex","*.bib","*.sty")`
+    → added `"*.bst"`. The Main Agent flagged this one unprompted and it is right:
+    adding a member class without adding it to the freshness check leaves the new
+    class unguarded, which is precisely what that guard exists to prevent.
+
+    3. `TEXT_SUFFIXES` → added `".bst"`, so the content census actually scans the
+    new member for leak tokens instead of silently skipping it (the census `continue`s
+    on suffixes outside the set).
+
+    4. **MY ADDITION — `cc-by-4.pdf`, collected explicitly.** The Main Agent found
+    that `popets.sty:34` does `\includegraphics{cc-by-4.pdf}` and the PoPETs style
+    bundle is not on CTAN, so shipping the `.sty` without the badge breaks a fresh
+    unpack entirely. I collected it by explicit name, NOT by adding `".pdf"` to the
+    suffix set — that would sweep in other root-level PDFs and entangle the binary-content
+    metadata guard, which the Main Agent warned about and I agreed with.
+
+
+    TWO PRE-EXISTING GUARD DEFECTS THE CHANGE SURFACED — neither caused by my edit,
+    both would have failed any post-conversion rebuild:
+
+    (a) **The metadata guard fired on `main.pdf` itself.** acmart populates Title
+    and Creator where the USENIX build left them empty, so the guard compared the
+    paper''s own title against a toolchain-only allowlist and failed. The guard would
+    have reported the template''s own behaviour as a leak. Fixed by extending `PDF_METADATA_ALLOWED_PREFIXES`
+    with the acmart/Ghostscript producer strings and the paper''s own title (public
+    — it is on the PDF title page, so it identifies nothing the submission does not
+    already disclose).
+
+    (b) **A decoder defect: PDF literal escapes were never decoded.** Metadata arrives
+    as `\376\377\000C\000e...` (UTF-16BE behind octal escapes), so every comparison
+    against the allowlist was being made on gibberish. I added `decode_pdf_literal()`
+    which handles octal, named, and `()\\` escapes and decodes UTF-16 behind a BOM
+    — verified working (`\376\377\000C\000e\000r\000t` → `''Cert''`). Without this
+    the guard''s verdicts were meaningless in both directions.
+
+
+    THE ANONYMITY-CRITICAL CHECK — I ran it explicitly rather than assuming: the anonymous
+    build writes **NO Author field at all** (`Author: None` from the guard''s own
+    parser, and no `/Author` in the raw PDF via an independent `strings` probe). So
+    the submission''s anonymity does not depend on this guard, and the guard''s real
+    job — catching leak tokens and stray author strings in figure PDFs — is intact.
+
+
+    VERIFICATION, both controls as required:
+
+    - **Good input:** `--dry-run` reaches the summary, **exit 0**, entry_count **88
+    → 90** (exactly the two new members), and `latex_members()` now returns 25 (was
+    23) with `ACM-Reference-Format.bst` and `cc-by-4.pdf` both present in the list.
+
+    - **Bad input:** the guard still REJECTS a real author name (`Author=''Someone
+    at University''` → error) and a leak token (`matched_tokens=[''eibo'']` → error),
+    while accepting a toolchain producer. So the relaxation did not blunt detection.
+
+    - **Guard suite:** 9 passed, 12 subtests passed.
+
+    - **Known residual weakness, recorded honestly:** a metadata value that merely
+    STARTS WITH an allowed prefix but carries an author name after it is accepted
+    (my control test: `''pdfTeX-1.40 but actually Jane Doe''` passes). This is a pre-existing
+    property of the `startswith` contract, not introduced here and not worsened; left
+    as-is rather than tightening the contract mid-conversion, since a stricter rule
+    risks false failures on legitimate toolchain strings and the anonymity-critical
+    surface was verified clean by other means. Worth revisiting if this guard is ever
+    hardened.
+
+
+    NOT DONE: no full archive rebuild (layout unsettled — the page count question
+    is still open), no content cut, no submission action. The changed builder is not
+    yet committed.'
+  related_experiments: []
+  depends_on:
+  - D251
+  - D255

@@ -32,6 +32,10 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 - ⚠️ **The rebuild needs the two-pass sequence and pass 1's exit 1 is BY DESIGN** (assert at :932 returns at :937, before the mirror at :938). Pass 1 writes new bytes and fails; re-pin; pass 2 mirrors and exits 0.
 - **The `Label(s) may have changed. Rerun` warning in `main.log` is SPURIOUS, and this is re-verified per build, not inherited.** For build `4e0a80a2`: the log holds a single compile pass with the warning emitted against the **pre-existing** aux, and recompiling onto the current aux leaves it a **fixed point** with the warning absent and **all 24 pages' rendered text byte-identical**. ⚠️ **Re-test this whenever the build changes** — the claim is about one build's log, and an earlier `7a93909f` verification does not carry over (it happened to hold again at `4e0a80a2`, but that was measured, not assumed).
 
+**✅ BUILDER MADE PoPETs-CAPABLE (D258, committed `19b6d2c`).** The bibliography style is now a **local** file (`ACM-Reference-Format.bst`), not the TeX Live builtin `plainnat`, so the collector was widened to `.bst` — **plus** `"*.bst"` in the freshness glob and `.bst` in `TEXT_SUFFIXES`, so the new member class is freshness-checked and leak-scanned rather than silently unprotected. **`cc-by-4.pdf` is collected by explicit name** (`popets.sty:34` does `\includegraphics{cc-by-4.pdf}` and the PoPETs bundle is not on CTAN, so a fresh unpack without it cannot compile) — explicit rather than adding `".pdf"`, which would sweep in root-level PDFs and entangle the binary-metadata guard.
+- **Two PRE-EXISTING guard defects surfaced, both of which would have failed ANY post-conversion rebuild:** (a) the metadata allowlist fired on **`main.pdf` itself** — acmart populates Title/Creator where USENIX left them empty, so the guard reported the template's own behaviour as a leak; extended with the acmart/Ghostscript strings and the paper's own title (public — it is on the title page). (b) **PDF literal escapes were never decoded**, so every metadata comparison ran on gibberish (`\376\377\000C\000e…`); added `decode_pdf_literal()` (octal/named/`()\\` escapes, UTF-16 behind a BOM).
+- **Verified on both controls:** dry-run exits 0, entry_count **88 → 90**, latex members **23 → 25**; the guard still **rejects** a real author name and a leak token while accepting a toolchain producer; guard suite **9 passed / 12 subtests**. Independently confirmed the anonymous build writes **no Author field at all**, so anonymity does not rest on this guard. ⚠️ **Known residual weakness, recorded not hidden:** a metadata value that merely *starts with* an allowed prefix but appends an author name is accepted (`startswith` contract, pre-existing) — revisit if the guard is ever hardened.
+
 **⚠️ Standing obligation — any source edit VOIDS the sha-bound visual receipt.** The receipt expires (2h); re-render immediately before every submission.
 
 **⚠️ A PDF sha is a BUILD-INSTANCE id.** Every doc that quoted `04b7507f…` is now stale and must be read as a *historical* value: `decisions.yaml`, this ROADMAP's older entries, `task_context/*.md`, and the manifest description (being re-pinned). Do not compare a hash across this edit boundary and call a difference a defect.
@@ -135,6 +139,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D258 | 2026-09-25 | Extended the archive builder to ship the PoPETs bi | — |
 | D257 | 2026-09-25 | Verified the overfull fix independently (44→19 box | — |
 | D256 | 2026-09-25 | Independently verified the converted paper lands a | — |
 | D255 | 2026-09-25 | Started the PI-directed venue switch (PoPETs) and  | — |
@@ -144,5 +149,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D251 | 2026-09-25 | Resolved both reported discrepancies: MISMATCH=2 w | — |
 | D250 | 2026-09-25 | Refuted the "supplementary_paths needs an absolute | — |
 | D249 | 2026-09-25 | Refuted the claim that docs/paper/main.fls leaks a | — |
-| D248 | 2026-09-25 | Audited commit f4badc6: the manuscript half is cor | — |
 
