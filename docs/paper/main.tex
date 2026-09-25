@@ -1,29 +1,37 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% EIBO: Certification-Grade epsilon-Indistinguishability Brackets for Open-Set
+% Certification-Grade epsilon-Indistinguishability Brackets for Open-Set
 % Encrypted-Traffic Recognition
 %
-% Target: USENIX Security 2027, Cycle 2.
-% Template: official USENIX Security 2027 LaTeX author kit (usenix.sty).
-% Body limit: 13 pages. References and appendices unlimited.
+% Target: PoPETs 2027, Issue 3 (deadline 2026-11-30).
+% Template: official PoPETs 2027 LaTeX author kit (acmart sigconf + popets.sty).
+% Body limit: 12 pages (submission); 13 (camera-ready / revision).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[letterpaper,twocolumn,10pt]{article}
-\usepackage{usenix}
-% natbib must come after usenix.sty: usenix loads the `cite` package, and
-% natbib redefines the citation commands on top of it.
-\usepackage[numbers,sort&compress]{natbib}
-\usepackage{amsmath}
+\PassOptionsToPackage{expansion=false}{microtype}
+\documentclass[sigconf,anonymous,review]{acmart}
+\usepackage{popets}
+
+% PoPETs issue metadata (submission placeholders)
+\setcopyright{popets}
+\copyrightyear{2027}
+\acmYear{2027}
+\acmVolume{2027}
+\acmNumber{3}
+\acmDOI{XXXXXXX.XXXXXXX}
+\acmISBN{}
+\acmConference{Proceedings on Privacy Enhancing Technologies}
+\settopmatter{printacmref=false,printccs=false,printfolios=true}
+
+% packages that acmart does not load by default
+\usepackage{cleveref}
+% disable font expansion to avoid 'scalable fonts' errors with this TeX installation
 \usepackage{mathtools}
-\usepackage{amssymb}
-\usepackage{amsthm}
 \usepackage{booktabs}
-\usepackage{graphicx}
 \usepackage{multirow}
 \usepackage{seqsplit}
-\usepackage{cleveref}
-% Keeps appendix floats from drifting past the References heading.
+% acmart already loads amsmath, amssymb, graphicx, cleveref (via hyperref)
 
-% cleveref must be told about the natbib-style theorem of equations/tables
+% cleveref names (acmart loads hyperref+cleveref already)
 \crefname{table}{Table}{Tables}
 \crefname{figure}{Figure}{Figures}
 \crefname{section}{Section}{Sections}
@@ -35,20 +43,22 @@
 \newcommand{\epslo}{\ensuremath{\epsilon_{\mathrm{lo}}}}
 \newcommand{\epshi}{\ensuremath{\epsilon_{\mathrm{hi}}}}
 \newcommand{\alaw}{\ensuremath{\alpha_{\mathrm{law}}}}
-% the binomial test's null rate is its own symbol: alpha is the confidence level
 \newcommand{\ptest}{\ensuremath{p_{\mathrm{null}}}}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 
-\title{\Large \bf Certification-Grade $\epsilon$-Indistinguishability Brackets\\
-  for Open-Set Encrypted-Traffic Recognition}
+
+\title{Certification-Grade $\epsilon$-Indistinguishability Brackets for Open-Set Encrypted-Traffic Recognition}
 
 \author{Anonymous Submission}
-\date{}
 
 \begin{document}
-\maketitle
 
 \input{abstract}
+
+\keywords{encrypted traffic, total variation distance, indistinguishability, certificate, QUIC}
+
+\maketitle
+
 
 \input{introduction}
 
@@ -94,6 +104,7 @@ current dataset's collection protocol.
 \clearpage
 \section*{Open Science}
 \addcontentsline{toc}{section}{Open Science}
+\begingroup\sloppy
 
 
 This appendix lists the artifacts needed to evaluate the paper's core
@@ -264,6 +275,21 @@ The primary corpus is publicly released by its operators and requires no
 credential to obtain; the independent replication corpus is likewise public. We
 redistribute neither, and instead document the acquisition steps and the
 preprocessing applied to produce the flow-level tables used here.
+
+
+
+\endgroup% end Open Science \sloppy
+
+\section*{AI Use Statement}
+\addcontentsline{toc}{section}{AI Use Statement}
+
+Portions of the manuscript drafting, code review, and copy-editing were assisted
+by AI language models operating under author supervision. All AI-generated text
+was reviewed by the authors as if they had written it themselves. No experimental
+data, figures, or quantitative claims were produced by an AI model; every number
+traces to an experiment identifier registered with its content hash. All
+bibliographic entries were verified against publisher records, and the
+verification tool and its self-test are included in the submission.
 
 \clearpage
 \section*{Appendix: Supplementary Material}
@@ -784,7 +810,7 @@ RoNeTC & 0.05 & 3 & 0.0088 & 1.0000 \\
 
 
 
-\bibliographystyle{plainnat}
+\bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
 
 \end{document}
