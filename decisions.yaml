@@ -1,4 +1,4 @@
-_next_id: 260
+_next_id: 261
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -13229,3 +13229,90 @@ decisions:
   depends_on:
   - D257
   - D258
+- id: D260
+  date: 2026-09-25 16:50 UTC
+  summary: 'Retracted D259''s "route is dead" claim — it was based on contamination
+    I created (a leftover user font map pointing at 394 deleted cm-super entries).
+    With a clean environment, bisection found the true trigger: `\S` pulls bitmap-only
+    symbol fonts that block expansion, and the paper has three. Replacing them lets
+    expansion run, recovering 10 of 32 spilled lines — so the route is real but insufficient:
+    the body is still p.13, now ~24 lines (~1.7%) over rather than ~2.2%. Tree untouched
+    and verified; all scratch and environment changes removed.'
+  rationale: 'I must retract D259''s "the toolchain route is dead" conclusion — it
+    was WRONG, and wrong because of contamination I introduced myself. The route is
+    real; it just is not sufficient. This is the first useful positive result in the
+    whole page investigation.
+
+
+    WHAT D259 CLAIMED AND WHY IT WAS WRONG. D259 said installing cm-super and enabling
+    microtype expansion fails, scalably, hence the route was closed. The failure was
+    real in what I measured but I mis-attributed it. The actual chain:
+
+    1. I ran `updmap-user`, which wrote a user font map referencing **394 cm-super
+    entries**, into `/efs/home/.texlive2025/texmf-var/...`.
+
+    2. I then deleted the cm-super fonts but **left that map behind**. Every subsequent
+    compile therefore loaded a map pointing at fonts that no longer existed.
+
+    3. So my "still fails after install" reading was measured against my own broken
+    environment — I was testing my contamination, not the hypothesis. I only noticed
+    because the fatal error''s log line pointed at that map path.
+
+    That is a self-inflicted instrument failure of exactly the kind this project keeps
+    logging, and I did not catch it before publishing D259.
+
+
+    THE REAL ROOT CAUSE, FOUND BY BISECTION. With the contamination removed and a
+    clean environment, a **minimal acmart document compiles fine with `expansion=true`**
+    (2 pages, zero errors) — so the class and template were never the problem. Binary-searching
+    `introduction.tex` isolated the trigger to a single token: **`\S` (the section
+    symbol)**. Confirmed by a paired minimal test: `\S` present → 2 errors, no PDF;
+    the same sentence without it → 0 errors. `\S` pulls bitmap-only symbol fonts (cmsy/cmex/oms),
+    which is precisely what pdfTeX''s expansion cannot scale. The paper contains **three
+    `\S` occurrences** (introduction.tex, measurement_design.tex, results.tex).
+
+
+    THE EXPERIMENT, RUN PROPERLY. In a scratch copy: replaced the three `\S` tokens
+    with `Section`, enabled `expansion=true`, compiled the standard sequence. Result:
+    **expansion now runs (log shows no "No font expansion" and loads mt-cmr.cfg),
+    and the build succeeds — 24 pages.** So the route is NOT dead.
+
+
+    BUT IT IS NOT SUFFICIENT, and D259''s practical conclusion survives by a different
+    mechanism than I claimed. Measured on the render:
+
+    - baseline (no expansion): body ends p.13, spilling 32 prose lines past the 12-page
+    budget;
+
+    - expansion active: body **still ends p.13**, spilling **22** prose lines.
+
+    So expansion recovered **10 of 32 lines** — a real effect, ~31% of the gap, and
+    it leaves the paper **~24 lines ≈ 1.7% of body over** rather than ~2.2%. Roughly
+    half the earlier requirement, not zero.
+
+
+    WHAT THIS CHANGES FOR THE PI. The venue tradeoff improves but does not vanish:
+    switching to PoPETs needs **~24 lines (~1.7%)** of body reduction rather than
+    ~30 (~2.2%), IF the `\S` substitution is also accepted (a cosmetic change: `\S
+    A.4` → `Section A.4`, same meaning, no claim touched). Both figures are small;
+    neither is zero. I had told the PI the route "might remove the cut entirely" and
+    then that it was "dead" — both wrong. The honest statement: it materially shrinks
+    the cut, it does not eliminate it.
+
+
+    CLEANUP AND VERIFICATION. Removed every scratch dir, `/efs/home/texmf`, and `/efs/home/.texlive2025`.
+    Verified the shipped tree is UNTOUCHED — `main.tex` still sha `ccad43c2…` and
+    all three `\S` occurrences are still present (I edited copies only). A clean build
+    of the untouched tree still reproduces 24 pp / body p.13, so the committed state
+    is intact.
+
+
+    LESSON (worth more than the result): when an experiment requires modifying the
+    environment, the modification itself can become the experiment''s dominant variable.
+    I removed a resource and left its index behind, then read the resulting failure
+    as evidence about the hypothesis. The tell was available and cheap — the fatal
+    error named the map path — and I did not read it before publishing.'
+  related_experiments: []
+  depends_on:
+  - D257
+  - D259
