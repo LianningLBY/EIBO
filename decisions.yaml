@@ -1,4 +1,4 @@
-_next_id: 259
+_next_id: 260
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -13174,3 +13174,58 @@ decisions:
   depends_on:
   - D251
   - D255
+- id: D259
+  date: 2026-09-25 16:30 UTC
+  summary: 'Proved the font/toolchain route dead by running it myself — cm-super installed,
+    indexed and mapped, expansion still fatals, and scalable CM fonts were already
+    present, so the blocker was never a missing font. Also corrected the trim estimate
+    I had given the PI twice: the true requirement is ~30 lines ≈ 2.2% of body (not
+    5.6%), because folio numbering made me count blank column space as content. Route
+    closed, tree restored, layout frozen pending the PI''s ruling.'
+  rationale: "Closed the font/toolchain theory I had raised as a possible lossless
+    route to the missing page. It is dead, I proved it myself, and the premise was
+    mine and was wrong. Also corrected the trim estimate I had given the PI twice.\n\nTHE
+    PROCESS CATCH WAS RIGHT. The Main Agent flagged that my brief was self-contradictory:
+    main.tex:10 is `\\PassOptionsToPackage{expansion=false}{microtype}`, which disables
+    expansion regardless of installed fonts, so testing the question REQUIRES removing
+    that line — while the same brief said \"do not touch any .tex\". It flagged rather
+    than picking an interpretation. Correct behaviour; I then ran the test in scratch
+    copies only, leaving the tree untouched.\n\nTHE EXPERIMENT, RUN BY ME (the agent
+    had no shell). Non-invasive install: `apt-get download cm-super` (18.7 MB, works
+    unprivileged), `dpkg-deb -x` into a user TEXMFHOME, `mktexlsr` to index, `updmap-user
+    --enable Map=cm-super-extended-t1.map` to register. Then compiled with expansion
+    enabled:\n  scalable-font error present: 1 (unchanged) ; \"Fatal error occurred,
+    no output PDF file produced\".\n**Expansion still fatals with cm-super installed,
+    indexed and mapped.** So \"install the font and expansion will work\" is FALSE.
+    Worse for the theory: scalable Type1 CM fonts (`cmr5..cmr17.pfb`, `cmbx10`, `cmti10`,
+    `cmmi10`) were ALREADY present before the install, so the blocker was never a
+    missing font. The error fires at shipout on page 1 mid-paragraph, which is not
+    where a font-availability problem surfaces.\nCLEANUP: removed /efs/home/texmf,
+    confirmed a normal build still reproduces 24 pp / body p.13. A stray `/efs/home/.texlive2025/texmf-var/web2c/updmap.log`
+    remains; harmless because default builds set no TEXMFHOME, but noted.\nI stopped
+    pursuing it rather than spending more cycles on a refuted theory, and told the
+    Main Agent to close the task.\n\nCORRECTION TO THE TRIM ESTIMATE — I had given
+    the PI 5.6% twice, and it is roughly double the truth. The over-count came from
+    measuring the spill by folio range: `printfolios` numbers blank column space too,
+    so the range 1451-1508 on p.13 counts ~58 empty positions as content. Measured
+    on the render instead: p13's LEFT column carries ~32 lines of real prose; the
+    RIGHT column is nearly but NOT entirely blank (9 of its numbered positions carry
+    text, so the agent's \"right column is blank\" is also slightly off); body content
+    ends around folio ~1450. **Trim needed ≈ 30 lines ≈ 2.2% of body lines (3.4% by
+    characters), not 5.6%.**\nThe agent's own parallel estimate (5.4%) over-counted
+    for the same reason, and its caveat — that it was arithmetic on the gap rather
+    than a measurement of the effect — was the right instinct. Its prior that expansion
+    recovers only 1-2% is moot now that the route is closed empirically.\n\nSTATE
+    OF THE PAGE QUESTION: every route I can test is exhausted. The body needs a real
+    ~30-line (2-3%) reduction to fit PoPETs' 12-page submission cap. That is smaller
+    than either figure previously reported, but it is a genuine content-and-layout
+    task and therefore the PI's decision — already put to them with the tradeoff restated
+    on the corrected numbers.\n\nTOLD THE MAIN AGENT: font route closed (with the
+    negative result and the correct trim figure), leave the layout frozen until the
+    PI rules, and confirm the archive dry-run still passes after my builder change
+    (19b6d2c) — my own check was entry_count 88->90 with guard suite 9/9, but an independent
+    pass on the packaging path is cheap."
+  related_experiments: []
+  depends_on:
+  - D257
+  - D258
