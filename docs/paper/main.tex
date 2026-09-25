@@ -101,11 +101,20 @@ contributions and how the review committee can reach each one.
 
 The artifacts this paper depends on (the complete per-pair ledgers, the
 calibration and estimator payloads, and the figure generators) are carried in
-the supplementary-material archive included with this submission, and are
-reachable through the submission system's own artifact materials.
+the supplementary-material archive \texttt{supplementary.tar.gz}, included with
+this submission and delivered through the submission system's artifact
+materials; its top-level \texttt{README.md} is the entry point. The call for
+papers recommends an anonymous link at submission, which we have not supplied,
+and reserves a stable public link for the camera-ready version; submission-system
+delivery, which the call contemplates for artifacts it treats with the same
+confidentiality as the manuscript, is the access path for review. The artifacts
+must be public for acceptance, and they are our own per-pair statistics over a
+publicly released corpus, so that condition is met.
 
 Every claim in this paper can be checked from the submitted bytes, without
-tooling and without contacting the authors. As a factual matter about the files
+contacting the authors: the per-pair ledgers carry the columns the bounds are
+computed from, so the reported numbers are recomputable from the archive with
+standard tooling. As a factual matter about the files
 themselves, none of the recognized grounds for withholding artifacts applies
 here: there is no licensing restriction, no harm to study subjects, and no NDA
 or legal constraint on them. The artifacts are per-pair statistics over a
@@ -178,7 +187,7 @@ measurement. That ordering, not the word itself, is the claim.
   mixture bound and the exclude-$U$ variant), with the weights and inputs each
   consumes. Registered as \texttt{art\_20260918\_f27ba9} with content hash
   \texttt{\seqsplit{0ace3222da0fad188b9382dcbf97121c5513344db6f098672d29022e3cbe003b}}.
-  \item[Joint-coverage reaggregation.] The D181 headline floors: the uniform
+  \item[Joint-coverage reaggregation.] The headline floors: the uniform
   open-set error floor $0.197$ at the simultaneous level $0.95$ (Bonferroni over
   the $990$ pairs, $\alpha_{\mathrm{pair}} = 0.05/990$), the matched $M{=}45$
   floor $0.206$, the $M{=}46$ gap $0.63$, and the LP-weighted floor $0.375$,
@@ -279,8 +288,8 @@ conditions by a margin.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.86\columnwidth]{figures/paper/fig1_bracket_overview.pdf}
-\caption{The EIBO measurement. Cited from \Cref{sec:intro} and
-\Cref{sec:design/frontier}; relocated here from the Introduction. Raw QUIC flow records are quantized into a
+\caption{The measurement pipeline. Cited from \Cref{sec:intro} and
+\Cref{sec:design/problem}. Raw QUIC flow records are quantized into a
 $k$-prefix symbol over a (direction, size) alphabet at resolution $M$. The
 quantized symbol feeds two branches that carry different certification
 strength: an upper branch combining a plug-in TV estimate with a confidence
@@ -302,9 +311,11 @@ endpoints.
 \centering
 \small
 \caption{Both endpoints across all 990 pairs at $k{=}5$, $M{=}1$, with width
-defined as $\epshi-\epslo$. The lower bound's median sits ten times above the
-gate, which is what "the lower side saturates" means quantitatively, and no
-bracket has negative width.}
+defined as $\epshi-\epslo$. The $\epslo$ column is the \emph{uncapped}
+convention (full per-service flow counts), the paper's declared convention
+(\Cref{sec:results/datasets}); the capped run's median is $0.535$. The lower
+bound's median sits ten times above the gate, which is what "the lower side
+saturates" means quantitatively, and no bracket has negative width.}
 \label{tab:endpoints}
 \begin{tabular}{lrrrrr}
 \toprule
@@ -618,7 +629,7 @@ had already lowered.
 gives the count a pair needs before its interval can close at the gate,
 $n > C/(0.5-\widehat{tv})^2$ with $C = 2\ln(2/\alaw) = 8.764$. The constant
 enters as $C$, not as $\sqrt{C}$: $\sqrt{C}$ sits inside the radius, so applying
-it linearly to the solved form would understate the requirement by $2.96\times$.
+it linearly to the solved form would understate the requirement by $\sqrt{C} \approx 2.96\times$.
 Feasibility is a large fraction at coarse resolution and vanishes at fine:
 $380$ of $990$ pairs at $k{=}5$, $114$ of $990$ at $k{=}10$, $20$ of $946$ at
 $k{=}15$, and none of $820$ at $k{=}30$. Each median must travel with its
@@ -658,8 +669,7 @@ verdict would call two of three arms failures and a count-based one would not. T
 these numbers. The criterion is one-sided, a replicate is covered when
 $\widehat{tv}$ plus its radius reaches the truth, so the i.i.d.\ reference's
 design target is $\Phi(r/\mathrm{sd}) = 0.9809$, not the nominal $0.975$; that
-$0.0059$ gap is a property of the design, not a coverage failure. And a
-follow-up at $5000$ replicates tests whether the signed deviation is
+$0.0059$ gap is a property of the design, not a coverage failure. A $5000$-replicate check tests whether the signed deviation is
 asymmetric, which would be the natural reason for a one-sided radius to differ
 from a symmetric one: it is essentially symmetric (skewness $-0.0089$, standard error $0.0346$,
 $95\%$ interval $[-0.0768, +0.0590]$, containing zero). A third moment
@@ -721,12 +731,12 @@ and strict by $K/M$ if it is averaged over the known classes alone. The objectiv
 $\max\sum_{i\ne j}w_{ij}(1-\epsilon_{\mathrm{hi},ij})$, every term of
 which is a certified upper bound. The weights range over the $K$ known classes
 only, the unknown-class terms being discarded as before, while the denominator
-keeps $M = K+1$; the same assumption-free property is therefore preserved. The
+keeps $M = K+1$, so the open-set discarded-term property is preserved as well. The
 maximum over feasible weights is valid a fortiori: each weight is non-negative
 and each $1-\epsilon_{\mathrm{hi},ij}$ is no larger than the $1-\tv_{ij}$ it stands for,
 so the objective can only undershoot the true value. The uniform point under
 \emph{this} constraint is $w_{ij}=1/[2(K-1)]$, whose row sum $2(K-1)w$ is exactly
-$1$, and it recovers the uniform floor $0.1858$ of \eqref{eq:floor} up to the
+$1$, and it recovers the uniform floor $0.197$ of \eqref{eq:floor} up to the
 ratio $(M-1)/(K-1)$ between the two normalisations: $(M-1)/(K-1)=45/44$ here, so
 the two differ by about $2\%$ and neither is a feasible point of the other's
 problem. We quote each floor against the constraint that defines it rather than
