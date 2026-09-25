@@ -1,172 +1,136 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-22 21:56 UTC | Update reason: Dashboard cleanup after the D191-D195 edit passes landed and the draft was delivered. Six items (D184/D185/D186/D188/D189/D193) were ALL fixed and installed but still listed as open with ~20 lines of resolved detail — condensed into one "Closed this session" section so the task list reflects what is actually outstanding (the PI's two decisions, camera-ready deferred, X9_C). Also folded in the new build sha 32dadd14…, the delivery state, and three new build rules learned today (checker artifacts are not findings; grep misses wrapped phrases; a PDF sha is a build-instance id).
+> Last updated: 2026-09-25 11:30 UTC | Update reason: D253 — committed the verifier fix so HEAD reproduces MISMATCH=1. The M183 class had recurred in the verifier: f4badc6 committed it at 07:47 and the correction landed at 10:45 without being committed, so HEAD reported MISMATCH=2 on the same `.bib` the worktree reported MISMATCH=1 on — a fresh checkout would have shown a kuhlewind ghost flag. Committed with an explicit pathspec, re-verified on both controls, then ran the durability test (the HEAD revision itself reproduces MISMATCH=1). Amended my commit subject, which had duplicated f4badc6's. Also re-verified the spurious `Label(s)` warning for the CURRENT build rather than inheriting the earlier proof, and independently confirmed the receipt on `4e0a80a2` and the benign `cesnet2025cesnet` analysis.
 
-> **Draft delivered to the PI (2026-09-22).** Current build is the text-accuracy submission candidate: no known defect remains after D191–D195, an independent section sweep, and a reference check. **Awaiting the PI's verdict on the revision** (then a fresh formal review) and **their Table 5 placement ruling**.
+> **Round 19 registration FAILED — twice.** Both submits returned `approved` with DISTINCT approval ids (`apr_20260924T225518_cl7h`, `apr_20260925T011505_9gg9`) instead of `deduplicated: true`. `get_formal_review_status` still reads **round 18 completed**; no round-19 directory. Fails one stage earlier than rounds 15–17. **Do not blind-retry a third time.**
 
 ## Core direction
 
-Certification-grade epsilon-indistinguishability brackets for open-set encrypted-traffic recognition: per service pair on real QUIC wire data, a two-sided interval on total variation whose **upper side is a finite-sample strict bound** and **lower side a classifier-based high-probability bound**. Target USENIX Security 2027 Cycle 2 — registration 2027-01-19, submission 2027-01-26, camera-ready 2027-06-03. **Contribution type: measurement/rigour.** See `paper_framing.md` for the full story.
+Certification-grade ε-indistinguishability brackets for open-set encrypted-traffic recognition: per service pair on real QUIC wire data, a two-sided interval on total variation whose **upper side is a finite-sample strict bound** and **lower side a classifier-based high-probability bound**. **Contribution type: measurement/rigour** (D180). See `paper_framing.md`.
+
+⚠️ **VENUE IS ASSUMED, NOT DECIDED — a PI call (D236, still open).** The project is shaped USENIX-first throughout (13 pp body cap, two mandatory one-page appendices, security-measurement framing) and every submission so far went in under **USENIX Security 2027 Cycle 2** (registration 2027-01-19, submission 2027-01-26, camera-ready 2027-06-03; per the CFP extract). **But Round 18's reviewers disagreed**: R2 recommended PoPETs with IMC second, and the consolidated assessment called USENIX "the weakest of the plausible venues" (relevance moderate-low; no attack, defense, vulnerability, or deployment). **No decision-log entry adopts or overrules that.** A late switch is a re-layout plus Abstract/Intro reframing, not an edit. `paper_framing.md`'s own rule: never silently downgrade the venue; that is a discussion with the PI. **Surfaced to the PI 2026-09-25 01:23.**
 
 ## Current paper state
 
-**Build (CURRENT):** sha256 **`de5e4b63e24d830f9606f7783fe37835fe23a25d0b2b4b7a6031b10b1060f15d`**, **416,639 B**, 24 pp. **Body's last page p.13** (by the Conclusion's FINAL SENTENCE); Ethics p.14; Open Science pp.15–16; Appendix pp.17–21; References pp.22–24. Gates **0 `??` / 0 undefined / 0 multiply-defined / 0 overfull**. ✅ **Visual gate PASSED 24/24 (2026-09-24 01:52 UTC)** — all 24 rendered pages inspected. **Delivered to the PI** (web channel). Content-identical to the earlier `32dadd14…` build (same sources, same byte count; sha differs by PDF metadata only — the "build-instance id" rule). **Round 17 formal review submitted on these bytes (auto-approved, 3 reviewers dispatched).**
+**Build:** sha256 `4e0a80a2e86f50a9d9eee3dbad307e5b188b32756ba28d7a2dfdc4795eb54634`, 421,196 bytes, 24 pp. Body ends **p.13** by the Conclusion's final sentence (13pp cap held); Ethics p.14; Open Science pp.15–16; Appendix pp.17–21; References pp.22–24. Log gates: 0 undefined refs / 0 multiply-defined / 0 missing citations / 0 overfull >10 pt. ✅ **Visual receipt passed 24/24 at 2026-09-25 ~10:5x on this exact sha.** (Supersedes `7a93909f…` and `04b7507f…`; any earlier quoted sha is a *different build* — refs shift with a bib edit.)
 
-**Page total 24 is COMPLIANT.** The CFP caps the body at 13 pages *excluding* References and appendices, and imposes no limit on either.
+**Bibliography: 4 corrections + 2 DOIs added, held item unchanged (D246/D250/D251).** `sekeh2019learning` dead DOI → `…2994807`; `smith2021website` → `…0017` + volume/number/pages; `li2023facing` 5 → **6 authors** (Xiaolin Xu, pos. 4) + published ISCC DOI + pages; `diakonikolas2020highprob` → STOC '21 published version. Then `chatzikokolakis2023bayes` → `10.1109/CSF57540.2023.00011` and `kuhlewind2022rfc` → `10.17487/RFC9312`, moving the verifier to **`parsed=69 checked=67 ok=66 MISMATCH=1 unverifiable=2`**. The remaining 2 are CORRECT to stay unverified: `wright2009traffic` (NDSS 2009 has no Crossref DOI) and `fano1961transmission` (1961 book, ISBN present). **The single MISMATCH is `liu2026inevitability`, HELD** (prints "Guang Cheng"; arXiv 2602.14055 says "Guang Chen" but the sister paper 2607.17889 says "Guang Cheng" — two arXiv records contradict each other, no independent index exists). **Do not edit it without an authoritative record.**
+- ⚠️ **Keep `{RFC 9312}:` in that entry's title.** A verifier flag on it was a FALSE POSITIVE from a stale tool revision, not a data error — the fix strips a leading RFC/arXiv/DOI marker before comparing (refusing to strip when that would empty the title). **Do not strip the prefix to satisfy a comparator.**
+- ⚠️ **The RFC DOI is present in the `.bib` but does NOT print.** `plainnat.bst` emits no `\doi` for `@misc` (confirmed in the `.bbl` and across four such entries) — pre-existing style behaviour, not a defect. **Do NOT retype the entry as `@inproceedings` to force the DOI out**; that would misdescribe an RFC as a conference paper. The edit still earned its place: the entry went from *checked 0 → 1*.
 
-**⚠️ ONE DELIBERATE CONSEQUENCE TO OWN:** the D192 fix makes the paper assert a **weaker** validation claim than the old sentence appeared to make — the old wording was universal (false for 320 pairs), the new one is the per-pair comparison (true, 0/990). The new statement is the defensible one; the reduction in rhetorical strength is intentional.
+**Supplementary archive: ✅ REBUILT AND VERIFIED (D251).** sha256 `7a48cf6e47ba8614b2501029fd06342379485173ca5b54c27dd07a206d343f22`, 4,252,311 bytes, 88 entries, 0 root-level files. Three-way agreement: tree copy == routed copy (`cmp` identical) == manifest `content_sha256`. Embedded `main.pdf` = `4e0a80a2…` and embedded `references.bib` = `7f179141…`, both byte-identical to the tree, so the entry's own byte-match assertion is TRUE. The description's hardcoded PDF prefix was re-pinned `(7a93909f)` → `(4e0a80a2)` in the same pass; the re-pin touched exactly ONE entry and two fields, 171 entries intact after re-parse. Guard tests: **9 passed, 12 subtests passed**. Not re-registered (the entry's own `content_sha256` equals the shipped bytes — that IS the pin; re-registering duplicates — C053).
+- ⚠️ **A stale hash inside an artifact's PROSE is invisible to every hash assert.** The script checks hashes, not sentences, so a description naming the old PDF would have survived a fully green rebuild. Read the entry, do not trust the asserts alone.
+- ⚠️ **The rebuild needs the two-pass sequence and pass 1's exit 1 is BY DESIGN** (assert at :932 returns at :937, before the mirror at :938). Pass 1 writes new bytes and fails; re-pin; pass 2 mirrors and exits 0.
+- **The `Label(s) may have changed. Rerun` warning in `main.log` is SPURIOUS, and this is re-verified per build, not inherited.** For build `4e0a80a2`: the log holds a single compile pass with the warning emitted against the **pre-existing** aux, and recompiling onto the current aux leaves it a **fixed point** with the warning absent and **all 24 pages' rendered text byte-identical**. ⚠️ **Re-test this whenever the build changes** — the claim is about one build's log, and an earlier `7a93909f` verification does not carry over (it happened to hold again at `4e0a80a2`, but that was measured, not assumed).
 
-## Research findings (all independently re-verified)
+**⚠️ Standing obligation — any source edit VOIDS the sha-bound visual receipt.** The receipt expires (2h); re-render immediately before every submission.
 
-### 1. The lower side stops being the BINDING side at finer resolution — on both axes
-Same object (one-hot over the packed k-prefix symbol law), same protocol, alpha 0.025.
+**⚠️ A PDF sha is a BUILD-INSTANCE id.** Every doc that quoted `04b7507f…` is now stale and must be read as a *historical* value: `decisions.yaml`, this ROADMAP's older entries, `task_context/*.md`, and the manifest description (being re-pinned). Do not compare a hash across this edit boundary and call a difference a defect.
 
-| cell | width | median `eps_lo` | clears 0.05 | joint | upper-only |
-|---|---|---|---|---|---|
-| M=1, k=5 | 32 | 0.5368 | 986/990 | 359 | 363 |
-| M=2, k=5 | 1024 | 0.8535 | 990/990 | 127 | 127 |
-| M=1, k=10 | 1024 | 0.7784 | 990/990 | 98 | 98 |
+## Key invariants (settled; do not re-derive)
 
-**The joint figure is set ENTIRELY by the upper side at every refined cell.** The lower side is **not the binding side**. Invariant `eps_lo <= eps_hi`: **0 violations on 990/990 rows, every cell**. Refining M certifies more pairs than refining k at matched width (127 vs 98).
+- **CONVENTION × ROUTE — two conventions (capped vs uncapped) and two upper routes (Eq (6) vs m-free).** Never place cells side by side without naming both. The paper uses **UNCAPPED**. Eq (6) runs at **α_law = 0.025** (per-law, no multiplicity); the **aggregation** into the 0.197 floor runs at **α_pair = 0.05/990**. Naming one α for both is the recurring defect class (found 7×).
+- **Lower side is not the binding side** at any refined cell; joint ≡ upper-only there. Invariant `eps_lo ≤ eps_hi`: 0 violations on 990/990 rows, every cell.
+- **Planning tool:** `n > C/(0.5 − tv̂)²` with **C = 2 ln(2/α) = 8.764053**. **Do NOT divide by √C = 2.960414** — understates n ≈2.96×.
+- **Coverage loss under dependence is a WIDENING LOWER TAIL, not a shifting centre.** The "decaying inflation" mechanism is **WITHDRAWN**; do not reinstate. A correction must change the **estimator**, not the sample size.
+- **B and C's identical interval is STRUCTURAL, not coincidence** (Clopper–Pearson is a function of (k,n) alone). Never write "numerical coincidence".
+- **Every relational claim carries a `falsifiers` field.** For each *implies/therefore/only/because/invariance/attribution/scope*, generate its negation.
 
-**⚠️ CONVENTION × ROUTE — two conventions (capped vs uncapped) and two upper routes (Eq (6) vs m-free); never place cells side by side without naming both.** The paper uses **UNCAPPED**.
-
-### 2. Threshold sensitivity — the count is driven almost entirely by the UPPER threshold
-Joint vs upper threshold: 0.30→112; 0.40→220; **0.50→335/336**; 0.60→453; 0.70→579; 0.80→747. The lower threshold is nearly inert over 0.01–0.10. **Any published table must state its convention.**
-
-### 3. Planning tool — flows needed to certify a pair
-Equal n: **`n > C/(0.5 − tv̂)²` with `C = 2 ln(2/alpha) = 8.764053`**. **Do NOT use `sqrt(C) = 2.960414`** as the divisor — it understates n by ≈2.96×. At M=1: k=5 → 380/990 feasible, median n 285; k=10 → 114/990; k=15 → 20/946; k=30 → 0/820.
-
-### 4. Why coverage is lost under dependence — a WIDENING LOWER TAIL, not a shifting centre
-Every failure cell requires `tv_hat` *below* the truth while every median `tv_hat` sits at/above it and stays flat as coverage falls. **Plateau:** coverage 0.9825 (393/400) at n = 60k/80k/107k — past n=60k further shrinkage buys nothing. **⚠️ The "decaying inflation" mechanism is WITHDRAWN and must not be reinstated.** **Practice conclusion: a correction must change the ESTIMATOR, not the sample size.**
-
-### 5. Robustness
-A **random** 60-pair subsample of the M=2 cell reproduces the full run exactly (max abs diff **0.0**).
-
-### 6. Track 5 — no dependence-aware radius is a CLEAN fix (D169); Track 5b reinterpreted it (D170)
-n=60000, B=64, conc=0.1, true TV=0.4, 1000 replicates (392 required for 95% power).
-
-| arm | coverage | CP95 | radius | ratio to i.i.d. | verdict |
-|---|---|---|---|---|---|
-| A block bootstrap | 0.9940 | [0.9870, 0.9978] | 0.041097 | 1.168 | clears nominal by OVER-covering |
-| B sandwich | 0.9780 | [0.9669, 0.9862] | 0.033172 | 0.943 | at nominal (p=0.61) |
-| C LOBO | 0.9780 | [0.9669, 0.9862] | 0.033117 | 0.941 | at nominal (p=0.61) |
-
-**B and C are not broken** — they recover the true `tv_hat` SD to three decimals. **⚠️ B and C's identical interval is STRUCTURAL, not coincidence (R14-M4):** Clopper–Pearson is a function of `(k,n)` alone, so two arms with the same count 978/1000 necessarily share the interval. The radii differ (0.033172 vs 0.033117) and the code paths differ. **Never write "numerical coincidence" — it is an unsupported causal claim.**
-
-**Radius-form question is MEASURED (~11%), not untested.** Centred gap **11.39%**, uncentred 5.33%, mixed 12.15%; normal theory 12.56%. **The convention is load-bearing.**
-
-**✅ COVERAGE CONSEQUENCE — TESTED (2026-09-20).**
-
-| arm | coverage | radius | computable? |
-|---|---|---|---|
-| sym_bootstrap_per_rep | 0.994 [0.9870, 0.9978] | 0.041097 | **yes** |
-| sym_pooled | 0.989 [0.9804, 0.9945] | 0.038574 | oracle |
-| one_sided_pooled | 0.984 [0.9741, 0.9908] | 0.035478 | oracle |
-| uncentred_pooled | 0.982 [0.9717, 0.9893] | 0.034270 | oracle |
-| normal_theory_per_rep | 0.978 [0.9669, 0.9862] | 0.033172 | **yes** |
-
-**Finding: the convention is NOT cosmetic for coverage.** Coverage tracks radius monotonically; the two computable arms differ by 1.6pp (paired CI excluding zero). **⚠️ Three arms are ORACLE** and must never be cited as achievable coverage.
-
-**⚠️ The recorded 11.39% is NOT reproduced by this run, and that is expected.** The run's own sd is 0.016641 against the canonical 0.016079 — a different generator pass. **DECISION: leave the paper's wording unchanged.**
-
-**⚠️ Artifact flag defect, caught by independent review:** `falsifier_fired=false` beside a rule 8 of its own 10 paired CIs satisfied; corrected in place to `true` with the oracle restriction named. **"Summary field is a claim" failure again.**
-
-### 7. Round 14 review outcome — and what the PI did with it
-**R14 internal: Accept, 3/3.** **⚠️ That Accept is SUPERSEDED: the PI assessed those same bytes as Reject** and raised four findings, all substantive (D181). The revision answers all four; the internal Accept carries no authority over the PI's judgement.
-
-## The classifier environment (C052 rule / C054 correction)
-
-**⚠️ THE MECHANISM PREVIOUSLY RECORDED HERE WAS WRONG (corrected 2026-09-20, C054 / M177).** The `penalty` `'deprecated'` string is a **sentinel** resolving at fit time to **`l2`**; `lbfgs` IS sklearn's default solver, so no solver was ever unpinned. **The cross-generation row divergence is real (593/990 rows, max 0.04317, identical `n_a`) but its cause is UNEXPLAINED — do not attribute it to solver or penalty.** If pinning is ever taken, the correct pin is **`l1_ratio=0.0`**.
-
-**Rule (binding):** no two lower-side ledgers may be compared at **row** level without stating which generation each is; medians and gate counts may be compared.
-
-| environment | python | sklearn | numpy | role |
-|---|---|---|---|---|
-| server 111 `/root/miniconda3` | 3.12.3 | **1.9.0** | 2.3.2 | **the canonical ledgers** |
-| platform-local `/app/.venv` | 3.12.14 | 1.9.1 | 2.5.3 | T1/T1b |
-
-## Full (M,k) grid — all 20 cells
-
-Pairs clearing the gate, **Eq (6) / m-free**:
-
-| k | M=1 | M=2 | M=4 | M=8 | M=16 |
-|---|---|---|---|---|---|
-| 5 | 340 / 363 | 47 / 127 | 3 / 111 | 0 / 94 | 0 / 80 |
-| 10 | 28 / 98 | 0 / 20 | 0 / 10 | 0 / 6 | 0 / 5 |
-| 15 | 0 / **18** | 0 / 4 | 0 / 1 | 0 / 0 | 0 / 0 |
-| 30 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
-
-Pair counts: 990 (k=5,10), 946 (k=15), 820 (k=30). The `18` at M=1,k=15 is **verified from `eth_full_mk_grid.json`** (`mfree` 18 vs `eq6` 0).
-
-**⚠️ BOTH prior single-axis boundary statements were FALSE (corrected 2026-09-20, M179).** "Vanishes from k≥15 onward at every M" was false (k=15 still shows +18/+4/+1 at M=1/2/4). Its replacement, "disappears at M≥8 at every k", was **also false** — at M≥8 the advantage is +94/+80 at k=5 and +6/+5 at k=10. **The advantage is present in 13 of 20 cells and absent in 7, and it is confined to neither axis.**
-
-**The separating quantity is SATURATION, and the separation is perfect:** every cell *with* the advantage has saturation fraction ≤ 0.6966; every cell *without* it has ≥ 0.7280. **Paper-safe wording = the abstract's, which was already correct.**
-
-**⚠️ The cited artifact's own prose asserts the false claim** (`eth_full_mk_grid.json` `finding`: "an M=1 phenomenon") while its table shows otherwise. It is hash-cited, so it was NOT edited — a sibling correction (`mk_grid_boundary_correction.json`) carries the fix. **Treat an artifact's summary field as a CLAIM, not an observation.**
-
-## Build rules (learned the hard way)
+## Build and verification rules (learned the hard way)
 
 - **Never wrap `\bibliography` in a brace group** — suppresses `.aux` writes; no reference list at all.
-- **Never put a `\label` on a `\section*`/`\subsection*`** — prints an empty string, no error, no `??`.
+- **Never put `\label` on `\section*`/`\subsection*`** — prints an empty string, no error, no `??`.
 - **A renumbering/relocation pass leaves resolving-but-wrong references.** Check file → label → number → prose.
 - **Locate the body's end by the conclusion's final sentence, never the heading.**
-- **To restore an overrun, relocate a FLOAT — and it may be a TABLE.**
-- **A PDF sha is a BUILD-INSTANCE id, not a CONTENT id.** Verify a rebuild by per-page text, not by an expected hash.
-- **A fixed-string grep misses any phrase that wraps across a line** in extracted text ("per-pair floor", "Figure 1 (in §A.1)"). Normalise whitespace first.
-- **`wc -c` counts BYTES, Python `len()` counts CHARACTERS** — p13 reads 4620 vs 4608. State the unit on both sides.
-- **Internal process vocabulary is an anonymity-adjacent defect.**
-- **One artifact, one canonical path** — registration copies (and suffixes on collision).
-- **A count is a weak instrument for presence** — use a key-set comparison or direct lookup.
+- **A PDF sha is a BUILD-INSTANCE id, not a CONTENT id.** Verify a rebuild by per-page text, not an expected hash.
+- **A fixed-string grep misses any phrase that wraps across a line.** Normalise whitespace first. Also misses a literal split across Python string concatenation — the full slug never appears contiguously, so the **longer** pattern under-reports.
+- **`wc -c` counts BYTES, Python `len()` counts CHARACTERS.** State the unit.
+- **Internal process vocabulary is an anonymity-adjacent defect.** Grep the RENDERED page, not just the source.
+- **One artifact, one canonical path** — registration copies to a type-routed path; a fix to the top-level copy never reaches the cited one.
 - **An artifact's summary/prose field is a CLAIM, not an observation.**
-- **CHECKER ARTIFACTS ARE NOT FINDINGS:** an awk default of 0 printed the same block 4× and read as "identical entries"; 8 "metadata mismatches" were a BibTeX type-vocabulary convention (55 of 62 unflagged entries shared the same types). Test whether a flag is per-item or a class/convention difference before reporting it.
-- **EVERY RELATIONAL CLAIM CARRIES A `falsifiers` FIELD.** For each — *implies, therefore, only, because, invariance, attribution, scope* — **generate its negation**.
+- **CHECKER ARTIFACTS ARE NOT FINDINGS:** test whether a flag is per-item or a class/convention difference before reporting it.
+- **A guard must be executed on a known-good AND a known-bad input.** A guard that cannot fail is not a guard. For every new argument/flag/return value, name its consumer and execute the branch where it does NOT fire.
+- **Bibliographic fields are verify-or-omit — every field, not just DOIs.** Title, author given names, pages, volume, year. This class shipped twice (fabricated DOIs/4th author; then a fabricated title + 2 invented given names).
+- **A comparison instrument's false-positive rate must be measured against known-GOOD inputs of the SAME SHAPE as the disputed one**, not merely against tricky strings. A parser that misread a correct multi-line author field produced a defect report that reached the PI (M181). Corollary: a finding from an instrument already shown unreliable does not become trustworthy by narrowing it — re-derive each one from the artifact.
+- ⚠️ **`references.bib` is NOT hash-cited.** 17 64-hex hashes are printed in the paper and 23 files sit under `latex/` in the archive; the intersection is **ZERO**. No printed hash is a document source, so a bib edit cannot invalidate one. The archive rebuild is still required, but because the manifest entry's own description asserts the embedded `main.pdf` and `references.bib` byte-match the library.
+
+## Round 18 outcome and what was fixed
+
+**Weak reject (borderline)**, 3 reviewers. All 14 findings (C1–C14) verified and resolved: two-generation α labelling; §3.4 lower-side scope; `D181` internal-ID leak; Open Science naming the archive; Figure-1 caption errors; the uncited nearest prior art (F-BLEAU, Bayes Security, DeepSE-WF, leakiEst, Howard); the missing LP-dominance clause; synthetic-only coverage calibration (wording, not a new test); C11–C14; plus minors.
+
+**Post-audit round found four further real defects, all fixed:** the α route mislabel reintroduced by my own C1 fix; RoNeTC's Monte-Carlo budget printed as 64 where every record says **8**; the abstract's dangling "larger"; and the **fabricated DeepSE-WF bibliography entry** (fabricated title + two invented given names — the CFP's named misconduct class, desk-reject risk).
+
+## Bibliography verification — COMPLETE, with corrections (D238–D243)
+
+**Method:** parse with brace-aware extraction; normalise accents, brace-quoted particles and multi-line fields; compare family names as SETS; query the publisher record directly (Crossref / DataCite / arXiv API), never a search snippet.
+
+**Corrections to the earlier record — this is the part that matters:**
+- ⛔ **RETRACTED — `luxemburk2023cesnet` has NO defect.** Reported to the PI as omitting Pavel Šiška. It carries all five authors in the working tree, in HEAD, in the repository's FIRST commit, and in the archive's embedded copy (all sha `46b4bff3…`); Crossref `10.1016/j.dib.2023.108888` returns exactly those five; the correct name renders in the PDF. The old report was a parser artifact on a two-line author field (**M181**). **Do not "fix" this entry.**
+- ✅ **NEW — `sekeh2019learning` carries a DEAD DOI, printed in the PDF** (reference [50]). Ours `10.1109/TSP.2020.2999953` → Crossref 404, doi.org HTTP 404 with no redirect. Correct: **`10.1109/TSP.2020.2994807`** (same title/authors/vol/pages, so the DOI is the only field to change); doi.org → ieeexplore document/9093984.
+- **Five title flags refuted** — `han2015l1distribution`, `jiao2018l1distance`, `andres2013geo`, `valiant2011estimating`, `sirinam2018deep` are all Crossref-side artifacts: four are subtitle truncation (Crossref either keeps only the part before the colon or splits the subtitle into a separate field), two are Crossref's raw LaTeX markup for `\ell_1`/`L_1`. Our entries are correct.
+
+**Confirmed defects (2) + preferences (2), all queued into the dispatched pass:**
+- `li2023facing` — omitted author **Xiaolin Xu** (position 4; Crossref returns 6, arXiv preprint has 5); DOI should be the published `10.1109/ISCC58397.2023.10218269`, `pages = {1255--1260}`. Cited twice.
+- `smith2021website` — wrong DOI `…0018` resolves to "EL PASSO" (different paper, different authors); correct `…0017`, PoPETs 2021(2):48–69.
+- `diakonikolas2020highprob` — published version available: STOC '21, `10.1145/3406325.3450997`, pp. 542–555 (preference).
+- `cesnet2025cesnet` — the Zenodo record asks that Mücke et al. be cited until the dataset paper appears; **already satisfied**, since `mucke2025waiting` is cited in the same sentence (main.tex:341). No edit needed.
+
+**Held, not fixed — an open ambiguity for the PI.** `liu2026inevitability` prints author 2 as **"Guang Cheng"**; the arXiv record for 2602.14055 returns **"Guang Chen"** (Semantic Scholar, which derives from the same metadata, agrees). But the sister paper 2607.17889 by the same group has the arXiv record saying **"Guang Cheng"**. The two arXiv records disagree about the same person and the indexes are not independent of the metadata they report, so it is undetermined whether our entry or the preprint metadata is wrong. **Deliberately not edited** (M178: a fix must not arrive with the authority of a correction while introducing a new error).
+
+**Verified clean:** all 51 DOI-bearing entries and 10 arXiv entries, titles and author families, after a normalizer self-test. Remaining unverifiable: entries with no resolvable identifier (`wright2009traffic`, `fano1961transmission`, `kuhlewind2022rfc`) — recorded unverified, not clean. `eriksson2026unseen` verified on both title and author against the arXiv record.
 
 ## Near-term tasks
 
-**Draft delivered; awaiting the PI.** No known text-accuracy defect remains (D191–D195 all installed and gate-passed; independent sweep WRONG 0; reference check clean).
+- [x] ✅ **TWO DOIs ADDED; unverifiable fell 4 → 2 (D250).** `chatzikokolakis2023bayes` → `doi = {10.1109/CSF57540.2023.00011}` and `kuhlewind2022rfc` → `doi = {10.17487/RFC9312}`, both verified against the live registry. Verifier now `parsed=69 checked=67 ok=66 MISMATCH=1 unverifiable=2`. Remaining unverifiable are CORRECT to stay: `wright2009traffic` (NDSS 2009 has no Crossref DOI — only an unrelated 2019 paper shares the phrase) and `fano1961transmission` (1961 book, ISBN present). **Note the entry the earlier pass recorded as "could not verify a DOI externally" WAS verifiable — that attempt simply missed it.**
+- [x] ✅ **FIXED A FALSE POSITIVE MY OWN VERIFIER PRODUCED (D250).** Adding the RFC DOI made `kuhlewind2022rfc` report as a MISMATCH, because our title carries the `{RFC 9312}:` prefix and Crossref's does not — the entry was CORRECT and the instrument was wrong, the exact class the tool exists to prevent. Fixed with `strip_doc_id_prefix` (strips a leading `RFC nnnn:`/`arXiv:`/`DOI:`/IETF-draft marker, but **only when substantive text follows**, so an identifier-only title cannot normalise to empty and match vacuously); two self-test cases added. Re-verified on **both** controls: self-test passes, and the negative fixture still reports MISMATCH=3 exit 1, so the fix did not blunt real detection.
+- [x] ⚠️ **ROUND 19 REGISTRATION — third hypothesis checked and constrained (D250).** The proposal that `supplementary_paths` needs an absolute path is **refuted for sibling fields**: five submits passed a RELATIVE `paper_path` and all registered, so relative resolution works generally. What remains true is narrower — **no attempt ever passed an absolute `supplementary_paths`, so that cell is untested, not causal.** NEW evidence: `artifacts/submission.tar.gz` mtime `2026-09-25 01:15:05.444` equals the second submit's timestamp, so the **pipeline RAN and rebuilt the snapshot**, then stopped short of creating the round (attempt 2 touched exactly one file; round 18's artifacts did materialise). So the failure is **downstream of packaging, not a path abort**. The clean discriminator is still the one D237 refused (submit once without the field) — a PI call. **Do not re-triage.**
+- [x] ✅ **THE PI WAS TOLD ABOUT THE D243 RETRACTION (sent 2026-09-25 06:4x).** Delivered: the `luxemburk2023cesnet` retraction, the new `sekeh2019learning` dead-DOI finding, the five refuted title flags, the held `liu2026inevitability` name, the correction that `references.bib` is NOT hash-cited, and a restatement of the two open PI decisions (venue D236, Round 19 registration).
+- [ ] ⚠️ **CONFIRM ROUND 19 REGISTRATION — do not retry blindly.** Two attempts, two distinct approvals, zero rounds. Treat as a platform-side registration failure. If it is resolved platform-side, re-submit from the build that is CURRENT **at that time** (as of D253 that is `4e0a80a2…`) — a submission needs a receipt fresh on the exact bytes submitted, so **re-read the sha from the paper-state header above rather than trusting any sha quoted in a task line**; quoting a superseded sha next to a warning that says "use the current build" is precisely how this line went stale once.
+  - ⚠️ **If Round 19 registers, the platform's `submission.tar.gz` snapshot must be REGENERATED, not reused.** The existing one is the snapshot of the failed attempt (mtime 2026-09-25 01:15:05.444) and all three of its paper files are stale against the tree (`main.pdf` `04b7507f…`, bib `46b4bff3…`). It is a record of a submission that never registered, and it is unregistered in the manifest (0 entries) — correct, but not reusable as-is.
+- [ ] **On the Round 19 report** → read `review-report-action`, Holistic Pass then point-by-point Action Matrix, dispatch fixes, report to the PI. Never blanket-acknowledge.
+- [ ] **PI answers venue (D236)** → record explicitly in the decision log (confirmed-with-reason, or changed-with-reframing-plan). A PoPETs switch = re-layout + Abstract/Intro reframing, not an edit. **The bib pass did not wait on this** and is now done — the corrections were wrong under every venue.
+- [ ] **PI answers the `liu2026inevitability` name** → edit only against an authoritative record for "Guang Chen" vs "Guang Cheng"; otherwise leave it.
+- [ ] **PI answers whether to PUSH** → commits `f4badc6` + `5fd92c2` sit ahead of origin. Pushing is a visible action; do not do it unprompted.
+- [ ] 🔴 **`EIBO` (the public repo name, `github.com/LianningLBY/EIBO`) ships in the submission — the OPEN half of R18-C6b (D249).** The caption half IS fixed (0 occurrences in any `.tex` caption/prose and 0 in the rendered PDF). The remaining carriers: **`docs/paper/main.tex:2`** (a source comment, and main.tex IS one of the 10 `.tex` in the submission snapshot), plus `src/eibo/statcore.py:1`, `src/eibo/__init__.py:1`, `tests/test_statcore.py:1`, `figures/paper/_generators/render_fig1.py:2`, and identifier tokens in `x9_dose_response_channels.json` — the last of these is governed by the standing D216/D217 ruling (ship byte-identical + disclose in the README) because those files carry internal hash/digest fields. **`main.tex`'s comment is NOT covered by that ruling** — it carries no self-hash and is pure prose. Confirmed safe: the hash-cited CODE/latex/generator set is **EMPTY** (all 17 printed hashes resolve to `supplementary/data/*`), so removing a comment token breaks no printed hash. **Batch it with the next source edit** — a one-token change would otherwise void the receipt on its own. Not a blocker: 0 occurrences in the rendered PDF, and the CFP's "no identifying information" line targets usernames, organization names and commit history rather than a project codename.
+- [ ] **Any source edit** → fresh render + 24/24 gate before delivery. **Correct order: render → gate → cleanup images → THEN submit.**
+  - ⚠️ **CORRECTED RULE (D249) — the snapshot is a SELECTED SOURCE SET, not a wholesale directory copy.** Measured from `artifacts/submission.tar.gz` itself: its 47 entries are 10 `.tex`, 6 `.pdf` (main.pdf + 5 figures), 29 `.png`, 1 `.sty`, 1 `.bib`. It contains **ZERO LaTeX intermediates** — no `.fls`, `.aux`, `.log`, `.out`, `.bbl`, `.blg`, `.fdb_latexmk`, or `.synctex` — and a content scan for `/efs/`, `/root/`, `/home/`, `autodl`, `seetacloud`, `connect.westb` returns **zero files**. Because `main.fls` (mtime 09-23) predates the snapshot (09-25) and is still absent, this is a filter, not a coincidence. **Consequence: the previously repeated claim "the platform snapshots `docs/paper/` wholesale" is FALSE** and must not be used again — it produced a false `.fls` leak alarm this round. The D233 incident is still real but explained differently: the 24 scratch PNGs and the internal notes were inside the SELECTED set at submit time (as `_pdf_images/*.png` and a `.md`), not swept in by a directory copy. **What actually ships: the `.tex` set, `main.pdf`, the figure assets, `.sty`, `.bib`.**
+  - **Still true and still binding:** anything sitting in that selected set at submit time ships. So `_pdf_images/` must be deleted before submitting, `camera_ready_plan.md` must stay out of `docs/paper/`, and a stray `.md`/`.prev` in the directory can still be captured (the earlier snapshot's 49 entries included exactly those two; the current 47 does not).
+- [ ] **The submission snapshot omits the supplementary archive** the paper names. Packaging-pipeline question. Recorded, not guessed.
+- [ ] **Camera-ready tier (DEFERRED).** `camera_ready_plan.md` is at `artifacts/_project/intermediate/` (**do not move it back** — its process vocabulary gets swept into the submission). Per-page table regenerated (`art_20260924_7fc200`, extractor: PyMuPDF `get_text('text')`). **Lever 1 confirmed** (removing the two back-matter `\clearpage` calls, main.tex:69/94; 24→23 pp; body still p.13). Back-matter placement is build-dependent — always name the build with the page.
+- [ ] **T3 — DECIDED (D180):** paper stays measurement/rigour. The user may overturn.
 
-- [ ] ⚠️ **STANDING OBLIGATION — any further source edit VOIDS the SHA-bound 24/24 visual receipt.** The receipt is bound to `32dadd14…`; the next edit pass (PI-driven changes, the camera-ready lever, or any fix) must end with a **fresh full render + re-inspection of every page + a new `confirm_pdf_visual_review`** before anything is delivered. This is NOT discharged by the fixes being closed — each of D191/D192/D193 voided a receipt in turn and each required its own gate. Listed explicitly because condensing the closed items into one block could otherwise read as "no gate obligation remains". **Never upload a PDF whose bytes are newer than its receipt.**
-- [ ] **PI REVIEW of the revision** — the immediate gate. If accepted → fresh `submit_paper_to_review` (Round 14 is the last registered round; check `get_formal_review_status` first). If rejected → their specific findings first.
-- [ ] **USER: Table 5 placement trade-off** — moving the (M,k) grid into the body breaches the 13-page cap unless ~1 page of body prose is cut. Awaiting their ruling. **Standing red line: body prose is never cut to buy a page unless the PI accepts that trade.**
-- [ ] **USER: anonymous artifact repository** — currently resolved by **REMOVAL** (D177); revertible if the user supplies a URL. ⚠️ **Deadline corrected against the CFP extract (verified 2026-09-22): the binding date is the ARTIFACT deadline, Fri 2027-01-29 — not the paper deadline 2027-01-26**, since submission artifacts are a separate, three-day-later deadline. (CFP verbatim, `usenix_sec27_cfp_extracted_20260918.txt`: Cycle 2 registration Tue 2027-01-19, papers Tue 2027-01-26, **artifacts Fri 2027-01-29**, notification 2027-05-06, final papers Thu 2027-06-03; venue is the 36th USENIX Security, Aug 11–13 2027, Denver.)
-- [ ] **USER: GPU binding** — 5090@111 idle with no GPU-eligible work; recommended unbinding in the Servers page.
-- [ ] **T3 — DECIDED by Director (D180):** the paper stays measurement/rigour; the planning tool remains a corollary. The user may overturn.
-- [ ] **Camera-ready tier (DEFERRED — do not start now).** ⚠️ `camera_ready_plan.md`'s per-page character TABLE is **NOT reproducible from either build under any metric, and the plan states none** — regenerate it from the current bytes with an explicit metric before that stage opens. **Lever 1 is independently confirmed** (removing the two back-matter `\clearpage` calls, main.tex:69/94 only; 24→23 pp, 0 undefined/overfull, two independent builds) and **the body still ends p.13**, so the 13-page cap is unaffected. ⚠️ Back-matter placement is BUILD-DEPENDENT: the standalone "Ethical Considerations" starts p.14 in the delivered build and p.13 in the lever-1 variant — always name the build with the page, since p13/p14 carries both a body subsection (§6.4) and the standalone section. **Appendix-side only; lever 1 does not touch body prose.**
-- [ ] **R14-A1/A2 (camera-ready tier):** symbol overload; artifact IDs in body; Ethics p.14 whitespace; bib hygiene — **0 retracted, 0 ghost, not blocking**.
-- [ ] ✅ **`X9_C` RESOLVED (D202).** Cleared to **DONE / killed** via the Agent's registry write (PREPARING→QUEUED→DONE; the state machine permits this — the M131 note assuming otherwise was wrong). No fabricated run history: no allocation, no PID, no metrics, no log. `failure_reason` records that it never ran. Registry now has **0 non-terminal entries** and `mark_project_passive` succeeds. ⚠️ **Lesson: the prior "no honest terminal status exists / all paths exhausted" entry was an INHERITED claim that was never re-tested, and it was false.** Re-deriving it exposed both why the Director path fails (`reject_experiment` → "Approval 'apr_X9_C' not found", because it never went through approval) and which path was never tried (the Agent holds registry-write access the Director lacks).
+## DONE — do not re-run these (kept as one line each; the detail is in the decision log)
 
-## Closed this session (2026-09-22) — keep, do not re-open
-
-**The floor-labelling defect class, found seven times and now fully closed.** All instances shared one shape: *a numeric expression whose object/floor/generation is not named, or two expressions in one breath using different objects.*
-- **D191 (installed, `48d67a32…`)** — §Measurement Design: cap count **29 → 6** (29 was the superseded `canonical_eps_hi` column; the paragraph's own sum is m-free, where it is **6**, a stored field `summary.eps_hi_mfree_ge_1_count`); the **α mis-attribution** labelled with BOTH values (per-pair envelope ≈0.012 is conservative by **495×**; the operative 0.05/990 gives **2.4e-5**); **four floor labels** (0.197 open-set M46; the 0.63 gap; both 0.375 sites incl. **L70**, which the Paper Agent caught and my brief missed); the **missing citation** for `art_20260922_f7853e` (sha `c0573590…`) plus a registry item for `art_20260922_764458` (sha `06c0e766…`); **Figure 1 relocated** from the Introduction to appendix §A.1 to pay the body space, both cites now "Figure 1 (in §A.1)".
-- **D192 (installed, `9ef3913a…`)** — `results.tex`: "above the **0.198 floor on all 990 pairs**" was **false for 320 pairs** (0.198 is the MEDIAN of a per-pair floor; min balanced error 0.0105). Now states the per-pair comparison (0/990 against each pair's own floor). **No numbers changed.**
-- **D193 (installed, `32dadd14…`)** — "**2.9× tighter**" named no object at abstract/introduction. It is the ratio of **per-side radii** (2.9109), equal to the ratio of **bounds** only at `tv̂ = 0`; the bound ratio is **1.0880** at the median `tv̂` (0.5805, confirmed as `med_tv` in the grid artifact). Both sites now say "**2.9× smaller confidence radius**".
-- **REFUTED, no edit applied:** the "gap should be 0.54" filing (used the **strongest** arm while calling it weakest; 0.830−0.197 = 0.6330 is the printed 0.63) and the "matched ratio is one generation stale" filing (both ranges reproduce on the delivered floors). **A reviewer's "critical" is a claim requiring re-derivation — two of three criticals did not survive.**
-- **D194 — reference check CLEAN:** 64 entries, all cited, no missing/ghost/retracted/orphan. The reported 8 "metadata mismatches" were a BibTeX **type-vocabulary convention**, proven by 55 of 62 unflagged entries sharing the same types.
-- **PROVENANCE re-check CLOSED:** all five D181 artifacts registered with matching hashes (the "unregistered" alarm was false, and my first check of it was wrong too — `content_sha256` sits AFTER `path:`, so a backward search anchors on the *previous* record).
-- **DELIVERED** to the PI (web only; Feishu reported no configured chat).
+- ✅ **The batched bibliography pass is COMPLETE** — 4 corrections landed, `liu2026inevitability` held, verifier at **MISMATCH=1** (D246). Routed to the **Paper Agent** (Patch), NOT the Main Agent (M182: `.tex` prose, `references.bib` and captions are always the Paper Agent's; Main owns code/data/builds/artifacts/verification).
+- ✅ **The archive was REBUILT and verified** (D247/D251) — see the paper-state section. **Do NOT "rebuild after the edit lands"**: that condition is already satisfied for the CURRENT build, and re-running is harmless only because the build is deterministic. ⚠️ **This is NOT a blanket exemption** — a FUTURE source edit still requires the full chain (D252).
+- ⚠️ **The EIBO edit at `main.tex:2` is a FULL-CHAIN event when it happens (D252).** `main.tex` is an in-register member of the archive's `latex/` set, so editing it voids the receipt AND stales the archive's embedded bytes, requiring: source edit → re-render → 24-page visual gate → archive rebuild → manifest re-pin (new PDF hash + new archive hash). Batch it with the next source edit; do not treat it as a one-liner.
+  - **Measured, so the batch is cheap to justify:** stripping that comment leaves **all 24 pages' rendered TEXT identical**; the PDF differs only in 72 trailing bytes, which `pdfinfo` shows is solely the embedded CreationDate/ModDate. It is a **metadata-only** PDF delta — nothing about pagination, cross-references or content can move.
+- ✅ **`scripts/verify_bibliography.py` is COMMITTED** in `f4badc6`, together with the builder correction and its guard suite in `5fd92c2`.
+- ✅ **The D243 retraction AND the D245 tool report were both delivered to the PI** (the D245 turn was first refused by the runtime — an internal continuity turn — and sent on the next allowed turn). A refusal and a success are different tool paths: **read the return value before believing the user was told.**
+- ✅ **`luxemburk2023cesnet` has NO defect — RETRACTED (M181).** Do not add Pavel Šiška; he is already there and adding him would duplicate an author.
+- ✅ **Do NOT add the x3 runner scripts to the archive.** They carry hardcoded server paths (`#!/root/miniconda3/bin/python3`, `Project = Path("/root/eibo")`); shipping them would reintroduce the absolute-path disclosure already removed from the archive root. The archive ships outputs, which is correct. (Two related non-defects: `x3_variant_b_*` is `RETIRED_pre_freeze_do_not_cite` so its payload is correctly ABSENT; and the "estimator family scripts" UNRESOLVED line was a checker artifact scored against a manifest description field that no `.tex` names.)
+- ✅ **`cesnet2025cesnet`'s Mücke-et-al request is already satisfied** — `mucke2025waiting` is cited in the same sentence (main.tex:341). No edit needed.
 
 ## GPU budget
 
-1x RTX 5090 D bound, idle. **All experiment tracks are CPU-only**; there is no GPU-eligible job in this project. The recurring idle notice is a binding/timing mismatch — a platform-level decision, not to be re-triaged per alert (constraint C055).
+1× RTX 5090 D bound at 111, idle. **All experiment tracks are CPU-only; there is no GPU-eligible job in this project** — the idle notice is a binding/timing mismatch, not a stall (**C055**: acknowledge once, do not re-triage). All 24 experiments terminal; registry has 0 non-terminal entries.
 
 ## Registry hygiene
 
-✅ **Clean.** All 24 entries terminal (0 PREPARING / QUEUED / ALLOCATED / RUNNING). `X9_C` was cleared to DONE/killed with an honest `failure_reason` recording that it never ran (D202).
+✅ Clean. 24 entries all terminal (`X9_C` cleared to DONE/killed with an honest `failure_reason` recording that it never ran, D202). Per **C053**, a null `content_sha256` is a property of the registration write path and a manual hash pass over the path the entry names is the standing remedy.
 
 ## Key Decision Log
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
-| D202 | 2026-09-24 | X9_C cleared honestly via Agent registry write — t | X9_C |
-| D201 | 2026-09-23 | X9_C terminal status: withdrawn design, no honest  | X9_C |
-| D200 | 2026-09-23 | Table 5 stays in appendix — body page cap (13pp) i | — |
-| D199 | 2026-09-23 | Measured the Table 5 move instead of relaying the  | — |
-| D198 | 2026-09-23 | Audited §4.4's resolution-substitution direction c | — |
-| D197 | 2026-09-23 | auto_build_provenance returned a tier distribution | — |
-| D196 | 2026-09-22 | Reviewer ROADMAP review: acted on the gate-obligat | — |
-| D195 | 2026-09-22 | D193 naming fix INSTALLED and gate-passed 24/24: n | — |
-| D194 | 2026-09-22 | Reference verification: 64 entries, all cited, no  | — |
-| D193 | 2026-09-22 | Independent sweep of the unswept sections: WRONG 0 | — |
+| D253 | 2026-09-25 | Committed the verifier fix so HEAD reproduces MISM | — |
+| D252 | 2026-09-25 | Accepted the Agent's forward obligation — the EIBO | — |
+| D251 | 2026-09-25 | Resolved both reported discrepancies: MISMATCH=2 w | — |
+| D250 | 2026-09-25 | Refuted the "supplementary_paths needs an absolute | — |
+| D249 | 2026-09-25 | Refuted the claim that docs/paper/main.fls leaks a | — |
+| D248 | 2026-09-25 | Audited commit f4badc6: the manuscript half is cor | — |
+| D247 | 2026-09-25 | Rebuilt the supplementary archive (new sha ed01a6d | — |
+| D246 | 2026-09-25 | Batched bibliography edit landed and independently | — |
+| D245 | 2026-09-25 | Built scripts/verify_bibliography.py — a field-lev | — |
+| D244 | 2026-09-25 | Sent the D243 retraction to the PI (the previous t | — |
 

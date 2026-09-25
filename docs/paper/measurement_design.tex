@@ -43,20 +43,19 @@ gate is not what makes a pair admissible, and $\epshi$ is truncated at $1$ befor
 summing, a cap $6$ of the 990 pairs sit exactly on and the bound is vacuous for.
 On this corpus the sum is taken over the complete graph of all 990 pairs, giving
 $S_{\mathrm{known}} = 407.75$ and a floor of $0.197$ at the simultaneous level
-$0.95$ (Bonferroni over the $990$ pairs). The floors are produced by the D181
-joint-coverage reaggregation, \texttt{art\_20260922\_f7853e}
-(\texttt{\seqsplit{c05735901f4bb714c55446ee324afe354716bc0a8cd4de5df4120aae042fc218}}),
-matching the citation style of the aggregation artifacts above.
-The per-pair sides remain
-high-probability statements at their own levels; because the $S$ terms are
-interval-valued, the aggregate is stated in expectation rather than as a joint
-high-probability claim, and it inherits the upper side's within-service i.i.d.\
-sampling assumption (\Cref{sec:design/upper}). "In expectation" is a budget, not
-a label: each term $\widehat{s}_{ij} = 1 - \epsilon_{\mathrm{hi},ij}$ is a lower bound on
-$1 - \tv_{ij}$ whenever $\epshi$ covers. Under the per-pair envelope it fails
-with probability at most $0.025$, overstating the floor by at most
-$24.75/(M(M-1)) \approx 0.012$; at the operative budget of $0.05/990$ the
-overstatement is at most $0.05/(M(M-1)) \approx 2.4\times10^{-5}$. The per-term
+$0.95$ (Bonferroni over the $990$ pairs). Two levels are in play: the gate counts
+use the per-law level $\alpha_{\mathrm{law}} = 0.025$ with no multiplicity
+correction, while this aggregation spends $\alpha_{\mathrm{pair}} = 0.05/990$
+across the $990$ pairs. The floor is therefore a simultaneous high-probability
+statement rather than an expectation-form one, inheriting its guarantee from the
+upper-side event; the lower-side terms enter only as bracket endpoints and
+invariant checks, not as inputs. It inherits the upper side's within-service
+i.i.d.\ sampling assumption (\Cref{sec:design/upper}). Each term
+$\widehat{s}_{ij} = 1 - \epsilon_{\mathrm{hi},ij}$ is a lower bound on
+$1 - \tv_{ij}$ whenever $\epshi$ covers; under that budget a term fails with
+probability at most $5.05\times10^{-5}$, overstating the floor by at most
+$990\times5.05\times10^{-5}/(M(M-1)) \approx 2.4\times10^{-5}$ against
+$24.75/(M(M-1)) \approx 0.012$ under the per-pair envelope $0.025$. The per-term
 radius is conservative for finite alphabets, which can only shrink the terms
 further. It is a consequence of the two-point lemma rather than a new
 construction.
@@ -71,8 +70,8 @@ gives $0.289$ at $C{=}45$ and $0.304$ at $C{=}46$, both above the $M{=}46$
 open-set floor of $0.197$ certified here. The uniform floor is therefore \emph{not} competitive at the
 coarsest rung even against a one-line combinatorial argument, and neither is it
 the strongest value available from our own constructions: the LP-weighted
-aggregation reaches an $M{=}46$ open-set floor of $0.375$ (the LP-over-$K$
-construction
+aggregation reaches an $M{=}46$ open-set floor of $0.375$, above the $0.304$ the
+combinatorial bound gives at $C{=}46$ (the LP-over-$K$ construction
 below). We keep the uniform form as the headline for the reason given there,
 namely that it alone preserves the per-pair confidence semantics and the
 open-set discarded-term property, and not because it is the tightest floor we
@@ -102,8 +101,9 @@ non-negative weights with uniform row sums tightens the uniform weighting used
 here, giving an LP-weighted $M{=}46$ open-set floor of $0.375$, against which
 the same measured $0.737$ is loose
 by about $1.97\times$ rather than $3.74\times$. We keep the uniform form as the
-headline because it alone preserves both the per-pair confidence semantics of
-\eqref{eq:lecam} and the open-set discarded-term property; the LP relaxation is
+headline because it preserves the per-pair confidence semantics of
+\eqref{eq:lecam} and states the open-set discarded-term property explicitly, which
+the LP relaxation does not; the LP relaxation is
 the tightest aggregation we compute under the simultaneous guarantee. One
 limitation of that choice, which we state rather than leave to be found: the two
 constructions
@@ -250,9 +250,10 @@ i.i.d.\ value the radius assumes; the error direction is coverage below nominal,
 not above it. Flow- and time-disjoint splits limit but do not eliminate
 clustering, so the i.i.d.\ hypothesis is the upper side's binding assumption, and
 a coverage check on near-identical synthetic pairs would not test it, since
-$\widehat{tv}$ is itself upward-biased there. We calibrate the assumption
-directly instead (\Cref{sec:discussion/limitations}); that clause is what the
-calibration supports, and we claim no more from it.
+$\widehat{tv}$ is itself upward-biased there, and a split-stability check would
+measure sensitivity to the split rather than coverage under dependence. We
+calibrate the assumption directly instead (\Cref{sec:discussion/limitations});
+that clause is what the calibration supports, and we claim no more from it.
 
 The left-hand column of \Cref{tab:bracket} is computed at this setting for all
 990 pairs, with a per-row invariant check that $\epslo \le \epshi$; no violation
@@ -274,7 +275,7 @@ observed in-class accuracy gap is consistent with a null at that separation, tak
 the largest $\lambda$ the data supports, and read off the implied $\tv$ lower
 bound.
 
-This side is evaluated at $M{=}1$ only, deliberately: it is computed on the
+This side is evaluated at $M{=}1$ and $M{=}2$, deliberately: it is computed on the
 one-hot encoding of the \emph{same} packed symbol the upper side consumes, so
 both endpoints of \eqref{eq:bracket} are statements about one object, and a
 one-hot of a fixed code is a bijection on the support rather than a
@@ -287,7 +288,10 @@ extension to further $M$ is reported in \Cref{sec:results/bracket}--%
 of principle: since both sides consume the same channel, a finer $M$ would
 change the lower side's input too, so extending the evaluation to further rungs
 is a computation we have not run at every cell, not one the construction rules
-out.
+out. Both rungs use their own 990-row ledgers; the $(M{=}2,k{=}5)$ ledger is
+mixed-convention, but its lower side clears the gate on $990/990$ pairs, so its
+joint count reduces to the upper-side count and is insensitive to that
+convention.
 
 The strength of the guarantee turns on where its confidence constant comes from,
 and we state that provenance rather than summarizing it. The constant is the

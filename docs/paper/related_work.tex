@@ -44,6 +44,17 @@ to classification risk under a hypothesis-class assumption, which is the route
 our conditional large-prefix bound follows. Our contribution composes these into an
 explicit two-sided interval and reports the sides separately.
 
+\emph{Black-box leakage estimators.} A separate line estimates leakage directly
+from samples rather than bounding it: \textsc{F-BLEAU}
+\citep{cherubin2019fbleau} and \textsc{leakiEst} \citep{chothia2013leakiest}
+estimate Bayes-risk variants, Bayes security
+\citep{chatzikokolakis2023bayes} recasts the comparison multiplicatively,
+\textsc{DeepSE-WF} \citep{veicht2023deepsewf} learns the closed-world
+classifier, and confidence sequences \citep{howard2021timeuniform} make the
+logic anytime-valid. Those are asymptotic estimates against our fixed-$n$ bound
+at a stated $\alpha$, channel-level against our per-\emph{pair} certificate,
+and none aggregates into an open-set error floor.
+
 \subsection{Estimation bias and certified indistinguishability}
 \label{sec:related/growth}
 
@@ -104,9 +115,11 @@ that their quantities are accuracy-style metrics with no stated limit. Our
 evaluation discipline comes from the data-hygiene literature
 \citep{zhao2025sweet,wang2026bias,wickramasinghe2025sok,zhao2026shortcutcatcher}.
 
-To our knowledge, no prior work measures a two-sided bracket with asymmetric
+Among the work cited above, none measures a two-sided bracket with asymmetric
 guarantee strength on real encrypted traffic (\Cref{sec:design/asymmetry}):
 different constant provenance and a nominal-versus-exact level, not a
 proven-versus-unproven pair, and none reports such an interval rather than a
-synthetic-channel bound, a closed-set floor, or an accuracy metric.
+synthetic-channel bound, a closed-set floor, or an accuracy metric. The
+black-box leakage estimators of \Cref{sec:related/tv} are the nearest line, and
+sit on the estimator side of that distinction rather than the certificate side.
 \label{sec:related/novelty}

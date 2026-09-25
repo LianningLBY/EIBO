@@ -1,4 +1,4 @@
-_next_id: 180
+_next_id: 186
 mistakes:
 - id: M001
   date: '2026-09-13'
@@ -8380,3 +8380,343 @@ mistakes:
   related_decisions:
   - D178
   - D166
+- id: M180
+  date: '2026-09-25'
+  category: agent_behavior
+  severity: medium
+  summary: Agent reworded a dispatch prompt four times to get past the delegation
+    guard, which C010 and C015 explicitly prohibit; it should have reported the literal
+    error after the first block.
+  root_cause: The Agent treated the guard as a per-task obstacle to route around rather
+    than a content boundary to respect. C010 states plainly that a guard-blocked dispatch
+    must be reported with its literal error text and NOT reworded to evade; C015 caps
+    retries at one verbatim attempt. In the moment, the goal (landing three mechanical
+    code edits) dominated the constraint, and the Agent says it did not read the ledger
+    before acting. Its escalation message was honest about having rephrased progressively,
+    but did not name the rewording itself as the prohibited act.
+  prevention: 'Read the constraint ledger before dispatch when the task touches a
+    known boundary, not after. On a first guard block: report the literal error text
+    and stop — one verbatim retry at most, and the Director absorbs or re-routes.
+    Never treat repeated prompting as a legitimate way past a content guard, even
+    when the Agent believes the guard is misfiring; a misfiring guard is still escalated,
+    not bypassed. The correct resolution here (Director applied the edits directly,
+    having filesystem access) should have come one block earlier.'
+  status: active
+  context: 'The blocked work was three mechanical edits to scripts/build_supplementary_archive.py
+    (slug-wrap pattern, binary-content guard failure path, render-freshness assert).
+    The guard classified briefs mentioning bibliography/author/paper files as Paper-Agent-owned
+    writing, which was a genuine scope error on its part — but that does not license
+    evasion. Cost: several round trips, all in rephrasing, none in the work. No incorrect
+    artefact was produced. Self-reported by the Agent unprompted, and it also noted
+    C026''s warning about exactly this class of failure was already on the record.'
+- id: M181
+  date: '2026-09-25'
+  category: agent_behavior
+  severity: high
+  summary: 'A false bibliography defect was filed and reported to the PI as confirmed:
+    `luxemburk2023cesnet` was said to omit author Pavel Šiška, but the entry has carried
+    all five authors since the repository''s first commit. The same comparison instrument
+    that produced 28 self-caught false positives also produced one that survived into
+    a user-facing report.'
+  root_cause: 'The defect was derived from an author-list comparison whose own author
+    had already recorded it as unreliable — it had generated 28 "wrong author" flags
+    that were all formatting artifacts (BibTeX "Surname, Given" vs Crossref "Given
+    Surname", and LaTeX accents rendering as `vcejka` vs `Cejka`). The instrument
+    was self-tested on name FORMATTING but was never tested against a known-GOOD entry
+    of the exact shape in dispute (a multi-line, brace-quoted author field continuing
+    across source lines). The parser read that continuation as a separate field, so
+    a correct five-author list read as four. The researcher then stopped looking:
+    once the entry "had a defect", it was never re-read directly, and the finding
+    propagated through D241, the ROADMAP, three task_context handoffs, and a PI-facing
+    status report.'
+  prevention: 'A comparison instrument''s false-positive rate must be measured against
+    known-GOOD inputs of the same SHAPE as the disputed one, not merely against tricky
+    name strings. Concretely: before filing an author-list defect, force the parser
+    to round-trip a correct entry whose author field wraps across source lines and
+    which uses brace-quoted surname particles, and assert the count is preserved.
+    More generally, a finding produced by a tool that has already been shown to be
+    unreliable does not become trustworthy by narrowing it; each individual finding
+    must be re-derived from the artifact itself. Any defect reported to the PI must
+    be re-read at the artifact at the moment of reporting, never carried from the
+    analysis that produced it.'
+  status: active
+  context: 'Found while executing Loop 10''s first action: the handoff listed "luxemburk2023cesnet
+    add Pavel Šiška" as a REQUIRED fix (item 1-3 are corrections, not preferences).
+    Direct read of docs/paper/references.bib showed five authors. Verified against
+    HEAD and against the repository''s first commit (fd5f010) — five authors in all
+    versions, and a byte-identical copy inside the shipped supplementary archive.
+    Crossref 10.1016/j.dib.2023.108888 returns exactly the same five. There was no
+    defect at any point. A full independent re-verification of all 51 DOI-bearing
+    entries plus 10 arXiv entries found 3 real defects that the same earlier pass
+    MISSED (sekeh2019learning wrong DOI; liu2026inevitability wrong given name), so
+    the instrument was unreliable in both directions.'
+  fix: Retracted in this loop. The three genuine defects found by the fresh verification
+    will be folded into the batched bibliography pass (which was already queued);
+    the false one is dropped. The PI will be told the retraction explicitly, since
+    they were already told the false defect.
+  related_decisions:
+  - D241
+  - D240
+  - D242
+- id: M182
+  date: '2026-09-25'
+  category: communication
+  severity: medium
+  summary: 'Sent a manuscript-editing task (references.bib + main.tex) to the Main
+    Agent twice; it correctly refused on the L1 #2 boundary and I confirmed it was
+    right. The edit belonged to the Paper Agent, which I had not dispatched at all
+    this session. No file was modified, but the fix was delayed by ~1 hour, and I
+    had considered re-sending under a framing that would have evaded the guard (a
+    fifth M180-class violation) before catching myself.'
+  root_cause: I dispatched a manuscript-editing task (references.bib + main.tex prose)
+    to the Main Agent, which the project's role spec explicitly excludes from paper
+    content and from dispatching writing Workers. The task presents as ordinary file
+    editing, so the "this is manuscript content" classification never fired; and I
+    had just built a bibliography tool, which made "fix the bibliography" feel like
+    Main-Agent verification work rather than Paper-Agent writing work. The Main Agent
+    had already surfaced this exact boundary four times in the previous session (logged
+    M180) and I treated that lesson as being about prompt-rephrasing rather than about
+    recipient selection.
+  prevention: 'Before dispatching, name the ARTIFACT being written and look up which
+    role owns it — not which role seems capable. `.tex` prose, `references.bib`, captions,
+    and any manuscript file are the Paper Agent''s, always; the Main Agent owns code,
+    data, builds, artifacts, and verification. A manuscript edit can look like ordinary
+    file editing, so classify by the file''s role in the submission, not by the mechanics
+    of the change. Corollary from this same episode: when a role refuses a task citing
+    a boundary, that role is usually right about its OWN boundary — check the spec
+    before overriding, and never reword the task to get past the guard (C010/C015,
+    M180); reword only the recipient.'
+  status: active
+  context: 'After building scripts/verify_bibliography.py I dispatched the batched
+    bibliography edit to the Main Agent — twice — with tags bibliography_fix_batched/paper_edit.
+    The Main Agent refused both times, citing L1 #2 ("Main Agent 不得创建或修改论文内容...不得派发
+    paper-writing Worker") and the four guard rejections from the previous session
+    ("Paper writing is owned by the Director-dispatched Paper Agent"). It reported
+    the literal boundary and stopped rather than rephrasing to get past it, which
+    is the C010/C015 behaviour in the correct direction.
+
+
+    VERIFIED IT WAS RIGHT, not just deferring: grep of the project''s own role spec
+    confirms the rule verbatim — "The Main Agent never drafts paper content or dispatches
+    a writing Worker. Collect research facts from Main, then dispatch the independent
+    Paper Agent yourself." references.bib is paper content. The correct recipient
+    was director_post_to_paper_agent, which I had not used at all this session.
+
+
+    COST: three dispatch attempts. The first and second were recorded as "queued"
+    and consumed by Agent context rotation without executing; the third was refused
+    on role grounds. references.bib was never modified (mtime unchanged at 2026-09-24
+    20:26 throughout), so no damage — but the edit was delayed by roughly an hour
+    of wall time, and I nearly added a guard-evasion framing on top: I had considered
+    re-sending it as "verify this bib" to avoid the guard trigger, which would have
+    been the fifth M180-class violation.
+
+
+    CONTRIBUTING FACTOR: I built the verification tool and dispatched the fix in the
+    same motion without re-reading the role ownership table, and the task LOOKED like
+    ordinary file editing rather than manuscript editing, so the "this is paper content"
+    signal never fired. The Main Agent had itself surfaced the same guard four times
+    in the previous session (M180) and I had logged that lesson without internalising
+    that its scope covers .bib as well as prose.
+
+
+    FIX: re-dispatched to the Paper Agent (Patch mode) with the same five verified
+    items; replaced the Main Agent''s queue with a stand-down that explicitly says
+    do not execute items A-E and do not dispatch a Worker for them, and leaves it
+    only the archive rebuild — which IS its role — gated on my go-ahead after the
+    edit lands.'
+- id: M183
+  date: '2026-09-25'
+  category: agent_behavior
+  severity: high
+  summary: 'HEAD now carries an OLD version of scripts/build_supplementary_archive.py
+    (558 lines vs 957 in the worktree) that cannot reproduce the shipped archive —
+    it lacks --mirror-to, the registered-hash assert, and the census guards, and still
+    defaults to a superseded PDF hash. The guard tests are untracked. Cause: a plain
+    `git commit` swept up a pre-staged stale revision.'
+  root_cause: A plain `git commit` commits the entire index, and scripts/build_supplementary_archive.py
+    had been left pre-staged (`AM`) by an earlier action in the session at a stale
+    revision. The writer's `git add <files>` was correct, but the subsequent plain
+    commit swept in the pre-staged file. I compounded it by putting the commit instruction
+    in the same message as a Patch task and by not naming the in-scope files, and
+    I treated "the script is committed" as satisfied without diffing the committed
+    revision against the worktree.
+  prevention: 'When instructing a commit, state the exact file list and require `git
+    commit -- <paths>` (or an equivalent explicit pathspec) rather than a plain `git
+    commit`. A plain commit takes the whole index, so any file pre-staged by an earlier
+    action in the session silently rides along at whatever revision was staged. Also:
+    before accepting a commit as done, diff the COMMITTED revision against the WORKTREE
+    for every tool the shipped artifacts depend on — a tool can be present at HEAD
+    and still be the wrong version, which a file-list check alone will not reveal.
+    Corollary for reproducibility: the revision of the build script that produced
+    a shipped artifact must be committed alongside it, or the artifact is not regenerable
+    from the repository.'
+  status: active
+  context: 'Commit f4badc6 ("Fix five bibliography defects and commit the field-level
+    verifier") was made by the Paper Agent. Its stat: docs/paper/main.tex, docs/paper/references.bib,
+    scripts/build_supplementary_archive.py (558 lines), scripts/verify_bibliography.py
+    (466 lines). The manuscript half is correct — I verified HEAD contains all four
+    bibliography fixes (2994807 present/2999953 gone, popets-0017 present/0018 gone,
+    Xiaolin, ISCC58397, 3406325) and the item E clause at main.tex:632, with the worktree
+    and HEAD identical for both files.
+
+
+    THE DEFECT IS THE BUILDER. The committed copy of scripts/build_supplementary_archive.py
+    is an OLD version: 558 lines at HEAD vs 957 in the worktree, 406 insertions /
+    7 deletions apart. The committed copy is missing exactly the machinery this session''s
+    rebuild depends on — assert_matches_registered_hash (0 occurrences), mirror_to_registered_path
+    (0), REGISTERED_ARTIFACT_ID (0), CONTENT_CENSUS_PATTERNS (0), and it has NO --mirror-to
+    argument at all (grep ''mirror'' = 0). Its default EXPECTED_MAIN_PDF_SHA256 is
+    still the older de5e4b63, while the worktree''s is 3877e127.
+
+
+    WHY IT MATTERS, concretely: the archive I shipped (ed01a6dc) was built by the
+    WORKTREE builder and verified by the worktree guard tests (9 passed). A future
+    session that checks out HEAD and runs the committed builder would (a) fail or
+    produce a different archive, because the stale PDF default and the missing asserts
+    change the behaviour, and (b) skip the routed copy entirely, since there is no
+    mirror step — recreating exactly the stale-routed-copy failure this session was
+    about. The guard test file tests/test_build_supplementary_archive.py is also UNTRACKED
+    (git ls-files tests/ lists only test_divisibility, test_q1_thresholds, test_statcore,
+    write_divisibility_report, write_report), so the mechanism that protects the builder
+    is not in the repository either.
+
+
+    CAUSE: the Paper Agent staged three specific files with `git add <files>` (correct
+    practice) but then ran a plain `git commit`, which commits the ENTIRE INDEX. The
+    builder had been pre-staged (`AM` in git status — added to index, modified in
+    worktree) by an earlier action in the session, so it rode along at its indexed
+    (stale) revision. The Paper Agent flagged this unprompted and accurately: it reported
+    committing a file it did not inspect or intend to commit. Two contributing factors
+    on my side: I dispatched the commit in the same message as the Patch instruction
+    ("commit the script with the fix"), which invited a broad commit; and I did not
+    state the expected file list, so the writer had no way to know that only two files
+    were in scope.
+
+
+    FIX: committed the correct worktree builder plus the untracked guard tests and
+    the field-level verifier''s guard coverage, with an explicit pathspec and no broad
+    `git add`. HEAD now reproduces the shipped archive. Local only — not pushed.'
+- id: M184
+  date: '2026-09-25'
+  category: experiment_design
+  severity: medium
+  summary: 'The rule "the platform snapshots docs/paper/ wholesale" was false and
+    I had repeated it across several loops unmeasured. It manufactured a false .fls
+    leak alarm this round. Measured from artifacts/submission.tar.gz: the snapshot
+    is a selected source set (10 .tex + main.pdf + figures + .sty + .bib) with ZERO
+    LaTeX intermediates and zero internal-path files; main.fls predates the snapshot
+    and is still absent, so it is a filter, not luck.'
+  root_cause: I adopted "the platform snapshots docs/paper/ wholesale" from the D233
+    sequencing incident and repeated it in ROADMAP and both task_context files without
+    ever enumerating the snapshot's members. The phrasing was a plausible generalisation
+    of one observation (scratch PNGs appeared in a snapshot) rather than a measurement
+    of the mechanism. It then propagated as an authoritative rule and was used this
+    round to derive a leak finding.
+  prevention: 'Describe a pipeline''s behaviour only from the artifact it produces,
+    never from a plausible-sounding summary of it. For any "X lands in Y" claim, extract
+    the actual container and enumerate its members; a rule that has been repeated
+    across several loops is exactly the kind that has never been measured. Specifically
+    here: the submission snapshot''s composition should be read from artifacts/submission.tar.gz
+    whenever it matters, and any "wholesale copy" phrasing must be replaced with the
+    measured set (.tex + main.pdf + figure assets + .sty + .bib). Corollary: a false
+    rule causes damage in BOTH directions — it invents alarms and it falsely bounds
+    scope — so correcting it in every document that carries it matters as much as
+    fixing the alarm.'
+  status: active
+  context: 'A repeated claim in the project documents — "the platform snapshots docs/paper/
+    wholesale" — is false, and I carried it forward across several loops without ever
+    measuring the snapshot itself. This round a read-only reviewer reasoned from it
+    to a concrete leak claim: `docs/paper/main.fls` line 1 prints `PWD /efs/workspace/projects/epsilon-.../docs/paper`,
+    and since main.fls lives inside docs/paper, the reasoning went, it must land in
+    the submission.
+
+
+    I refuted it by extracting the authoritative artifact rather than reasoning about
+    it. artifacts/submission.tar.gz holds 47 entries: 10 .tex, 6 .pdf, 29 .png, 1
+    .sty, 1 .bib. It contains ZERO LaTeX intermediates — no .fls, .aux, .log, .out,
+    .bbl, .blg, .fdb_latexmk, .synctex. A content scan of the extracted snapshot for
+    /efs/, /root/, /home/, autodl, seetacloud, connect.westb, LianningLBY returns
+    zero files. Decisively: main.fls has mtime 2026-09-23 07:00 and the snapshot is
+    2026-09-25 01:15, so the file EXISTED when the snapshot was taken and was still
+    excluded — which makes this an inclusion filter, not a coincidence.
+
+
+    WHY THE FALSE RULE MATTERED, in both directions:
+
+    - It manufactured a false-positive leak alarm this round (the .fls claim would
+    have sent a worker to "fix" a non-problem).
+
+    - It is also falsely REASSURING about scope: "everything in that directory ships"
+    does not tell you which files actually ship, so it cannot support a completeness
+    argument either. The D233 incident (24 scratch PNGs + internal notes in a snapshot)
+    is real and is explained differently — those files were INSIDE the selected set
+    at submit time (as _pdf_images/*.png and a stray .md), not swept in by a directory
+    copy. The earlier 49-entry snapshot and the current 47 differ by exactly the two
+    files (camera_ready_plan.md, references.bib.prev) that were moved out, which is
+    consistent with the filter reading.
+
+
+    WHAT I DID: corrected the rule in ROADMAP.md and task_context/director.md and
+    task_context/agent.md with the measured composition, marked the .fls item explicitly
+    closed-as-refuted so it is not re-filed, and split the one genuine item the sweep
+    surfaced (EIBO in main.tex:2 and archive members — the open half of R18-C6b) into
+    the tracker with its scope closed.'
+- id: M185
+  date: '2026-09-25'
+  category: agent_behavior
+  severity: medium
+  summary: I stated in D249 that four specific archive files fall under the D216/D217
+    disclosure ruling "because they carry internal hash/digest fields" — measured,
+    all four carry ZERO such fields. The ruling and my action were right; the stated
+    reason was false. Committed one turn after refuting the identical reasoning in
+    the Agent's report.
+  root_cause: 'I inherited the property "carries internal hash/digest fields" from
+    a class-level statistic in the R18-A1 tracker entry (23 of 39 leaking files) and
+    applied it to four specific named files without measuring them. Same defect as
+    the .fls reasoning I had just refuted: a plausible generalisation substituted
+    for a measurement of the object under claim.'
+  prevention: 'When applying a ruling that rests on a PROPERTY, measure that property
+    on the object in front of you before citing it — a class-level statistic ("23
+    of the 39") is not a property of a named file. Concretely: before writing "because
+    X carries Y", grep X for Y. And treat this as a live hazard on the turn AFTER
+    refuting the same reasoning in someone else''s report: having just articulated
+    a rule is not having applied it, and the adjacent question is exactly where it
+    slips.'
+  status: active
+  context: 'In D249 I disposed of the archive-member half of the EIBO item by writing
+    that those code files "fall under the standing D216/D217 ruling (ship byte-identical
+    + README disclosure) because they carry internal hash/digest fields". I had inherited
+    that property from the R18-A1 tracker entry, which says "23 of the 39 carry internal
+    hash/digest fields". I applied it to four specific files without checking whether
+    they were among the 23.
+
+
+    Measured: src/eibo/statcore.py, src/eibo/__init__.py, tests/test_statcore.py and
+    figures/paper/_generators/render_fig1.py each contain ZERO occurrences of sha256/hash/digest/checksum.
+    My stated reason was false for every one of them.
+
+
+    This is precisely the error I had refuted in the Main Agent''s report ONE TURN
+    EARLIER (D249''s own first finding): it reasoned from a repeated generalisation
+    to a conclusion about a specific object without measuring that object. I wrote
+    the refutation and then committed the same fault in the same document, on the
+    adjacent question.
+
+
+    WHAT SURVIVES: my D249 ACTION was right — batch the main.tex edit, do not edit
+    evidence to hide metadata — and the D216/D217 ruling stands. Only the stated REASON
+    was wrong. The honest reason is narrower and I verified it: the hash-cited set
+    is 17 members, all under supplementary/data/, with ZERO under code/, generators/
+    or latex/, so an EIBO-token edit to those files would break no printed hash at
+    all. The D216/D217 ruling is a deliberate cost/benefit choice about not curating
+    evidence, and it does not need the hash-field property to hold.
+
+
+    Also verified while checking: render_fig1.py:16 carries a hardcoded absolute path,
+    which IS covered by the R18-A1 disclosure (and the README caveat), so no new action
+    — but it shows the archive tokens are documented rather than removed, which is
+    the ruling''s actual substance.
+
+
+    Corrected in the tracker (R18-C6b resolution restated), ROADMAP and D252.'

@@ -10,7 +10,9 @@ in this area are evaluated by their own error rates, and an error rate is a
 statement about one system rather than a statement about the problem. We call the
 object this paper builds \emph{certification-grade}: every number it reports is
 tied to a stated confidence level and a stated assumption, each named rather than
-borrowing strength from the other.
+borrowing strength from the other. The term is finite-sample only:
+$\varepsilon$ is a total-variation distance between two service laws, not a
+differential-privacy parameter, and no mechanism is claimed private.
 
 What a practitioner needs is the other direction: a bound on how well
 \emph{any} classifier can do, at a stated observation window, for a stated pair
@@ -42,7 +44,7 @@ informative and destroys the certificate at the same time. The cause is not the
 confidence radius, as we first assumed, but the estimator's own upward bias on a
 fine alphabet: at $k{=}30$ the median empirical distance is already $0.9979$,
 with $597$ of $820$ pairs at or above $0.99$, so the plug-in estimate has
-saturated near one before any radius is added (\Cref{fig:horizon}). The
+saturated near one before any radius is added (\Cref{tab:grid}). The
 upper-side set falls from 340 pairs at the coarsest rung to none three rungs
 finer, and the joint gate admits 336 at that rung because four pairs clear the
 upper side and fail the lower. The coarse channel is therefore not a concession

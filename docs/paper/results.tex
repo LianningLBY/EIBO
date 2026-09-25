@@ -237,14 +237,14 @@ open-set substitution declared below runs the other way, narrowing the citable
 statement to the surrogate actually measured.
 \emph{Prototype} is a nearest-centre rejector in the style of prototype-radius
 open-set methods \citep{qu2026sepspace}: one mean centre per service, with a
-per-service acceptance radius set at a fixed distance quantile of the training
+per-service acceptance radius set at a distance quantile $0.95$ of the training
 points around its own centre, so a test flow is accepted when its distance to
 the nearest centre falls inside that centre's radius.
 \emph{RoNeTC} follows the uncertainty-quantified rejector of
 \citet{wang2025reliable}: an MLP with two hidden layers of width
 $\min(128, 2d)$, ReLU activations and dropout $0.20$, trained with Adam at
-$10^{-3}$ for a fixed epoch budget and scored by Monte-Carlo dropout sampling
-(64 passes), with rejection driven by predictive uncertainty.
+$10^{-3}$ for $5$ training epochs and scored by Monte-Carlo dropout sampling
+($8$ passes), with rejection driven by predictive uncertainty.
 A fourth detector, a Pcap-Encoder adapter, was not part of the evaluated
 panel; it contributes no cells and is not counted as a pass.
 
@@ -256,7 +256,8 @@ strongest cell is $p = 0.9765$, so no correction for multiplicity could change
 the verdict, and we make no family-wise claim beyond that. The binomial treats
 the 340 pairs as independent draws, which they are not: they form a graph over
 the same services, with a maximum pair-degree of 27, so the effective
-independent sample size lies somewhere between 43 and 340. The $340$
+independent sample size lies somewhere between 43 and 340 (a heuristic bound,
+used conservatively). The $340$
 informative pairs span $43$ of the $45$ services, under the full-$n$ convention
 of \Cref{sec:results/datasets} (the other $2$ carry no informative pair). The reported
 $p$-values are therefore anti-conservative. That does not affect the
@@ -296,7 +297,8 @@ as a pass.
 regression on the same $32$-symbol one-hot representation reaches a median
 balanced error of $0.366$ against a per-pair floor $(1-\epshi)/2$ (median
 $0.198$), clearing its own floor on every pair ($0/990$); its implied $\tv$
-(median $0.267$) is weaker than the certified lower bound (median $0.535$), so
+(median $0.267$) is weaker than the certified lower bound (capped-convention
+median $0.535$), so
 the certificate is consistent with, but not tight against, the classification
 risk.
 

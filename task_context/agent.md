@@ -1,47 +1,50 @@
 ---
-loop: 5
+loop: 6
 reason: max_wall_time
-updated: '2026-09-23T21:09:09+00:00'
+updated: '2026-09-25T05:24:02+00:00'
 ---
 
 ### 1. 🔴 Hard constraints / red lines
-- **`docs/paper/` is untouched and must stay that way.** Current delivered build `5f08a9fb…` / 414,613 B / 24 pp. Any source edit voids the SHA-bound visual receipt. Three `\clearpage` at `main.tex:69/94/243`.
-- **I do not author paper text.** Drafting prose, labels, references, registry entries = paper content, even on a scratch copy, even as a diff. Hand back a verified evidence package and refuse in the open. The Director confirmed and retracted the instruction that asked for the edit diff. Scratch-copy *compile-and-measure* of an unmodified copy IS allowed.
-- **All D181 work is CPU-only and runs LOCALLY.** Server 111's GPU has no GPU-eligible work; the recurring idle notice is C055 binding/timing mismatch. **Do not `read_registry`, check workers, write `[Resources]`, or report on GPU-idle notices.** Silence is the standing rule.
-- **Every answer to a Director instruction goes through `main_agent_post_to_director`.** Plain-text output is invisible. I lost a full turn failing this.
-- **`register_artifact` COPIES into a type-routed path and SUFFIXES on collision.** Never re-register.
-- **Server 111 has NO `python3` on PATH** — use `/root/miniconda3/bin/python3`.
-- **Do not let two workers share one scratch directory.**
+- **`docs/paper/` current build.** `main.pdf` = `4e0a80a2e86f50a9d9eee3dbad307e5b188b32756ba28d7a2dfdc4795eb54634`, 24 pp, body ends **p.13**, **valid 24/24 visual receipt (2026-09-25T10:56:40)**. Any source edit voids that receipt and forces a fresh render + full visual gate. ⚠️ Superseded: `04b7507f…` (pre-edit), `7a93909f…` (after the bib pass), and the typo variant `04b7507f9f80ac8b…` which never existed in any artifact. Do not compare either against the current build and call the difference a defect (a bib edit shifts reference numbers, so the sha MUST change).
+- **The delegation guard is unpredictable** — it rejects worker dispatches with "Paper writing is owned by the Director-dispatched Paper Agent" on tasks with no manuscript content (Python maintenance, read-only integrity checks, **even release/packaging work like the archive rebuild**) when the prompt mentions bibliography/paper nouns. **Per C010/C015: report the literal error ONCE, stop, hand to the Director. Do NOT reword to evade.** The Director then executes or re-routes.
+- **Manuscript edits are the PAPER AGENT's, never yours** (L1 #2). `.tex` prose, `references.bib`, and captions go to `director_post_to_paper_agent`; you own code, data, builds, artifacts and verification. A `.bib` fix *looks* like ordinary file editing — classify by the artifact's role, not the change's mechanics (M182).
+- **`register_artifact` cannot set `content_sha256`** (C053 — already recorded, not new). It also copies to a type-routed path and suffixes on collision — never re-register.
+- **Never whole-file rewrite `memory.md`** (C023/C028). It is 208 KB and rewriting has dropped sections 5×; I destroyed it once this session with `save_project_file` and had to recover from git.
+- **One writer per output file.** Two workers on one target reported different counts off the same file — benign landing order, not design.
+- C055: the `[GPU IDLE]` nudge for `111:cuda:0` is a **known binding mismatch** — acknowledge, do not re-triage. Verified this session: 0 ALLOCATED, 0 active crons.
 
 ### 2. 🖥️ Infrastructure snapshot
-- Server `111`, account `root`, project `/root/eibo` — but all D181 jobs ran locally, not there.
-- Local Python: `PYTHONPATH=/efs/home/.local/lib/python3.12/site-packages /app/.venv/bin/python3` (3.12.14, numpy 2.5.3, sklearn 1.9.1; the venv lacks SciPy so the PYTHONPATH injector is mandatory).
-- Corpus `/efs/workspace/_corpus/CESNET-QUICEXT-25-XS.h5` — one level ABOVE the project tree; sha `6b323c4c…`.
-- **Active processes: NONE. Workers: 0. Registry RUNNING/ALLOCATED: 0.** Only `X9_C` (PREPARING/`killed`) — stale withdrawn design, exclude when filtering.
-- Disk 111 = 20% (~25 GB free).
-- Scratch artifacts from this session at `artifacts/_project/scratch/lever1_recheck/` (two builds: `baseline_final/` and `lever1_final/`, each with a compiled PDF) and `artifacts/_project/scratch/metric_defs/METRICS.md`.
+- **All work this session was LOCAL.** No GPU/remote server bound to this project; all experiment lines are CPU-only.
+- Local Python: `PYTHONPATH=/efs/home/.local/lib/python3.12/site-packages /app/.venv/bin/python3` (3.12.14, sklearn 1.9.1 — NOT canonical). Canonical ledgers were produced on server 111 `/root/miniconda3` (3.12.3, sklearn **1.9.0**, numpy 2.3.2). Server 111 has no `python3` on PATH.
+- Corpus: `/efs/workspace/_corpus/CESNET-QUICEXT-25-XS.h5` — **one level ABOVE the project tree** (a project-tree search reports it missing).
+- Archive builder (tracked, committed at `5fd92c2`): `scripts/build_supplementary_archive.py`; its guard suite `tests/test_build_supplementary_archive.py` (9 cases). ⚠️ The previously cited `artifacts/_project/scratch/check_supp_archive.sh` is **gone** — scratch was deliberately deleted this session so it cannot be swept into a submission snapshot. Use the tracked guard suite instead.
+- Deliverable: `artifacts/supplementary.tar.gz`; registered copy at `artifacts/_project/data/supplementary.tar.gz` = **`art_20260924_2d151d`**.
+- Active processes: none. Workers: 0. Crons: 0.
 
 ### 3. 📊 Current state
-**Waiting on two things, both external to me:**
-1. **The Paper Agent** has a four-edit spec for `measurement_design.tex` (cap count 29→6, alpha label 0.012→labelled pair, floor labelling ×4 sites, citation gap ×2 artifacts). The Director reviews its diff, then instructs the single batched rebuild with one fresh render and one visual gate.
-2. **The PI** is reviewing the delivered D181 revision (`5f08a9fb…`). No new experiment or verification work starts until the PI rules.
+- **Finished:** supplementary archive rebuilt after the bibliography edit, **registered as `art_20260924_2d151d`**, sha `7a48cf6e47ba8614b2501029fd06342379485173ca5b54c27dd07a206d343f22`, 4,252,311 bytes, 88 entries, 0 root-level files. Tree copy == routed copy (`cmp` identical) == manifest `content_sha256`. Embedded `main.pdf` = `4e0a80a2…` and embedded `references.bib` = `7f179141…`, both byte-identical to the tree, so the manifest description's byte-match claim is TRUE again. The description's hardcoded PDF prefix was re-pinned to `(4e0a80a2)` in the same pass. Guard tests: **9 passed, 12 subtests passed**. Not re-registered (the entry's own `content_sha256` now equals the shipped bytes — that IS the pin; re-registering duplicates, C053).
+  - ⚠️ **The rebuild is a TWO-PASS sequence and pass 1's exit 1 is BY DESIGN**: the manifest assert returns before the mirror, so pass 1 writes new bytes and fails, then you re-pin, then pass 2 mirrors and exits 0. Invoke with `--expected-main-pdf-sha256 4e0a80a2…` explicitly — the script's built-in default is a superseded hash.
+  - ⚠️ **A stale hash in an artifact's PROSE is invisible to every hash assert** (asserts check hashes, not sentences). Read the entry; do not trust the asserts alone.
+- **Cleared earlier:** `X9_C` moved PREPARING → QUEUED → DONE (`conclusion: killed`). C034/M131 said this was impossible; it is not — the QUEUED→DONE path works. Registry now has 0 non-terminal rows.
+- **Registry:** 0 RUNNING / 0 ALLOCATED / 0 QUEUED.
+- **Bibliography:** 4 corrections landed (sekeh dead DOI → `…2994807`; smith `…0017` + locators; li2023facing 5 → **6 authors** with Xiaolin Xu at pos. 4 + published ISCC DOI + pages; diakonikolas → STOC '21) plus `$\sqrt{C} \approx 2.96\times$` at main.tex:632. `scripts/verify_bibliography.py` now reads **MISMATCH=1** — the single held item is `liu2026inevitability` (prints "Guang Cheng"; arXiv 2602.14055 says "Guang Chen" but the sister paper 2607.17889 says "Guang Cheng", so the two arXiv records contradict each other and no independent index exists). **DO NOT EDIT IT** without an authoritative record.
+- **Repository:** commit `5fd92c2` carries the **build-script revision that actually produced the shipped archive** plus the 9-case guard suite; `3aef387` carries the **verifier revision that reports MISMATCH=1**. BOTH tools now match HEAD (M183 twice: once a stale revision rode into a commit, once a good fix was never committed — verify by running `git show HEAD:<tool>`).. ⚠️ A bare `git commit` commits the WHOLE index, so a pre-staged stale revision rides along; **always commit with an explicit pathspec** and confirm `git diff --cached --name-only` first (M183). Local commits are **not pushed** — pushing is a visible action awaiting the PI.
+- **Pending:** the PI's two decisions — venue (D236) and the Round 19 registration failure (D235). No worker callbacks, no crons.
 
-**Registry:** 0 RUNNING, 0 ALLOCATED. `X9_C` is the only non-DONE row (PREPARING/killed, stale).
-**Workers:** 0 in flight. Last two (lever-1 recheck, metric-def check) both completed this session.
-**Crons:** 0 active.
-
-### 4. 📋 To-do (condition-triggered)
-- **Paper Agent returns the diff → Director reviews → Director instructs rebuild** → when the rebuilt PDF exists, the reviewer ping MUST include the item-(3) refutation (detector gap "0.63 should be 0.54" is WRONG; arm arithmetic: 0.830−0.197=0.633, not 0.737−0.197=0.540). Otherwise the phantom gets re-filed.
-- **PI rules on the D181 revision → Director relays** → act on whatever direction arrives. If Accept, the camera-ready stage opens and the per-page table must be regenerated first (the plan's table is unusable — not reproducible from its cited build under any metric). If Reject with findings, prepare evidence as before.
-- **Any `register_artifact` instruction → grep the manifest for the name FIRST.** Re-registering makes a suffixed duplicate.
-- **Any count/presence claim → parse and diff key sets**, never count with a regex.
-- **Any relational claim from a review → re-derive from the artifact before editing.** One third of the last critical report was wrong.
+### 4. 📋 To-do
+- **PI rules on Round 19 → Director relays → act.** If accepted, camera-ready stage opens (and `camera_ready_plan.md`'s per-page table must be regenerated from the then-current bytes with an explicit metric).
+- ⚠️ **The submission snapshot is a SELECTED SOURCE SET, not a wholesale directory copy (D249).** Measured from `artifacts/submission.tar.gz`: 47 entries = 10 `.tex`, 6 `.pdf`, 29 `.png`, 1 `.sty`, 1 `.bib`, and **ZERO LaTeX intermediates** (no `.fls`/`.aux`/`.log`/`.out`/`.bbl`/`.blg`/`.fdb_latexmk`); a content scan of the extracted snapshot for `/efs/`, `/root/`, `/home/`, `autodl`, `seetacloud`, `connect.westb` returns **zero files**. `main.fls` predates the snapshot and is still absent ⇒ an inclusion filter, not luck. **Do NOT re-file a ".fls leaks a path into the submission" finding** — that was raised this round and is refuted. `_pdf_images/` must still be deleted before submitting and `camera_ready_plan.md` must stay out of `docs/paper/`, because anything inside the selected set at submit time does ship. **Measure the snapshot, do not reason about it from the old "wholesale" phrasing — that phrasing was false and caused the false alarm.**
+- 🔴 **`EIBO` (public repo name) ships in `docs/paper/main.tex:2` — open half of R18-C6b (D249).** Caption half is fixed; 0 occurrences reach the rendered PDF. Safe to edit (no printed hash resolves to any CODE/latex/generator member). **Batch with the next source edit**; it is not a blocker.
+- **Any paper source edit → the archive must be rebuilt** (its embedded `main.pdf` would go stale against its own sources), and needs a fresh render + 24-page visual gate.
+- **Any `register_artifact` call → grep the manifest FIRST** for the name and hash (re-registering duplicates an entry), and expect a hash-less entry needing a manual pass over the entry's own path.
+- **Any "not cited" / "absent" claim → normalise `\_` → `_` before matching against `.tex`.** A regex for `art_[0-9]{8}_[0-9a-f]{6}` matches nothing in LaTeX and produces false "uncited" verdicts.
+- **If a dispatch is guard-blocked → report the literal error once and stop.**
 
 ### 5. 🎯 Strategic context
-**Decision chain highlights:** D143 ladder abandoned · D166 m-free Hoeffding verified · D168 paper convention is UNCAPPED · D169/D170 Track 5 closed · D178 Round 14 Accept 3/3 · D181 PI overrode Accept as Reject → evidence phase complete, revision delivered (`5f08a9fb…`) · D182 m-free route adopted as headline · D188 four text-accuracy edits identified, spec with Paper Agent.
-
-**The four edits are with the Paper Agent, not me.** The authoring boundary was tested twice this session — I over-refused a scratch compile (wrong), then correctly refused a prose-editing task. The Director confirmed and retracted. Do not collapse these two again.
-
-**Most likely misjudgement by the next me:** (1) treating a reviewer's "critical" as an instruction rather than a claim to re-derive — item (3) was wrong and aimed at a correct number; (2) quoting a hash from an instruction message and inheriting its truncation — always take hashes from the manifest; (3) attributing an effect to the wrong variable — lever 1 moves the Ethics heading from p.14 to p.13, not D181; the unmodified rebuild is the control that proves it.
-
-**Bytes-vs-chars is RESOLVED (not a live issue).** `wc -c` = UTF-8 bytes, Python `len()` = characters; the 12/2/16 byte gaps on p13/p14/p16 match exactly 6/1/8 non-ASCII glyphs at 2 bytes each. Both metrics are stable. The metric-independent content statement (footer-stripped hash `cd13e95b…` identical on both builds) is the statement of record for lever-1 equivalence.
+- **The session's central lesson: verification scope ≠ verification correctness.** The archive passed 41/41 hash matches and 17/17 cited-ID resolution — both true — while missing **all four** categories the paper promises *by description* (core module code, detector payload, estimator family, cross-corpus stratification). A check over what was CHOSEN cannot detect an omission. **Both the Director and I initially reported that artifact as correct.**
+- **The fabricated-bib-field class RECURRED (2nd time).** DeepSE-WF carried a fabricated title and two invented given-names. Correct: **Alexander Veicht, Cédric Renggli, Diogo Barradas**, PoPETs 2023(2):188–205, DOI `10.56553/popets-2023-0047` — I verified this against the publisher, not just by reading the file. Source fixed and rendered; **the check is still not mechanised anywhere.**
+- **A PDF hash is a build-instance id, not a content id** — the build has changed repeatedly (`de5e4b63` → `b3e3af06` → `668f2460` → `b104b41b` → `3877e127` → `04b7507f` → `7a93909f` → **`4e0a80a2` current**). Always measure; never inherit a hash from an instruction message, and never treat a changed hash as a defect across an edit boundary.
+- **Easy pitfalls:** (a) treating a reviewer's "critical" as an instruction rather than a claim to re-derive; (b) a guard test that cannot produce its own failure state is not evidence about the guard (the +120s freshness test); (c) the extremum-direction error — the slug needed BOTH patterns (9 *and* 11), since either alone misses files.
+- **⚠️ A negative result needs a POSITIVE CONTROL.** A probe can be *structurally incapable* of matching and still print "False" — `re.search('i.ka, Pavel', flat)` can never match `Šiška` because `Š` is not `i`, so its "False" carried no information about the PDF. This nearly produced a second false "missing author" on the entry whose omitted-author claim was already retracted. And a check that RAISED (`SyntaxError`) was followed by one that reported anyway. **When a check returns a negative, prove it CAN return True** (pass a known-present string through the same probe) before believing it; and discard the reading if any step in the same run threw.
+- **⚠️ `grep -c` counts matching LINES, not matches, and a substring relation poisons a presence check.** `grep -c "Guang Chen"` returned 3 only because `Chen` is a substring of `Cheng`; under `grep -oP "Guang Chen\b"` the true count is 0. For presence/absence of a name, use word boundaries with `grep -o | wc -l`.
+- **✅ The earlier "OWED TO memory.md, NOT WRITTEN" block is DISCHARGED — do not redo it.** Those three lessons (verification scope vs correctness; a rewritten dispatch prompt silently drops sections; one writer per output file) are all written to the auto-memory store. Re-writing them would duplicate entries, which the memory rules forbid.
