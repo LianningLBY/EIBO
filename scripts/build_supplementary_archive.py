@@ -24,7 +24,14 @@ BASE = Path(
 )
 WORKSPACE_ROOT = Path("/efs/workspace")
 DEFAULT_OUTPUT = BASE / "artifacts" / "supplementary.tar.gz"
-EXPECTED_MAIN_PDF_SHA256 = "de5e4b63e24d830f9606f7783fe37835fe23a25d0b2b4b7a6031b10b1060f15d"
+# The path the manifest cites for art_20260924_2d151d. Registration copied the
+# built archive here once; re-running the build without mirroring would leave this
+# copy stale while every other assert still passed.
+REGISTERED_OUTPUT = BASE / "artifacts" / "_project" / "data" / "supplementary.tar.gz"
+# Manifest id for this archive; the build compares its own output hash against the
+# recorded one so a rebuild cannot silently leave the record stale.
+REGISTERED_ARTIFACT_ID = "art_20260924_2d151d"
+EXPECTED_MAIN_PDF_SHA256 = "3877e12747d608a741a5cd09fd2db4a3d6356e6901d5cbc6d007aee0ad4a315f"
 
 
 CODE_MEMBERS = (
@@ -131,6 +138,89 @@ FORBIDDEN_ENTRY_RE = re.compile(
     re.IGNORECASE,
 )
 ARTIFACT_ID_RE = re.compile(r"art_[0-9]{8}_[0-9a-f]{6}")
+PROJECT_SLUG = "epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-recognition-certification-grade"
+# The slug is also spelled across Python string-concatenation boundaries in the
+# figure generators, where the contiguous full slug never occurs (it is split as
+# "...-open-set-encrypted-traffic-" + "recognition-certification-grade"). Matching
+# only the full slug misses those files, and the miss is in the hiding direction.
+PROJECT_SLUG_PREFIX = "epsilon-indistinguishability-brackets-for-open-set-encrypted-traffic-"
+CONTENT_CENSUS_PATTERNS = {
+    "root": "/root/",
+    "efs": "/efs/",
+    "home": "/home/",
+    "usr": "/usr/local/",
+    "autodl": "autodl",
+    "eibo": "eibo",
+    "slug": PROJECT_SLUG,
+    "slug_prefix": PROJECT_SLUG_PREFIX,
+}
+EXPECTED_LEAK_BASELINE = {
+    "root": 17,
+    "efs": 12,
+    "home": 1,
+    "usr": 1,
+    "autodl": 11,
+    "eibo": 33,
+    "slug": 9,
+    "slug_prefix": 11,
+}
+# PDF metadata values that indicate a toolchain, not a person or institution.
+# The project's own main.pdf carries empty-string Author/Title/Subject/Keywords,
+# so "" must be treated as absent rather than as a hit.
+PDF_METADATA_ALLOWED_PREFIXES = (
+    "pdfTeX-",
+    "LaTeX with hyperref",
+    "Matplotlib",
+)
+EXPECTED_LEAK_BASELINE_FILES = (
+    "supplementary/code/__init__.py",
+    "supplementary/code/statcore.py",
+    "supplementary/code/test_divisibility.py",
+    "supplementary/code/test_statcore.py",
+    "supplementary/code/xs_compression_early_readout.py",
+    "supplementary/data/ci_k_ladder.json",
+    "supplementary/data/coverage_calibration_ladder.json",
+    "supplementary/data/coverage_calibration_v2.json",
+    "supplementary/data/coverage_calibration_v2.md",
+    "supplementary/data/d181_balanced_accuracy_risk_interval.json",
+    "supplementary/data/d181_same_channel_classifier.json",
+    "supplementary/data/d181_tv_saturation_simulation.json",
+    "supplementary/data/masking_regime_sweep.json",
+    "supplementary/data/q1_absolute_counts.meta.json",
+    "supplementary/data/q1_absolute_counts_k10.meta.json",
+    "supplementary/data/q1_gate_five_pairs_full_n.json",
+    "supplementary/data/q1_lower_side_full_n.json",
+    "supplementary/data/track5_armE_design.json",
+    "supplementary/data/track5_diagnosis_between_block.json",
+    "supplementary/data/track5_radius_form_coverage.json",
+    "supplementary/data/track5_skewness_prefixes_D.json",
+    "supplementary/data/x11_full_bracket.json",
+    "supplementary/data/x12_detector_validation_k5.json",
+    "supplementary/data/x12_k5_containment_corrected_342.json",
+    "supplementary/data/x12_label_space_check.json",
+    "supplementary/data/x1_headline_table.json",
+    "supplementary/data/x3_chain_rule_divergence.json",
+    "supplementary/data/x3_control_heterogeneous_iid.json",
+    "supplementary/data/x3_control_known_truth.json",
+    "supplementary/data/x3_control_occupancy_dose_response.json",
+    "supplementary/data/x3_fixed_population_and_occupancy.json",
+    "supplementary/data/x3_variant_a_estimator_family.json",
+    "supplementary/data/x3_variant_c_nested_lr.json",
+    "supplementary/data/x5_estimator_ground_truth.json",
+    "supplementary/data/x9_dose_response_channels.json",
+    "supplementary/generators/DATA_PROVENANCE.json",
+    "supplementary/generators/build_data.py",
+    "supplementary/generators/render_fig1.py",
+    "supplementary/generators/render_figs.py",
+    "supplementary/latex/main.tex",
+)
+TEXT_SUFFIXES = {".json", ".md", ".py", ".csv", ".tex", ".txt", ".sty", ".bib"}
+BINARY_SUFFIXES = {".pdf", ".png", ".npz", ".h5", ".pyc"}
+PDF_METADATA_KEYS = ("Author", "Producer", "Title", "Creator", "Subject", "Keywords")
+PDF_METADATA_REGEX = (
+    r"/(Author|Producer|Title|Creator|Subject|Keywords)\s*"
+    r"(?:\(([^()]*)\)|<([0-9A-Fa-f\s]+)>)"
+)
 
 
 @dataclass(frozen=True)
@@ -177,7 +267,7 @@ def resolve_manifest_path(raw_path: str) -> Path:
     try:
         resolved.resolve().relative_to(WORKSPACE_ROOT.resolve())
     except ValueError as exc:
-        raise ValueError(f"manifest path escapes /efs/workspace: {raw_path}") from exc
+        raise ValueError(f"manifest path escapes workspace root: {raw_path}") from exc
     return resolved
 
 
@@ -313,6 +403,14 @@ def staged_files(staging: Path) -> list[Path]:
     return sorted(path.relative_to(staging) for path in staging.rglob("*") if path.is_file())
 
 
+def assert_root_only(staging: Path) -> list[str]:
+    errors: list[str] = []
+    for rel in staged_files(staging):
+        if not rel.parts or rel.parts[0] != "supplementary":
+            errors.append(f"{rel.as_posix()}: staged file is outside supplementary/")
+    return errors
+
+
 def category_counts_from_staging(staging: Path) -> dict[str, int]:
     counts = {"code": 0, "data": 0, "generators": 0, "latex": 0}
     for rel in staged_files(staging):
@@ -356,7 +454,16 @@ def write_readme(staging: Path, manifest: dict[str, dict]) -> None:
             "## Server-Only Payloads",
             "",
             "No payload is copied directly from a server-only path by this archive builder. "
-            "All included payloads are resolved from local manifest paths under `/efs/workspace`.",
+            "All included payloads are resolved from the project artifact manifest.",
+            "",
+            "## Provenance Metadata",
+            "",
+            "Some artifacts in this archive are provenance records written by the tools that produced them. "
+            "Those records include local execution paths and environment details of the machine that ran the analysis, "
+            "such as a project directory name, a container path, a Python environment path, and, in two analysis files, "
+            "a private cloud hostname and region string recorded by a non-canonical analysis run. "
+            "The artifacts are shipped byte-identical and unedited so that the content hashes printed in the paper remain valid. "
+            "The recorded paths are provenance metadata, not results.",
             "",
             "## Cited Artifact Provenance",
             "",
@@ -410,6 +517,180 @@ def forbidden_entries(staging: Path) -> list[str]:
     return offenders
 
 
+def content_census(staging: Path) -> tuple[dict[str, int], dict[str, list[str]], set[str]]:
+    per_pattern: dict[str, int] = {label: 0 for label in CONTENT_CENSUS_PATTERNS}
+    per_file: dict[str, list[str]] = {}
+    for rel in staged_files(staging):
+        suffix = rel.suffix.lower()
+        if suffix in BINARY_SUFFIXES:
+            continue
+        if suffix not in TEXT_SUFFIXES:
+            continue
+        text = (staging / rel).read_bytes().decode("utf-8", errors="replace")
+        text_lower = text.lower()
+        matches: list[str] = []
+        for label, pattern in CONTENT_CENSUS_PATTERNS.items():
+            if pattern.lower() in text_lower:
+                per_pattern[label] += 1
+                matches.append(label)
+        if matches:
+            per_file[rel.as_posix()] = matches
+    return per_pattern, per_file, set(per_file)
+
+
+def decode_pdf_hex_value(hex_value: str) -> str:
+    compact = re.sub(r"\s+", "", hex_value)
+    if len(compact) % 2:
+        compact += "0"
+    try:
+        return bytes.fromhex(compact).decode("utf-8", errors="replace")
+    except ValueError:
+        return hex_value
+
+
+def pdf_metadata(decoded: str) -> dict[str, str | None]:
+    metadata: dict[str, str | None] = {key: None for key in PDF_METADATA_KEYS}
+    for match in re.finditer(PDF_METADATA_REGEX, decoded):
+        key = match.group(1)
+        literal = match.group(2)
+        hex_value = match.group(3)
+        if literal is not None:
+            metadata[key] = literal
+        elif hex_value is not None:
+            metadata[key] = decode_pdf_hex_value(hex_value)
+    return metadata
+
+
+def binary_content_census(staging: Path) -> list[dict[str, object]]:
+    records: list[dict[str, object]] = []
+    for rel in staged_files(staging):
+        suffix = rel.suffix.lower()
+        if suffix not in BINARY_SUFFIXES:
+            continue
+        data = (staging / rel).read_bytes()
+        decoded = data.decode("latin-1", errors="replace")
+        decoded_lower = decoded.lower()
+        matches = [
+            label
+            for label, pattern in CONTENT_CENSUS_PATTERNS.items()
+            if pattern.lower() in decoded_lower
+        ]
+        metadata = pdf_metadata(decoded) if suffix == ".pdf" else None
+        records.append(
+            {
+                "path": rel.as_posix(),
+                "matched_tokens": matches,
+                "pdf_metadata": metadata,
+            }
+        )
+    return records
+
+
+def print_content_census(per_pattern: dict[str, int], union_files: set[str]) -> None:
+    print("content_census_text:")
+    print("  per_pattern_counts:")
+    for label in CONTENT_CENSUS_PATTERNS:
+        print(f"    {label}: {per_pattern[label]}")
+    print(f"  union_count: {len(union_files)}")
+    print("  union_files:")
+    for filename in sorted(union_files):
+        print(f"    - {filename}")
+
+
+def print_binary_content_census(records: list[dict[str, object]]) -> None:
+    print("content_census_binary:")
+    print(f"  files_scanned: {len(records)}")
+    print("  token_scan: latin-1 decode with errors=\"replace\"; case-insensitive substring match")
+    print(f"  pdf_metadata_regex: {PDF_METADATA_REGEX}")
+    for record in records:
+        print(f"  - path: {record['path']}")
+        matches = record["matched_tokens"]
+        if matches:
+            print("    matched_tokens:")
+            for label in matches:
+                print(f"      - {label}")
+        else:
+            print("    matched_tokens: none")
+        metadata = record["pdf_metadata"]
+        if metadata is None:
+            continue
+        found = {key: value for key, value in metadata.items() if value is not None}
+        if not found:
+            print("    pdf_metadata: none")
+        else:
+            print("    pdf_metadata:")
+            for key in PDF_METADATA_KEYS:
+                value = found.get(key)
+                if value is not None:
+                    print(f"      {key}: {value}")
+
+
+def assert_render_not_older_than_sources() -> list[str]:
+    """Fail if the compiled PDF predates any shipped paper source.
+
+    A matching embedded-PDF hash proves which render ships; it says nothing about
+    whether the sources beside it moved afterwards. A stale PDF next to a newer
+    .bib or .tex is exactly how a fabricated bibliography entry reached a shipped
+    archive while the hash assert passed on every run.
+    """
+    paper_dir = BASE / "docs/paper"
+    main_pdf = paper_dir / "main.pdf"
+    if not main_pdf.exists():
+        return [f"missing render: {main_pdf}"]
+    pdf_mtime = main_pdf.stat().st_mtime
+    newer: list[str] = []
+    for pattern in ("*.tex", "*.bib", "*.sty"):
+        for source in sorted(paper_dir.glob(pattern)):
+            if source.stat().st_mtime > pdf_mtime:
+                newer.append(f"{source.name} (source is newer than main.pdf)")
+    return newer
+
+
+def content_census_guard(
+    per_pattern: dict[str, int], union_files: set[str]
+) -> list[str]:
+    errors: list[str] = []
+    baseline_files = set(EXPECTED_LEAK_BASELINE_FILES)
+    new_files = sorted(union_files - baseline_files)
+    if new_files:
+        errors.append("files not in EXPECTED_LEAK_BASELINE_FILES:")
+        errors.extend(f"  {filename}" for filename in new_files)
+    for label in CONTENT_CENSUS_PATTERNS:
+        baseline = EXPECTED_LEAK_BASELINE[label]
+        observed = per_pattern[label]
+        if observed > baseline:
+            errors.append(
+                f"{label}: observed count {observed} exceeds baseline {baseline}"
+            )
+    return errors
+
+
+def binary_content_guard(records: list[dict[str, object]]) -> list[str]:
+    """Fail on any leaking token or unexpected PDF metadata in a binary member.
+
+    The binary census previously computed and printed these records without any
+    consumer, so a figure PDF carrying an author name or a leak token would be
+    detected and accepted. This gives the records a failure path.
+    """
+    errors: list[str] = []
+    for record in records:
+        path = str(record.get("path", "?"))
+        tokens = record.get("matched_tokens") or []
+        if tokens:
+            errors.append(f"{path}: matched leak tokens {tokens}")
+        metadata = record.get("pdf_metadata") or {}
+        for key, value in metadata.items():
+            # Empty string means the field is present but unset (the project's own
+            # main.pdf carries "" for Author/Title/Subject/Keywords). Treat it as
+            # absent, or every build would fail on a clean artifact.
+            if value is None or str(value).strip() == "":
+                continue
+            if str(value).startswith(PDF_METADATA_ALLOWED_PREFIXES):
+                continue
+            errors.append(f"{path}: unexpected PDF metadata {key}={value!r}")
+    return errors
+
+
 def write_deterministic_archive(staging: Path, output: Path) -> tuple[str, int, int]:
     output.parent.mkdir(parents=True, exist_ok=True)
     entries = staged_files(staging)
@@ -419,7 +700,7 @@ def write_deterministic_archive(staging: Path, output: Path) -> tuple[str, int, 
                 for rel in entries:
                     source = staging / rel
                     data = source.read_bytes()
-                    info = tarfile.TarInfo(rel.as_posix())
+                    info = tarfile.TarInfo(f"./{rel.as_posix()}")
                     info.size = len(data)
                     info.mtime = 0
                     info.mode = 0o644
@@ -472,7 +753,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         "--output",
         type=Path,
         default=DEFAULT_OUTPUT,
-        help=f"archive path to write; default: {DEFAULT_OUTPUT}",
+        help="archive path to write",
     )
     parser.add_argument(
         "--expected-main-pdf-sha256",
@@ -480,11 +761,84 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         help="expected sha256 for docs/paper/main.pdf",
     )
     parser.add_argument(
+        "--mirror-to",
+        type=Path,
+        default=REGISTERED_OUTPUT,
+        help=(
+            "path the manifest cites for this artifact; the built archive is copied "
+            "there and verified byte-for-byte. Pass an empty value to skip."
+        ),
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="validate and stage membership, but do not write the archive",
     )
     return parser.parse_args(argv)
+
+
+def assert_matches_registered_hash(
+    manifest: dict[str, dict], built_sha256: str, artifact_id: str
+) -> list[str]:
+    """Fail if the freshly built archive differs from the manifest's recorded hash.
+
+    The mirror asserts built == registered, which catches a stale cited copy. It
+    does not catch the next case up: if a rebuild produces different bytes, both
+    paths agree with each other while the manifest's recorded hash goes stale, so
+    the cited artifact diverges from what shipped with every other assert green.
+    Re-pinning the manifest hash when the archive legitimately changes is the
+    intended behaviour — that is exactly when the record needs updating.
+    """
+    entry = manifest.get(artifact_id)
+    if entry is None:
+        return []  # not yet registered; nothing to compare against
+    recorded = entry.get("content_sha256")
+    if not recorded:
+        return [
+            f"{artifact_id}: manifest entry carries no content_sha256",
+            f"  set it to: {built_sha256}",
+        ]
+    if recorded != built_sha256:
+        return [
+            f"{artifact_id}: manifest hash does not match the built archive",
+            f"  manifest: {recorded}",
+            f"  built:    {built_sha256}",
+            "  (re-pin the manifest if the archive change is intended)",
+        ]
+    return []
+
+
+def mirror_to_registered_path(built: Path, registered: Path | None) -> list[str]:
+    """Copy the built archive to the path the manifest cites, and verify by bytes.
+
+    The script's default output and the registered artifact live at different
+    paths. Re-running the build rewrites one and leaves the other at its old
+    bytes, so the cited artifact silently goes stale while every other assert
+    still passes (they check the paper PDF, not the cited tarball). This closes
+    that gap by making the build write both and verify they agree.
+    """
+    # Path("") normalises to Path("."), so an empty string cannot be tested with
+    # `is None` — it would fall through and copy onto the current directory.
+    if registered is None or str(registered).strip() in ("", "."):
+        return []
+    if not built.exists():
+        return [f"built archive missing: {built}"]
+    if registered.is_dir():
+        return [f"mirror target is a directory, not a file: {registered}"]
+    registered.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(built, registered)
+    built_sha = sha256_file(built)
+    registered_sha = sha256_file(registered)
+    if built_sha != registered_sha:
+        return [
+            "registered copy does not match the built archive:",
+            f"  built:      {built_sha}  ({built})",
+            f"  registered: {registered_sha}  ({registered})",
+        ]
+    os.chmod(registered, 0o644)
+    print(f"mirrored to registered path: {registered}", file=sys.stderr)
+    print(f"  sha256: {registered_sha}", file=sys.stderr)
+    return []
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -495,7 +849,7 @@ def main(argv: list[str] | None = None) -> int:
     observed_pdf_sha = sha256_file(main_pdf)
     if observed_pdf_sha != args.expected_main_pdf_sha256:
         print("ERROR: STALE MAIN.PDF HASH MISMATCH", file=sys.stderr)
-        print(f"file: {main_pdf}", file=sys.stderr)
+        print("file: docs/paper/main.pdf", file=sys.stderr)
         print(f"expected: {args.expected_main_pdf_sha256}", file=sys.stderr)
         print(f"observed: {observed_pdf_sha}", file=sys.stderr)
         return 1
@@ -505,7 +859,26 @@ def main(argv: list[str] | None = None) -> int:
     )
     source_errors = assert_sources_exist(members)
     duplicate_errors = assert_unique_archive_paths(members)
-    all_preflight_errors = unresolved + mismatches + source_errors + duplicate_errors
+    freshness_errors = assert_render_not_older_than_sources()
+    # A user-supplied output that is a directory would otherwise raise a raw
+    # IsADirectoryError from .open("wb") at write time. Pointing a build at a
+    # directory is a natural way to test without touching the deliverable, so it
+    # must fail here with a named message rather than a traceback.
+    output_errors = []
+    if args.output.is_dir():
+        output_errors.append(f"--output is a directory, not a file: {args.output}")
+    if str(args.mirror_to).strip() not in ("", ".") and args.mirror_to.is_dir():
+        output_errors.append(
+            f"--mirror-to is a directory, not a file: {args.mirror_to}"
+        )
+    all_preflight_errors = (
+        unresolved
+        + mismatches
+        + source_errors
+        + duplicate_errors
+        + freshness_errors
+        + output_errors
+    )
     if all_preflight_errors:
         print_errors("ERROR: archive preflight failed", all_preflight_errors)
         return 1
@@ -513,14 +886,30 @@ def main(argv: list[str] | None = None) -> int:
     with tempfile.TemporaryDirectory(prefix="supplementary-build-") as temp_dir:
         staging = Path(temp_dir) / "staging"
         stage_members(staging, members)
+        root_errors = assert_root_only(staging)
+        if root_errors:
+            print_errors("ERROR: STAGING ROOT ASSERT FAILED", root_errors)
+            return 1
         coverage = coverage_errors(manifest, members)
         if coverage:
             print_errors("ERROR: CITED-ID COVERAGE ASSERT FAILED", coverage)
             return 1
         write_readme(staging, manifest)
         forbidden = forbidden_entries(staging)
+        per_pattern, _per_file, union_files = content_census(staging)
+        binary_records = binary_content_census(staging)
+        print_content_census(per_pattern, union_files)
+        print_binary_content_census(binary_records)
+        content_errors = content_census_guard(per_pattern, union_files)
+        binary_errors = binary_content_guard(binary_records)
         if forbidden:
             print_errors("ERROR: FORBIDDEN ARCHIVE ENTRIES", forbidden)
+            return 1
+        if content_errors:
+            print_errors("ERROR: CONTENT CENSUS BASELINE GUARD FAILED", content_errors)
+            return 1
+        if binary_errors:
+            print_errors("ERROR: BINARY CONTENT GUARD FAILED", binary_errors)
             return 1
 
         entries = staged_files(staging)
@@ -540,6 +929,16 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
         archive_sha, byte_size, entry_count = write_deterministic_archive(staging, args.output)
+        hash_errors = assert_matches_registered_hash(
+            manifest, archive_sha, REGISTERED_ARTIFACT_ID
+        )
+        if hash_errors:
+            print_errors("ERROR: MANIFEST HASH MISMATCH", hash_errors)
+            return 1
+        mirror_errors = mirror_to_registered_path(args.output, args.mirror_to)
+        if mirror_errors:
+            print_errors("ERROR: MIRROR TO REGISTERED PATH FAILED", mirror_errors)
+            return 1
         print_summary(
             output=args.output,
             archive_sha256=archive_sha,
