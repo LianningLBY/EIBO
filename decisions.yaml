@@ -1,4 +1,4 @@
-_next_id: 254
+_next_id: 255
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -12773,3 +12773,69 @@ decisions:
   - D245
   - D248
   - D251
+- id: D254
+  date: 2026-09-25 12:39 UTC
+  summary: 'Reviewer was right: my D253 durability conclusion was direction-reversed
+    (the ghost flag needs the RFC DOI, absent at HEAD, so a fresh checkout reads MISMATCH=1,
+    not 2) and the real defect was that D250''s two DOIs were never committed — leaving
+    a fresh checkout unable to reproduce the verified bib, and the delivered PDF depending
+    on a .bbl input present in no commit. Verified all four cells myself, committed
+    the delivered state (HEAD now matches 4e0a80a2 / 7f179141, 0 dirty files), and
+    recorded the false D253 claim''s correction explicitly.'
+  rationale: "The Reviewer falsified my D253 conclusion and was right on every point.
+    I verified all four cells myself before acting rather than accepting or dismissing
+    it.\n\nWHAT I GOT WRONG IN D253 — direction-reversed, not merely imprecise. D253
+    claimed \"a fresh checkout would have shown a kuhlewind ghost flag\". The opposite
+    is true. The ghost flag requires the RFC DOI to be present in the .bib, and it
+    was NOT at HEAD, so a fresh checkout simply reads kuhlewind2022rfc as UNVERIFIABLE
+    (not checked) rather than as a false MISMATCH. Measured table (parsed=69 in every
+    cell):\n  old script f4badc6 x HEAD bib      -> MISMATCH=1, unverifiable=4\n  old
+    script f4badc6 x worktree bib  -> MISMATCH=2, unverifiable=2\n  new script 3aef387
+    x HEAD bib      -> MISMATCH=1, unverifiable=4\n  new script 3aef387 x worktree
+    bib  -> MISMATCH=1, unverifiable=2\nRow 1 IS the fresh checkout (both from HEAD),
+    and it reads 1. So D253's durability test paired the NEW script with the WORKTREE
+    bib — HEAD's script against worktree data — which is not what a checkout produces.
+    The commit message I wrote asserts the same reversed claim and is preserved in
+    history; the correction lives here.\n\nBLAST RADIUS OF THE VERIFIER FIX, correctly
+    stated: it is a genuine improvement but it is confined to the worktree. Against
+    HEAD's own .bib the old and new scripts agree exactly (both MISMATCH=1), because
+    the fix's target entry does not exist at HEAD. The fix's normalisation blast radius
+    is 1 of 69 entries.\n\nTHE ACTUAL DEFECT, which the Reviewer identified and I
+    had not: D250's two added DOIs were never committed. `git log -S` for both returns
+    empty, with a positive control confirming the grep works (a known-committed DOI
+    returns f4badc6). Consequences, both confirmed: (a) a fresh checkout could not
+    reproduce the verified bibliography state (unverifiable=4 vs 2); (b) more seriously,
+    `10.1109/CSF57540` is VISIBLE in the delivered PDF (1 occurrence in the reference
+    list) and reaches it via `main.bbl`, which is `.gitignore:66`-excluded and absent
+    from HEAD — so the INPUT the delivered PDF depends on existed in no commit at
+    all. HEAD's main.pdf was also the superseded de5e4b63, not the delivered 4e0a80a2.\nI
+    had carried forward \"the deliverable is committed\" from the earlier 14eafe6
+    commit and never re-checked after every source edit since.\n\nFIX: committed the
+    delivered state with explicit pathspecs (M183 rule) — the 8 paper files including
+    main.pdf and references.bib, ROADMAP, decisions/mistakes, manifest, review_issues,
+    task_context docs, user_messages, the archive (4.1 MB; `.gitignore:32` explicitly
+    un-ignores `artifacts/**/data/**`, so the routed copy was always intended to be
+    tracked and its absence was untracked-not-ignored), round-18 report, and loop
+    history. Verified after: HEAD's main.pdf = 4e0a80a2 and HEAD's bib = 7f179141,
+    matching the worktree; 0 dirty files remain. One file deliberately left untracked:
+    `artifacts/_project/paper/main_485def.pdf`, a superseded build copy (sha de5e4b63,
+    the OLD HEAD) in a working directory — correct to exclude.\n\nREVIEWER'S THIRD
+    POINT, partly right and worth recording precisely: it said the negative fixture
+    \"does not exist on disk\" (find found nothing). It DOES exist at /tmp/bibneg/bad.bib
+    (1,294 B, with its own cache dir) — but /tmp is ephemeral, so its substantive
+    point stands: the control is not persisted and therefore not reproducible by a
+    future reader, and my RECORDED number (MISMATCH=3) depends on a fixture whose
+    exact contents are not in the repository. It also noted the expected count differs
+    if the fixture omits the held `liu2026inevitability` entry, which is consistent
+    with my 3 vs its 4. Agreed it should be persisted; recorded as an open item rather
+    than fixed now, since it is a test-harness change not a deliverable change.\n\nREVIEWER'S
+    OTHER CONFIRMATIONS I INDEPENDENTLY RE-CHECKED: 3aef387 changed exactly one file
+    with a clean index (no pre-staged rider — the M183 commit-hygiene half holds);
+    the fix is not blunted (three historically-real defects re-injected still report,
+    exit 1); both guard branches behave (prefix stripped when substantive text follows,
+    identifier-only title NOT emptied).\n\nPINNED (pushing is a separate act and awaits
+    the PI)."
+  related_experiments: []
+  depends_on:
+  - D250
+  - D253

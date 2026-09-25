@@ -1,6 +1,6 @@
 # EIBO — Research Dashboard
 
-> Last updated: 2026-09-25 11:30 UTC | Update reason: D253 — committed the verifier fix so HEAD reproduces MISMATCH=1. The M183 class had recurred in the verifier: f4badc6 committed it at 07:47 and the correction landed at 10:45 without being committed, so HEAD reported MISMATCH=2 on the same `.bib` the worktree reported MISMATCH=1 on — a fresh checkout would have shown a kuhlewind ghost flag. Committed with an explicit pathspec, re-verified on both controls, then ran the durability test (the HEAD revision itself reproduces MISMATCH=1). Amended my commit subject, which had duplicated f4badc6's. Also re-verified the spurious `Label(s)` warning for the CURRENT build rather than inheriting the earlier proof, and independently confirmed the receipt on `4e0a80a2` and the benign `cesnet2025cesnet` analysis.
+> Last updated: 2026-09-25 12:35 UTC | Update reason: D254 — the Reviewer falsified my D253 conclusion and I verified it: the durability claim was DIRECTION-REVERSED, and the real defect was that D250's two DOIs were never committed. Measured four-cell table (old/new verifier × HEAD/worktree bib): old×HEAD = MISMATCH 1 (that IS the fresh checkout), old×worktree = 2, new×HEAD = 1, new×worktree = 1 — so the "ghost flag" required the RFC DOI, absent at HEAD, and the verifier fix was confined to the worktree. Committed the delivered state so a fresh checkout now reproduces it: HEAD's `main.pdf` = `4e0a80a2` and HEAD's bib = `7f179141`, 0 dirty files. The delivered PDF had been depending on `main.bbl`, which `.gitignore:66` excludes and no commit contains.
 
 > **Round 19 registration FAILED — twice.** Both submits returned `approved` with DISTINCT approval ids (`apr_20260924T225518_cl7h`, `apr_20260925T011505_9gg9`) instead of `deduplicated: true`. `get_formal_review_status` still reads **round 18 completed**; no round-19 directory. Fails one stage earlier than rounds 15–17. **Do not blind-retry a third time.**
 
@@ -101,7 +101,10 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 ## DONE — do not re-run these (kept as one line each; the detail is in the decision log)
 
-- ✅ **The batched bibliography pass is COMPLETE** — 4 corrections landed, `liu2026inevitability` held, verifier at **MISMATCH=1** (D246). Routed to the **Paper Agent** (Patch), NOT the Main Agent (M182: `.tex` prose, `references.bib` and captions are always the Paper Agent's; Main owns code/data/builds/artifacts/verification).
+- 🔴 **MEASURE "IS THE DELIVERABLE COMMITTED?" AFTER EVERY SOURCE EDIT — do not inherit it (D254).** `14eafe6` committed the paper once; every source edit since left it uncommitted, and I carried "the deliverable is committed" forward across many turns without re-checking. The gap it hid: the delivered PDF `4e0a80a2` depends on `main.bbl`, and `.gitignore:66` excludes `*.bbl`, so **the input the delivered PDF renders from existed in no commit**. Check with `git diff --quiet HEAD -- docs/paper/main.pdf docs/paper/references.bib` and re-commit after each edit. **Committing is local and needs no PI authorisation; PUSHING does.**
+- ⚠️ **A "fresh checkout" test must take BOTH sides from HEAD** (D254). My D253 durability test paired the NEW script with the WORKTREE `.bib` — a pair no checkout produces — and the resulting conclusion was backwards. Correct table: old×HEAD=1, old×worktree=2, new×HEAD=1, new×worktree=1. When testing reproducibility, check out or `git show` **both** the tool and its input from the same revision.
+- [ ] **OPEN (test-harness, not a deliverable): persist the negative fixture.** The control that proves the verifier is not blunted lives at `/tmp/bibneg/bad.bib` only — ephemeral, so my recorded "MISMATCH=3, exit 1" is not reproducible by a future reader (and the count depends on whether the fixture includes the held entry). Add a committed fixture or a `--fixture` entry point with an expected exit code.
+- ✅ **The batched bibliography pass is COMPLETE** — 4 corrections + 2 DOIs added, `liu2026inevitability` held, verifier at **MISMATCH=1 / unverifiable=2** (D246/D250). Routed to the **Paper Agent** (Patch), NOT the Main Agent (M182: `.tex` prose, `references.bib` and captions are always the Paper Agent's; Main owns code/data/builds/artifacts/verification).
 - ✅ **The archive was REBUILT and verified** (D247/D251) — see the paper-state section. **Do NOT "rebuild after the edit lands"**: that condition is already satisfied for the CURRENT build, and re-running is harmless only because the build is deterministic. ⚠️ **This is NOT a blanket exemption** — a FUTURE source edit still requires the full chain (D252).
 - ⚠️ **The EIBO edit at `main.tex:2` is a FULL-CHAIN event when it happens (D252).** `main.tex` is an in-register member of the archive's `latex/` set, so editing it voids the receipt AND stales the archive's embedded bytes, requiring: source edit → re-render → 24-page visual gate → archive rebuild → manifest re-pin (new PDF hash + new archive hash). Batch it with the next source edit; do not treat it as a one-liner.
   - **Measured, so the batch is cheap to justify:** stripping that comment leaves **all 24 pages' rendered TEXT identical**; the PDF differs only in 72 trailing bytes, which `pdfinfo` shows is solely the embedded CreationDate/ModDate. It is a **metadata-only** PDF delta — nothing about pagination, cross-references or content can move.
@@ -123,6 +126,7 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 
 | ID | Date | Summary | Related experiments |
 |----|------|---------|---------------------|
+| D254 | 2026-09-25 | Reviewer was right: my D253 durability conclusion  | — |
 | D253 | 2026-09-25 | Committed the verifier fix so HEAD reproduces MISM | — |
 | D252 | 2026-09-25 | Accepted the Agent's forward obligation — the EIBO | — |
 | D251 | 2026-09-25 | Resolved both reported discrepancies: MISMATCH=2 w | — |
@@ -132,5 +136,4 @@ Certification-grade ε-indistinguishability brackets for open-set encrypted-traf
 | D247 | 2026-09-25 | Rebuilt the supplementary archive (new sha ed01a6d | — |
 | D246 | 2026-09-25 | Batched bibliography edit landed and independently | — |
 | D245 | 2026-09-25 | Built scripts/verify_bibliography.py — a field-lev | — |
-| D244 | 2026-09-25 | Sent the D243 retraction to the PI (the previous t | — |
 
