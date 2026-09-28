@@ -1,4 +1,4 @@
-_next_id: 271
+_next_id: 272
 decisions:
 - id: D001
   date: 2026-09-13 11:37 UTC
@@ -13964,3 +13964,63 @@ decisions:
   related_experiments: []
   depends_on:
   - D266
+- id: D271
+  date: 2026-09-28 06:24 UTC
+  summary: 'Re-measured the artifacts while confirming the repository push: the push
+    is complete (repo private), and three recorded values in the ROADMAP described
+    superseded generations, so they were corrected from the artifacts'' own bytes.'
+  rationale: 'The PI asked that everything be in the repository, and a prior attempt
+    had already pushed. Rather than report the push from the task document, I verified
+    it end-to-end and, in doing so, re-measured the artifacts the ROADMAP describes.
+    Three recorded values were stale, and all three were stale in the PROSE only,
+    not in the artifacts:
+
+
+    (a) ARCHIVE — the ROADMAP said the archive''s embedded main.pdf was `b74b2c23…`;
+    the archive actually embeds **`8fea6b59…`**. Traced: the archive was rebuilt TWICE
+    (0184f8b embedded b74b2c23; 6dbee33, the notation fix, re-embedded 8fea6b59) and
+    `57693b17` is the second generation''s hash. The D269 note was written from the
+    earlier generation and never re-measured. The byte-identity and three-way-agreement
+    claims were correct throughout; only the named prefix was wrong. This is the project''s
+    documented class — a stale hash inside prose is invisible to every hash assert.
+
+
+    (b) RE-SUBMIT SHA — the "if registration is repaired, re-submit from `4e0a80a2…`"
+    line still named the PRE-CONVERSION USENIX build. Verified: `git show 472cace:docs/paper/main.pdf`
+    = `4e0a80a2…`, and the current PoPETs build is `8fea6b59…`. Quoting a superseded
+    sha next to a warning about superseded shas is exactly the failure the line itself
+    warns about.
+
+
+    (c) SUBMISSION SNAPSHOT — the section described the failed-attempt snapshot (47
+    entries, mtime 2026-09-25 01:15, stale paper and bib) and instructed that it "must
+    be REGENERATED, not reused". Measured, the on-disk snapshot is now the REGENERATED
+    one (mtime 20:35:01, i.e. the fifth attempt): 27 entries, `main.pdf` = 8fea6b59
+    and `references.bib` = 7f179141, both byte-identical to the tree, zero LaTeX intermediates.
+    It also now carries `supplementary.tar.gz` (57693b17), which CLOSES the long-open
+    "the snapshot omits the supplementary archive the paper names" finding for the
+    current generation. The entry count is generation-dependent (49 → 47 → 27), so
+    the correction states the generation alongside every count.
+
+
+    ALSO MEASURED, both refuting previous worries: the repository is PRIVATE (unauthenticated
+    GitHub API and the web page both return 404), which materially lowers the stakes
+    on the `EIBO` codename item and re-scopes it from a live disclosure to risk hygiene;
+    and `eibo` appears 0 times in the 24-page render (confirms the caption half of
+    R18-C6b is fixed).
+
+
+    PUSH: verified against the remote itself, not the local ref — `git ls-remote origin
+    main` returns `ee5c3f2`, matching HEAD. The two residual continuity files (task_context/director.md
+    and its archived predecessor) were the only uncommitted content and are now committed
+    and pushed. Working tree clean; `HEAD == origin/main`.
+
+
+    WHAT WAS NOT DONE AND WHY: no source edit was made, so the sha-bound 24/24 receipt
+    on `8fea6b59…` remains valid — deliberately, since the paper is submission-ready
+    and a gratuitous edit would void it. The `EIBO` comment at main.tex:2 stays batched
+    for the next real edit.'
+  related_experiments: []
+  depends_on:
+  - D269
+  - D270
