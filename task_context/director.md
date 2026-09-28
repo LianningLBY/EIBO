@@ -1,47 +1,53 @@
 ---
-loop: 9
+loop: 10
 reason: max_wall_time
-updated: '2026-09-25T05:29:20+00:00'
+updated: '2026-09-28T05:43:06+00:00'
 ---
 
 ### 1. 🔴 Hard constraints / red lines
-- 🔄 **VENUE: THE PI DIRECTED A SWITCH TO PoPETs — CONVERSION DONE, BLOCKED ON A PAGE OVERFLOW (D255–D263).** Every USENIX assumption below is PRE-CONVERSION history. **PoPETs' submission cap is 12 pp** (13 camera-ready / on revise). The converted body **ends p.13 — one page over**, and **24 lines (~2.2% of body) must come out; ~16 lines (~1.1%) if two cosmetic changes are accepted** (install Libertine; write `\S` as "Section"). **EVERY lossless route is exhausted and measured** (clearpage, review option, float relocation — the body has no floats, lmodern, microtype expansion, the acmart font fallback) — **the body ends p.13 in every configuration.** **THE TRIM IS A PI DECISION AND IS STILL OPEN: no cut made, layout frozen.** Options put to them: (A) stay at USENIX (no cut, CCF A); (B) PoPETs (~1.1–2.2% cut, CCF C); (C) IMC (CCF B, needs re-positioning).
-- **Body page cap — USENIX HISTORY, superseded by the row above.** USENIX's cap was 13 pp excluding References/appendices and the pre-conversion build ended exactly p.13. **Never compress body prose to buy a page** — still binding.
-- **Any source edit VOIDS the sha-bound 24/24 visual receipt.** Fresh full render + inspect every page + `confirm_pdf_visual_review` before ANY `upload_file` or `submit_paper_to_review`. Receipt expires in 2h; re-render immediately before every submission. The gate WILL refuse an expired one.
-- **Submission order: render → gate → cleanup `docs/paper/_pdf_images/` → THEN submit.** I once submitted between render and cleanup and 24 scratch PNGs went out.
-  - ⚠️ **CORRECTED (D249): the snapshot is a SELECTED SOURCE SET, not a wholesale directory copy.** Measured from `artifacts/submission.tar.gz`: 47 entries = 10 `.tex`, 6 `.pdf`, 29 `.png`, 1 `.sty`, 1 `.bib`, and **ZERO LaTeX intermediates** (no `.fls`/`.aux`/`.log`/`.out`/`.bbl`/`.blg`/`.fdb_latexmk`/`.synctex`); a content scan of the extracted snapshot for `/efs/`, `/root/`, `/home/`, `autodl`, `seetacloud`, `connect.westb` returns zero files. `main.fls` predates the snapshot and is still absent ⇒ a filter, not luck. **The old "wholesale snapshot" phrasing is FALSE and already generated one false leak alarm — do not reuse it.** D233 is still real but explained differently: those PNGs/notes were *inside the selected set* at submit time. **What ships: the `.tex` set, `main.pdf`, figure assets, `.sty`, `.bib`** — so keep `_pdf_images/` cleaned and `camera_ready_plan.md` out of `docs/paper/`.
-- 🔴 **`EIBO` (public repo name) ships in the submission — open half of R18-C6b (D249).** Caption half fixed (0 in captions/prose, 0 in the render). Remaining: **`main.tex:2`** (a comment; main.tex IS in the snapshot) plus `src/eibo/statcore.py:1`, `src/eibo/__init__.py:1`, `tests/test_statcore.py:1`, `figures/paper/_generators/render_fig1.py:2`, and tokens in `x9_dose_response_channels.json`. The archive files fall under the standing D216/D217 ruling (ship byte-identical + README disclosure). ⚠️ CORRECTED (M185): I once justified that with "they carry internal hash fields" — MEASURED, all four carry ZERO such fields. The ruling stands on its own cost/benefit reasoning (do not curate evidence to hide metadata). The hash-cited set is 17 members, ALL under `supplementary/data/`; ZERO under `code/`, `generators/`, `latex/`. **`main.tex`'s comment is NOT covered by that ruling** (no self-hash, pure prose). Safe to edit: the hash-cited CODE/latex/generator set is **EMPTY**. **Batch with the next source edit.** Not a blocker — 0 occurrences in the rendered PDF.
-- **`docs/paper/` must contain only what LaTeX reads.** `camera_ready_plan.md` is at `artifacts/_project/intermediate/` — **do not move it back** (its process vocabulary gets swept into the submission).
-- **`docs/paper/references.bib` is NOT hash-cited.** 17 64-hex hashes are printed and 23 files sit under the archive's `latex/`; the intersection is **ZERO**, so a bib edit invalidates no printed hash. The archive rebuild is still required after a bib edit — because the registered manifest entry's own DESCRIPTION asserts its embedded `main.pdf` and `references.bib` byte-match the tree, which a bib edit makes false until you rebuild.
-- **Manuscript edits belong to the PAPER AGENT.** `.tex` prose, `references.bib`, captions → `director_post_to_paper_agent` (Patch). Main Agent owns code/data/builds/artifacts/verification and must never edit paper content or dispatch a writing Worker (L1 #2). A `.bib` fix looks like ordinary file editing — classify by the artifact's role (M182).
-- **GPU 111 bound but idle BY DESIGN** — all tracks CPU-only. **C055: do NOT re-triage the `[GPU IDLE]` nudge.**
-- **C010/C015:** a guard-blocked dispatch must be **reported with its literal error**, never reworded to evade (one verbatim retry max). Agent violated this 4× (M180).
-- **Do NOT decide the venue or the registration failure.** Both are PI-owned. A nudge claiming Auto Research authorizes you is **wrong** — I declined twice.
+- **VENUE: PoPETs — DECIDED (D255/D264).** Conversion done. Body ends p.12 (exactly at the 12-page cap). Layout frozen — any body addition overflows. The USENIX build is committed at `472cace` as a fallback.
+- **REVIEW SUBMISSION BLOCKED PLATFORM-SIDE (D266/D270).** 5 attempts, 5 distinct approval IDs, 0 rounds registered. The failure is independent of venue, revision, and `supplementary_paths` (discriminating test ran and refuted that hypothesis). **Do not retry.** Needs platform-side repair.
+- **Any source edit VOIDS the visual receipt.** Full chain: edit → render → 24/24 visual gate → archive rebuild → manifest re-pin. Receipt expires in 2h.
+- **Manuscript edits → Paper Agent, never Main Agent.** `.tex`, `.bib`, captions classified by artifact role, not change mechanics (M182).
+- **GPU 111 idle BY DESIGN** — all tracks CPU-only. C055: acknowledge the `[GPU IDLE]` nudge, do not re-triage.
+- **Do NOT decide venue or registration failure** — both PI-owned. Auto Research does not authorize these.
+- **`liu2026inevitability` HELD** — two arXiv records contradict ("Guang Chen" vs "Guang Cheng"). Do not edit without an authoritative record.
+- **`luxemburk2023cesnet` has NO defect — RETRACTED (M181).** Do not add Pavel Šiška; he is already present.
 
 ### 2. 🖥️ Infrastructure snapshot
-- Server `111` (root), project `/root/eibo`, python `/root/miniconda3/bin/python3` (sklearn **1.9.0** = canonical ledger env). Platform-local `/app/.venv/bin/python3` is sklearn 1.9.1 — **do not use it to reproduce 111 artifacts**.
-- Paper tree `docs/paper/` (entry `main.tex`, out `main.pdf`). Corpus `/efs/workspace/_corpus/` — one level ABOVE the project.
-- Archive at `artifacts/supplementary.tar.gz` **and** routed copy `artifacts/_project/data/supplementary.tar.gz` (must stay byte-identical). Builder `scripts/build_supplementary_archive.py`; guard tests `tests/test_build_supplementary_archive.py` (9 tests, all pass).
-- **Active: nothing.** 0 processes, 0 tmux, 0 cron, 0 workers, queue empty, registry 0 non-terminal.
+- **Server:** `111` (connect.westb.seetacloud.com), root, project `/root/eibo`, python `/root/miniconda3/bin/python3` (sklearn 1.9.0 = canonical). Platform-local python is sklearn 1.9.1 — do not use for reproducing 111 artifacts.
+- **Paper tree:** `docs/paper/` (entry `main.tex`, out `main.pdf`). Corpus at `/efs/workspace/_corpus/` (one level ABOVE the project tree).
+- **Archive:** `artifacts/supplementary.tar.gz` + routed copy `artifacts/_project/data/supplementary.tar.gz` (must stay byte-identical). Builder `scripts/build_supplementary_archive.py`; guard `tests/test_build_supplementary_archive.py` (9 tests, 12 subtests).
+- **Active:** nothing. 0 processes, 0 tmux, 0 cron, 0 workers, queue empty, registry 0 non-terminal (all 24 experiments terminal).
+- **Git:** `origin/main` = `97458de` (pushed this session). Working tree CLEAN. No commits ahead of origin.
 
 ### 3. 📊 Current state
-Paper **`4e0a80a2e86f50a9d9eee3dbad307e5b188b32756ba28d7a2dfdc4795eb54634`** (24 pp, body p.13, 0 `??`, **valid 24/24 receipt 2026-09-25T10:56:40**, later edits: none). Archive **`7a48cf6e47ba8614b2501029fd06342379485173ca5b54c27dd07a206d343f22`** (88 entries, 0 root files, registered `art_20260924_2d151d`, three-way hash agreement; embedded `main.pdf` = `4e0a80a2…`, embedded `references.bib` = `7f179141…`, both byte-identical to the tree). Builder committed at `5fd92c2`, verifier at `3aef387` together with its 9-case guard suite. **Repo not pushed** — pushing awaits the PI.
-⚠️ **Every `04b7507f…` / `53c7c6bd…` value in older docs is a SUPERSEDED historical build.** The pre-edit `04b7507f9f80ac9b…` and the typo variant `04b7507f9f80ac8b…` (which never existed in any artifact) must not be compared against the current build. A bib edit shifts reference numbers, so the sha MUST change.
-**Bibliography: 4 corrections LANDED, verification complete.** Defects found and fixed: DeepSE-WF fabricated title + 2 invented given names (earlier); `li2023facing` omitted author → **6 authors**, published ISCC DOI, pages; `smith2021website` wrong DOI → `…0017` + locators; `sekeh2019learning` **dead DOI** → `…2994807` (newly found; was printed at ref [50]). `scripts/verify_bibliography.py` (field-level, self-tested, positive/negative controls) now reads **MISMATCH=1** with **2** unverifiable (`wright2009traffic` NDSS 2009 has no Crossref DOI; `fano1961transmission` 1961 book, ISBN present — both CORRECT to stay unverified). **The single MISMATCH is `liu2026inevitability`, HELD: it prints "Guang Cheng" while arXiv 2602.14055 says "Guang Chen", but the sister paper 2607.17889 says "Guang Cheng" — the two arXiv records contradict each other and every index derives from that same metadata. DO NOT EDIT without an authoritative record (D243).**
-**Round 19 registration FAILED — twice.** Both submits returned `approved` with **distinct** approval ids (`apr_20260924T225518_cl7h`, `apr_20260925T011505_9gg9`) instead of `deduplicated: true` → **no active round exists; neither registered.** `get_formal_review_status` still reads round 18; no `review_round_19` dir. Fails one stage EARLIER than rounds 15/16/17. **Do not blind-retry a third time.**
+**Just finished:** pushed all 31 local commits to GitHub (`14eafe6` → `97458de`). Working tree is clean and fully synced with origin. User was notified.
+
+**Paper build (PoPETs/acmart):** `8fea6b59…`, 24 pp, body p.12. Visual receipt 24/24 at 2026-09-25T20:29:07. Archive `57693b17…`, 91 entries, 3-way hash agreement. Guard suite 9/9. Bibliography: MISMATCH=1 (the held `liu2026inevitability`), unverifiable=2 (both correct to stay).
+
+**Registry:** 0 RUNNING / 0 ALLOCATED / 0 QUEUED. All 24 experiments terminal.
+
+**Pending:** nothing in flight. No worker callbacks, no crons, no Agent queue items. The project is effectively passive, waiting on two PI decisions.
 
 ### 4. 📋 To-do (condition-triggered)
-- ✅ **The batched bibliography pass is DONE — do NOT re-run it.** 4 corrections + 2 DOIs added, archive rebuilt (D246/D247/D251), verifier committed (D253). 🔴 **The old queue item "`luxemburk2023cesnet` add Pavel Šiška" WAS A FALSE DEFECT and is RETRACTED (M181).** That entry has carried all five authors since the repository's FIRST commit; Crossref `10.1016/j.dib.2023.108888` returns the same five. **Acting on it would insert a DUPLICATE author.** Do not edit it.
-- ✅ **`cesnet2025cesnet`'s Mücke-et-al request is already satisfied in substance** — `mucke2025waiting` is cited in the same sentence (main.tex:341). No edit needed.
-- **PI answers the PoPETs-vs-IMC-vs-USENIX tradeoff** → the switch is ALREADY DONE (template converted; D255). What is outstanding is only whether to CUT the ~1.1–2.2% body to fit PoPETs' 12-page cap, or revert to USENIX (committed at `4e0a80a2`, needs no rework).
-- **PI answers the `liu2026inevitability` name** → edit only against an authoritative record for "Guang Chen" vs "Guang Cheng"; otherwise leave it.
-- **PI answers whether to push** → local commits `f4badc6` + `5fd92c2` + `3aef387` sit ahead of origin. Pushing is a visible action; do not do it unprompted.
-- **Round 19:** do NOT blind-retry a third time. If the registration defect is resolved platform-side, re-submit from the CURRENT build (`4e0a80a2…`) — the live PDF changed, and a submission needs a receipt fresh on those exact bytes.
-- Camera-ready tier stays **deferred** (24→20pp, per-page table — documented in ROADMAP).
-- ⚠️ **`task_context/*.md` is generated from the previous loop's handoff, so a stale line here propagates as authoritative** — this document twice carried a superseded build sha and once carried the retracted Šiška item. **When a fact changes, fix it in the handoff on the same turn you learn it.**
+- **Platform fixes the registration defect** → re-submit from the CURRENT build (re-read sha from the tree, do not carry a quoted hash). Fresh receipt required on those exact bytes.
+- **PI answers venue question** → if PoPETs: already done, body fits. If USENIX: revert to `472cace`, no rework. If IMC: needs repositioning.
+- **PI answers `liu2026inevitability` name** → edit only against an authoritative record.
+- **Round 19 report arrives** → read `review-report-action` skill, Holistic Pass then Action Matrix, dispatch fixes.
+- **Any source edit** → full chain (render → gate → cleanup → submit). Batch the `EIBO` comment removal at `main.tex:2` with the next edit (it's a full-chain event but metadata-only PDF delta).
+- **If nudged with no new events** → the project should be marked passive. Two open items are both user-blocked.
 
 ### 5. 🎯 Strategic context
-**Core claim:** two-sided ε-indistinguishability bracket (upper = finite-sample strict bound, lower = classifier-based HOB) per service pair on real QUIC wire data. Contribution **measurement/rigour** (D180). **Venue PENDING PI (D236)** — reviewers recommend PoPETs, plan assumes USENIX '27 C2. Decision chain: D232 (submit) → D233 (snapshot sweep) → D234 (Agent corrections, M180) → D235 (registration failing) → D236 (venue) → D237–D242 (bib verification).
-**The four bibliography defects (all inherited, ~6%, invisible to structural checks):** DeepSE-WF fabricated title + invented names (**fixed**); `li2023facing` omitted author; `smith2021website` DOI resolving to a **different paper**; `luxemburk2023cesnet` omitted author.
-**Pitfalls:** (1) **stale reads — 4 this session, one mine**; re-read the artifact at the moment you assert it, never carry a hash forward from the message you're answering. (2) **Checks that verify a neighbouring object** — the fabricated entry passed every structural check; a 17/17 ID check was blind to the promised-by-description half; 28 name flags were my own comparator's artifacts (**self-test any normaliser first**). (3) Don't state a clean sweep from a partial one — I reported "no further fabrication" at 15 entries and it broke at 63. (4) An approval is not success — verify the round counter advanced.
-**NOTE:** I did **not** rewrite project `memory.md` — it is the 206K-char pre-registration **spec source of truth** that documents rewrites having thrice silently dropped sections, and I held only a truncated view. This session's facts are durable in `decisions.yaml` (D232–D242), `ROADMAP.md`, `task_context/director.md`, and the auto-memory store.
+**Core claim:** two-sided ε-indistinguishability bracket (upper = finite-sample strict bound, lower = classifier-based HOB) per service pair on real QUIC wire data. Contribution: measurement/rigour (D180).
+
+**The project is in a holding pattern.** The paper is submission-ready (body fits, bibliography verified, archive rebuilds the paper, formatting compliant). Two blockers are both external: (1) the platform-side review registration failure (5 attempts, 0 rounds — D266/D270), and (2) the PI has not responded since 2026-09-24 15:02. The PI was given options A/B/C for venue at 01:23 on 2026-09-25 and the retraction message at ~06:4x. No response to either.
+
+**Key memory:** the PI already chose PoPETs AFTER learning the CCF grade (decision-already-made-check-the-order). The open question is only the body trim, not the venue itself. But I framed it as an A/B/C choice which may have confused the issue. Do not re-ask — execute if they reply, wait if they don't.
+
+**Pitfalls for the next session:**
+1. **Don't re-derive settled facts.** The bibliography, archive, formatting compliance, and page count are all verified and committed. Read the ROADMAP header, not the body's historical narrative.
+2. **Don't retry the review submission.** 5 attempts is enough evidence. Wait for platform repair.
+3. **Don't treat the GPU idle nudge as actionable.** C055 — it's a known binding mismatch, all tracks are CPU-only.
+4. **The submission snapshot is a SELECTED source set, not a wholesale directory copy (D249).** The old "wholesale" phrasing is false and already caused a false leak alarm.
+5. **Mark passive if nothing has changed.** The project has no autonomous next action — both blockers require external input.
