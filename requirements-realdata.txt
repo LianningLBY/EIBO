@@ -1,0 +1,2 @@
+-r requirements-methodology.txt
+tables>=3.8,<4

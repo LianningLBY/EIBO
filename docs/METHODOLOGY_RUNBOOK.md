@@ -161,3 +161,47 @@ python -u scripts/methodology_synthetic.py \
 这段更新命令保留服务器已有凭据配置。没有缓存凭据时仍需 GitHub 用户名与 Token。
 
 新增方法和场景的适用条件、证明及真实流量接入条件详见 [dependence protocol](METHODOLOGY_DEPENDENCE_PROTOCOL.md)。重点查看覆盖率、`mean_lower_floor`、`zero_floor_rate` 和 `mean_radius`，同时查看 `assumptions_met`。`progress.jsonl` 保存第一条重复实验的段长度与标签，便于重建采样计数和核对预算。
+
+## 第三轮：真实数据准备审计
+
+已在学校服务器确认 XS 文件的位置和结构：
+
+`/data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5`
+
+字段检查显示 360 张 `/flows/DYYYYMMDD` 表、10,000,000 条记录，包含 `TIME_FIRST`、`TIME_LAST`、`ID`、多个 QUIC CID 字段及 `APP`、`PPI`、`PPI_LEN`。官方说明中，`ID` 是每个数据集内唯一的流记录编号，不能直接作为多条流的会话分组键。源 IP、源端口没有提供；目标端点键是服务端聚类候选。CID 键需先检查空值、重复、跨类别和跨日期复用。
+
+另一个关键限制是流开始时间被截到整点小时，结束时间也相应调整。细于一小时的顺序不能从这些绝对时间字段恢复，文件行序也不构成小时内真实时间顺序。脚本逐记录审计小时对齐比例，以核对当前 H5 版本；默认使用 1 小时、6 小时和 24 小时分组。
+
+Sources: [official release](https://zenodo.org/records/17249078), [DataZoo field definitions](https://cesnet.github.io/cesnet-datazoo/features/).
+
+当前 `traffic-ncde` 环境已成功使用 PyTables 读取该文件，可以直接执行以下完整命令；无需重装依赖：
+
+```bash
+cd /data/xjw/EIBO && \
+git switch codex/methodology-risk-certificates && \
+env -u http_proxy -u https_proxy -u all_proxy \
+    -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+    -u GIT_ASKPASS -u SSH_ASKPASS \
+    GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+    git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+        pull --ff-only origin codex/methodology-risk-certificates && \
+python -m unittest discover -s tests -p '*riskcert*.py' -v && \
+python -u scripts/methodology_real_prepare.py \
+    --h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+    --backend tables --time-unit seconds --k 5 \
+    --gap-seconds 86400 --rounding-seconds 3600 \
+    --block-seconds 3600 21600 86400 \
+    --identifier-sample 50000 --min-pilot-flows 2000 \
+    --expected-sha256 6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab \
+    --out-dir "artifacts/methodology/real_prepare_$(date +%Y%m%d_%H%M%S)"
+```
+
+SHA256 来自原实验脚本登记的 XS 字节记录。如果不匹配，程序会在正式扫描前停止，需核对文件版本。脚本按块读取，不修改 H5，也不导出原始 IP、CID、哈希键或逐流记录。另一台环境缺少读库时使用 `requirements-realdata.txt`；当前服务器不需要重复安装。
+
+输出包括 `report.md`、`audit.json`、`tables.json`、`experiment_plan.json`、逐日/分期类别计数 CSV、`time_unit_diagnostics.json` 和含代码/输入/输出 SHA256 的 `run.json`。`--max-rows` 只用于读取烟测；未完整扫描时计划状态为 `needs_review`。
+
+准备阶段固定按日历跨度 50%/25%/25% 划分 pilot、certificate、evaluation，在后两段开头留出 24 小时间隔。每条流的整个区间都必须落在所属窗口内。由于绝对时间的小时截断会把结束时间一起前移，窗口末端另留 1 小时包络。短前缀、无效时间、间隔和越界流的排除都会改变目标总体，报告明确记录这点。
+
+类别仅根据 pilot 的可用整流数 ≥ 2,000 选择。证书期和评估期缺失的 pilot 类别会被报告，而不会被悄悄移除。ID/CID 审计采用在所有有效 k≥5 流上均匀抽取的 50,000 条样本；没有观察到重复不证明全文件唯一性，更不证明会话或时间块相互独立。
+
+时间块统一覆盖所有类别，敏感性预算按 `sum_b (sum_i pi_i*n_ib/n_i)^2` 计算，调用 `eibo.riskcert` 的公式实现。独立性和条件无偏性均标为未证实，此阶段只报告假设成立时的半径诊断，不给出真实流量风险下界或覆盖率。完成准备审计后，再接固定观测计数、pilot 训练的频数分类器和跨时段评估；真实覆盖率不能像合成分布一样直接用已知 Bayes 风险核验。
