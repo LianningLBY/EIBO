@@ -285,3 +285,59 @@ python -u scripts/methodology_real_monthly.py \
 `--small-n 200` **只标记样本量，不筛选类别**。月份缺失任何固定类别时，不计算完整类别混合的经验 F/经验最优表示收益，也不对剩余类别重新归一化先验。固定分类器的已有类别错误贡献仍保留，并报告未观测类别引起的数值范围；这种范围不是置信区间，不包含采样误差。小样本行保留在排名中并带标记。
 
 同一类别的表示贡献可以为负，因为细表示会改变经验最优分类器在不同类别之间的错误分配；完整类别集合的贡献之和必须非负。pilot 月份的模型误差复用了训练数据，属于重代入统计；证书期训练的近期模型仅在后续 evaluation 月份评估。分析保留正、负错误变化贡献以显示抵消，并区分全局新符号与类别内新符号。所有差异均为描述性结果，不推断显著性、真实 Bayes 风险、时间块独立性或新的风险证书。
+
+## 第六轮：APP=2 符号、混淆归因与滚动训练
+
+逐月分解已经在服务器完成，目录为 `artifacts/methodology/real_monthly_20261012_213718`。本轮直接使用该目录中的聚合计数，**无需重新扫描原始 H5，不新增依赖**。全部 44 类、固定先验、k=5、原 log M=1/M=2 表示和原目标总体均保持不变。
+
+服务器当前 `traffic-ncde` 环境完整执行：
+
+```bash
+cd /data/xjw/EIBO && \
+git switch codex/methodology-risk-certificates && \
+env -u http_proxy -u https_proxy -u all_proxy \
+    -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+    -u GIT_ASKPASS -u SSH_ASKPASS \
+    GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+    git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+        pull --ff-only origin codex/methodology-risk-certificates && \
+python -m unittest discover -s tests -p '*riskcert*.py' -v && \
+python -u scripts/methodology_real_rolling.py \
+    --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+    --app 2 --reference-months 2024-12 2025-01 \
+    --matched-repeats 100 --seed 20261012 \
+    --small-n 200 --top 10 \
+    --out-dir "artifacts/methodology/real_rolling_$(date +%Y%m%d_%H%M%S)"
+```
+
+先验证缓存文件清单 SHA256、编码实现来源、时间片段、全部类别顺序、先验、M=2→M=1 的投影和原月度指标。输出目录必须不存在。原始 H5 不参与本轮读取；完整测试会使用临时的小型合成 H5 夹具验证早期流水线。
+
+### 符号与混淆归因
+
+以 2024-12 和 2025-01 合并计数为描述性参照，分析之后的 2025-02 至 05。这个参照来自前一轮观察，结果属于事后诊断。APP=2 的每个 log M=2 符号会记录概率变化、对固定 pilot 模型错误变化的加权贡献、参照期/目标期的经验最优标签、最强竞争类别、焦点类别分数与已知类别条件后验，以及对应粗符号的经验最优标签。全部类别都参与竞争。
+
+输出区分两个恒等分解：
+
+- 固定 pilot 错误变化：保持分类规则不变，逐符号统计 APP=2 的概率质量转移，贡献之和必须与类别错误变化一致。
+- 焦点类别经验最优错误变化：保持参照期规则计算概率质量变化项，再计算目标期经验规则改变引起的错误重新分配项。二者之和必须与经验最优错误变化一致。这是样本代数分解，不是因果效应。
+
+同时逐符号计算 APP=2 对 M=1/M=2 经验风险差的带符号贡献变化，以及前五个包位置的方向/尺寸边际 TV。位置边际 TV 不是联合前缀 TV 的可加贡献。符号解码由 `statcore` 的固定网格和 ID 编码核对；C/S 对应 PPI 原始 +1/-1 方向，1–38/39+ 对应当前 log M=2 尺寸桶，不能恢复桶内实际尺寸。
+
+### 过去月份的监督滚动模型
+
+对 certificate/evaluation 六个月分别比较固定 pilot、最近 1 个日历月、最近 3 个日历月的频数分类器。每个目标月只允许使用之前月份的训练记录；当前月不会被纳入训练。窗口严格按日历取值，缺失/空月份不会被更早月份替换。缺失训练类别时模型标为不可用，不缩减类别集合或重新归一化先验。该对照假设过去月份标签已可用。
+
+除使用窗口内全部训练记录外，默认增加 100 次匹配训练量的对照：每个类别的预算取三个模型训练量的最小值，从各自已有计数中不放回抽样。先抽 M=2，再投影为 M=1，保证两种表示使用相同训练子集。每个类别预算在模型之间相同，不要求不同类别之间样本量相同。固定随机种子及月/模型/重复编号规则确保重现。`--matched-repeats 0` 可跳过这项。
+
+随机重复的均值、标准差和分位数只反映给定已有数据时的训练子集敏感性，**不是总体置信区间，不证明样本独立**。整段错误先按类别汇总各月错误计数，再除以各类目标样本量并施加固定先验；不会直接平均各月的宏观错误率。当前月经验最优标签仅用于诊断，不作为待比较的预测模型。
+
+### 输出与查看
+
+- `report.md`、`summary.json`：三模型的月度/整段比较、匹配训练量结果和 APP=2 的归因概览。
+- `rolling_monthly_summary.csv`、`rolling_period_summary.csv`、`matched_training_summary.csv`：完整及匹配训练量的汇总；跳过随机对照时不生成最后一项。
+- `rolling_class_metrics.csv`：全部类别的训练量、目标样本量和错误；`--small-n` 仅标记目标小样本。
+- `focal_model_confusions.csv`、`focal_attribution_confusions.csv`：APP=2 的误判去向和其他类别被判为 APP=2 的情况；区分实际过去训练模型与诊断性经验规则。
+- `focal_symbol_attribution.csv`：全部固定字母表上的逐符号贡献、竞争类别及细/粗经验标签；`focal_packet_marginals.csv`、`focal_packet_TV.csv`：包位置边际变化。
+- `confusion_matrices.json`：全部已知类别的完整计数混淆矩阵；`plan_snapshot.json`、`run.json`：计划及输入/代码/输出哈希。
+
+完成后终端直接显示各月三模型错误、整段完整/匹配错误，以及 APP=2 每月最主要的误判符号与竞争类别。`error` 为固定先验加权错误，`APP_error` 为 APP=2 类别条件错误，`*_pp` 为加权百分点。未知类自身错误未计入；已知类别条件后验和精确率不描述未知类。所有本轮结果仍是探索性证据，不新增表示选择或风险证书。
