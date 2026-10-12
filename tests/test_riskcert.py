@@ -7,7 +7,8 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from eibo.riskcert import direct_risk_bounds, empirical_known_risk, grouped_joint_risk_bound, tree_risk_bound
+from eibo.riskcert import (direct_risk_bounds, empirical_known_risk, grouped_joint_risk_bound,
+                           joint_radius_from_change_budget, tree_risk_bound)
 
 
 class TestRiskcert(unittest.TestCase):
@@ -68,6 +69,14 @@ class TestRiskcert(unittest.TestCase):
         grouped = grouped_joint_risk_bound(counts, priors, [sum(priors) / 100] * 100)
         self.assertAlmostEqual(grouped["radius"] / individual["radius"], np.sqrt(6))
         self.assertLess(grouped["lower_floor"], individual["lower_floor"])
+
+    def test_change_budgets_require_valid_conditional_or_dominating_values(self):
+        for budget in ([], [-1], [float("nan")], [[1, 2]]):
+            with self.assertRaises(ValueError):
+                joint_radius_from_change_budget(budget)
+        values = joint_radius_from_change_budget([0, 1, 4])
+        self.assertEqual(values[0], 0)
+        self.assertAlmostEqual(values[2], 2 * values[1])
 
 
 if __name__ == "__main__":

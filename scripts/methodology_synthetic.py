@@ -18,10 +18,11 @@ import scipy
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from eibo.riskcert import direct_risk_bounds, grouped_joint_risk_bound, tree_risk_bound  # noqa: E402
+from eibo.riskcert import (direct_risk_bounds, grouped_joint_risk_bound,
+                           joint_radius_from_change_budget, tree_risk_bound)  # noqa: E402
 from eibo.statcore import tv_upper_bound  # noqa: E402
 from eibo.synthetic import (CASE_SPECS, batch_known_risk, failure_interval, make_case,
-                            markov_variance_factor, sample_counts)  # noqa: E402
+                            markov_variance_factor, sample_counts_with_units)  # noqa: E402
 
 
 def stable_seed(seed, cell_id):
@@ -39,8 +40,9 @@ def prepare_methods(case, ns, config, alpha, include_tree, tree_max_services):
     reference = reference_bounds(case, ns, alpha)
     mode = config["mode"]
     within_iid = mode in ("iid", "cross_service") or (mode == "block" and config["block_size"] == 1)
-    within_iid = within_iid or (mode == "markov" and config["rho"] == 0)
-    all_iid = within_iid and mode != "cross_service"
+    within_iid = within_iid or (mode in ("markov", "cross_markov") and config["rho"] == 0)
+    within_iid = within_iid or (mode == "hidden_blocks" and config["block_size"] == 1)
+    all_iid = within_iid and mode not in ("cross_service", "cross_markov")
     methods = {
         "classwise_naive": {"radius": reference["classwise"]["radius"], "assumptions_met": within_iid,
                             "basis": "statcore marginal TV radii at alpha/K; raw flow count"},
@@ -65,6 +67,41 @@ def prepare_methods(case, ns, config, alpha, include_tree, tree_max_services):
         methods["joint_oracle_shared_units"] = {
             "radius": oracle["radius"], "assumptions_met": True,
             "basis": "known independent shocks across positions; replace one entire cross-service column",
+        }
+        methods["joint_observed_shared_runs"] = {
+            "radius": None, "dynamic_budget": "observed_budget", "assumptions_met": True,
+            "basis": "observed shared constant runs coarsen independent shocks; pathwise budget domination",
+        }
+    if mode == "markov":
+        methods["joint_oracle_regeneration"] = {
+            "radius": None, "dynamic_budget": "oracle_budget", "assumptions_met": True,
+            "basis": "conditional on latent exogenous regeneration lengths; independent labels across services",
+        }
+        methods["joint_observed_runs"] = {
+            "radius": None, "dynamic_budget": "observed_budget", "assumptions_met": True,
+            "basis": "observed constant runs coarsen latent regeneration segments in the sticky iid-refresh model",
+        }
+    if mode == "cross_markov":
+        methods["joint_oracle_shared_regeneration"] = {
+            "radius": None, "dynamic_budget": "oracle_budget", "assumptions_met": True,
+            "basis": "shared sticky-refresh shocks; sum class contributions in each latent segment before squaring",
+        }
+        methods["joint_observed_shared_runs"] = {
+            "radius": None, "dynamic_budget": "observed_budget", "assumptions_met": True,
+            "basis": "observed global shock runs coarsen shared latent regeneration segments",
+        }
+        methods["joint_separate_run_heuristic"] = {
+            "radius": None, "dynamic_budget": "separate_observed_budget", "assumptions_met": False,
+            "basis": "negative control: ignores cross-service dependence when squaring changes",
+        }
+    if mode == "hidden_blocks":
+        methods["joint_oracle_hidden_blocks"] = {
+            "radius": None, "dynamic_budget": "oracle_budget", "assumptions_met": True,
+            "basis": "known independent latent blocks; within-block symbols need not be constant",
+        }
+        methods["joint_observed_runs"] = {
+            "radius": None, "dynamic_budget": "observed_budget", "assumptions_met": config["block_size"] == 1,
+            "basis": "negative control: observed changes can split one dependent hidden block; sticky-refresh assumptions fail for b>1",
         }
     if include_tree and case["services"] <= tree_max_services:
         pairs = case["services"] * (case["services"] - 1) // 2
@@ -95,14 +132,30 @@ def evaluate_cell(case, ns, config, methods, args):
     rng = np.random.default_rng(seed_sequence)
     empirical = []
     floors = {name: [] for name in methods}
+    sampled_radii = {name: [] for name in methods if name != "tree_naive"}
+    unit_counts, domination = [], []
+    example = None
     for start in range(0, args.trials, args.batch_size):
-        counts = sample_counts(rng, case, ns, min(args.batch_size, args.trials - start),
-                               mode=config["mode"], block_size=config["block_size"], rho=config["rho"])
+        counts, units = sample_counts_with_units(rng, case, ns, min(args.batch_size, args.trials - start),
+                                                mode=config["mode"], block_size=config["block_size"], rho=config["rho"])
         points = batch_known_risk(counts, case["known_priors"])
         empirical.append(points)
+        unit_counts.append(units["oracle_unit_counts"])
+        if example is None:
+            example = units["geometry_example"]
+        if units["observed_budget"] is not None:
+            delta = units["observed_budget"] - units["oracle_budget"]
+            domination.append(delta >= -1e-12)
+            if config["mode"] in ("markov", "cross_service", "cross_markov") and np.any(delta < -1e-12):
+                raise RuntimeError("observed runs failed to dominate the latent regeneration budget")
         for name, method in methods.items():
-            values = (tree_floors(counts, case["known_priors"], method["pair_radii"])
-                      if name == "tree_naive" else np.maximum(0, points - method["radius"]))
+            if name == "tree_naive":
+                values = tree_floors(counts, case["known_priors"], method["pair_radii"])
+            else:
+                radii = (joint_radius_from_change_budget(units[method["dynamic_budget"]], alpha=args.alpha)
+                         if "dynamic_budget" in method else np.full(len(points), method["radius"]))
+                sampled_radii[name].append(radii)
+                values = np.maximum(0, points - radii)
             floors[name].append(values)
     truth = case["true_known_risk"]
     point_mean = float(np.concatenate(empirical).mean())
@@ -110,6 +163,7 @@ def evaluate_cell(case, ns, config, methods, args):
     for name, method in methods.items():
         values = np.concatenate(floors[name])
         failures = int(np.count_nonzero(values > truth + args.violation_tolerance))
+        radii = np.concatenate(sampled_radii[name]) if name in sampled_radii else None
         rows.append({
             "cell_id": cell_id, "case": case["name"], **config,
             "services": case["services"], "alphabet_size": case["alphabet_size"],
@@ -128,8 +182,18 @@ def evaluate_cell(case, ns, config, methods, args):
             "max_excess_over_truth": max(0.0, float(values.max() - truth)),
             "zero_floor_rate": float(np.mean(values <= args.violation_tolerance)),
             "radius": method["radius"],
+            "mean_radius": float(radii.mean()) if radii is not None else None,
+            "radius_q05": float(np.quantile(radii, 0.05)) if radii is not None else None,
+            "radius_q95": float(np.quantile(radii, 0.95)) if radii is not None else None,
+            "radius_basis": method.get("dynamic_budget", "fixed"),
         })
-    return rows
+    counts_all = np.concatenate(unit_counts)
+    diagnostics = {"mean_latent_independent_units": float(counts_all.mean()),
+                   "latent_unit_count_q05": float(np.quantile(counts_all, 0.05)),
+                   "latent_unit_count_q95": float(np.quantile(counts_all, 0.95)),
+                   "observed_budget_domination_rate": float(np.concatenate(domination).mean()) if domination else None,
+                   "first_replication_geometry": example}
+    return rows, diagnostics
 
 
 def finalize_intervals(rows, mc_alpha):
@@ -152,7 +216,8 @@ def finalize_intervals(rows, mc_alpha):
 def write_csv(path, rows):
     keys = ["case", "mode", "base_n", "block_size", "rho", "services", "alphabet_size", "method",
             "assumptions_met", "trials", "true_known_risk", "failures", "failure_rate", "coverage_rate",
-            "mean_lower_floor", "mean_gap_to_truth", "zero_floor_rate", "empirical_bias", "max_excess_over_truth", "mc_verdict"]
+            "mean_lower_floor", "mean_gap_to_truth", "zero_floor_rate", "mean_radius", "radius_q05", "radius_q95",
+            "empirical_bias", "max_excess_over_truth", "mc_verdict"]
     keys += ["failure_ci95_lo", "failure_ci95_hi", "failure_ci_simultaneous_lo", "failure_ci_simultaneous_hi"]
     with path.open("x", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=keys)
@@ -173,7 +238,7 @@ def write_report(path, rows, args):
              f"Rows: {len(rows)}; valid-assumption rows above budget: {len(valid_bad)}; stress rows above budget: {len(stress_bad)}; inconclusive rows: {inconclusive}.", "",
              "The verdict uses exact binomial intervals with a Bonferroni correction over all rows. This checks fixed synthetic cases; it is not a proof of uniform coverage or an independence check for real traffic.", "",
              "The exact target is the known-class Bayes-risk contribution on the declared alphabet. Unknown-class error is discarded. Tree tests here use finite-alphabet pair upper bounds, not the m-free ledger bounds used in the previous count-table recomputation.", "",
-             "Repeated-block corrections and shared-unit corrections use the known simulator's independent units. Sticky-chain n/tau values are variance diagnostics only; no Markov coverage correction is claimed.", "",
+             "Regeneration corrections condition on latent segment lengths that are independent of iid regenerated labels. Observable-run corrections use pathwise domination by coarsening those segments; they do not require the latent boundaries or rho, but do require the sticky iid-refresh model and appropriate cross-service grouping. Hidden blocks are a negative control for that model. n/tau remains a variance diagnostic only.", "",
              "## Rows with failure rates demonstrably above the budget", "",
              "| Case | Mode | n | b / rho | Method | Assumptions met | Failure rate | Simultaneous failure CI |",
              "|---|---|---:|---|---|---|---:|---|" ]
@@ -183,6 +248,14 @@ def write_report(path, rows, args):
                      f"{row['method']} | {row['assumptions_met']} | {row['failure_rate']:.4f} | [{lo:.4f}, {hi:.4f}] |")
     if not valid_bad and not stress_bad:
         lines.extend(["", "No row's simultaneous lower confidence endpoint exceeds the nominal failure budget. This does not establish robustness to arbitrary dependence."])
+    lines.extend(["", "## Dependence corrections: 45-class private/common-symbol case", "",
+                  "| Mode | n | b / rho | Method | Assumptions met | Coverage | Mean lower floor | Zero-floor fraction | Mean radius |",
+                  "|---|---:|---|---|---|---:|---:|---:|---:|"])
+    for row in rows:
+        if row["case"] == "private_45_64" and row["mode"] in ("markov", "cross_markov", "hidden_blocks"):
+            radius = f"{row['mean_radius']:.4f}" if row["mean_radius"] is not None else "-"
+            lines.append(f"| {row['mode']} | {row['base_n']} | {row['block_size']} / {row['rho']} | {row['method']} | "
+                         f"{row['assumptions_met']} | {row['coverage_rate']:.4f} | {row['mean_lower_floor']:.4f} | {row['zero_floor_rate']:.4f} | {radius} |")
     lines.extend(["", "All rows, including zero-floor rates and gaps to truth, are in summary.csv and summary.json.", ""])
     with path.open("x") as handle:
         handle.write("\n".join(lines))
@@ -194,7 +267,7 @@ def main():
     parser.add_argument("--trials", type=int, default=2000)
     parser.add_argument("--samples-per-service", type=int, nargs="+", default=[128, 512, 2048])
     parser.add_argument("--cases", nargs="+", choices=sorted(CASE_SPECS), default=list(CASE_SPECS))
-    parser.add_argument("--modes", nargs="+", choices=["iid", "block", "markov", "cross_service"], default=["iid", "block", "markov", "cross_service"])
+    parser.add_argument("--modes", nargs="+", choices=["iid", "block", "markov", "cross_service", "cross_markov", "hidden_blocks"], default=["iid", "block", "markov", "cross_service"])
     parser.add_argument("--block-sizes", type=int, nargs="+", default=[8, 32, 128])
     parser.add_argument("--markov-rhos", type=float, nargs="+", default=[0.9, 0.99])
     parser.add_argument("--alpha", type=float, default=0.05)
@@ -237,15 +310,23 @@ def main():
                 configs.extend({"mode": "markov", "block_size": 1, "rho": rho} for rho in args.markov_rhos)
             if "cross_service" in args.modes and case["family"] == "private_common":
                 configs.append({"mode": "cross_service", "block_size": 1, "rho": 0.0})
+            if "cross_markov" in args.modes and case["family"] == "private_common":
+                configs.extend({"mode": "cross_markov", "block_size": 1, "rho": rho} for rho in args.markov_rhos)
+            if "hidden_blocks" in args.modes and case["family"] == "private_common":
+                for block_size in args.block_sizes:
+                    if np.any(ns % block_size):
+                        parser.error(f"hidden block size {block_size} does not divide sample counts")
+                    configs.append({"mode": "hidden_blocks", "block_size": block_size, "rho": 0.0})
             for config in configs:
                 config["base_n"] = base_n
                 cells.append((case, ns, config))
     if not cells:
-        parser.error("no eligible configurations; cross_service requires a private_* case")
+        parser.error("no eligible configurations; shared/hidden sampling requires a private_* case")
     started = time.monotonic()
     args.out_dir.mkdir(parents=True, exist_ok=False)
     parameters = {key: str(value) if isinstance(value, Path) else value for key, value in vars(args).items()}
-    metadata = {"status": "running", "created_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
+    metadata = {"status": "running", "protocol_version": "2-regeneration-and-observed-run-domination",
+                "created_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
                 "parameters": parameters, "python": platform.python_version(), "numpy": np.__version__,
                 "scipy": scipy.__version__, "planned_configurations": len(cells),
                 "seed_policy": "SHA256 stable cell id + base seed; batch size and library versions also affect the stream",
@@ -259,7 +340,7 @@ def main():
     with (args.out_dir / "progress.jsonl").open("x") as progress:
         for index, (case, ns, config) in enumerate(cells, 1):
             methods = prepare_methods(case, ns, config, args.alpha, args.include_tree, args.tree_max_services)
-            cell_rows = evaluate_cell(case, ns, config, methods, args)
+            cell_rows, unit_diagnostics = evaluate_cell(case, ns, config, methods, args)
             rows.extend(cell_rows)
             diagnostics = {"independent_units": None}
             if config["mode"] == "iid":
@@ -268,10 +349,11 @@ def main():
                 diagnostics["independent_units"] = int((ns // config["block_size"]).sum())
             elif config["mode"] == "cross_service":
                 diagnostics["independent_units"] = int(ns.max())
-            else:
+            elif config["mode"] in ("markov", "cross_markov"):
                 tau = [markov_variance_factor(int(n), config["rho"]) for n in ns]
                 diagnostics.update({"variance_inflation_per_service": tau,
                                     "variance_effective_n_diagnostic_only": (ns / np.asarray(tau)).tolist()})
+            diagnostics.update(unit_diagnostics)
             progress.write(json.dumps({"cell_id": cell_rows[0]["cell_id"], "diagnostics": diagnostics, "rows": cell_rows}) + "\n")
             progress.flush()
             text = ", ".join(f"{r['method']}={r['failures']}/{args.trials}" for r in cell_rows)

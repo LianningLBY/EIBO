@@ -77,7 +77,6 @@ env -u http_proxy -u https_proxy -u all_proxy \
     -u GIT_ASKPASS -u SSH_ASKPASS \
     GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
     git -c http.proxy= \
-        -c credential.helper= \
         -c core.askPass= \
         -c http.extraHeader= \
         pull --ff-only origin codex/methodology-risk-certificates && \
@@ -92,9 +91,9 @@ python -u scripts/methodology_synthetic.py \
     --out-dir "artifacts/methodology/synthetic_$(date +%Y%m%d_%H%M%S)"
 ```
 
-这次 Git 操作临时绕过代理并禁用缓存凭据。需要认证时，Username 输入有仓库访问权限的 GitHub 用户名，Password 输入该账号的 Personal Access Token。依赖保持前一步已安装的版本。
+这次 Git 操作临时绕过代理，保留服务器已有凭据配置。需要认证时，Username 输入有仓库访问权限的 GitHub 用户名，Password 输入该账号的 Personal Access Token。依赖保持前一步已安装的版本。
 
-完整网格有 **168 种采样配置、597 行方法结果**，每种配置独立重复 2,000 次。脚本按批次运行并逐配置输出进度，所有结果放在新目录中。仅跨服务相关模式适用于 `private_*` 分布；生成树默认只在 K ≤ 8 的小类别数场景运行，以控制计算量。
+上述默认网格有 **168 种采样配置**，每种配置独立重复 2,000 次。初版输出 597 行方法结果；v2 加入 Markov 修正及可观测连续段对照后输出 **711 行**。脚本按批次运行并逐配置输出进度，所有结果放在新目录中。仅跨服务相关模式适用于 `private_*` 分布；生成树默认只在 K ≤ 8 的小类别数场景运行，以控制计算量。
 
 输出包括：
 
@@ -116,7 +115,7 @@ python -u scripts/methodology_synthetic.py \
 
 1. `iid`：所有服务内外样本独立。
 2. `block`：每个独立块抽一个符号，并重复 b 次。原始流数用于 naive 方法；oracle 对照使用已知独立块数。等长块保证两者的经验分布相同，修正无需估计有效样本量。
-3. `markov`：从真实边际分布开始的平稳链，转移核 `P = rho I + (1-rho) 1 p^T`。每个服务单独生成，避免混入初始分布偏移。报告精确方差膨胀因子，但不把 `n/tau` 代入 iid 公式来声称覆盖保证。
+3. `markov`：从真实边际分布开始的平稳链，转移核 `P = rho I + (1-rho) 1 p^T`。每个服务单独生成，避免混入初始分布偏移。v2 保留隐藏再生段长度来构造条件证书，并加入只使用可观测连续相同符号段的保守对照；后者的保证来自对隐藏段预算的逐路径支配。精确方差膨胀因子仍仅供诊断，不把 `n/tau` 代入 iid 公式。
 4. `cross_service`：各服务在同一位置共享“公共符号/私有符号”的 Bernoulli 冲击。每个服务内仍为 iid，只有跨服务独立性被破坏。classwise 和 pair/tree 的边际条件仍成立；原始 joint 的条件不成立。额外对照按已知独立的整列冲击计算改变上界。
 
 oracle 修正使用模拟器已知的独立单位；不能从这些结果推断真实流量中块长度或独立性已知。`grouped_joint_risk_bound` 的证明依据是经验 F 的凹性（`E[Fhat] <= F`）以及独立单位的有界差分；调用方必须另行证明经验分布无偏、单位相互独立和每个改变上界。
@@ -132,3 +131,33 @@ oracle 修正使用模拟器已知的独立单位；不能从这些结果推断�
 `assumptions_met` 来自模拟器定义。假设被破坏的压力测试出现超预算属于诊断结果，程序正常退出；满足假设的方法出现超预算则退出码为 2，应检查实现及理论依据。零下界比例用于区分保守但无信息的覆盖与有用的证书。生成树测试使用 `statcore` 的有限字母表 pair upper，不能将其数值与先前读取 m-free ledger 的生成树结果直接等同。
 
 这些输出在审查和登记前均属于探索性结果，不直接写入论文。
+
+## 第二轮：Markov 修正与模型不匹配
+
+第二轮默认参数下有 **117 种配置、489 行方法结果**。它保留 iid 和跨服务相关基线，增加 Markov 再生修正、可观测连续段对照、时间相关与跨服务相关叠加的场景，以及段内会变化的隐藏块负对照。第一轮重复常数块已验证，此轮不再选择 `block` 模式。
+
+当前环境依赖已齐，完整执行：
+
+```bash
+cd /data/xjw/EIBO && \
+git switch codex/methodology-risk-certificates && \
+env -u http_proxy -u https_proxy -u all_proxy \
+    -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+    -u GIT_ASKPASS -u SSH_ASKPASS \
+    GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+    git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+        pull --ff-only origin codex/methodology-risk-certificates && \
+python -m unittest discover -s tests -p '*riskcert*.py' -v && \
+python -u scripts/methodology_synthetic.py \
+    --trials 2000 \
+    --samples-per-service 128 512 2048 \
+    --modes iid markov cross_service cross_markov hidden_blocks \
+    --block-sizes 8 32 128 --markov-rhos 0.9 0.99 \
+    --alpha 0.05 --mc-alpha 0.05 --seed 20261012 \
+    --include-tree \
+    --out-dir "artifacts/methodology/dependence_v2_$(date +%Y%m%d_%H%M%S)"
+```
+
+这段更新命令保留服务器已有凭据配置。没有缓存凭据时仍需 GitHub 用户名与 Token。
+
+新增方法和场景的适用条件、证明及真实流量接入条件详见 [dependence protocol](METHODOLOGY_DEPENDENCE_PROTOCOL.md)。重点查看覆盖率、`mean_lower_floor`、`zero_floor_rate` 和 `mean_radius`，同时查看 `assumptions_met`。`progress.jsonl` 保存第一条重复实验的段长度与标签，便于重建采样计数和核对预算。

@@ -43,6 +43,21 @@ def empirical_known_risk(counts, priors) -> float:
     return max(0.0, float(weights.sum() - (weights[:, None] * laws).max(axis=0).sum()))
 
 
+def joint_radius_from_change_budget(change_squared_sums, *, alpha: float = 0.05) -> np.ndarray:
+    """McDiarmid radii from externally justified sums of squared changes.
+
+    A random budget is valid here only when it is justified conditionally on
+    exogenous sampling geometry, or dominates such a valid budget pathwise.
+    Estimating effective sample size from arbitrary observations is insufficient.
+    """
+    budget = np.asarray(change_squared_sums, dtype=float)
+    if budget.ndim != 1 or not len(budget) or not np.all(np.isfinite(budget)) or np.any(budget < 0):
+        raise ValueError("change budgets must be a nonempty finite nonnegative vector")
+    if not 0 < alpha < 1:
+        raise ValueError("alpha must lie in (0, 1)")
+    return np.sqrt(0.5 * math.log(1 / alpha) * budget)
+
+
 def grouped_joint_risk_bound(counts, priors, unit_change_bounds, *, alpha: float = 0.05) -> dict:
     """Bound risk when independent sampling units have known change bounds.
 
@@ -56,9 +71,7 @@ def grouped_joint_risk_bound(counts, priors, unit_change_bounds, *, alpha: float
     changes = np.asarray(unit_change_bounds, dtype=float)
     if changes.ndim != 1 or not len(changes) or not np.all(np.isfinite(changes)) or np.any(changes < 0):
         raise ValueError("unit_change_bounds must be a nonempty finite nonnegative vector")
-    if not 0 < alpha < 1:
-        raise ValueError("alpha must lie in (0, 1)")
-    radius = math.sqrt(0.5 * math.log(1 / alpha) * float(np.dot(changes, changes)))
+    radius = float(joint_radius_from_change_budget([np.dot(changes, changes)], alpha=alpha)[0])
     return {"lower_floor": max(0.0, point - radius), "radius": radius,
             "assumption": "independent sampling units; unbiased empirical laws; externally justified change bounds"}
 
@@ -91,7 +104,7 @@ def direct_risk_bounds(counts, priors, *, alphabet_size: int, alpha: float = 0.0
         )
         radii.append(float(reference.radius_1))
     classwise_radius = float(np.dot(weights, radii))
-    joint_radius = math.sqrt(0.5 * math.log(1 / alpha) * float(np.sum(weights**2 / ns)))
+    joint_radius = float(joint_radius_from_change_budget([np.sum(weights**2 / ns)], alpha=alpha)[0])
     return {
         "empirical_known_risk": point,
         "sample_counts": ns.tolist(),

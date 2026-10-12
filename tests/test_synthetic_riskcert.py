@@ -9,8 +9,10 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
-from eibo.riskcert import empirical_known_risk, tv_upper_bound, tree_risk_bound
-from eibo.synthetic import batch_known_risk, failure_interval, make_case, markov_variance_factor, sample_counts
+from eibo.riskcert import (empirical_known_risk, grouped_joint_risk_bound,
+                           joint_radius_from_change_budget, tv_upper_bound, tree_risk_bound)
+from eibo.synthetic import (batch_known_risk, failure_interval, make_case, markov_variance_factor,
+                            merge_constant_runs, sample_counts, sample_counts_with_units)
 from methodology_synthetic import finalize_intervals, prepare_methods, stable_seed, tree_floors
 
 
@@ -103,6 +105,91 @@ class TestSyntheticRiskcert(unittest.TestCase):
         scalar = tree_risk_bound(upper, case["known_priors"])["lower_floor"]
         batched = tree_floors(counts[None], case["known_priors"], methods["tree_naive"]["pair_radii"])[0]
         self.assertAlmostEqual(scalar, batched)
+
+    def test_observed_runs_only_merge_true_constant_segments(self):
+        lengths = np.array([[2, 3, 1, 4, 0], [1, 2, 3, 0, 0]])
+        labels = np.array([[0, 0, 1, 1, -1], [2, 2, 2, -1, -1]])
+        observed = merge_constant_runs(lengths, labels)
+        np.testing.assert_array_equal(observed, [[5, 5, 0, 0, 0], [6, 0, 0, 0, 0]])
+        np.testing.assert_array_equal(observed.sum(axis=1), lengths.sum(axis=1))
+        self.assertTrue(np.all((observed ** 2).sum(axis=1) >= (lengths ** 2).sum(axis=1)))
+        with self.assertRaises(ValueError):
+            merge_constant_runs([[1, 0, 2]], [[0, -1, 0]])
+
+    def test_regeneration_retains_lengths_and_preserves_v1_markov_counts(self):
+        case = make_case("zipf_6_1024")
+        ns = 128 * case["sample_factors"]
+        counts, info = sample_counts_with_units(np.random.default_rng(24), case, ns, 10, mode="markov", rho=0.9)
+        legacy = sample_counts(np.random.default_rng(24), case, ns, 10, mode="markov", rho=0.9)
+        np.testing.assert_array_equal(counts, legacy)
+        changes = []
+        for i, trace in enumerate(info["geometry_example"]["independent_services"]):
+            lengths = np.array(trace["regeneration_lengths"])
+            labels = np.array(trace["regeneration_labels"])
+            self.assertEqual(lengths.sum(), ns[i])
+            reconstructed = np.bincount(labels, weights=lengths, minlength=case["alphabet_size"])
+            np.testing.assert_array_equal(counts[0, i], reconstructed)
+            changes.extend(case["known_priors"][i] * lengths / ns[i])
+        oracle = grouped_joint_risk_bound(counts[0], case["known_priors"], changes)
+        batched_radius = joint_radius_from_change_budget(info["oracle_budget"])[0]
+        self.assertAlmostEqual(oracle["radius"], batched_radius)
+        self.assertTrue(np.all(info["observed_budget"] >= info["oracle_budget"] - 1e-12))
+
+    def test_cross_service_units_preserve_v1_counts_and_include_cross_terms(self):
+        case = make_case("private_6_32")
+        ns = np.full(6, 128)
+        counts, info = sample_counts_with_units(np.random.default_rng(26), case, ns, 10, mode="cross_service")
+        legacy = sample_counts(np.random.default_rng(26), case, ns, 10, mode="cross_service")
+        np.testing.assert_array_equal(counts, legacy)
+        np.testing.assert_allclose(info["observed_budget"], 6 * info["separate_observed_budget"])
+        np.testing.assert_allclose(info["oracle_budget"], case["known_priors"].sum() ** 2 / 128)
+
+    def test_shared_regeneration_supports_unequal_priors_and_sample_lengths(self):
+        case = make_case("private_6_32")
+        case["known_priors"] = np.array([1, 2, 3, 4, 5, 6]) / 21 * 6 / 7
+        ns = np.array([32, 64, 128, 32, 64, 128])
+        counts, info = sample_counts_with_units(np.random.default_rng(28), case, ns, 12, mode="cross_markov", rho=0.9)
+        np.testing.assert_array_equal(counts.sum(axis=2), np.tile(ns, (12, 1)))
+        trace = info["geometry_example"]["shared_shocks"]
+        lengths = np.array(trace["regeneration_lengths"])
+        labels = np.array(trace["regeneration_labels"])
+        sequence = np.repeat(labels, lengths)
+        starts = np.cumsum(lengths) - lengths
+        changes = np.zeros(len(lengths))
+        for i, n in enumerate(ns):
+            self.assertEqual(counts[0, i, 0], sequence[:n].sum())
+            changes += case["known_priors"][i] * np.minimum(lengths, np.maximum(0, n - starts)) / n
+        self.assertAlmostEqual(info["oracle_budget"][0], np.dot(changes, changes))
+        self.assertTrue(np.all(info["observed_budget"] >= info["oracle_budget"] - 1e-12))
+
+    def test_hidden_blocks_preserve_marginal_but_invalidate_run_domination(self):
+        case = make_case("private_6_32")
+        counts, info = sample_counts_with_units(np.random.default_rng(30), case, [128] * 6, 2000,
+                                               mode="hidden_blocks", block_size=128)
+        np.testing.assert_array_equal(counts.sum(axis=2), np.full((2000, 6), 128))
+        self.assertLess(abs(counts[:, :, 0].mean() / 128 - 0.4), 0.03)
+        self.assertTrue(np.any(info["observed_budget"] < info["oracle_budget"] - 1e-12))
+        expected = np.sum(case["known_priors"] ** 2)
+        np.testing.assert_allclose(info["oracle_budget"], expected)
+
+    def test_regeneration_endpoint_has_one_independent_draw_per_service(self):
+        case = make_case("private_6_32")
+        counts, info = sample_counts_with_units(np.random.default_rng(32), case, [128] * 6, 20, mode="markov", rho=1)
+        self.assertTrue(np.all((counts == 0) | (counts == 128)))
+        np.testing.assert_allclose(info["oracle_budget"], np.sum(case["known_priors"] ** 2))
+        np.testing.assert_array_equal(info["oracle_unit_counts"], np.full(20, 6))
+        np.testing.assert_allclose(info["observed_budget"], info["oracle_budget"])
+
+    def test_new_assumption_labels_reject_wrong_model_and_wrong_grouping(self):
+        case = make_case("private_6_32")
+        ns = np.full(6, 128)
+        shared = prepare_methods(case, ns, {"mode": "cross_markov", "block_size": 1, "rho": 0.9}, 0.05, False, 8)
+        self.assertTrue(shared["joint_oracle_shared_regeneration"]["assumptions_met"])
+        self.assertTrue(shared["joint_observed_shared_runs"]["assumptions_met"])
+        self.assertFalse(shared["joint_separate_run_heuristic"]["assumptions_met"])
+        hidden = prepare_methods(case, ns, {"mode": "hidden_blocks", "block_size": 128, "rho": 0}, 0.05, False, 8)
+        self.assertTrue(hidden["joint_oracle_hidden_blocks"]["assumptions_met"])
+        self.assertFalse(hidden["joint_observed_runs"]["assumptions_met"])
 
 
 if __name__ == "__main__":
