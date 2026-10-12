@@ -43,6 +43,26 @@ def empirical_known_risk(counts, priors) -> float:
     return max(0.0, float(weights.sum() - (weights[:, None] * laws).max(axis=0).sum()))
 
 
+def grouped_joint_risk_bound(counts, priors, unit_change_bounds, *, alpha: float = 0.05) -> dict:
+    """Bound risk when independent sampling units have known change bounds.
+
+    Each empirical law must be unbiased for its fixed target law. The supplied
+    c_b must bound the change in empirical risk when independent unit b is
+    replaced. This is an oracle interface, not an estimator of effective sample
+    size or a guarantee for arbitrary correlation. Independent iid observations
+    have c_b = pi_i/n_i; a shared cross-service draw can affect several laws.
+    """
+    point = empirical_known_risk(counts, priors)
+    changes = np.asarray(unit_change_bounds, dtype=float)
+    if changes.ndim != 1 or not len(changes) or not np.all(np.isfinite(changes)) or np.any(changes < 0):
+        raise ValueError("unit_change_bounds must be a nonempty finite nonnegative vector")
+    if not 0 < alpha < 1:
+        raise ValueError("alpha must lie in (0, 1)")
+    radius = math.sqrt(0.5 * math.log(1 / alpha) * float(np.dot(changes, changes)))
+    return {"lower_floor": max(0.0, point - radius), "radius": radius,
+            "assumption": "independent sampling units; unbiased empirical laws; externally justified change bounds"}
+
+
 def direct_risk_bounds(counts, priors, *, alphabet_size: int, alpha: float = 0.05) -> dict:
     """Two baselines, with explicitly different independence assumptions.
 

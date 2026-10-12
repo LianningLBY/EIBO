@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from eibo.riskcert import direct_risk_bounds, empirical_known_risk, tree_risk_bound
+from eibo.riskcert import direct_risk_bounds, empirical_known_risk, grouped_joint_risk_bound, tree_risk_bound
 
 
 class TestRiskcert(unittest.TestCase):
@@ -50,6 +50,24 @@ class TestRiskcert(unittest.TestCase):
         for method in ["classwise", "joint"]:
             self.assertGreater(large[method]["lower_floor"], small[method]["lower_floor"])
             self.assertLessEqual(large[method]["lower_floor"], 2 / 3)
+
+    def test_grouped_bound_reduces_to_individual_iid_bound(self):
+        counts = np.array([[120, 80], [60, 340], [250, 50]])
+        priors = np.array([0.2, 0.3, 0.4])
+        ns = counts.sum(axis=1)
+        individual_changes = np.repeat(priors / ns, ns)
+        direct = direct_risk_bounds(counts, priors, alphabet_size=2)["joint"]
+        grouped = grouped_joint_risk_bound(counts, priors, individual_changes)
+        self.assertAlmostEqual(direct["radius"], grouped["radius"])
+        self.assertAlmostEqual(direct["lower_floor"], grouped["lower_floor"])
+
+    def test_shared_units_widen_joint_bound(self):
+        counts = [[40, 60]] * 6
+        priors = [1 / 7] * 6
+        individual = direct_risk_bounds(counts, priors, alphabet_size=2)["joint"]
+        grouped = grouped_joint_risk_bound(counts, priors, [sum(priors) / 100] * 100)
+        self.assertAlmostEqual(grouped["radius"] / individual["radius"], np.sqrt(6))
+        self.assertLess(grouped["lower_floor"], individual["lower_floor"])
 
 
 if __name__ == "__main__":
