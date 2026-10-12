@@ -242,3 +242,46 @@ python -u scripts/methodology_real_experiment.py \
 - 时间块合并前后的半径、单位数与连接边数。任何可用整流的时间包络跨块时，相关相邻块会合并；跨类别共用一个单位，先求和再平方。该操作修复同一流被拆分的问题，不能证明不同流、不同单位相互独立。
 
 本阶段明确使用 `statcore` 的固定 `log` 网格。`log M=2` 的尺寸边界与旧实验的 1200 字节切分不同，不能直接作为旧表示的复现实验。只比较当前两种明确的固定表示，不选择多个方法/块宽中最大的下界作为同时有效证书。
+
+## 第五轮：逐类别、逐月漂移分解
+
+上一轮服务器实验已经完成，目录为 `artifacts/methodology/real_experiment_20261012_205629`。本轮仍使用原计划的 44 个 APP、固定先验、k=5、两个 log 表示和三个时间窗口。原输出没有逐月计数，因此需要再扫描一次 H5；扫描后所有整段符号计数和指标必须与上一轮完全核对。
+
+当前 `traffic-ncde` 环境可以直接运行，不需要新增依赖或重新跑前三轮：
+
+```bash
+cd /data/xjw/EIBO && \
+git switch codex/methodology-risk-certificates && \
+env -u http_proxy -u https_proxy -u all_proxy \
+    -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+    -u GIT_ASKPASS -u SSH_ASKPASS \
+    GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+    git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+        pull --ff-only origin codex/methodology-risk-certificates && \
+python -m unittest discover -s tests -p '*riskcert*.py' -v && \
+python -u scripts/methodology_real_monthly.py \
+    --h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+    --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+    --experiment-dir artifacts/methodology/real_experiment_20261012_205629 \
+    --backend tables --chunk-rows 20000 \
+    --small-n 200 --top 10 \
+    --out-dir "artifacts/methodology/real_monthly_$(date +%Y%m%d_%H%M%S)"
+```
+
+程序重新核验 H5 的 SHA256，以及准备审计和上一轮实验的文件清单哈希。按 UTC 开始时间把已经满足原时间窗口、整流包络、前缀长度条件的流分配到月份。**不额外按月末排除跨月流**，确保月计数之和仍等于上一轮整段计数。若同一个月被 pilot/certificate/evaluation 边界分开，会保留为不同片段，不跨期合并。缺表日期、无样本月份和缺失 APP 都会显式报告。
+
+输出包括：
+
+- `report.md`：月度概览、错误分解、错误增加最多的类别、表示收益贡献下降的类别、缺样情况。
+- `monthly_summary.csv`：每月的样本量、最小类别样本量、缺失/小样本 APP、经验 F、分类错误、pilot 与相邻片段的经验 TV，以及 M=1/M=2 的经验风险差。
+- `class_metrics.csv`：每个 APP 在整段和月份片段中的样本量、固定 pilot 模型错误、评估期近期模型错误、经验最优错误，以及全局/类别专属未见符号质量。
+- `class_drift_decomposition.csv`：逐 APP 的经验 TV、固定 pilot 模型错误变化，以及 `错误变化 = 经验 F 变化 + 经验差距变化` 的带符号贡献。包含三组整段比较、pilot/证书期参照和相邻月份片段比较。
+- `representation_contributions.csv`：每类对 M=1/M=2 经验风险差的带符号贡献、相对 pilot 的变化，以及固定模型分类改善。
+- `summary.json`、`rankings.json`：完整指标、缺失值的可辨识范围及分类别排名。
+- `monthly_symbol_counts.json`、`plan_snapshot.json`、`run.json`：可复查的聚合月计数、固定计划和输入/代码/输出 SHA256。
+
+完成后终端会直接显示 12 个月的 M=2 概览、certificate→evaluation 分解和错误增加最多的 APP，方便在 ToDesk 中查看。表内错误、F、TV 以原固定先验计算；终端 `delta_*_pp` 为加权百分点，`error/F/TV/loss` 为 0 至 1 尺度的值。
+
+`--small-n 200` **只标记样本量，不筛选类别**。月份缺失任何固定类别时，不计算完整类别混合的经验 F/经验最优表示收益，也不对剩余类别重新归一化先验。固定分类器的已有类别错误贡献仍保留，并报告未观测类别引起的数值范围；这种范围不是置信区间，不包含采样误差。小样本行保留在排名中并带标记。
+
+同一类别的表示贡献可以为负，因为细表示会改变经验最优分类器在不同类别之间的错误分配；完整类别集合的贡献之和必须非负。pilot 月份的模型误差复用了训练数据，属于重代入统计；证书期训练的近期模型仅在后续 evaluation 月份评估。分析保留正、负错误变化贡献以显示抵消，并区分全局新符号与类别内新符号。所有差异均为描述性结果，不推断显著性、真实 Bayes 风险、时间块独立性或新的风险证书。

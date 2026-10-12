@@ -172,11 +172,17 @@ class RealExperimentCounts:
             self.period_service[period].update({int(key): int(n) for key, n in zip(keys, numbers)})
             mask = all_mask & np.isin(labels, self.known)
             selected_labels = np.searchsorted(self.known, labels[mask])
+            symbols_by_rung = {}
             for rung, codec in self.encoders.items():
                 symbols = codec.encode(records["PPI"][mask])
+                symbols_by_rung[rung] = symbols
                 np.add.at(self.counts[period][rung], (selected_labels, symbols), 1)
+            self.add_selected(period, first[mask], selected_labels, symbols_by_rung)
             if period in self.geometry:
                 self.geometry[period].add(first[all_mask], last[all_mask], first[mask], selected_labels)
+
+    def add_selected(self, period, first, labels, symbols_by_rung):
+        """Optional aggregate observer; receives exactly the audited population."""
 
     def reconcile(self, expected):
         for period in PERIODS:
