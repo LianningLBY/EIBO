@@ -205,3 +205,40 @@ SHA256 来自原实验脚本登记的 XS 字节记录。如果不匹配，程序
 类别仅根据 pilot 的可用整流数 ≥ 2,000 选择。证书期和评估期缺失的 pilot 类别会被报告，而不会被悄悄移除。ID/CID 审计采用在所有有效 k≥5 流上均匀抽取的 50,000 条样本；没有观察到重复不证明全文件唯一性，更不证明会话或时间块相互独立。
 
 时间块统一覆盖所有类别，敏感性预算按 `sum_b (sum_i pi_i*n_ib/n_i)^2` 计算，调用 `eibo.riskcert` 的公式实现。独立性和条件无偏性均标为未证实，此阶段只报告假设成立时的半径诊断，不给出真实流量风险下界或覆盖率。完成准备审计后，再接固定观测计数、pilot 训练的频数分类器和跨时段评估；真实覆盖率不能像合成分布一样直接用已知 Bayes 风险核验。
+
+## 第四轮：真实数据计数与跨时段评估
+
+2026-10-12 的 ToDesk 报告已确认完整扫描、44 个 pilot 类别，以及所有开始时间对齐整点。CID 样本不支持可靠的多流会话划分：OCCID 有 72.83% 空值或零值，仅 3 个重复键且存在跨 APP、跨日期复用；组合键未观察到重复。详细判读见 [real audit memo](METHODOLOGY_REAL_AUDIT_20261012.md)。当前继续使用时间划分，不把 CID 当作独立单位。
+
+下面命令直接复用已经完成的审计目录，不必重新跑准备审计，也不必安装依赖：
+
+```bash
+cd /data/xjw/EIBO && \
+git switch codex/methodology-risk-certificates && \
+env -u http_proxy -u https_proxy -u all_proxy \
+    -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+    -u GIT_ASKPASS -u SSH_ASKPASS \
+    GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+    git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+        pull --ff-only origin codex/methodology-risk-certificates && \
+python -m unittest discover -s tests -p '*riskcert*.py' -v && \
+python -u scripts/methodology_real_experiment.py \
+    --h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+    --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+    --backend tables --chunk-rows 20000 \
+    --block-seconds 3600 21600 86400 \
+    --out-dir "artifacts/methodology/real_experiment_$(date +%Y%m%d_%H%M%S)"
+```
+
+程序先校验准备文件的清单 SHA256、重新校验 H5 的 SHA256 和表结构，再完整扫描。时间窗口、k、类别、先验、alpha 和两种表示均从准备计划复制，不能根据后期结果临时移除类别或改变表示。新增输出目录必须不存在。若前 k 个包有非法方向或非正尺寸，程序会停止，不会静默改变审计所定义的总体。
+
+输出包括 `report.md`、`summary.json`、`symbol_counts.json`、`time_unit_diagnostics.json`、`per_service_metrics.csv`、`plan_snapshot.json` 和 `run.json`。逐 APP 的三个时期计数必须与准备 CSV 完全一致；M=2 计数向 M=1 的投影及时间单位计数也必须一致。没有逐流记录、原始 CID/IP 或哈希键输出。
+
+重点查看：
+
+- pilot 分类器在 certificate/evaluation 的已知类加权错误、未见符号质量，以及 certificate 训练的近期模型在 evaluation 的错误。未知类自身的错误未测量，先验由计划固定，不是流量实际比例。
+- 每个类别的 certificate→evaluation 经验 TV 与 M=1/M=2 的经验 Bayes 风险差。二者都是样本统计，不能当作总体漂移界或表示损失证书。
+- iid 条件下界与 1/6/24 小时的条件敏感性下界。所有依赖假设均未验证；不从这些结果推断真实覆盖率，也不将证书期下界直接用于评估期。
+- 时间块合并前后的半径、单位数与连接边数。任何可用整流的时间包络跨块时，相关相邻块会合并；跨类别共用一个单位，先求和再平方。该操作修复同一流被拆分的问题，不能证明不同流、不同单位相互独立。
+
+本阶段明确使用 `statcore` 的固定 `log` 网格。`log M=2` 的尺寸边界与旧实验的 1200 字节切分不同，不能直接作为旧表示的复现实验。只比较当前两种明确的固定表示，不选择多个方法/块宽中最大的下界作为同时有效证书。
