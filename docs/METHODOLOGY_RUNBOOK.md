@@ -341,3 +341,70 @@ python -u scripts/methodology_real_rolling.py \
 - `confusion_matrices.json`：全部已知类别的完整计数混淆矩阵；`plan_snapshot.json`、`run.json`：计划及输入/代码/输出哈希。
 
 完成后终端直接显示各月三模型错误、整段完整/匹配错误，以及 APP=2 每月最主要的误判符号与竞争类别。`error` 为固定先验加权错误，`APP_error` 为 APP=2 类别条件错误，`*_pp` 为加权百分点。未知类自身错误未计入；已知类别条件后验和精确率不描述未知类。所有本轮结果仍是探索性证据，不新增表示选择或风险证书。
+
+## 第七轮：全部 44 类的错误重分配与符号 479 原始特征
+
+本轮输入为已经完成的月计数 `artifacts/methodology/real_monthly_20261012_213718`、滚动实验 `artifacts/methodology/real_rolling_20261013_102535`，以及原始 H5 和准备审计。使用当前 `traffic-ncde` 环境，不增加依赖，不改变 `statcore.py` / `realexperiment.py`，原缓存的编码来源校验继续有效。
+
+完整命令如下。外层子 shell 的 `set -euo pipefail` 确保拉取、测试或实验失败后停止，不通过 `tee` 掩盖 Python 错误；日志和两份报告放在同一个新目录中。
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_DIAG_OUT="artifacts/methodology/real_collision_$(date +%Y%m%d_%H%M%S)"
+    mkdir "$EIBO_DIAG_OUT"
+
+    python -u scripts/methodology_real_reallocation.py \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --rolling-dir artifacts/methodology/real_rolling_20261013_102535 \
+        --small-n 200 --top 10 \
+        --out-dir "$EIBO_DIAG_OUT/reallocation" \
+        2>&1 | tee "$EIBO_DIAG_OUT/reallocation.log"
+
+    python -u scripts/methodology_real_collision.py \
+        --h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+        --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --backend tables --chunk-rows 20000 \
+        --symbol-id 479 --apps 2 34 \
+        --reference-months 2024-12 2025-01 --small-n 200 \
+        --out-dir "$EIBO_DIAG_OUT/symbol479" \
+        2>&1 | tee "$EIBO_DIAG_OUT/symbol479.log"
+)
+```
+
+### 全类别错误与预测转移
+
+`methodology_real_reallocation.py` 先核验两轮输出的文件清单、原始数据来源、完整计划和固定先验，再从已核验的月计数重建三个模型的每一张混淆矩阵，核对保存的逐月/整段错误。随后比较最近 1 个月、最近 3 个月相对固定 pilot 的变化，两种原表示和全部 44 类均保留。
+
+- `class_error_changes.csv`：逐月和 certificate/evaluation 整段的每类错误、条件错误变化、固定先验加权变化及样本量标记；区分错变对（rescued）、对变错（harmed）、错变另一错误类别，以及预测改变总数。
+- `confusion_changes.csv`：全部真类/预测类组合的计数与变化，保留对角项。非对角项的加权变化之和等于全部类别错误变化。
+- `prediction_transfers.csv`：同一目标样本在两个模型之间的原预测→新预测转移；由公共符号计数精确汇总，无需输出单流记录。若预测没有改变，文件仅保留表头。
+- `matched_class_changes.csv`：重放第六轮原种子、原重复次数和逐类共同训练预算，保存全部类别的条件变化均值、加权变化均值和随机子集标准差/分位数。若第六轮没有匹配实验，不生成该文件。重放的月度整体及 APP=2 指标必须与第六轮一致。
+- `report.md`、`summary.json`、`plan_snapshot.json`、`run.json`：整体变化、正负贡献、改善/恶化类别数、评估期主要类别、完整来源与哈希。
+
+每类 `harmed - rescued` 必须等于错误计数增量；全部类别贡献必须等于整体错误变化。整段先在每类内部合并各月错误计数，再按固定先验加权，**各类具有不同的月份权重**。因此，整段改善与每月宏观错误恶化可能同时发生，必须同时检查两种口径。匹配重复仍是给定训练计数的子集敏感性，不是总体置信区间或时间相关性修正。
+
+### 符号内部的精细尺寸和时间分布
+
+`methodology_real_collision.py` 重新校验原 H5 SHA256、大小和准备审计的表/字段元数据，完整扫描全部记录。沿用原窗口、整流包络和前缀有效性，先按原 log M=2 编码筛选符号 479，再记录 APP=2、34 的前五个包细节。**所有类别、所有月份和两种原表示的符号计数必须逐项等于已保存月缓存**，APP=2/34 的细节流数也必须等于该格子的原计数。
+
+符号 479 为 `C:39+ S:39+ C:39+ S:39+ S:39+`。根据 [CESNET 官方特征说明](https://cesnet.github.io/cesnet-datazoo/features/) 和 [PPI 通道常量](https://github.com/CESNET/cesnet-datazoo/blob/main/cesnet_datazoo/constants.py)，PPI 第 0 行为毫秒级包间隔，第 1 行为方向，第 2 行为传输层载荷字节数。载荷尺寸不是完整线上包长；现有数据无法恢复亚毫秒时序。编码筛选仍按原规则饱和到 1500，但细节统计**保留实际超过 1500 的尺寸**。首包间隔应为结构性 0；保留其统计及非零诊断，差异排名排除该位置。其余位置的零间隔正常保留。
+
+- `cell_occupancy.csv`：逐月、原整段和 12–1 月参考期的全部 44 类总流数、格子流数、类内格子概率、固定先验质量和已知类条件后验。后验分母包含全部已知竞争类，不能用 APP=2/34 的原始二类比例替代。
+- `distributions.csv`：APP=2、34 在各范围内每个包位置的精确观测值计数和概率，分别记录 `size_bytes` / `IPT_ms`。
+- `feature_summary.csv`：均值、经验逆 CDF 分位数、极值、零值比例、等于 1200 / 超过 1500 的比例、有效/无效数。数值阈值使用各自特征单位；尺寸比例用于检查尺寸饱和。小样本仅标记。
+- `marginal_comparisons.csv`：同月两类在符号内的边际 TV、CDF 最大距离、分布重叠，以及 12–1 月参考期到之后各月的同类边际漂移。
+- `report.md`、`summary.json`、`plan_snapshot.json`、`run.json`：类别竞争、逐月分位数、主要差异/漂移、完整扫描与原计数核对、输入/代码/输出哈希。
+
+非有限/负间隔只从相应边际分布中排除，保留该流的格子计数并报告无效数，不改变审计总体。边际分布结果不等于联合序列可分性，精确支持集 TV 会受稀疏观测和采样噪声影响；不计算独立样本 p 值，不声称分类提升。符号和焦点类别来自前一轮观察，属于事后诊断，本轮不选择新表示、不拟合新分类器、不新增风险证书。
