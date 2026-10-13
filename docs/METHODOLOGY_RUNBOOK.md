@@ -473,3 +473,57 @@ python -u scripts/methodology_real_rolling.py \
 缺失训练类别时，四组全部标为不可用，不缩减类别或重归一化先验。目标月份缺失类别时，保留已有类别的分类指标和缺失值可辨识范围，完整经验 F/表示收益为 NA；小样本只标记。带符号的每类经验表示收益可以为负，完整类别之和必须非负。
 
 本轮不新增跨训练窗口的等样本量随机对照；同窗口四组已经使用相同训练流，窗口之间仍有训练量差异。符号、时间特征与实验家族来自此前已查看的月份，虽然实际阈值按过去数据选择，结果仍属于探索性证据，不是新确认性留出集，不新增显著性或有效风险证书。引入时间和更细包长后，原粗表示的风险下界不能直接当作新分类器的下界。
+
+## 第九轮：仅在低间隔分支内细分包长
+
+上一轮服务器结果中，加入第二包间隔的评估期收益全部来自 APP=21，APP=2 的条件错误没有改变。交叉组合虽有额外整体收益，固定 pilot 与最近 3 月模型却使 APP=34 条件错误增加约 12.94 个百分点。本轮 `scripts/methodology_real_hierarchy.py` 检查：**先使用上一轮选出的间隔阈值，只在低间隔分支内搜索包长二分，高间隔与无效间隔分支保持时间组的原判决**，是否能够获得额外收益并避免 APP=34 的上述代价。
+
+复用第八轮 `real_refinement_20261013_123459` 保存的全部已知类联合原子计数，**无需重新读取 H5，无需安装新依赖**。输入的完整运行状态、文件/旧代码哈希、原计划、类顺序、先验、每月符号 479 总数和各包位置的间隔边际须全部核对；再按保存协议重现第八轮四组阈值、每月/整段指标与全部混淆矩阵。若来源或结果不一致，脚本停止。按原目录名定位月度输入，避免多个阶段同名 `summary.json`、`run.json` 的哈希混淆；迁移缓存时保留这些目录名。
+
+服务器当前 `traffic-ncde` 环境完整执行：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_HIER_OUT="artifacts/methodology/real_hierarchy_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_HIER_OUT"
+    test ! -e "${EIBO_HIER_OUT}.log"
+    python -u scripts/methodology_real_hierarchy.py \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --refinement-dir artifacts/methodology/real_refinement_20261013_123459 \
+        --min-leaf-flows 200 --small-n 200 \
+        --out-dir "$EIBO_HIER_OUT" \
+        2>&1 | tee "${EIBO_HIER_OUT}.log"
+)
+```
+
+### 冻结高间隔判决与过去月份选择
+
+四组为 `original`（原表示）、`ipt_split`（上一轮时间组）、`crossed_size_ipt`（上一轮交叉组合）和 `low_size_split`（新增低间隔分层细分）。三个对照的全部混淆矩阵必须重现第八轮。同一窗口四组保持全部 44 类、原先验、原训练流与目标流；固定 pilot、最近 1 月、最近 3 月仍沿用严格过去日历规则。
+
+时间根阈值、交叉组的主效应阈值及最低训练流门槛直接重现第八轮协议。新增包长选择只查看同一过去训练窗口的低间隔计数，使用缓存原来的包位置与阈值网格。训练得分仍是 `pi_i * child_count_i / full_training_class_n_i`，不能以低间隔/符号 479 内数量为分母，也不只比较 APP=2/34。两个新增子格子各至少有 200 条全部类别合计的训练流，整体训练经验收益须严格大于 1e-12；没有符合条件的正收益分割便完全回退为时间组。并列时按包位置/阈值升序确定。未见低间隔子格子回退到**时间组低间隔父格子**的判决。
+
+新增表示最多四个符号 479 子格子：低间隔小尺寸、低间隔大尺寸、高间隔、无效间隔。它们必须确定投影到原时间组及原符号。高间隔、无效间隔及符号 479 之外的判决逐项检查不变。
+
+这一约束给出一个可直接检查的分类性质：低间隔父格子原来只预测一个类别，改变其中的判决，只可能给**该原预测类别**增加错误；其余类别在任意目标分布上均不会新增错误。如果低间隔父判决为 APP=21，则 APP=34 相对时间组逐流受保护，但 APP=21 仍可能受损。脚本不默认父判决一定为 21，会报告实际类别和 APP=34 是否受保护，并核对全部类别的错变对/对变错计数。这是分类规则的结构性质，不是依赖假设下的总体风险证书。
+
+### 重点结果与输出
+
+- `report.md`：过去月份阈值、低分支原预测、APP=2 的训练/目标竞争排名、四组逐月/整段错误、相对时间组的额外收益、APP=2/21/34 条件错误及主要改善/受损类别。
+- `low_threshold_selections.csv`、`low_threshold_candidates.csv`：实际位置/阈值、训练月份与截止时间、全部候选的整体得分和 APP=2/21 带符号贡献。`best_eligible_APP2_training_gain` 仅说明有限候选中 APP=2 最多可获多少训练收益，不能作为事后替代决策；部署的选择仍按全部类别整体目标。
+- `branch_competition.csv`：每个时间父格子和分层子格子的全部 44 类训练/目标流数、使用全类分母计算的已知类后验、过去训练判决及目标经验赢家。APP=2 排名并列取最优名次；完整分数差保留在阈值选择记录。目标排名/后验只在冻结规则后计算，不能参与阈值拟合。
+- `class_metrics.csv`、`period_class_metrics.csv`：所有类别的错误、相对时间组的条件/加权变化、每月的精确获救与受损流数、带符号经验表示贡献。新增错误只能来自低分支原预测类别，逐类贡献须重现整体变化。
+- `monthly_summary.csv`、`period_summary.csv`、`summary.json`：相对原表示和时间组的错误变化、三个重点类别指标；每月另外报告目标经验 F、相对时间组的经验收益与经验差距变化。整段先在每类内池化错误数，再施加固定先验；不同月份阈值可变，不池化经验 F。
+- `confusion_matrices.json`、`selection_protocol.json`、`plan_snapshot.json`、`run.json`：完整混淆、协议、计划和哈希。`run.json` 的 `rows_read=0` 表示本轮不读取原始流，`cached_source_rows` 保留原缓存的完整扫描数量。
+
+若 APP=2 仍无改善，先检查低分支中它与全部竞争类别的排名、选中子格子的赢家，以及是否存在能帮助 APP=2 的合格包长候选；据此判断当前二分家族的局限，不能从二类分布差异直接推断 44 类中的可分类收益。新增模型允许 APP=21 受损，须同时比较它的代价和整体收益。缺失类别保留先验/NA，小样本不剔除；本轮实验家族来自此前评估月份，结果仍是探索性证据，不新增确认性、显著性或独立时间单元保证。
