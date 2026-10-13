@@ -408,3 +408,68 @@ python -u scripts/methodology_real_rolling.py \
 - `report.md`、`summary.json`、`plan_snapshot.json`、`run.json`：类别竞争、逐月分位数、主要差异/漂移、完整扫描与原计数核对、输入/代码/输出哈希。
 
 非有限/负间隔只从相应边际分布中排除，保留该流的格子计数并报告无效数，不改变审计总体。边际分布结果不等于联合序列可分性，精确支持集 TV 会受稀疏观测和采样噪声影响；不计算独立样本 p 值，不声称分类提升。符号和焦点类别来自前一轮观察，属于事后诊断，本轮不选择新表示、不拟合新分类器、不新增风险证书。
+
+## 第八轮：符号 479 的四组过去月份表示对照
+
+`scripts/methodology_real_refinement.py` 比较原 log M=2 表示、仅细分包长、仅加入第二包间隔、两者结合。全部 44 类与原先验不变。每组分别在固定 pilot、最近 1 个日历月、最近 3 个日历月的训练窗口中运行，对 certificate/evaluation 六个月逐月评估。**同一窗口下四组使用同一批完整训练流和目标流**，不为不同表示重新抽样。过去标签可用的假设沿用第六轮。
+
+原来的符号检查只保留 APP=2/34 的细节，无法支持全部 44 类的联合细分。本轮需重新扫描一次 H5，保留符号 479 内全部已知类的有限联合原子计数；两种原编码的所有月计数、原窗口/整流包络及固定类别顺序必须逐项核对，原表示的预测混淆矩阵必须重现第六轮。`statcore.py` 与 `realexperiment.py` 不变，旧缓存仍可校验。
+
+服务器当前 `traffic-ncde` 环境完整执行，无需新增依赖：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_REFINE_OUT="artifacts/methodology/real_refinement_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_REFINE_OUT"
+    test ! -e "${EIBO_REFINE_OUT}.log"
+    python -u scripts/methodology_real_refinement.py \
+        --h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+        --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --rolling-dir artifacts/methodology/real_rolling_20261013_102535 \
+        --symbol-id 479 --size-positions 1 2 3 4 5 \
+        --models fixed_pilot rolling_1m rolling_3m \
+        --backend tables --chunk-rows 20000 \
+        --min-leaf-flows 200 --small-n 200 \
+        --out-dir "$EIBO_REFINE_OUT" \
+        2>&1 | tee "${EIBO_REFINE_OUT}.log"
+)
+```
+
+### 训练期选阈值与四组表示
+
+候选网格在代码中固定，且在扫描前写入 `selection_protocol.json`。包长阈值单位为实际传输层载荷字节，包含 1200、1500 两侧和更高尺寸的候选；时间阈值单位为毫秒，包含 0–5 的细网格及较大间隔候选。原始超出 1500 的尺寸按新候选正常分箱，不能用原编码的饱和值代替。候选列表完整记录在协议文件，可用 `--size-cuts` / `--ipt-cuts` 显式替换为严格递增的固定列表；改变候选网格需要重新生成对应的原子计数。
+
+对每个目标月，先按第六轮严格日历规则取得过去窗口。包长组在前五个包的位置与候选阈值中选择**一个位置、一个二分阈值**；时间组只对第二包间隔选择一个二分阈值。选择目标为全部已知类的训练经验风险下降：每个子格子的竞争分数是 `pi_i * child_count_i / n_i`，其中 `n_i` 是该类在整个训练窗口的流数。不能把分母替换成该类在符号 479 内的数量，不能按 APP=2/34 二类比例选择。
+
+组合组直接交叉上述两个已选阈值，不再额外搜索组合阈值，便于解释两种特征的组合收益。两组主效应分别最多产生两个有效子格子，组合最多产生四个有效子格子；无效/负/非有限第二包间隔有额外的无效子格子，保留全部流。因此时间组最多三个子格子，组合最多六个。缺失的候选分割显式回退为原表示或已有单一特征，不伪造阈值。训练中全类别均未见过的子格子回退到原父符号的分类规则，报告未来落入该子格子的流数/加权质量。
+
+每个可选二分的低/高有效子格子至少包含 `--min-leaf-flows 200` 条训练流，该条件按全部类别的原始计数判断。无效时间子格子由记录内容确定，不参与这个最低流数门槛。此门槛仅限制分割复杂度，**不是独立样本量或置信保证**。分数在 1e-12 内并列时，固定选择更早的包位置和更小阈值。实际阈值及模型只使用过去窗口的标签；目标月只用于冻结后的评估。
+
+符号 479 之外的表示和同窗口原模型预测必须保持一致，所有细子格子都有到原符号的确定投影。训练期与完整类别目标期的经验风险在细化后不能增加，组合表示的经验收益不能小于任一主效应。实际过去训练分类器的未来错误仍可能增加，需通过类别错误与混淆表检查。
+
+### 输出和解释
+
+- `report.md`、`summary.json`：全部阈值、每月四组错误、APP=2/34 条件错误、经验 F 与经验表示收益、各训练窗口的整段错误及评估期主要改善/恶化类别。
+- `monthly_summary.csv`：分类错误相对同窗口原表示的变化、经验表示收益、经验差距变化、有效细分标记和未见子格子流数。样本恒等式为 `错误变化 = -经验表示收益 + 经验差距变化`；差距指实际分类错误减去当前样本经验 Bayes 泛函，不能解释为因果效应。
+- `period_summary.csv`、`period_class_metrics.csv`：certificate/evaluation 先在每类内合并各月错误计数，再施加固定先验；保留全部 44 类，不直接平均月度宏观错误。**滚动阈值可逐月不同，不能把不同细表示的子格子当作共同字母表池化；整段不报告池化经验 F/表示收益**。
+- `class_metrics.csv`：每月每组全部类别的错误与增量、错变对/对变错计数，以及每类的带符号经验表示收益贡献。分类变化必须完全来自符号 479；全类别贡献之和须等于相应整体指标。
+- `threshold_selections.csv`、`threshold_candidates.csv`：过去训练月份、最后训练结束/目标开始时间、实际位置/阈值、训练目标得分、每个候选的子格子数量和是否符合门槛。
+- `cell_children.csv`：每个子格子的条件、全部竞争类别的训练/目标计数、训练预测类别及已知类训练后验。
+- `monthly_atomic_counts.json`：固定候选网格下的月度联合原子计数，轴为包长位置、固定类别、包长原子、第二包间隔原子；末时间原子为无效标记。用于按已保存协议复现四组，不导出单流或身份字段。
+- `confusion_matrices.json`、`selection_protocol.json`、`plan_snapshot.json`、`run.json`：全部混淆矩阵、选择协议、原计划与输入/代码/输出哈希。
+
+缺失训练类别时，四组全部标为不可用，不缩减类别或重归一化先验。目标月份缺失类别时，保留已有类别的分类指标和缺失值可辨识范围，完整经验 F/表示收益为 NA；小样本只标记。带符号的每类经验表示收益可以为负，完整类别之和必须非负。
+
+本轮不新增跨训练窗口的等样本量随机对照；同窗口四组已经使用相同训练流，窗口之间仍有训练量差异。符号、时间特征与实验家族来自此前已查看的月份，虽然实际阈值按过去数据选择，结果仍属于探索性证据，不是新确认性留出集，不新增显著性或有效风险证书。引入时间和更细包长后，原粗表示的风险下界不能直接当作新分类器的下界。
