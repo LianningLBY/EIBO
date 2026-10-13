@@ -527,3 +527,68 @@ python -u scripts/methodology_real_rolling.py \
 - `confusion_matrices.json`、`selection_protocol.json`、`plan_snapshot.json`、`run.json`：完整混淆、协议、计划和哈希。`run.json` 的 `rows_read=0` 表示本轮不读取原始流，`cached_source_rows` 保留原缓存的完整扫描数量。
 
 若 APP=2 仍无改善，先检查低分支中它与全部竞争类别的排名、选中子格子的赢家，以及是否存在能帮助 APP=2 的合格包长候选；据此判断当前二分家族的局限，不能从二类分布差异直接推断 44 类中的可分类收益。新增模型允许 APP=21 受损，须同时比较它的代价和整体收益。缺失类别保留先验/NA，小样本不剔除；本轮实验家族来自此前评估月份，结果仍是探索性证据，不新增确认性、显著性或独立时间单元保证。
+
+## 第十轮：低间隔细原子诊断与逐月收益归因
+
+第九轮的额外评估期收益来自 APP=15/22，APP=2 仍未改善。固定 pilot 和最近 3 月模型在固定先验下获益，但原始错误条数可能增加；不能只凭加权错误下降判断流量整体准确率。本轮 `scripts/methodology_real_atomic.py` 复用第八/九轮缓存，完成两项检查：更细的包长×间隔区域是否存在 APP=2 获胜机会，以及 APP=15、22 的逐月改善和 APP=21 的损失如何抵消。**全部 44 类与先验不变，不读取原始 H5，不新增依赖。**
+
+完整执行命令：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_ATOMIC_OUT="artifacts/methodology/real_atomic_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_ATOMIC_OUT"
+    test ! -e "${EIBO_ATOMIC_OUT}.log"
+    python -u scripts/methodology_real_atomic.py \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --refinement-dir artifacts/methodology/real_refinement_20261013_123459 \
+        --hierarchy-dir artifacts/methodology/real_hierarchy_20261013_131451 \
+        --min-atom-flows 200 --small-n 200 \
+        --out-dir "$EIBO_ATOMIC_OUT" \
+        2>&1 | tee "${EIBO_ATOMIC_OUT}.log"
+)
+```
+
+### 先复现旧结果，再区分表示与判决问题
+
+脚本核验完整运行状态、原计划、原先验和类别顺序、输入/输出/旧代码哈希。第八轮四组结果和第九轮分层结果的全部阈值、指标、混淆矩阵须按联合计数重现，月度输入按父目录名定位，避免同名文件混淆。`statcore.py`、`realexperiment.py`、`refinement.py`、`hierarchy.py` 及其旧脚本均不修改，保持已有缓存的代码谱系可校验。
+
+先读取全部合格二分候选的**未舍入** APP=2 得分。记录最佳加权增益、17 位有效数字的百分点显示、是否严格为零、正收益候选个数，以及对应训练正确条数变化。此前 `0.00000` 的显示不能自动认定为数学上的零；本轮明确区分。
+
+时间根阈值与最低流数门槛沿用第八轮。对每个过去训练窗口和目标月，每个包位置分别展开低间隔内的全部包长原子×有效第二包间隔原子；各原子类别分数仍为 `pi_i * atom_count_i / full_training_class_n_i`。训练流数合计不足 `--min-atom-flows 200` 的原子回退为时间组低父判决，**不剔除流、不合并目标样本、不使用目标流数决定回退**。高间隔、无效间隔和符号 479 外的表示/判决保持时间组规则。各位置的细表示均确定投影到原时间组和原符号。
+
+各位置独立形成训练模型与诊断结果；实际选中位置只按过去窗口的整体训练错误下降选择，1e-12 内并列时保留较早位置，无正收益则保留时间组。各位置观察是相同流的不同视图，不能跨位置把计数相加。现有缓存没有多个包长位置之间的联合关系，本轮不能据此拼造多包长联合表示。
+
+目标月的经验最优规则仅用于低间隔区域，其余判决固定；这些规则不会参与模型/位置选择。完整类别月份分解为：
+
+- `root_adaptation_gain`：原过去时间组与目标样本最优低父判决之间的错误差，表示不变。
+- `empirical_representation_gain`：目标样本最优粗低父判决与最优细原子判决之间的错误差，整体须非负。
+- `past_model_regret_to_atomic_oracle`：实际过去训练细原子模型相对目标细原子经验最优规则的错误差，包含漂移与训练回退的差距。
+
+另外以相同过去训练直方图、仅保留未见原子回退的模型作比较，记录 `unguarded_past_regret` 和最低训练流门槛带来的 `guard_error_change`，满足 `past_model_regret_to_atomic_oracle = unguarded_past_regret + guard_error_change`。门槛影响可正可负：回退可能保护未来错误，也可能抹去 APP=2 的收益。未加门槛的判决差距仍包含有限训练估计误差，不能全归因于时间漂移。
+
+恒等式是 `相对时间组的错误变化 = -(root_adaptation_gain + empirical_representation_gain) + past_model_regret_to_atomic_oracle`。同时检查 APP=2 是否为某原子的过去分数赢家、经过最低训练流门槛后的实际预测类别，以及目标样本经验赢家。这样可识别中间尺寸区间有机会但单阈值看不见、机会仅在未来出现、机会被训练流门槛回退等不同情况。经验最优只是当前有限缓存的样本比较器，细稀疏区域会显得乐观，**不是总体可分类准确率的上界或风险证书**。
+
+### 精确逐月归因与输出
+
+第九轮原分层模型的归因与新细原子模型分开保存。旧模型按整数混淆矩阵重建每类错误变化，逐月/整段核对 `新增错误数 = 受损条数 - 获救条数`，保留全部类别的原始条数、条件错误变化和固定先验加权贡献；重点展示 APP=15/21/22。整段先在每类内合并错误计数，再按原先验加权，不能直接平均逐月宏观错误。
+
+- `binary_candidate_precision.csv`：二分候选未舍入得分、严格零标记与正确条数变化。
+- `atomic_selections.csv`、`atomic_monthly.csv`：过去训练月份/截止时间、选中位置、各位置及选中模型的逐月分类变化、经验机会/判决差距、回退目标流数。
+- `APP2_atomic_cells.csv`：每个位置和小区域的实际区间、过去/目标流数、APP=2 未舍入分数/竞争边际、最强竞争类别、实际训练判决与目标经验赢家。保留空区域和回退状态。
+- `atomic_monthly_classes.csv`、`atomic_period_classes.csv`、`atomic_periods.csv`：新模型的全类别指标、固定先验加权错误及原始错误数。整段不池化不同月份的经验最优/表示收益。
+- `hierarchy_attribution.csv`、`hierarchy_attribution_summary.csv`：旧第九轮模型全部类别的逐月/整段获救、受损、原始错误变化和加权贡献。
+- `report.md`、`summary.json`、`confusion_matrices.json`、`selection_protocol.json`、`plan_snapshot.json`、`run.json`：核心诊断、全部选中模型混淆矩阵、协议及谱系。`rows_read=0`，`cached_source_rows` 保留原扫描数量。
+
+缺失训练类别则该窗口不可用；目标缺失类别保留原先验和分类可辨识范围，完整经验最优诊断为 NA；小样本仅标记。本轮仍是此前查看过月份上的探索性诊断，不产生确认性或依赖修正保证。月度缓存不能确定收益是否集中于某天或会话；日/会话集中度需要更细聚合或另行扫描 H5。
