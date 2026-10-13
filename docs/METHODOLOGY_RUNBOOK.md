@@ -592,3 +592,100 @@ python -u scripts/methodology_real_rolling.py \
 - `report.md`、`summary.json`、`confusion_matrices.json`、`selection_protocol.json`、`plan_snapshot.json`、`run.json`：核心诊断、全部选中模型混淆矩阵、协议及谱系。`rows_read=0`，`cached_source_rows` 保留原扫描数量。
 
 缺失训练类别则该窗口不可用；目标缺失类别保留原先验和分类可辨识范围，完整经验最优诊断为 NA；小样本仅标记。本轮仍是此前查看过月份上的探索性诊断，不产生确认性或依赖修正保证。月度缓存不能确定收益是否集中于某天或会话；日/会话集中度需要更细聚合或另行扫描 H5。
+
+## 第十一轮：联合包长与过去验证下的代价约束
+
+第十轮的单个包长×低间隔细原子没有降低 APP=2 的实际错误，APP=21 的损失使原始错误条数增加。本轮 `scripts/methodology_real_joint.py` 采集前五包全部位置对的**真实联合包长计数**，检验两个包长共同出现时是否有稳定信号，并比较过去验证与代价约束的作用。旧单位置边际不能确定两个包长的联合关系，因此第一次需要重新扫描原 H5；之后可复用联合缓存，不新增依赖。
+
+完整执行命令（继续使用当前 `traffic-ncde` 环境）：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_JOINT_OUT="artifacts/methodology/real_joint_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_JOINT_OUT"
+    test ! -e "${EIBO_JOINT_OUT}.log"
+    python -u scripts/methodology_real_joint.py \
+        --h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+        --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --refinement-dir artifacts/methodology/real_refinement_20261013_123459 \
+        --hierarchy-dir artifacts/methodology/real_hierarchy_20261013_131451 \
+        --backend tables --chunk-rows 20000 \
+        --ipt-threshold-ms 4 --validation-day 21 \
+        --validation-gap-seconds 86400 \
+        --min-leaf-flows 200 --app21-budget-pp 0.1 \
+        --max-validation-raw-increase 0 --small-n 200 \
+        --out-dir "$EIBO_JOINT_OUT" \
+        2>&1 | tee "${EIBO_JOINT_OUT}.log"
+)
+```
+
+### 先隔离过去验证，再拟合并冻结规则
+
+全部 44 类、原先验、原目标月份和原目标流不变。默认时间根为 `IPT2 <= 4 ms`；这个值由此前实验启发，在本轮扫描前写入协议，仍属探索性选择。包位置、尺寸网格与间隔单位沿用第八轮已校验协议。
+
+- 固定 pilot：6 月至 11 月 1 日前用于拟合，11 月 2 日至原 pilot 结束用于验证。
+- 最近 3 月：前两个月用于拟合，最后一个月留一天隔离后用于验证。
+- 最近 1 月：过去月 21 日前用于拟合，22 日起用于验证。原月份起止与原计划的隔离仍保留。
+
+边界只按日历确定。流的整个时间区间（包括一小时截断保护）必须落在拟合或验证窗口内；跨边界及隔离期的过去流不参与这两个角色，逐类记录 `unused_past_sample_counts`。这些流仍属于原历史窗口，目标月份完整保留。每类分母是该拟合/验证角色内的**全类流数**，不能改为符号 479、低间隔或叶子内的数量。
+
+先用拟合数据确定所有候选的叶子判决，验证数据只选择候选，**不使用验证标签重新拟合**。任何固定类别在拟合角色缺失，该窗口的新模型不可用；任何固定类别在验证角色缺失，两种验证选择均回退为时间组。类别与先验不删减；未来缺失类别继续保留原先验的可辨识范围。
+
+### 七组比较与结构保护
+
+| 组 | 拟合与选择方式 |
+|---|---|
+| `time_fit` | 相同拟合子集上的时间根，作为新方法共同基线 |
+| `single_fit` | 用拟合收益选择一个包长二分 |
+| `joint_fit` | 用拟合收益选择一对包长的交叉二分，最多四个低间隔叶子 |
+| `validation_weighted` | 从同一已拟合单包/双包候选池中，按正的验证加权收益选择 |
+| `validation_constrained` | 验证加权收益须为正，另要求原始错误条数不增加、APP=21 条件错误增量不超过 0.1 个百分点 |
+| `legacy_time_full` | 重现第八轮使用完整过去窗口的时间组 |
+| `legacy_hierarchy_full` | 重现第九轮使用完整过去窗口的分层组 |
+
+后两组用到更多拟合流，只作为旧结果参照。前五组共享拟合数据、目标流和先验；验证组额外使用同一过去验证数据选择规则。两种验证组的差别可识别代价约束的影响。
+
+双包候选穷举全部位置对和两个网格阈值，低分支局部树深度最多二层，能够检验单包主效应为零的交互。每个非空拟合叶子至少有 200 条所有类别合计的流，至少存在两个非空叶子；拟合未见叶子回退到低父判决，未来流不剔除。恒等模型始终可选，无正收益时回退，并列优先较少非空叶子，再按固定候选顺序选择。
+
+高间隔、无效间隔和其他原符号的判决冻结为 `time_fit`。修改低分支只能给其原预测类别新增错误；如果父判决为 APP=34，则禁用细化，因此 APP=34 相对 `time_fit` 逐流受保护。**APP=21 的 0.1 个百分点与原始错误零增量只是过去验证约束，未来漂移下可能失效**，须检查目标月实际代价。所有叶子仍由全部 44 类竞争。
+
+### 输出、校验与复用
+
+读取前校验准备、月度、第八/九轮的完整状态与全部输入/输出/旧代码哈希，重现旧阈值、指标和混淆。原 H5 校验 SHA256、大小、表结构和扫描前后状态。新的月度原表示和单位置原子必须逐项重现旧缓存，每个真实包长对必须投影回两个旧单位置边际；拟合/验证子集也分别检查类数、原符号、时间子格子和包长边际守恒。旧核心与脚本保持原样。
+
+- `joint_counts.npz`：月度和拟合/验证角色的整数联合直方图；保留低间隔内的细时间原子，不保存逐流数据或身份。当前树只切包长轴。
+- `collection_protocol.json`、`selection_protocol.json`：固定网格、全部角色边界、叶子门槛、代价预算、不重拟合规则。
+- `candidate_scores.csv`：所有候选的拟合/验证得分、叶子判决与原始代价，不含目标标签得分。
+- `selections.csv`、`summary.json`：实际冻结规则，逐类拟合/验证/未使用过去流数。
+- `monthly_summary.csv`、`period_summary.csv`、`report.md`：七组逐月/整段结果，重点比较 APP=2 收益、APP=21 代价、APP=34 保护与原始错误条数。
+- `monthly_classes.csv`、`period_classes.csv`、`confusion_matrices.json`：完整 44 类错误分解与混淆；新模型每类错误变化必须等于受损流数减获救流数。整段先在每类内池化错误，再按固定先验加权。
+- `plan_snapshot.json`、`run.json`：原计划与源文件/代码/产物谱系。首次运行 `rows_read` 为完整扫描量，复用运行为 0；`cached_source_rows` 保留原扫描量。
+
+复用时把首次输出目录填给 `--reuse-counts-dir`，取代 `--h5`，并指定新的输出目录。例如，仅调整 APP=21 验证预算：
+
+```bash
+python -u scripts/methodology_real_joint.py \
+    --reuse-counts-dir artifacts/methodology/real_joint_替换为首次时间戳 \
+    --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+    --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+    --refinement-dir artifacts/methodology/real_refinement_20261013_123459 \
+    --hierarchy-dir artifacts/methodology/real_hierarchy_20261013_131451 \
+    --ipt-threshold-ms 4 --validation-day 21 --validation-gap-seconds 86400 \
+    --min-leaf-flows 200 --app21-budget-pp 0.2 \
+    --max-validation-raw-increase 0 --small-n 200 \
+    --out-dir "artifacts/methodology/real_joint_budget_$(date +%Y%m%d_%H%M%S)"
+```
+
+缓存复用严格校验联合产物哈希、角色几何、网格、原计划和源代码；叶子门槛与经验代价预算可变，不重新读取 H5。改变角色边界、根阈值或网格须重新采集。本轮的阈值家族和未来月份已被此前实验观察，验证选模自身也可能乐观；它仍是探索性方法检验，不提供总体风险保证或已验证的会话独立性。下一步依据冻结模型的真实目标收益和代价，决定是否值得固定方案、预留新时间段并开展确认性验证。
