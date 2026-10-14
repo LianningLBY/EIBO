@@ -689,3 +689,74 @@ python -u scripts/methodology_real_joint.py \
 ```
 
 缓存复用严格校验联合产物哈希、角色几何、网格、原计划和源代码；叶子门槛与经验代价预算可变，不重新读取 H5。改变角色边界、根阈值或网格须重新采集。本轮的阈值家族和未来月份已被此前实验观察，验证选模自身也可能乐观；它仍是探索性方法检验，不提供总体风险保证或已验证的会话独立性。下一步依据冻结模型的真实目标收益和代价，决定是否值得固定方案、预留新时间段并开展确认性验证。
+
+## 第十二轮：联合收益归因、APP=2 候选机会与逐月预算审计
+
+服务器第十一轮输出 `real_joint_20261014_150841` 已完成 1000 万条扫描与投影校验。联合细化改善了整体错误，APP=2 仍未改善；过去约束下最近 1 月模型在 2025-03/04 的 APP=21 条件错误增量仍达 0.11950/0.11039 个百分点，最近 3 月模型在 2025-03 原始错误多 1 条。整段预算合格不能直接解释为逐月保护。
+
+本轮 `scripts/methodology_real_joint_diagnostic.py` **仅复用缓存，不读取 H5、不改原规则或预算、不新增依赖**。它检查收益来自哪些类别，APP=2 是没有合格获胜区域、被样本门槛挡住，还是候选存在但未被整体目标选择，并定位留出验证后的基线退化。
+
+完整执行命令：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_JOINT_DIAG_OUT="artifacts/methodology/real_joint_diagnostic_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_JOINT_DIAG_OUT"
+    test ! -e "${EIBO_JOINT_DIAG_OUT}.log"
+    python -u scripts/methodology_real_joint_diagnostic.py \
+        --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --refinement-dir artifacts/methodology/real_refinement_20261013_123459 \
+        --hierarchy-dir artifacts/methodology/real_hierarchy_20261013_131451 \
+        --joint-dir artifacts/methodology/real_joint_20261014_150841 \
+        --small-n 200 --top 5 \
+        --out-dir "$EIBO_JOINT_DIAG_OUT" \
+        2>&1 | tee "${EIBO_JOINT_DIAG_OUT}.log"
+)
+```
+
+### 冻结旧模型并完整重现
+
+读取原准备、月度、第八/九轮与第十一轮的完整状态、原计划、全部类别/先验及输入/输出/旧代码哈希。第十一轮联合 NPZ 必须投影到旧单位置边际，拟合/验证数量须守恒；用原始叶子门槛、预算和时间角色重新计算全部候选和七组选模，重现所有保存的逐月/整段指标、实际规则及混淆矩阵。旧核心与脚本均保持原样，避免使现有缓存谱系失效。
+
+所有比较保持完整 44 类、原先验及目标流。除各细化组相对 `time_fit` 外，另外比较双包长相对单包长、验证收益选择相对训练收益选择、约束组相对无约束验证组，以及拟合子集基线相对旧完整过去基线。
+
+按整数混淆计算每类净错误变化、条件变化和固定先验贡献；整段先在每类内池化。只有相对共同时间基线的原已保存配对转换可以报告精确获救/受损条数，并核对 `受损 - 获救 = 新增错误`。不同规则的两张混淆矩阵只能给出净变化，不能据此推算逐流获救/受损。
+
+### APP=2 的候选与更细联合原子
+
+逐个检查原来全部单包长和双包长候选，保留拟合叶子预测、原样本量门槛、APP=34 父分支保护、全部类分母。记录 APP=2 的拟合/验证/目标正确条数变化、拟合赢家叶子数、与最强竞争类别的分数差，以及候选实际被哪些原组选中。另记录原验证预算的拒绝原因：叶子门槛、父分支保护、验证缺类、无正验证收益、原始错误预算或 APP=21 预算。
+
+每个家族汇总原始正 APP=2 收益候选数、合格正候选数、通过原验证约束的正候选数与最佳拟合收益。恒等规则提供零收益参照；没有正收益候选时不把负收益候选标成赢家。被选中规则和最佳合格拟合 APP=2 候选另展开逐叶子分数与样本量，便于识别整体目标忽略了局部 APP=2 机会的情况。
+
+还检查每个包长对的完整细尺寸网格，低间隔内 IPT 轴在本轮合并。这个网格比两个交叉二分更细，**仅用于诊断，不部署或用目标标签重选模型**。统计原始 APP=2 获胜原子、按原门槛回退后的获胜原子、门槛抹去的 APP=2 拟合流数，以及目标样本的经验赢家。目标经验赢家须全部固定类存在才定义；经验赢家和“过去拟合候选在目标上的最大收益”均是事后样本诊断，不是总体可分类上限，也不能替代原选择。
+
+不同包位置对是同一批流的多个视图，不能跨位置对相加获胜流数。完整原子表只省略拟合/验证/目标三个角色中 APP=2 均为零的原子；它们不会贡献 APP=2 正确条数。包长区间为 `(前一阈值, 当前阈值]`，首尾区间无相应界限；字节单位沿用源数据协议。
+
+### 逐月预算与训练划分的区域分解
+
+预算审计并列显示每月选择时的验证 APP=21 代价、验证原始错误增量，以及实际目标月对应代价。保持原 0.1 个百分点与零条增量预算，分别记录违约，不根据目标月表现调整预算。按窗口汇总检查月份数和违约数；这些模型月份并非独立试验，不输出二项显著性或成功概率保证。
+
+训练划分另做一个严格的同表示比较：完整过去数据与原拟合子集，都使用本轮固定的 4 ms 时间根，分别拟合并在相同目标流上评价。每类错误变化精确分成符号 479 外、低间隔、高间隔、无效间隔四部分，并核对总和。这样可判断 APP=2 的退化是否主要发生在当前局部细化无法改变的区域。它仍不能单独识别样本量、数据新鲜度和估计噪声各占多少。实际旧完整过去模型可能使用不同学习阈值，因此也单独保留旧模型比较，不混为同一个比较器。
+
+主要输出：
+
+- `class_attribution.csv`、`attribution_summary.csv`：全部类别、月份和整段比较；稀有类与缺失类保留，原先验不重归一。
+- `APP2_candidates.csv`、`APP2_candidate_summary.csv`、`APP2_candidate_leaves.csv`：完整候选、拒绝原因、实际选择组和逐叶子竞争。
+- `APP2_pair_atoms.csv`、`APP2_pair_summary.csv`：细联合原子、样本门槛影响及明确标记的事后经验机会。
+- `budget_monthly.csv`、`budget_summary.csv`：逐月预算迁移与违约。
+- `training_split_regions.csv`：完整过去与拟合子集的逐类/逐区域变化。
+- `report.md`、`summary.json`、`audit_protocol.json`、`collection_protocol.json`、`plan_snapshot.json`、`run.json`：核心表、原协议及谱系；`rows_read=0`，`cached_source_rows` 保留原始扫描量。
+
+缺失拟合类使该窗口不可用，缺失目标类保留 NA 和原先验可辨识范围，小样本仅标记。未来若修改时间角色边界做新的多块验证，需要与第十一轮缓存几何区分；本轮诊断不声称已经完成新的稳健选模或确认性实验。
