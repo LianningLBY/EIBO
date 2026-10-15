@@ -1120,3 +1120,62 @@ python -u scripts/methodology_real_joint.py \
 末尾 `PERIOD` 打印12个新模型/组的局部增量、相对近期方案的增量、原始净变化和 APP=21/22/15 净变化；`caps` 依次是原预算、根基线兼顾、近期收益保留的达标次数及可检查次数。`PAST` 按固定组顺序打印9个评估模型月份的规则与过去可行数，`identity` 不隐含通过约束；详细资格看冻结选择和报告。
 
 本轮由已观察月份的类别代价提出，是探索性有限候选分析，不扫描预算，不按目标结果自动选赢家，也不提供未来逐类预算或独立性保证。若能找到稳定折中，后续应冻结完整协议，使用未参与这些调整的新时段确认。
+
+## 第十八轮：过去可行性缺口与稀疏类别代价分解
+
+第十七轮原预算内前沿在9个评估起点均非空，但严格保留 APP=22/15 近期净收益时，仅最近3个月模型的4月、固定 pilot 的5月存在正收益可行规则，其余7个起点连恒等规则也不满足保留条件。严格组相对原近期方案只保留固定 pilot 30.6%、最近1个月0%、最近3个月5.4%的加权收益；原预算9/9达标不能解释为三类近期收益9/9兼顾。
+
+本轮 `scripts/methodology_real_gap.py` 只读取第十七轮已经保存的**过去候选聚合计数**和原冻结选择，固定原 APP=21/原始错误预算、全部44类及先验、支持门槛和候选网格。校验来源输出、代码和原输入哈希，再从全部原类别的整数增量重新核对原候选代价、资格和前沿。**不读取 H5，不重新拟合，不评分任何新目标策略，不搜索或放宽预算。**
+
+完整服务器命令：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_GAP_OUT="artifacts/methodology/real_gap_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_GAP_OUT"
+    test ! -e "$EIBO_GAP_OUT.log"
+    python -u scripts/methodology_real_gap.py \
+        --costs-dir artifacts/methodology/real_costs_20261015_175220 \
+        --small-n 200 \
+        --out-dir "$EIBO_GAP_OUT" \
+        2>&1 | tee "$EIBO_GAP_OUT.log"
+)
+```
+
+### 缺口定义与固定诊断点
+
+每个历史月及逐类整数合并视图中，用 `d` 表示候选相对共同根基线的某类净错误增量，保留门槛为 `L=min(0, 原近期切分方式的历史净增量)`。所需让步为 `max(0,d-L)`，精确拆成“放弃的原近期净收益”和“超过根基线的新增错误”。这是**类别净计数**，不是能识别的具体流、配对获救数或应当删除/改标的样本数。历史参照仍使用每个起点自身的过去拟合标签；不把当前标签复制到过去，也不称其为独立验证。
+
+分析两个固定集合：`original_budget` 保留全部历史月及合并的原 APP=21/原始错误预算和共同支持；`root_no_harm` 再要求 APP=22/15 每月及合并相对根基线不增错。后者用于识别只放弃部分已有收益、仍保留根基线保护的机会。零缺口的可行数和正收益可行数必须精确重现第十七轮；历史缺失或当前模型不可用保留相应状态，不当作已证明无解。
+
+- `minimum_joint_rate`：在正过去合并收益候选中，最小化 APP=22/15、全部历史月及合并视图的最大条件错误率缺口。它给出使该有限集合可行的最小**共同百分点容许量**。
+- `minimum_joint_count`：最小化同一批约束的最大净条数缺口，可能选择不同候选。两种最小值不能拼成同一规则的两项代价。
+- `minimum_APP22_rate`、`minimum_APP15_rate`：各自独立的最小缺口，不能拼接为联合可行解。`relax_APP22_keep_APP15` 和反向组则明确保持另一类零缺口。
+- `maximum_gain` 给出原固定集合内正过去收益上限；`identity`、`stage17_all_keep_gains` 和 `source_latest_family` 保留真实回退、真实旧部署及旧近期方式的诊断。点不满足集合资格时明确标记，不因缺口为零就认作合格。
+
+所有诊断并列时先取更大过去合并收益，再取更小原候选 ID；不生成新部署规则。收益采用全部原类别先验，两个类别的缺口不互相抵消。合并行不再加到逐月缺口总和中。每条净计数对应的百分点变化与小样本标记只展示算术敏感性，不是统计置信区间，也不能据此认定少量采样噪声是空集合的原因。
+
+### 输出和判读
+
+- `gap_summary.csv`：两个集合的候选数、正收益数、联合及单类零缺口覆盖、最小共同率/条数缺口和可用性。
+- `diagnostic_profiles.csv`：上述固定诊断点的旧候选 ID、过去收益、各类最大率/条数缺口、逐月缺口和合并缺口、集合资格。
+- `binding_constraints.csv`：每个诊断点、每个历史月及合并、APP=22/15 的原数量、参照与门槛、候选净增量、缺口拆分、条件/加权代价、单条对应百分点和限制行标记。用于核对究竟是哪类、哪个月、多少净计数造成冲突。
+- `past_coverage.csv`：全部原类别及先验、逐月样本量和单条敏感性；小样本不删类、不忽略约束。
+- `gap_frontiers.csv`：收益与两类率缺口、收益与两类条数缺口的两个联合前沿；仅合并展示值相同的行，保留全部原候选 ID，不能把这种等价理解为预测相同。
+- `gap_candidate_metrics.npz`、`candidate_index.json`：全部候选的逐月/合并缺口、放弃净收益、新增伤害和前沿标记；全部44类的原计数仍保存在已验证的第十七轮输入，不重复复制或修改。
+- `analysis_protocol.json`、`summary.json`、`report.md`、`run.json`：固定诊断定义、原预算、原类别先验、来源和哈希；明确 `new_target_scoring=false`、`new_deployment_policy=false`、`rows_read=0`。
+
+末尾 `GAP` 给出9个评估起点的正收益/零缺口候选数、最小率/条数缺口、最小率诊断点收益及其限制月份/类别/净条数。率最小点和条数最小点可能不同；全部限制行以 CSV 为准，不只取终端首条。
+
+本轮先回答过去集合离可行还有多远，不把诊断最小值自动作为新预算。任何后续允许让步的策略仍需声明选择协议，并在未参与这些调整的新时段确认；本轮不提供未来预算、独立性或新颖性保证。
