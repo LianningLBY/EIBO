@@ -760,3 +760,73 @@ python -u scripts/methodology_real_joint.py \
 - `report.md`、`summary.json`、`audit_protocol.json`、`collection_protocol.json`、`plan_snapshot.json`、`run.json`：核心表、原协议及谱系；`rows_read=0`，`cached_source_rows` 保留原始扫描量。
 
 缺失拟合类使该窗口不可用，缺失目标类保留 NA 和原先验可辨识范围，小样本仅标记。未来若修改时间角色边界做新的多块验证，需要与第十一轮缓存几何区分；本轮诊断不声称已经完成新的稳健选模或确认性实验。
+
+## 第十三轮：保留完整过去外围基线的局部增量验证
+
+第十二轮精确审计表明，最近 3 月模型的 APP=2 相对完整过去固定时间根，多错 2541 条、约 7.27226 个百分点，全部发生在符号 479 外；最近 1 月在同一区域则少错 345 条。完整过去数据的使用不能预先假定必定更好。局部预算共有 4 个违约模型月份：2025-03 固定 pilot 的 APP=21 增量为 0.10457 个百分点、2025-03/04 最近 1 月为 0.11950/0.11039，以及 2025-03 最近 3 月原始错误增加 1 条。
+
+本轮 `scripts/methodology_real_regional.py` 比较两种外围训练方式，**直接复用第十一轮联合缓存，不读取 H5、不新增依赖、不重新选择局部规则或预算**。它检验能否保留完整过去数据在非细化区域的分类能力，同时用单独的过去拟合/验证控制局部增量代价。
+
+完整执行命令：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_REGIONAL_OUT="artifacts/methodology/real_regional_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_REGIONAL_OUT"
+    test ! -e "${EIBO_REGIONAL_OUT}.log"
+    python -u scripts/methodology_real_regional.py \
+        --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --refinement-dir artifacts/methodology/real_refinement_20261013_123459 \
+        --hierarchy-dir artifacts/methodology/real_hierarchy_20261013_131451 \
+        --joint-dir artifacts/methodology/real_joint_20261014_150841 \
+        --small-n 200 \
+        --out-dir "$EIBO_REGIONAL_OUT" \
+        2>&1 | tee "${EIBO_REGIONAL_OUT}.log"
+)
+```
+
+### 两种外围基线与同一个局部规则
+
+全部 44 类、原先验、原目标月份和原目标流不变。先校验旧产物/代码哈希并完整重现第十一轮，随后保留原五个局部组：`time_fit`、`single_fit`、`joint_fit`、`validation_weighted`、`validation_constrained`，每组各配两种外围预测：
+
+- `fit_subset`：完整重现第十一轮的拟合子集模型。
+- `full_past`：只有原符号 479 外的预测改用完整过去窗口拟合；479 内的低间隔、高间隔、无效间隔三个根预测及细化叶子均保持原拟合子集规则。
+
+每种外围预测都有自己的共同 `time_fit` 基线。原训练/验证角色、原 4 ms 时间根、候选阈值、叶子门槛、判决、验证选模和预算全部冻结，不按目标月表现选择外围版本。
+
+另外单独列出 `full_past_time`：在所有区域均用完整过去窗口拟合、时间根也固定为本轮相同阈值；以及原 `legacy_time_full`：第八轮实际学习阈值的旧时间模型。两者不能自动等同，也不能把混合基线直接叫作完整过去时间模型。
+
+### 验证仅针对可变区域的增量
+
+完整过去的外围模型可以使用局部验证期的流，因此其**绝对验证准确率不是留出指标，本轮不报告该值**。可用于原局部选模的是新规则相对共同基线的配对错误差：在 479 外，两者逐流预测完全相同，外围错误在相减时严格抵消；在 479 内，判决只来自原拟合子集，验证不重新拟合叶子。
+
+脚本在验证和目标上都逐项检查完整类别混淆矩阵：`full_past 细化组 - full_past time_fit` 必须等于 `fit_subset 细化组 - fit_subset time_fit`。同时，所有局部组的 `full_past - fit_subset` 混淆差须一致；逐类整数错误变化必须完全来自原符号 479 外。原第十一轮的拟合子集对照混淆也必须逐项重现。
+
+这允许把外围训练数据的影响与局部表示/选模的增量分开。它不使原先跨月失效的预算自动恢复；预算仍是相对**各自共同基线**的局部增量，不是绝对错误上限，也不是相对任意其他模型的总代价上限。APP=34 的结构保护同样只针对局部细化增量；外围训练方式本身可能改善或损害类别，绝对错误另列。
+
+### 输出与判断方式
+
+- `monthly_summary.csv`、`period_summary.csv`：两种外围训练与原五个局部组的所有结果，分别列出局部增量、相同局部组的外围变化，以及相对完整过去固定根/实际旧模型的总变化。整段先在每类内合并整数错误，再施加固定先验。
+- `reference_summary.csv`：完整过去固定时间根和实际旧时间模型的独立参照指标。
+- `class_metrics.csv`：全部类别及其原先验、条件/加权变化；局部精确获救/受损仍逐类核验。缺失类别保留 NA 和原先验可辨识范围；小样本只标记。
+- `outside_class_effects.csv`：逐月的外围错误变化及完整过去、局部拟合、验证、未使用过去流的每类数量。不能只凭这个对照单独识别样本量、数据新鲜度和估计噪声。
+- `APP2_outside_symbols.csv`：每个发生 APP=2 错误变化的原外围符号、两种过去判决、APP=2 分数和目标错误条数变化；条数总和必须重现外围 APP=2 的精确变化。
+- `validation_local_increments.csv`：仅报告两个外围版本共同的逐类配对增量，不含外围绝对验证错误。
+- `budget_monthly.csv`、`budget_summary.csv`：保留原局部预算和全部真实违约，因局部混淆增量严格一致而沿用原值。
+- `frozen_selections.json`、`regional_protocol.json`、`invariants.json`、`collection_protocol.json`、`plan_snapshot.json`、`confusion_matrices.json`、`summary.json`、`report.md`、`run.json`：原规则、两种外围协议、全部不变量、计数与谱系；`rows_read=0`，保留 `cached_source_rows`。
+
+运行末尾直接打印 `INVARIANTS`、两种外围下的评估期 `PERIOD`、APP=2 的 `OUTSIDE_APP2` 变化与 `LOCAL_BUDGET`，便于 ToDesk 核对。重点观察最近 3 月的 APP=2 是否恢复，以及其他窗口/类别是否付出代价；局部收益和原预算违约应与第十一轮一致。
+
+本轮是基于已观察目标月份提出的探索性训练数据使用对照，不新增稳健预算、不声称会话独立、未来风险保证或方法新颖性已经成立。多过去时间块的稳健选模与新时间段确认仍是后续独立实验。
