@@ -830,3 +830,76 @@ python -u scripts/methodology_real_joint.py \
 运行末尾直接打印 `INVARIANTS`、两种外围下的评估期 `PERIOD`、APP=2 的 `OUTSIDE_APP2` 变化与 `LOCAL_BUDGET`，便于 ToDesk 核对。重点观察最近 3 月的 APP=2 是否恢复，以及其他窗口/类别是否付出代价；局部收益和原预算违约应与第十一轮一致。
 
 本轮是基于已观察目标月份提出的探索性训练数据使用对照，不新增稳健预算、不声称会话独立、未来风险保证或方法新颖性已经成立。多过去时间块的稳健选模与新时间段确认仍是后续独立实验。
+
+## 第十四轮：多个过去时间块上的局部约束选模
+
+第十三轮确认：恢复 479 外的完整过去训练数据后，最近 3 月模型的 APP=2 少错 2541 条、类别错误率下降 7.27226 个百分点；最近 1 月多错 345 条。APP=21、34 的评估期外围净错误变化均为零。原局部混淆增量保持一致，预算仍有 4/9 个模型月份违约。本轮集中检验：过去验证期内的逐块检查能否减少目标月违约，以及要付出多少局部收益。
+
+`scripts/methodology_real_blocks.py` 保留全部 44 类、固定先验和原目标流。479 外使用完整过去窗口；479 内的原拟合期、4 ms 时间根、候选包长网格、叶子门槛、APP=34 保护和原预算均不变。只调整过去验证的组织方式和选模规则。
+
+旧缓存没有验证期内的精确子块，不能按比例拆计数，也不能直接相减得到带完整流边界约束的新窗口。因此本轮首次运行需重新扫描一次原 H5，逐项重现旧月份联合计数和所有旧拟合/验证角色，再收集新块计数。无需新增依赖；之后可以用本轮缓存重放。
+
+完整服务器命令：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_BLOCK_OUT="artifacts/methodology/real_blocks_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_BLOCK_OUT"
+    test ! -e "${EIBO_BLOCK_OUT}.log"
+    python -u scripts/methodology_real_blocks.py \
+        --h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+        --backend tables \
+        --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --refinement-dir artifacts/methodology/real_refinement_20261013_123459 \
+        --hierarchy-dir artifacts/methodology/real_hierarchy_20261013_131451 \
+        --joint-dir artifacts/methodology/real_joint_20261014_150841 \
+        --blocks 3 \
+        --chunk-rows 20000 \
+        --small-n 200 \
+        --out-dir "$EIBO_BLOCK_OUT" \
+        2>&1 | tee "${EIBO_BLOCK_OUT}.log"
+)
+```
+
+### 分块和五组对照
+
+每个原验证区间按时间等分为 3 个连续、不重叠的块；边界只依赖日期，不依赖标签、类别数量、收益或目标表现。本轮分的是原验证期内的子块，**没有把已用于拟合的过去月份重新当成留出验证，也没有声称完成了新的跨月留出或新时段确认**。原拟合到验证的时间间隔保持不变；每条验证流必须连同原时间戳舍入包络完整落入其块，跨内部边界的流仅从分块验证中剔除。目标流全部保留。
+
+所有组共用相同外围预测及原拟合子集产生的局部叶子标签：
+
+| 组 | 验证与选模方式 | 用途 |
+|---|---|---|
+| `time_baseline` | 不做包长细化 | 共同回退基线 |
+| `original_pooled` | 原整段验证、原受约束选模 | 精确重现第十一/十三轮局部对照 |
+| `block_pooled` | 把新块计数合并后，按原约束选模 | 隔离边界删样影响 |
+| `block_constraints` | 每块都通过 APP=21 和原始错误预算，最大化合并收益 | 隔离逐块约束影响 |
+| `block_minimax` | 相同逐块预算，最大化最差块收益；每块收益都须严格为正 | 检查更保守的收益目标 |
+
+预算沿用每类错误率增量 0.1 个百分点、原始错误增量不超过 0；相对各自共同时间基线计算，不是绝对错误上限。任一块缺少任一原类别时，两个逐块组回退为恒等规则，缺失类仍保留且不重新归一先验；缺失拟合类使模型不可用。小样本仅标记，不据目标结果调阈值。候选和阈值全部来自原网格，标签及叶子资格只用原拟合子集；不会用验证或目标重新拟合叶子。
+
+外围模型可以使用局部验证期，但所有候选与基线的外围预测完全相同。因此只报告配对局部增量，不把外围绝对验证准确率称为留出指标。`select_rules` 不接收目标直方图或目标错误；原对照重现后，新规则先保存到 `frozen_selections.json` 并写入 `selection_lock.json` 的哈希，再开始新模型的目标评分，结束时再次检查哈希。
+
+### 输出与结果判断
+
+- `period_summary.csv`、`monthly_summary.csv`：所有组的加权错误、局部加权/整数增量、相对原整段选模的变化、保留收益比例，以及 APP=2/21/34 错误。整段先在每类内合并整数错误，再应用固定先验；保留收益比例相对原局部正收益计算，不裁剪到 0–100%，原收益非正或不可辨识时保留 NA。
+- `budget_monthly.csv`、`budget_summary.csv`：实际目标月的 APP=21/原始错误预算、所有违约、可用/可检查/预期月份数及回退次数。不能只用回退获得的高达标率声称适配有效，必须同时比较保留收益和回退比例。
+- `class_metrics.csv`、`confusion_matrices.json`：全部原类别及先验、原目标数量、准确整数错误、局部获救/受损、相对两个基线的贡献；缺失目标类保留 NA 和原先验可辨识范围。
+- `candidate_scores.csv`：每个候选的合并分数、每块 APP=21/原始错误变化、最差块分数和通过状态，不含目标分数。
+- `selected_validation.csv`、`validation_coverage.csv`、`boundary_counts.json`：被选规则在整段、块并集及各块上的增量、全部类别的块样本数、跨边界排除数。块太短或稀有类缺失导致大量回退，本身也是需要保留的实验结果。
+- `joint_counts.npz`、`collection_protocol.json`、`selection_protocol.json`、`frozen_selections.json`、`selection_lock.json`、`plan_snapshot.json`、`summary.json`、`invariants.json`、`report.md`、`run.json`：聚合计数、明确协议、冻结规则、代码/输入/输出哈希及完整谱系，不保存逐流标识。以相同参数用 `--reuse-counts-dir 本轮产物目录` 替换 `--h5 ...` 可校验并复用计数；仍须使用全新的输出目录。
+
+末尾 `PERIOD` 直接列出各组的局部收益、`retained_pct`、预算达标数及恒等回退数；`SELECT` 列出最差块组逐月选择、最少类样本数和缺失类块数，便于 ToDesk 读取。
+
+本轮检查的是过去多个子块上的经验稳定性。块之间可能相关，多个模型月份也不独立；不提供 iid 显著性、未来预算保证、独立会话假设或新颖性结论。目标月份已经参与前期诊断，本轮仍是探索性回放。若能在保留收益的同时减少违约，再冻结协议、在未参与这些调整的新时段确认；若主要结果是大量回退，应先分析验证覆盖和预算敏感性，而不是通过删除稀有类提高通过率。
