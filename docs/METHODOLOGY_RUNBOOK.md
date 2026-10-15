@@ -903,3 +903,82 @@ python -u scripts/methodology_real_joint.py \
 末尾 `PERIOD` 直接列出各组的局部收益、`retained_pct`、预算达标数及恒等回退数；`SELECT` 列出最差块组逐月选择、最少类样本数和缺失类块数，便于 ToDesk 读取。
 
 本轮检查的是过去多个子块上的经验稳定性。块之间可能相关，多个模型月份也不独立；不提供 iid 显著性、未来预算保证、独立会话假设或新颖性结论。目标月份已经参与前期诊断，本轮仍是探索性回放。若能在保留收益的同时减少违约，再冻结协议、在未参与这些调整的新时段确认；若主要结果是大量回退，应先分析验证覆盖和预算敏感性，而不是通过删除稀有类提高通过率。
+
+## 第十五轮：跨月前向验证与固定 pilot 过去收益审计
+
+第十四轮观察到预算违约由 4/9 减至 2/9，最近 1 月保留 76.31% 局部收益、最近 3 月保留 59.02%，均没有显式恒等回退。固定 pilot 却没有获救样本、损害 1 条；剩余违约为最近 3 月的 2025-03 和固定 pilot 的 2025-05，各多错 1 条。最差块和逐块约束对滚动模型选中同一规则，固定 pilot 规则不同但目标结果相同。因此本轮不继续扩大候选网格，改为验证候选切分方式在多个过去月份分别拟合后是否稳定，并核算固定 pilot 原规则在过去实际获救/受损多少条。
+
+`scripts/methodology_real_forward.py` 保留 44 类、固定先验、原目标流、原候选网格、200 条叶子门槛、4 ms 时间根、APP=34 结构保护及原预算。**历史月叶子标签按各自更早数据重新拟合，历史分数验证的是“切分方式及其拟合程序”，并不是部署月这一份叶子标签的独立验证。** 当前部署规则会单独保存并在新目标评分前冻结。
+
+完整服务器命令（首次需扫描一次 H5，无新增依赖）：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_FORWARD_OUT="artifacts/methodology/real_forward_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_FORWARD_OUT"
+    test ! -e "${EIBO_FORWARD_OUT}.log"
+    python -u scripts/methodology_real_forward.py \
+        --h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+        --backend tables \
+        --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --refinement-dir artifacts/methodology/real_refinement_20261013_123459 \
+        --hierarchy-dir artifacts/methodology/real_hierarchy_20261013_131451 \
+        --joint-dir artifacts/methodology/real_joint_20261014_150841 \
+        --blocks-dir artifacts/methodology/real_blocks_20261015_114553 \
+        --history-months 3 \
+        --chunk-rows 20000 \
+        --small-n 200 \
+        --out-dir "$EIBO_FORWARD_OUT" \
+        2>&1 | tee "${EIBO_FORWARD_OUT}.log"
+)
+```
+
+### 时间角色与数据使用
+
+部署月前的连续 3 个日历月构成验证历史。例如评估 2025-03 时，验证历史为 2024-12、2025-01、2025-02；每个历史月自身的局部模型分别只用该月之前的 1 月或 3 月窗口拟合，并在拟合末尾与验证月起点之间保留原 24 小时间隔。当前部署月也采用相同拟合程序：使用其之前的过去窗口，保留隔离间隔，不使用当月标签。固定 pilot 继续使用原局部拟合区间；早于其拟合完成的历史月份不能作留出验证，也不会通过缩短历史长度伪造可用性。
+
+每个验证月要求整条流及原时间戳舍入包络完整落在该审计月份区间内。原采集区间和数据划分间隔会裁剪月份首尾，不补齐不存在的数据；当前目标评分仍保留原目标流。旧月度缓存仅按起始时间归月，不能直接拿来保证历史验证月的完整流边界，所以需重新收集这些精确角色。新缓存使用已折叠低间隔的联合包长计数，限制内存，不保留逐流标识。
+
+历史后一个月的拟合可包含前一个验证月，因为在该次前向拟合时它已是过去数据。本轮假定过去月份标签在下一次选模前可用，不建模标注延迟；重叠训练窗口、验证月份和模型月份均不视为独立试验。部署月之前的标签用于选切分方式，部署规则的叶子标签另由当前过去窗口拟合；因此不把历史分数说成当前冻结叶子的留出风险保证。
+
+### 对照与预算
+
+479 外保持原完整过去模型。479 内滚动模型的新拟合使用隔离后的完整过去窗口，区别于第十一至十四轮的拟合子集。为分开重新拟合和历史选模的影响，保留以下对照：
+
+| 组 | 含义 |
+|---|---|
+| `previous_time` | 第十四轮实际保存的时间基线 |
+| `previous_blocks` | 第十四轮实际保存的逐块约束模型 |
+| `time_baseline` | 本轮当前过去数据拟合的共同时间基线 |
+| `fit_only` | 只按当前拟合收益选切分方式 |
+| `latest_month` | 只按最近一个历史验证月的预算和收益选模 |
+| `pooled_months` | 合并 3 个历史月的逐类整数增量，再应用固定先验和预算 |
+| `all_months` | 与合并月份相同的候选资格和合并收益目标，另要求每个历史月都通过预算 |
+
+`pooled_months` 与 `all_months` 都要求当前拟合和全部 3 个历史拟合的同一切分方式满足原叶子门槛及 APP=34 父标签保护；最近月组只要求其使用的最近历史月。预算仍为 APP=21 条件错误率增量不超过 0.1 个百分点、原始错误增量不超过 0。验证缺少原类别或历史日期不足时回退恒等；当前拟合缺类使本轮模型不可用，旧对照仍保留；不删类、不改先验。当前模型的局部预算均相对本轮共同时间基线，不能把相对旧模型的总变化当作纯选模增量。
+
+### 固定 pilot 审计与输出
+
+原固定 pilot 的整段验证、逐块约束和最差块选择都按其真实旧拟合标签重放，逐项对照第十四轮保存的验证分数，输出整段、块并集和每块的获救条数、受损条数、加权增量及原每类数量。本轮只做审计，不根据已观察目标结果临时加一个最低收益阈值。
+
+- `fixed_pilot_past_audit.csv`、`fixed_pilot_past_classes.csv`：上述过去收益及逐类精确获救/受损；用于识别所选规则是否只依赖极少数过去样本。
+- `frozen_selections.json`：当前部署规则及其当前拟合标签。`historical_selected_scores.csv`：相应切分方式在各历史月自身的拟合标签、资格和验证增量，两者明确分开。
+- `candidate_scores.csv`：只用当前拟合和过去月份的候选资格、当前拟合收益、合并增量及逐月增量，不含目标分数。`validation_coverage.csv`：全部原类别和先验的各历史月拟合/验证数量。
+- `monthly_summary.csv`、`period_summary.csv`、`class_metrics.csv`、`confusion_matrices.json`、`budget_monthly.csv`、`budget_summary.csv`：所有对照、相对当前时间基线和两个实际旧模型的变化、真实预算违约及显式回退次数。整段按每类内整数汇总再加权；缺失目标类保留 NA 和原先验可辨识范围，模型不可用时不伪报达标。
+- `role_counts.npz`、`collection_protocol.json`、`selection_protocol.json`、`selection_lock.json`、`plan_snapshot.json`、`summary.json`、`report.md`、`run.json`：精确日期角色、聚合缓存、规则锁、来源和代码/输入/输出哈希。新计数校验原月份计数和单包长原子、各角色联合投影、验证/拟合子集关系及固定 pilot 原拟合数据完全一致；第十四轮旧产物也先校验哈希和谱系。
+
+末尾 `PERIOD` 打印各模型/组的错误、局部增量、相对旧逐块模型的变化及预算/回退；`SELECT` 打印跨月组的逐月选择和最少验证类数量；`FIXED_PAST` 打印固定 pilot 在过去的真实获救/受损。之后用 `--reuse-counts-dir 本轮产物目录` 替换 `--h5 ...`，可在几何、源、代码和原输入完全一致时无 H5 重放，输出目录仍须新建。
+
+本轮继续使用已经观察过的历史目标月份，仍是探索性对照。跨月经验稳定性、重新拟合后的部署效果和已冻结叶子的风险保证是不同结论；本轮只测前两者，不提供未来预算保证、独立会话结论或新颖性结论。若表现改善，下一步应冻结完整协议并寻找未参与这些调整的新时段确认。
