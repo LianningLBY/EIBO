@@ -982,3 +982,72 @@ python -u scripts/methodology_real_joint.py \
 末尾 `PERIOD` 打印各模型/组的错误、局部增量、相对旧逐块模型的变化及预算/回退；`SELECT` 打印跨月组的逐月选择和最少验证类数量；`FIXED_PAST` 打印固定 pilot 在过去的真实获救/受损。之后用 `--reuse-counts-dir 本轮产物目录` 替换 `--h5 ...`，可在几何、源、代码和原输入完全一致时无 H5 重放，输出目录仍须新建。
 
 本轮继续使用已经观察过的历史目标月份，仍是探索性对照。跨月经验稳定性、重新拟合后的部署效果和已冻结叶子的风险保证是不同结论；本轮只测前两者，不提供未来预算保证、独立会话结论或新颖性结论。若表现改善，下一步应冻结完整协议并寻找未参与这些调整的新时段确认。
+
+## 第十六轮：近期规则排除归因与相同支持资格下的收益目标对照
+
+第十五轮逐月方案观察到 9/9 个模型月份预算达标，仅固定 pilot 的 4 月显式回退；最近月方案为 8/9，唯一违约是最近 3 月模型在 2025-03 多错 1 条。最近 1 月、3 月的逐月方案分别只保留最近月方案 29.23%、12.95% 的加权收益。最近 3 月逐月方案虽然救回 353 条、损害 4 条，却比最近月的救回 174 条、损害 50 条获得更低加权收益，需要逐类核算。新旧时间基线的全部评估月混淆矩阵已核对一致；不同轮次细化仍可能包含叶子重新拟合影响。
+
+`scripts/methodology_real_recency.py` 先校验并重现第十五轮的规则、协议、整段/逐月汇总和完整混淆矩阵，再复用其精确时间角色缓存。本轮**不读取 H5、不新增依赖、不改变 44 类及先验、目标流、当前及历史拟合标签、网格、叶子门槛、时间基线或外围预测**。新对照先冻结规则和权重，再评分目标月份。
+
+完整服务器命令：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_RECENCY_OUT="artifacts/methodology/real_recency_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_RECENCY_OUT"
+    test ! -e "${EIBO_RECENCY_OUT}.log"
+    python -u scripts/methodology_real_recency.py \
+        --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --refinement-dir artifacts/methodology/real_refinement_20261013_123459 \
+        --hierarchy-dir artifacts/methodology/real_hierarchy_20261013_131451 \
+        --joint-dir artifacts/methodology/real_joint_20261014_150841 \
+        --blocks-dir artifacts/methodology/real_blocks_20261015_114553 \
+        --forward-dir artifacts/methodology/real_forward_20261015_151659 \
+        --recency-ratio 2 \
+        --small-n 200 \
+        --out-dir "$EIBO_RECENCY_OUT" \
+        2>&1 | tee "${EIBO_RECENCY_OUT}.log"
+)
+```
+
+### 支持资格、预算和目标分开检查
+
+所有新组共用同一个支持集合：当前拟合和每个历史拟合均满足原叶子门槛及 APP=34 父标签保护，每个历史验证月都有全部原类别，历史日期完整可用。缺失历史不缩短窗口，缺失验证类不删类或重新归一先验；当前拟合缺类保留模型不可用。小样本仍仅标记。
+
+预算分为两行：`shared_*` 只要求最近历史月通过 APP=21/原始错误预算；`strict_*` 要求每个历史月和原合并月份都通过原预算。同一行中的所有目标使用**完全相同的支持和预算可行集合**，只改变收益排序。两行之间的可行集合有意不同，用于检查额外历史预算的影响。原预算仍为 0.1 个百分点及原始错误不增加，不随近期权重衰减。
+
+| 目标后缀 | 收益排序 |
+|---|---|
+| `latest` | 最近历史月的固定先验加权收益 |
+| `pooled` | 原来的逐类整数合并后加固定先验 |
+| `uniform` | 各月固定先验收益等权平均 |
+| `recent` | 对相同的各月收益按固定近期权重平均 |
+
+默认比率为 2，3 个历史月从旧到新的权重为 `[1,2,4]/7`。只声明这一组示例权重，不搜索权重、不按目标结果自动挑选赢家。`uniform` 与 `recent` 分离纯近期加权影响；`pooled` 与 `uniform` 还涉及各月每类样本数量对汇总权重的影响，不能把两者差异都归因于近期性。
+
+实际旧控制保留为 `source_fit`、`source_latest`、`source_pooled`、`source_all` 和共同 `time_baseline`。`source_latest` 与 `shared_latest` 的目标和最近月预算相同，差异来自额外历史支持/覆盖要求；同一支持/预算行内比较四个目标，再对同一目标比较两行预算。`strict_pooled` 必须逐项重现 `source_all` 的当前规则及其结果。上述检查存在交互，多个排除原因可以同时出现，不能把原因计数直接相加当作唯一因果分解。
+
+### 输出和判读
+
+- `candidate_audit.csv`：所有候选的当前/历史支持、保护、类别覆盖、每月预算标记、合并预算及四种收益分数，不含目标分数。
+- `latest_choice_audit.csv`：真实旧最近月规则的逐月资格、预算和收益；每个布尔列表按 `history_node_ids` 从旧到新对齐。`latest_choice_exclusions.csv`：各对照中旧近期规则是否可行、是否被选、赢家和目标分数差。规则不满足资格时，不能仅用分数差解释其落选。
+- `selected_monthly_scores.csv`：旧/新实际所选切分方式在各历史月的标签、收益、APP=21/原始错误增量、叶子数量和当前标签；历史不合资格的原始分数只是诊断，不表示该月允许部署。
+- `class_metrics.csv`：全部原类别的错误、相对共同时间基线的精确获救/受损、相对 `source_latest` 的整数净变化和条件/加权贡献。跨方案比较仅报告净变化，不从两个独立混淆矩阵推断配对获救/受损。整段按每类整数汇总再加权，缺失目标类保留 NA 和原先验可辨识范围。
+- `monthly_summary.csv`、`period_summary.csv`、`budget_monthly.csv`、`budget_summary.csv`、`confusion_matrices.json`：所有旧控制和 8 个新对照的完整结果，预算达标、回退、不可用及预期/可检查月份均保留。不能只报告达标率而忽略收益和回退。
+- `frozen_selections.json`、`selection_lock.json`、`selection_protocol.json`、`collection_protocol.json`、`plan_snapshot.json`、`invariants.json`、`summary.json`、`report.md`、`run.json`：冻结规则、固定权重、来源、代码/输入/输出哈希；`rows_read=0`，保留原 `cached_source_rows`。不重复复制大计数缓存。
+
+运行末尾 `PERIOD` 打印 8 个对照的局部收益、相对旧近期方案的变化、预算和回退；`AUDIT` 打印真实近期规则的历史支持和逐月预算；`CLASSES` 列出原逐月方案相对原近期方案的最大类别收益与代价，便于解释最近 3 月模型的原始计数/加权收益差异。
+
+本轮由已看过的目标结果提出，仍是探索性对照；历史分数仍验证拟合程序而非当前叶子的独立留出风险。继承原标注可用性、时间相关和会话未验证等限制；多个模型月份不独立，固定近期权重不提供未来预算保证或新颖性结论。下一步的确认仍需未参与调整的新时段。
