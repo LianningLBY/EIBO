@@ -1051,3 +1051,72 @@ python -u scripts/methodology_real_joint.py \
 运行末尾 `PERIOD` 打印 8 个对照的局部收益、相对旧近期方案的变化、预算和回退；`AUDIT` 打印真实近期规则的历史支持和逐月预算；`CLASSES` 列出原逐月方案相对原近期方案的最大类别收益与代价，便于解释最近 3 月模型的原始计数/加权收益差异。
 
 本轮由已看过的目标结果提出，仍是探索性对照；历史分数仍验证拟合程序而非当前叶子的独立留出风险。继承原标注可用性、时间相关和会话未验证等限制；多个模型月份不独立，固定近期权重不提供未来预算保证或新颖性结论。下一步的确认仍需未参与调整的新时段。
+
+## 第十七轮：现有候选的收益与类别代价前沿
+
+第十六轮中，原近期规则在 9 个评估模型月份均通过共同支持检查和历史原始错误预算，却未通过较早月份的 APP=21 预算。改变月度评分权重未改善整段加权错误的显示值，但部分逐月混淆矩阵不同。原逐月严格方案相对近期方案，在最近 1 月模型里少错 28 条 APP=21，却多错 217 条 APP=22 和 8 条 APP=15；APP=2 局部错误不变，APP=34 保持。本轮先检查已有有限候选中能否兼顾这些代价，不新增特征、阈值网格或目标数据调参。
+
+`scripts/methodology_real_costs.py` 校验并完整重放第十五、十六轮的协议、冻结规则、汇总和混淆矩阵，再复用原精确时间角色缓存。保留全部 44 类、原先验（已知每类 1/45，未知 1/45）、原目标流、当前及历史拟合标签、叶子门槛、APP=34 父标签保护、外围预测和共同时间基线。**不读取 H5，不需要新依赖。**
+
+完整服务器命令（继续使用现有 `traffic-ncde` 环境）：
+
+```bash
+(
+    set -euo pipefail
+    cd /data/xjw/EIBO
+    git switch codex/methodology-risk-certificates
+    env -u http_proxy -u https_proxy -u all_proxy \
+        -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY \
+        -u GIT_ASKPASS -u SSH_ASKPASS \
+        GIT_TERMINAL_PROMPT=1 NO_PROXY='*' no_proxy='*' \
+        git -c http.proxy= -c core.askPass= -c http.extraHeader= \
+            pull --ff-only origin codex/methodology-risk-certificates
+    python -m unittest discover -s tests -p '*riskcert*.py' -v
+
+    EIBO_COST_OUT="artifacts/methodology/real_costs_$(date +%Y%m%d_%H%M%S)"
+    test ! -e "$EIBO_COST_OUT"
+    test ! -e "$EIBO_COST_OUT.log"
+    python -u scripts/methodology_real_costs.py \
+        --prepare-dir artifacts/methodology/real_prepare_20261012_180750 \
+        --monthly-dir artifacts/methodology/real_monthly_20261012_213718 \
+        --refinement-dir artifacts/methodology/real_refinement_20261013_123459 \
+        --hierarchy-dir artifacts/methodology/real_hierarchy_20261013_131451 \
+        --joint-dir artifacts/methodology/real_joint_20261014_150841 \
+        --blocks-dir artifacts/methodology/real_blocks_20261015_114553 \
+        --forward-dir artifacts/methodology/real_forward_20261015_151659 \
+        --recency-dir artifacts/methodology/real_recency_20261015_165602 \
+        --small-n 200 \
+        --out-dir "$EIBO_COST_OUT" \
+        2>&1 | tee "$EIBO_COST_OUT.log"
+)
+```
+
+### 四组规则与两个类别代价参照
+
+四组共用第十六轮的当前和全部历史支持资格；只用严格早于目标的历史月份选切分方式。原 APP=21 条件错误增量预算仍为 0.1 个百分点，原始错误增量不超过 0。
+
+| 组 | 过去预算和收益排序 | APP=22、15 的额外要求 |
+|---|---|---|
+| `latest_no_harm` | 最近历史月预算；最大化该月固定先验收益 | 相对该月共同根基线，各类错误不增加 |
+| `all_no_harm` | 每个历史月及逐类合并均通过预算；最大化合并收益 | 每月及合并后各类错误均不增加 |
+| `latest_keep_gains` | 与最近月组相同 | 各类增量不高于 `min(0, 原近期规则切分方式的历史增量)` |
+| `all_keep_gains` | 与所有历史月组相同 | 每月及合并后均满足上述保留收益条件 |
+
+“不新增伤害”不代表“保留已有收益”。当局部父标签是 APP=21 时，APP=22、15 相对根基线本已逐点不受伤害，新增根基线约束可能冗余；`keep_gains` 才能检查原近期方案救回的样本收益是否被收回。过去参照是本目标起点真实 `source_latest` 所选切分方式，在各历史起点使用其当时拟合标签评分；不把当前标签复制到过去，也不把这一由过去分数选出的参照解释为独立验证。
+
+恒等规则作为显式候选计入前沿和可行数，但**可能不满足保留收益条件**：回退会放弃过去已救回的流。选模只部署具有正过去加权收益的合格候选；`identity_no_feasible_rule`、`identity_no_positive_feasible_gain`、`identity_incomplete_history` 和 `unavailable_current_fit` 分别标记无可行规则、无正收益、历史不完整和当前模型不可用。记录实际部署是否满足过去约束；不把回退自动计作保留收益成功。
+
+### 前沿定义、完整类别记录和目标评估
+
+前沿同时最大化收益、最小化 APP=21/22/15 条件错误增量和原始错误增量。最近月视图取该月值；所有月视图取逐类整数合并收益，各代价取每月及合并值的最大值，不同最大值可以来自不同月份。保留共同支持集合中的完整前沿，以及通过原 APP=21/原始错误预算后的前沿；数值完全相同的非支配点均保留。前沿相对共同根基线定义，保留近期收益另列资格标记。两种历史视图不是同一个可行集合，不能只用前沿大小判断孰优。
+
+- `past_candidate_classes.npz`、`candidate_index.json`：全部现有候选加恒等规则、每个历史月、全部原类别的整数增量、原始类别数量、支持和历史可用性、代价向量与前沿/预算/兼顾资格。压缩保存完整候选数据，避免巨大的逐候选逐类文本表。所有轴、原类别顺序和先验、历史角色均可恢复；不包含目标候选评分。
+- `frontier_candidates.csv`、`frontier_summary.csv`：完整前沿、原预算内前沿和实际选择点；可行数包含恒等，另列正收益可行数。有限网格内无可行解不代表其他表示或规则也不可能兼顾。
+- `selected_past_classes.csv`、`frozen_selections.json`：四组所选方式在每个历史月及合并后的全部类别增量、当前部署标签和历史拟合标签、可行数、恒等资格及部署资格。
+- `class_metrics.csv`、`monthly_summary.csv`、`period_summary.csv`、`confusion_matrices.json`：四组和全部十六轮实际控制的逐月/整段效果。整段先在每类内合并整数错误，再使用原先验加权。所有44类均保留；缺失类继续保留 NA 和原先验可辨识区间，小样本只标记。跨策略差异只报告整数净变化；获救/受损配对仍仅相对共同根基线。
+- `compatibility_monthly.csv`：分别报告原 APP=21/原始错误预算、额外 APP=22/15 根基线零伤害、额外保留目标实际近期方案收益的检查。全部为冻结之后的目标诊断，不参与规则选择。原预算不因其他类别缺失而伪报未知或通过；额外兼顾条件缺类时明确为 NA。
+- `selection_protocol.json`、`selection_lock.json`、`summary.json`、`invariants.json`、`report.md`、`run.json`：原来源和代码/输入/输出哈希、先冻结规则和协议再评分的锁，以及 `rows_read=0`。
+
+末尾 `PERIOD` 打印12个新模型/组的局部增量、相对近期方案的增量、原始净变化和 APP=21/22/15 净变化；`caps` 依次是原预算、根基线兼顾、近期收益保留的达标次数及可检查次数。`PAST` 按固定组顺序打印9个评估模型月份的规则与过去可行数，`identity` 不隐含通过约束；详细资格看冻结选择和报告。
+
+本轮由已观察月份的类别代价提出，是探索性有限候选分析，不扫描预算，不按目标结果自动选赢家，也不提供未来逐类预算或独立性保证。若能找到稳定折中，后续应冻结完整协议，使用未参与这些调整的新时段确认。
