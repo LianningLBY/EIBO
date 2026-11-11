@@ -34,3 +34,35 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/if_e1_fusion_probe.py
 - `pointwise` 给出逐项区间，`simultaneous_panel` 在单个分块假设内对两段留出、全部服务对、预算和端点做 Bonferroni 校正。比较效果是否跨两个时间段复现时，看同一预算、同一分块口径下的结果。区间包含 0 表示现有比较的精度不足以确定符号。
 
 每个块的质量为两类各半权重下该块的样本占比。配对正确性差、固定判决的 TV 对比，以及总体最优事件的 TV 对比，在质量为 `w` 的块上取值范围长均为 `2w`。脚本以此用 Hoeffding 计算半径。TV 上界使用样本 TV 不小于总体最优事件的样本对比，TV 下界使用校准期冻结的判决事件。输出中的风险区间由等先验二分类的恒等式 `R* = (1 - TV) / 2` 得到。
+
+## 新留出数据上的复验
+
+固定 8 格 late fusion。主检验为 APP 0 vs 1，辅助比较为原来不含 APP 0 的全部 21 对。新留出结果出来前固定两个 UTC 日期窗口和 APP 映射。
+
+旧 JSON 没有保存所有系数。`freeze` 依据旧 JSON 的设置，从原拟合、stacking 和校准窗口重建模型，核对 stacking 系数、分箱边界和校准判决，再一起保存模型及其分箱。学校服务器上运行：
+
+```bash
+cd /data/xjw/EIBO
+conda activate traffic-ncde
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/if_e1_fusion_validate.py freeze \
+  --discovery /data/xjw/EIBO/artifacts/methodology/if_e1_fusion_20261111_184554.json \
+  --h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+  --backend tables \
+  --out /data/xjw/EIBO/artifacts/methodology/if_e1_frozen_b8.json
+```
+
+`evaluate` 使用兼容 H5 和两个新窗口，日期右端不含当天。脚本要求首窗比旧评估期结束晚至少一天，且新窗之间留至少一天。根据采集来源确认新文件确实是新流量，并根据两份数据的标签表确认 APP 指向同一服务。下例的路径和日期是占位符。APP 编码一致时用 `--same-app-codes`，否则用 `--app-map` 指定一个以旧 APP 编号为键、新 APP 编号为值的 JSON 对象。
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/if_e1_fusion_validate.py evaluate \
+  --frozen /data/xjw/EIBO/artifacts/methodology/if_e1_frozen_b8.json \
+  --h5 /data/xjw/path/to/new-capture.h5 \
+  --certificate YYYY-MM-DD YYYY-MM-DD \
+  --evaluation YYYY-MM-DD YYYY-MM-DD \
+  --same-app-codes --backend tables \
+  --out /data/xjw/EIBO/artifacts/methodology/if_e1_validation_b8.json
+```
+
+每个窗口从首日开始交替保留一天、间隔一天，只评估整条流的时间包络都落在保留日内的记录。结果的总体是符合该规则的流量。JSON 报告各批次的样本数、配对增益和样本最优单源差距；缺少任一类的批次只报告样本数。
+
+主检验要求 `separated_24h` 下 APP 0 vs 1 的贝叶斯增益下界在两窗都为正。每窗用单侧尾概率 0.025，使两窗下界同时覆盖至少 95%。辅助比较以 42 个单侧下界单独校正。`iid_flow` 是用同批流量的敏感性对照。间隔用于减少相邻批次的关联，置信界仍以批次独立及其条件均值解释为前提。对 4.76 个百分点的差距，现有主检验的最坏情形半径要更小，每个窗口约需 3,257 个等权独立批次。短留出期主要用于观察配对增益在时间上的表现。

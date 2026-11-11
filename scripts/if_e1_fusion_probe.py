@@ -61,13 +61,15 @@ class AppReservoir:
             self.rows[app] = rows
 
 
-def scan(source, tables, windows, encoder, args):
+def scan(source, tables, windows, encoder, args, *, batch_mask=None):
     seeds = np.random.SeedSequence(args.seed).spawn(len(windows))
     samples = {name: AppReservoir(args.max_per_app, np.random.default_rng(seed))
                for name, seed in zip(windows, seeds)}
-    geometry = {name: TimeUnitGeometry(windows[name], 1, BLOCK_SECONDS, ROUNDING_SECONDS) for name in HOLDOUTS}
+    geometry = {name: TimeUnitGeometry(window, 1, BLOCK_SECONDS, ROUNDING_SECONDS)
+                for name, window in windows.items() if name in HOLDOUTS and batch_mask is None}
     empty = np.empty(0)
     audit = Counter()
+    outside = "valid_but_outside_windows" if batch_mask is None else "valid_but_outside_capture_batches"
     for index, table in enumerate(tables, 1):
         if table["ppi_capacity"] < K or set(PHIST_FIELDS).difference(table["fields"]):
             raise ValueError(f"{table['path']} lacks the required prefix capacity or PHIST fields")
@@ -99,6 +101,8 @@ def scan(source, tables, windows, encoder, args):
             assigned = np.zeros(len(records), dtype=bool)
             for name, window in windows.items():
                 use = valid & whole_interval_mask(first, last, window, ROUNDING_SECONDS)
+                if batch_mask is not None:
+                    use[use] = batch_mask(first[use], last[use], window)
                 if use.any():
                     if np.any(assigned & use):
                         raise RuntimeError("one flow was assigned to multiple windows")
@@ -108,13 +112,13 @@ def scan(source, tables, windows, encoder, args):
                     if name in geometry:
                         # Every eligible flow can bridge blocks, even if it was not retained in the sample.
                         geometry[name].add(first[use], last[use], empty, empty)
-            audit["valid_but_outside_windows"] += int((valid & ~assigned).sum())
+            audit[outside] += int((valid & ~assigned).sum())
         if index % 30 == 0 or index == len(tables):
             print(f"Scanned {index}/{len(tables)} daily tables ({audit['rows_read']:,} rows)", flush=True)
     if audit["rows_read"] != sum(table["rows"] for table in tables):
         raise RuntimeError("H5 scan did not read the expected row count")
     assigned_count = sum(sum(sample.eligible.values()) for sample in samples.values())
-    if assigned_count + audit["valid_but_outside_windows"] != audit["jointly_valid_rows"]:
+    if assigned_count + audit[outside] != audit["jointly_valid_rows"]:
         raise RuntimeError("window counts do not reconcile with eligible rows")
     return samples, geometry, dict(audit)
 
@@ -126,10 +130,14 @@ def pair_sample(sample, pair):
     return np.concatenate(parts), np.repeat([0, 1], [len(left), len(right)])
 
 
-def block_budgets(geometry, rows, y):
+def iid_flow_budget(y):
     ns = np.bincount(y, minlength=2)
     weight = 0.5 / ns
-    budgets = {"iid_flow": {"blocks": len(y), "squared_mass": float(np.dot(ns, weight ** 2))}}
+    return {"blocks": len(y), "squared_mass": float(np.dot(ns, weight ** 2))}
+
+
+def block_budgets(geometry, rows, y):
+    budgets = {"iid_flow": iid_flow_budget(y)}
     pair_geometry = TimeUnitGeometry(geometry.window, 2, BLOCK_SECONDS, ROUNDING_SECONDS)
     pair_geometry.bridges = geometry.bridges
     pair_geometry.add(np.empty(0), np.empty(0), rows["first"], y)
@@ -143,12 +151,16 @@ def block_budgets(geometry, rows, y):
     return budgets
 
 
-def analyze_pair(pair, samples, geometry, alphabet, panel_tail):
+def fit_pair(pair, samples, alphabet):
     fit, fit_y = pair_sample(samples["fit"], pair)
     stack, stack_y = pair_sample(samples["stack"], pair)
     cal, cal_y = pair_sample(samples["calibration"], pair)
     model = PairScores.fit(alphabet, fit, fit_y, stack, stack_y)
-    cal_scores = model.predict(cal)
+    return model, model.predict(cal), cal_y
+
+
+def analyze_pair(pair, samples, geometry, alphabet, panel_tail):
+    model, cal_scores, cal_y = fit_pair(pair, samples, alphabet)
     holdouts = {}
     for name in HOLDOUTS:
         rows, y = pair_sample(samples[name], pair)
