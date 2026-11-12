@@ -46,6 +46,27 @@ The known-null simulations use 36 equally weighted cells with 10 independent tim
 
 The simulation JSON includes the one-sided 95% Monte Carlo upper bounds for these rates. [Simulation JSON](../artifacts/methodology/if_e1/timing_cell_null_simulation.json)
 
+## Matched comparison of three certificates
+
+The `--compare` flag evaluates all three certificates from the same retained flows, fitted rule, class weights, and time blocks. The estimand is the conditional Bayes gain defined above. Write $v_{cb}$ for the total weight in cell $c$ and block $b$ of records whose correctness can change with timing. The score $X_{cb}$ is in $[0,v_{cb}]$.
+
+- **Pooled Hoeffding.** Sum the cell scores within each block and use the range $\sum_c v_{cb}$. At tail probability $0.05$, subtract $\sqrt{\tfrac12\log(1/0.05)\sum_b (\sum_c v_{cb})^2}$ from the pooled frozen-rule gain over the coarse optimum. Truncate the result at zero using the nonnegative Bayes gain.
+- **Cell Hoeffding.** At tail probability $0.05/M$, subtract $\sqrt{\tfrac12\log(M/0.05)\sum_b v_{cb}^2}$ from the frozen-rule gain in cell $c$. Truncate each cell at zero and sum. This gives simultaneous coverage across all $M$ occupied cells for the fixed width.
+- **Cell product.** Apply the product lower bound to the same $X_{cb}$ with the same cell tail probability and the same truncation and sum.
+
+Each method gives a 95% lower bound under the same conditional block-independence model for the specified width. The table compares methods and grouping assumptions. Each entry is a lower bound on the overall cohort gain in percentage points.
+
+| Corpus | Block width | Pooled Hoeffding | Cell Hoeffding | Cell product |
+|---|---|---:|---:|---:|
+| QUIC22 | 1 day | 0 | +0.01605 | +0.05429 |
+| QUIC22 | 2 days | 0 | 0 | 0 |
+| QUIC22 | 4 days | 0 | 0 | 0 |
+| QUICEXT-25 XS | 1 day | Pending H5 rerun | Pending H5 rerun | +0.02206 |
+| QUICEXT-25 XS | 2 days | Pending H5 rerun | Pending H5 rerun | +0.01793 |
+| QUICEXT-25 XS | 4 days | Pending H5 rerun | Pending H5 rerun | +0.01606 |
+
+In QUIC22, both cell methods obtain their daily lower bound from coarse symbol 501. Cell Hoeffding certifies a positive gain after pooling yields zero. The product bound increases that lower bound by 0.03824 pp. In XS, the archived output gives the product bound and identifies symbol 469 as the contributor at all three widths. The two Hoeffding columns require the original H5 to recover the mutable weight in each time block. [QUIC22 matched comparison](../artifacts/methodology/if_e1/timing_certificate_comparison_quic22.json) · [XS product result](../artifacts/methodology/if_e1_timing_cells_xs_20261112_123022.json)
+
 ## Frozen QUICEXT-25 XS protocol
 
 - Use the registered XS H5 with the SHA-256 in the command below. The established calendar 50/25/25 split fixes the pilot and evaluation windows before reading flow values. On this release they are `[2024-06-01, 2024-11-30)` and `[2025-03-02, 2025-06-01)` in UTC. Use the eight most frequent eligible APP codes in the pilot, the original timing bins and the pilot frequency rule with equal class priors. QUIC22 and XS fit their rules separately and use their respective pilot cohorts.
@@ -69,3 +90,5 @@ For local reproduction and simulation, choose new output paths.
 python3 scripts/quic_timing_cell_certificate.py quic22 --out /tmp/timing_cell_quic22.json
 python3 scripts/quic_timing_cell_certificate.py simulate --out /tmp/timing_cell_null_simulation.json
 ```
+
+For the matched comparison, add `--compare` to the `quic22` or `xs` invocation and choose a new output path. The JSON includes the pooled radius, the two cell-based lower bounds, and the cell Hoeffding radius and contribution for each occupied cell.

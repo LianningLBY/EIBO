@@ -15,6 +15,7 @@ from scipy.stats import beta
 import quic_timing_pilot as timing
 import quic_timing_pilot_h5 as h5_pilot
 from eibo.realdata import DAY, FlowSource, chronological_windows, utc
+from eibo.riskcert import joint_radius_from_change_budget
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,7 +36,7 @@ def product_lower(scores, alpha):
         return units * np.exp((math.log(alpha) + np.log(scores).sum(axis=-1)) / units)
 
 
-def cell_certificate(labels, coarse, fine, groups, priors, fine_rule):
+def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare=False):
     """Condition on labels, coarse symbols, block membership, and the fitted rule."""
     alphabet = len(fine_rule) // timing.TIMING_BINS
     coarse_counts = timing.hist(labels, coarse, len(priors), alphabet)
@@ -77,7 +78,7 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule):
             "frozen_gain_contribution": float(deterministic[symbol] + scores.sum() - coarse_optimum[symbol]),
             "bayes_gain_lower_contribution": float(max(0, lower)),
         })
-    return {
+    result = {
         "flows": len(labels),
         "class_counts": class_counts.tolist(),
         "sampling_units": num_units,
@@ -90,14 +91,43 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule):
         "conditional_bayes_gain_lower": sum(row["bayes_gain_lower_contribution"] for row in cells),
         "cells": cells,
     }
+    if compare:
+        # Conditional on the coarse inputs and labels, the correct score of
+        # the mutable rows in a cell and block lies in [0, mutable mass].
+        block_masses = np.bincount(cell_unit, weights=class_weights[mutable_labels],
+                                   minlength=alphabet * num_units).reshape(alphabet, num_units)
+        pooled_masses = block_masses.sum(axis=0)
+        pooled_radius = float(joint_radius_from_change_budget([pooled_masses @ pooled_masses], alpha=ALPHA)[0])
+        cell_radii = joint_radius_from_change_budget(np.square(block_masses[active]).sum(axis=1), alpha=cell_alpha)
+        for row, radius in zip(cells, cell_radii):
+            row["hoeffding_radius"] = float(radius)
+            row["hoeffding_lower_contribution"] = max(0.0, row["frozen_gain_contribution"] - float(radius))
+        result["certificate_comparison"] = {
+            "pooled_hoeffding": {
+                "alpha": ALPHA,
+                "radius": pooled_radius,
+                "lower": max(0.0, result["frozen_rule_minus_sample_coarse_optimum"] - pooled_radius),
+            },
+            "cell_hoeffding": {
+                "alpha": cell_alpha,
+                "positive_cells": sum(row["hoeffding_lower_contribution"] > 0 for row in cells),
+                "lower": sum(row["hoeffding_lower_contribution"] for row in cells),
+            },
+            "cell_product": {
+                "alpha": cell_alpha,
+                "positive_cells": result["positive_cells"],
+                "lower": result["conditional_bayes_gain_lower"],
+            },
+        }
+    return result
 
 
-def evaluate_days(labels, coarse, fine, day, priors, fine_rule):
-    return {f"{width}d": cell_certificate(labels, coarse, fine, day // width, priors, fine_rule)
+def evaluate_days(labels, coarse, fine, day, priors, fine_rule, *, compare=False):
+    return {f"{width}d": cell_certificate(labels, coarse, fine, day // width, priors, fine_rule, compare=compare)
             for width in BLOCK_DAYS}
 
 
-def run_quic22(prefix_dir):
+def run_quic22(prefix_dir, *, compare=False):
     manifest_bytes = ARCHIVE_SUMMARY.read_bytes()
     summary = json.loads(manifest_bytes)
     encoder = timing.FixedPrefixEncoder(timing.K, 2)
@@ -118,7 +148,7 @@ def run_quic22(prefix_dir):
     fit = timing.combine([days[date] for date in fit_dates], classes)
     _, fine_rule, fit_counts = timing.fit_rules(*fit[:3], priors, encoder.alphabet)
     labels, coarse, fine, hour = timing.combine([days[date] for date in evaluation_dates], classes)
-    results = evaluate_days(labels, coarse, fine, hour // 24, priors, fine_rule)
+    results = evaluate_days(labels, coarse, fine, hour // 24, priors, fine_rule, compare=compare)
     archived = summary["results"]["all"]
     primary = results["1d"]
     archived_keys = {"flows": "flows", "sample_bayes_gain": "sample_ceiling_gain",
@@ -138,7 +168,7 @@ def run_quic22(prefix_dir):
     }
 
 
-def run_xs(args):
+def run_xs(args, *, compare=False):
     initial = args.h5.stat()
     sha256 = h5_pilot.sha256(args.h5)
     if sha256 != args.expected_sha256.lower():
@@ -175,7 +205,8 @@ def run_xs(args):
         "timestamp_end_margin_seconds": ROUNDING_SECONDS,
         "evaluation_fitted_class_flows_before_daily_guard": int(fitted_class.sum()),
         "excluded_fitted_class_flows_crossing_day_boundary": int((fitted_class & ~within_day).sum()),
-        "results_by_block_width": evaluate_days(labels, coarse[keep], fine[keep], day[keep], priors, fine_rule),
+        "results_by_block_width": evaluate_days(labels, coarse[keep], fine[keep], day[keep], priors, fine_rule,
+                                                compare=compare),
     }
 
 
@@ -226,6 +257,8 @@ def main():
     xs.add_argument("--backend", choices=("auto", "tables", "h5py"), default="auto")
     xs.add_argument("--chunk-rows", type=int, default=20_000)
     simulation = modes.add_parser("simulate")
+    for mode in (quic22, xs):
+        mode.add_argument("--compare", action="store_true", help="include matched pooled and cell Hoeffding bounds")
     for mode in (quic22, xs, simulation):
         mode.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
@@ -234,16 +267,21 @@ def main():
     if args.mode == "simulate":
         result = run_simulation()
     elif args.mode == "quic22":
-        result = run_quic22(args.prefix_dir)
+        result = run_quic22(args.prefix_dir, compare=args.compare)
     else:
-        result = run_xs(args)
+        result = run_xs(args, compare=args.compare)
     if args.mode != "simulate":
         result["target"] = "Bayes accuracy gain from adding timing, conditional on coarse inputs, labels and grouping"
         result["block_independence_is_assumed"] = True
         result["primary_block_width"] = "1d"
         for width, row in result["results_by_block_width"].items():
-            print(f"{width}: {row['positive_cells']}/{row['occupied_coarse_cells']} positive cells, "
-                  f"gain lower {100 * row['conditional_bayes_gain_lower']:+.5f} pp")
+            if args.compare:
+                bounds = row["certificate_comparison"]
+                print(f"{width}: " + " | ".join(f"{name} {100 * bound['lower']:+.5f} pp"
+                                                for name, bound in bounds.items()))
+            else:
+                print(f"{width}: {row['positive_cells']}/{row['occupied_coarse_cells']} positive cells, "
+                      f"gain lower {100 * row['conditional_bayes_gain_lower']:+.5f} pp")
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("x") as output:
         json.dump(result, output, indent=2, allow_nan=False)
