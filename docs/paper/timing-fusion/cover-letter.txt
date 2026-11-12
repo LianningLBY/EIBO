@@ -1,0 +1,14 @@
+Dear Editors,
+
+We submit “Finite-sample certificates for the Bayes accuracy gain of feature fusion in QUIC traffic” for consideration in Information Fusion. We develop lower confidence bounds on the improvement in Bayes accuracy from adding a feature to an existing representation. The method allows arbitrary dependence within each time block and assumes conditional independence across blocks.
+
+We compare four bounds on the same held-out flows and fitted rules in two encrypted traffic corpora. For the 44-class CESNET-QUICEXT-25 XS cohort, the pooled daily bound is 2.03 percentage points in the original evaluation window and 1.94 points in a disjoint window. On CESNET-QUIC22-S, it reaches 1.29 points for 82 classes with daily blocks. All four bounds on that corpus are zero with two- or four-day blocks.
+
+The study fits Information Fusion’s scope in feature fusion and network security. Its methodological contribution is to decompose the gain into nonnegative contributions that can be bounded simultaneously. The controlled simulation shows how the distribution of gain and the number of cells can reverse the ordering of pooled and cell-level bounds. These results give readers a way to assess how much additional predictive information their evaluation can certify under a stated dependence model.
+
+Thank you for considering the manuscript.
+
+Sincerely,
+[Corresponding author name]
+[Affiliation]
+[Email]
