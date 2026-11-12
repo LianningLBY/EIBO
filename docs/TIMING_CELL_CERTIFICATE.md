@@ -197,3 +197,18 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_sensit
   --backend tables \
   --out "artifacts/methodology/if_e1_timing_xs_refit_$(date +%Y%m%d_%H%M%S).json"
 ```
+
+## XS time-block diagnostics and prior comparison
+
+Run one scan of the XS file with the archived 44-class frequency rules and two evaluation windows. Keep the daily guard, flows, feature cuts, and equal evaluation weights fixed for the block diagnostic.
+
+- Report daily mutable correct weight, mutable weight, and their ratio. Calculate descriptive Pearson correlations at lags one through seven UTC days. Pairs must have a defined ratio at both dates, so missing days do not become consecutive observations.
+- Recompute the pooled product bound for every calendar offset at widths one, two, and four days. Offset zero reproduces the archived partition. The script checks its bound and block counts against the archive before writing results. Partial blocks at the window edges retain their flows. Each bound is pointwise under conditional independence for that partition. The correlations describe the observed scores.
+- On the same retained flows, cross the archived equal-prior and square-root-prior frequency rules with both evaluation priors. The script verifies the three archived comparisons and reports the additional square-root-fitted rule under equal evaluation weights. This comparison uses the archived pointwise error level of 0.05.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_block_diagnostics.py \
+  --xs-h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+  --backend tables \
+  --out "artifacts/methodology/if_e1_timing_xs_block_diagnostics_$(date +%Y%m%d_%H%M%S).json"
+```

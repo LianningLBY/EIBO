@@ -42,7 +42,7 @@ def product_lower(scores, alpha):
 
 
 def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare=False, alpha=ALPHA,
-                     pooled_omit_symbol=None):
+                     pooled_omit_symbol=None, report_pooled_blocks=False):
     """Condition on labels, coarse symbols, block membership, and the fitted rule."""
     alphabet = len(fine_rule) // timing.TIMING_BINS
     coarse_counts = timing.hist(labels, coarse, len(priors), alphabet)
@@ -103,8 +103,16 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
         block_masses = np.bincount(cell_unit, weights=class_weights[mutable_labels],
                                    minlength=alphabet * num_units).reshape(alphabet, num_units)
         pooled_masses = block_masses.sum(axis=0)
+        pooled_scores = block_scores.sum(axis=0)
+        if report_pooled_blocks:
+            result["pooled_blocks"] = {
+                "groups": unique_units.tolist(),
+                "scores": pooled_scores.tolist(),
+                "mutable_masses": pooled_masses.tolist(),
+                "fixed_correct_minus_coarse_optimum": float(deterministic.sum() - coarse_optimum.sum()),
+            }
         pooled_radius = float(joint_radius_from_change_budget([pooled_masses @ pooled_masses], alpha=alpha)[0])
-        pooled_scores = block_scores.sum(axis=0)[pooled_masses > 0]
+        pooled_scores = pooled_scores[pooled_masses > 0]
         pooled_product = float(deterministic.sum() + product_lower(pooled_scores, alpha) - coarse_optimum.sum())
         cell_radii = joint_radius_from_change_budget(np.square(block_masses[active]).sum(axis=1), alpha=cell_alpha)
         for row, radius in zip(cells, cell_radii):
