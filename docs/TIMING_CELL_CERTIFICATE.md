@@ -109,3 +109,18 @@ Run the XS command with both `--compare` and `--service-sweep` to obtain the fou
 The eight-class baseline retains its original selection rule. For both expansion cohorts, require at least 2,000 usable flows per service in the pilot window, following the [existing methodology runbook](METHODOLOGY_RUNBOOK.md). Rank by decreasing pilot count and use APP code order to break ties. Take the first 16 eligible codes and all eligible codes, respectively. Fit a separate frequency rule for each cohort with equal class priors. The input hash, time windows, daily guard, and block definitions are shared across the sweep. If a selected service is absent after the holdout guard, report its code and the counts for that cohort. Preserve results for the other cohorts.
 
 The archived sweep matches the original eight-class cohort and its per-cell results. It retains 1,182,338, 1,763,662, and 2,038,134 flows for the 8-, 16-, and 44-class cohorts, respectively. Their sample Bayes gains are 3.27412, 4.84831, and 6.39494 pp. Each cohort has 91, 46, and 23 blocks at the three widths. The coverage guarantee applies to each fixed cohort, method, and width. Different cohort sizes use their own class priors and target distributions. [Original eight-class result](../artifacts/methodology/if_e1_timing_cells_xs_20261112_123022.json) · [XS service sweep](../artifacts/methodology/if_e1_timing_service_sweep_xs_20261112_125904.json)
+
+## Fixed temporal check for the 16- and 44-class cohorts
+
+Rebuild the frequency rules from the original XS pilot and match the exact APP lists and fitting counts in the archived sweep. The temporal check uses the same equal class priors, feature encoding, one-hour end margin, and daily guard. Its two primary lower bounds use UTC daily blocks. The primary method is cell product for 16 classes and pooled product for 44 classes. Allocate a tail probability of 0.025 to each primary bound, giving at least 95% joint coverage for the two statements under their conditional independence assumptions. A positive result for both cohorts requires both prespecified bounds to exceed zero. The remaining methods and the 2- and 4-day widths are descriptive sensitivity comparisons at the same per-cohort level.
+
+The executable check uses the middle XS window `[2024-12-01, 2025-03-01)` in UTC. It is disjoint from both the registered pilot and the March–May evaluation used for the service sweep. Earlier project work used the middle window for a different IF-E1 comparison, so report this check as a time-disjoint reanalysis. To evaluate a later untouched capture, use `--later-h5 FILE --later-window START STOP --same-app-codes`. Confirm the APP code semantics and record the capture and half-open UTC dates before inspecting results. The later window starts at least one day after the archived end. The script records missing dates and verifies both H5 digests. A cohort with absent classes records the missing codes and leaves its primary result unavailable.
+
+Run on the school server after updating the experimental branch.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_temporal_check.py \
+  --xs-h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+  --backend tables \
+  --out "artifacts/methodology/if_e1_timing_temporal_xs_$(date +%Y%m%d_%H%M%S).json"
+```

@@ -37,7 +37,7 @@ def product_lower(scores, alpha):
         return units * np.exp((math.log(alpha) + np.log(scores).sum(axis=-1)) / units)
 
 
-def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare=False):
+def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare=False, alpha=ALPHA):
     """Condition on labels, coarse symbols, block membership, and the fitted rule."""
     alphabet = len(fine_rule) // timing.TIMING_BINS
     coarse_counts = timing.hist(labels, coarse, len(priors), alphabet)
@@ -47,7 +47,7 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
     class_weights = priors / class_counts
     coarse_mass = class_weights[:, None] * coarse_counts
     active = np.flatnonzero(coarse_counts.sum(axis=0))
-    cell_alpha = ALPHA / len(active)
+    cell_alpha = alpha / len(active)
     coarse_optimum = coarse_mass.max(axis=0)
     fine_mass = class_weights[:, None] * timing.hist(labels, fine, len(priors), len(fine_rule))
     fine_optimum = fine_mass.max(axis=0).reshape(alphabet, timing.TIMING_BINS).sum(axis=1)
@@ -83,7 +83,7 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
         "flows": len(labels),
         "class_counts": class_counts.tolist(),
         "sampling_units": num_units,
-        "family_alpha": ALPHA,
+        "family_alpha": alpha,
         "occupied_coarse_cells": len(active),
         "per_cell_alpha": cell_alpha,
         "positive_cells": sum(row["bayes_gain_lower_contribution"] > 0 for row in cells),
@@ -98,21 +98,21 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
         block_masses = np.bincount(cell_unit, weights=class_weights[mutable_labels],
                                    minlength=alphabet * num_units).reshape(alphabet, num_units)
         pooled_masses = block_masses.sum(axis=0)
-        pooled_radius = float(joint_radius_from_change_budget([pooled_masses @ pooled_masses], alpha=ALPHA)[0])
+        pooled_radius = float(joint_radius_from_change_budget([pooled_masses @ pooled_masses], alpha=alpha)[0])
         pooled_scores = block_scores.sum(axis=0)[pooled_masses > 0]
-        pooled_product = float(deterministic.sum() + product_lower(pooled_scores, ALPHA) - coarse_optimum.sum())
+        pooled_product = float(deterministic.sum() + product_lower(pooled_scores, alpha) - coarse_optimum.sum())
         cell_radii = joint_radius_from_change_budget(np.square(block_masses[active]).sum(axis=1), alpha=cell_alpha)
         for row, radius in zip(cells, cell_radii):
             row["hoeffding_radius"] = float(radius)
             row["hoeffding_lower_contribution"] = max(0.0, row["frozen_gain_contribution"] - float(radius))
         result["certificate_comparison"] = {
             "pooled_hoeffding": {
-                "alpha": ALPHA,
+                "alpha": alpha,
                 "radius": pooled_radius,
                 "lower": max(0.0, result["frozen_rule_minus_sample_coarse_optimum"] - pooled_radius),
             },
             "pooled_product": {
-                "alpha": ALPHA,
+                "alpha": alpha,
                 "mutable_units": len(pooled_scores),
                 "untruncated_lower": pooled_product,
                 "lower": max(0.0, pooled_product),
@@ -131,8 +131,9 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
     return result
 
 
-def evaluate_days(labels, coarse, fine, day, priors, fine_rule, *, compare=False):
-    return {f"{width}d": cell_certificate(labels, coarse, fine, day // width, priors, fine_rule, compare=compare)
+def evaluate_days(labels, coarse, fine, day, priors, fine_rule, *, compare=False, alpha=ALPHA):
+    return {f"{width}d": cell_certificate(labels, coarse, fine, day // width, priors, fine_rule,
+                                          compare=compare, alpha=alpha)
             for width in BLOCK_DAYS}
 
 
@@ -179,13 +180,17 @@ def run_quic22(prefix_dir, *, compare=False):
 
 def evaluate_xs_cohort(pilot, evaluation, day, within_day, alphabet, classes, *, compare=False):
     classes, priors, _, fine_rule, fit_counts = h5_pilot.fit(pilot, alphabet, classes=classes)
+    cohort = evaluate_frozen_xs_cohort(evaluation, day, within_day, classes, priors, fine_rule, compare=compare)
+    return {**cohort, "fit_counts": fit_counts.tolist()}
+
+
+def evaluate_frozen_xs_cohort(evaluation, day, within_day, classes, priors, fine_rule, *, compare=False, alpha=ALPHA):
     apps, coarse, fine, _, _ = evaluation
     fitted_class = np.isin(apps, classes)
     keep = fitted_class & within_day
     labels = np.searchsorted(classes, apps[keep])
     cohort = {
         "classes_in_count_order": classes.tolist(),
-        "fit_counts": fit_counts.tolist(),
         "evaluation_fitted_class_flows_before_daily_guard": int(fitted_class.sum()),
         "excluded_fitted_class_flows_crossing_day_boundary": int((fitted_class & ~within_day).sum()),
     }
@@ -194,7 +199,7 @@ def evaluate_xs_cohort(pilot, evaluation, day, within_day, alphabet, classes, *,
         return {**cohort, "status": "missing_holdout_classes", "holdout_counts": holdout_counts.tolist(),
                 "missing_holdout_classes": classes[holdout_counts == 0].tolist()}
     return {**cohort, "results_by_block_width": evaluate_days(labels, coarse[keep], fine[keep], day[keep],
-                                                             priors, fine_rule, compare=compare)}
+                                                             priors, fine_rule, compare=compare, alpha=alpha)}
 
 
 def run_xs(args, *, compare=False, service_sweep=False):
