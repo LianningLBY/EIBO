@@ -1,0 +1,217 @@
+{
+  "source": "CESNET-QUICEXT-25 XS",
+  "h5_sha256": "6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab",
+  "reference_sweep_sha256": "481d73fb0e6be159055dd0c70cb4d9315c04321da3c201c0875340654927a716",
+  "temporal_sha256": "bbbcf0520f5a0ac2fc08f16e4e96cf16029f0f7b88e69169fbed889b404208ec",
+  "rows_scanned": 10000000,
+  "windows_utc": {
+    "original": [
+      "2025-03-02T00:00:00+00:00",
+      "2025-06-01T00:00:00+00:00"
+    ],
+    "temporal": [
+      "2024-12-01T00:00:00+00:00",
+      "2025-03-01T00:00:00+00:00"
+    ]
+  },
+  "app_codes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    25,
+    26,
+    27,
+    28,
+    29,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    43,
+    44,
+    48,
+    50,
+    51,
+    52
+  ],
+  "omitted_symbol": 479,
+  "selection": "Largest original daily cell-product contribution",
+  "target": "Bayes accuracy gain summed over retained symbols with original cohort weights",
+  "block_independence_is_assumed": true,
+  "results": {
+    "original": {
+      "1d": {
+        "flows": 2038134,
+        "sampling_units": 91,
+        "occupied_coarse_cells": 88,
+        "full_pooled_product": {
+          "alpha": 0.05,
+          "mutable_units": 91,
+          "untruncated_lower": 0.02034851563239165,
+          "lower": 0.02034851563239165
+        },
+        "pooled_product_without_symbol": {
+          "omitted_symbol": 479,
+          "omitted_flows": 587817,
+          "omitted_class_weight": 0.29916692120212707,
+          "retained_mutable_units": 91,
+          "retained_sample_bayes_gain": 0.04707410906555429,
+          "retained_frozen_gain": 0.030004330161336648,
+          "pointwise_alpha": 0.05,
+          "pointwise_lower": 0.009884353028875414,
+          "singleton_family_alpha": 0.05,
+          "singleton_per_symbol_alpha": 0.0005681818181818183,
+          "singleton_simultaneous_lower": 0.004048884771289271
+        }
+      },
+      "2d": {
+        "flows": 2038134,
+        "sampling_units": 46,
+        "occupied_coarse_cells": 88,
+        "full_pooled_product": {
+          "alpha": 0.05,
+          "mutable_units": 46,
+          "untruncated_lower": 0.01840130996715128,
+          "lower": 0.01840130996715128
+        },
+        "pooled_product_without_symbol": {
+          "omitted_symbol": 479,
+          "omitted_flows": 587817,
+          "omitted_class_weight": 0.29916692120212707,
+          "retained_mutable_units": 46,
+          "retained_sample_bayes_gain": 0.04707410906555429,
+          "retained_frozen_gain": 0.03000433016133673,
+          "pointwise_alpha": 0.05,
+          "pointwise_lower": 0.008473585990747184,
+          "singleton_family_alpha": 0.05,
+          "singleton_per_symbol_alpha": 0.0005681818181818183,
+          "singleton_simultaneous_lower": 0.0
+        }
+      },
+      "4d": {
+        "flows": 2038134,
+        "sampling_units": 23,
+        "occupied_coarse_cells": 88,
+        "full_pooled_product": {
+          "alpha": 0.05,
+          "mutable_units": 23,
+          "untruncated_lower": 0.01677719951245296,
+          "lower": 0.01677719951245296
+        },
+        "pooled_product_without_symbol": {
+          "omitted_symbol": 479,
+          "omitted_flows": 587817,
+          "omitted_class_weight": 0.29916692120212707,
+          "retained_mutable_units": 23,
+          "retained_sample_bayes_gain": 0.04707410906555429,
+          "retained_frozen_gain": 0.03000433016133812,
+          "pointwise_alpha": 0.05,
+          "pointwise_lower": 0.006682714184517449,
+          "singleton_family_alpha": 0.05,
+          "singleton_per_symbol_alpha": 0.0005681818181818183,
+          "singleton_simultaneous_lower": 0.0
+        }
+      }
+    },
+    "temporal": {
+      "1d": {
+        "flows": 2318322,
+        "sampling_units": 86,
+        "occupied_coarse_cells": 199,
+        "full_pooled_product": {
+          "alpha": 0.025,
+          "mutable_units": 86,
+          "untruncated_lower": 0.01935045487707565,
+          "lower": 0.01935045487707565
+        },
+        "pooled_product_without_symbol": {
+          "omitted_symbol": 479,
+          "omitted_flows": 580325,
+          "omitted_class_weight": 0.2366904709861005,
+          "retained_mutable_units": 86,
+          "retained_sample_bayes_gain": 0.046155988502769627,
+          "retained_frozen_gain": 0.04181120767745841,
+          "pointwise_alpha": 0.025,
+          "pointwise_lower": 0.01086813424267502,
+          "singleton_family_alpha": 0.025,
+          "singleton_per_symbol_alpha": 0.0001256281407035176,
+          "singleton_simultaneous_lower": 0.002984469200477319
+        }
+      },
+      "2d": {
+        "flows": 2318322,
+        "sampling_units": 43,
+        "occupied_coarse_cells": 199,
+        "full_pooled_product": {
+          "alpha": 0.025,
+          "mutable_units": 43,
+          "untruncated_lower": 0.020251877551985265,
+          "lower": 0.020251877551985265
+        },
+        "pooled_product_without_symbol": {
+          "omitted_symbol": 479,
+          "omitted_flows": 580325,
+          "omitted_class_weight": 0.2366904709861005,
+          "retained_mutable_units": 43,
+          "retained_sample_bayes_gain": 0.046155988502769627,
+          "retained_frozen_gain": 0.04181120767745988,
+          "pointwise_alpha": 0.025,
+          "pointwise_lower": 0.011495388173408727,
+          "singleton_family_alpha": 0.025,
+          "singleton_per_symbol_alpha": 0.0001256281407035176,
+          "singleton_simultaneous_lower": 0.0
+        }
+      },
+      "4d": {
+        "flows": 2318322,
+        "sampling_units": 22,
+        "occupied_coarse_cells": 199,
+        "full_pooled_product": {
+          "alpha": 0.025,
+          "mutable_units": 22,
+          "untruncated_lower": 0.012287727550297362,
+          "lower": 0.012287727550297362
+        },
+        "pooled_product_without_symbol": {
+          "omitted_symbol": 479,
+          "omitted_flows": 580325,
+          "omitted_class_weight": 0.2366904709861005,
+          "retained_mutable_units": 22,
+          "retained_sample_bayes_gain": 0.046155988502769627,
+          "retained_frozen_gain": 0.04181120767745952,
+          "pointwise_alpha": 0.025,
+          "pointwise_lower": 0.004677794754243125,
+          "singleton_family_alpha": 0.025,
+          "singleton_per_symbol_alpha": 0.0001256281407035176,
+          "singleton_simultaneous_lower": 0.0
+        }
+      }
+    }
+  }
+}
