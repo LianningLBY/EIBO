@@ -161,15 +161,18 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_mechanism
 
 ## XS sensitivity to the fitted rule and class prior
 
-Use the exact registered 16- and 44-class cohorts, original fitting period, and both disjoint evaluation periods. Within a cohort and window the three scenarios use the same retained records and time blocks. Each fixed bound uses tail probability 0.05. The original-window frequency-rule results are checked against the archived sweep.
+Use the exact registered 16- and 44-class cohorts, original fitting period, and both disjoint evaluation periods. Within a cohort and window all scenarios use the same retained records and time blocks. Each fixed bound uses tail probability 0.05. The original-window frequency-rule results are checked against the archived sweep.
 
 - Fit the original frequency rule with equal class priors and use equal priors in evaluation.
 - Fit a multinomial logistic rule with additive one-hot terms for the coarse symbol and the timing bin. Fit the rule on counts from the original pilot with equal total weight per class. Fix the L2 penalty coefficient at 0.001 in the normalized objective. Unseen coarse symbols use the original fallback. Use equal priors in evaluation so the Bayes gain target is shared with the frequency rule.
 - Keep the equal-prior frequency decisions fixed and evaluate with class priors proportional to the square roots of the pilot class counts. This changes the target while holding the rule fixed. Report both prior vectors and the evaluation counts for all classes. In the 44-class cohort, the APP with 190 original holdout flows receives about 0.675% of the mass under the alternative, compared with 2.273% under equal priors.
+- Refit the frequency decisions on the original pilot using those square-root priors. Freeze the refitted rule and evaluate it with the same prior, holdout flows, and blocks as the preceding scenario. The two scenarios use the same Bayes gain target. Compare the frozen-rule gain over the coarse optimum and the resulting lower bounds.
+
+With square-root priors, the archived 44-class sample Bayes gains are 4.471 and 5.137 pp in the original and temporal windows, respectively. The equal-prior frequency rule falls below the reweighted coarse optimum by 4.523 and 1.923 pp. The refit addresses this mismatch between the rule's fitting prior and its evaluation prior. [Archived sensitivity results](../artifacts/methodology/if_e1_timing_xs_sensitivity_20261112_153107.json)
 
 ```bash
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_sensitivity.py \
   --xs-h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
   --backend tables \
-  --out "artifacts/methodology/if_e1_timing_xs_sensitivity_$(date +%Y%m%d_%H%M%S).json"
+  --out "artifacts/methodology/if_e1_timing_xs_refit_$(date +%Y%m%d_%H%M%S).json"
 ```

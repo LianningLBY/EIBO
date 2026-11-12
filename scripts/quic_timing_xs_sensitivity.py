@@ -58,6 +58,14 @@ def fit_additive_rule(pilot, classes, priors, alphabet, fallback):
                           "fitting_coarse_cells": num_coarse}
 
 
+def fit_frequency_with_prior(pilot, classes, prior, alphabet):
+    apps, coarse, fine, _, _ = pilot
+    keep = np.isin(apps, classes)
+    labels = np.searchsorted(classes, apps[keep])
+    _, rule, _ = timing.fit_rules(labels, coarse[keep], fine[keep], prior, alphabet)
+    return rule
+
+
 def check_original_result(baseline, archived):
     for width, row in baseline["results_by_block_width"].items():
         expected = archived["results_by_block_width"][width]
@@ -97,10 +105,12 @@ def run(args):
         additive, fit_info = fit_additive_rule(pilot, classes, priors, encoder.alphabet, frequency)
         root_prior = np.sqrt(counts)
         root_prior /= root_prior.sum()
+        refitted_frequency = fit_frequency_with_prior(pilot, classes, root_prior, encoder.alphabet)
         scenarios = {
             "frequency_equal": (frequency, priors),
             "additive_logistic_equal": (additive, priors),
             "frequency_sqrt_pilot_prior": (frequency, root_prior),
+            "refitted_frequency_sqrt_pilot_prior": (refitted_frequency, root_prior),
         }
         holdouts = {}
         for period, data in periods.items():
@@ -118,7 +128,11 @@ def run(args):
             "pilot_class_counts": counts.tolist(),
             "scenario_priors": {label: weights.tolist() for label, (_, weights) in scenarios.items()},
             "additive_fit": fit_info,
-            "fine_rules": {"frequency": frequency.tolist(), "additive_logistic": additive.tolist()},
+            "fine_rules": {
+                "frequency": frequency.tolist(),
+                "additive_logistic": additive.tolist(),
+                "refitted_frequency_sqrt_pilot_prior": refitted_frequency.tolist(),
+            },
             "holdouts": holdouts,
         }
     return {
@@ -150,6 +164,11 @@ def main():
         for period, scenarios in cohort["holdouts"].items():
             for label, entry in scenarios.items():
                 print(f"{name} classes | {period} | {label}")
+                if "results_by_block_width" in entry:
+                    daily = entry["results_by_block_width"]["1d"]
+                    print(f"  Sample Bayes gain {100 * daily['sample_bayes_gain']:+.5f} pp | "
+                          f"frozen rule vs coarse optimum "
+                          f"{100 * daily['frozen_rule_minus_sample_coarse_optimum']:+.5f} pp")
                 print_block_results(entry, compare=True)
     print(f"Results: {args.out}")
 
