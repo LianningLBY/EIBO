@@ -138,10 +138,38 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_cell_cert
   --out "artifacts/methodology/if_e1_timing_quic22_s_$(date +%Y%m%d_%H%M%S).json"
 ```
 
-The XS diagnosis verifies the fitted cohorts and provenance before comparing the original and temporal windows. It reports positive contributions to the cell product certificate, their shares, and the number of blocks with mutable records in each positive cell. It also reports the product-bound gap and identifies which positive cells recur. The windows use tail probabilities of 0.05 and 0.025, respectively. Interpret the cell shares and overlap descriptively at these levels.
+The XS diagnosis verifies the fitted cohorts and provenance before comparing the original and temporal windows. It reports positive contributions to the cell product certificate, their shares, and the number of blocks with mutable records in each positive cell. It also reports the product-bound gap and identifies which positive cells recur. The windows use tail probabilities of 0.05 and 0.025, respectively. Interpret the cell shares and overlap descriptively at these levels. In the 16-class cohort, symbol 509 supplies the entire cell product bound in the original window. In the temporal window it supplies 99.97% of the daily bound and the entire two- and four-day bounds. [XS contribution results](../artifacts/methodology/if_e1_timing_xs_diagnostics_20261112_151423.json)
 
 ```bash
 python scripts/quic_timing_xs_diagnostics.py \
   --temporal artifacts/methodology/if_e1_timing_temporal_xs_20261112_150118.json \
   --out "artifacts/methodology/if_e1_timing_xs_diagnostics_$(date +%Y%m%d_%H%M%S).json"
+```
+
+## Controlled simulation of signal concentration
+
+Use 32 equally weighted coarse cells, balanced binary labels in every cell, and a fixed fine rule that predicts the added binary feature. In each cell and block, eight independent group-level bits set whether that feature agrees with the labels of all flows in each group. Groups contain a balanced pair of labels. Repeat the pair within a group as needed to hold the flow count at 81,920 across 20, 40, 80, and 160 blocks. The data share the same block draws across all four certificates within each replicate.
+
+Under the null the agreement probability is 0.5 everywhere. Under the alternative, distribute exactly 4 pp of Bayes gain across 4, 8, 16, or 32 cells, equally among the selected cells. Keep agreement at 0.5 elsewhere. Use 10,000 replicates per scenario and a tail probability of 0.05 for each fixed method. Report the frequency of a positive lower bound, the median and mean lower bounds, and the frequency of exceeding the known gain.
+
+At 80 blocks with gain concentrated in four cells, the cell and pooled product median lower bounds are 3.064 and 1.940 pp, respectively. With gain spread across all 32 cells, the corresponding medians are 0.030 and 1.928 pp. With 20 blocks, the median pooled bound is zero in both scenarios and the median cell bound is positive in the four-cell scenario. The comparisons identify a concentration effect in this fixed simulation model. [Simulation results](../artifacts/methodology/if_e1/timing_certificate_mechanism.json)
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_mechanism_simulation.py \
+  --out /tmp/timing_certificate_mechanism.json
+```
+
+## XS sensitivity to the fitted rule and class prior
+
+Use the exact registered 16- and 44-class cohorts, original fitting period, and both disjoint evaluation periods. Within a cohort and window the three scenarios use the same retained records and time blocks. Each fixed bound uses tail probability 0.05. The original-window frequency-rule results are checked against the archived sweep.
+
+- Fit the original frequency rule with equal class priors and use equal priors in evaluation.
+- Fit a multinomial logistic rule with additive one-hot terms for the coarse symbol and the timing bin. Fit the rule on counts from the original pilot with equal total weight per class. Fix the L2 penalty coefficient at 0.001 in the normalized objective. Unseen coarse symbols use the original fallback. Use equal priors in evaluation so the Bayes gain target is shared with the frequency rule.
+- Keep the equal-prior frequency decisions fixed and evaluate with class priors proportional to the square roots of the pilot class counts. This changes the target while holding the rule fixed. Report both prior vectors and the evaluation counts for all classes. In the 44-class cohort, the APP with 190 original holdout flows receives about 0.675% of the mass under the alternative, compared with 2.273% under equal priors.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_sensitivity.py \
+  --xs-h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+  --backend tables \
+  --out "artifacts/methodology/if_e1_timing_xs_sensitivity_$(date +%Y%m%d_%H%M%S).json"
 ```

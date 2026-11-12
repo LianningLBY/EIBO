@@ -1,0 +1,715 @@
+{
+  "alpha_per_method": 0.05,
+  "seed": 20261112,
+  "trials_per_scenario": 10000,
+  "coarse_cells": 32,
+  "groups_per_cell_block": 8,
+  "equal_class_priors": [
+    0.5,
+    0.5
+  ],
+  "synthetic_flow_count": 81920,
+  "design": "Independent agreement bits across groups, cells and blocks. Each group repeats its balanced class pair to keep the total flow count fixed. The frozen decision predicts the added binary feature.",
+  "scenarios": [
+    {
+      "blocks": 20,
+      "signal_cells": 0,
+      "true_bayes_gain": 0.0,
+      "signal_cell_agreement_probability": 0.5,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.0,
+      "pooled_product_larger_rate": 0.0,
+      "mean_cell_minus_pooled_product": 0.0
+    },
+    {
+      "blocks": 20,
+      "signal_cells": 4,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.8200000000000001,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0076,
+          "mean_lower": 1.830037303652781e-06,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.01065428034594469,
+          "median_lower": 0.010677662884819224,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 1.0,
+      "pooled_product_larger_rate": 0.0,
+      "mean_cell_minus_pooled_product": 0.01065428034594469
+    },
+    {
+      "blocks": 20,
+      "signal_cells": 8,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.66,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.5409,
+          "mean_lower": 0.0003060514456500189,
+          "median_lower": 5.852993224086077e-05,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.5409,
+      "pooled_product_larger_rate": 0.0,
+      "mean_cell_minus_pooled_product": 0.0003060514456500189
+    },
+    {
+      "blocks": 20,
+      "signal_cells": 16,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.58,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.0078,
+          "mean_lower": 1.5358305007564691e-06,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.0078,
+      "pooled_product_larger_rate": 0.0,
+      "mean_cell_minus_pooled_product": 1.5358305007564691e-06
+    },
+    {
+      "blocks": 20,
+      "signal_cells": 32,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.54,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.0003,
+          "mean_lower": 8.319974156042638e-08,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.0003,
+      "pooled_product_larger_rate": 0.0,
+      "mean_cell_minus_pooled_product": 8.319974156042638e-08
+    },
+    {
+      "blocks": 40,
+      "signal_cells": 0,
+      "true_bayes_gain": 0.0,
+      "signal_cell_agreement_probability": 0.5,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.0015,
+          "mean_lower": 2.0176238677923828e-07,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0015
+        }
+      },
+      "cell_product_larger_rate": 0.0015,
+      "pooled_product_larger_rate": 0.0,
+      "mean_cell_minus_pooled_product": 2.0176238677923828e-07
+    },
+    {
+      "blocks": 40,
+      "signal_cells": 4,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.8200000000000001,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.5253,
+          "mean_lower": 0.0019459282055632166,
+          "median_lower": 0.000291579857379598,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.004518413195260054,
+          "median_lower": 0.004514345707404943,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.023397974907717212,
+          "median_lower": 0.023410202463728234,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 1.0,
+      "pooled_product_larger_rate": 0.0,
+      "mean_cell_minus_pooled_product": 0.021452046702153994
+    },
+    {
+      "blocks": 40,
+      "signal_cells": 8,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.66,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.522,
+          "mean_lower": 0.001894489589426339,
+          "median_lower": 0.00025416042997511434,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0001,
+          "mean_lower": 5.539551851237168e-10,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.010424938594296067,
+          "median_lower": 0.010396428980046207,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.9956,
+      "pooled_product_larger_rate": 0.0044,
+      "mean_cell_minus_pooled_product": 0.008530449004869729
+    },
+    {
+      "blocks": 40,
+      "signal_cells": 16,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.58,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.5154,
+          "mean_lower": 0.0019008343530980327,
+          "median_lower": 0.000162145533993463,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.8441,
+          "mean_lower": 0.0006694178206772014,
+          "median_lower": 0.0005183321156948806,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.4307,
+      "pooled_product_larger_rate": 0.4552,
+      "mean_cell_minus_pooled_product": -0.0012314165324208315
+    },
+    {
+      "blocks": 40,
+      "signal_cells": 32,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.54,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.5152,
+          "mean_lower": 0.0019527054158809758,
+          "median_lower": 0.0002064326695198626,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.1286,
+          "mean_lower": 3.41202439474142e-05,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.0414,
+      "pooled_product_larger_rate": 0.5118,
+      "mean_cell_minus_pooled_product": -0.0019185851719335616
+    },
+    {
+      "blocks": 80,
+      "signal_cells": 0,
+      "true_bayes_gain": 0.0,
+      "signal_cell_agreement_probability": 0.5,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.0059,
+          "mean_lower": 9.839260346991546e-07,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0059
+        }
+      },
+      "cell_product_larger_rate": 0.0059,
+      "pooled_product_larger_rate": 0.0,
+      "mean_cell_minus_pooled_product": 9.839260346991546e-07
+    },
+    {
+      "blocks": 80,
+      "signal_cells": 4,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.8200000000000001,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.01937171652397545,
+          "median_lower": 0.019395193868334715,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.01489448478591192,
+          "median_lower": 0.014919294356224414,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.030628520036399685,
+          "median_lower": 0.030641588010058715,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.9999,
+      "pooled_product_larger_rate": 0.0001,
+      "mean_cell_minus_pooled_product": 0.011256803512424234
+    },
+    {
+      "blocks": 80,
+      "signal_cells": 8,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.66,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.01927518433852069,
+          "median_lower": 0.01926352510855789,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.1108,
+          "mean_lower": 2.318798567519691e-05,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.02136943700908668,
+          "median_lower": 0.021464800831143445,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.7547,
+      "pooled_product_larger_rate": 0.2453,
+      "mean_cell_minus_pooled_product": 0.00209425267056599
+    },
+    {
+      "blocks": 80,
+      "signal_cells": 16,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.58,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.019300311118437982,
+          "median_lower": 0.01930563261153606,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.0057709672480708565,
+          "median_lower": 0.005684343456937082,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.0,
+      "pooled_product_larger_rate": 1.0,
+      "mean_cell_minus_pooled_product": -0.013529343870367125
+    },
+    {
+      "blocks": 80,
+      "signal_cells": 32,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.54,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.019282116887672583,
+          "median_lower": 0.019280938142482107,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.808,
+          "mean_lower": 0.0004280651015479597,
+          "median_lower": 0.0003046101420840063,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.0,
+      "pooled_product_larger_rate": 1.0,
+      "mean_cell_minus_pooled_product": -0.018854051786124627
+    },
+    {
+      "blocks": 160,
+      "signal_cells": 0,
+      "true_bayes_gain": 0.0,
+      "signal_cell_agreement_probability": 0.5,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.0031,
+          "mean_lower": 3.3306739019536086e-07,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0031
+        }
+      },
+      "cell_product_larger_rate": 0.0031,
+      "pooled_product_larger_rate": 0.0,
+      "mean_cell_minus_pooled_product": 3.3306739019536086e-07
+    },
+    {
+      "blocks": 160,
+      "signal_cells": 4,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.8200000000000001,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.029139421730743756,
+          "median_lower": 0.02911920692982567,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.02223928467010873,
+          "median_lower": 0.022252290041202476,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.03443784533728623,
+          "median_lower": 0.034455751817182356,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.9888,
+      "pooled_product_larger_rate": 0.0112,
+      "mean_cell_minus_pooled_product": 0.0052984236065424664
+    },
+    {
+      "blocks": 160,
+      "signal_cells": 8,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.66,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.02911456211317952,
+          "median_lower": 0.02914188856077049,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.004624746679217475,
+          "median_lower": 0.0045875878949049615,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.026896411792573724,
+          "median_lower": 0.027272833032955628,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.1928,
+      "pooled_product_larger_rate": 0.8072,
+      "mean_cell_minus_pooled_product": -0.0022181503206057953
+    },
+    {
+      "blocks": 160,
+      "signal_cells": 16,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.58,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.029100787601449834,
+          "median_lower": 0.029113396310418815,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0002,
+          "mean_lower": 5.436767685124133e-09,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.012315287560406011,
+          "median_lower": 0.012302724496437515,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.0,
+      "pooled_product_larger_rate": 1.0,
+      "mean_cell_minus_pooled_product": -0.01678550004104382
+    },
+    {
+      "blocks": 160,
+      "signal_cells": 32,
+      "true_bayes_gain": 0.04,
+      "signal_cell_agreement_probability": 0.54,
+      "methods": {
+        "pooled_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "pooled_product": {
+          "positive_rate": 1.0,
+          "mean_lower": 0.029098925819454603,
+          "median_lower": 0.029139861936342826,
+          "undercoverage_rate": 0.0
+        },
+        "cell_hoeffding": {
+          "positive_rate": 0.0,
+          "mean_lower": 0.0,
+          "median_lower": 0.0,
+          "undercoverage_rate": 0.0
+        },
+        "cell_product": {
+          "positive_rate": 0.9954,
+          "mean_lower": 0.001258522614379481,
+          "median_lower": 0.0011737623788251588,
+          "undercoverage_rate": 0.0
+        }
+      },
+      "cell_product_larger_rate": 0.0,
+      "pooled_product_larger_rate": 1.0,
+      "mean_cell_minus_pooled_product": -0.02784040320507512
+    }
+  ]
+}
