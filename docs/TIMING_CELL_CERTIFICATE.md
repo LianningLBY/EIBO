@@ -148,6 +148,15 @@ python scripts/quic_timing_xs_diagnostics.py \
 
 Use `--leave-one-cell-out` to omit the largest daily contributor from the original window and sum the remaining simultaneous cell product bounds for that cohort in both windows and all widths. The weights and error allocation refer to the original cohort. In the 16-class cohort, omitting symbol 509 leaves daily bounds of 0 and 0.00061 pp. In the 44-class cohort, omitting symbol 479 leaves 1.199 and 0.664 pp. [Ablation results](../artifacts/methodology/if_e1/timing_xs_leave_one_cell_out.json)
 
+For the pooled product ablation, use the 44-class equal-prior rule and the two registered XS windows. Select symbol 479 as the largest original daily cell product contributor. Remove that symbol from the block scores, fixed correct mass, and coarse optimum. Keep the original weights and block partition, and report the gain summed over the remaining symbols. The script verifies that the full-cohort bounds match both archives before writing its output. It reports a pointwise bound at the archived tail probability of each window (0.05 and 0.025, respectively) and a bound with Bonferroni allocation over all possible single-symbol omissions in that window and width.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_pooled_ablation.py \
+  --xs-h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+  --backend tables \
+  --out "artifacts/methodology/if_e1_timing_xs_pooled_ablation_$(date +%Y%m%d_%H%M%S).json"
+```
+
 ## Controlled simulation of signal concentration
 
 Use 32 equally weighted coarse cells, balanced binary labels in every cell, and a fixed fine rule that predicts the added binary feature. In each cell and block, eight independent group-level bits set whether that feature agrees with the labels of all flows in each group. Groups contain a balanced pair of labels. Repeat the pair within a group as needed to hold the flow count at 81,920 across 20, 40, 80, and 160 blocks. The data share the same block draws across all four certificates within each replicate.

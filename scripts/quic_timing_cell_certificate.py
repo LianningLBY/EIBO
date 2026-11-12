@@ -41,7 +41,8 @@ def product_lower(scores, alpha):
         return units * np.exp((math.log(alpha) + np.log(scores).sum(axis=-1)) / units)
 
 
-def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare=False, alpha=ALPHA):
+def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare=False, alpha=ALPHA,
+                     pooled_omit_symbol=None):
     """Condition on labels, coarse symbols, block membership, and the fitted rule."""
     alphabet = len(fine_rule) // timing.TIMING_BINS
     coarse_counts = timing.hist(labels, coarse, len(priors), alphabet)
@@ -132,12 +133,35 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
                 "lower": result["conditional_bayes_gain_lower"],
             },
         }
+        if pooled_omit_symbol is not None:
+            if pooled_omit_symbol not in active:
+                raise ValueError(f"coarse symbol {pooled_omit_symbol} is absent from the holdout")
+            retained = active[active != pooled_omit_symbol]
+            retained_units = block_masses[retained].sum(axis=0) > 0
+            retained_scores = block_scores[retained].sum(axis=0)[retained_units]
+            fixed_gap = float(deterministic[retained].sum() - coarse_optimum[retained].sum())
+            pointwise = fixed_gap + product_lower(retained_scores, alpha)
+            simultaneous = fixed_gap + product_lower(retained_scores, cell_alpha)
+            result["pooled_product_ablation"] = {
+                "omitted_symbol": int(pooled_omit_symbol),
+                "omitted_flows": int(coarse_counts[:, pooled_omit_symbol].sum()),
+                "omitted_class_weight": float(coarse_mass[:, pooled_omit_symbol].sum()),
+                "retained_mutable_units": len(retained_scores),
+                "retained_sample_bayes_gain": float((fine_optimum - coarse_optimum)[retained].sum()),
+                "retained_frozen_gain": float(fixed_gap + retained_scores.sum()),
+                "pointwise_alpha": alpha,
+                "pointwise_lower": float(max(0, pointwise)),
+                "singleton_family_alpha": alpha,
+                "singleton_per_symbol_alpha": cell_alpha,
+                "singleton_simultaneous_lower": float(max(0, simultaneous)),
+            }
     return result
 
 
-def evaluate_days(labels, coarse, fine, day, priors, fine_rule, *, compare=False, alpha=ALPHA):
+def evaluate_days(labels, coarse, fine, day, priors, fine_rule, *, compare=False, alpha=ALPHA,
+                  pooled_omit_symbol=None):
     return {f"{width}d": cell_certificate(labels, coarse, fine, day // width, priors, fine_rule,
-                                          compare=compare, alpha=alpha)
+                                          compare=compare, alpha=alpha, pooled_omit_symbol=pooled_omit_symbol)
             for width in BLOCK_DAYS}
 
 
@@ -188,7 +212,8 @@ def evaluate_cohort(pilot, evaluation, day, within_day, alphabet, classes, *, co
     return {**cohort, "fit_counts": fit_counts.tolist()}
 
 
-def evaluate_frozen_cohort(evaluation, day, within_day, classes, priors, fine_rule, *, compare=False, alpha=ALPHA):
+def evaluate_frozen_cohort(evaluation, day, within_day, classes, priors, fine_rule, *, compare=False, alpha=ALPHA,
+                           pooled_omit_symbol=None):
     apps, coarse, fine, _, _ = evaluation
     fitted_class = np.isin(apps, classes)
     keep = fitted_class & within_day
@@ -203,7 +228,8 @@ def evaluate_frozen_cohort(evaluation, day, within_day, classes, priors, fine_ru
         return {**cohort, "status": "missing_holdout_classes", "holdout_counts": holdout_counts.tolist(),
                 "missing_holdout_classes": classes[holdout_counts == 0].tolist()}
     return {**cohort, "results_by_block_width": evaluate_days(labels, coarse[keep], fine[keep], day[keep],
-                                                             priors, fine_rule, compare=compare, alpha=alpha)}
+                                                             priors, fine_rule, compare=compare, alpha=alpha,
+                                                             pooled_omit_symbol=pooled_omit_symbol)}
 
 
 def run_quic22_s(args):

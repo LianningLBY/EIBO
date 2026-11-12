@@ -66,15 +66,15 @@ def fit_frequency_with_prior(pilot, classes, prior, alphabet):
     return rule
 
 
-def check_original_result(baseline, archived):
+def check_archived_bounds(baseline, archived):
     for width, row in baseline["results_by_block_width"].items():
         expected = archived["results_by_block_width"][width]
         if row["class_counts"] != expected["class_counts"]:
-            raise RuntimeError(f"the {width} holdout counts disagree with the archived sweep")
+            raise RuntimeError(f"the {width} holdout counts disagree with the archived result")
         for method, result in row["certificate_comparison"].items():
             if not np.isclose(result["lower"], expected["certificate_comparison"][method]["lower"],
                               rtol=0, atol=1e-10):
-                raise RuntimeError(f"the {width} {method} bound disagrees with the archived sweep")
+                raise RuntimeError(f"the {width} {method} bound disagrees with the archived result")
 
 
 def run(args):
@@ -122,7 +122,7 @@ def run(args):
                 for label, (rule, weights) in scenarios.items()
             }
         archived = reference["service_sweep"]["expanded_cohorts"]["all" if name == "44" else name]
-        check_original_result(holdouts["original"]["frequency_equal"], archived)
+        check_archived_bounds(holdouts["original"]["frequency_equal"], archived)
         cohorts[name] = {
             "app_codes": classes.tolist(),
             "pilot_class_counts": counts.tolist(),
