@@ -88,15 +88,42 @@ def compare_windows(sweep_path, temporal_path):
     return output
 
 
+def add_leave_one_cell_out(result):
+    for cohort in result["cohorts"].values():
+        original = cohort["original"]
+        if "status" in original or not original["1d"]["positive_cells"]:
+            cohort["leave_one_cell_out"] = {"status": "no_positive_original_daily_cell"}
+            continue
+        symbol = original["1d"]["positive_cells"][0]["symbol"]
+        cohort["leave_one_cell_out"] = {
+            "omitted_symbol": symbol,
+            "remaining_bound_pp": {
+                window: {
+                    width: sum(cell["contribution_pp"] for cell in row["positive_cells"]
+                               if cell["symbol"] != symbol)
+                    for width, row in cohort[window].items()
+                }
+                for window in result["windows_utc"] if "status" not in cohort[window]
+            },
+        }
+    result["leave_one_cell_out_design"] = (
+        "Omit the largest original daily cell-product contributor in every width and window. "
+        "Sum the remaining simultaneous bounds under the original weights and error allocation."
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sweep", type=Path, default=DEFAULT_SWEEP)
     parser.add_argument("--temporal", type=Path, help="XS temporal check JSON; omit for the original window only")
+    parser.add_argument("--leave-one-cell-out", action="store_true", help="omit the largest original daily contributor")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     if args.out.exists():
         parser.error("--out must be a new file")
     result = compare_windows(args.sweep, args.temporal)
+    if args.leave_one_cell_out:
+        add_leave_one_cell_out(result)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("x", encoding="utf-8") as handle:
         json.dump(result, handle, indent=2, allow_nan=False)
@@ -120,6 +147,12 @@ def main():
                           f"top 3 share {row['top_3_share']:.1%}")
         if "common_positive_symbols" in windows:
             print(f"  Common positive symbols by width: {windows['common_positive_symbols']}")
+        if args.leave_one_cell_out:
+            check = windows["leave_one_cell_out"]
+            if "omitted_symbol" in check:
+                for window, bounds in check["remaining_bound_pp"].items():
+                    print(f"  {window} without symbol {check['omitted_symbol']}: " + " | ".join(
+                        f"{width} {value:+.5f} pp" for width, value in bounds.items()))
     print(f"Results: {args.out}")
 
 

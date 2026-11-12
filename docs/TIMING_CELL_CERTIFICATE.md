@@ -146,6 +146,8 @@ python scripts/quic_timing_xs_diagnostics.py \
   --out "artifacts/methodology/if_e1_timing_xs_diagnostics_$(date +%Y%m%d_%H%M%S).json"
 ```
 
+Use `--leave-one-cell-out` to omit the largest daily contributor from the original window and sum the remaining simultaneous cell product bounds for that cohort in both windows and all widths. The weights and error allocation refer to the original cohort. In the 16-class cohort, omitting symbol 509 leaves daily bounds of 0 and 0.00061 pp. In the 44-class cohort, omitting symbol 479 leaves 1.199 and 0.664 pp. [Ablation results](../artifacts/methodology/if_e1/timing_xs_leave_one_cell_out.json)
+
 ## Controlled simulation of signal concentration
 
 Use 32 equally weighted coarse cells, balanced binary labels in every cell, and a fixed fine rule that predicts the added binary feature. In each cell and block, eight independent group-level bits set whether that feature agrees with the labels of all flows in each group. Groups contain a balanced pair of labels. Repeat the pair within a group as needed to hold the flow count at 81,920 across 20, 40, 80, and 160 blocks. The data share the same block draws across all four certificates within each replicate.
@@ -157,6 +159,16 @@ At 80 blocks with gain concentrated in four cells, the cell and pooled product m
 ```bash
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_mechanism_simulation.py \
   --out /tmp/timing_certificate_mechanism.json
+```
+
+Use `--cell-count-sweep` to compare 32, 88, and 199 occupied cells for the null and the 4-, 8-, and 16-signal-cell scenarios. Only zero-gain cells split. The children divide the parent's mass and share its block draws. This fixes the true gain and pooled block scores within every matched replicate. The family tail probability remains 0.05. With 80 blocks and eight signal cells, the cell product median falls from 2.146 to 1.817 pp while the pooled median is 1.926 pp. The share of paired replicates in which the cell bound is larger falls from 75.47% to 35.19%. [Cell count sweep results](../artifacts/methodology/if_e1/timing_certificate_cell_count_sweep.json)
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_mechanism_simulation.py \
+  --cell-count-sweep --out /tmp/timing_certificate_cell_count_sweep.json
+python scripts/quic_timing_xs_diagnostics.py --leave-one-cell-out \
+  --temporal artifacts/methodology/if_e1_timing_temporal_xs_20261112_150118.json \
+  --out /tmp/timing_xs_leave_one_cell_out.json
 ```
 
 ## XS sensitivity to the fitted rule and class prior
