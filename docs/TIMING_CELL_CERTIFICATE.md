@@ -124,3 +124,24 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_temporal_
   --backend tables \
   --out "artifacts/methodology/if_e1_timing_temporal_xs_$(date +%Y%m%d_%H%M%S).json"
 ```
+
+## QUIC22-S comparison and XS cell contributions
+
+The QUIC22-S comparison scans all 25 million rows of the S release. It uses the timing pilot's fitting dates (October 31 through November 6, 2022), leaves November 7 as a gap, and evaluates November 8 through 27. Dates use the stored H5 timestamps in UTC. Apply the XS H5 rules for valid prefixes, a one-hour end margin, and the holdout daily guard. This is a cross-corpus comparison with the H5 protocol. The original QUIC22 archive-prefix analysis used same-hour eligibility.
+
+Select the top eight, top sixteen, and all non-background APP codes with at least 2,000 usable fitting flows. Use the [CESNET DataZoo APP enumeration](https://github.com/CESNET/cesnet-datazoo/blob/main/cesnet_datazoo/datasets/datasets_constants.py) for the background codes 0, 109, and 110. Fit each cohort's equal-prior frequency rule before evaluation. Keep the cohort fixed if a service is absent from the eligible holdout, and report that cohort as unavailable. Within each cohort and block width, all four methods share the same fitted rule, flow records, and class weights. Daily blocks are primary. The two- and four-day groupings are sensitivity analyses. The 95% coverage applies to each fixed method, cohort, and width under its block independence assumption.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_cell_certificate.py quic22-s \
+  --h5 /data/xjw/traffic-drift2/Experiment/core_code/data/CESNET-QUIC22-S/CESNET-QUIC22-S.h5 \
+  --backend tables \
+  --out "artifacts/methodology/if_e1_timing_quic22_s_$(date +%Y%m%d_%H%M%S).json"
+```
+
+The XS diagnosis verifies the fitted cohorts and provenance before comparing the original and temporal windows. It reports positive contributions to the cell product certificate, their shares, and the number of blocks with mutable records in each positive cell. It also reports the product-bound gap and identifies which positive cells recur. The windows use tail probabilities of 0.05 and 0.025, respectively. Interpret the cell shares and overlap descriptively at these levels.
+
+```bash
+python scripts/quic_timing_xs_diagnostics.py \
+  --temporal artifacts/methodology/if_e1_timing_temporal_xs_20261112_150118.json \
+  --out "artifacts/methodology/if_e1_timing_xs_diagnostics_$(date +%Y%m%d_%H%M%S).json"
+```

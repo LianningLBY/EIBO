@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import date
 import hashlib
 import json
 import math
@@ -24,6 +25,9 @@ ALPHA = 0.05
 BLOCK_DAYS = (1, 2, 4)
 ROUNDING_SECONDS = 3600
 MIN_SWEEP_PILOT_FLOWS = 2_000
+QUIC22_S_ROWS = 25_000_000
+# CESNET DataZoo APP enum for QUIC22.
+QUIC22_BACKGROUND = (0, 109, 110)
 TRIALS = 100_000
 SEED = 20261112
 
@@ -178,13 +182,13 @@ def run_quic22(prefix_dir, *, compare=False):
     }
 
 
-def evaluate_xs_cohort(pilot, evaluation, day, within_day, alphabet, classes, *, compare=False):
+def evaluate_cohort(pilot, evaluation, day, within_day, alphabet, classes, *, compare=False):
     classes, priors, _, fine_rule, fit_counts = h5_pilot.fit(pilot, alphabet, classes=classes)
-    cohort = evaluate_frozen_xs_cohort(evaluation, day, within_day, classes, priors, fine_rule, compare=compare)
+    cohort = evaluate_frozen_cohort(evaluation, day, within_day, classes, priors, fine_rule, compare=compare)
     return {**cohort, "fit_counts": fit_counts.tolist()}
 
 
-def evaluate_frozen_xs_cohort(evaluation, day, within_day, classes, priors, fine_rule, *, compare=False, alpha=ALPHA):
+def evaluate_frozen_cohort(evaluation, day, within_day, classes, priors, fine_rule, *, compare=False, alpha=ALPHA):
     apps, coarse, fine, _, _ = evaluation
     fitted_class = np.isin(apps, classes)
     keep = fitted_class & within_day
@@ -200,6 +204,55 @@ def evaluate_frozen_xs_cohort(evaluation, day, within_day, classes, priors, fine
                 "missing_holdout_classes": classes[holdout_counts == 0].tolist()}
     return {**cohort, "results_by_block_width": evaluate_days(labels, coarse[keep], fine[keep], day[keep],
                                                              priors, fine_rule, compare=compare, alpha=alpha)}
+
+
+def run_quic22_s(args):
+    start = (date(2022, 10, 31) - date(1970, 1, 1)).days * DAY
+    windows = {"pilot": (start, start + 7 * DAY), "evaluation": (start + 8 * DAY, start + 28 * DAY)}
+    initial = args.h5.stat()
+    encoder = timing.FixedPrefixEncoder(timing.K, 2)
+    source = FlowSource(args.h5, args.backend)
+    try:
+        tables = source.tables()
+        if ({table["day_seconds"] for table in tables} != set(range(start, start + 28 * DAY, DAY))
+                or sum(table["rows"] for table in tables) != QUIC22_S_ROWS):
+            raise ValueError("expected the 28 daily tables and 25 million rows of CESNET-QUIC22-S")
+        sha256 = h5_pilot.sha256(args.h5)
+        periods, rows = h5_pilot.scan(source, tables, windows, encoder, args.chunk_rows, ROUNDING_SECONDS)
+    finally:
+        source.close()
+    after = args.h5.stat()
+    if (initial.st_size, initial.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
+        raise RuntimeError("H5 changed during hashing or scanning")
+    if not periods["pilot"] or not periods["evaluation"]:
+        raise ValueError("pilot and evaluation each need eligible rows")
+
+    pilot, evaluation = periods["pilot"], periods["evaluation"]
+    ranked, counts = h5_pilot.rank_pilot_services(pilot[0])
+    eligible = ranked[(counts >= MIN_SWEEP_PILOT_FLOWS) & ~np.isin(ranked, QUIC22_BACKGROUND)]
+    _, _, _, first, last = evaluation
+    day = (first // DAY).astype(np.int64)
+    within_day = last + ROUNDING_SECONDS <= (day + 1) * DAY
+    cohorts = {}
+    for name, requested in (("8", 8), ("16", 16), ("all", len(eligible))):
+        if requested < 2 or len(eligible) < requested:
+            cohorts[name] = {"status": "insufficient_pilot_classes", "requested_classes": requested,
+                             "eligible_pilot_classes": len(eligible)}
+            continue
+        cohorts[name] = evaluate_cohort(pilot, evaluation, day, within_day, encoder.alphabet,
+                                        eligible[:requested], compare=True)
+    return {
+        "source": "CESNET-QUIC22-S",
+        "h5_sha256": sha256,
+        "backend": source.backend,
+        "rows_scanned": rows,
+        "windows_utc": {name: [utc(begin), utc(end)] for name, (begin, end) in windows.items()},
+        "timestamp_end_margin_seconds": ROUNDING_SECONDS,
+        "excluded_background_app_codes": list(QUIC22_BACKGROUND),
+        "min_pilot_flows_per_service": MIN_SWEEP_PILOT_FLOWS,
+        "eligible_app_codes_ranked_by_pilot_count": eligible.tolist(),
+        "cohorts": cohorts,
+    }
 
 
 def run_xs(args, *, compare=False, service_sweep=False):
@@ -229,7 +282,7 @@ def run_xs(args, *, compare=False, service_sweep=False):
     ranked, counts = h5_pilot.rank_pilot_services(pilot[0])
     if len(ranked) < 8:
         raise ValueError("the pilot window has fewer than eight usable APP codes")
-    baseline = evaluate_xs_cohort(pilot, evaluation, day, within_day, encoder.alphabet, ranked[:8], compare=compare)
+    baseline = evaluate_cohort(pilot, evaluation, day, within_day, encoder.alphabet, ranked[:8], compare=compare)
     if "status" in baseline and not service_sweep:
         raise ValueError(f"baseline classes absent from the eligible holdout: {baseline['missing_holdout_classes']}")
     result = {
@@ -249,8 +302,8 @@ def run_xs(args, *, compare=False, service_sweep=False):
                 cohorts[name] = {"status": "insufficient_pilot_classes", "requested_classes": requested,
                                  "eligible_pilot_classes": len(eligible)}
                 continue
-            cohorts[name] = evaluate_xs_cohort(pilot, evaluation, day, within_day, encoder.alphabet,
-                                               eligible[:requested], compare=compare)
+            cohorts[name] = evaluate_cohort(pilot, evaluation, day, within_day, encoder.alphabet,
+                                            eligible[:requested], compare=compare)
         result["service_sweep"] = {
             "baseline_top_pilot_classes": 8,
             "min_pilot_flows_per_service": MIN_SWEEP_PILOT_FLOWS,
@@ -310,29 +363,45 @@ def print_block_results(cohort, *, compare):
                   f"gain lower {100 * row['conditional_bayes_gain_lower']:+.5f} pp")
 
 
+def print_cohorts(cohorts, *, compare):
+    for name, cohort in cohorts.items():
+        selected = len(cohort.get("classes_in_count_order", ()))
+        print(f"Service cohort {name} ({selected} selected APP codes)")
+        if "results_by_block_width" in cohort:
+            daily = cohort["results_by_block_width"]["1d"]
+            print(f"  Retained {daily['flows']:,} flows, {daily['sampling_units']} days, "
+                  f"{daily['occupied_coarse_cells']} coarse cells, "
+                  f"sample Bayes gain {100 * daily['sample_bayes_gain']:+.5f} pp")
+        print_block_results(cohort, compare=compare)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     modes = parser.add_subparsers(dest="mode", required=True)
     quic22 = modes.add_parser("quic22")
     quic22.add_argument("--prefix-dir", type=Path, default=ROOT / "data/quic_timing_pilot")
+    quic22_s = modes.add_parser("quic22-s")
     xs = modes.add_parser("xs")
-    xs.add_argument("--h5", type=Path, required=True)
+    for mode in (xs, quic22_s):
+        mode.add_argument("--h5", type=Path, required=True)
+        mode.add_argument("--backend", choices=("auto", "tables", "h5py"), default="auto")
+        mode.add_argument("--chunk-rows", type=int, default=20_000)
     xs.add_argument("--expected-sha256", required=True)
-    xs.add_argument("--backend", choices=("auto", "tables", "h5py"), default="auto")
-    xs.add_argument("--chunk-rows", type=int, default=20_000)
     xs.add_argument("--service-sweep", action="store_true", help="also evaluate 16 and all eligible pilot APP codes")
     simulation = modes.add_parser("simulate")
     for mode in (quic22, xs):
         mode.add_argument("--compare", action="store_true", help="include four matched pooled and cell bounds")
-    for mode in (quic22, xs, simulation):
+    for mode in (quic22, quic22_s, xs, simulation):
         mode.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
-    if args.out.exists() or (args.mode == "xs" and args.chunk_rows <= 0):
+    if args.out.exists() or getattr(args, "chunk_rows", 1) <= 0:
         parser.error("use a new output path and a positive chunk size")
     if args.mode == "simulate":
         result = run_simulation()
     elif args.mode == "quic22":
         result = run_quic22(args.prefix_dir, compare=args.compare)
+    elif args.mode == "quic22-s":
+        result = run_quic22_s(args)
     else:
         result = run_xs(args, compare=args.compare, service_sweep=args.service_sweep)
     if args.mode != "simulate":
@@ -341,16 +410,9 @@ def main():
         result["primary_block_width"] = "1d"
         if "service_sweep" in result:
             sweep = result["service_sweep"]
-            cohorts = {"8": result, **sweep["expanded_cohorts"]}
-            for name, cohort in cohorts.items():
-                selected = len(cohort.get("classes_in_count_order", ()))
-                print(f"Service cohort {name} ({selected} selected APP codes)")
-                if "results_by_block_width" in cohort:
-                    daily = cohort["results_by_block_width"]["1d"]
-                    print(f"  Retained {daily['flows']:,} flows, {daily['sampling_units']} days, "
-                          f"{daily['occupied_coarse_cells']} coarse cells, "
-                          f"sample Bayes gain {100 * daily['sample_bayes_gain']:+.5f} pp")
-                print_block_results(cohort, compare=args.compare)
+            print_cohorts({"8": result, **sweep["expanded_cohorts"]}, compare=args.compare)
+        elif args.mode == "quic22-s":
+            print_cohorts(result["cohorts"], compare=True)
         else:
             print_block_results(result, compare=args.compare)
     args.out.parent.mkdir(parents=True, exist_ok=True)

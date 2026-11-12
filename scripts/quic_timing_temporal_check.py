@@ -13,7 +13,7 @@ import quic_timing_pilot as timing
 import quic_timing_pilot_h5 as h5_pilot
 from eibo.realdata import DAY, FlowSource, chronological_windows, utc
 from if_e1_fusion_validate import capture_day, file_state, read_json, write_json
-from quic_timing_cell_certificate import ROUNDING_SECONDS, evaluate_frozen_xs_cohort, print_block_results
+from quic_timing_cell_certificate import ROUNDING_SECONDS, evaluate_frozen_cohort, print_block_results
 
 
 REFERENCE = (Path(__file__).resolve().parents[1]
@@ -50,8 +50,8 @@ def evaluate_holdout(holdout, models):
     per_cohort_alpha = FAMILY_ALPHA / len(PRIMARY)
     results = {}
     for name, (classes, priors, fine_rule, counts) in models.items():
-        result = evaluate_frozen_xs_cohort(holdout, day, within_day, classes, priors, fine_rule,
-                                           compare=True, alpha=per_cohort_alpha)
+        result = evaluate_frozen_cohort(holdout, day, within_day, classes, priors, fine_rule,
+                                        compare=True, alpha=per_cohort_alpha)
         method = PRIMARY[name]
         primary_lower = (result["results_by_block_width"]["1d"]["certificate_comparison"][method]["lower"]
                          if "results_by_block_width" in result else None)
