@@ -63,12 +63,21 @@ def scan(source, tables, windows, encoder, chunk_rows, rounding):
     return {name: tuple(np.concatenate(column) for column in zip(*chunks)) for name, chunks in parts.items()}, rows_read
 
 
-def fit(pilot, alphabet):
-    apps, x, z, _, _ = pilot
+def rank_pilot_services(apps):
+    """Rank eligible pilot APP codes by count, with code order breaking ties."""
     codes, counts = np.unique(apps, return_counts=True)
-    if len(codes) < 8:
-        raise ValueError("the pilot window has fewer than eight usable APP codes")
-    classes = np.sort(codes[np.argsort(-counts, kind="stable")[:8]])
+    order = np.argsort(-counts, kind="stable")
+    return codes[order], counts[order]
+
+
+def fit(pilot, alphabet, *, classes=None):
+    apps, x, z, _, _ = pilot
+    if classes is None:
+        ranked, _ = rank_pilot_services(apps)
+        if len(ranked) < 8:
+            raise ValueError("the pilot window has fewer than eight usable APP codes")
+        classes = ranked[:8]
+    classes = np.sort(classes)
     priors = np.full(len(classes), 1 / len(classes))
     keep = np.isin(apps, classes)
     coarse, fused, ns = fit_rules(np.searchsorted(classes, apps[keep]), x[keep], z[keep], priors, alphabet)

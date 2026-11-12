@@ -23,6 +23,7 @@ ARCHIVE_SUMMARY = ROOT / "artifacts/quic_timing_pilot_20261111/summary.json"
 ALPHA = 0.05
 BLOCK_DAYS = (1, 2, 4)
 ROUNDING_SECONDS = 3600
+MIN_SWEEP_PILOT_FLOWS = 2_000
 TRIALS = 100_000
 SEED = 20261112
 
@@ -98,6 +99,8 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
                                    minlength=alphabet * num_units).reshape(alphabet, num_units)
         pooled_masses = block_masses.sum(axis=0)
         pooled_radius = float(joint_radius_from_change_budget([pooled_masses @ pooled_masses], alpha=ALPHA)[0])
+        pooled_scores = block_scores.sum(axis=0)[pooled_masses > 0]
+        pooled_product = float(deterministic.sum() + product_lower(pooled_scores, ALPHA) - coarse_optimum.sum())
         cell_radii = joint_radius_from_change_budget(np.square(block_masses[active]).sum(axis=1), alpha=cell_alpha)
         for row, radius in zip(cells, cell_radii):
             row["hoeffding_radius"] = float(radius)
@@ -107,6 +110,12 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
                 "alpha": ALPHA,
                 "radius": pooled_radius,
                 "lower": max(0.0, result["frozen_rule_minus_sample_coarse_optimum"] - pooled_radius),
+            },
+            "pooled_product": {
+                "alpha": ALPHA,
+                "mutable_units": len(pooled_scores),
+                "untruncated_lower": pooled_product,
+                "lower": max(0.0, pooled_product),
             },
             "cell_hoeffding": {
                 "alpha": cell_alpha,
@@ -168,7 +177,27 @@ def run_quic22(prefix_dir, *, compare=False):
     }
 
 
-def run_xs(args, *, compare=False):
+def evaluate_xs_cohort(pilot, evaluation, day, within_day, alphabet, classes, *, compare=False):
+    classes, priors, _, fine_rule, fit_counts = h5_pilot.fit(pilot, alphabet, classes=classes)
+    apps, coarse, fine, _, _ = evaluation
+    fitted_class = np.isin(apps, classes)
+    keep = fitted_class & within_day
+    labels = np.searchsorted(classes, apps[keep])
+    cohort = {
+        "classes_in_count_order": classes.tolist(),
+        "fit_counts": fit_counts.tolist(),
+        "evaluation_fitted_class_flows_before_daily_guard": int(fitted_class.sum()),
+        "excluded_fitted_class_flows_crossing_day_boundary": int((fitted_class & ~within_day).sum()),
+    }
+    holdout_counts = np.bincount(labels, minlength=len(classes))
+    if np.any(holdout_counts == 0):
+        return {**cohort, "status": "missing_holdout_classes", "holdout_counts": holdout_counts.tolist(),
+                "missing_holdout_classes": classes[holdout_counts == 0].tolist()}
+    return {**cohort, "results_by_block_width": evaluate_days(labels, coarse[keep], fine[keep], day[keep],
+                                                             priors, fine_rule, compare=compare)}
+
+
+def run_xs(args, *, compare=False, service_sweep=False):
     initial = args.h5.stat()
     sha256 = h5_pilot.sha256(args.h5)
     if sha256 != args.expected_sha256.lower():
@@ -187,27 +216,43 @@ def run_xs(args, *, compare=False):
         raise RuntimeError("H5 changed during hashing or scanning")
     if not periods["pilot"] or not periods["evaluation"]:
         raise ValueError("pilot and evaluation each need eligible rows")
-    classes, priors, _, fine_rule, fit_counts = h5_pilot.fit(periods.pop("pilot"), encoder.alphabet)
-    apps, coarse, fine, first, last = periods["evaluation"]
+    pilot = periods.pop("pilot")
+    evaluation = periods["evaluation"]
+    _, _, _, first, last = evaluation
     day = (first // DAY).astype(np.int64)
-    fitted_class = np.isin(apps, classes)
     within_day = last + ROUNDING_SECONDS <= (day + 1) * DAY
-    keep = fitted_class & within_day
-    labels = np.searchsorted(classes, apps[keep])
-    return {
+    ranked, counts = h5_pilot.rank_pilot_services(pilot[0])
+    if len(ranked) < 8:
+        raise ValueError("the pilot window has fewer than eight usable APP codes")
+    baseline = evaluate_xs_cohort(pilot, evaluation, day, within_day, encoder.alphabet, ranked[:8], compare=compare)
+    if "status" in baseline and not service_sweep:
+        raise ValueError(f"baseline classes absent from the eligible holdout: {baseline['missing_holdout_classes']}")
+    result = {
         "source": "CESNET-QUICEXT-25 XS",
         "h5_sha256": sha256,
         "backend": source.backend,
         "rows_scanned": rows,
         "windows_utc": {name: [utc(start), utc(stop)] for name, (start, stop) in windows.items()},
-        "classes_in_count_order": classes.tolist(),
-        "fit_counts": fit_counts.tolist(),
         "timestamp_end_margin_seconds": ROUNDING_SECONDS,
-        "evaluation_fitted_class_flows_before_daily_guard": int(fitted_class.sum()),
-        "excluded_fitted_class_flows_crossing_day_boundary": int((fitted_class & ~within_day).sum()),
-        "results_by_block_width": evaluate_days(labels, coarse[keep], fine[keep], day[keep], priors, fine_rule,
-                                                compare=compare),
+        **baseline,
     }
+    if service_sweep:
+        eligible = ranked[counts >= MIN_SWEEP_PILOT_FLOWS]
+        cohorts = {}
+        for name, requested in (("16", 16), ("all", len(eligible))):
+            if requested < 2 or len(eligible) < requested:
+                cohorts[name] = {"status": "insufficient_pilot_classes", "requested_classes": requested,
+                                 "eligible_pilot_classes": len(eligible)}
+                continue
+            cohorts[name] = evaluate_xs_cohort(pilot, evaluation, day, within_day, encoder.alphabet,
+                                               eligible[:requested], compare=compare)
+        result["service_sweep"] = {
+            "baseline_top_pilot_classes": 8,
+            "min_pilot_flows_per_service": MIN_SWEEP_PILOT_FLOWS,
+            "eligible_app_codes_ranked_by_pilot_count": eligible.tolist(),
+            "expanded_cohorts": cohorts,
+        }
+    return result
 
 
 def run_simulation():
@@ -246,6 +291,20 @@ def run_simulation():
             "family_alpha": ALPHA, "scenarios": scenarios}
 
 
+def print_block_results(cohort, *, compare):
+    if "status" in cohort:
+        print(f"  {cohort['status']}: {cohort.get('missing_holdout_classes', cohort.get('eligible_pilot_classes'))}")
+        return
+    for width, row in cohort["results_by_block_width"].items():
+        if compare:
+            bounds = row["certificate_comparison"]
+            print(f"{width}: " + " | ".join(f"{name} {100 * bound['lower']:+.5f} pp"
+                                            for name, bound in bounds.items()))
+        else:
+            print(f"{width}: {row['positive_cells']}/{row['occupied_coarse_cells']} positive cells, "
+                  f"gain lower {100 * row['conditional_bayes_gain_lower']:+.5f} pp")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     modes = parser.add_subparsers(dest="mode", required=True)
@@ -256,9 +315,10 @@ def main():
     xs.add_argument("--expected-sha256", required=True)
     xs.add_argument("--backend", choices=("auto", "tables", "h5py"), default="auto")
     xs.add_argument("--chunk-rows", type=int, default=20_000)
+    xs.add_argument("--service-sweep", action="store_true", help="also evaluate 16 and all eligible pilot APP codes")
     simulation = modes.add_parser("simulate")
     for mode in (quic22, xs):
-        mode.add_argument("--compare", action="store_true", help="include matched pooled and cell Hoeffding bounds")
+        mode.add_argument("--compare", action="store_true", help="include four matched pooled and cell bounds")
     for mode in (quic22, xs, simulation):
         mode.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
@@ -269,19 +329,25 @@ def main():
     elif args.mode == "quic22":
         result = run_quic22(args.prefix_dir, compare=args.compare)
     else:
-        result = run_xs(args, compare=args.compare)
+        result = run_xs(args, compare=args.compare, service_sweep=args.service_sweep)
     if args.mode != "simulate":
         result["target"] = "Bayes accuracy gain from adding timing, conditional on coarse inputs, labels and grouping"
         result["block_independence_is_assumed"] = True
         result["primary_block_width"] = "1d"
-        for width, row in result["results_by_block_width"].items():
-            if args.compare:
-                bounds = row["certificate_comparison"]
-                print(f"{width}: " + " | ".join(f"{name} {100 * bound['lower']:+.5f} pp"
-                                                for name, bound in bounds.items()))
-            else:
-                print(f"{width}: {row['positive_cells']}/{row['occupied_coarse_cells']} positive cells, "
-                      f"gain lower {100 * row['conditional_bayes_gain_lower']:+.5f} pp")
+        if "service_sweep" in result:
+            sweep = result["service_sweep"]
+            cohorts = {"8": result, **sweep["expanded_cohorts"]}
+            for name, cohort in cohorts.items():
+                selected = len(cohort.get("classes_in_count_order", ()))
+                print(f"Service cohort {name} ({selected} selected APP codes)")
+                if "results_by_block_width" in cohort:
+                    daily = cohort["results_by_block_width"]["1d"]
+                    print(f"  Retained {daily['flows']:,} flows, {daily['sampling_units']} days, "
+                          f"{daily['occupied_coarse_cells']} coarse cells, "
+                          f"sample Bayes gain {100 * daily['sample_bayes_gain']:+.5f} pp")
+                print_block_results(cohort, compare=args.compare)
+        else:
+            print_block_results(result, compare=args.compare)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("x") as output:
         json.dump(result, output, indent=2, allow_nan=False)

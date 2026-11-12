@@ -441,6 +441,12 @@
           "radius": 0.19043809323658098,
           "lower": 0.0
         },
+        "pooled_product": {
+          "alpha": 0.05,
+          "mutable_units": 20,
+          "untruncated_lower": -0.01744461936661046,
+          "lower": 0.0
+        },
         "cell_hoeffding": {
           "alpha": 0.001388888888888889,
           "positive_cells": 1,
@@ -841,6 +847,12 @@
           "radius": 0.262408032706385,
           "lower": 0.0
         },
+        "pooled_product": {
+          "alpha": 0.05,
+          "mutable_units": 11,
+          "untruncated_lower": -0.07885312290608665,
+          "lower": 0.0
+        },
         "cell_hoeffding": {
           "alpha": 0.001388888888888889,
           "positive_cells": 0,
@@ -1239,6 +1251,12 @@
         "pooled_hoeffding": {
           "alpha": 0.05,
           "radius": 0.3662034933156341,
+          "lower": 0.0
+        },
+        "pooled_product": {
+          "alpha": 0.05,
+          "mutable_units": 6,
+          "untruncated_lower": -0.1733123470893737,
           "lower": 0.0
         },
         "cell_hoeffding": {

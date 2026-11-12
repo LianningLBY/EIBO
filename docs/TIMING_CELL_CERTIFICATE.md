@@ -46,26 +46,27 @@ The known-null simulations use 36 equally weighted cells with 10 independent tim
 
 The simulation JSON includes the one-sided 95% Monte Carlo upper bounds for these rates. [Simulation JSON](../artifacts/methodology/if_e1/timing_cell_null_simulation.json)
 
-## Matched comparison of three certificates
+## Matched comparison of four certificates
 
-The `--compare` flag evaluates all three certificates from the same retained flows, fitted rule, class weights, and time blocks. The estimand is the conditional Bayes gain defined above. Write $v_{cb}$ for the total weight in cell $c$ and block $b$ of records whose correctness can change with timing. The score $X_{cb}$ is in $[0,v_{cb}]$.
+The `--compare` flag evaluates all four certificates from the same retained flows, fitted rule, class weights, and time blocks. The estimand is the conditional Bayes gain defined above. Write $v_{cb}$ for the total weight in cell $c$ and block $b$ of records whose correctness can change with timing. The score $X_{cb}$ is in $[0,v_{cb}]$.
 
 - **Pooled Hoeffding.** Sum the cell scores within each block and use the range $\sum_c v_{cb}$. At tail probability $0.05$, subtract $\sqrt{\tfrac12\log(1/0.05)\sum_b (\sum_c v_{cb})^2}$ from the pooled frozen-rule gain over the coarse optimum. Truncate the result at zero using the nonnegative Bayes gain.
+- **Pooled product.** Apply the product lower bound at tail probability $0.05$ to the pooled scores $\sum_c X_{cb}$ over blocks with positive pooled mutable weight. Add the fixed correct mass, subtract the pooled coarse optimum, and truncate at zero.
 - **Cell Hoeffding.** At tail probability $0.05/M$, subtract $\sqrt{\tfrac12\log(M/0.05)\sum_b v_{cb}^2}$ from the frozen-rule gain in cell $c$. Truncate each cell at zero and sum. This gives simultaneous coverage across all $M$ occupied cells for the fixed width.
 - **Cell product.** Apply the product lower bound to the same $X_{cb}$ with the same cell tail probability and the same truncation and sum.
 
 Each method gives a 95% lower bound under the same conditional block-independence model for the specified width. The table compares methods and grouping assumptions. Each entry is a lower bound on the overall cohort gain in percentage points.
 
-| Corpus | Block width | Pooled Hoeffding | Cell Hoeffding | Cell product |
-|---|---|---:|---:|---:|
-| QUIC22 | 1 day | 0 | +0.01605 | +0.05429 |
-| QUIC22 | 2 days | 0 | 0 | 0 |
-| QUIC22 | 4 days | 0 | 0 | 0 |
-| QUICEXT-25 XS | 1 day | Pending H5 rerun | Pending H5 rerun | +0.02206 |
-| QUICEXT-25 XS | 2 days | Pending H5 rerun | Pending H5 rerun | +0.01793 |
-| QUICEXT-25 XS | 4 days | Pending H5 rerun | Pending H5 rerun | +0.01606 |
+| Corpus | Block width | Pooled Hoeffding | Pooled product | Cell Hoeffding | Cell product |
+|---|---|---:|---:|---:|---:|
+| QUIC22 | 1 day | 0 | 0 | +0.01605 | +0.05429 |
+| QUIC22 | 2 days | 0 | 0 | 0 | 0 |
+| QUIC22 | 4 days | 0 | 0 | 0 | 0 |
+| QUICEXT-25 XS | 1 day | Pending H5 rerun | Pending H5 rerun | Pending H5 rerun | +0.02206 |
+| QUICEXT-25 XS | 2 days | Pending H5 rerun | Pending H5 rerun | Pending H5 rerun | +0.01793 |
+| QUICEXT-25 XS | 4 days | Pending H5 rerun | Pending H5 rerun | Pending H5 rerun | +0.01606 |
 
-In QUIC22, both cell methods obtain their daily lower bound from coarse symbol 501. Cell Hoeffding certifies a positive gain after pooling yields zero. The product bound increases that lower bound by 0.03824 pp. In XS, the archived output gives the product bound and identifies symbol 469 as the contributor at all three widths. The two Hoeffding columns require the original H5 to recover the mutable weight in each time block. [QUIC22 matched comparison](../artifacts/methodology/if_e1/timing_certificate_comparison_quic22.json) · [XS product result](../artifacts/methodology/if_e1_timing_cells_xs_20261112_123022.json)
+In QUIC22, both cell methods obtain their daily lower bound from coarse symbol 501. Both pooled bounds are zero. Cell Hoeffding certifies a positive gain, and the cell product bound increases it by 0.03824 pp. In XS, the archived output gives the cell product bound and identifies symbol 469 as the contributor at all three widths. The other columns require the original H5 to recover the block-level weights and scores. [QUIC22 matched comparison](../artifacts/methodology/if_e1/timing_certificate_comparison_quic22.json) · [XS product result](../artifacts/methodology/if_e1_timing_cells_xs_20261112_123022.json)
 
 ## Frozen QUICEXT-25 XS protocol
 
@@ -92,3 +93,11 @@ python3 scripts/quic_timing_cell_certificate.py simulate --out /tmp/timing_cell_
 ```
 
 For the matched comparison, add `--compare` to the `quic22` or `xs` invocation and choose a new output path. The JSON includes the pooled radius, the two cell-based lower bounds, and the cell Hoeffding radius and contribution for each occupied cell.
+
+## XS service-count expansion
+
+Run the XS command with both `--compare` and `--service-sweep` to obtain the four-way comparison for the original eight classes and two expanded cohorts in one H5 scan. The top-level fields contain the eight-class result. The `service_sweep.expanded_cohorts` object contains the 16-class and all-eligible-class results.
+
+The eight-class baseline retains its original selection rule. For both expansion cohorts, require at least 2,000 usable flows per service in the pilot window, following the [existing methodology runbook](METHODOLOGY_RUNBOOK.md). Rank by decreasing pilot count and use APP code order to break ties. Take the first 16 eligible codes and all eligible codes, respectively. Fit a separate frequency rule for each cohort with equal class priors. The input hash, time windows, daily guard, and block definitions are shared across the sweep. If a selected service is absent after the holdout guard, report its code and the counts for that cohort. Preserve results for the other cohorts.
+
+Check the eight-class run against the archived result. It should retain 1,182,338 flows across 81 occupied cells, with 91, 46, and 23 blocks and cell product bounds of 0.02206, 0.01793, and 0.01606 pp at the three widths. Report class counts, retained flows, sample Bayes gains, positive cells, and all four lower bounds for the expansion cohorts. The coverage guarantee applies to each fixed cohort, method, and width. Different cohort sizes use their own class priors and target distributions.
