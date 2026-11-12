@@ -1,0 +1,69 @@
+{
+  "seed": 20261112,
+  "trials_per_scenario": 100000,
+  "cells": 36,
+  "units": 10,
+  "family_alpha": 0.05,
+  "scenarios": [
+    {
+      "shared_bits_across_cells": false,
+      "unit_success_probabilities": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "true_bayes_gain": 0.0,
+      "families_with_false_positive": 3541,
+      "estimated_family_false_positive_rate": 0.03541,
+      "monte_carlo_one_sided_95pct_upper": 0.036386322226564946,
+      "exact_family_false_positive_rate": 0.03456203158321517
+    },
+    {
+      "shared_bits_across_cells": true,
+      "unit_success_probabilities": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "true_bayes_gain": 0.0,
+      "families_with_false_positive": 117,
+      "estimated_family_false_positive_rate": 0.00117,
+      "monte_carlo_one_sided_95pct_upper": 0.0013640463707672015,
+      "exact_family_false_positive_rate": 0.0009765625
+    },
+    {
+      "shared_bits_across_cells": false,
+      "unit_success_probabilities": [
+        0.1,
+        0.9,
+        0.1,
+        0.9,
+        0.1,
+        0.9,
+        0.1,
+        0.9,
+        0.1,
+        0.9
+      ],
+      "true_bayes_gain": 0.0,
+      "families_with_false_positive": 24,
+      "estimated_family_false_positive_rate": 0.00024,
+      "monte_carlo_one_sided_95pct_upper": 0.0003375075740102607,
+      "exact_family_false_positive_rate": 0.00021255443472826483
+    }
+  ]
+}
