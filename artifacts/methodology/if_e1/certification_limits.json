@@ -1,0 +1,222 @@
+{
+  "design": "Exploratory fusion certification limits",
+  "shared_bit_model": {
+    "alpha": 0.025,
+    "target_power": 0.8,
+    "null_success_probability": 0.5,
+    "alternative": "success probability 0.5 + gain; one predeclared fusion orientation",
+    "rows": [
+      {
+        "bayes_gain": 0.01,
+        "kl_necessary_units": 12279,
+        "neyman_pearson_minimum_units": 19621,
+        "neyman_pearson_power_at_minimum": 0.8000175815322047,
+        "benchmarks": {
+          "exact_binomial": {
+            "first_units_at_target_power": 19648,
+            "critical_successes": 9962,
+            "null_rejection_probability": 0.02488656419221628,
+            "alternative_rejection_probability": 0.8000284300851295
+          },
+          "known_range_hoeffding": {
+            "first_units_at_target_power": 31577,
+            "critical_successes": 16030,
+            "null_rejection_probability": 0.0033389428857105437,
+            "alternative_rejection_probability": 0.8000257418042163
+          },
+          "generic_hoeffding": {
+            "first_units_at_target_power": 98344,
+            "critical_successes": 50024,
+            "null_rejection_probability": 2.80757895551799e-08,
+            "alternative_rejection_probability": 0.8000031610830022
+          }
+        }
+      },
+      {
+        "bayes_gain": 0.02,
+        "kl_necessary_units": 3069,
+        "neyman_pearson_minimum_units": 4904,
+        "neyman_pearson_power_at_minimum": 0.8000705080006483,
+        "benchmarks": {
+          "exact_binomial": {
+            "first_units_at_target_power": 4927,
+            "critical_successes": 2533,
+            "null_rejection_probability": 0.02464267992364512,
+            "alternative_rejection_probability": 0.8002206184261103
+          },
+          "known_range_hoeffding": {
+            "first_units_at_target_power": 7865,
+            "critical_successes": 4053,
+            "null_rejection_probability": 0.0034009170150446806,
+            "alternative_rejection_probability": 0.8000769212656299
+          },
+          "generic_hoeffding": {
+            "first_units_at_target_power": 24572,
+            "critical_successes": 12712,
+            "null_rejection_probability": 2.8273059871436135e-08,
+            "alternative_rejection_probability": 0.8001096377638129
+          }
+        }
+      },
+      {
+        "bayes_gain": 0.0476,
+        "kl_necessary_units": 542,
+        "neyman_pearson_minimum_units": 865,
+        "neyman_pearson_power_at_minimum": 0.8005683776958221,
+        "benchmarks": {
+          "exact_binomial": {
+            "first_units_at_target_power": 869,
+            "critical_successes": 464,
+            "null_rejection_probability": 0.024530704514903447,
+            "alternative_rejection_probability": 0.8003817514364603
+          },
+          "known_range_hoeffding": {
+            "first_units_at_target_power": 1377,
+            "critical_successes": 739,
+            "null_rejection_probability": 0.003510322275223824,
+            "alternative_rejection_probability": 0.8000768089327792
+          },
+          "generic_hoeffding": {
+            "first_units_at_target_power": 4330,
+            "critical_successes": 2344,
+            "null_rejection_probability": 2.844945535388376e-08,
+            "alternative_rejection_probability": 0.800407665937714
+          }
+        }
+      },
+      {
+        "bayes_gain": 0.052718690013153435,
+        "kl_necessary_units": 441,
+        "neyman_pearson_minimum_units": 705,
+        "neyman_pearson_power_at_minimum": 0.8010055589946221,
+        "benchmarks": {
+          "exact_binomial": {
+            "first_units_at_target_power": 716,
+            "critical_successes": 385,
+            "null_rejection_probability": 0.023774455248770473,
+            "alternative_rejection_probability": 0.8011319750557846
+          },
+          "known_range_hoeffding": {
+            "first_units_at_target_power": 1121,
+            "critical_successes": 606,
+            "null_rejection_probability": 0.0035799790552737613,
+            "alternative_rejection_probability": 0.8015364646989659
+          },
+          "generic_hoeffding": {
+            "first_units_at_target_power": 3527,
+            "critical_successes": 1925,
+            "null_rejection_probability": 2.8885058361472758e-08,
+            "alternative_rejection_probability": 0.8008679680542206
+          }
+        }
+      }
+    ]
+  },
+  "quic22_timing": {
+    "target": "Frozen timing rule versus optimal coarse rule, conditional on holdout coarse inputs and labels",
+    "conditional_assumption": "Independent blocks; arbitrary within-block timing dependence and heterogeneous block laws",
+    "source_summary_sha256": "89d4ba9c09e488affdaa5811032231dec044088906136ef9ad6c45d0f6018c17",
+    "pointwise_alpha": 0.05,
+    "holdout_flows": 283526,
+    "sample_bayes_ceiling_gain": 0.054402472412623415,
+    "frozen_rule_minus_sample_coarse_optimum": 0.052718690013153435,
+    "mutable_weight": 0.695612630128923,
+    "observed_mutable_correct_weight": 0.5031849143405088,
+    "blocks": {
+      "1h": {
+        "units": 40,
+        "historical_effective_units": 24.480857664455463,
+        "historical_hoeffding_radius": 0.49471284012460265,
+        "conditional_hoeffding_radius": 0.17190891500457942,
+        "conditional_hoeffding_lower": -0.11919022499142598,
+        "zero_gain_model_replay_probability": 0.08530649755956328,
+        "units_with_positive_shock_probability": 20,
+        "rules_out_deterministic_positive_lower_at_timing_alpha": true
+      },
+      "6h": {
+        "units": 20,
+        "historical_effective_units": 19.987219358638118,
+        "historical_hoeffding_radius": 0.5475077959873856,
+        "conditional_hoeffding_radius": 0.19043809323658165,
+        "conditional_hoeffding_lower": -0.1377194032234282,
+        "zero_gain_model_replay_probability": 0.11015985745525582,
+        "units_with_positive_shock_probability": 20,
+        "rules_out_deterministic_positive_lower_at_timing_alpha": true
+      },
+      "24h": {
+        "units": 20,
+        "historical_effective_units": 19.987219358638118,
+        "historical_hoeffding_radius": 0.5475077959873856,
+        "conditional_hoeffding_radius": 0.19043809323658165,
+        "conditional_hoeffding_lower": -0.1377194032234282,
+        "zero_gain_model_replay_probability": 0.11015985745525582,
+        "units_with_positive_shock_probability": 20,
+        "rules_out_deterministic_positive_lower_at_timing_alpha": true
+      },
+      "48h": {
+        "units": 11,
+        "historical_effective_units": 10.526008542156694,
+        "historical_hoeffding_radius": 0.7544572527548536,
+        "conditional_hoeffding_radius": 0.2624080327064034,
+        "conditional_hoeffding_lower": -0.20968934269324996,
+        "zero_gain_model_replay_probability": 0.3290841240142227,
+        "units_with_positive_shock_probability": 9,
+        "rules_out_deterministic_positive_lower_at_timing_alpha": true
+      }
+    }
+  },
+  "quicext25_xs": {
+    "source_sha256": "3c808552451a08a0778d6a7ab098c3a902b146f08faa6ecb738659c5bcc11b72",
+    "budget": 8,
+    "simultaneous_panel_alpha": 0.05,
+    "tails_in_panel": 2688,
+    "windows": {
+      "certificate": {
+        "iid_flow": {
+          "pairs": 28,
+          "median_effective_units": 12000.0,
+          "median_radius": 0.042607286104603105,
+          "positive_late_bayes_gain_lower_bounds": 5,
+          "late_tv_upper_equal_to_one": 0
+        },
+        "start_24h": {
+          "pairs": 28,
+          "median_effective_units": 66.67209927811675,
+          "median_radius": 0.5716134389468224,
+          "positive_late_bayes_gain_lower_bounds": 0,
+          "late_tv_upper_equal_to_one": 16
+        },
+        "span_merged_24h": {
+          "pairs": 28,
+          "median_effective_units": 1.3347263888038052,
+          "median_radius": 4.039978471913937,
+          "positive_late_bayes_gain_lower_bounds": 0,
+          "late_tv_upper_equal_to_one": 28
+        }
+      },
+      "evaluation": {
+        "iid_flow": {
+          "pairs": 28,
+          "median_effective_units": 12000.0,
+          "median_radius": 0.042607286104603105,
+          "positive_late_bayes_gain_lower_bounds": 1,
+          "late_tv_upper_equal_to_one": 0
+        },
+        "start_24h": {
+          "pairs": 28,
+          "median_effective_units": 73.67057329639377,
+          "median_radius": 0.5437853642368683,
+          "positive_late_bayes_gain_lower_bounds": 0,
+          "late_tv_upper_equal_to_one": 16
+        },
+        "span_merged_24h": {
+          "pairs": 28,
+          "median_effective_units": 1.0,
+          "median_radius": 4.667394342713508,
+          "positive_late_bayes_gain_lower_bounds": 0,
+          "late_tv_upper_equal_to_one": 28
+        }
+      }
+    }
+  }
+}
