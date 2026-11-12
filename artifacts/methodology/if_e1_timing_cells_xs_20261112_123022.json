@@ -1,0 +1,2057 @@
+{
+  "source": "CESNET-QUICEXT-25 XS",
+  "h5_sha256": "6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab",
+  "backend": "tables",
+  "rows_scanned": 10000000,
+  "windows_utc": {
+    "pilot": [
+      "2024-06-01T00:00:00+00:00",
+      "2024-11-30T00:00:00+00:00"
+    ],
+    "evaluation": [
+      "2025-03-02T00:00:00+00:00",
+      "2025-06-01T00:00:00+00:00"
+    ]
+  },
+  "classes_in_count_order": [
+    0,
+    1,
+    2,
+    4,
+    14,
+    16,
+    31,
+    51
+  ],
+  "fit_counts": [
+    583513,
+    216902,
+    375835,
+    193963,
+    381717,
+    539369,
+    189851,
+    825073
+  ],
+  "timestamp_end_margin_seconds": 3600,
+  "evaluation_fitted_class_flows_before_daily_guard": 1205893,
+  "excluded_fitted_class_flows_crossing_day_boundary": 23555,
+  "results_by_block_width": {
+    "1d": {
+      "flows": 1182338,
+      "class_counts": [
+        414491,
+        61868,
+        34242,
+        44799,
+        162516,
+        114366,
+        138387,
+        211669
+      ],
+      "sampling_units": 91,
+      "family_alpha": 0.05,
+      "occupied_coarse_cells": 81,
+      "per_cell_alpha": 0.0006172839506172839,
+      "positive_cells": 1,
+      "sample_bayes_gain": 0.03274123863046309,
+      "frozen_rule_minus_sample_coarse_optimum": 0.011385984509601453,
+      "conditional_bayes_gain_lower": 0.00022064054801967936,
+      "cells": [
+        {
+          "coarse_symbol": 119,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 127,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.5078735123319927e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 221,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -7.691550370425066e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 256,
+          "flow_count": 1,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 319,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 320,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 321,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 324,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 325,
+          "flow_count": 43,
+          "mutable_units": 29,
+          "sample_bayes_gain_contribution": 2.7902408535904818e-06,
+          "frozen_gain_contribution": -9.935904384082318e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 327,
+          "flow_count": 3,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 8.921193736275039e-07,
+          "frozen_gain_contribution": -3.1271936375546924e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 335,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -9.032640349165745e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 336,
+          "flow_count": 245,
+          "mutable_units": 83,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -4.010943542803101e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 337,
+          "flow_count": 20,
+          "mutable_units": 10,
+          "sample_bayes_gain_contribution": 6.552918099974335e-06,
+          "frozen_gain_contribution": 3.65048770515741e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 339,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 3.015747024663989e-07,
+          "frozen_gain_contribution": -4.371928720074148e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 340,
+          "flow_count": 310,
+          "mutable_units": 18,
+          "sample_bayes_gain_contribution": 1.882580726193377e-07,
+          "frozen_gain_contribution": -7.450793245147451e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 341,
+          "flow_count": 8766,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 0.000380360395756979,
+          "frozen_gain_contribution": -0.0014753991126685746,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 342,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -2.7097921047497237e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 343,
+          "flow_count": 7019,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 0.00023477558526254806,
+          "frozen_gain_contribution": 0.00022235114804083217,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 344,
+          "flow_count": 2,
+          "mutable_units": 2,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 345,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 346,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -9.047241073991957e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 347,
+          "flow_count": 13,
+          "mutable_units": 9,
+          "sample_bayes_gain_contribution": 8.470329472543003e-22,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 349,
+          "flow_count": 596,
+          "mutable_units": 87,
+          "sample_bayes_gain_contribution": 2.5246611868594998e-06,
+          "frozen_gain_contribution": -2.2397995360116767e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 350,
+          "flow_count": 23,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 2.299280989884131e-06,
+          "frozen_gain_contribution": 1.092982180018537e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 351,
+          "flow_count": 35382,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -0.00026088629604666125,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 356,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -7.691550370425066e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 357,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 367,
+          "flow_count": 19,
+          "mutable_units": 19,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.015747024663981e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 372,
+          "flow_count": 7,
+          "mutable_units": 7,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 373,
+          "flow_count": 1084,
+          "mutable_units": 84,
+          "sample_bayes_gain_contribution": 6.1031975432806486e-05,
+          "frozen_gain_contribution": -0.00016505722693723856,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 374,
+          "flow_count": 10,
+          "mutable_units": 9,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639854e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 375,
+          "flow_count": 1055,
+          "mutable_units": 78,
+          "sample_bayes_gain_contribution": 3.9349613433649247e-05,
+          "frozen_gain_contribution": -1.551562722402019e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 377,
+          "flow_count": 13,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 2.4886661511240833e-06,
+          "frozen_gain_contribution": -3.0157470246639854e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 378,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 9.047241073991959e-07,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 379,
+          "flow_count": 20,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 8.470329472543003e-22,
+          "frozen_gain_contribution": -6.031494049327971e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 380,
+          "flow_count": 25,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.650487705157408e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 381,
+          "flow_count": 10377,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 1.4142419740362233e-05,
+          "frozen_gain_contribution": -0.0008097964607604834,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 382,
+          "flow_count": 9622,
+          "mutable_units": 88,
+          "sample_bayes_gain_contribution": 0.0034597778963195817,
+          "frozen_gain_contribution": 0.00010672439030113244,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 383,
+          "flow_count": 50731,
+          "mutable_units": 87,
+          "sample_bayes_gain_contribution": 0.0027295190937190565,
+          "frozen_gain_contribution": -0.0003404829952013116,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 405,
+          "flow_count": 2,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -6.031494049327971e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 407,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 413,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 415,
+          "flow_count": 1,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 431,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 447,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 452,
+          "flow_count": 1,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 455,
+          "flow_count": 5,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 2.487539062503473e-06,
+          "frozen_gain_contribution": -3.650487705157409e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 460,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 463,
+          "flow_count": 4,
+          "mutable_units": 2,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.5383100740850132e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 464,
+          "flow_count": 6929,
+          "mutable_units": 87,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 465,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 467,
+          "flow_count": 1832,
+          "mutable_units": 87,
+          "sample_bayes_gain_contribution": 5.5293413968315885e-06,
+          "frozen_gain_contribution": -0.00012294096517319862,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 468,
+          "flow_count": 10,
+          "mutable_units": 8,
+          "sample_bayes_gain_contribution": 2.5756462248071465e-06,
+          "frozen_gain_contribution": -9.49700854659324e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 469,
+          "flow_count": 5237,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 0.0007423498851768747,
+          "frozen_gain_contribution": 0.0007423498851768747,
+          "bayes_gain_lower_contribution": 0.00022064054801967936
+        },
+        {
+          "coarse_symbol": 470,
+          "flow_count": 115,
+          "mutable_units": 66,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.015747024663981e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 471,
+          "flow_count": 20756,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 0.0007392178691773671,
+          "frozen_gain_contribution": -0.00020971453759451465,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 473,
+          "flow_count": 33,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -9.951965181391152e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 474,
+          "flow_count": 7,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -2.11102291726479e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 475,
+          "flow_count": 24,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": -8.470329472543003e-22,
+          "frozen_gain_contribution": -7.237792859193566e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 476,
+          "flow_count": 4,
+          "mutable_units": 2,
+          "sample_bayes_gain_contribution": 2.185964360037074e-06,
+          "frozen_gain_contribution": -1.464523345120335e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 477,
+          "flow_count": 2467,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 1.0595605932901906e-06,
+          "frozen_gain_contribution": -0.000183987702475162,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 478,
+          "flow_count": 361,
+          "mutable_units": 86,
+          "sample_bayes_gain_contribution": 2.676924223743408e-06,
+          "frozen_gain_contribution": 1.5839420437248623e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 479,
+          "flow_count": 427877,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 0.005374700184612197,
+          "frozen_gain_contribution": 0.004366260051127169,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 485,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 6.03149404932797e-07,
+          "frozen_gain_contribution": -1.092982180018537e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 486,
+          "flow_count": 4,
+          "mutable_units": 4,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 487,
+          "flow_count": 2,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -6.031494049327971e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 493,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 495,
+          "flow_count": 11,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.317321727130384e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 497,
+          "flow_count": 2,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.650487705157409e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 500,
+          "flow_count": 22,
+          "mutable_units": 17,
+          "sample_bayes_gain_contribution": 9.032640349165719e-07,
+          "frozen_gain_contribution": 6.776263578034403e-21,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 501,
+          "flow_count": 6987,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 0.00025801237624088064,
+          "frozen_gain_contribution": -0.00025719973145788867,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 502,
+          "flow_count": 757,
+          "mutable_units": 72,
+          "sample_bayes_gain_contribution": 1.8166565314909808e-06,
+          "frozen_gain_contribution": -4.577315757160408e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 503,
+          "flow_count": 7058,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 0.00037103675493400153,
+          "frozen_gain_contribution": 0.00022001681906718036,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 504,
+          "flow_count": 4,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.092982180018537e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 505,
+          "flow_count": 4872,
+          "mutable_units": 87,
+          "sample_bayes_gain_contribution": 1.0929821800185861e-06,
+          "frozen_gain_contribution": -0.001971975221777261,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 506,
+          "flow_count": 3,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 7.698102594222526e-07,
+          "frozen_gain_contribution": -1.2506203347459766e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 507,
+          "flow_count": 135,
+          "mutable_units": 47,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 508,
+          "flow_count": 780,
+          "mutable_units": 83,
+          "sample_bayes_gain_contribution": 4.446588640051236e-05,
+          "frozen_gain_contribution": 1.7193552204056335e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 509,
+          "flow_count": 408789,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 0.013809534301781015,
+          "frozen_gain_contribution": 0.009615437453855916,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 510,
+          "flow_count": 930,
+          "mutable_units": 4,
+          "sample_bayes_gain_contribution": 2.264600856114829e-05,
+          "frozen_gain_contribution": -0.0009605001946221174,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 511,
+          "flow_count": 160873,
+          "mutable_units": 91,
+          "sample_bayes_gain_contribution": 0.004419675102104573,
+          "frozen_gain_contribution": 0.003131932843809457,
+          "bayes_gain_lower_contribution": 0.0
+        }
+      ]
+    },
+    "2d": {
+      "flows": 1182338,
+      "class_counts": [
+        414491,
+        61868,
+        34242,
+        44799,
+        162516,
+        114366,
+        138387,
+        211669
+      ],
+      "sampling_units": 46,
+      "family_alpha": 0.05,
+      "occupied_coarse_cells": 81,
+      "per_cell_alpha": 0.0006172839506172839,
+      "positive_cells": 1,
+      "sample_bayes_gain": 0.03274123863046309,
+      "frozen_rule_minus_sample_coarse_optimum": 0.01138598450960501,
+      "conditional_bayes_gain_lower": 0.00017925479126388428,
+      "cells": [
+        {
+          "coarse_symbol": 119,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 127,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.5078735123319927e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 221,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -7.691550370425066e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 256,
+          "flow_count": 1,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 319,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 320,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 321,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 324,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 325,
+          "flow_count": 43,
+          "mutable_units": 25,
+          "sample_bayes_gain_contribution": 2.7902408535904818e-06,
+          "frozen_gain_contribution": -9.935904384082321e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 327,
+          "flow_count": 3,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 8.921193736275039e-07,
+          "frozen_gain_contribution": -3.1271936375546924e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 335,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -9.032640349165745e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 336,
+          "flow_count": 245,
+          "mutable_units": 45,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -4.010943542803102e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 337,
+          "flow_count": 20,
+          "mutable_units": 10,
+          "sample_bayes_gain_contribution": 6.552918099974335e-06,
+          "frozen_gain_contribution": 3.65048770515741e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 339,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 3.015747024663989e-07,
+          "frozen_gain_contribution": -4.371928720074148e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 340,
+          "flow_count": 310,
+          "mutable_units": 17,
+          "sample_bayes_gain_contribution": 1.882580726193377e-07,
+          "frozen_gain_contribution": -7.450793245147451e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 341,
+          "flow_count": 8766,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 0.000380360395756979,
+          "frozen_gain_contribution": -0.0014753991126685744,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 342,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -2.7097921047497237e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 343,
+          "flow_count": 7019,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 0.00023477558526254806,
+          "frozen_gain_contribution": 0.00022235114804083217,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 344,
+          "flow_count": 2,
+          "mutable_units": 2,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 345,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 346,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -9.047241073991957e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 347,
+          "flow_count": 13,
+          "mutable_units": 8,
+          "sample_bayes_gain_contribution": 8.470329472543003e-22,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 349,
+          "flow_count": 596,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 2.5246611868594998e-06,
+          "frozen_gain_contribution": -2.2397995360116712e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 350,
+          "flow_count": 23,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 2.299280989884131e-06,
+          "frozen_gain_contribution": 1.092982180018537e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 351,
+          "flow_count": 35382,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -0.0002608862960467445,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 356,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -7.691550370425066e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 357,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 367,
+          "flow_count": 19,
+          "mutable_units": 15,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.015747024663964e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 372,
+          "flow_count": 7,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 373,
+          "flow_count": 1084,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 6.1031975432806486e-05,
+          "frozen_gain_contribution": -0.00016505722693723856,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 374,
+          "flow_count": 10,
+          "mutable_units": 8,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639854e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 375,
+          "flow_count": 1055,
+          "mutable_units": 43,
+          "sample_bayes_gain_contribution": 3.9349613433649247e-05,
+          "frozen_gain_contribution": -1.551562722402019e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 377,
+          "flow_count": 13,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 2.4886661511240833e-06,
+          "frozen_gain_contribution": -3.0157470246639854e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 378,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 9.047241073991959e-07,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 379,
+          "flow_count": 20,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 8.470329472543003e-22,
+          "frozen_gain_contribution": -6.031494049327971e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 380,
+          "flow_count": 25,
+          "mutable_units": 19,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.6504877051573946e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 381,
+          "flow_count": 10377,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 1.4142419740362233e-05,
+          "frozen_gain_contribution": -0.0008097964607604868,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 382,
+          "flow_count": 9622,
+          "mutable_units": 45,
+          "sample_bayes_gain_contribution": 0.0034597778963195817,
+          "frozen_gain_contribution": 0.00010672439030111683,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 383,
+          "flow_count": 50731,
+          "mutable_units": 44,
+          "sample_bayes_gain_contribution": 0.0027295190937190565,
+          "frozen_gain_contribution": -0.00034048299520130984,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 405,
+          "flow_count": 2,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -6.031494049327971e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 407,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 413,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 415,
+          "flow_count": 1,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 431,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 447,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 452,
+          "flow_count": 1,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 455,
+          "flow_count": 5,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 2.487539062503473e-06,
+          "frozen_gain_contribution": -3.650487705157409e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 460,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 463,
+          "flow_count": 4,
+          "mutable_units": 2,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.5383100740850132e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 464,
+          "flow_count": 6929,
+          "mutable_units": 44,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 1.5612511283791264e-17,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 465,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 467,
+          "flow_count": 1832,
+          "mutable_units": 44,
+          "sample_bayes_gain_contribution": 5.5293413968315885e-06,
+          "frozen_gain_contribution": -0.00012294096517319867,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 468,
+          "flow_count": 10,
+          "mutable_units": 8,
+          "sample_bayes_gain_contribution": 2.5756462248071465e-06,
+          "frozen_gain_contribution": -9.49700854659324e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 469,
+          "flow_count": 5237,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 0.0007423498851768747,
+          "frozen_gain_contribution": 0.0007423498851768745,
+          "bayes_gain_lower_contribution": 0.00017925479126388428
+        },
+        {
+          "coarse_symbol": 470,
+          "flow_count": 115,
+          "mutable_units": 40,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.015747024663981e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 471,
+          "flow_count": 20756,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 0.0007392178691773671,
+          "frozen_gain_contribution": -0.0002097145375945129,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 473,
+          "flow_count": 33,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -9.951965181391152e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 474,
+          "flow_count": 7,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -2.11102291726479e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 475,
+          "flow_count": 24,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": -8.470329472543003e-22,
+          "frozen_gain_contribution": -7.237792859193566e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 476,
+          "flow_count": 4,
+          "mutable_units": 2,
+          "sample_bayes_gain_contribution": 2.185964360037074e-06,
+          "frozen_gain_contribution": -1.464523345120335e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 477,
+          "flow_count": 2467,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 1.0595605932901906e-06,
+          "frozen_gain_contribution": -0.00018398770247516206,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 478,
+          "flow_count": 361,
+          "mutable_units": 45,
+          "sample_bayes_gain_contribution": 2.676924223743408e-06,
+          "frozen_gain_contribution": 1.5839420437248623e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 479,
+          "flow_count": 427877,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 0.005374700184612197,
+          "frozen_gain_contribution": 0.0043662600511277655,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 485,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 6.03149404932797e-07,
+          "frozen_gain_contribution": -1.092982180018537e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 486,
+          "flow_count": 4,
+          "mutable_units": 4,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 487,
+          "flow_count": 2,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -6.031494049327971e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 493,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 495,
+          "flow_count": 11,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.317321727130384e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 497,
+          "flow_count": 2,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.650487705157409e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 500,
+          "flow_count": 22,
+          "mutable_units": 14,
+          "sample_bayes_gain_contribution": 9.032640349165719e-07,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 501,
+          "flow_count": 6987,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 0.00025801237624088064,
+          "frozen_gain_contribution": -0.00025719973145788347,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 502,
+          "flow_count": 757,
+          "mutable_units": 41,
+          "sample_bayes_gain_contribution": 1.8166565314909808e-06,
+          "frozen_gain_contribution": -4.577315757160413e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 503,
+          "flow_count": 7058,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 0.00037103675493400153,
+          "frozen_gain_contribution": 0.00022001681906718036,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 504,
+          "flow_count": 4,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.092982180018537e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 505,
+          "flow_count": 4872,
+          "mutable_units": 44,
+          "sample_bayes_gain_contribution": 1.0929821800185861e-06,
+          "frozen_gain_contribution": -0.0019719752217772606,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 506,
+          "flow_count": 3,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 7.698102594222526e-07,
+          "frozen_gain_contribution": -1.2506203347459766e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 507,
+          "flow_count": 135,
+          "mutable_units": 33,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 508,
+          "flow_count": 780,
+          "mutable_units": 45,
+          "sample_bayes_gain_contribution": 4.446588640051236e-05,
+          "frozen_gain_contribution": 1.7193552204056335e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 509,
+          "flow_count": 408789,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 0.013809534301781015,
+          "frozen_gain_contribution": 0.00961543745385944,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 510,
+          "flow_count": 930,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 2.264600856114829e-05,
+          "frozen_gain_contribution": -0.0009605001946221174,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 511,
+          "flow_count": 160873,
+          "mutable_units": 46,
+          "sample_bayes_gain_contribution": 0.004419675102104573,
+          "frozen_gain_contribution": 0.003131932843808971,
+          "bayes_gain_lower_contribution": 0.0
+        }
+      ]
+    },
+    "4d": {
+      "flows": 1182338,
+      "class_counts": [
+        414491,
+        61868,
+        34242,
+        44799,
+        162516,
+        114366,
+        138387,
+        211669
+      ],
+      "sampling_units": 23,
+      "family_alpha": 0.05,
+      "occupied_coarse_cells": 81,
+      "per_cell_alpha": 0.0006172839506172839,
+      "positive_cells": 1,
+      "sample_bayes_gain": 0.03274123863046309,
+      "frozen_rule_minus_sample_coarse_optimum": 0.011385984509606265,
+      "conditional_bayes_gain_lower": 0.00016058249593777895,
+      "cells": [
+        {
+          "coarse_symbol": 119,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 127,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.5078735123319927e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 221,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -7.691550370425066e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 256,
+          "flow_count": 1,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 319,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 320,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 321,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 324,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 325,
+          "flow_count": 43,
+          "mutable_units": 18,
+          "sample_bayes_gain_contribution": 2.7902408535904818e-06,
+          "frozen_gain_contribution": -9.935904384082314e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 327,
+          "flow_count": 3,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 8.921193736275039e-07,
+          "frozen_gain_contribution": -3.1271936375546924e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 335,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -9.032640349165745e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 336,
+          "flow_count": 245,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -4.010943542803101e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 337,
+          "flow_count": 20,
+          "mutable_units": 9,
+          "sample_bayes_gain_contribution": 6.552918099974335e-06,
+          "frozen_gain_contribution": 3.650487705157408e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 339,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 3.015747024663989e-07,
+          "frozen_gain_contribution": -4.371928720074148e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 340,
+          "flow_count": 310,
+          "mutable_units": 14,
+          "sample_bayes_gain_contribution": 1.882580726193377e-07,
+          "frozen_gain_contribution": -7.450793245147451e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 341,
+          "flow_count": 8766,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.000380360395756979,
+          "frozen_gain_contribution": -0.0014753991126685746,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 342,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -2.7097921047497237e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 343,
+          "flow_count": 7019,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.00023477558526254806,
+          "frozen_gain_contribution": 0.00022235114804083217,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 344,
+          "flow_count": 2,
+          "mutable_units": 2,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 345,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 346,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -9.047241073991957e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 347,
+          "flow_count": 13,
+          "mutable_units": 8,
+          "sample_bayes_gain_contribution": 8.470329472543003e-22,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 349,
+          "flow_count": 596,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 2.5246611868594998e-06,
+          "frozen_gain_contribution": -2.2397995360116767e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 350,
+          "flow_count": 23,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 2.299280989884131e-06,
+          "frozen_gain_contribution": 1.092982180018537e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 351,
+          "flow_count": 35382,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -0.0002608862960467931,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 356,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -7.691550370425066e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 357,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 367,
+          "flow_count": 19,
+          "mutable_units": 12,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639723e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 372,
+          "flow_count": 7,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 373,
+          "flow_count": 1084,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 6.1031975432806486e-05,
+          "frozen_gain_contribution": -0.00016505722693723867,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 374,
+          "flow_count": 10,
+          "mutable_units": 8,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639854e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 375,
+          "flow_count": 1055,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 3.9349613433649247e-05,
+          "frozen_gain_contribution": -1.551562722402019e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 377,
+          "flow_count": 13,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 2.4886661511240833e-06,
+          "frozen_gain_contribution": -3.0157470246639854e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 378,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 9.047241073991959e-07,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 379,
+          "flow_count": 20,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 8.470329472543003e-22,
+          "frozen_gain_contribution": -6.031494049327971e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 380,
+          "flow_count": 25,
+          "mutable_units": 16,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.6504877051573946e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 381,
+          "flow_count": 10377,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 1.4142419740362233e-05,
+          "frozen_gain_contribution": -0.0008097964607604452,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 382,
+          "flow_count": 9622,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.0034597778963195817,
+          "frozen_gain_contribution": 0.0001067243903010856,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 383,
+          "flow_count": 50731,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.0027295190937190565,
+          "frozen_gain_contribution": -0.00034048299520130637,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 405,
+          "flow_count": 2,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -6.031494049327971e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 407,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 413,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 415,
+          "flow_count": 1,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 431,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 447,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 452,
+          "flow_count": 1,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 455,
+          "flow_count": 5,
+          "mutable_units": 2,
+          "sample_bayes_gain_contribution": 2.487539062503473e-06,
+          "frozen_gain_contribution": -3.650487705157409e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 460,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 463,
+          "flow_count": 4,
+          "mutable_units": 2,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.5383100740850132e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 464,
+          "flow_count": 6929,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 3.0357660829594124e-17,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 465,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 467,
+          "flow_count": 1832,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 5.5293413968315885e-06,
+          "frozen_gain_contribution": -0.0001229409651731985,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 468,
+          "flow_count": 10,
+          "mutable_units": 8,
+          "sample_bayes_gain_contribution": 2.5756462248071465e-06,
+          "frozen_gain_contribution": -9.49700854659324e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 469,
+          "flow_count": 5237,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.0007423498851768747,
+          "frozen_gain_contribution": 0.0007423498851768739,
+          "bayes_gain_lower_contribution": 0.00016058249593777895
+        },
+        {
+          "coarse_symbol": 470,
+          "flow_count": 115,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246640485e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 471,
+          "flow_count": 20756,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.0007392178691773671,
+          "frozen_gain_contribution": -0.00020971453759451248,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 473,
+          "flow_count": 33,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -9.951965181391152e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 474,
+          "flow_count": 7,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -2.11102291726479e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 475,
+          "flow_count": 24,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": -8.470329472543003e-22,
+          "frozen_gain_contribution": -7.237792859193566e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 476,
+          "flow_count": 4,
+          "mutable_units": 2,
+          "sample_bayes_gain_contribution": 2.185964360037074e-06,
+          "frozen_gain_contribution": -1.464523345120335e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 477,
+          "flow_count": 2467,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 1.0595605932901906e-06,
+          "frozen_gain_contribution": -0.00018398770247516217,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 478,
+          "flow_count": 361,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 2.676924223743408e-06,
+          "frozen_gain_contribution": 1.5839420437249301e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 479,
+          "flow_count": 427877,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.005374700184612197,
+          "frozen_gain_contribution": 0.0043662600511271965,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 485,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 6.03149404932797e-07,
+          "frozen_gain_contribution": -1.092982180018537e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 486,
+          "flow_count": 4,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.2062988098655942e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 487,
+          "flow_count": 2,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -6.031494049327971e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 493,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.0157470246639855e-07,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 495,
+          "flow_count": 11,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.317321727130384e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 497,
+          "flow_count": 2,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.650487705157409e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 500,
+          "flow_count": 22,
+          "mutable_units": 13,
+          "sample_bayes_gain_contribution": 9.032640349165719e-07,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 501,
+          "flow_count": 6987,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.00025801237624088064,
+          "frozen_gain_contribution": -0.00025719973145788,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 502,
+          "flow_count": 757,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 1.8166565314909808e-06,
+          "frozen_gain_contribution": -4.577315757160413e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 503,
+          "flow_count": 7058,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.00037103675493400153,
+          "frozen_gain_contribution": 0.00022001681906718383,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 504,
+          "flow_count": 4,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -1.092982180018537e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 505,
+          "flow_count": 4872,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 1.0929821800185861e-06,
+          "frozen_gain_contribution": -0.0019719752217772614,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 506,
+          "flow_count": 3,
+          "mutable_units": 1,
+          "sample_bayes_gain_contribution": 7.698102594222526e-07,
+          "frozen_gain_contribution": -1.2506203347459766e-06,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 507,
+          "flow_count": 135,
+          "mutable_units": 21,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 508,
+          "flow_count": 780,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 4.446588640051236e-05,
+          "frozen_gain_contribution": 1.7193552204056308e-05,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 509,
+          "flow_count": 408789,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.013809534301781015,
+          "frozen_gain_contribution": 0.009615437453859801,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 510,
+          "flow_count": 930,
+          "mutable_units": 3,
+          "sample_bayes_gain_contribution": 2.264600856114829e-05,
+          "frozen_gain_contribution": -0.0009605001946221174,
+          "bayes_gain_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 511,
+          "flow_count": 160873,
+          "mutable_units": 23,
+          "sample_bayes_gain_contribution": 0.004419675102104573,
+          "frozen_gain_contribution": 0.003131932843810449,
+          "bayes_gain_lower_contribution": 0.0
+        }
+      ]
+    }
+  },
+  "target": "Bayes accuracy gain from adding timing, conditional on coarse inputs, labels and grouping",
+  "block_independence_is_assumed": true,
+  "primary_block_width": "1d"
+}
