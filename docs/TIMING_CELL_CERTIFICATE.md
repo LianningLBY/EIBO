@@ -57,16 +57,24 @@ The `--compare` flag evaluates all four certificates from the same retained flow
 
 Each method gives a 95% lower bound under the same conditional block-independence model for the specified width. The table compares methods and grouping assumptions. Each entry is a lower bound on the overall cohort gain in percentage points.
 
-| Corpus | Block width | Pooled Hoeffding | Pooled product | Cell Hoeffding | Cell product |
-|---|---|---:|---:|---:|---:|
-| QUIC22 | 1 day | 0 | 0 | +0.01605 | +0.05429 |
-| QUIC22 | 2 days | 0 | 0 | 0 | 0 |
-| QUIC22 | 4 days | 0 | 0 | 0 | 0 |
-| QUICEXT-25 XS | 1 day | Pending H5 rerun | Pending H5 rerun | Pending H5 rerun | +0.02206 |
-| QUICEXT-25 XS | 2 days | Pending H5 rerun | Pending H5 rerun | Pending H5 rerun | +0.01793 |
-| QUICEXT-25 XS | 4 days | Pending H5 rerun | Pending H5 rerun | Pending H5 rerun | +0.01606 |
+| Corpus | Classes | Block width | Pooled Hoeffding | Pooled product | Cell Hoeffding | Cell product |
+|---|---:|---|---:|---:|---:|---:|
+| QUIC22 | 8 | 1 day | 0 | 0 | +0.01605 | +0.05429 |
+| QUIC22 | 8 | 2 days | 0 | 0 | 0 | 0 |
+| QUIC22 | 8 | 4 days | 0 | 0 | 0 | 0 |
+| QUICEXT-25 XS | 8 | 1 day | 0 | 0 | +0.03118 | +0.02206 |
+| QUICEXT-25 XS | 8 | 2 days | 0 | 0 | +0.01548 | +0.01793 |
+| QUICEXT-25 XS | 8 | 4 days | 0 | 0 | 0 | +0.01606 |
+| QUICEXT-25 XS | 16 | 1 day | 0 | 0 | 0 | +1.48313 |
+| QUICEXT-25 XS | 16 | 2 days | 0 | 0 | 0 | +0.96655 |
+| QUICEXT-25 XS | 16 | 4 days | 0 | 0 | 0 | +0.30540 |
+| QUICEXT-25 XS | 44 | 1 day | +0.94622 | +2.03485 | +0.70709 | +2.01152 |
+| QUICEXT-25 XS | 44 | 2 days | 0 | +1.84013 | +0.00043 | +1.53983 |
+| QUICEXT-25 XS | 44 | 4 days | 0 | +1.67772 | 0 | +0.78488 |
 
-In QUIC22, both cell methods obtain their daily lower bound from coarse symbol 501. Both pooled bounds are zero. Cell Hoeffding certifies a positive gain, and the cell product bound increases it by 0.03824 pp. In XS, the archived output gives the cell product bound and identifies symbol 469 as the contributor at all three widths. The other columns require the original H5 to recover the block-level weights and scores. [QUIC22 matched comparison](../artifacts/methodology/if_e1/timing_certificate_comparison_quic22.json) · [XS product result](../artifacts/methodology/if_e1_timing_cells_xs_20261112_123022.json)
+In QUIC22, both cell methods obtain their daily lower bound from coarse symbol 501. Both pooled bounds are zero. Cell Hoeffding certifies a positive gain, and the cell product bound increases it by 0.03824 pp. In the eight-class XS cohort, symbol 469 supplies the entire cell product bound at all three widths. Cell Hoeffding gives the larger daily bound, and the cell product bound is larger at the two coarser widths. [QUIC22 matched comparison](../artifacts/methodology/if_e1/timing_certificate_comparison_quic22.json) · [XS service sweep](../artifacts/methodology/if_e1_timing_service_sweep_xs_20261112_125904.json)
+
+In the 16-class XS cohort, symbol 509 supplies the entire cell product lower bound at all three widths. The cell includes 574,783 flows and contains mutable records in all 91 daily blocks. On daily blocks its frozen-rule gain contribution is 2.79020 pp and its cell Hoeffding radius is 3.32999 pp. In the 44-class cohort, five cells contribute to the daily cell product bound, and symbols 479, 511, and 509 account for 91.41% of it. Pooled product gives the largest bound at each width in that cohort. [XS per-cell results](../artifacts/methodology/if_e1_timing_service_sweep_xs_20261112_125904.json)
 
 ## Frozen QUICEXT-25 XS protocol
 
@@ -100,4 +108,4 @@ Run the XS command with both `--compare` and `--service-sweep` to obtain the fou
 
 The eight-class baseline retains its original selection rule. For both expansion cohorts, require at least 2,000 usable flows per service in the pilot window, following the [existing methodology runbook](METHODOLOGY_RUNBOOK.md). Rank by decreasing pilot count and use APP code order to break ties. Take the first 16 eligible codes and all eligible codes, respectively. Fit a separate frequency rule for each cohort with equal class priors. The input hash, time windows, daily guard, and block definitions are shared across the sweep. If a selected service is absent after the holdout guard, report its code and the counts for that cohort. Preserve results for the other cohorts.
 
-Check the eight-class run against the archived result. It should retain 1,182,338 flows across 81 occupied cells, with 91, 46, and 23 blocks and cell product bounds of 0.02206, 0.01793, and 0.01606 pp at the three widths. Report class counts, retained flows, sample Bayes gains, positive cells, and all four lower bounds for the expansion cohorts. The coverage guarantee applies to each fixed cohort, method, and width. Different cohort sizes use their own class priors and target distributions.
+The archived sweep matches the original eight-class cohort and its per-cell results. It retains 1,182,338, 1,763,662, and 2,038,134 flows for the 8-, 16-, and 44-class cohorts, respectively. Their sample Bayes gains are 3.27412, 4.84831, and 6.39494 pp. Each cohort has 91, 46, and 23 blocks at the three widths. The coverage guarantee applies to each fixed cohort, method, and width. Different cohort sizes use their own class priors and target distributions. [Original eight-class result](../artifacts/methodology/if_e1_timing_cells_xs_20261112_123022.json) · [XS service sweep](../artifacts/methodology/if_e1_timing_service_sweep_xs_20261112_125904.json)
