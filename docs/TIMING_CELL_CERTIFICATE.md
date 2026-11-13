@@ -24,6 +24,22 @@ $$
 
 The nonnegative truncation follows from $B_c\ge A_c$. It permits reporting the contributing cells after evaluation. The earlier zero-gain example concerns the aggregate performance of a single frozen rule, which can lose accuracy in other cells. Here the fine Bayes rule can use timing selectively in each coarse cell. [Frozen-rule analysis](FUSION_CERTIFICATION_LIMITS.md)
 
+## HDF5 reproduction record
+
+The two school-server runs used code commit `81726206cd743c351683982c36c667e846574b80`. The five HDF5 outputs were compared with their respective reference archives. All parsed values matched exactly.
+
+| Reproduced output | Archive comparison |
+|---|---|
+| [XS service sweep](../artifacts/methodology/timing_repro_VH3il3MK/xs_sweep.json) | Serialization-only difference |
+| [XS disjoint window](../artifacts/methodology/timing_repro_VH3il3MK/xs_temporal.json) | Byte-identical |
+| [XS omission of symbol 479](../artifacts/methodology/timing_repro_VH3il3MK/xs_omit_479.json) | Byte-identical |
+| [QUIC22-S service sweep](../artifacts/methodology/timing_repro_VH3il3MK/quic22_s.json) | Byte-identical |
+| [XS block diagnostics](../artifacts/methodology/timing_block_repro_QfpnhZIJ/diagnostics.json) | Byte-identical |
+
+The XS service sweep serializes `fit_counts` in a different position at the top level and in the two expanded cohort objects. Reordering those keys reproduces the new file byte for byte. The new file's SHA-256 is `4ecf051afb0f81bc0de4d035450e4d8e72f35f1031f0bd4b66120dfebbe1c51f`. Use the [original XS service sweep](../artifacts/methodology/if_e1_timing_service_sweep_xs_20261112_125904.json) and its SHA-256 `481d73fb0e6be159055dd0c70cb4d9315c04321da3c201c0875340654927a716` as the reference for downstream provenance checks.
+
+The [parity-group bounds](../artifacts/methodology/timing_block_repro_QfpnhZIJ/parity.json) were recomputed from the daily scores. The pooled product bounds match Appendix C at 1.54325 and 1.27665 percentage points for the original and disjoint windows. The two Hoeffding bounds are zero.
+
 ## QUIC22 reproduction and null checks
 
 The reproduction uses the archived fit dates, the 283,526 retained evaluation flows, and the original five-packet direction and size representation with the second-packet interval bins. It verifies the archived input manifests and reproduces the original sample Bayes gain and frozen-rule gap.

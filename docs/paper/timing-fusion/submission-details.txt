@@ -1,28 +1,37 @@
 Information Fusion submission details for author review
 
-Use the journal's current submission instructions to place the author details
-and declarations in the appropriate files and submission fields.
+Use the journal's current submission instructions to place the confirmed
+details in the manuscript, submission files, and submission fields.
 
-Author names and order
-[Confirm the full names, author order, and affiliations.]
+Title page and author approval
+[Provide each author's given and family names, publication order, and full
+affiliation address, including the country. Confirm that every author approves
+the manuscript and its submission to Information Fusion.]
 
 Corresponding author
-[Confirm the name, affiliation, and contact email for the title page and cover letter.]
+[Designate one corresponding author. Provide their name, affiliation, and
+publication email for the title page, cover letter, and submission system.]
 
 CRediT author contributions
-[Assign and confirm the applicable roles for each author.]
+[Provide each author's name and agreed CRediT roles.]
 
 Funding
-[Confirm the funders and grant numbers, or provide the applicable no-funding statement.]
+[Confirm the funders, grant numbers, and sponsor roles. If the study received no
+specific funding, use the statement below after author confirmation.]
+This research did not receive any specific grant from funding agencies in the
+public, commercial, or not-for-profit sectors.
 
-Declaration of competing interest
-[Confirm the disclosure for all authors.]
+Declaration of competing interests
+[Confirm each author's disclosure and complete Elsevier's declarations tool.
+Upload the resulting Word document with the submission.]
 
-Declaration of generative AI use
-[Review the following draft and complete it after the authors have checked the manuscript.]
-During manuscript preparation, the authors used OpenAI Codex to help edit and
-organize the text and verify bibliographic details. The authors reviewed and
-edited the resulting content and take responsibility for the manuscript.
+Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
+[Confirm the tools and their uses, including any additional tools used by the
+authors. After author review, add the confirmed statement before the references.]
+During manuscript preparation, the authors used OpenAI Codex to assist with
+drafting and restructuring manuscript text, reviewing the literature, and
+checking bibliographic details. The authors reviewed and edited the content
+and take full responsibility for the published article.
 
 Data and code availability
 The manuscript links the public QUIC22 archive, QUICEXT-25 record, and CESNET
@@ -36,8 +45,12 @@ SHA-256 6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab
 
 The manuscript links the private EIBO reproduction guide at commit
 8a3f5cf7972d2c0041c22ffe4796be5b99885e0d.
+The guide now records the five HDF5 checks in docs/TIMING_CELL_CERTIFICATE.md.
+The reproduction outputs are archived in commit
+9aa8125e0ffebd7c87850e092fafcf4847ad780a.
 [Before submission, arrange access to the code and results for the editor and
-reviewers, or supply the equivalent reproduction files as a supplement.]
+reviewers, or supply the equivalent reproduction files as a supplement. Point
+the manuscript to the accessible version that includes the reproduction record.]
 
 Suggested reviewers
 [If requested by the submission system, provide names, affiliations, email
