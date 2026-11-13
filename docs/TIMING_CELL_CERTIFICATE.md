@@ -112,7 +112,7 @@ The archived sweep matches the original eight-class cohort and its per-cell resu
 
 ## Fixed temporal check for the 16- and 44-class cohorts
 
-Rebuild the frequency rules from the original XS pilot and match the exact APP lists and fitting counts in the archived sweep. The temporal check uses the same equal class priors, feature encoding, one-hour end margin, and daily guard. Its two primary lower bounds use UTC daily blocks. The primary method is cell product for 16 classes and pooled product for 44 classes. Allocate a tail probability of 0.025 to each primary bound, giving at least 95% joint coverage for the two statements under their conditional independence assumptions. A positive result for both cohorts requires both prespecified bounds to exceed zero. The remaining methods and the 2- and 4-day widths are descriptive sensitivity comparisons at the same per-cohort level.
+Rebuild the frequency rules from the original XS pilot and match the exact APP lists and fitting counts in the archived sweep. The temporal check uses the same equal class priors, feature encoding, one-hour end margin, and daily guard. Its two primary lower bounds use UTC daily blocks. The primary method is cell product for 16 classes and pooled product for 44 classes. Each primary bound uses tail probability 0.025 and has at least 97.5% coverage under conditional daily block independence given its own cohort information. A positive result for both cohorts requires both prespecified bounds to exceed zero. The remaining methods and the 2- and 4-day widths are descriptive sensitivity comparisons at the same per-cohort level.
 
 The executable check uses the middle XS window `[2024-12-01, 2025-03-01)` in UTC. It is disjoint from both the registered pilot and the March–May evaluation used for the service sweep. Earlier project work used the middle window for a different IF-E1 comparison, so report this check as a time-disjoint reanalysis. To evaluate a later untouched capture, use `--later-h5 FILE --later-window START STOP --same-app-codes`. Confirm the APP code semantics and record the capture and half-open UTC dates before inspecting results. The later window starts at least one day after the archived end. The script records missing dates and verifies both H5 digests. A cohort with absent classes records the missing codes and leaves its primary result unavailable. [XS temporal results](../artifacts/methodology/if_e1_timing_temporal_xs_20261112_150118.json)
 
@@ -214,6 +214,15 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_block_
 ```
 
 [Archived XS time-block and prior results](../artifacts/methodology/if_e1_timing_xs_block_diagnostics_20261113_010220.json)
+
+For the manuscript's daily dependence comparison, use each window's
+`daily_scores[*].mutable_weight` as $v_b$ and
+`prior_comparison.frequency_equal.results_by_block_width.1d.frozen_rule_minus_sample_coarse_optimum`
+as the observed gap. Take $\alpha$ from the zero-offset daily row in
+`pooled_product_by_block_offset`. Compute the radius
+$\sqrt{\log(1/\alpha)\sum_b v_b^2}$ and truncate the gap minus the radius
+at zero. This bound assumes mutual conditional independence within the even
+days and within the odd days and permits dependence between the two groups.
 
 ## Manuscript simulation figure
 
