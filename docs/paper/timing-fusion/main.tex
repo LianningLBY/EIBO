@@ -4,6 +4,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{placeins}
 \usepackage[hidelinks]{hyperref}
 \input{glyphtounicode}
@@ -51,6 +52,15 @@ Classical classifier combination pools decisions from different representations 
 Learn then Test uses multiple testing to calibrate predictive rules with finite-sample risk guarantees \cite{angelopoulos2025learntest}. Conformal risk control calibrates a rule to control the expected value of a monotone loss \cite{angelopoulos2024conformal}. Gorriz studies generalization bounds for fitted predictors, including fusion rules and validation with dependent fold scores \cite{gorriz2026evidence}. Our guarantee concerns the difference between two optimal accuracies on a fixed cohort, using a rule fitted before evaluation. We use Hoeffding's inequality for bounded independent observations \cite{hoeffding1963} and a product bound based on the arithmetic--geometric mean and Markov inequalities. The product gives a fixed-sample conditional e-value \cite{vovk2021evalues} for a null that constrains the sum of block means and permits unequal individual means. Sequential monitoring with optional stopping would require an anytime-valid construction \cite{ramdas2023savi}. The simultaneous cell guarantee allows dependence among cells within each time block.
 
 \section{Finite-sample certificates for Bayes gain}
+
+Figure~\ref{fig:nested-fusion} shows how an added feature refines a coarse cell and how the resulting block scores enter the two certificates. Section~\ref{sec:worked-example} gives the calculation for cell 509.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{figures/nested-fusion.pdf}
+\caption{Nested fusion and certificate construction in the original XS evaluation window for 16 classes. The top row shows two timing intervals and their frozen predictions for coarse cell 509. Both paths use the same fixed cohort and daily block model. Here $Q$ denotes the product or Hoeffding bound and $M=87$ is the number of occupied coarse cells. The product examples use 91 daily blocks and total tail probability $\alpha=0.05$.}
+\label{fig:nested-fusion}
+\end{figure}
 
 \subsection{Conditional Bayes gain}
 \label{sec:target}
