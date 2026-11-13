@@ -1,0 +1,12 @@
+{
+  "original": {
+    "alpha": 0.05,
+    "hoeffding_lower": 0.0,
+    "product_lower": 0.015432469971574714
+  },
+  "temporal": {
+    "alpha": 0.025,
+    "hoeffding_lower": 0.0,
+    "product_lower": 0.01276654004855074
+  }
+}
