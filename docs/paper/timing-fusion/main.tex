@@ -99,7 +99,7 @@ The expected frozen-rule contribution is $D_c+\mu_c\le B_c$.
 
 \subsection{Cell-wise and pooled lower bounds}
 
-Let $x=(x_1,\dots,x_m)$ be the realized values of conditionally independent block scores with known ranges $[0,v_b]$. We use $a\in(0,1)$ for the tail probability of a single bound and $\alpha$ for the overall error budget. For the cell-wise family with $M$ occupied cells, the uniform allocation is $a=\alpha/M$. The two lower bounds for the sum of conditional means are
+Let $x=(x_1,\dots,x_m)$ be the realized values of conditionally independent block scores with known ranges $[0,v_b]$. We write $a\in(0,1)$ for a generic tail probability and $\alpha$ for the overall error budget. The cell-wise certificate controls family-wise error at level $\alpha$ and assigns $a=\alpha/M$ to each of the $M$ occupied cells under uniform allocation. The two lower bounds for the sum of conditional means are
 \begin{align}
  P_a(x) &= m\left(a\prod_{b=1}^m x_b\right)^{1/m},\label{eq:product}\\
  H_a(x,v) &= \sum_{b=1}^m x_b-\sqrt{\tfrac12\log(1/a)\sum_{b=1}^m v_b^2}.\label{eq:hoeffding}
@@ -177,7 +177,7 @@ The original comparison uses tail probability 0.05 per fixed bound. Before runni
 \label{tab:primary-xs}
 \begin{tabular}{rlrr}
 \toprule
-Classes & Certificate & Original window & Disjoint window \\
+Classes & Certificate & Original window & Retrospective check \\
 \midrule
 16 & Pooled Hoeffding & 0 & 0 \\
    & Pooled product & 0 & 0.13536 \\
