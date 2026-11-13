@@ -64,7 +64,7 @@ Figure~\ref{fig:nested-fusion} shows how an added feature refines a coarse cell 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figures/nested-fusion.pdf}
-\caption{Nested fusion and certificate construction in the original XS evaluation window for 16 classes. The top row shows two timing intervals and their frozen predictions for coarse cell 509. Both paths use the same fixed cohort and daily block model. Here $Q$ denotes the product or Hoeffding bound and $M=87$ is the number of occupied coarse cells. The product examples use 91 daily blocks and total tail probability $\alpha=0.05$.}
+\caption{Nested fusion and certificate construction in the original XS evaluation window for 16 classes. The bin label $T$ is obtained by discretizing the first inter-packet interval $\tau$. The top row shows two bins and their frozen predictions for cell 509. In block $b$, $v_{cb}$ is the weight of records whose correctness can change, and $X_{cb}$ is the weight correctly classified among them. Both paths use 91 daily blocks and total tail probability $\alpha=0.05$. Here $Q$ denotes the product or Hoeffding bound and $M=87$ is the number of occupied coarse cells. Cell 509 supplies the entire 1.483 pp cell-wise product bound. Pooling all 87 cells gives a product bound of $-0.913$ pp before truncation and zero after truncation.}
 \label{fig:nested-fusion}
 \end{figure}
 
