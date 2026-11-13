@@ -24,7 +24,7 @@
 \date{}
 
 \begin{abstract}
-We derive finite-sample lower bounds on the gain in class-weighted Bayes accuracy when an additional feature augments a discrete representation. The guarantee is conditional on a fixed evaluation cohort and a rule fitted in a separate period. It assumes conditional independence across blocks and permits arbitrary dependence within blocks. Nested features yield nonnegative cell gains, which we bound simultaneously and sum. For 44 classes in CESNET-QUICEXT-25 XS, the pooled product bounds on the gain from adding packet timing are 2.035 and 1.935 percentage points under daily blocks in two disjoint evaluation windows. After omitting the cell with the largest original contribution and correcting for selection among omissions, the daily bounds are 0.405 and 0.298 points. Across calendar alignments in the second window, four-day bounds range from zero to 1.229 points. For 16 classes, the daily cell product bounds are 1.483 and 2.327 points, with nearly all of the bound from one cell in each window. Each of the two primary daily bounds in the second window has at least 97.5\% coverage conditional on its own cohort information under the daily block model. On CESNET-QUIC22-S, daily bounds reach 1.289 points, and two- and four-day bounds are zero. Controlled simulations show how gain concentration and the number of occupied cells affect the relative performance of the cell and pooled bounds.
+We construct finite-sample lower bounds on the gain in class-weighted Bayes accuracy when a new feature refines a discrete representation. The bounds condition on a fixed evaluation cohort and a rule fitted in a separate period. They allow arbitrary dependence within blocks and assume conditional independence across blocks. The refinement yields nonnegative gains within coarse cells, so simultaneous lower bounds on these gains can be summed. When adding packet timing on CESNET-QUICEXT-25 XS, the daily cell product bounds for 16 classes are 1.483 and 2.327 percentage points in two disjoint evaluation windows. The corresponding pooled product bounds for 44 classes are 2.035 and 1.935 points. Each primary bound in the disjoint check has at least 97.5\% conditional coverage under the daily block model. On CESNET-QUIC22-S, daily bounds reach 1.289 points and two- and four-day bounds are zero. Controlled simulations show how the concentration of gain and the number of occupied cells affect the choice between cell and pooled certificates.
 \end{abstract}
 
 \begin{keyword}
@@ -38,7 +38,7 @@ Classifiers for encrypted traffic combine packet sizes, directions, timing, and 
 
 We consider nested fusion, in which a discrete representation is refined by adding a finite-valued feature. Conditioning on the evaluation cohort's labels, coarse observations, and class weights makes the coarse Bayes accuracy directly computable. A fine rule can ignore the new feature in any coarse cell, so the Bayes gain in each cell is nonnegative. A rule fitted in a separate period supplies a lower bound on the fine optimum through its conditional expected accuracy. We bound that accuracy using held-out block scores. The sampling model assumes conditional independence across declared blocks and permits arbitrary dependence within them.
 
-Our first contribution is a finite-sample certificate for the gain in class-weighted Bayes accuracy on the fixed cohort. We bound the gains simultaneously across coarse cells, truncate the lower bounds at zero, and sum them to certify the total gain. This identifies which coarse cells contribute to the certificate. Our second contribution is a matched comparison of four certificates that varies pooling and the lower-bound inequality. The comparison covers two QUIC corpora, three block widths, and up to 82 classes. With equal class weights and the frequency rule, the cell product bound is largest for the 16-class XS cohort and the pooled product bound is largest for the 44-class cohort at the default alignment of each block width in two evaluation windows. The daily comparison has the same pattern on QUIC22-S for 16 and 82 classes. Simulations vary gain concentration and cell count. Sensitivity checks vary calendar alignment, fitted rule, and class weights. Our third contribution is an analysis of the limits of certification. A binary model gives an explicit sample-size benchmark, and a conditional converse rules out a positive 95\% lower certificate for the aggregate frozen-rule gain on the observed QUIC22 archive-prefix cohort under the stated model.
+Our first contribution is a finite-sample certificate for the gain in class-weighted Bayes accuracy on the fixed cohort. We bound the gains simultaneously across coarse cells, truncate the lower bounds at zero, and sum them to certify the total gain. This identifies which coarse cells contribute to the certificate. Our second contribution is a matched comparison of four certificates on two QUIC corpora, with a temporal check of the primary methods on XS. The product bounds favor cell-wise inference for 16 classes and pooling for 44 classes across both XS windows at the default block alignments. Controlled simulations vary gain concentration and the number of occupied cells to explain when this ordering can reverse. Our third contribution characterizes the limits of the evidence through a sample-size benchmark, a conditional converse for the frozen rule, and sensitivity to block design, fitted rule, and class weights.
 
 \section{Related work}
 
@@ -50,10 +50,12 @@ MIMETIC and TrafficCross combine several traffic representations to improve pred
 
 Learn then Test uses multiple testing to calibrate predictive rules with finite-sample risk guarantees \cite{angelopoulos2025learntest}. Our guarantee instead concerns the difference between two optimal accuracies on a fixed cohort, using a rule fitted before evaluation. We use Hoeffding's inequality for bounded independent observations \cite{hoeffding1963} and a product bound based on the arithmetic--geometric mean and Markov inequalities. The product gives a conditional e-value \cite{vovk2021evalues} for a null that constrains the sum of block means and permits unequal individual means. The simultaneous cell guarantee allows dependence among cells within each time block.
 
-\section{Conditional Bayes gain}
+\section{Finite-sample certificates for Bayes gain}
+
+\subsection{Conditional Bayes gain}
 \label{sec:target}
 
-Let the evaluation cohort contain $n$ records indexed by $i$. Record $i$ has class $Y_i\in\{1,\dots,K\}$, coarse observation $C_i\in\mathcal C$, and an added feature $T_i\in\mathcal T$. Both feature alphabets are finite. For class prior $\pi_y$ and cohort count $n_y>0$, use weight $w_i=\pi_{Y_i}/n_{Y_i}$. The main comparisons use $\pi_y=1/K$. Section~\ref{sec:xs-sensitivity} also evaluates a prior derived from fitting counts. Let $\given$ fix the labels, coarse observations, retained-record set, weights, block memberships, and a rule $f(c,t)$ fitted on a separate window. Conditional on $\given$, the joint vectors of added features in different blocks are independent. Features inside a block may be arbitrarily dependent, and blocks can have different laws.
+Let the evaluation cohort contain $n$ records indexed by $i$. Record $i$ has class $Y_i\in\{1,\dots,K\}$, coarse observation $C_i\in\mathcal C$, and an added feature $T_i\in\mathcal T$. Both feature alphabets are finite. For class prior $\pi_y$ and cohort count $n_y>0$, use weight $w_i=\pi_{Y_i}/n_{Y_i}$. The main comparisons use $\pi_y=1/K$. \ref{sec:xs-sensitivity} also evaluates a prior derived from fitting counts. Let $\given$ fix the labels, coarse observations, retained-record set, weights, block memberships, and a rule $f(c,t)$ fitted on a separate window. Conditional on $\given$, the joint vectors of added features in different blocks are independent. Features inside a block may be arbitrarily dependent, and blocks can have different laws.
 
 For a coarse cell $c$, the best coarse contribution to expected accuracy is known under the conditioning. Define
 \begin{align}
@@ -66,12 +68,14 @@ Here $B_c$ is the best expected contribution of a fine rule on the conditional, 
  \Delta=\sum_{c\in\mathcal C}(B_c-A_c)\ge 0.
  \label{eq:target}
 \end{equation}
-In the experiments, the sample Bayes gain replaces the conditional timing probabilities by observed indicators before taking the fine maxima. Since the maxima are convex, its conditional expectation is at least $\Delta$. We report it as a descriptive statistic. The lower bounds below use the frozen rule, whose expected accuracy cannot exceed the Bayes optimum.
+In the experiments, the sample Bayes gain replaces the conditional probabilities of the added feature by observed indicators before taking the fine maxima. Since the maxima are convex, its conditional expectation is at least $\Delta$. We report it as a descriptive statistic. The lower bounds below use the frozen rule, whose expected accuracy cannot exceed the Bayes optimum.
 
-\section{Certificates from block scores}
+\subsection{Frozen rule and block scores}
 \label{sec:certificates}
 
-For each record, evaluate whether $f(C_i,t)$ is correct at all, some, or none of the possible timing values $t$. In cell $c$, let $D_c$ be the weight of records that are always correct. Records that are always wrong contribute zero. Let $X_{cb}$ be the observed correct weight among the remaining records in cell $c$ and block $b$, and let $v_{cb}$ be their total weight. Then $0\le X_{cb}\le v_{cb}$. Both $D_c$ and $v_{cb}$ are fixed by $\given$. Write $I_c=\{b:v_{cb}>0\}$ and $\mu_c=\sum_{b\in I_c}\E[X_{cb}\mid\given]$. The expected frozen-rule contribution is $D_c+\mu_c\le B_c$.
+For each record, evaluate whether $f(C_i,t)$ is correct at all, some, or none of the possible values $t$ of the added feature. In cell $c$, let $D_c$ be the weight of records that are always correct. Records that are always wrong contribute zero. Let $X_{cb}$ be the observed correct weight among the remaining records in cell $c$ and block $b$, and let $v_{cb}$ be their total weight. Then $0\le X_{cb}\le v_{cb}$. Both $D_c$ and $v_{cb}$ are fixed by $\given$. Write $I_c=\{b:v_{cb}>0\}$ and $\mu_c=\sum_{b\in I_c}\E[X_{cb}\mid\given]$. The expected frozen-rule contribution is $D_c+\mu_c\le B_c$.
+
+\subsection{Cell-wise and pooled lower bounds}
 
 For any collection of conditionally independent nonnegative block scores $x=(x_1,\dots,x_m)$ with known ranges $[0,v_b]$, define two lower bounds for the sum of their conditional means,
 \begin{align}
@@ -110,25 +114,178 @@ The e-value is for the joint constraint on the block means. An individual normal
 
 The pooled counterparts sum $X_b=\sum_c X_{cb}$ and $v_b=\sum_c v_{cb}$ within each block. They apply~\eqref{eq:product} or~\eqref{eq:hoeffding} once at level $\alpha$, add $\sum_c D_c$, subtract $\sum_c A_c$, and truncate at zero. All four procedures lower-bound the same $\Delta$. Cell certificates retain positive contributions from cells with sufficient evidence. Their product bound scales with $(\alpha/M)^{1/m}$ for a cell with $m$ active blocks, so multiplicity has a stronger effect when $m$ is small. Pooling spends the full tail budget once and can combine evidence spread across many cells. The product bound uses a geometric mean and vanishes if an included block has zero score. The Hoeffding bound uses the sum of scores and subtracts a penalty determined by the block ranges. It can remain positive with some zero scores if the total is large relative to those ranges.
 
+\subsection{Worked example with packet timing}
+\label{sec:worked-example}
+
+In the 16-class XS cohort, coarse symbol 509 encodes the first five packet directions $(+,-,-,-,+)$, where $+$ is client to server. All five sizes are in the upper bin, starting at 39 bytes. A coarse rule makes one decision for this entire pattern. The frozen fine rule predicts APP code 31 if the first inter-packet interval is in $(0,1]$ ms and APP code 35 if it is in $(1,4]$ ms.
+
+In the original XS evaluation window, this cell contains 574{,}783 flows and has mutable records on all 91 days. The frozen rule's observed gain contribution $D_c+\sum_b X_{cb}-A_c$ is 2.79020 pp. The cell Hoeffding radius of 3.32999 pp gives a zero contribution after truncation. The cell product bound uses the 91 daily scores and the per-cell tail probability $0.05/87$. Inserting it into \eqref{eq:cell-bound} gives a 1.48313 pp lower contribution. It supplies the entire daily cell product bound in this cohort.
+
 \section{Experiments}
 \label{sec:experiments}
 
-\subsection{Data and protocol}
+\subsection{Datasets and evaluation protocol}
 
-We use CESNET-QUIC22 \cite{luxemburk2023cesnet} and CESNET-QUICEXT-25 \cite{cesnet2025cesnet}. For the latter, we use the 10-million-flow XS release. The coarse feature encodes the directions and two logarithmic size bins of the first five packets. The augmented representation retains this symbol and adds the first inter-packet interval. We use the original timing pilot's right-closed cuts at $0,1,4,16$ ms throughout the comparisons and the temporal check. In each corpus and class cohort, the fine witness predicts the class with largest prior-weighted frequency in the fitted fine cell. A fine cell unobserved in fitting uses the fitted coarse decision. The matched comparisons hold this witness fixed across all four certificates.
+We use CESNET-QUICEXT-25 XS, the 10-million-flow release, and CESNET-QUIC22-S \cite{cesnet2025cesnet,luxemburk2023cesnet}. The coarse representation encodes the directions and two logarithmic size bins of the first five packets. The fine representation adds the first inter-packet interval using the timing pilot's right-closed cuts at $0,1,4,16$ ms. For each cohort, the frequency rule predicts the class with largest prior-weighted fitting frequency in the fine cell and falls back to the fitted coarse rule for unseen fine cells. The four certificates share the same records, class weights, and fitted rule within each comparison.
 
-Coarse symbol 509 encodes directions $(+,-,-,-,+)$, where $+$ is client to server. All five packet sizes are in the upper bin, starting at 39 bytes. For this symbol, the frozen 16-class XS fine rule predicts APP code 31 for timing in $(0,1]$ ms and APP code 35 for timing in $(1,4]$ ms. A coarse rule must use the same decision for both intervals. Symbol 479 also has all sizes in the upper bin and encodes directions $(+,-,+,-,-)$.
+On XS, the fitting window is June 1 to November 30, 2024. We select the top 16 and all 44 services with at least 2{,}000 eligible fitting flows, ranking by decreasing count and breaking ties by APP code. Each cohort uses an equal prior over its classes. We compare the four certificates in the original evaluation window, March 2 to June 1, 2025. We then check the two methods selected from that comparison on December 1, 2024 to March 1, 2025. All windows use UTC and exclude the right endpoint. The disjoint window was used for a separate fusion analysis. This check retains the fitted rules, service lists, weights, feature bins, and eligibility criteria.
 
-For QUIC22, we use the archived leading 4 MiB of each selected daily flow member. The fitting members cover October 31 to November 6, 2022, and the evaluation members cover November 8 to 27. The pipeline keeps flows with at least five valid packets that fit within one recorded hour and selects the eight most frequent non-background fitting labels. The resulting cohort has 283,526 evaluation flows. We treat this result as exploratory because the holdout informed development of the procedure.
+For the HDF5 analyses we retain flows with at least five valid packets whose timestamp envelope, including a one-hour margin on the stored end, fits inside one UTC date. The primary grouping is by UTC day. We also evaluate fixed two- and four-day groupings of the same records. The guard controls whether a single flow crosses a day boundary. Independence across blocks is a sampling assumption. Each fixed specification uses its own conditional coverage level. The cell methods use the same Bonferroni allocation within each comparison. Selecting a bound or timing cut using evaluation timing requires accounting for that selection, and each set of timing cuts defines its own Bayes gain target.
 
-For QUICEXT-25 XS, the fitting window is June 1 to November 30, 2024 and the evaluation window is March 2 to June 1, 2025, with right endpoints excluded and all times in UTC. The baseline retains the original eight most frequent eligible pilot classes. The expansion selects the top 16 and all 44 classes with at least 2,000 eligible fitting flows, ranking by decreasing count with APP code as the tie-break. Each cohort uses an equal prior over its own classes. In evaluation, we retain flows whose timestamp envelope, including a one-hour margin on the stored end, stays inside one UTC date. The envelope prevents an individual retained flow from spanning two days. It supplies a reproducible grouping rule and leaves conditional block independence as an assumption.
+\subsection{Primary results on two XS evaluation windows}
+\label{sec:temporal-check}
 
-The primary grouping is calendar days. We also report fixed two- and four-day groupings of the same retained records, aligned to the calendar index. Within each cohort and width, all four certificates use the same weights, rule, records, and conditioning. Unless otherwise indicated, each fixed lower bound has at least 95\% conditional coverage under its specified grouping. The two cell methods use the same Bonferroni allocation. The pointwise guarantee applies to a specification fixed independently of evaluation timing. Selecting among bounds or timing cuts using those observations requires a procedure that accounts for the selection. Each set of cuts defines its own augmented representation and Bayes gain.
+Table~\ref{tab:primary-xs} compares all four daily bounds in the two windows. The original comparison uses tail probability 0.05 per fixed bound. Before running the disjoint check, we selected cell product for 16 classes and pooled product for 44 classes based on the original results. Each of the two primary bounds in the disjoint window uses tail probability 0.025 and has at least 97.5\% coverage conditional on its own cohort information under the daily block model.
+
+\begin{table}[!ht]
+\centering
+\small
+\caption{Daily conditional lower bounds on Bayes gain (pp) for adding timing on XS. Tail probabilities are 0.05 per fixed bound in the original comparison and 0.025 in the disjoint check. Bold marks the primary bounds selected for the disjoint check.}
+\label{tab:primary-xs}
+\begin{tabular}{rlrr}
+\toprule
+Classes & Certificate & Original window & Disjoint window \\
+\midrule
+16 & Pooled Hoeffding & 0 & 0 \\
+   & Pooled product & 0 & 0.13536 \\
+   & Cell Hoeffding & 0 & 0.03046 \\
+   & Cell product & 1.48313 & \textbf{2.32724} \\
+\addlinespace
+44 & Pooled Hoeffding & 0.94622 & 1.12468 \\
+   & Pooled product & 2.03485 & \textbf{1.93505} \\
+   & Cell Hoeffding & 0.70709 & 0.42046 \\
+   & Cell product & 2.01152 & 1.29856 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Both primary bounds are positive. In the 16-class cohort, symbol 509 contributes all of the original daily cell product bound and 99.97\% of the disjoint-window bound. In the 44-class cohort, five cells contribute to the original daily cell product bound. Symbols 479, 511, and 509 account for 91.41\% of that bound and make positive daily contributions in both windows. The 16- and 44-class results compare methods within each cohort. Changing the cohort changes the service mix, class weights, and fitted rule.
+
+The same certificate gives the largest bound within each cohort at the default two- and four-day alignments in both windows. On four-day blocks, the 16-class cell product bounds are 0.305 and 0.433 pp, and the 44-class pooled product bounds are 1.678 and 1.229 pp. Each width has its own block assumption. \ref{app:full-comparisons} gives the full matched results and the exploratory eight-class comparisons.
+
+\subsection{Cross-corpus evaluation on QUIC22-S}
+\label{sec:quic22-s}
+
+We scan all 25 million records in the S release. We fit on October 31 through November 6, 2022, and evaluate November 8 through 27 using the stored UTC timestamps. We use the same H5 eligibility rules and one-hour end margin as for XS, with the daily guard applied to the holdout. We rank non-background services with at least 2,000 eligible fitting flows by fitting count, breaking ties by APP code. We fit separate equal-prior frequency rules for the first 8, the first 16, and all 82 qualifying classes. The retained evaluation spans 20 UTC dates for each cohort.
+
+\begin{table}[!ht]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{QUIC22-S daily conditional lower bounds (pp) and descriptive sample Bayes gain (pp). Each fixed daily bound has 95\% conditional coverage under the block model. All four methods give zero for the two- and four-day groupings in each cohort.}
+\label{tab:quic22-s}
+\begin{tabular}{rrrrrrr}
+\toprule
+Classes & Flows & Sample gain & Pooled H. & Pooled prod. & Cell H. & Cell prod. \\
+\midrule
+8 & 7,616,452 & 3.60311 & 0 & 0 & 0 & 0 \\
+16 & 12,097,980 & 5.65618 & 0 & 0 & 0 & 0.27236 \\
+82 & 16,163,125 & 4.81089 & 0 & 1.28878 & 0 & 0.49711 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:quic22-s} shows that the cell product bound is the sole positive daily result for 16 classes. For all 82 eligible classes, pooled product gives the largest bound. The eight-class cohort has a sample gain of 3.60311 pp and zero lower bounds. With two- and four-day blocks, every lower bound is zero in all three cohorts. Thus the daily ordering of the two product bounds repeats in the larger cohorts, and the persistence of positive bounds at coarser widths is specific to XS in these experiments.
+
+\subsection{When do cell-wise bounds help?}
+\label{sec:concentration}
+
+To isolate the effect of gain concentration and the number of occupied cells, we simulate 32 equally weighted coarse cells with balanced binary labels and 20, 40, 80, or 160 blocks. Each cell and block has eight groups. An independent Bernoulli bit in each group makes the added binary feature agree with every label in the group or flips them all. Each group repeats a balanced pair of labels to keep the total flow count at 81,920 across the block counts. The fixed rule predicts the added feature. In the alternatives, we distribute a total Bayes gain of 4 pp equally across 4, 8, 16, or 32 cells. In the null, all agreement probabilities are one half. We evaluate four bounds on the same scores in each of 10,000 replicates per setting at tail probability 0.05.
+
+At 80 blocks, with gain in four cells, the median cell and pooled product bounds are 3.064 and 1.940 pp. With gain spread across all 32 cells, the medians are 0.030 and 1.928 pp. At 20 blocks, the four-cell case gives a 1.068 pp median cell product bound and a zero median pooled product bound. The two product bounds both have zero medians at 20 blocks with gain in all 32 cells. The largest observed undercoverage frequency across settings and methods is 0.59\%. The change in ordering at 80 blocks occurs with the class weights, flow count, and true gain held fixed.
+
+To isolate the multiplicity cost, we increase the total occupied cell count from 32 to 88 or 199 by splitting only zero-gain cells. The children share their parent's block draws and divide its mass proportionally. This preserves the signal cells, true gain, and pooled block scores on every replicate. Each child receives the tail probability for the expanded cell count. By homogeneity, its bound scales with its share of the parent mass, so the sum of its siblings' bounds equals the parent bound at the smaller tail probability. Dependence between children within a block is allowed by the simultaneous cell guarantee.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/cell-count-sweep.pdf}
+\caption{Median product lower bounds across 10,000 replicates with 80 blocks and a true gain of 4 percentage points. Within each panel, splitting zero-gain cells changes the cell-level error allocation and preserves the pooled scores on every replicate.}
+\label{fig:cell-count-sweep}
+\end{figure}
+
+With eight signal cells at 80 blocks, the cell product bound exceeds the pooled product bound in 75.47\%, 54.17\%, and 35.19\% of replicates as the occupied count rises from 32 to 88 and 199. The median ordering reverses (Fig.~\ref{fig:cell-count-sweep}). With four signal cells, the cell median remains larger at all three counts. With 20 blocks and eight signal cells, the fraction of positive cell product bounds falls from 54.09\% to 1.01\% between 32 and 199 occupied cells. These comparisons isolate the effect of the error allocation in this simulation.
+
+\subsection{Sensitivity to block design}
+\label{sec:calendar-alignment}
+
+We vary the calendar offset while holding the retained flows, fitted rule, bins, and weights fixed within each 44-class XS window. Both two-day offsets give positive pooled product bounds in each window. At four days, all offsets give positive bounds in the original window, and the disjoint-window bounds range from zero to 1.229 pp. Each bound is pointwise under the model for its partition. The full offset comparison is in \ref{app:alignment-and-omission}.
+
+Adjacent daily score ratios have lag-one correlations of 0.376 and 0.554 in the original and disjoint windows. The ratios can change with daily conditional means as well as with dependence. We also use a model that allows dependence between the even- and odd-date groups and assumes conditional independence within each group. Under this model, the pooled product bounds are 1.543 and 1.277 pp, respectively, and both Hoeffding bounds are zero (\ref{app:daily-dependence}).
+
+\subsection{Sensitivity to dominant cells and fitted rules}
+
+In the 16-class cohort, dropping symbol 509 leaves a zero daily cell product bound in the original window and 0.00061 pp in the disjoint window. In the 44-class cohort, dropping symbol 479 and accounting for selection among possible omissions leaves pooled daily lower bounds of 0.405 and 0.298 pp. The adjusted two- and four-day bounds are zero. These bounds use the original class weights and target the contribution of the retained cells (\ref{app:alignment-and-omission}).
+
+A multinomial logistic witness gives positive daily bounds under equal class priors in both XS cohorts and windows. For 44 classes under square-root evaluation priors, the original equal-prior frequency rule gives zero bounds at every width. Refitting the rule using the square-root prior yields daily cell product bounds of 1.390 and 1.837 pp. This comparison fixes the evaluation weights and changes the witness. The full comparison crosses the fitting and evaluation priors in \ref{sec:xs-sensitivity}.
+
+\FloatBarrier
+
+\section{Discussion}
+
+\subsection{Choosing a certificate}
+
+Use fitting or pilot data to choose a primary certificate. Cell bounds can preserve evidence concentrated in a few cells with informative block scores, as in the 16-class XS cohort. Pooling can be preferable when evidence is spread across cells or when a large occupied alphabet reduces the per-cell error budget. Product bounds benefit from positive scores across active blocks. Hoeffding can still give a positive bound when some active scores are zero and the sum is large relative to the block ranges. For a fixed cohort and partition, coverage for a method selected using evaluation scores requires allocating the tail probability across the candidate methods.
+
+On the exploratory QUIC22 prefix holdout, weighting the cell error budgets by the mass of records whose correctness can change increased the daily product bound and reduced the daily Hoeffding bound (\ref{app:weighted-cells}).
+
+\subsection{How many independent blocks are needed?}
+
+Consider balanced binary classes with a constant coarse feature. In unit $b$, a shared $U_b\sim\mathrm{Bernoulli}(p)$ either makes the fine feature agree with all labels or flips all labels. The units are independent. Repeating records inside a unit supplies one random bit about $p$. The Bayes gain is $|p-1/2|$. For the simple null $p=1/2$ and the fixed alternative $p=1/2+\delta$, every test of size at most $\alpha$ and power at least $1-\beta$ needs a number of units $n$ satisfying
+\begin{equation}
+ n\,d(1/2+\delta\,\Vert\,1/2)\ge d(1-\beta\,\Vert\,\alpha),
+\end{equation}
+where $d$ is Bernoulli relative entropy. This follows by applying data processing to the rejection indicator under the two joint laws \cite{kaufmann2016complexity}. The likelihood ratio increases with the number of agreements, so an exact upper-tail binomial test with boundary randomization attains the optimal size--power tradeoff \cite{neyman1933tests}.
+
+Table~\ref{tab:power} contrasts the necessary KL count, the optimal randomized test, and two Hoeffding choices. The known range of the normalized unit score is $1/n$. The generic paired-score range is $2/n$. All counts refer to this model, the stated direction, and a fixed sample size.
 
 \begin{table}[t]
 \centering
 \small
-\caption{Evaluation cohorts and descriptive sample Bayes gains. Gains are in percentage points (pp).}
+\setlength{\tabcolsep}{4pt}
+\caption{Independent units for 80\% power at one-sided size 0.025 in the shared-bit model. The KL column is a necessary lower bound. The other columns give the first unit count attaining the target power.}
+\label{tab:power}
+\begin{tabular}{rrrrrr}
+\toprule
+Gain (pp) & KL & Optimal & Exact binomial & Known range H. & Generic H. \\
+\midrule
+1.00 & 12,279 & 19,621 & 19,648 & 31,577 & 98,344 \\
+2.00 & 3,069 & 4,904 & 4,927 & 7,865 & 24,572 \\
+4.76 & 542 & 865 & 869 & 1,377 & 4,330 \\
+5.27 & 441 & 705 & 716 & 1,121 & 3,527 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Scope of the conditional guarantee}
+
+The guarantee applies to the class-weighted gain on the fixed evaluation cohort. Extending it to future traffic requires assumptions connecting that cohort to the deployment population. Both corpora were collected on the CESNET network in different periods. Their comparison changes the number of blocks, the fitted rule, the class mixture, and the block score distribution together.
+
+The day guard defines a reproducible grouping. Shared traffic conditions can induce dependence across dates. The collection schedule and the duration of known shared conditions can inform a primary partition before evaluation timing is examined. Coverage after choosing a partition using the evaluation scores requires both an error budget for selection and a valid sampling model for the candidate bounds. The observed score correlations and the offset sensitivity in Section~\ref{sec:calendar-alignment} leave conditional independence within each assumed group unresolved.
+
+Under independent blocks, empirical Bernstein bounds offer a variance-adaptive alternative for bounded scores \cite{maurer2009bernstein}. Heterogeneous block scores require a common range or a bound that uses the individual ranges. Betting bounds can use a specified conditional-mean structure \cite{waudby2024betting}. Heteroskedasticity and autocorrelation consistent covariance estimation gives asymptotic variance estimates under its own assumptions \cite{newey1987hac}.
+
+\ref{app:frozen-converse} gives a separate limit for the gain of the particular frozen rule over the coarse optimum. On the observed exploratory QUIC22 prefix cohort, a zero frozen-rule gain model can replay the full observation with probability above 0.05 at each tested width. This rules out a positive deterministic 95\% lower bound for that frozen-rule target under the stated model. The fine Bayes rule can choose other decisions under the same law.
+
+\section{Conclusion}
+
+Under conditional independence across blocks, nested fusion permits finite-sample lower bounds on class-weighted Bayes accuracy gains for a fixed evaluation cohort. The daily cell product bounds for adding timing in the 16-class XS cohort are 1.483 and 2.327 pp in two evaluation windows. The 44-class cohort gives pooled product bounds of 2.035 and 1.935 pp. The two 44-class bounds remain positive after omitting the leading original cell and accounting for selection among omissions at the daily width. The simulations show how the distribution of gain and the number of occupied cells affect the choice between cell and pooled bounds. The XS sensitivity checks show how the fitted rule and the target class weights also affect the resulting bounds.
+
+\section*{Data and code availability}
+
+The QUIC22 prefix analysis uses daily file segments from the \href{https://zenodo.org/records/10728760}{CESNET-QUIC22 Zenodo archive} \cite{luxemburk2023cesnet}. The HDF5 analyses use the \texttt{S} release of CESNET-QUIC22 and the \texttt{XS} release of CESNET-QUICEXT-25, available through \href{https://cesnet.github.io/cesnet-datazoo/}{CESNET DataZoo}. CESNET also provides a \href{https://zenodo.org/records/17249078}{Zenodo record for QUICEXT-25} \cite{cesnet2025cesnet}.
+
+The \href{https://github.com/LianningLBY/EIBO/blob/8a3f5cf7972d2c0041c22ffe4796be5b99885e0d/docs/TIMING_CELL_CERTIFICATE.md}{EIBO reproduction guide} links the scripts, manifests, and JSON outputs. The manifests and result files record the prefix byte ranges, input hashes, and cohort definitions. The repository is private. Contact the corresponding author to request access to the code and results.
+
+\appendix
+\section{Full matched comparisons and exploratory cohorts}
+\label{app:full-comparisons}
+
+The original comparisons include the eight most frequent eligible XS pilot classes and the eight most frequent non-background fitting labels in the QUIC22 archive-prefix analysis. For the latter, we use the leading 4 MiB of each selected daily flow member. The fitting members cover October 31 to November 6, 2022, and the evaluation members cover November 8 to 27. The analysis keeps flows with at least five valid packets that fit within one recorded hour. The holdout informed development of the procedure, so these prefix results are exploratory.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Original evaluation cohorts and descriptive sample Bayes gains. Gains are in percentage points (pp).}
 \label{tab:cohorts}
 \begin{tabular}{lrrrrr}
 \toprule
@@ -141,10 +298,6 @@ QUICEXT-25 XS & 44 & 2,038,134 & 91 & 88 & 6.39494 \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\subsection{Matched comparison}
-
-Table~\ref{tab:cohorts} reports the retained cohorts and empirical gains. Table~\ref{tab:bounds} compares certificates. Both pooled methods return zero on QUIC22. For daily blocks, both cell methods certify positive gain from coarse symbol 501. The product bound improves the cell Hoeffding result from 0.01605 to 0.05429 pp. At the coarser widths both cell bounds fall to zero. In the eight-class XS cohort, symbol 469 supplies the cell product bound at every width. Cell Hoeffding gives the larger daily result, and the product bound is larger for the two coarser groupings.
 
 \begin{table}[t]
 \centering
@@ -175,15 +328,6 @@ XS, 44 & 1 day & 0.94622 & 2.03485 & 0.70709 & 2.01152 \\
 \end{tabular}
 \end{table}
 
-In the original evaluation window, the 16-class XS cell product bound is positive at all three widths. The other three methods give zero at each width. Symbol 509 supplies the entire positive bound. It includes 574,783 evaluation flows and has mutable records in all 91 daily blocks. Its daily frozen-rule gain contribution is 2.79020 pp. The cell Hoeffding radius for this symbol is 3.32999 pp, whereas the cell product method gives a positive lower contribution of 1.48313 pp. Pooling all cells gives a frozen-rule gap of 2.84360 pp. The pooled product result before truncation is $-0.91298$ pp.
-
-The 44-class cohort illustrates a different outcome. Five cells contribute to the daily cell product bound, with symbols 479, 511, and 509 accounting for 91.41\% of that bound. Pooled product gives the largest lower bound at every width. Its result is 2.03485 pp on daily blocks and 1.67772 pp on four-day blocks. The 16- and 44-class analyses support comparisons within each cohort. Changing the class count also changes the equal priors, the selected population, and the fitted witness.
-
-\subsection{Temporal check with frozen rules}
-\label{sec:temporal-check}
-
-We evaluate the same fitted 16- and 44-class rules from December 1, 2024 to March 1, 2025 (right endpoint excluded, UTC). This window is disjoint from the fitting period and the original evaluation window in Table~\ref{tab:bounds}. It was previously used for a separate fusion analysis. Before running this temporal check, we chose the daily cell product bound for 16 classes and the daily pooled product bound for 44 classes using the original comparison. The check retains the original service lists, class priors, feature bins, and daily guard. Each primary bound uses tail probability 0.025 and has at least 97.5\% coverage under conditional independence of the daily blocks given the information for its own cohort.
-
 \begin{table}[t]
 \centering
 \small
@@ -205,35 +349,16 @@ Classes & Width & Pooled H. & Pooled prod. & Cell H. & Cell prod. \\
 \end{tabular}
 \end{table}
 
-Both primary bounds exceed zero (Table~\ref{tab:temporal-check}). The 16-class cell product bound is 2.32724 pp with daily blocks and 0.43333 pp with four-day blocks. The 44-class pooled product bound is 1.93505 pp with daily blocks and 1.22877 pp with four-day blocks. The original ordering repeats at all three widths. The 16-class daily pooled product and cell Hoeffding bounds also become positive in the disjoint window. The two- and four-day comparisons use their own block assumptions.
+In the eight-class XS cohort, symbol 469 supplies the cell product bound at every width. Cell Hoeffding gives the larger daily result, and cell product is larger at two and four days. On the QUIC22 prefix cohort, both pooled methods return zero. For daily blocks, symbol 501 supplies the positive cell bounds of 0.01605 pp with Hoeffding and 0.05429 pp with the product method. Both cell bounds are zero at the coarser widths.
 
-In the 16-class cohort, symbol 509 contributes 99.97\% of the daily cell product bound in the disjoint window and the entire two- and four-day bounds. It also supplies the entire bound at all widths in the original window. For 44 classes, symbols 479, 509, and 511 make positive contributions in both windows at the daily and two-day widths. Symbol 479 is the only shared positive contributor at four days. These comparisons use each window's respective error level.
+In the original 16-class XS cohort, pooling all cells gives a frozen-rule gap of 2.84360 pp. The pooled product result before truncation is $-0.91298$ pp. Section~\ref{sec:worked-example} gives the corresponding cell calculation for symbol 509.
 
-We omit the largest original daily contributor in each cohort and sum the remaining cell product lower contributions. We retain the original class weights and simultaneous error allocation, so this sum bounds the contribution of the retained cells to the original target. After omitting symbol 509, the 16-class daily bound is zero in the original window and 0.00061 pp in the disjoint window. After omitting symbol 479, the 44-class daily bounds are 1.199 and 0.664 pp. The 44-class two-day bounds are 0.876 and 0.516 pp, and its four-day bounds are 0.335 and zero.
+\FloatBarrier
 
-For the 44-class cohort, we also recompute the pooled product bound over the retained cells. For an omitted cell $s$, the target is $\sum_{c\ne s}(B_c-A_c)$ with the original class weights. We remove $s$ from the pooled block scores, fixed correct mass, and coarse optimum. For each fixed width and window, we use a tail probability of $\alpha/M$ per possible single-cell omission. The union bound gives simultaneous coverage over all $M$ occupied cells. We also report the pointwise results at the archived window-specific $\alpha$ for comparison.
+\section{Calendar alignment and single-cell omission}
+\label{app:alignment-and-omission}
 
-\begin{table}[t]
-\centering
-\small
-\caption{Pooled product lower bounds (pp) for the 44-class XS cohort after omitting symbol 479. The simultaneous columns account for selection among all occupied cells at each window and width. The error budgets are 0.05 in the original window and 0.025 in the disjoint window.}
-\label{tab:pooled-ablation}
-\begin{tabular}{lrrrr}
-\toprule
- & \multicolumn{2}{c}{Original} & \multicolumn{2}{c}{Disjoint} \\
-Width & Pointwise & Simultaneous & Pointwise & Simultaneous \\
-\midrule
-1 day & 0.98844 & 0.40489 & 1.08681 & 0.29845 \\
-2 days & 0.84736 & 0 & 1.14954 & 0 \\
-4 days & 0.66827 & 0 & 0.46778 & 0 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-With adjustment for the omitted cell, the retained cells give positive pooled daily lower bounds in both windows (Table~\ref{tab:pooled-ablation}). The adjusted two- and four-day bounds are zero. The positive daily result thus holds for the remaining cells under the daily block model.
-
-\subsection{Calendar alignment sensitivity}
-\label{sec:calendar-alignment}
+\subsection{Calendar offsets}
 
 For the 44-class XS cohort, we keep the fitted frequency rule, feature bins, daily guard, records, and equal evaluation weights fixed within each window. The original and disjoint windows retain 2,038,134 and 2,318,322 flows. For block width $w$ and calendar offset $s\in\{0,\ldots,w-1\}$, we assign UTC day $d$, indexed from the Unix epoch, to block $\lfloor(d-s)/w\rfloor$. Partial blocks retain their flows at each window edge. The zero offsets reproduce the partitions used in Tables~\ref{tab:bounds} and~\ref{tab:temporal-check}. Each offset gives a pointwise bound under conditional independence for its own partition.
 
@@ -261,150 +386,33 @@ Both two-day alignments give positive bounds in each window (Table~\ref{tab:cale
 
 To describe how scores change across dates, we divide each day's pooled mutable correct weight by its mutable weight and compute the Pearson correlation between adjacent UTC days with defined ratios. The lag-one correlations are 0.376 over 90 pairs in the original window and 0.554 over 84 pairs in the disjoint window. The correlation describes the observed scores and can reflect variation in conditional means across dates as well as dependence.
 
-\subsection{Comparison on CESNET-QUIC22-S}
-\label{sec:quic22-s}
+\subsection{Single-cell omission}
 
-We scan all 25 million records in the S release. We fit on October 31 through November 6, 2022, and evaluate November 8 through 27 using the stored UTC timestamps. We use the same H5 eligibility rules and one-hour end margin as for XS, with the daily guard applied to the holdout. We rank non-background services with at least 2,000 eligible fitting flows by fitting count, breaking ties by APP code. We fit separate equal-prior frequency rules for the first 8, the first 16, and all 82 qualifying classes. The retained evaluation spans 20 UTC dates for each cohort.
+In the 16-class cohort, symbol 509 contributes 99.97\% of the daily cell product bound in the disjoint window and the entire two- and four-day bounds. It also supplies the entire bound at all widths in the original window. For 44 classes, symbol 479 has directions $(+,-,+,-,-)$, with all five sizes in the upper bin. Symbols 479, 509, and 511 make positive contributions in both windows at the daily and two-day widths. Symbol 479 is the only shared positive contributor at four days. These comparisons use each window's respective error level.
 
-\begin{table}[t]
-\centering
-\small
-\setlength{\tabcolsep}{4pt}
-\caption{QUIC22-S daily conditional lower bounds (pp) and descriptive sample Bayes gain (pp). Each fixed daily bound has 95\% conditional coverage under the block model. All four methods give zero for the two- and four-day groupings in each cohort.}
-\label{tab:quic22-s}
-\begin{tabular}{rrrrrrr}
-\toprule
-Classes & Flows & Sample gain & Pooled H. & Pooled prod. & Cell H. & Cell prod. \\
-\midrule
-8 & 7,616,452 & 3.60311 & 0 & 0 & 0 & 0 \\
-16 & 12,097,980 & 5.65618 & 0 & 0 & 0 & 0.27236 \\
-82 & 16,163,125 & 4.81089 & 0 & 1.28878 & 0 & 0.49711 \\
-\bottomrule
-\end{tabular}
-\end{table}
+We omit the largest original daily contributor in each cohort and sum the remaining cell product lower contributions. We retain the original class weights and simultaneous error allocation, so this sum bounds the contribution of the retained cells to the original target. After omitting symbol 509, the 16-class daily bound is zero in the original window and 0.00061 pp in the disjoint window. After omitting symbol 479, the 44-class daily bounds are 1.199 and 0.664 pp. The 44-class two-day bounds are 0.876 and 0.516 pp, and its four-day bounds are 0.335 and zero.
 
-Table~\ref{tab:quic22-s} shows that the cell product bound is the sole positive daily result for 16 classes. For all 82 eligible classes, pooled product gives the largest bound. The eight-class cohort has a sample gain of 3.60311 pp and zero lower bounds. With two- and four-day blocks, every lower bound is zero in all three cohorts. Thus the daily ordering of the two product bounds repeats in the larger cohorts, and the persistence of positive bounds at coarser widths is specific to XS in these experiments.
-
-\subsection{Gain concentration and occupied cell count}
-\label{sec:concentration}
-
-We simulate 32 equally weighted coarse cells with balanced binary labels and 20, 40, 80, or 160 blocks. Each cell and block has eight groups. An independent Bernoulli bit in each group makes the added binary feature agree with every label in the group or flips them all. Each group repeats a balanced pair of labels to keep the total flow count at 81,920 across the block counts. The fixed rule predicts the added feature. In the alternatives, we distribute a total Bayes gain of 4 pp equally across 4, 8, 16, or 32 cells. In the null, all agreement probabilities are one half. We evaluate four bounds on the same scores in each of 10,000 replicates per setting at tail probability 0.05.
-
-At 80 blocks, with gain in four cells, the median cell and pooled product bounds are 3.064 and 1.940 pp. With gain spread across all 32 cells, the medians are 0.030 and 1.928 pp. At 20 blocks, the four-cell case gives a 1.068 pp median cell product bound and a zero median pooled product bound. The two product bounds both have zero medians at 20 blocks with gain in all 32 cells. The largest observed undercoverage frequency across settings and methods is 0.59\%. The change in ordering at 80 blocks occurs with the class weights, flow count, and true gain held fixed.
-
-To isolate the multiplicity cost, we increase the total occupied cell count from 32 to 88 or 199 by splitting only zero-gain cells. The children share their parent's block draws and divide its mass proportionally. This preserves the signal cells, true gain, and pooled block scores on every replicate. Each child receives the tail probability for the expanded cell count. By homogeneity, its bound scales with its share of the parent mass, so the sum of its siblings' bounds equals the parent bound at the smaller tail probability. Dependence between children within a block is allowed by the simultaneous cell guarantee.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\linewidth]{figures/cell-count-sweep.pdf}
-\caption{Median product lower bounds across 10,000 replicates with 80 blocks and a true gain of 4 percentage points. Within each panel, splitting zero-gain cells changes the cell-level error allocation and preserves the pooled scores on every replicate.}
-\label{fig:cell-count-sweep}
-\end{figure}
-
-With eight signal cells at 80 blocks, the cell product bound exceeds the pooled product bound in 75.47\%, 54.17\%, and 35.19\% of replicates as the occupied count rises from 32 to 88 and 199. The median ordering reverses (Fig.~\ref{fig:cell-count-sweep}). With four signal cells, the cell median remains larger at all three counts. With 20 blocks and eight signal cells, the fraction of positive cell product bounds falls from 54.09\% to 1.01\% between 32 and 199 occupied cells. These comparisons isolate the effect of the error allocation in this simulation.
-
-\subsection{Sensitivity to the fitted rule and class prior}
-\label{sec:xs-sensitivity}
-
-We use the registered XS 16- and 44-class cohorts, the original fitting period, and both evaluation windows. We compare the frequency rule with a multinomial logistic rule using additive categorical terms for the same coarse symbol and timing bin. The logistic rule is fitted to equal-class weighted counts from the original pilot, with an L2 penalty of 0.001 in the normalized objective. An unseen coarse symbol uses the frequency-rule fallback. We also use class weights proportional to the square roots of the fitting counts, which reduces the target mass of the 44-class service with 190 original holdout flows from 2.27\% to 0.68\%. For 44 classes we cross both frequency fitting priors with both evaluation priors. Each comparison uses the same retained flows and blocks within a cohort and window. The tail probability is 0.05 per fixed bound in both windows.
+For the 44-class cohort, we also recompute the pooled product bound over the retained cells. For an omitted cell $s$, the target is $\sum_{c\ne s}(B_c-A_c)$ with the original class weights. We remove $s$ from the pooled block scores, fixed correct mass, and coarse optimum. For each fixed width and window, we use a tail probability of $\alpha/M$ per possible single-cell omission. The union bound gives simultaneous coverage over all $M$ occupied cells. We also report the pointwise results at the archived window-specific $\alpha$ for comparison.
 
 \begin{table}[t]
 \centering
 \small
-\setlength{\tabcolsep}{4pt}
-\caption{Daily product lower bounds (pp) for XS sensitivity checks at tail probability 0.05 per fixed bound. The frequency and refitted rules use equal and square-root fitting priors, respectively. The prior shown in each row is the evaluation prior.}
-\label{tab:xs-sensitivity}
-\begin{tabular}{rlrrrr}
+\caption{Pooled product lower bounds (pp) for the 44-class XS cohort after omitting symbol 479. The simultaneous columns account for selection among all occupied cells at each window and width. The error budgets are 0.05 in the original window and 0.025 in the disjoint window.}
+\label{tab:pooled-ablation}
+\begin{tabular}{lrrrr}
 \toprule
- & & \multicolumn{2}{c}{Original} & \multicolumn{2}{c}{Disjoint} \\
-Classes & Rule, evaluation prior & Cell & Pooled & Cell & Pooled \\
+ & \multicolumn{2}{c}{Original} & \multicolumn{2}{c}{Disjoint} \\
+Width & Pointwise & Simultaneous & Pointwise & Simultaneous \\
 \midrule
-16 & Frequency, equal & 1.48313 & 0 & 2.39217 & 0.35759 \\
-   & Logistic, equal & 1.07323 & 0 & 1.90730 & 0 \\
-   & Frequency, square root & 1.67405 & 0 & 2.44219 & 0 \\
-   & Refitted, square root & 1.90142 & 0 & 2.53049 & 0.93079 \\
-\addlinespace
-44 & Frequency, equal & 2.01152 & 2.03485 & 1.35803 & 2.06194 \\
-   & Logistic, equal & 0.93386 & 0.67926 & 0.88874 & 0.67020 \\
-   & Frequency, square root & 0 & 0 & 0 & 0 \\
-   & Refitted, equal & 0.24724 & 0 & 0.63444 & 0 \\
-   & Refitted, square root & 1.38964 & 0.30499 & 1.83706 & 1.21411 \\
+1 day & 0.98844 & 0.40489 & 1.08681 & 0.29845 \\
+2 days & 0.84736 & 0 & 1.14954 & 0 \\
+4 days & 0.66827 & 0 & 0.46778 & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The logistic rule gives positive daily bounds under equal priors in both cohorts and windows. For 44 classes, the cell product bound is larger than the pooled product bound on daily blocks with the logistic rule. At four days, the 16-class original-window logistic bounds are all zero. The 44-class pooled logistic bounds remain positive in both windows at that width.
+With adjustment for the omitted cell, the retained cells give positive pooled daily lower bounds in both windows (Table~\ref{tab:pooled-ablation}). The adjusted two- and four-day bounds are zero. The positive daily result thus holds for the remaining cells under the daily block model.
 
-With square-root evaluation priors, all four 44-class bounds from the equal-prior frequency rule are zero at all three widths. Its observed gains over the reweighted coarse optimum are $-4.523$ pp in the original window and $-1.923$ pp in the disjoint window. Refitting with the square-root prior raises these gains to 2.968 and 4.415 pp for the same Bayes gain target. The cell product lower bounds reach 1.390 and 1.837 pp on daily blocks, and 0.606 and 0.755 pp on four-day blocks. At the equal evaluation prior, this refit reduces the daily cell product bounds from 2.012 and 1.358 pp to 0.247 and 0.634 pp, and both daily pooled product bounds become zero. Thus the effect of refitting depends on the evaluation prior.
-
-\subsection{Known-null checks}
-
-We simulated 36 equally weighted coarse cells and 10 independent blocks per family. A binary outcome in each cell and block either makes the added feature agree with all labels or flips all labels, inducing perfect dependence among the affected records. Class balance and a weighted mean agreement probability of one half give zero Bayes gain. Across 100,000 families per scenario, the observed family false-positive rates were 3.541\% with independent fair outcomes across cells, 0.117\% with the outcome shared across cells within a block, and 0.024\% with independent cells and alternating block agreement probabilities of 0.1 and 0.9. Exact family probabilities are 3.456\%, 0.098\%, and 0.021\%, respectively. These checks exercise the known-null implementation under the assumed block model.
-
-\section{Limits of certification}
-
-\subsection{Independent-unit sample complexity in a binary model}
-
-Consider balanced binary classes with a constant coarse feature. In unit $b$, a shared $U_b\sim\mathrm{Bernoulli}(p)$ either makes the fine feature agree with all labels or flips all labels. The units are independent. Repeating records inside a unit supplies one random bit about $p$. The Bayes gain is $|p-1/2|$. For the simple null $p=1/2$ and the fixed alternative $p=1/2+\delta$, every test of size at most $\alpha$ and power at least $1-\beta$ needs a number of units $n$ satisfying
-\begin{equation}
- n\,d(1/2+\delta\,\Vert\,1/2)\ge d(1-\beta\,\Vert\,\alpha),
-\end{equation}
-where $d$ is Bernoulli relative entropy. This follows by applying data processing to the rejection indicator under the two joint laws \cite{kaufmann2016complexity}. The likelihood ratio increases with the number of agreements, so an exact upper-tail binomial test with boundary randomization attains the optimal size--power tradeoff \cite{neyman1933tests}.
-
-Table~\ref{tab:power} contrasts the necessary KL count, the optimal randomized test, and two Hoeffding choices. The known range of the normalized unit score is $1/n$. The generic paired-score range is $2/n$. All counts refer to this model, the stated direction, and a fixed sample size.
-
-\begin{table}[t]
-\centering
-\small
-\setlength{\tabcolsep}{4pt}
-\caption{Independent units for 80\% power at one-sided size 0.025 in the shared-bit model. The KL column is a necessary lower bound. The other columns give the first unit count attaining the target power.}
-\label{tab:power}
-\begin{tabular}{rrrrrr}
-\toprule
-Gain (pp) & KL & Optimal & Exact binomial & Known range H. & Generic H. \\
-\midrule
-1.00 & 12,279 & 19,621 & 19,648 & 31,577 & 98,344 \\
-2.00 & 3,069 & 4,904 & 4,927 & 7,865 & 24,572 \\
-4.76 & 542 & 865 & 869 & 1,377 & 4,330 \\
-5.27 & 441 & 705 & 716 & 1,121 & 3,527 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{A conditional converse for the frozen rule}
-
-The frozen-rule gain and the Bayes gain are distinct targets. Write $D=\sum_c D_c$, $A=\sum_c A_c$, and let $x_b$ be the observed mutable correct weight in each block for the frozen rule. For the following construction, condition on the same cohort geometry as in Section~\ref{sec:target}. Independently for each block, replay the observed timing vector with probability $s_b$. Otherwise assign each mutable record a timing value that makes the frozen rule wrong. Such a value exists by definition. The expected frozen-rule accuracy under this law is $D+\sum_b s_bx_b$.
-
-If $0<A-D<\sum_b x_b$, choose the probabilities to give zero frozen-rule gain and maximize the probability of replaying the complete observation. For $x_b>0$, maximizing $\sum_b\log s_b$ subject to $\sum_b s_bx_b=A-D$ and $s_b\le1$ gives $s_b=\min(1,c/x_b)$, where $\sum_b\min(c,x_b)=A-D$. A block with $x_b=0$ can be replayed with probability one. If $\prod_b s_b>\alpha$, a deterministic procedure with uniform conditional coverage at level $1-\alpha$ must return a nonpositive lower bound for the frozen-rule gain on the observed timing vectors. A positive value would cause failure whenever that observation is replayed under the constructed zero-gain law.
-
-For the QUIC22 cohort, the replay probabilities for 1, 6, 24, and 48 hour groups are 8.53\%, 11.02\%, 11.02\%, and 32.91\%, respectively. All exceed 5\%. The law sets the expected accuracy of the particular frozen rule to the coarse optimum. The fine Bayes rule can choose different decisions under that law, so the construction permits a positive Bayes gain. This distinction is consistent with the positive daily Bayes-gain certificate in Table~\ref{tab:bounds}.
-
-\section{Discussion}
-
-The 16-class frequency-rule result locates a certified gain in one well-supported coarse symbol. The 44-class daily cell and pooled bounds remain positive in both windows after omitting the largest contributor. The simulation shows that both gain concentration and the number of occupied cells can change the relative performance of the product bounds. Matching the fitting prior to the evaluation prior can recover positive lower bounds for the same target and records. The fitted rule affects the evidence available to the certificate. The evaluation weights also determine the Bayes gain target.
-
-\paragraph{Choosing a certificate}
-Use fitting or pilot data to choose a primary method. Cell bounds can preserve evidence concentrated in a few cells with informative block scores. Pooling can be preferable when evidence is spread across cells or the number of occupied cells makes the per-cell error budget small. Product bounds benefit from positive scores across active blocks. Hoeffding can still give a positive bound when some active scores are zero and the observed gain exceeds the range penalty. For a fixed cohort and partition, allocate the tail probability across candidate methods before selecting one using evaluation scores.
-
-The allocation across cells also affects the bound. On the exploratory QUIC22 prefix holdout, allocating the error budget by the class-weighted mass of records whose correctness can change increased the daily cell product bound and reduced the daily cell Hoeffding bound (\ref{app:weighted-cells}).
-
-The certificate targets the class-weighted gain on the fixed evaluation cohort. Extending the claim to future traffic would require assumptions connecting that cohort to the deployment population. The one-hour guard keeps each retained flow within one date. Shared traffic conditions can still induce dependence across dates. The positive lag-one correlations and the zero bound at one disjoint-window alignment motivate reporting sensitivity to both block width and alignment. Conditional independence remains an assumption for the main comparisons. Under the model in \ref{app:daily-dependence}, the even and odd groups can be dependent, and days within each group are conditionally independent. The product lower bounds remain positive in both 44-class XS windows, and the Hoeffding bounds are zero. The collection schedule and duration of known shared conditions can inform a primary partition before evaluation timing is examined. A coverage statement for a selected partition requires an error budget for the selection and a valid sampling model for the candidate bounds used in that guarantee.
-
-An alternative under independent blocks is to use empirical Bernstein bounds for the mean of bounded independent observations \cite{maurer2009bernstein}. Applying such a bound to the sum of heterogeneous block scores requires an appropriate common range or a bound that uses the individual ranges. Betting methods also give variance-adaptive bounds for settings with a specified conditional-mean structure \cite{waudby2024betting}. Residual dependence across blocks poses a separate problem. Heteroskedasticity and autocorrelation consistent covariance estimation \cite{newey1987hac} provides an asymptotic variance estimate under its own assumptions. The daily score ratios can have different means and weights across dates. Their lag correlations describe the data and leave independence within each group unresolved.
-
-Both corpora were collected on the CESNET network in different periods and use different available label sets. QUIC22-S retains millions of flows and spans 20 evaluation days. Its coarser-width bounds are zero. The cross-corpus comparison changes the fitted rule, class mixture, and block score distribution along with the number of blocks.
-
-\section{Conclusion}
-
-Under conditional independence across blocks, nested fusion permits finite-sample lower bounds on class-weighted Bayes accuracy gains for a fixed evaluation cohort. In the 44-class XS cohort, the daily pooled product bounds for adding timing are 2.035 and 1.935 pp in two evaluation windows. Both remain positive after omitting the leading original cell and accounting for selection among omissions at the daily width. The simulations show how the distribution of gain and the number of occupied cells affect the choice between cell and pooled bounds. The XS sensitivity checks show how the fitted rule and the target class weights also affect the resulting bounds.
-
-\section*{Data and code availability}
-
-The QUIC22 prefix analysis uses daily file segments from the \href{https://zenodo.org/records/10728760}{CESNET-QUIC22 Zenodo archive} \cite{luxemburk2023cesnet}. The HDF5 analyses use the \texttt{S} release of CESNET-QUIC22 and the \texttt{XS} release of CESNET-QUICEXT-25, available through \href{https://cesnet.github.io/cesnet-datazoo/}{CESNET DataZoo}. CESNET also provides a \href{https://zenodo.org/records/17249078}{Zenodo record for QUICEXT-25} \cite{cesnet2025cesnet}.
-
-The \href{https://github.com/LianningLBY/EIBO/blob/8a3f5cf7972d2c0041c22ffe4796be5b99885e0d/docs/TIMING_CELL_CERTIFICATE.md}{EIBO reproduction guide} links the scripts, manifests, and JSON outputs. The manifests and result files record the prefix byte ranges, input hashes, and cohort definitions. The repository is private. Contact the corresponding author to request access to the code and results.
-
-\appendix
 \section{Sensitivity to dependence between days}
 \label{app:daily-dependence}
 
@@ -448,7 +456,51 @@ Disjoint & 0.025 & 1.12468 & 1.93505 & 0 & 1.27665 \\
 
 Table~\ref{tab:daily-dependence} uses the archived daily scores and ranges. The Hoeffding radii under the two-group model are 5.292 and 6.465 pp, exceeding the observed gaps of 4.688 and 5.696 pp.
 
-\section{Weighted allocation across coarse cells}
+\FloatBarrier
+
+\section{Fitted-rule and class-prior comparisons}
+\label{sec:xs-sensitivity}
+
+We use the registered XS 16- and 44-class cohorts, the original fitting period, and both evaluation windows. We compare the frequency rule with a multinomial logistic rule using additive categorical terms for the same coarse symbol and timing bin. The logistic rule is fitted to equal-class weighted counts from the original pilot, with an L2 penalty of 0.001 in the normalized objective. An unseen coarse symbol uses the frequency-rule fallback. We also use class weights proportional to the square roots of the fitting counts, which reduces the target mass of the 44-class service with 190 original holdout flows from 2.27\% to 0.68\%. For 44 classes we cross both frequency fitting priors with both evaluation priors. Each comparison uses the same retained flows and blocks within a cohort and window. The tail probability is 0.05 per fixed bound in both windows.
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{Daily product lower bounds (pp) for XS sensitivity checks at tail probability 0.05 per fixed bound. The frequency and refitted rules use equal and square-root fitting priors, respectively. The prior shown in each row is the evaluation prior.}
+\label{tab:xs-sensitivity}
+\begin{tabular}{rlrrrr}
+\toprule
+ & & \multicolumn{2}{c}{Original} & \multicolumn{2}{c}{Disjoint} \\
+Classes & Rule, evaluation prior & Cell & Pooled & Cell & Pooled \\
+\midrule
+16 & Frequency, equal & 1.48313 & 0 & 2.39217 & 0.35759 \\
+   & Logistic, equal & 1.07323 & 0 & 1.90730 & 0 \\
+   & Frequency, square root & 1.67405 & 0 & 2.44219 & 0 \\
+   & Refitted, square root & 1.90142 & 0 & 2.53049 & 0.93079 \\
+\addlinespace
+44 & Frequency, equal & 2.01152 & 2.03485 & 1.35803 & 2.06194 \\
+   & Logistic, equal & 0.93386 & 0.67926 & 0.88874 & 0.67020 \\
+   & Frequency, square root & 0 & 0 & 0 & 0 \\
+   & Refitted, equal & 0.24724 & 0 & 0.63444 & 0 \\
+   & Refitted, square root & 1.38964 & 0.30499 & 1.83706 & 1.21411 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The logistic rule gives positive daily bounds under equal priors in both cohorts and windows. For 44 classes, the cell product bound is larger than the pooled product bound on daily blocks with the logistic rule. At four days, the 16-class original-window logistic bounds are all zero. The 44-class pooled logistic bounds remain positive in both windows at that width.
+
+With square-root evaluation priors, all four 44-class bounds from the equal-prior frequency rule are zero at all three widths. Its observed gains over the reweighted coarse optimum are $-4.523$ pp in the original window and $-1.923$ pp in the disjoint window. Refitting with the square-root prior raises these gains to 2.968 and 4.415 pp for the same Bayes gain target. The cell product lower bounds reach 1.390 and 1.837 pp on daily blocks, and 0.606 and 0.755 pp on four-day blocks. At the equal evaluation prior, this refit reduces the daily cell product bounds from 2.012 and 1.358 pp to 0.247 and 0.634 pp, and both daily pooled product bounds become zero. Thus the effect of refitting depends on the evaluation prior.
+
+\FloatBarrier
+
+\section{Known-null checks and weighted error allocation}
+
+\subsection{Known-null checks}
+
+We simulated 36 equally weighted coarse cells and 10 independent blocks per family. A binary outcome in each cell and block either makes the added feature agree with all labels or flips all labels, inducing perfect dependence among the affected records. Class balance and a weighted mean agreement probability of one half give zero Bayes gain. Across 100,000 families per scenario, the observed family false-positive rates were 3.541\% with independent fair outcomes across cells, 0.117\% with the outcome shared across cells within a block, and 0.024\% with independent cells and alternating block agreement probabilities of 0.1 and 0.9. Exact family probabilities are 3.456\%, 0.098\%, and 0.021\%, respectively. These checks exercise the known-null implementation under the assumed block model.
+
+\subsection{Weighted allocation across coarse cells}
 \label{app:weighted-cells}
 
 For each cell $c$, let $m_c=\sum_b v_{cb}$ be the class-weighted mass of records whose correctness can change with timing under the frozen rule. The masses are fixed given $\given$. If $\sum_j m_j>0$, assign tail probability $\alpha_c=\alpha m_c/\sum_j m_j$ to each cell with $m_c>0$. Set the contribution of a zero-mass cell to zero, using $B_c-A_c\ge0$. For either cell method, Theorem~1's per-cell argument applies at $\alpha_c$. Summing the failure probabilities gives at most $\alpha$ for the fixed allocation and partition. If all masses are zero, report the zero bound.
@@ -473,6 +525,17 @@ Block width & Uniform & Weighted & Uniform & Weighted \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\FloatBarrier
+
+\section{Conditional converse for the frozen rule}
+\label{app:frozen-converse}
+
+The frozen-rule gain and the Bayes gain are distinct targets. Write $D=\sum_c D_c$, $A=\sum_c A_c$, and let $x_b$ be the observed mutable correct weight in each block for the frozen rule. For the following construction, condition on the same cohort geometry as in Section~\ref{sec:target}. Independently for each block, replay the observed timing vector with probability $s_b$. Otherwise assign each mutable record a timing value that makes the frozen rule wrong. Such a value exists by definition. The expected frozen-rule accuracy under this law is $D+\sum_b s_bx_b$.
+
+If $0<A-D<\sum_b x_b$, choose the probabilities to give zero frozen-rule gain and maximize the probability of replaying the complete observation. For $x_b>0$, maximizing $\sum_b\log s_b$ subject to $\sum_b s_bx_b=A-D$ and $s_b\le1$ gives $s_b=\min(1,c/x_b)$, where $\sum_b\min(c,x_b)=A-D$. A block with $x_b=0$ can be replayed with probability one. If $\prod_b s_b>\alpha$, a deterministic procedure with uniform conditional coverage at level $1-\alpha$ must return a nonpositive lower bound for the frozen-rule gain on the observed timing vectors. A positive value would cause failure whenever that observation is replayed under the constructed zero-gain law.
+
+For the exploratory QUIC22 archive-prefix cohort, the replay probabilities for 1, 6, 24, and 48 hour groups are 8.53\%, 11.02\%, 11.02\%, and 32.91\%, respectively. All exceed 5\%. The law sets the expected accuracy of the particular frozen rule to the coarse optimum. The fine Bayes rule can choose different decisions under that law, so the construction permits a positive Bayes gain. This distinction is consistent with the positive daily Bayes-gain certificate in Table~\ref{tab:bounds}.
 
 \FloatBarrier
 \bibliographystyle{elsarticle-num}
