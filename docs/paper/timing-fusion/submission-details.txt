@@ -26,8 +26,16 @@ edited the resulting content and take responsibility for the manuscript.
 
 Data and code availability
 The manuscript links the public QUIC22 archive, QUICEXT-25 record, and CESNET
-DataZoo, and identifies the S and XS HDF5 releases. It also links the private
-EIBO reproduction guide at commit 8a3f5cf7972d2c0041c22ffe4796be5b99885e0d.
+DataZoo. The archived HDF5 input digests are listed below.
+
+CESNET-QUIC22-S.h5 (25 million flows)
+SHA-256 e46ee1252b3c845a827a4f9140650e54e0995be2134f60fe05beefa69ec9e3f5
+
+CESNET-QUICEXT-25-XS.h5 (10 million flows)
+SHA-256 6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab
+
+The manuscript links the private EIBO reproduction guide at commit
+8a3f5cf7972d2c0041c22ffe4796be5b99885e0d.
 [Before submission, arrange access to the code and results for the editor and
 reviewers, or supply the equivalent reproduction files as a supplement.]
 
