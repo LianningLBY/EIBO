@@ -42,20 +42,20 @@ Our first contribution is a finite-sample certificate for the gain in class-weig
 
 \section{Related work}
 
-Blackwell's comparison of experiments formalizes the value of retaining additional observations for decision problems \cite{blackwell1953}. For binary classification, Chowdhury et al.\ characterize when an added modality strictly improves population Bayes balanced accuracy and estimate the accuracy ceiling by cross-fitting \cite{chowdhury2026ceiling}. Williamson et al.\ define variable importance as the loss of population-level optimal predictiveness after removing a feature subset. Their framework includes classification accuracy and gives asymptotic inference under independent sampling and regularity conditions \cite{williamson2023importance}. Our contrast is the fixed-cohort analogue for class-weighted accuracy. Conditioning on the evaluation labels, coarse observations, and weights makes the coarse optimum known, so inference for the gain only requires a lower bound on the fine optimum.
+Blackwell's comparison of experiments formalizes the value of retaining additional observations for decision problems \cite{blackwell1953}. Arnosti and Danyluk give an upper bound on the improvement in binary Bayes accuracy obtainable by adding features \cite{arnosti2012feature}. Chowdhury et al.\ characterize when an added modality strictly improves population Bayes balanced accuracy and estimate the accuracy ceiling by cross-fitting \cite{chowdhury2026ceiling}. Williamson et al.\ define variable importance as the loss of population-level optimal predictiveness after removing a feature subset. Their framework includes classification accuracy and gives asymptotic inference under independent sampling and regularity conditions \cite{williamson2023importance}. Our contrast is the fixed-cohort analogue for class-weighted accuracy. Conditioning on the evaluation labels, coarse observations, and weights makes the coarse optimum known, so inference for the gain only requires a lower bound on the fine optimum.
 
-Total Variation Floodgate also uses a fitted rule to obtain a lower confidence bound on a measure of feature importance \cite{wang2024floodgate}. It targets expected total variation as a measure of conditional association and gives asymptotic coverage using resampling from the added feature's conditional distribution. AICO gives exact finite-sample inference for the median change in loss when a feature is masked for a fitted predictor \cite{giesecke2026aico}. Our target compares the optimal expected accuracies of two nested representations. We score a frozen fine rule on the observed held-out features and bound its conditional expected accuracy using time blocks as the sampling units. The nonnegativity of the gain within each coarse cell lets us aggregate simultaneous finite-sample lower bounds into a certificate for the total Bayes gain. In traffic analysis, Bayes-error estimates and bounds have also been used to characterize performance attainable from a single declared representation \cite{cherubin2017bayes,cherubin2019fbleau}.
+Total Variation Floodgate also uses a fitted rule to obtain a lower confidence bound on a measure of feature importance \cite{wang2024floodgate}. It targets expected total variation as a measure of conditional association and gives asymptotic coverage using resampling from the added feature's conditional distribution. In two-sample inference, Michel et al.\ use one-dimensional projections, including classifier scores, to lower-bound total variation \cite{michel2022tv}. AICO gives exact finite-sample inference for the median change in loss when a feature is masked for a fitted predictor \cite{giesecke2026aico}. Our target compares the optimal expected accuracies of two nested representations. We score a frozen fine rule on the observed held-out features and bound its conditional expected accuracy using time blocks as the sampling units. The nonnegativity of the gain within each coarse cell lets us aggregate simultaneous finite-sample lower bounds into a certificate for the total Bayes gain. In traffic analysis, Bayes-error estimates and bounds have also been used to characterize performance attainable from a single declared representation \cite{cherubin2017bayes,cherubin2019fbleau}.
 
-MIMETIC and TrafficCross combine several traffic representations to improve predictive performance \cite{aceto2019mimetic,zuo2026trafficcross}. FG-SAT models flows as graphs and evaluates classification under environment shifts \cite{cui2025fgsat}. GETA uses metadata time series for few-shot adaptation across domains \cite{gunasekara2026geta}. FlowCLIP is especially close to our application because it uses inter-arrival times, sizes, and directions for QUIC classification and evaluates on later weeks \cite{choi2026flowclip}. Byte-level approaches such as MambaNetBurst use a different observation regime \cite{kulatilleke2026mambanetburst}. These studies measure the performance of fitted classifiers. We hold the fitted rule fixed across our four certificates and use it as a witness for the Bayes gain between two representations. A stronger witness can tighten the bound for the same target.
+Classical classifier combination pools decisions from different representations \cite{kittler1998combining}. Multimodal learning also combines information at the representation level \cite{baltrusaitis2019multimodal}. MIMETIC and TrafficCross combine several traffic representations to improve predictive performance \cite{aceto2019mimetic,zuo2026trafficcross}. FG-SAT models flows as graphs and evaluates classification under environment shifts \cite{cui2025fgsat}. GETA uses metadata time series for few-shot adaptation across domains \cite{gunasekara2026geta}. FlowCLIP uses inter-arrival times, sizes, and directions for QUIC classification and evaluates on later weeks \cite{choi2026flowclip}. Byte-level approaches such as MambaNetBurst use a different observation regime \cite{kulatilleke2026mambanetburst}. These studies measure the performance of fitted classifiers. We hold the fitted rule fixed across our four certificates and use it as a witness for the Bayes gain between two representations.
 
-Learn then Test uses multiple testing to calibrate predictive rules with finite-sample risk guarantees \cite{angelopoulos2025learntest}. Our guarantee concerns the difference between two optimal accuracies on a fixed cohort, using a rule fitted before evaluation. We use Hoeffding's inequality for bounded independent observations \cite{hoeffding1963} and a product bound based on the arithmetic--geometric mean and Markov inequalities. The product gives a fixed-sample conditional e-value \cite{vovk2021evalues} for a null that constrains the sum of block means and permits unequal individual means. Sequential monitoring with optional stopping would require an anytime-valid construction \cite{ramdas2023savi}. The simultaneous cell guarantee allows dependence among cells within each time block.
+Learn then Test uses multiple testing to calibrate predictive rules with finite-sample risk guarantees \cite{angelopoulos2025learntest}. Conformal risk control calibrates a rule to control the expected value of a monotone loss \cite{angelopoulos2024conformal}. Gorriz studies generalization bounds for fitted predictors, including fusion rules and validation with dependent fold scores \cite{gorriz2026evidence}. Our guarantee concerns the difference between two optimal accuracies on a fixed cohort, using a rule fitted before evaluation. We use Hoeffding's inequality for bounded independent observations \cite{hoeffding1963} and a product bound based on the arithmetic--geometric mean and Markov inequalities. The product gives a fixed-sample conditional e-value \cite{vovk2021evalues} for a null that constrains the sum of block means and permits unequal individual means. Sequential monitoring with optional stopping would require an anytime-valid construction \cite{ramdas2023savi}. The simultaneous cell guarantee allows dependence among cells within each time block.
 
 \section{Finite-sample certificates for Bayes gain}
 
 \subsection{Conditional Bayes gain}
 \label{sec:target}
 
-Let the evaluation cohort contain $n$ records indexed by $i$. Record $i$ has class $Y_i\in\{1,\dots,K\}$, coarse observation $C_i\in\mathcal C$, and an added feature $T_i\in\mathcal T$. Both feature alphabets are finite. For class prior $\pi_y$ and cohort count $n_y>0$, use weight $w_i=\pi_{Y_i}/n_{Y_i}$. The main comparisons use $\pi_y=1/K$. \ref{sec:xs-sensitivity} also evaluates a prior derived from fitting counts. Let $\given$ fix the labels, coarse observations, retained-record set, weights, block memberships, and a rule $f(c,t)$ fitted on a separate window. Conditional on $\given$, the joint vectors of added features in different blocks are independent. Features inside a block may be arbitrarily dependent, and blocks can have different laws.
+Let the evaluation cohort contain $n$ records indexed by $i$. Record $i$ has class $Y_i\in\{1,\dots,K\}$, coarse observation $C_i\in\mathcal C$, and an added feature $T_i\in\mathcal T$. Both feature alphabets are finite. For class prior $\pi_y$ and cohort count $n_y>0$, use weight $w_i=\pi_{Y_i}/n_{Y_i}$. The main comparisons use $\pi_y=1/K$. \ref{sec:xs-sensitivity} also evaluates a prior derived from fitting counts. Let $\given$ fix the labels, coarse observations, retained-record set, weights, block memberships, and a rule $f(c,t)$ fitted on a separate window. It also includes the information used to fix the evaluation specification. Conditional on $\given$, the joint vectors of added features in different blocks are independent. Features inside a block may be arbitrarily dependent, and blocks can have different laws.
 
 For a coarse cell $c$, the best coarse contribution to expected accuracy is known under the conditioning. Define
 \begin{align}
@@ -63,7 +63,7 @@ For a coarse cell $c$, the best coarse contribution to expected accuracy is know
  B_c &= \sum_{t\in\mathcal T}\max_y
  \sum_i w_i\mathbf 1\{C_i=c,Y_i=y\}\Prb(T_i=t\mid\given).
 \end{align}
-Here $B_c$ is the best expected contribution of a fine rule on the conditional, class-weighted cohort law. The rule that always uses a coarse maximizer in $c$ is available to the fine classifier, so $B_c\ge A_c$. The target gain is
+The conditional cohort law draws an index $i$ with probability $w_i$ and then draws $T_i$ from its law given $\given$. Under this law, $B_c$ is the largest expected contribution to accuracy that a rule observing $(C_i,T_i)$ can attain in cell $c$. The rule that always uses a coarse maximizer in $c$ is available to the fine classifier, so $B_c\ge A_c$. The target gain is
 \begin{equation}
  \Delta=\sum_{c\in\mathcal C}(B_c-A_c)\ge 0.
  \label{eq:target}
@@ -77,7 +77,7 @@ For each record, evaluate whether $f(C_i,t)$ is correct at all, some, or none of
 
 \subsection{Cell-wise and pooled lower bounds}
 
-For any collection of conditionally independent nonnegative block scores $x=(x_1,\dots,x_m)$ with known ranges $[0,v_b]$, define two lower bounds for the sum of their conditional means,
+Let $x=(x_1,\dots,x_m)$ be the realized values of conditionally independent block scores with known ranges $[0,v_b]$. At tail probability $a\in(0,1)$, define two lower bounds for the sum of their conditional means,
 \begin{align}
  P_a(x) &= m\left(a\prod_{b=1}^m x_b\right)^{1/m},\label{eq:product}\\
  H_a(x,v) &= \sum_{b=1}^m x_b-\sqrt{\tfrac12\log(1/a)\sum_{b=1}^m v_b^2}.\label{eq:hoeffding}
@@ -99,7 +99,7 @@ Let $M$ be the number of occupied coarse cells. For a fixed block partition, eit
  \right)\ge 1-\alpha,
  \label{eq:cell-bound}
 \end{equation}
-where $X_c=(X_{cb})_{b\in I_c}$ and the product bound uses only $X_c$. On the same event each summand lower-bounds its own cell gain $B_c-A_c$.
+where $X_c=(X_{cb})_{b\in I_c}$, $v_c=(v_{cb})_{b\in I_c}$, and the product bound uses only $X_c$. With conditional probability at least $1-\alpha$, every summand simultaneously lower-bounds its own cell gain $B_c-A_c$.
 \end{theorem}
 
 \begin{proof}
@@ -112,7 +112,7 @@ When $\mu_c=0$, the mutable scores vanish almost surely and the product bound is
 
 The e-value is for the joint constraint on the block means. An individual normalized score $X_b/(\mu_0/m)$ may have conditional mean above one. Different cells can also share the same block and yield dependent e-values. The simultaneous guarantee uses the union bound to allow for this dependence.
 
-The pooled counterparts sum $X_b=\sum_c X_{cb}$ and $v_b=\sum_c v_{cb}$ within each block. They apply~\eqref{eq:product} or~\eqref{eq:hoeffding} once at level $\alpha$, add $\sum_c D_c$, subtract $\sum_c A_c$, and truncate at zero. All four procedures lower-bound the same $\Delta$. Cell certificates retain positive contributions from cells with sufficient evidence. Their product bound scales with $(\alpha/M)^{1/m}$ for a cell with $m$ active blocks, so multiplicity has a stronger effect when $m$ is small. Pooling spends the full tail budget once and can combine evidence spread across many cells. The product bound uses a geometric mean and vanishes if an included block has zero score. The Hoeffding bound uses the sum of scores and subtracts a penalty determined by the block ranges. It can remain positive with some zero scores if the total is large relative to those ranges.
+The pooled counterparts sum $X_b=\sum_c X_{cb}$ and $v_b=\sum_c v_{cb}$ within each block. They apply~\eqref{eq:product} or~\eqref{eq:hoeffding} to the blocks with $v_b>0$ at tail probability $\alpha$, add $\sum_c D_c$, subtract $\sum_c A_c$, and truncate at zero. Each fixed procedure lower-bounds the same $\Delta$ with conditional probability at least $1-\alpha$. Cell certificates retain positive contributions from cells with sufficient evidence. Their product bound scales with $(\alpha/M)^{1/m}$ for a cell with $m$ active blocks, so multiplicity has a stronger effect when $m$ is small. Pooling spends the full tail budget once and can combine evidence spread across many cells. The product bound uses a geometric mean and vanishes if an included block has zero score. The Hoeffding bound uses the sum of scores and subtracts a penalty determined by the block ranges. It can remain positive with some zero scores if the total is large relative to those ranges.
 
 \subsection{Worked example with packet timing}
 \label{sec:worked-example}
@@ -126,16 +126,18 @@ In the original XS evaluation window, this cell contains 574{,}783 flows and has
 
 \subsection{Datasets and evaluation protocol}
 
-We use CESNET-QUICEXT-25 XS, the 10-million-flow release, and CESNET-QUIC22-S \cite{cesnet2025cesnet,luxemburk2023cesnet}. The coarse representation encodes the directions and two logarithmic size bins of the first five packets. The fine representation adds the first inter-packet interval. We carry forward the right-closed timing cuts at $0,1,4,16$ ms from the original pilot and use the same cuts in the service sweep, the XS temporal check, and the QUIC22-S evaluation. For each cohort, the frequency rule predicts the class with largest prior-weighted fitting frequency in the fine cell and falls back to the fitted coarse rule for unseen fine cells. The four certificates share the same records, class weights, and fitted rule within each comparison.
+We use CESNET-QUICEXT-25 XS, the 10-million-flow release, and CESNET-QUIC22-S \cite{cesnet2025cesnet,luxemburk2023cesnet}. The coarse representation encodes the directions and two logarithmic size bins of the first five packets. The fine representation adds the first inter-packet interval, binned as $\{0\}$, $(0,1]$, $(1,4]$, $(4,16]$, or $(16,\infty)$ ms. We carry these bins forward from the original pilot to the service sweep, the XS temporal check, and the QUIC22-S evaluation. For each cohort, the frequency rule predicts the class with largest prior-weighted fitting frequency in the fine cell and falls back to the fitted coarse rule for unseen fine cells. The four certificates share the same records, class weights, and fitted rule within each comparison.
 
-On XS, the fitting window is June 1 to November 30, 2024. We select the top 16 and all 44 services with at least 2{,}000 eligible fitting flows, ranking by decreasing count and breaking ties by APP code. Each cohort uses an equal prior over its classes. We compare the four certificates in the original evaluation window, March 2 to June 1, 2025. We then check the two methods selected from that comparison on December 1, 2024 to March 1, 2025. All windows use UTC and exclude the right endpoint. The disjoint window was used for a separate fusion analysis. This check retains the fitted rules, service lists, weights, feature bins, and eligibility criteria.
+On XS, the fitting window is June 1 to November 30, 2024. We select the top 16 and all 44 services with at least 2{,}000 eligible fitting flows, ranking by decreasing count and breaking ties by APP code. Each cohort uses an equal prior over its classes. We compare the four certificates in the original evaluation window, March 2 to June 1, 2025. We then check the two methods selected from that comparison on December 1, 2024 to March 1, 2025. All windows use UTC and exclude the right endpoint. This is a retrospective temporal check on a disjoint window previously used for a separate fusion analysis. It retains the fitted rules, service lists, class priors, feature bins, and eligibility criteria. Record weights use the class counts of the corresponding evaluation cohort.
 
-For the HDF5 analyses we retain flows with at least five valid packets whose timestamp envelope, including a one-hour margin on the stored end, fits inside one UTC date. The primary grouping is by UTC day. We also evaluate fixed two- and four-day groupings of the same records. The guard controls whether a single flow crosses a day boundary. Independence across blocks is a sampling assumption. Each fixed specification uses its own conditional coverage level. The cell methods use the same Bonferroni allocation within each comparison. Selecting a bound or timing cut using evaluation timing requires accounting for that selection, and each set of timing cuts defines its own Bayes gain target.
+For the HDF5 analyses, flows used for fitting or evaluation must have at least five valid packets, and their timestamp envelope, including a one-hour margin on the stored end, must fit within the respective window. Evaluation additionally requires the envelope to fit within one UTC date. The primary grouping is by UTC day. We also evaluate fixed two- and four-day groupings of the same records. The date guard prevents a retained evaluation flow from spanning two dates. Independence across blocks is a sampling assumption. Each fixed specification uses its own conditional coverage level. The cell methods use the same Bonferroni allocation within each comparison. Selecting a bound or timing cut using evaluation timing requires accounting for that selection, and each set of timing cuts defines its own Bayes gain target.
 
 \subsection{Primary results on two XS evaluation windows}
 \label{sec:temporal-check}
 
-Table~\ref{tab:primary-xs} compares all four daily bounds in the two windows. The original comparison uses tail probability 0.05 per fixed bound. Before running the disjoint check, we selected cell product for 16 classes and pooled product for 44 classes based on the original results. Each of the two primary bounds in the disjoint window uses tail probability 0.025 and has at least 97.5\% coverage conditional on its own cohort information under the daily block model.
+Table~\ref{tab:primary-xs} compares all four daily bounds in the two windows in percentage points (pp). The 16- and 44-class cohorts contain 1{,}763{,}662 and 2{,}038{,}134 flows over 91 dates in the original window, and 2{,}051{,}566 and 2{,}318{,}322 flows over 86 dates in the disjoint window. The XS archive has no tables for December 11--14, 2024.
+
+The original comparison uses tail probability 0.05 per fixed bound. Before running the disjoint check, we selected cell product for 16 classes and pooled product for 44 classes based on the original results. Each primary bound in the disjoint window uses tail probability 0.025. Its coverage is at least 97.5\% under the daily block model conditional on the information fixing its cohort and method, including the information used for method selection. Averaging each conditional failure bound and applying the union bound gives at least 95\% joint coverage for the two primary bounds and their respective conditional targets.
 
 \begin{table}[!ht]
 \centering
@@ -172,7 +174,7 @@ We scan all 25 million records in the S release. We fit on October 31 through No
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
-\caption{QUIC22-S daily conditional lower bounds (pp) and descriptive sample Bayes gain (pp). Each fixed daily bound has 95\% conditional coverage under the block model. All four methods give zero for the two- and four-day groupings in each cohort.}
+\caption{QUIC22-S daily conditional lower bounds (pp) and descriptive sample Bayes gain (pp). Each fixed daily bound has at least 95\% conditional coverage under the block model. All four methods give zero for the two- and four-day groupings in each cohort.}
 \label{tab:quic22-s}
 \begin{tabular}{rrrrrrr}
 \toprule
@@ -230,13 +232,13 @@ On the exploratory QUIC22 prefix holdout, weighting the cell error budgets by th
 
 \subsection{How many independent blocks are needed?}
 
-Consider balanced binary classes with a constant coarse feature. In unit $b$, a shared $U_b\sim\mathrm{Bernoulli}(p)$ either makes the fine feature agree with all labels or flips all labels. The units are independent. Repeating records inside a unit supplies one random bit about $p$. The Bayes gain is $|p-1/2|$. For the simple null $p=1/2$ and the fixed alternative $p=1/2+\delta$, every test of size at most $\alpha$ and power at least $1-\beta$ needs a number of units $n$ satisfying
+Consider balanced binary classes with a constant coarse feature. In unit $b$, a shared $U_b\sim\mathrm{Bernoulli}(p)$ either makes the fine feature agree with all labels or flips all labels. The units are independent. Each unit reveals one Bernoulli draw, regardless of how many records it contains. The Bayes gain is $|p-1/2|$. For the simple null $p=1/2$ and the fixed alternative $p=1/2+\delta$, every test of size at most $\alpha$ and power at least $1-\beta>\alpha$ needs a number of units $n$ satisfying
 \begin{equation}
  n\,d(1/2+\delta\,\Vert\,1/2)\ge d(1-\beta\,\Vert\,\alpha),
 \end{equation}
 where $d$ is Bernoulli relative entropy. This follows by applying data processing to the rejection indicator under the two joint laws \cite{kaufmann2016complexity}. The likelihood ratio increases with the number of agreements, so an exact upper-tail binomial test with boundary randomization attains the optimal size--power tradeoff \cite{neyman1933tests}.
 
-Table~\ref{tab:power} contrasts the necessary KL count, the optimal randomized test, and two Hoeffding choices. The known range of the normalized unit score is $1/n$. The generic paired-score range is $2/n$. All counts refer to this model, the stated direction, and a fixed sample size.
+Table~\ref{tab:power} contrasts the necessary KL count, the optimal randomized test, the nonrandomized exact binomial test, and two Hoeffding choices. The known range of the normalized unit score is $1/n$. The generic paired-score range is $2/n$. All counts refer to this model, the stated direction, and a fixed sample size.
 
 \begin{table}[t]
 \centering
@@ -260,7 +262,7 @@ Gain (pp) & KL & Optimal & Exact binomial & Known range H. & Generic H. \\
 
 The guarantee applies to the class-weighted gain on the fixed evaluation cohort. Extending it to future traffic requires assumptions connecting that cohort to the deployment population. Both corpora were collected on the CESNET network in different periods. Their comparison changes the number of blocks, the fitted rule, the class mixture, and the block score distribution together.
 
-The day guard defines a reproducible grouping. Shared traffic conditions can induce dependence across dates. The collection schedule and duration of known shared conditions can inform a primary partition before evaluation. Selecting a partition on evaluation scores requires an error budget and a valid sampling model for the candidates. The score correlations and offset sensitivity in Section~\ref{sec:calendar-alignment} leave conditional independence unresolved. Coupling to independent blocks under stationarity and mixing is another route \cite{yu1994mixing}. Applying it here would require a dependence bound under the conditional cohort law.
+The day guard defines a reproducible grouping. Shared traffic conditions can induce dependence across dates. The collection schedule and duration of known shared conditions can inform a primary partition before evaluation. Selecting a partition on evaluation scores requires an error budget and a valid sampling model for the candidates. The score correlations and offset sensitivity in Section~\ref{sec:calendar-alignment} leave conditional independence unresolved. Coupling to independent blocks under stationarity and mixing is another route \cite{yu1994mixing}. Applying it here would require a dependence bound under the conditional cohort law. Related work on conformal prediction quantifies coverage loss through departures from exchangeability \cite{barber2023beyond}. Our sensitivity analysis instead changes the assumptions on independence across the declared blocks.
 
 The empirical bounds apply to the pilot timing discretization. Changing the cutpoints can change the Bayes gain and the fitted rule. Robustness to cut placement remains untested. Choosing cuts using evaluation timing requires selection-adjusted coverage.
 
@@ -278,13 +280,18 @@ The QUIC22 prefix analysis uses daily file segments from the \href{https://zenod
 
 The \href{https://github.com/LianningLBY/EIBO/blob/8a3f5cf7972d2c0041c22ffe4796be5b99885e0d/docs/TIMING_CELL_CERTIFICATE.md}{EIBO reproduction guide} links the scripts, manifests, and JSON outputs. The archived XS service sweep and QUIC22-S results record the SHA-256 digest of each HDF5 input. The prefix manifest records the byte ranges used from the QUIC22 archive. Contact the corresponding author for access to the private code and result repository.
 
+\FloatBarrier
 \appendix
+\counterwithin*{table}{section}
+\counterwithin*{figure}{section}
+\renewcommand{\theHtable}{app.\Alph{section}.\arabic{table}}
+\renewcommand{\theHfigure}{app.\Alph{section}.\arabic{figure}}
 \section{Full matched comparisons and exploratory cohorts}
 \label{app:full-comparisons}
 
 The original comparisons include the eight most frequent eligible XS pilot classes and the eight most frequent non-background fitting labels in the QUIC22 archive-prefix analysis. For the latter, we use the leading 4 MiB of each selected daily flow member. The fitting members cover October 31 to November 6, 2022, and the evaluation members cover November 8 to 27. The analysis keeps flows with at least five valid packets that fit within one recorded hour. The holdout informed development of the procedure, so these prefix results are exploratory.
 
-\begin{table}[t]
+\begin{table}[!ht]
 \centering
 \small
 \caption{Original evaluation cohorts and descriptive sample Bayes gains. Gains are in percentage points (pp).}
@@ -362,7 +369,7 @@ In the original 16-class XS cohort, pooling all cells gives a frozen-rule gap of
 
 \subsection{Calendar offsets}
 
-For the 44-class XS cohort, we keep the fitted frequency rule, feature bins, daily guard, records, and equal evaluation weights fixed within each window. The original and disjoint windows retain 2,038,134 and 2,318,322 flows. For block width $w$ and calendar offset $s\in\{0,\ldots,w-1\}$, we assign UTC day $d$, indexed from the Unix epoch, to block $\lfloor(d-s)/w\rfloor$. Partial blocks retain their flows at each window edge. The zero offsets reproduce the partitions used in Tables~\ref{tab:bounds} and~\ref{tab:temporal-check}. Each offset gives a pointwise bound under conditional independence for its own partition.
+For the 44-class XS cohort, we keep the fitted frequency rule, feature bins, daily guard, records, and class weights fixed within each window. The weights give each class the same total mass. For block width $w$ and calendar offset $s\in\{0,\ldots,w-1\}$, we assign UTC day $d$, indexed from the Unix epoch, to block $\lfloor(d-s)/w\rfloor$. Partial blocks retain their flows at each window edge. The zero offsets reproduce the partitions used in Tables~\ref{tab:bounds} and~\ref{tab:temporal-check}. Each offset gives a pointwise bound under conditional independence for its own partition.
 
 \begin{table}[t]
 \centering
@@ -415,6 +422,8 @@ Width & Pointwise & Simultaneous & Pointwise & Simultaneous \\
 
 With adjustment for the omitted cell, the retained cells give positive pooled daily lower bounds in both windows (Table~\ref{tab:pooled-ablation}). The adjusted two- and four-day bounds are zero. The positive daily result thus holds for the remaining cells under the daily block model.
 
+\FloatBarrier
+
 \section{Sensitivity to dependence between days}
 \label{app:daily-dependence}
 
@@ -465,7 +474,7 @@ Table~\ref{tab:daily-dependence} uses the archived daily scores and ranges. The 
 
 We use the registered XS 16- and 44-class cohorts, the original fitting period, and both evaluation windows. We compare the frequency rule with a multinomial logistic rule using additive categorical terms for the same coarse symbol and timing bin. The logistic rule is fitted to equal-class weighted counts from the original pilot, with an L2 penalty of 0.001 in the normalized objective. An unseen coarse symbol uses the frequency-rule fallback. We also use class weights proportional to the square roots of the fitting counts, which reduces the target mass of the 44-class service with 190 original holdout flows from 2.27\% to 0.68\%. For 44 classes we cross both frequency fitting priors with both evaluation priors. Each comparison uses the same retained flows and blocks within a cohort and window. The tail probability is 0.05 per fixed bound in both windows.
 
-\begin{table}[t]
+\begin{table}[!ht]
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
@@ -505,7 +514,7 @@ We simulated 36 equally weighted coarse cells and 10 independent blocks per fami
 \subsection{Weighted allocation across coarse cells}
 \label{app:weighted-cells}
 
-For each cell $c$, let $m_c=\sum_b v_{cb}$ be the class-weighted mass of records whose correctness can change with timing under the frozen rule. The masses are fixed given $\given$. If $\sum_j m_j>0$, assign tail probability $\alpha_c=\alpha m_c/\sum_j m_j$ to each cell with $m_c>0$. Set the contribution of a zero-mass cell to zero, using $B_c-A_c\ge0$. For either cell method, Theorem~1's per-cell argument applies at $\alpha_c$. Summing the failure probabilities gives at most $\alpha$ for the fixed allocation and partition. If all masses are zero, report the zero bound.
+For each cell $c$, let $m_c=\sum_b v_{cb}$ be the class-weighted mass of records whose correctness can change with timing under the frozen rule. The masses are fixed given $\given$. If $\sum_j m_j>0$, assign tail probability $\alpha_c=\alpha m_c/\sum_j m_j$ to each cell with $m_c>0$, a weighted Bonferroni allocation \cite{roeder2009weighted}. Set the contribution of a zero-mass cell to zero, using $B_c-A_c\ge0$. For either cell method, Theorem~1's per-cell argument applies at $\alpha_c$. Summing the failure probabilities gives at most $\alpha$ for the fixed allocation and partition. If all masses are zero, report the zero bound.
 
 We compare this allocation with uniform Bonferroni on the same eight-class QUIC22 prefix holdout, with 283{,}526 retained flows. The feature encoding, fitted rule, and time blocks are fixed. Table~\ref{tab:weighted-cells} gives the bounds at $\alpha=0.05$ per method, allocation, and width. The daily product bound gains positive contributions from symbols 471 and 509, alongside symbol 501. The daily Hoeffding bound falls to zero. Both allocations give zero for both methods at two and four days. This comparison is exploratory.
 
@@ -513,7 +522,7 @@ We compare this allocation with uniform Bonferroni on the same eight-class QUIC2
 \centering
 \small
 \setlength{\tabcolsep}{5pt}
-\caption{QUIC22 prefix cell lower bounds (pp) by error allocation. Weighted allocations are proportional to the mass of records whose correctness can change with timing.}
+\caption{QUIC22 prefix cell lower bounds (pp) by error allocation. Weighted allocations are proportional to the class-weighted mass of records whose correctness can change with timing.}
 \label{tab:weighted-cells}
 \begin{tabular}{lrrrr}
 \toprule
