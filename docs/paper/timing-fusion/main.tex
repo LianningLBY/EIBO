@@ -383,6 +383,8 @@ The 16-class frequency-rule result locates a certified gain in one well-supporte
 \paragraph{Choosing a certificate}
 Use fitting or pilot data to choose a primary method. Cell bounds can preserve evidence concentrated in a few cells with informative block scores. Pooling can be preferable when evidence is spread across cells or the number of occupied cells makes the per-cell error budget small. Product bounds benefit from positive scores across active blocks. Hoeffding can still give a positive bound when some active scores are zero and the observed gain exceeds the range penalty. For a fixed cohort and partition, allocate the tail probability across candidate methods before selecting one using evaluation scores.
 
+The allocation across cells also affects the bound. On the exploratory QUIC22 prefix holdout, allocating the error budget by the class-weighted mass of records whose correctness can change increased the daily cell product bound and reduced the daily cell Hoeffding bound (\ref{app:weighted-cells}).
+
 The certificate targets the class-weighted gain on the fixed evaluation cohort. Extending the claim to future traffic would require assumptions connecting that cohort to the deployment population. The one-hour guard keeps each retained flow within one date. Shared traffic conditions can still induce dependence across dates. The positive lag-one correlations and the zero bound at one disjoint-window alignment motivate reporting sensitivity to both block width and alignment. Conditional independence remains an assumption for the main comparisons. Under the model in \ref{app:daily-dependence}, the even and odd groups can be dependent, and days within each group are conditionally independent. The product lower bounds remain positive in both 44-class XS windows, and the Hoeffding bounds are zero. The collection schedule and duration of known shared conditions can inform a primary partition before evaluation timing is examined. A coverage statement for a selected partition requires an error budget for the selection and a valid sampling model for the candidate bounds used in that guarantee.
 
 An alternative under independent blocks is to use empirical Bernstein bounds for the mean of bounded independent observations \cite{maurer2009bernstein}. Applying such a bound to the sum of heterogeneous block scores requires an appropriate common range or a bound that uses the individual ranges. Betting methods also give variance-adaptive bounds for settings with a specified conditional-mean structure \cite{waudby2024betting}. Residual dependence across blocks poses a separate problem. Heteroskedasticity and autocorrelation consistent covariance estimation \cite{newey1987hac} provides an asymptotic variance estimate under its own assumptions. The daily score ratios can have different means and weights across dates. Their lag correlations describe the data and leave independence within each group unresolved.
@@ -395,7 +397,9 @@ Under conditional independence across blocks, nested fusion permits finite-sampl
 
 \section*{Data and code availability}
 
-The corpora and release metadata are publicly documented \cite{luxemburk2023cesnet,cesnet2025cesnet}. The analysis archive provides input hashes, cohort definitions, fitted rules, per-cell results, simulation outputs, and the sample-size benchmark. The reproduction guide \path{TIMING_CELL_CERTIFICATE.md} lists the scripts, commands, and JSON outputs for the comparisons, temporal check, calendar alignment diagnostic, simulations, sensitivity analysis, and ablations.
+The QUIC22 prefix analysis uses daily file segments from the \href{https://zenodo.org/records/10728760}{CESNET-QUIC22 Zenodo archive} \cite{luxemburk2023cesnet}. The HDF5 analyses use the \texttt{S} release of CESNET-QUIC22 and the \texttt{XS} release of CESNET-QUICEXT-25, available through \href{https://cesnet.github.io/cesnet-datazoo/}{CESNET DataZoo}. CESNET also provides a \href{https://zenodo.org/records/17249078}{Zenodo record for QUICEXT-25} \cite{cesnet2025cesnet}.
+
+The \href{https://github.com/LianningLBY/EIBO/blob/8a3f5cf7972d2c0041c22ffe4796be5b99885e0d/docs/TIMING_CELL_CERTIFICATE.md}{EIBO reproduction guide} links the scripts, manifests, and JSON outputs. The manifests and result files record the prefix byte ranges, input hashes, and cohort definitions. The repository is private. Contact the corresponding author to request access to the code and results.
 
 \clearpage
 \appendix
@@ -441,6 +445,32 @@ Disjoint & 0.025 & 1.12468 & 1.93505 & 0 & 1.27665 \\
 \end{table}
 
 Table~\ref{tab:daily-dependence} uses the archived daily scores and ranges. The Hoeffding radii under the two-group model are 5.292 and 6.465 pp, exceeding the observed gaps of 4.688 and 5.696 pp.
+
+\section{Weighted allocation across coarse cells}
+\label{app:weighted-cells}
+
+For each cell $c$, let $m_c=\sum_b v_{cb}$ be the class-weighted mass of records whose correctness can change with timing under the frozen rule. The masses are fixed given $\given$. If $\sum_j m_j>0$, assign tail probability $\alpha_c=\alpha m_c/\sum_j m_j$ to each cell with $m_c>0$. Set the contribution of a zero-mass cell to zero, using $B_c-A_c\ge0$. For either cell method, Theorem~1's per-cell argument applies at $\alpha_c$. Summing the failure probabilities gives at most $\alpha$ for the fixed allocation and partition. If all masses are zero, report the zero bound.
+
+We compare this allocation with uniform Bonferroni on the same eight-class QUIC22 prefix holdout, with 283{,}526 retained flows. The feature encoding, fitted rule, and time blocks are fixed. Table~\ref{tab:weighted-cells} gives the bounds at $\alpha=0.05$ per method, allocation, and width. The daily product bound gains positive contributions from symbols 471 and 509, alongside symbol 501. The daily Hoeffding bound falls to zero. Both allocations give zero for both methods at two and four days. This comparison is exploratory.
+
+\begin{table}[!ht]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\caption{QUIC22 prefix cell lower bounds (pp) by error allocation. Weighted allocations are proportional to the mass of records whose correctness can change with timing.}
+\label{tab:weighted-cells}
+\begin{tabular}{lrrrr}
+\toprule
+ & \multicolumn{2}{c}{Cell product} & \multicolumn{2}{c}{Cell Hoeffding} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Block width & Uniform & Weighted & Uniform & Weighted \\
+\midrule
+1 day  & 0.05429 & 0.21743 & 0.01605 & 0 \\
+2 days & 0 & 0 & 0 & 0 \\
+4 days & 0 & 0 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \bibliographystyle{elsarticle-num}
 \bibliography{references}
