@@ -216,13 +216,21 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_block_
 [Archived XS time-block and prior results](../artifacts/methodology/if_e1_timing_xs_block_diagnostics_20261113_010220.json)
 
 For the manuscript's daily dependence comparison, use each window's
-`daily_scores[*].mutable_weight` as $v_b$ and
+`daily_scores[*].mutable_weight` as $v_b$, `daily_scores[*].mutable_correct_weight`
+as $X_b$, and
 `prior_comparison.frequency_equal.results_by_block_width.1d.frozen_rule_minus_sample_coarse_optimum`
 as the observed gap. Take $\alpha$ from the zero-offset daily row in
-`pooled_product_by_block_offset`. Compute the radius
-$\sqrt{\log(1/\alpha)\sum_b v_b^2}$ and truncate the gap minus the radius
-at zero. This bound assumes mutual conditional independence within the even
-days and within the odd days and permits dependence between the two groups.
+`pooled_product_by_block_offset`. The parity-group bounds assume mutual
+conditional independence within the even days and within the odd days and
+permit dependence between the two groups.
+
+- Hoeffding uses radius $\sqrt{\log(1/\alpha)\sum_b v_b^2}$. Subtract the
+  radius from the observed gap and truncate at zero.
+- The product method uses $m$ active days with $v_b>0$. Subtract $\sum_b X_b$
+  from the observed gap, add $m(\alpha^2\prod_{b:v_b>0}X_b)^{1/m}$, and truncate
+  at zero. The product term is zero when an active score is zero or there
+  are no active days. The bounds are 1.54325 pp in the original window and
+  1.27665 pp in the disjoint window.
 
 ## Manuscript simulation figure
 
