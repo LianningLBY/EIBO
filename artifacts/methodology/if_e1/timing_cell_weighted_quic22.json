@@ -1,0 +1,2056 @@
+{
+  "source": "QUIC22 archived daily prefixes",
+  "manifest_sha256": "89d4ba9c09e488affdaa5811032231dec044088906136ef9ad6c45d0f6018c17",
+  "fit_archive_dates": [
+    "20221031",
+    "20221101",
+    "20221102",
+    "20221103",
+    "20221104",
+    "20221105",
+    "20221106"
+  ],
+  "evaluation_archive_dates": [
+    "20221108",
+    "20221109",
+    "20221110",
+    "20221111",
+    "20221112",
+    "20221113",
+    "20221114",
+    "20221115",
+    "20221116",
+    "20221117",
+    "20221118",
+    "20221119",
+    "20221120",
+    "20221121",
+    "20221122",
+    "20221123",
+    "20221124",
+    "20221125",
+    "20221126",
+    "20221127"
+  ],
+  "classes_in_count_order": [
+    "discord",
+    "google-gstatic",
+    "google-play",
+    "google-services",
+    "google-www",
+    "instagram",
+    "spotify",
+    "youtube"
+  ],
+  "fit_counts": [
+    10416,
+    9928,
+    12882,
+    14204,
+    12722,
+    14209,
+    10204,
+    14733
+  ],
+  "results_by_block_width": {
+    "1d": {
+      "flows": 283526,
+      "class_counts": [
+        27993,
+        29564,
+        37757,
+        39948,
+        39735,
+        30615,
+        34091,
+        43823
+      ],
+      "sampling_units": 20,
+      "family_alpha": 0.05,
+      "occupied_coarse_cells": 36,
+      "per_cell_alpha": 0.001388888888888889,
+      "positive_cells": 1,
+      "sample_bayes_gain": 0.054402472412623505,
+      "frozen_rule_minus_sample_coarse_optimum": 0.05271869001315521,
+      "conditional_bayes_gain_lower": 0.0005429221808906995,
+      "cells": [
+        {
+          "coarse_symbol": 341,
+          "flow_count": 10627,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.0002257845810357019,
+          "frozen_gain_contribution": 0.0002257845810356117,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.01085265805157143,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 342,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 343,
+          "flow_count": 11552,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 349,
+          "flow_count": 1315,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0001757975538234399,
+          "frozen_gain_contribution": -0.00043701450628301627,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 350,
+          "flow_count": 20,
+          "mutable_units": 14,
+          "sample_bayes_gain_contribution": 2.8523834516121636e-06,
+          "frozen_gain_contribution": -4.465402064801915e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 3.3205605048945073e-05,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 351,
+          "flow_count": 75505,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.0014108683976683661,
+          "frozen_gain_contribution": 0.0014108683976690878,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.07881601566620614,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 373,
+          "flow_count": 450,
+          "mutable_units": 15,
+          "sample_bayes_gain_contribution": 0.0001293677561846066,
+          "frozen_gain_contribution": -0.00043057305444691075,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0006247413420856897,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 375,
+          "flow_count": 638,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.00015775617274251853,
+          "frozen_gain_contribution": 0.0001299999815020475,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.000684698901644576,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 377,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.3106443838228674e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 379,
+          "flow_count": 8,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 380,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 381,
+          "flow_count": 8484,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 382,
+          "flow_count": 12213,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.001133842904704467,
+          "frozen_gain_contribution": 0.0010631728049371597,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.020097702882040484,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 383,
+          "flow_count": 51259,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.0025056131481868,
+          "frozen_gain_contribution": 0.002505613148187355,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.04054521707626364,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 465,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.3106443838228674e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 467,
+          "flow_count": 15,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 3.3106443838228687e-06,
+          "frozen_gain_contribution": 3.3106443838228687e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 2.17460476441564e-05,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 468,
+          "flow_count": 32,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 469,
+          "flow_count": 20286,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.001893822532764905,
+          "frozen_gain_contribution": 0.001871003465153176,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.029697439288863064,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 470,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 3.145841197936328e-06,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 471,
+          "flow_count": 13639,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.013887400421533955,
+          "frozen_gain_contribution": 0.01388740042153458,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0210502433260618,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 475,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 476,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.6666568889149627e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 477,
+          "flow_count": 213,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 4.698702044329502e-05,
+          "frozen_gain_contribution": 3.1257814453613413e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0003130508238663672,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 478,
+          "flow_count": 1732,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": -8.673617379884035e-19,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 479,
+          "flow_count": 16505,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.0026681741921479422,
+          "frozen_gain_contribution": 0.0026592433880183244,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.008311313928398461,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 497,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 500,
+          "flow_count": 138,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 501,
+          "flow_count": 1175,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.0014671306069318725,
+          "frozen_gain_contribution": 0.0014557210731254233,
+          "bayes_gain_lower_contribution": 0.0005429221808906995,
+          "hoeffding_radius": 0.0012951855356615463,
+          "hoeffding_lower_contribution": 0.00016053553746387707
+        },
+        {
+          "coarse_symbol": 502,
+          "flow_count": 298,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -4.017363919745881e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 503,
+          "flow_count": 300,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.00031004214152527095,
+          "frozen_gain_contribution": 6.606266515666291e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.00029123816105588687,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 504,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.1458411979363283e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 505,
+          "flow_count": 1011,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 507,
+          "flow_count": 31,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -2.8110608712908384e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 508,
+          "flow_count": 37,
+          "mutable_units": 13,
+          "sample_bayes_gain_contribution": 8.803732389724893e-07,
+          "frozen_gain_contribution": -1.2207713033791706e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 4.330447087337653e-05,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 509,
+          "flow_count": 42973,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.022254755202690074,
+          "frozen_gain_contribution": 0.02225028980062363,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.050653729321653615,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 511,
+          "flow_count": 13048,
+          "mutable_units": 20,
+          "sample_bayes_gain_contribution": 0.00612494053796795,
+          "frozen_gain_contribution": 0.006124940537968103,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.019957130994664493,
+          "hoeffding_lower_contribution": 0.0
+        }
+      ],
+      "certificate_comparison": {
+        "pooled_hoeffding": {
+          "alpha": 0.05,
+          "radius": 0.19043809323658098,
+          "lower": 0.0
+        },
+        "pooled_product": {
+          "alpha": 0.05,
+          "mutable_units": 20,
+          "untruncated_lower": -0.01744461936661046,
+          "lower": 0.0
+        },
+        "cell_hoeffding": {
+          "alpha": 0.001388888888888889,
+          "positive_cells": 1,
+          "lower": 0.00016053553746387707
+        },
+        "cell_product": {
+          "alpha": 0.001388888888888889,
+          "positive_cells": 1,
+          "lower": 0.0005429221808906995
+        }
+      },
+      "mutable_mass_weighted_cells": {
+        "family_alpha": 0.05,
+        "cell_product_lower": 0.002174305860683791,
+        "cell_hoeffding_lower": 0.0,
+        "cells": [
+          {
+            "coarse_symbol": 341,
+            "mutable_mass": 0.026714640662382258,
+            "alpha": 0.0019202239511832205,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 342,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 343,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 349,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 350,
+            "mutable_mass": 6.277039940664751e-05,
+            "alpha": 4.511878931454551e-06,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 351,
+            "mutable_mass": 0.19343200220540857,
+            "alpha": 0.013903715503955007,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 373,
+            "mutable_mass": 0.0006790041082302222,
+            "alpha": 4.880619462763185e-05,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 375,
+            "mutable_mass": 0.001646446433734019,
+            "alpha": 0.00011834506465393466,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 377,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 379,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 380,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 381,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 382,
+            "mutable_mass": 0.04926730999519636,
+            "alpha": 0.0035412892076201433,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 383,
+            "mutable_mass": 0.09990414886738103,
+            "alpha": 0.007181018899043354,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 465,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 467,
+            "mutable_mass": 2.6129711996720205e-05,
+            "alpha": 1.8781798133738162e-06,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 468,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 469,
+            "mutable_mass": 0.07316369130606493,
+            "alpha": 0.005258939252763779,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 470,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 471,
+            "mutable_mass": 0.051808764711868384,
+            "alpha": 0.003723966649532102,
+            "product_lower_contribution": 0.0011771645478207068,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 475,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 476,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 477,
+            "mutable_mass": 0.0007132559957917964,
+            "alpha": 5.1268188996194865e-05,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 478,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 479,
+            "mutable_mass": 0.02033013252453048,
+            "alpha": 0.0014613113422597389,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 497,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 500,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 501,
+            "mutable_mass": 0.0031519257553237114,
+            "alpha": 0.00022655754214378923,
+            "product_lower_contribution": 0.0003492338645294606,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 502,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 503,
+            "mutable_mass": 0.000691218954228931,
+            "alpha": 4.968418659253083e-05,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 504,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 505,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 507,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 508,
+            "mutable_mass": 7.424416375354579e-05,
+            "alpha": 5.336602624637908e-06,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 509,
+            "mutable_mass": 0.12483900016385549,
+            "alpha": 0.008973313217495645,
+            "product_lower_contribution": 0.0006479074483336233,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 511,
+            "mutable_mass": 0.04910794416977002,
+            "alpha": 0.003529834137763461,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          }
+        ]
+      }
+    },
+    "2d": {
+      "flows": 283526,
+      "class_counts": [
+        27993,
+        29564,
+        37757,
+        39948,
+        39735,
+        30615,
+        34091,
+        43823
+      ],
+      "sampling_units": 11,
+      "family_alpha": 0.05,
+      "occupied_coarse_cells": 36,
+      "per_cell_alpha": 0.001388888888888889,
+      "positive_cells": 0,
+      "sample_bayes_gain": 0.054402472412623505,
+      "frozen_rule_minus_sample_coarse_optimum": 0.05271869001314882,
+      "conditional_bayes_gain_lower": 0.0,
+      "cells": [
+        {
+          "coarse_symbol": 341,
+          "flow_count": 10627,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.0002257845810357019,
+          "frozen_gain_contribution": 0.00022578458103549026,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.014972517924834476,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 342,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 343,
+          "flow_count": 11552,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 349,
+          "flow_count": 1315,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0001757975538234399,
+          "frozen_gain_contribution": -0.00043701450628301627,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 350,
+          "flow_count": 20,
+          "mutable_units": 9,
+          "sample_bayes_gain_contribution": 2.8523834516121636e-06,
+          "frozen_gain_contribution": -4.465402064801915e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 4.081013588152021e-05,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 351,
+          "flow_count": 75505,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.0014108683976683661,
+          "frozen_gain_contribution": 0.0014108683976667286,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.1084606686525724,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 373,
+          "flow_count": 450,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.0001293677561846066,
+          "frozen_gain_contribution": -0.0004305730544469107,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0008043277388119363,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 375,
+          "flow_count": 638,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.00015775617274251853,
+          "frozen_gain_contribution": 0.00012999998150204717,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0009278832171697418,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 377,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.3106443838228674e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 379,
+          "flow_count": 8,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 380,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 381,
+          "flow_count": 8484,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 382,
+          "flow_count": 12213,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.001133842904704467,
+          "frozen_gain_contribution": 0.001063172804937229,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.027619834894293604,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 383,
+          "flow_count": 51259,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.0025056131481868,
+          "frozen_gain_contribution": 0.002505613148187258,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.055864172571322666,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 465,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.3106443838228674e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 467,
+          "flow_count": 15,
+          "mutable_units": 5,
+          "sample_bayes_gain_contribution": 3.3106443838228687e-06,
+          "frozen_gain_contribution": 3.3106443838228687e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 2.4260035890545884e-05,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 468,
+          "flow_count": 32,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 469,
+          "flow_count": 20286,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.001893822532764905,
+          "frozen_gain_contribution": 0.0018710034651534119,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.04084059617520977,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 470,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 3.145841197936328e-06,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 471,
+          "flow_count": 13639,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.013887400421533955,
+          "frozen_gain_contribution": 0.01388740042153476,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.02895494614815273,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 475,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 476,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.6666568889149627e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 477,
+          "flow_count": 213,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 4.698702044329502e-05,
+          "frozen_gain_contribution": 3.125781445361352e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0004186800719465525,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 478,
+          "flow_count": 1732,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": -8.673617379884035e-19,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 479,
+          "flow_count": 16505,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.0026681741921479422,
+          "frozen_gain_contribution": 0.0026592433880181718,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.01147888359229485,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 497,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 500,
+          "flow_count": 138,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 501,
+          "flow_count": 1175,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.0014671306069318725,
+          "frozen_gain_contribution": 0.0014557210731254233,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0017595382263260358,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 502,
+          "flow_count": 298,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -4.017363919745881e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 503,
+          "flow_count": 300,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.00031004214152527095,
+          "frozen_gain_contribution": 6.606266515666291e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.00039823953480479457,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 504,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.1458411979363283e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 505,
+          "flow_count": 1011,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 507,
+          "flow_count": 31,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -2.8110608712908384e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 508,
+          "flow_count": 37,
+          "mutable_units": 8,
+          "sample_bayes_gain_contribution": 8.803732389724893e-07,
+          "frozen_gain_contribution": -1.2207713033791699e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 5.7474574414002094e-05,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 509,
+          "flow_count": 42973,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.022254755202690074,
+          "frozen_gain_contribution": 0.022250289800619855,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.06985235485631916,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 511,
+          "flow_count": 13048,
+          "mutable_units": 11,
+          "sample_bayes_gain_contribution": 0.00612494053796795,
+          "frozen_gain_contribution": 0.006124940537967735,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.027541423834524122,
+          "hoeffding_lower_contribution": 0.0
+        }
+      ],
+      "certificate_comparison": {
+        "pooled_hoeffding": {
+          "alpha": 0.05,
+          "radius": 0.262408032706385,
+          "lower": 0.0
+        },
+        "pooled_product": {
+          "alpha": 0.05,
+          "mutable_units": 11,
+          "untruncated_lower": -0.07885312290608665,
+          "lower": 0.0
+        },
+        "cell_hoeffding": {
+          "alpha": 0.001388888888888889,
+          "positive_cells": 0,
+          "lower": 0.0
+        },
+        "cell_product": {
+          "alpha": 0.001388888888888889,
+          "positive_cells": 0,
+          "lower": 0.0
+        }
+      },
+      "mutable_mass_weighted_cells": {
+        "family_alpha": 0.05,
+        "cell_product_lower": 0.0,
+        "cell_hoeffding_lower": 0.0,
+        "cells": [
+          {
+            "coarse_symbol": 341,
+            "mutable_mass": 0.026714640662382258,
+            "alpha": 0.0019202239511832205,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 342,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 343,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 349,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 350,
+            "mutable_mass": 6.277039940664751e-05,
+            "alpha": 4.511878931454551e-06,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 351,
+            "mutable_mass": 0.19343200220540857,
+            "alpha": 0.013903715503955007,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 373,
+            "mutable_mass": 0.0006790041082302222,
+            "alpha": 4.880619462763185e-05,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 375,
+            "mutable_mass": 0.001646446433734019,
+            "alpha": 0.00011834506465393466,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 377,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 379,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 380,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 381,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 382,
+            "mutable_mass": 0.04926730999519636,
+            "alpha": 0.0035412892076201433,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 383,
+            "mutable_mass": 0.09990414886738103,
+            "alpha": 0.007181018899043354,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 465,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 467,
+            "mutable_mass": 2.6129711996720205e-05,
+            "alpha": 1.8781798133738162e-06,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 468,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 469,
+            "mutable_mass": 0.07316369130606493,
+            "alpha": 0.005258939252763779,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 470,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 471,
+            "mutable_mass": 0.051808764711868384,
+            "alpha": 0.003723966649532102,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 475,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 476,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 477,
+            "mutable_mass": 0.0007132559957917964,
+            "alpha": 5.1268188996194865e-05,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 478,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 479,
+            "mutable_mass": 0.02033013252453048,
+            "alpha": 0.0014613113422597389,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 497,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 500,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 501,
+            "mutable_mass": 0.0031519257553237114,
+            "alpha": 0.00022655754214378923,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 502,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 503,
+            "mutable_mass": 0.000691218954228931,
+            "alpha": 4.968418659253083e-05,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 504,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 505,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 507,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 508,
+            "mutable_mass": 7.424416375354579e-05,
+            "alpha": 5.336602624637908e-06,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 509,
+            "mutable_mass": 0.12483900016385549,
+            "alpha": 0.008973313217495645,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 511,
+            "mutable_mass": 0.04910794416977002,
+            "alpha": 0.003529834137763461,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          }
+        ]
+      }
+    },
+    "4d": {
+      "flows": 283526,
+      "class_counts": [
+        27993,
+        29564,
+        37757,
+        39948,
+        39735,
+        30615,
+        34091,
+        43823
+      ],
+      "sampling_units": 6,
+      "family_alpha": 0.05,
+      "occupied_coarse_cells": 36,
+      "per_cell_alpha": 0.001388888888888889,
+      "positive_cells": 0,
+      "sample_bayes_gain": 0.054402472412623505,
+      "frozen_rule_minus_sample_coarse_optimum": 0.05271869001314492,
+      "conditional_bayes_gain_lower": 0.0,
+      "cells": [
+        {
+          "coarse_symbol": 341,
+          "flow_count": 10627,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.0002257845810357019,
+          "frozen_gain_contribution": 0.0002257845810356117,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.020911654875828804,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 342,
+          "flow_count": 3,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 343,
+          "flow_count": 11552,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 349,
+          "flow_count": 1315,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0001757975538234399,
+          "frozen_gain_contribution": -0.00043701450628301627,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 350,
+          "flow_count": 20,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 2.8523834516121636e-06,
+          "frozen_gain_contribution": -4.465402064801915e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 4.9976969891856516e-05,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 351,
+          "flow_count": 75505,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.0014108683976683661,
+          "frozen_gain_contribution": 0.0014108683976699066,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.15145433850101422,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 373,
+          "flow_count": 450,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.0001293677561846066,
+          "frozen_gain_contribution": -0.0004305730544469107,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0010768668188170525,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 375,
+          "flow_count": 638,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.00015775617274251853,
+          "frozen_gain_contribution": 0.00012999998150204685,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.001301389136793777,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 377,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.3106443838228674e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 379,
+          "flow_count": 8,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 380,
+          "flow_count": 6,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 381,
+          "flow_count": 8484,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 382,
+          "flow_count": 12213,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.001133842904704467,
+          "frozen_gain_contribution": 0.001063172804937229,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.038540781068332676,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 383,
+          "flow_count": 51259,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.0025056131481868,
+          "frozen_gain_contribution": 0.002505613148185544,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.07787542900192408,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 465,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.3106443838228674e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 467,
+          "flow_count": 15,
+          "mutable_units": 4,
+          "sample_bayes_gain_contribution": 3.3106443838228687e-06,
+          "frozen_gain_contribution": 3.3106443838228687e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 2.7527031870287817e-05,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 468,
+          "flow_count": 32,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 469,
+          "flow_count": 20286,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.001893822532764905,
+          "frozen_gain_contribution": 0.0018710034651467228,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.05702908329821149,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 470,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 3.145841197936328e-06,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 471,
+          "flow_count": 13639,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.013887400421533955,
+          "frozen_gain_contribution": 0.013887400421533136,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.04037443630372631,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 475,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 476,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.6666568889149627e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 477,
+          "flow_count": 213,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 4.698702044329502e-05,
+          "frozen_gain_contribution": 3.1257814453613956e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0005599434443932107,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 478,
+          "flow_count": 1732,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": -8.673617379884035e-19,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 479,
+          "flow_count": 16505,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.0026681741921479422,
+          "frozen_gain_contribution": 0.0026592433880184597,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.015953410609156345,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 497,
+          "flow_count": 4,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 500,
+          "flow_count": 138,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 501,
+          "flow_count": 1175,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.0014671306069318725,
+          "frozen_gain_contribution": 0.0014557210731254212,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0024649101115473363,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 502,
+          "flow_count": 298,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -4.017363919745881e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 503,
+          "flow_count": 300,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.00031004214152527095,
+          "frozen_gain_contribution": 6.606266515666248e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0005430140950783539,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 504,
+          "flow_count": 1,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -3.1458411979363283e-06,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 505,
+          "flow_count": 1011,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": 0.0,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 507,
+          "flow_count": 31,
+          "mutable_units": 0,
+          "sample_bayes_gain_contribution": 0.0,
+          "frozen_gain_contribution": -2.8110608712908384e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 508,
+          "flow_count": 37,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 8.803732389724893e-07,
+          "frozen_gain_contribution": -1.2207713033791706e-05,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 6.048233426282993e-05,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 509,
+          "flow_count": 42973,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.022254755202690074,
+          "frozen_gain_contribution": 0.022250289800624143,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.09731709196323549,
+          "hoeffding_lower_contribution": 0.0
+        },
+        {
+          "coarse_symbol": 511,
+          "flow_count": 13048,
+          "mutable_units": 6,
+          "sample_bayes_gain_contribution": 0.00612494053796795,
+          "frozen_gain_contribution": 0.006124940537965987,
+          "bayes_gain_lower_contribution": 0.0,
+          "hoeffding_radius": 0.0382966975208431,
+          "hoeffding_lower_contribution": 0.0
+        }
+      ],
+      "certificate_comparison": {
+        "pooled_hoeffding": {
+          "alpha": 0.05,
+          "radius": 0.3662034933156341,
+          "lower": 0.0
+        },
+        "pooled_product": {
+          "alpha": 0.05,
+          "mutable_units": 6,
+          "untruncated_lower": -0.1733123470893737,
+          "lower": 0.0
+        },
+        "cell_hoeffding": {
+          "alpha": 0.001388888888888889,
+          "positive_cells": 0,
+          "lower": 0.0
+        },
+        "cell_product": {
+          "alpha": 0.001388888888888889,
+          "positive_cells": 0,
+          "lower": 0.0
+        }
+      },
+      "mutable_mass_weighted_cells": {
+        "family_alpha": 0.05,
+        "cell_product_lower": 0.0,
+        "cell_hoeffding_lower": 0.0,
+        "cells": [
+          {
+            "coarse_symbol": 341,
+            "mutable_mass": 0.026714640662382258,
+            "alpha": 0.0019202239511832205,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 342,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 343,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 349,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 350,
+            "mutable_mass": 6.277039940664751e-05,
+            "alpha": 4.511878931454551e-06,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 351,
+            "mutable_mass": 0.19343200220540857,
+            "alpha": 0.013903715503955007,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 373,
+            "mutable_mass": 0.0006790041082302222,
+            "alpha": 4.880619462763185e-05,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 375,
+            "mutable_mass": 0.001646446433734019,
+            "alpha": 0.00011834506465393466,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 377,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 379,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 380,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 381,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 382,
+            "mutable_mass": 0.04926730999519636,
+            "alpha": 0.0035412892076201433,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 383,
+            "mutable_mass": 0.09990414886738103,
+            "alpha": 0.007181018899043354,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 465,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 467,
+            "mutable_mass": 2.6129711996720205e-05,
+            "alpha": 1.8781798133738162e-06,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 468,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 469,
+            "mutable_mass": 0.07316369130606493,
+            "alpha": 0.005258939252763779,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 470,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 471,
+            "mutable_mass": 0.051808764711868384,
+            "alpha": 0.003723966649532102,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 475,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 476,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 477,
+            "mutable_mass": 0.0007132559957917964,
+            "alpha": 5.1268188996194865e-05,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 478,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 479,
+            "mutable_mass": 0.02033013252453048,
+            "alpha": 0.0014613113422597389,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 497,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 500,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 501,
+            "mutable_mass": 0.0031519257553237114,
+            "alpha": 0.00022655754214378923,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 502,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 503,
+            "mutable_mass": 0.000691218954228931,
+            "alpha": 4.968418659253083e-05,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 504,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 505,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 507,
+            "mutable_mass": 0.0,
+            "alpha": 0.0,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 508,
+            "mutable_mass": 7.424416375354579e-05,
+            "alpha": 5.336602624637908e-06,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 509,
+            "mutable_mass": 0.12483900016385549,
+            "alpha": 0.008973313217495645,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          },
+          {
+            "coarse_symbol": 511,
+            "mutable_mass": 0.04910794416977002,
+            "alpha": 0.003529834137763461,
+            "product_lower_contribution": 0.0,
+            "hoeffding_lower_contribution": 0.0
+          }
+        ]
+      }
+    }
+  },
+  "weighted_allocation_protocol": "Exploratory comparison of fixed allocations on the same holdout. Coverage applies to each allocation and block width under its conditional block model.",
+  "target": "Bayes accuracy gain from adding timing, conditional on coarse inputs, labels and grouping",
+  "block_independence_is_assumed": true,
+  "primary_block_width": "1d"
+}

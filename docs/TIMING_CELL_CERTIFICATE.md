@@ -239,3 +239,26 @@ Generate the vector figure from the archived cell-count sweep with Matplotlib.
 ```bash
 python3 docs/paper/timing-fusion/plot_cell_count_sweep.py
 ```
+
+## Weighted allocation on the QUIC22 prefix holdout
+
+Keep the original eight-class cohort, timing cuts, frequency rule, and time
+blocks. For coarse cell $c$, let $m_c=\sum_b v_{cb}$ be the class-weighted
+mass of records whose fitted-rule correctness can change with timing. This
+mass is determined by the labels, coarse observations, and frozen rule. Give
+each cell with $m_c>0$ tail probability $\alpha m_c/\sum_j m_j$ and let
+zero-mass cells contribute zero. At the same family error budget, the union
+bound gives simultaneous coverage across cells for each fixed allocation,
+method, and partition under the corresponding block-independence assumption.
+
+On the 20 daily blocks, the cell product bound rises from 0.05429 to
+0.21743 pp, with positive contributions from cells 471, 501, and 509.
+The cell Hoeffding bound falls from 0.01605 pp to zero. All four cell bounds
+are zero with two- and four-day blocks. This is an exploratory comparison on
+the archived prefix holdout.
+[Per-cell allocations and results](../artifacts/methodology/if_e1/timing_cell_weighted_quic22.json)
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 scripts/quic_timing_cell_certificate.py \
+  quic22 --weighted-cells --out /tmp/timing_cell_weighted_quic22.json
+```

@@ -42,7 +42,7 @@ def product_lower(scores, alpha):
 
 
 def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare=False, alpha=ALPHA,
-                     pooled_omit_symbol=None, report_pooled_blocks=False):
+                     pooled_omit_symbol=None, report_pooled_blocks=False, weighted_cells=False):
     """Condition on labels, coarse symbols, block membership, and the fitted rule."""
     alphabet = len(fine_rule) // timing.TIMING_BINS
     coarse_counts = timing.hist(labels, coarse, len(priors), alphabet)
@@ -141,6 +141,36 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
                 "lower": result["conditional_bayes_gain_lower"],
             },
         }
+        if weighted_cells:
+            # Correctness can change for these records given the fixed rule,
+            # label, and coarse symbol. Their mass is fixed by conditioning.
+            mutable_mass = (coarse_mass * can_change).sum(axis=0)
+            total_mass = float(mutable_mass.sum())
+            allocated = alpha * mutable_mass / total_mass if total_mass > 0 else mutable_mass
+            weighted_rows = []
+            for symbol in active:
+                tail = float(allocated[symbol])
+                product, hoeffding = 0.0, 0.0
+                if tail > 0:
+                    ranges = block_masses[symbol]
+                    scores = block_scores[symbol, ranges > 0]
+                    fixed = float(deterministic[symbol] - coarse_optimum[symbol])
+                    radius = float(joint_radius_from_change_budget([ranges @ ranges], alpha=tail)[0])
+                    product = max(0.0, fixed + float(product_lower(scores, tail)))
+                    hoeffding = max(0.0, fixed + float(scores.sum()) - radius)
+                weighted_rows.append({
+                    "coarse_symbol": int(symbol),
+                    "mutable_mass": float(mutable_mass[symbol]),
+                    "alpha": tail,
+                    "product_lower_contribution": product,
+                    "hoeffding_lower_contribution": hoeffding,
+                })
+            result["mutable_mass_weighted_cells"] = {
+                "family_alpha": alpha,
+                "cell_product_lower": sum(row["product_lower_contribution"] for row in weighted_rows),
+                "cell_hoeffding_lower": sum(row["hoeffding_lower_contribution"] for row in weighted_rows),
+                "cells": weighted_rows,
+            }
         if pooled_omit_symbol is not None:
             if pooled_omit_symbol not in active:
                 raise ValueError(f"coarse symbol {pooled_omit_symbol} is absent from the holdout")
@@ -167,13 +197,14 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
 
 
 def evaluate_days(labels, coarse, fine, day, priors, fine_rule, *, compare=False, alpha=ALPHA,
-                  pooled_omit_symbol=None):
+                  pooled_omit_symbol=None, weighted_cells=False):
     return {f"{width}d": cell_certificate(labels, coarse, fine, day // width, priors, fine_rule,
-                                          compare=compare, alpha=alpha, pooled_omit_symbol=pooled_omit_symbol)
+                                          compare=compare, alpha=alpha, pooled_omit_symbol=pooled_omit_symbol,
+                                          weighted_cells=weighted_cells)
             for width in BLOCK_DAYS}
 
 
-def run_quic22(prefix_dir, *, compare=False):
+def run_quic22(prefix_dir, *, compare=False, weighted_cells=False):
     manifest_bytes = ARCHIVE_SUMMARY.read_bytes()
     summary = json.loads(manifest_bytes)
     encoder = timing.FixedPrefixEncoder(timing.K, 2)
@@ -194,7 +225,8 @@ def run_quic22(prefix_dir, *, compare=False):
     fit = timing.combine([days[date] for date in fit_dates], classes)
     _, fine_rule, fit_counts = timing.fit_rules(*fit[:3], priors, encoder.alphabet)
     labels, coarse, fine, hour = timing.combine([days[date] for date in evaluation_dates], classes)
-    results = evaluate_days(labels, coarse, fine, hour // 24, priors, fine_rule, compare=compare)
+    results = evaluate_days(labels, coarse, fine, hour // 24, priors, fine_rule, compare=compare,
+                            weighted_cells=weighted_cells)
     archived = summary["results"]["all"]
     primary = results["1d"]
     archived_keys = {"flows": "flows", "sample_bayes_gain": "sample_ceiling_gain",
@@ -392,6 +424,10 @@ def print_block_results(cohort, *, compare):
             bounds = row["certificate_comparison"]
             print(f"{width}: " + " | ".join(f"{name} {100 * bound['lower']:+.5f} pp"
                                             for name, bound in bounds.items()))
+            if "mutable_mass_weighted_cells" in row:
+                weighted = row["mutable_mass_weighted_cells"]
+                print(f"  Mutable-mass weights: cell product {100 * weighted['cell_product_lower']:+.5f} pp | "
+                      f"cell Hoeffding {100 * weighted['cell_hoeffding_lower']:+.5f} pp")
         else:
             print(f"{width}: {row['positive_cells']}/{row['occupied_coarse_cells']} positive cells, "
                   f"gain lower {100 * row['conditional_bayes_gain_lower']:+.5f} pp")
@@ -414,6 +450,8 @@ def main():
     modes = parser.add_subparsers(dest="mode", required=True)
     quic22 = modes.add_parser("quic22")
     quic22.add_argument("--prefix-dir", type=Path, default=ROOT / "data/quic_timing_pilot")
+    quic22.add_argument("--weighted-cells", action="store_true",
+                        help="compare uniform and mutable-mass-weighted cell error allocations")
     quic22_s = modes.add_parser("quic22-s")
     xs = modes.add_parser("xs")
     for mode in (xs, quic22_s):
@@ -433,7 +471,13 @@ def main():
     if args.mode == "simulate":
         result = run_simulation()
     elif args.mode == "quic22":
-        result = run_quic22(args.prefix_dir, compare=args.compare)
+        args.compare = args.compare or args.weighted_cells
+        result = run_quic22(args.prefix_dir, compare=args.compare, weighted_cells=args.weighted_cells)
+        if args.weighted_cells:
+            result["weighted_allocation_protocol"] = (
+                "Exploratory comparison of fixed allocations on the same holdout. "
+                "Coverage applies to each allocation and block width under its conditional block model."
+            )
     elif args.mode == "quic22-s":
         result = run_quic22_s(args)
     else:
