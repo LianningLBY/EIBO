@@ -1,0 +1,35 @@
+Information Fusion submission details for author review
+
+Use the journal's current submission instructions to place the author details
+and declarations in the appropriate files and submission fields.
+
+Author names and order
+[Confirm the full names, author order, and affiliations.]
+
+Corresponding author
+[Confirm the name, affiliation, and contact email for the title page and cover letter.]
+
+CRediT author contributions
+[Assign and confirm the applicable roles for each author.]
+
+Funding
+[Confirm the funders and grant numbers, or provide the applicable no-funding statement.]
+
+Declaration of competing interest
+[Confirm the disclosure for all authors.]
+
+Declaration of generative AI use
+[Review the following draft and complete it after the authors have checked the manuscript.]
+During manuscript preparation, the authors used OpenAI Codex to help edit and
+organize the text and verify bibliographic details. The authors reviewed and
+edited the resulting content and take responsibility for the manuscript.
+
+Data and code availability
+[Confirm the repository URL or access instructions for the editor and reviewers.]
+The manuscript identifies the two public dataset releases. The accompanying
+analysis archive provides the scripts, result files, and reproduction guide
+TIMING_CELL_CERTIFICATE.md.
+
+Suggested reviewers
+[If requested by the submission system, provide names, affiliations, email
+addresses, and the requested conflict information.]

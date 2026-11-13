@@ -212,3 +212,13 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_block_
   --backend tables \
   --out "artifacts/methodology/if_e1_timing_xs_block_diagnostics_$(date +%Y%m%d_%H%M%S).json"
 ```
+
+[Archived XS time-block and prior results](../artifacts/methodology/if_e1_timing_xs_block_diagnostics_20261113_010220.json)
+
+## Manuscript simulation figure
+
+Generate the vector figure from the archived cell-count sweep with Matplotlib.
+
+```bash
+python3 docs/paper/timing-fusion/plot_cell_count_sweep.py
+```

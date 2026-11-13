@@ -3,6 +3,7 @@
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
+\usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}
 \input{glyphtounicode}
 \pdfgentounicode=1
@@ -36,15 +37,15 @@ Classifiers for encrypted traffic combine packet sizes, directions, timing, and 
 
 We consider nested fusion. The augmented representation contains the original representation together with a finite-valued feature. A fine classifier can then use the added feature selectively within each coarse cell. We use this structure to construct a certificate for the gain in Bayes accuracy. The target is conditional on the evaluation cohort, including its coarse information and class weights. The sampling model assumes conditional independence across declared blocks and permits arbitrary dependence within them. A classifier trained in a separate period supplies evidence for a lower bound on the optimum in each cell.
 
-Our first contribution is a finite-sample construction that sums nonnegative cell lower bounds with simultaneous coverage. Our second is a matched comparison of four certificates that varies pooling and the lower-bound inequality. The comparison covers two QUIC corpora, three block widths, and up to 82 classes. With equal class weights and the frequency rule, the cell product bound is largest for the 16-class XS cohort and the pooled product bound is largest for the 44-class cohort at every tested width in two evaluation windows. The daily comparison has the same pattern on QUIC22-S for 16 and 82 classes. A simulation varies gain concentration under a fixed population model, and sensitivity comparisons change the fitted rule or the class weights. Our third contribution is an analysis of the limits of certification. A binary model gives an explicit sample-size benchmark, and a conditional converse rules out a positive 95\% lower certificate for the aggregate frozen-rule gain on the observed QUIC22 archive-prefix cohort under the stated model.
+Our first contribution is a finite-sample construction that sums nonnegative cell lower bounds with simultaneous coverage. Our second is a matched comparison of four certificates that varies pooling and the lower-bound inequality. The comparison covers two QUIC corpora, three block widths, and up to 82 classes. With equal class weights and the frequency rule, the cell product bound is largest for the 16-class XS cohort and the pooled product bound is largest for the 44-class cohort at the default alignment of each block width in two evaluation windows. The daily comparison has the same pattern on QUIC22-S for 16 and 82 classes. Simulations vary gain concentration and cell count. Sensitivity checks vary calendar alignment, fitted rule, and class weights. Our third contribution is an analysis of the limits of certification. A binary model gives an explicit sample-size benchmark, and a conditional converse rules out a positive 95\% lower certificate for the aggregate frozen-rule gain on the observed QUIC22 archive-prefix cohort under the stated model.
 
 \section{Related work}
 
-Blackwell's comparison of experiments formalizes the value of retaining additional observations for decision problems \cite{blackwell1953}. In the nested setting studied here, a fine decision rule can reproduce any coarse decision rule. We use the stronger cell-level implication for zero--one loss and quantify the gain with finite-sample lower bounds. In traffic analysis, Bayes-error estimates and bounds address the performance available from a declared representation \cite{cherubin2017bayes,cherubin2019fbleau}. Our estimand compares two nested representations on a fixed, class-weighted cohort under an explicit block model.
+Blackwell's comparison of experiments formalizes the value of retaining additional observations for decision problems \cite{blackwell1953}. In the nested setting studied here, a fine decision rule can reproduce any coarse decision rule within each coarse cell. In traffic analysis, Bayes-error estimates and bounds characterize the performance available from a declared representation \cite{cherubin2017bayes,cherubin2019fbleau}. Williamson et al.\ define feature importance through the change in population-level optimal predictiveness when a subset of features is removed \cite{williamson2023importance}. The analogous contrast here is defined for class-weighted accuracy on a fixed cohort. Conditioning on the labels and coarse observations makes the coarse optimum computable. The cell-level nonnegativity then lets us lower-bound the total gain using only those cells with positive lower bounds.
 
-Multimodal traffic classification methods such as MIMETIC and TrafficCross combine several representations to improve predictive performance \cite{aceto2019mimetic,zuo2026trafficcross}. Our comparisons hold the predictive witness fixed and vary how its evidence is converted into a lower certificate for the optimal gain. The witness in the experiments is a simple frequency rule trained before evaluation. The construction permits any fixed rule on the same augmented representation.
+MIMETIC and TrafficCross combine several traffic representations to improve predictive performance \cite{aceto2019mimetic,zuo2026trafficcross}. FG-SAT models flows as graphs and evaluates classification under environment shifts \cite{cui2025fgsat}. GETA uses metadata time series for few-shot adaptation across domains \cite{gunasekara2026geta}. FlowCLIP is especially close to our application because it uses inter-arrival times, sizes, and directions for QUIC classification and evaluates on later weeks \cite{choi2026flowclip}. Byte-level approaches such as MambaNetBurst use a different observation regime \cite{kulatilleke2026mambanetburst}. These studies measure the performance of fitted classifiers. We hold the fitted rule fixed across our four certificates and use it as a witness for the Bayes gain between two representations. A stronger witness can tighten the bound for the same target.
 
-We use Hoeffding's inequality for bounded independent observations \cite{hoeffding1963} and a product bound based on the arithmetic--geometric mean and Markov inequalities. The product gives a conditional e-value \cite{vovk2021evalues} for a null that constrains the sum of block means and permits unequal individual means. The nested feature map yields nonnegative cell gains, allowing simultaneous lower bounds to be added across cells.
+Learn then Test uses multiple testing to calibrate predictive rules with finite-sample risk guarantees \cite{angelopoulos2025learntest}. Our guarantee instead concerns the difference between two optimal accuracies on a fixed cohort, using a rule fitted before evaluation. We use Hoeffding's inequality for bounded independent observations \cite{hoeffding1963} and a product bound based on the arithmetic--geometric mean and Markov inequalities. The product gives a conditional e-value \cite{vovk2021evalues} for a null that constrains the sum of block means and permits unequal individual means. The simultaneous cell guarantee allows dependence among cells within each time block.
 
 \section{Conditional Bayes gain}
 \label{sec:target}
@@ -290,24 +291,14 @@ At 80 blocks, with gain in four cells, the median cell and pooled product bounds
 
 To isolate the multiplicity cost, we increase the total occupied cell count from 32 to 88 or 199 by splitting only zero-gain cells. The children share their parent's block draws and divide its mass proportionally. This preserves the signal cells, true gain, and pooled block scores on every replicate. Each child receives the tail probability for the expanded cell count. By homogeneity, its bound scales with its share of the parent mass, so the sum of its siblings' bounds equals the parent bound at the smaller tail probability. Dependence between children within a block is allowed by the simultaneous cell guarantee.
 
-\begin{table}[t]
+\begin{figure}[t]
 \centering
-\small
-\caption{Median product lower bounds (pp) across 10,000 replicates at 80 blocks and 4 pp true gain. The pooled bound uses the same block scores for all three cell counts within a row.}
-\label{tab:cell-count-sweep}
-\begin{tabular}{rrrrr}
-\toprule
- & & \multicolumn{3}{c}{Cell bound by occupied count} \\
-Signal cells & Pooled bound & 32 & 88 & 199 \\
-\midrule
-4 & 1.940 & 3.064 & 2.947 & 2.854 \\
-8 & 1.926 & 2.146 & 1.963 & 1.817 \\
-16 & 1.931 & 0.568 & 0.386 & 0.270 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\includegraphics[width=\linewidth]{figures/cell-count-sweep.pdf}
+\caption{Median product lower bounds across 10,000 replicates with 80 blocks and a true gain of 4 percentage points. Within each panel, splitting zero-gain cells changes the cell-level error allocation and preserves the pooled scores on every replicate.}
+\label{fig:cell-count-sweep}
+\end{figure}
 
-With eight signal cells at 80 blocks, the cell product bound exceeds the pooled product bound in 75.47\%, 54.17\%, and 35.19\% of replicates as the occupied count rises from 32 to 88 and 199. The median ordering reverses (Table~\ref{tab:cell-count-sweep}). With four signal cells, the cell median remains larger at all three counts. With 20 blocks and eight signal cells, the fraction of positive cell product bounds falls from 54.09\% to 1.01\% between 32 and 199 occupied cells. These comparisons isolate the effect of the error allocation in this simulation.
+With eight signal cells at 80 blocks, the cell product bound exceeds the pooled product bound in 75.47\%, 54.17\%, and 35.19\% of replicates as the occupied count rises from 32 to 88 and 199. The median ordering reverses (Fig.~\ref{fig:cell-count-sweep}). With four signal cells, the cell median remains larger at all three counts. With 20 blocks and eight signal cells, the fraction of positive cell product bounds falls from 54.09\% to 1.01\% between 32 and 199 occupied cells. These comparisons isolate the effect of the error allocation in this simulation.
 
 \subsection{Sensitivity to the fitted rule and class prior}
 \label{sec:xs-sensitivity}
@@ -389,7 +380,9 @@ For the QUIC22 cohort, the replay probabilities for 1, 6, 24, and 48 hour groups
 
 The 16-class frequency-rule result locates a certified gain in one well-supported coarse symbol. The 44-class daily cell and pooled bounds remain positive in both windows after omitting the largest contributor. The simulation shows that both gain concentration and the number of occupied cells can change the relative performance of the product bounds. Matching the fitting prior to the evaluation prior can recover positive lower bounds for the same target and records. The fitted rule affects the evidence available to the certificate. The evaluation weights also determine the Bayes gain target.
 
-The certificate targets the class-weighted gain on the fixed evaluation cohort. Extending the claim to future traffic would require assumptions connecting that cohort to the deployment population. The one-hour guard keeps each retained flow within one date. Shared traffic conditions can still induce dependence across dates. The positive lag-one correlations and the zero bound at one disjoint-window alignment motivate reporting sensitivity to both block width and alignment. Conditional independence remains an assumption for each partition. The collection schedule and duration of known shared conditions can inform a primary partition before evaluation timing is examined. A coverage statement for a selected partition requires an error budget for the selection and a valid sampling model for the candidate bounds used in that guarantee. Variance-adaptive bounds under independence and bounds allowing residual dependence across blocks are separate extensions.
+The certificate targets the class-weighted gain on the fixed evaluation cohort. Extending the claim to future traffic would require assumptions connecting that cohort to the deployment population. The one-hour guard keeps each retained flow within one date. Shared traffic conditions can still induce dependence across dates. The positive lag-one correlations and the zero bound at one disjoint-window alignment motivate reporting sensitivity to both block width and alignment. Conditional independence remains an assumption for each partition. The collection schedule and duration of known shared conditions can inform a primary partition before evaluation timing is examined. A coverage statement for a selected partition requires an error budget for the selection and a valid sampling model for the candidate bounds used in that guarantee.
+
+An alternative under independent blocks is to use empirical Bernstein bounds for the mean of bounded independent observations \cite{maurer2009bernstein}. Applying such a bound to the sum of heterogeneous block scores requires an appropriate common range or a bound that uses the individual ranges. Betting methods also give variance-adaptive bounds for settings with a specified conditional-mean structure \cite{waudby2024betting}. Residual dependence across blocks poses a separate problem. Heteroskedasticity and autocorrelation consistent covariance estimation \cite{newey1987hac} provides an asymptotic variance estimate under its own assumptions. The daily score ratios in our diagnostic can have different means and weights across dates. The finite-sample product bound requires factoring the expectation of the product across blocks, a condition that the lag correlations leave unresolved.
 
 Both corpora were collected on the CESNET network in different periods and use different available label sets. QUIC22-S retains millions of flows and spans 20 evaluation days. Its coarser-width bounds are zero. The cross-corpus comparison changes the fitted rule, class mixture, and block score distribution along with the number of blocks.
 
