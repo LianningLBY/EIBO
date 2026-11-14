@@ -46,10 +46,16 @@ SHA-256 6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab
 KU-HAR v5, trimmed interpolated archive (doi:10.17632/45f952y38r.5)
 SHA-256 9fe5d0052f2f1d6711afac42ee4badd968116afa8ba4b8ba591f4fdd771c2ec2
 
-The manuscript links docs/TIMING_CELL_CERTIFICATE.md on the
-codex/methodology-risk-certificates branch. The guide records the five HDF5
-checks. The KU-HAR and exact null results are archived in 40c74ed and the
-participant omission results in 67314f4.
+The 31-page manuscript, source files, and figures are archived in commit
+834d4ec7f3058e742a39373d524d40dc83487733.
+Manuscript PDF:
+https://github.com/LianningLBY/EIBO/blob/834d4ec7f3058e742a39373d524d40dc83487733/docs/paper/timing-fusion/main.pdf
+Reproduction guide:
+https://github.com/LianningLBY/EIBO/blob/834d4ec7f3058e742a39373d524d40dc83487733/docs/TIMING_CELL_CERTIFICATE.md
+
+The five HDF5 reproduction outputs are archived in 9aa8125. The KU-HAR and
+exact null results are archived in 40c74ed, and the participant omission
+results are archived in 67314f4.
 [Before submission, arrange access to the code and results for the editor and
 reviewers, or supply the equivalent reproduction files as a supplement. Point
 the manuscript to the accessible version that includes the reproduction record.]
