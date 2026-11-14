@@ -43,11 +43,13 @@ SHA-256 e46ee1252b3c845a827a4f9140650e54e0995be2134f60fe05beefa69ec9e3f5
 CESNET-QUICEXT-25-XS.h5 (10 million flows)
 SHA-256 6b323c4c53b7c9d0ec9011f895b3c5ba6b35247576e41ef19fe84ab8632810ab
 
-The manuscript links the private EIBO reproduction guide at commit
-8a3f5cf7972d2c0041c22ffe4796be5b99885e0d.
-The guide now records the five HDF5 checks in docs/TIMING_CELL_CERTIFICATE.md.
-The reproduction outputs are archived in commit
-9aa8125e0ffebd7c87850e092fafcf4847ad780a.
+KU-HAR v5, trimmed interpolated archive (doi:10.17632/45f952y38r.5)
+SHA-256 9fe5d0052f2f1d6711afac42ee4badd968116afa8ba4b8ba591f4fdd771c2ec2
+
+The manuscript links docs/TIMING_CELL_CERTIFICATE.md on the
+codex/methodology-risk-certificates branch. The guide records the five HDF5
+checks. The KU-HAR and exact null results are archived in 40c74ed and the
+participant omission results in 67314f4.
 [Before submission, arrange access to the code and results for the editor and
 reviewers, or supply the equivalent reproduction files as a supplement. Point
 the manuscript to the accessible version that includes the reproduction record.]

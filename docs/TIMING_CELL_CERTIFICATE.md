@@ -56,6 +56,8 @@ bash scripts/run_fusion_followups.sh
 
 The subject omission check keeps the training set, sensor encoders, and fitted rules fixed. It removes each evaluation subject in turn and recomputes the class weights and coarse optimum for the remaining cohort. An omission that removes an entire activity is marked unavailable. The output reports pointwise pooled product bounds at 0.05 and bounds with a Bonferroni budget of 0.05 divided by the number of candidate omissions. The latter give simultaneous coverage of the evaluable reduced-cohort targets under the subject-block model. The reference check verifies the full primary analysis against the archived result before writing the omission report.
 
+The [KU-HAR archive](../artifacts/methodology/fusion_kuhar_20261114T075451Z.json) gives a primary eight-leaf pooled product bound of 2.419 pp. The [participant omission archive](../artifacts/methodology/fusion_kuhar_omit_subject_20261114T100646Z.json) verifies that result and records all 59 reduced cohorts. The [exact null coverage archive](../artifacts/methodology/fusion_block_dependence_20261114T071847Z.json) contains all 70 settings. Run the [figure script](paper/timing-fusion/plot_fusion_followups.py) with Python to regenerate both plots from the archives.
+
 ```bash
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/fusion_kuhar_certificate.py \
   --archive data/fusion_sensor/kuhar-trimmed.zip \
