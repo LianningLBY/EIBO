@@ -197,7 +197,14 @@ Classes & Certificate & Original window & Retrospective check \\
 
 Both primary bounds are positive. In the 16-class cohort, symbol 509 contributes all of the original daily cell product bound and 99.97\% of the disjoint-window bound. In the 44-class cohort, five cells contribute to the original daily cell product bound. Symbols 479, 511, and 509 account for 91.41\% of that bound and make positive daily contributions in both windows. The 16- and 44-class results compare methods within each cohort. Changing the cohort changes the service mix, class weights, and fitted rule.
 
-The same certificate gives the largest bound within each cohort at the default two- and four-day alignments in both windows. On four-day blocks, the 16-class cell product bounds are 0.305 and 0.433 pp, and the 44-class pooled product bounds are 1.678 and 1.229 pp. Each width has its own block assumption. \ref{app:full-comparisons} gives the full matched results and the exploratory eight-class comparisons.
+Figure~\ref{fig:xs-block-widths} follows the two selected certificates across the default block widths of one, two, and four days. The 16-class cell product bound falls as blocks widen in both windows. For 44 classes, the pooled product bound increases slightly from one to two days in the retrospective check. Both cohorts retain positive bounds at four days. The 16-class bounds are 0.305 and 0.433 pp, and the 44-class bounds are 1.678 and 1.229 pp in the original and retrospective windows, respectively. The selected certificate gives the largest bound within each cohort at the default alignments for two and four days in both windows. \ref{app:full-comparisons} gives the full matched results and the exploratory eight-class comparisons.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\linewidth]{figures/xs-block-widths.pdf}
+\caption{XS conditional lower bounds for adding packet timing across block widths. Each panel uses the certificate selected for the retrospective check. The tail probability is 0.05 per fixed bound in the original window and 0.025 in the retrospective check. In the retrospective check, the daily bounds are primary and the wider groupings assess sensitivity. Coverage at each width uses the corresponding block model. Labels report percentage points (pp).}
+\label{fig:xs-block-widths}
+\end{figure}
 
 \subsection{Cross-corpus evaluation on QUIC22-S}
 \label{sec:quic22-s}

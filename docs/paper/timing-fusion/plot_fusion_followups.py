@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Plot the archived KU-HAR and exact null coverage results."""
+"""Plot the archived XS, KU-HAR, and exact null coverage results."""
 
 import json
 from pathlib import Path
@@ -21,6 +21,47 @@ GRAY = "#67707b"
 def save(fig, name):
     fig.savefig(FIGURES / name, metadata={"CreationDate": None, "ModDate": None})
     plt.close(fig)
+
+
+def plot_xs_block_widths():
+    sweep = ARCHIVES / "if_e1_timing_service_sweep_xs_20261112_125904.json"
+    check = ARCHIVES / "if_e1_timing_temporal_xs_20261112_150118.json"
+    original = json.loads(sweep.read_text(encoding="utf-8"))["service_sweep"]["expanded_cohorts"]
+    retrospective = json.loads(check.read_text(encoding="utf-8"))["cohorts"]
+    widths = (1, 2, 4)
+    windows = (
+        ("Original window", BLUE, "o", "-"),
+        ("Retrospective check", ORANGE, "s", "--"),
+    )
+    method_names = {"cell_product": "cell product", "pooled_product": "pooled product"}
+    fig, axes = plt.subplots(1, 2, sharex=True, sharey=True, figsize=(5.0, 2.55))
+    for ax, (classes, sweep_key) in zip(axes, (("16", "16"), ("44", "all"))):
+        method = retrospective[classes]["primary_method"]
+        cohorts = (original[sweep_key], retrospective[classes])
+        values = [
+            [100 * cohort["results_by_block_width"][f"{days}d"]["certificate_comparison"][method]["lower"]
+             for days in widths]
+            for cohort in cohorts
+        ]
+        for (label, color, marker, style), bounds, other_bounds in zip(windows, values, reversed(values)):
+            ax.plot(widths, bounds, label=label, color=color, marker=marker, linestyle=style,
+                    markersize=4.2, linewidth=1.3, markerfacecolor="white" if style == "--" else color,
+                    zorder=3)
+            for days, bound, other in zip(widths, bounds, other_bounds):
+                above = bound > other
+                ax.annotate(f"{bound:.3f}", (days, bound), xytext=(0, 5 if above else -5),
+                            textcoords="offset points", ha="center", va="bottom" if above else "top",
+                            color=color, fontsize=7)
+        ax.set_title(f"{classes} classes ({method_names[method]})", pad=8)
+        ax.set(xlim=(0.55, 4.45), ylim=(0, 2.65), xticks=widths, yticks=(0, 0.5, 1, 1.5, 2, 2.5))
+        ax.grid(axis="y", color="#e8eaed", linewidth=0.55)
+        ax.spines[["top", "right"]].set_visible(False)
+    axes[0].set_ylabel("Lower bound on Bayes gain (pp)", fontsize=9)
+    fig.supxlabel("Block width (days)", y=0.15, fontsize=9)
+    fig.legend(*axes[0].get_legend_handles_labels(), loc="lower center", ncol=2,
+               frameon=False, bbox_to_anchor=(0.53, 0.015))
+    fig.subplots_adjust(left=0.145, right=0.985, bottom=0.30, top=0.86, wspace=0.13)
+    save(fig, "xs-block-widths.pdf")
 
 
 def plot_kuhar():
@@ -87,6 +128,7 @@ def plot_coverage():
 
 def main():
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8, "pdf.fonttype": 42})
+    plot_xs_block_widths()
     plot_kuhar()
     plot_coverage()
 

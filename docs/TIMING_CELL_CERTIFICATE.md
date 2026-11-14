@@ -40,6 +40,8 @@ The XS service sweep serializes `fit_counts` in a different position at the top 
 
 The [parity-group bounds](../artifacts/methodology/timing_block_repro_QfpnhZIJ/parity.json) were recomputed from the daily scores. The pooled product bounds match Appendix C at 1.54325 and 1.27665 percentage points for the original and disjoint windows. The two Hoeffding bounds are zero.
 
+The XS block-width figure in Section 4.2 uses the original [service sweep](../artifacts/methodology/if_e1_timing_service_sweep_xs_20261112_125904.json) and the [retrospective check](../artifacts/methodology/if_e1_timing_temporal_xs_20261112_150118.json). The [figure script](paper/timing-fusion/plot_fusion_followups.py) reads both archives and plots the cell product bound for 16 classes and the pooled product bound for 44 classes.
+
 ## Cross-block dependence and sensor fusion
 
 The dependence experiment uses a balanced binary cohort with known zero Bayes gain. Each block has the same two possible scores and the same marginal law at every correlation level. A recursion computes the exact false-certification rate for the independent-block and parity versions of both the pooled product and pooled Hoeffding bounds. Independent adjacent pairs satisfy the parity assumption by construction. A persistent Markov chain induces dependence at lag two as well. Its rates describe sensitivity under the specified data generating process. The block counts include those of the QUIC22-S sensitivity analysis and the one- and two-day counts of the original XS window.
@@ -56,7 +58,7 @@ bash scripts/run_fusion_followups.sh
 
 The subject omission check keeps the training set, sensor encoders, and fitted rules fixed. It removes each evaluation subject in turn and recomputes the class weights and coarse optimum for the remaining cohort. An omission that removes an entire activity is marked unavailable. The output reports pointwise pooled product bounds at 0.05 and bounds with a Bonferroni budget of 0.05 divided by the number of candidate omissions. The latter give simultaneous coverage of the evaluable reduced-cohort targets under the subject-block model. The reference check verifies the full primary analysis against the archived result before writing the omission report.
 
-The [KU-HAR archive](../artifacts/methodology/fusion_kuhar_20261114T075451Z.json) gives a primary eight-leaf pooled product bound of 2.419 pp. The [participant omission archive](../artifacts/methodology/fusion_kuhar_omit_subject_20261114T100646Z.json) verifies that result and records all 59 reduced cohorts. The [exact null coverage archive](../artifacts/methodology/fusion_block_dependence_20261114T071847Z.json) contains all 70 settings. Run the [figure script](paper/timing-fusion/plot_fusion_followups.py) with Python to regenerate both plots from the archives.
+The [KU-HAR archive](../artifacts/methodology/fusion_kuhar_20261114T075451Z.json) gives a primary eight-leaf pooled product bound of 2.419 pp. The [participant omission archive](../artifacts/methodology/fusion_kuhar_omit_subject_20261114T100646Z.json) verifies that result and records all 59 reduced cohorts. The [exact null coverage archive](../artifacts/methodology/fusion_block_dependence_20261114T071847Z.json) contains all 70 settings. Run the [figure script](paper/timing-fusion/plot_fusion_followups.py) with Python to regenerate these plots and the XS block-width figure from the archives.
 
 ```bash
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/fusion_kuhar_certificate.py \
