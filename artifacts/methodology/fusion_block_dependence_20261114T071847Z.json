@@ -1,0 +1,1274 @@
+{
+  "alpha_per_method": 0.05,
+  "true_bayes_gain": 0.0,
+  "design": "One coarse cell with four equal-mass balanced label pairs per block. In the high state the added feature agrees with three pairs and flips one. The low state reverses those outcomes. Each state has marginal probability one half, so each record's added feature is marginally fair given the cohort. The frozen rule predicts the added feature. Scores are one-quarter or three-quarters of the mutable block mass. False certification means a strictly positive lower bound.",
+  "assumptions": {
+    "adjacent_pairs": "Independent successive pairs of blocks with correlation rho inside each pair. An unpaired final block is independent.",
+    "persistent_markov": "Stationary symmetric two-state Markov chain with lag-one correlation rho and lag-two correlation rho squared.",
+    "range": "[0, 1 / blocks] from the mutable block mass",
+    "method_scope": "At rho=0 all methods have their assumed independence. For adjacent pairs, the parity methods remain valid at all rho values.",
+    "calculation": "Exact recursion over the last state and the number of high scores"
+  },
+  "scenarios": [
+    {
+      "blocks": 5,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.0,
+      "mean_adjacent_correlation": 0.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.1,
+      "mean_adjacent_correlation": 0.05,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.2,
+      "mean_adjacent_correlation": 0.1,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.4,
+      "mean_adjacent_correlation": 0.2,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.6,
+      "mean_adjacent_correlation": 0.3,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.8,
+      "mean_adjacent_correlation": 0.4,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 1.0,
+      "mean_adjacent_correlation": 0.5,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.0,
+      "mean_adjacent_correlation": 0.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.1,
+      "mean_adjacent_correlation": 0.1,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.2,
+      "mean_adjacent_correlation": 0.2,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.4,
+      "mean_adjacent_correlation": 0.4,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.6,
+      "mean_adjacent_correlation": 0.6,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.8,
+      "mean_adjacent_correlation": 0.8,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 5,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 1.0,
+      "mean_adjacent_correlation": 1.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 1.0,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.0,
+      "mean_adjacent_correlation": 0.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0009765625,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9990234375,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.1,
+      "mean_adjacent_correlation": 0.05555555555555555,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0015727636718750008,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.998427236328125,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.2,
+      "mean_adjacent_correlation": 0.1111111111111111,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.00243,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.99757,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.4,
+      "mean_adjacent_correlation": 0.2222222222222222,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.005252187499999998,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9947478125,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.6,
+      "mean_adjacent_correlation": 0.3333333333333333,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.010240000000000004,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.98976,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.8,
+      "mean_adjacent_correlation": 0.4444444444444444,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.018452812500000006,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9815471875,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 1.0,
+      "mean_adjacent_correlation": 0.5555555555555556,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.03125,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.96875,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.0,
+      "mean_adjacent_correlation": 0.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0009765625,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9990234375,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.1,
+      "mean_adjacent_correlation": 0.1,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0023026832919921894,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9976973167080078,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.2,
+      "mean_adjacent_correlation": 0.2,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.005038847999999999,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.994961152,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.4,
+      "mean_adjacent_correlation": 0.4,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.02017680349999999,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9798231965,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.6,
+      "mean_adjacent_correlation": 0.6,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.06710886400000003,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.932891136,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.8,
+      "mean_adjacent_correlation": 0.8,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.19371024450000007,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.8062897554999999,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 10,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 1.0,
+      "mean_adjacent_correlation": 1.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.5,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.5,
+        "parity_hoeffding": 1.0,
+        "parity_product": 1.0
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.0,
+      "mean_adjacent_correlation": 0.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.005908966064453125,
+        "parity_hoeffding": 0.0,
+        "parity_product": 2.002716064453125e-05
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9940910339355469,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9999799728393555
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.1,
+      "mean_adjacent_correlation": 0.05263157894736842,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.008250891410968403,
+        "parity_hoeffding": 0.0,
+        "parity_product": 4.2950440309619935e-05
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9917491085890316,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9999570495596903
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.2,
+      "mean_adjacent_correlation": 0.10526315789473684,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0109682424,
+        "parity_hoeffding": 0.0,
+        "parity_product": 8.463689999999998e-05
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9890317576,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9999153631
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.4,
+      "mean_adjacent_correlation": 0.21052631578947367,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.01732882452382812,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.00026403238955078115
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9826711754761719,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9997359676104492
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.6,
+      "mean_adjacent_correlation": 0.3157894736842105,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.02468085760000001,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0006291456000000002
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9753191424,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9993708544
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.8,
+      "mean_adjacent_correlation": 0.42105263157894735,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.034068066823828125,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0010971869317382816
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9659319331761719,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9989028130682617
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 1.0,
+      "mean_adjacent_correlation": 0.5263157894736842,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0546875,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0009765625
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9453125,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9990234375
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.0,
+      "mean_adjacent_correlation": 0.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.005908966064453125,
+        "parity_hoeffding": 0.0,
+        "parity_product": 2.002716064453125e-05
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9940910339355469,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9999799728393555
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.1,
+      "mean_adjacent_correlation": 0.1,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.01120510578864006,
+        "parity_hoeffding": 0.0,
+        "parity_product": 8.565705963547195e-05
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9887948942113599,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9999143429403645
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.2,
+      "mean_adjacent_correlation": 0.2,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.01955695087119237,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0003148358656720895
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9804430491288076,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.999685164134328
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.4,
+      "mean_adjacent_correlation": 0.4,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.0495560242356614,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.002942776001938166
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.9504439757643386,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9970572239980618
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.6,
+      "mean_adjacent_correlation": 0.6,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.10662063210590374,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.018915118434956097
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.8933793678940962,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9810848815650439
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.8,
+      "mean_adjacent_correlation": 0.8,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.21404632261780945,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.09756151294304947
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.7859536773821906,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9024384870569505
+      }
+    },
+    {
+      "blocks": 20,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 1.0,
+      "mean_adjacent_correlation": 1.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0,
+        "independent_product": 0.5,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.5
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 1.0,
+        "independent_product": 0.5,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.5
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.0,
+      "mean_adjacent_correlation": 0.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 1.5514018514295458e-07,
+        "independent_product": 0.005675795718389054,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.00026779253605013764
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999998448598149,
+        "independent_product": 0.994324204281611,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9997322074639499
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.1,
+      "mean_adjacent_correlation": 0.051111111111111114,
+      "false_certification_rates": {
+        "independent_hoeffding": 5.006482920330235e-07,
+        "independent_product": 0.007916549641635693,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0004795286758500347
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.999999499351708,
+        "independent_product": 0.9920834503583643,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.99952047132415
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.2,
+      "mean_adjacent_correlation": 0.10222222222222223,
+      "false_certification_rates": {
+        "independent_hoeffding": 1.3848920311310672e-06,
+        "independent_product": 0.010488843781980336,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.000787038161649073
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999986151079688,
+        "independent_product": 0.9895111562180197,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.999212961838351
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.4,
+      "mean_adjacent_correlation": 0.20444444444444446,
+      "false_certification_rates": {
+        "independent_hoeffding": 7.334163828132205e-06,
+        "independent_product": 0.016441056707063303,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0017423516471961208
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999926658361719,
+        "independent_product": 0.9835589432929367,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9982576483528038
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.6,
+      "mean_adjacent_correlation": 0.30666666666666664,
+      "false_certification_rates": {
+        "independent_hoeffding": 2.6732701084024843e-05,
+        "independent_product": 0.023171117125459773,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0031973415540039367
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.999973267298916,
+        "independent_product": 0.9768288828745402,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.996802658445996
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.8,
+      "mean_adjacent_correlation": 0.4088888888888889,
+      "false_certification_rates": {
+        "independent_hoeffding": 7.517524908075445e-05,
+        "independent_product": 0.03043405416122934,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.005138126726310874
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999248247509193,
+        "independent_product": 0.9695659458387706,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9948618732736891
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 1.0,
+      "mean_adjacent_correlation": 0.5111111111111111,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.000244140625,
+        "independent_product": 0.04656982421875,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.005311012268066406
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.999755859375,
+        "independent_product": 0.95343017578125,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9946889877319336
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.0,
+      "mean_adjacent_correlation": 0.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 1.5514018514295458e-07,
+        "independent_product": 0.005675795718389054,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.00026779253605013764
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999998448598149,
+        "independent_product": 0.994324204281611,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9997322074639499
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.1,
+      "mean_adjacent_correlation": 0.1,
+      "false_certification_rates": {
+        "independent_hoeffding": 1.5444352046958738e-06,
+        "independent_product": 0.010933320817121797,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0008419107678275849
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999984555647953,
+        "independent_product": 0.9890666791828782,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9991580892321724
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.2,
+      "mean_adjacent_correlation": 0.2,
+      "false_certification_rates": {
+        "independent_hoeffding": 1.1512460391009449e-05,
+        "independent_product": 0.019207811036835637,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.0022557489277349775
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.999988487539609,
+        "independent_product": 0.9807921889631643,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.997744251072265
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.4,
+      "mean_adjacent_correlation": 0.4,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.00032397637740955144,
+        "independent_product": 0.04863673609442412,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.011368144482714641
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9996760236225904,
+        "independent_product": 0.9513632639055759,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9886318555172854
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.6,
+      "mean_adjacent_correlation": 0.6,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.004679221756618602,
+        "independent_product": 0.10366957657467411,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.04156006411506346
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9953207782433814,
+        "independent_product": 0.8963304234253259,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.9584399358849366
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.8,
+      "mean_adjacent_correlation": 0.8,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.044475891316605884,
+        "independent_product": 0.20391792592719374,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.12781557870831387
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9555241086833941,
+        "independent_product": 0.7960820740728063,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.8721844212916862
+      }
+    },
+    {
+      "blocks": 46,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 1.0,
+      "mean_adjacent_correlation": 1.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.5,
+        "independent_product": 0.5,
+        "parity_hoeffding": 0.0,
+        "parity_product": 0.5
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.5,
+        "independent_product": 0.5,
+        "parity_hoeffding": 1.0,
+        "parity_product": 0.5
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.0,
+      "mean_adjacent_correlation": 0.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 4.0935996829218375e-07,
+        "independent_product": 0.0007582565972286107,
+        "parity_hoeffding": 1.494951520008628e-13,
+        "parity_product": 0.00015641949820335824
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999995906400317,
+        "independent_product": 0.9992417434027714,
+        "parity_hoeffding": 0.9999999999998505,
+        "parity_product": 0.9998435805017967
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.1,
+      "mean_adjacent_correlation": 0.05,
+      "false_certification_rates": {
+        "independent_hoeffding": 1.2465853888625474e-06,
+        "independent_product": 0.0012411098490613367,
+        "parity_hoeffding": 1.4546145753129516e-12,
+        "parity_product": 0.000291710948722869
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999987534146111,
+        "independent_product": 0.9987588901509387,
+        "parity_hoeffding": 0.9999999999985454,
+        "parity_product": 0.9997082890512772
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.2,
+      "mean_adjacent_correlation": 0.1,
+      "false_certification_rates": {
+        "independent_hoeffding": 3.2179789673784776e-06,
+        "independent_product": 0.0018820704469639997,
+        "parity_hoeffding": 1.0531072268992178e-11,
+        "parity_product": 0.0004942188238533876
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999967820210326,
+        "independent_product": 0.998117929553036,
+        "parity_hoeffding": 0.999999999989469,
+        "parity_product": 0.9995057811761466
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.4,
+      "mean_adjacent_correlation": 0.2,
+      "false_certification_rates": {
+        "independent_hoeffding": 1.4765171268852111e-05,
+        "independent_product": 0.00365899497987365,
+        "parity_hoeffding": 2.726084532858505e-10,
+        "parity_product": 0.0011473833929853939
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999852348287311,
+        "independent_product": 0.9963410050201263,
+        "parity_hoeffding": 0.9999999997273915,
+        "parity_product": 0.9988526166070146
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.6,
+      "mean_adjacent_correlation": 0.3,
+      "false_certification_rates": {
+        "independent_hoeffding": 4.735193664297495e-05,
+        "independent_product": 0.006076809403374181,
+        "parity_hoeffding": 3.4422544196895004e-09,
+        "parity_product": 0.0021812765059591207
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.999952648063357,
+        "independent_product": 0.9939231905966258,
+        "parity_hoeffding": 0.9999999965577456,
+        "parity_product": 0.9978187234940409
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 0.8,
+      "mean_adjacent_correlation": 0.4,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.00011851235189612439,
+        "independent_product": 0.009066413740767311,
+        "parity_hoeffding": 2.573560723069812e-08,
+        "parity_product": 0.003618263394468613
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9998814876481039,
+        "independent_product": 0.9909335862592327,
+        "parity_hoeffding": 0.9999999742643928,
+        "parity_product": 0.9963817366055314
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "adjacent_pairs",
+      "state_correlation_at_linked_transitions": 1.0,
+      "mean_adjacent_correlation": 0.5,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.00026779253605013764,
+        "independent_product": 0.012948040896617385,
+        "parity_hoeffding": 1.5514018514295458e-07,
+        "parity_product": 0.005675795718389054
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9997322074639499,
+        "independent_product": 0.9870519591033826,
+        "parity_hoeffding": 0.9999998448598149,
+        "parity_product": 0.994324204281611
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.0,
+      "mean_adjacent_correlation": 0.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 4.0935996829218375e-07,
+        "independent_product": 0.0007582565972286107,
+        "parity_hoeffding": 1.494951520008628e-13,
+        "parity_product": 0.00015641949820335824
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999995906400317,
+        "independent_product": 0.9992417434027714,
+        "parity_hoeffding": 0.9999999999998505,
+        "parity_product": 0.9998435805017967
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.1,
+      "mean_adjacent_correlation": 0.1,
+      "false_certification_rates": {
+        "independent_hoeffding": 3.8120304747146018e-06,
+        "independent_product": 0.0020391360582235315,
+        "parity_hoeffding": 1.420473660404389e-11,
+        "parity_product": 0.0005461745014560569
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9999961879695253,
+        "independent_product": 0.9979608639417765,
+        "parity_hoeffding": 0.9999999999857953,
+        "parity_product": 0.9994538254985439
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.2,
+      "mean_adjacent_correlation": 0.2,
+      "false_certification_rates": {
+        "independent_hoeffding": 2.5731166351977306e-05,
+        "independent_product": 0.0047423910348617995,
+        "parity_hoeffding": 7.534083582838783e-10,
+        "parity_product": 0.0015864258830214906
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.999974268833648,
+        "independent_product": 0.9952576089651382,
+        "parity_hoeffding": 0.9999999992465917,
+        "parity_product": 0.9984135741169785
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.4,
+      "mean_adjacent_correlation": 0.4,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.0005722911059068131,
+        "independent_product": 0.01877460556116562,
+        "parity_hoeffding": 5.337796505889384e-07,
+        "parity_product": 0.008981847615091125
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9994277088940932,
+        "independent_product": 0.9812253944388344,
+        "parity_hoeffding": 0.9999994662203494,
+        "parity_product": 0.9910181523849089
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.6,
+      "mean_adjacent_correlation": 0.6,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.006547903226704291,
+        "independent_product": 0.05644288489433823,
+        "parity_hoeffding": 9.572216719632286e-05,
+        "parity_product": 0.03560674996746059
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9934520967732957,
+        "independent_product": 0.9435571151056618,
+        "parity_hoeffding": 0.9999042778328037,
+        "parity_product": 0.9643932500325394
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 0.8,
+      "mean_adjacent_correlation": 0.8,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.050310533638386334,
+        "independent_product": 0.14703647486044852,
+        "parity_hoeffding": 0.006805579481967514,
+        "parity_product": 0.11624396484836706
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.9496894663616137,
+        "independent_product": 0.8529635251395515,
+        "parity_hoeffding": 0.9931944205180325,
+        "parity_product": 0.8837560351516329
+      }
+    },
+    {
+      "blocks": 91,
+      "dependence": "persistent_markov",
+      "state_correlation_at_linked_transitions": 1.0,
+      "mean_adjacent_correlation": 1.0,
+      "false_certification_rates": {
+        "independent_hoeffding": 0.5,
+        "independent_product": 0.5,
+        "parity_hoeffding": 0.5,
+        "parity_product": 0.5
+      },
+      "coverage_rates": {
+        "independent_hoeffding": 0.5,
+        "independent_product": 0.5,
+        "parity_hoeffding": 0.5,
+        "parity_product": 0.5
+      }
+    }
+  ]
+}
