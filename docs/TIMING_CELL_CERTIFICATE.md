@@ -54,6 +54,16 @@ conda activate traffic-ncde &&
 bash scripts/run_fusion_followups.sh
 ```
 
+The subject omission check keeps the training set, sensor encoders, and fitted rules fixed. It removes each evaluation subject in turn and recomputes the class weights and coarse optimum for the remaining cohort. An omission that removes an entire activity is marked unavailable. The output reports pointwise pooled product bounds at 0.05 and bounds with a Bonferroni budget of 0.05 divided by the number of candidate omissions. The latter give simultaneous coverage of the evaluable reduced-cohort targets under the subject-block model. The reference check verifies the full primary analysis against the archived result before writing the omission report.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/fusion_kuhar_certificate.py \
+  --archive data/fusion_sensor/kuhar-trimmed.zip \
+  --reference artifacts/methodology/fusion_kuhar_20261114T075451Z.json \
+  --leave-one-subject-out \
+  --out "artifacts/methodology/fusion_kuhar_omit_subject_$(date -u +%Y%m%dT%H%M%SZ).json"
+```
+
 ## QUIC22 reproduction and null checks
 
 The reproduction uses the archived fit dates, the 283,526 retained evaluation flows, and the original five-packet direction and size representation with the second-packet interval bins. It verifies the archived input manifests and reproduces the original sample Bayes gain and frozen-rule gap.

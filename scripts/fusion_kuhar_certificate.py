@@ -16,7 +16,7 @@ import sklearn
 from sklearn.tree import DecisionTreeClassifier
 
 import quic_timing_pilot as timing
-from quic_timing_cell_certificate import ALPHA, cell_certificate
+from quic_timing_cell_certificate import ALPHA, cell_certificate, product_lower
 from quic_timing_pilot_h5 import sha256
 
 
@@ -126,7 +126,51 @@ def discretize(features, labels, fit, max_leaves, fit_weights):
     return np.searchsorted(leaf_ids, nodes), len(leaf_ids)
 
 
-def fit_and_evaluate(labels, subjects, accel, gyro, fit, priors, max_leaves):
+def leave_one_subject_out(labels, subjects, coarse, fine, priors, fine_rule, gyro_bins):
+    candidates = np.unique(subjects)
+    simultaneous_alpha = ALPHA / len(candidates)
+    rows = []
+    for subject in candidates:
+        keep = subjects != subject
+        remaining = labels[keep]
+        missing = np.flatnonzero(np.bincount(remaining, minlength=len(priors)) == 0)
+        row = {"omitted_subject": int(subject), "remaining_windows": int(keep.sum())}
+        if len(missing):
+            rows.append({**row, "missing_activity_codes": missing.tolist()})
+            continue
+        result = cell_certificate(remaining, coarse[keep], fine[keep], subjects[keep], priors, fine_rule,
+                                  compare=True, report_pooled_blocks=True, added_bins=gyro_bins)
+        pooled = result["pooled_blocks"]
+        active = np.asarray(pooled["mutable_masses"]) > 0
+        scores = np.asarray(pooled["scores"])[active]
+        fixed = pooled["fixed_correct_minus_coarse_optimum"]
+        rows.append({
+            **row,
+            "remaining_subjects": result["sampling_units"],
+            "sample_bayes_gain": result["sample_bayes_gain"],
+            "pointwise_lower": result["certificate_comparison"]["pooled_product"]["lower"],
+            "simultaneous_lower": max(0.0, fixed + float(product_lower(scores, simultaneous_alpha))),
+        })
+    summaries = {}
+    for name in ("pointwise_lower", "simultaneous_lower"):
+        values = [row[name] for row in rows if name in row]
+        summaries[name] = {
+            "positive_omissions": sum(x > 0 for x in values),
+            "range": [min(values), max(values)] if values else None,
+        }
+    return {
+        "family_alpha": ALPHA,
+        "pointwise_alpha": ALPHA,
+        "per_omission_alpha_for_simultaneous_coverage": simultaneous_alpha,
+        "candidate_omissions": len(candidates),
+        "evaluated_omissions": sum("pointwise_lower" in row for row in rows),
+        "target": "Bayes gain on each remaining cohort, with equal activity priors and refixed record weights",
+        "summary": summaries,
+        "omissions": rows,
+    }
+
+
+def fit_and_evaluate(labels, subjects, accel, gyro, fit, priors, max_leaves, *, omit_subjects=False):
     fit_counts = np.bincount(labels[fit], minlength=len(priors))
     test_counts = np.bincount(labels[~fit], minlength=len(priors))
     if min(fit_counts.min(), test_counts.min()) == 0:
@@ -147,13 +191,44 @@ def fit_and_evaluate(labels, subjects, accel, gyro, fit, priors, max_leaves):
     result["frozen_fused_minus_accel_balanced_accuracy"] = (
         result["frozen_fused_balanced_accuracy"] - result["frozen_accel_balanced_accuracy"]
     )
+    if omit_subjects:
+        result["leave_one_subject_out"] = leave_one_subject_out(
+            labels[~fit], subjects[~fit], coarse[~fit], fine[~fit], priors, fine_rule, gyro_bins
+        )
     return {"accel_bins": accel_bins, "gyro_bins": gyro_bins, "fit_class_counts": fit_counts.tolist(), **result}
+
+
+def check_reference(output, reference):
+    for key in ("archive_sha256", "fit_subject_ids", "evaluation_subject_ids", "primary_method",
+                "primary_encoding_max_leaves_per_sensor", "eligible_windows_per_subject"):
+        if output[key] != reference[key]:
+            raise ValueError(f"KU-HAR result disagrees with the reference on {key}")
+    primary = str(LEAVES[0])
+    observed = output["results_by_max_leaves_per_sensor"][primary]
+    expected = reference["results_by_max_leaves_per_sensor"][primary]
+    for key in ("flows", "sampling_units", "class_counts", "fit_class_counts", "accel_bins", "gyro_bins"):
+        if observed[key] != expected[key]:
+            raise ValueError(f"KU-HAR primary analysis disagrees with the reference on {key}")
+    for key in ("sample_bayes_gain", "frozen_fused_minus_accel_balanced_accuracy"):
+        if not np.isclose(observed[key], expected[key], atol=1e-10, rtol=0):
+            raise ValueError(f"KU-HAR primary analysis disagrees with the reference on {key}")
+    for key in ("scores", "mutable_masses", "fixed_correct_minus_coarse_optimum"):
+        if not np.allclose(observed["pooled_blocks"][key], expected["pooled_blocks"][key], atol=1e-10, rtol=0):
+            raise ValueError(f"KU-HAR primary pooled blocks disagree with the reference on {key}")
+    lower = "pooled_product"
+    got = observed["certificate_comparison"][lower]["lower"]
+    want = expected["certificate_comparison"][lower]["lower"]
+    if not np.isclose(got, want, atol=1e-10, rtol=0):
+        raise ValueError("KU-HAR primary bound disagrees with the reference")
+    print(f"PASS archived KU-HAR baseline | pooled product {100 * got:+.3f} pp")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, required=True, help="KU-HAR v5 trimmed interpolated ZIP")
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--leave-one-subject-out", action="store_true", help="audit omissions for the primary encoding")
+    parser.add_argument("--reference", type=Path, help="previous KU-HAR JSON to verify the full primary analysis")
     args = parser.parse_args()
     if args.out.exists():
         parser.error("--out must be a new file")
@@ -166,8 +241,10 @@ def main():
     fit_subjects = rng.permutation(np.unique(subjects))[:FIT_SUBJECTS]
     fit = np.isin(subjects, fit_subjects)
     priors = np.full(len(activity_names), 1 / len(activity_names))
-    comparisons = {str(leaves): fit_and_evaluate(labels, subjects, accel, gyro, fit, priors, leaves)
-                   for leaves in LEAVES}
+    encodings = LEAVES[:1] if args.leave_one_subject_out else LEAVES
+    comparisons = {str(leaves): fit_and_evaluate(labels, subjects, accel, gyro, fit, priors, leaves,
+                                                omit_subjects=args.leave_one_subject_out)
+                   for leaves in encodings}
     output = {
         "source": SOURCE,
         "archive_sha256": digest,
@@ -185,7 +262,8 @@ def main():
         "split_seed": SPLIT_SEED,
         "fit_subject_ids": sorted(fit_subjects.tolist()),
         "evaluation_subject_ids": sorted(np.unique(subjects[~fit]).tolist()),
-        "eligible_windows_per_subject": dict(sorted(Counter(subjects.tolist()).items())),
+        "eligible_windows_per_subject": {str(subject): count for subject, count
+                                         in sorted(Counter(subjects.tolist()).items())},
         "evaluation_unit": "participant, assuming conditional independence across participants",
         "class_prior": "equal",
         "alpha_per_fixed_method_and_encoding": ALPHA,
@@ -193,6 +271,10 @@ def main():
         "primary_method": "pooled_product",
         "results_by_max_leaves_per_sensor": comparisons,
     }
+    if args.reference is not None:
+        with args.reference.open(encoding="utf-8") as handle:
+            check_reference(output, json.load(handle))
+        output["verified_reference"] = {"filename": args.reference.name, "sha256": sha256(args.reference)}
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("x", encoding="utf-8") as handle:
         json.dump(output, handle, indent=2, allow_nan=False)
@@ -203,6 +285,15 @@ def main():
               f"frozen comparison {100 * row['frozen_fused_minus_accel_balanced_accuracy']:+.3f} pp")
         print("  " + " | ".join(f"{key} {100 * item['lower']:+.3f} pp"
                                 for key, item in row["certificate_comparison"].items()))
+        if args.leave_one_subject_out:
+            omissions = row["leave_one_subject_out"]
+            print(f"Leave one subject out | {omissions['evaluated_omissions']}/"
+                  f"{omissions['candidate_omissions']} eligible omissions")
+            for name, summary in omissions["summary"].items():
+                interval = summary["range"]
+                if interval is not None:
+                    print(f"  {name} | {summary['positive_omissions']}/{omissions['evaluated_omissions']} positive"
+                          f" | range {100 * interval[0]:+.3f} to {100 * interval[1]:+.3f} pp")
     print(f"Results: {args.out}")
 
 
