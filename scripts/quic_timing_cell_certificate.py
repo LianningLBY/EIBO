@@ -42,9 +42,10 @@ def product_lower(scores, alpha):
 
 
 def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare=False, alpha=ALPHA,
-                     pooled_omit_symbol=None, report_pooled_blocks=False, weighted_cells=False):
+                     pooled_omit_symbol=None, report_pooled_blocks=False, weighted_cells=False,
+                     added_bins=timing.TIMING_BINS):
     """Condition on labels, coarse symbols, block membership, and the fitted rule."""
-    alphabet = len(fine_rule) // timing.TIMING_BINS
+    alphabet = len(fine_rule) // added_bins
     coarse_counts = timing.hist(labels, coarse, len(priors), alphabet)
     class_counts = coarse_counts.sum(axis=1)
     if np.any(class_counts == 0):
@@ -55,9 +56,9 @@ def cell_certificate(labels, coarse, fine, groups, priors, fine_rule, *, compare
     cell_alpha = alpha / len(active)
     coarse_optimum = coarse_mass.max(axis=0)
     fine_mass = class_weights[:, None] * timing.hist(labels, fine, len(priors), len(fine_rule))
-    fine_optimum = fine_mass.max(axis=0).reshape(alphabet, timing.TIMING_BINS).sum(axis=1)
+    fine_optimum = fine_mass.max(axis=0).reshape(alphabet, added_bins).sum(axis=1)
 
-    candidates = fine_rule.reshape(alphabet, timing.TIMING_BINS)
+    candidates = fine_rule.reshape(alphabet, added_bins)
     correct_by_bin = candidates[None, :, :] == np.arange(len(priors))[:, None, None]
     always_correct = correct_by_bin.all(axis=2)
     can_change = correct_by_bin.any(axis=2) & ~always_correct

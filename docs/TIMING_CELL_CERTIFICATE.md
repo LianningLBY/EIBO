@@ -40,6 +40,20 @@ The XS service sweep serializes `fit_counts` in a different position at the top 
 
 The [parity-group bounds](../artifacts/methodology/timing_block_repro_QfpnhZIJ/parity.json) were recomputed from the daily scores. The pooled product bounds match Appendix C at 1.54325 and 1.27665 percentage points for the original and disjoint windows. The two Hoeffding bounds are zero.
 
+## Cross-block dependence and sensor fusion
+
+The dependence experiment uses a balanced binary cohort with known zero Bayes gain. Each block has the same two possible scores and the same marginal law at every correlation level. A recursion computes the exact false-certification rate for the independent-block and parity versions of both the pooled product and pooled Hoeffding bounds. Independent adjacent pairs satisfy the parity assumption by construction. A persistent Markov chain induces dependence at lag two as well. Its rates describe sensitivity under the specified data generating process. The block counts include those of the QUIC22-S sensitivity analysis and the one- and two-day counts of the original XS window.
+
+The sensor experiment uses the [KU-HAR v5 trimmed and interpolated release](https://doi.org/10.17632/45f952y38r.5). The archive contains paired smartphone accelerometer and gyroscope streams in 1,945 activity recordings. Its filenames expose 89 distinct subject IDs. Each sensor is interpolated onto the overlapping clock support and summarized over common, nonoverlapping three-second windows. Windows crossing a gap longer than 15 ms and recordings with ambiguous clocks are counted and excluded. The 18 activity classes have equal evaluation weight. Encoders and class-normalized frequency rules are fitted using only the 30 subjects drawn by the fixed seed. The primary representation uses up to eight decision-tree leaves for each sensor and the primary certificate is pooled product. The 16-leaf encoding and other methods are sensitivity comparisons. The coarse representation uses only accelerometer leaves. The fine representation retains the accelerometer leaf and appends the gyroscope leaf. All windows from one evaluation subject form a single block. Coverage is conditional on the cohort and assumes independence across subject blocks. The JSON keeps the sample Bayes gain, frozen-rule comparison, and four bounds in separate fields.
+
+Run both scripts on the school server in a Python environment with NumPy, SciPy, and scikit-learn. The runner validates the publisher SHA-256 and stores the public v5 download in the ignored data directory. Pass an existing archive as the runner's first argument to reuse a server copy. Output names are timestamped so reruns retain earlier results.
+
+```bash
+cd /data/xjw/EIBO &&
+conda activate traffic-ncde &&
+bash scripts/run_fusion_followups.sh
+```
+
 ## QUIC22 reproduction and null checks
 
 The reproduction uses the archived fit dates, the 283,526 retained evaluation flows, and the original five-packet direction and size representation with the second-packet interval bins. It verifies the archived input manifests and reproduces the original sample Bayes gain and frozen-rule gap.

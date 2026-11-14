@@ -109,15 +109,15 @@ def hist(labels, symbols, n_classes, alphabet):
     return np.bincount(labels * alphabet + symbols, minlength=n_classes * alphabet).reshape(n_classes, alphabet)
 
 
-def fit_rules(y, x, z, priors, alphabet):
+def fit_rules(y, x, z, priors, alphabet, *, added_bins=TIMING_BINS):
     coarse = hist(y, x, len(priors), alphabet)
-    fused = hist(y, z, len(priors), alphabet * TIMING_BINS)
+    fused = hist(y, z, len(priors), alphabet * added_bins)
     ns = coarse.sum(axis=1)
     train_weights = (priors / ns)[:, None]
     coarse_rule = (train_weights * coarse).argmax(axis=0)
     fused_rule = (train_weights * fused).argmax(axis=0)
     unseen = np.flatnonzero(fused.sum(axis=0) == 0)
-    fused_rule[unseen] = coarse_rule[unseen // TIMING_BINS]
+    fused_rule[unseen] = coarse_rule[unseen // added_bins]
     return coarse_rule, fused_rule, ns
 
 
