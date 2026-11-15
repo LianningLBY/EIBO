@@ -242,6 +242,19 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_sensit
   --out "artifacts/methodology/if_e1_timing_xs_refit_$(date +%Y%m%d_%H%M%S).json"
 ```
 
+## XS sensitivity to timing cutpoints
+
+Compare the registered timing cuts (0, 1, 4, and 16 ms) with two pilot-quantile grids on the same 44-class XS cohorts. Keep the zero bin, the total of five bins, the coarse encoding, the flows, equal class priors, and UTC-day blocks fixed. Choose six ordered, distinct thresholds from the positive pilot support using probabilities 0.10, 0.25, 0.40, 0.60, 0.75, and 0.90. Use the first, third, and fifth thresholds for one grid and the second, fourth, and sixth for the other. Reserve at least one positive support value above the last threshold. If a grid repeats the registered split of the positive pilot support, use the first, third, and sixth thresholds as the replacement. Fit and freeze a frequency rule on the pilot separately for each encoding.
+
+The script scans the registered XS H5 once, verifies that the baseline reproduces the archived rule, cohort counts, and both daily pooled product bounds, and reports all three encodings in both windows. The pointwise bounds use tail probability 0.05 and the six simultaneous bounds use 0.05/6 each, conditional on the daily block model. Each encoding defines its own Bayes gain target. The two evaluation windows were previously analyzed, so this is a retrospective sensitivity analysis.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_cutpoint_sensitivity.py \
+  --xs-h5 /data/xjw/CESNET-QUICEXT-25/XS/CESNET-QUICEXT-25-XS.h5 \
+  --backend tables \
+  --out "artifacts/methodology/if_e1_timing_xs_cutpoints_$(date -u +%Y%m%dT%H%M%SZ).json"
+```
+
 ## XS time-block diagnostics and prior comparison
 
 Run one scan of the XS file with the archived 44-class frequency rules and two evaluation windows. Keep the daily guard, flows, feature cuts, and equal evaluation weights fixed for the block diagnostic.

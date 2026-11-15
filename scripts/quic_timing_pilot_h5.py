@@ -25,8 +25,8 @@ def sha256(path):
     return digest.hexdigest()
 
 
-def scan(source, tables, windows, encoder, chunk_rows, rounding):
-    """Read bounded chunks, retaining only encoded observables and time geometry."""
+def scan(source, tables, windows, encoder, chunk_rows, rounding, *, raw_timing=False):
+    """Read bounded chunks, optionally retaining the interval in place of the fine symbol."""
     parts = {period: [] for period in windows}
     rows_read = 0
     for index, table in enumerate(tables, 1):
@@ -53,9 +53,11 @@ def scan(source, tables, windows, encoder, chunk_rows, rounding):
                 use = valid & whole_interval_mask(first, last, window, rounding)
                 if use.any():
                     x = encoder.encode(ppi[use])
-                    t = np.searchsorted(TIMING_CUTS_MS, timing[use], side="left")
-                    parts[period].append((apps[use], x.astype(np.int16), (x * TIMING_BINS + t).astype(np.int16),
-                                          first[use], last[use]))
+                    interval = timing[use]
+                    if not raw_timing:
+                        t = np.searchsorted(TIMING_CUTS_MS, interval, side="left")
+                        interval = (x * TIMING_BINS + t).astype(np.int16)
+                    parts[period].append((apps[use], x.astype(np.int16), interval, first[use], last[use]))
         if index % 30 == 0 or index == len(tables):
             print(f"Scanned {index}/{len(tables)} daily tables ({rows_read:,} rows)", flush=True)
     if rows_read != sum(table["rows"] for table in tables):
