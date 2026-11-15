@@ -47,15 +47,16 @@ KU-HAR v5, trimmed interpolated archive (doi:10.17632/45f952y38r.5)
 SHA-256 9fe5d0052f2f1d6711afac42ee4badd968116afa8ba4b8ba591f4fdd771c2ec2
 
 The 33-page manuscript, source files, and figures are archived in commit
-4f059b74a85d87a925a50efd02165e00cc33e082.
+7d9de21afe89f8aa666d2216f6c84a46e5edcaeb.
 Manuscript PDF:
-https://github.com/LianningLBY/EIBO/blob/4f059b74a85d87a925a50efd02165e00cc33e082/docs/paper/timing-fusion/main.pdf
+https://github.com/LianningLBY/EIBO/blob/7d9de21afe89f8aa666d2216f6c84a46e5edcaeb/docs/paper/timing-fusion/main.pdf
 Reproduction guide:
-https://github.com/LianningLBY/EIBO/blob/f0fd8b848c05a7c75becd82aa647531a7f3b28c9/docs/TIMING_CELL_CERTIFICATE.md
+https://github.com/LianningLBY/EIBO/blob/7d9de21afe89f8aa666d2216f6c84a46e5edcaeb/docs/TIMING_CELL_CERTIFICATE.md
 
 The five HDF5 reproduction outputs are archived in 9aa8125. The KU-HAR and
 exact null results are archived in 40c74ed, and the participant omission
-results are archived in 67314f4.
+results are archived in 67314f4. The XS timing cutpoint sensitivity results
+are archived in e71f992.
 [Before submission, arrange access to the code and results for the editor and
 reviewers, or supply the equivalent reproduction files as a supplement. Point
 the manuscript to the accessible version that includes the reproduction record.]
