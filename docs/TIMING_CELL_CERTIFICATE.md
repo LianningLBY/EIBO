@@ -246,7 +246,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_sensit
 
 Compare the registered timing cuts (0, 1, 4, and 16 ms) with two pilot-quantile grids on the same 44-class XS cohorts. Keep the zero bin, the total of five bins, the coarse encoding, the flows, equal class priors, and UTC-day blocks fixed. Choose six ordered, distinct thresholds from the positive pilot support using probabilities 0.10, 0.25, 0.40, 0.60, 0.75, and 0.90. Use the first, third, and fifth thresholds for one grid and the second, fourth, and sixth for the other. Reserve at least one positive support value above the last threshold. If a grid repeats the registered split of the positive pilot support, use the first, third, and sixth thresholds as the replacement. Fit and freeze a frequency rule on the pilot separately for each encoding.
 
-The script scans the registered XS H5 once, verifies that the baseline reproduces the archived rule, cohort counts, and both daily pooled product bounds, and reports all three encodings in both windows. The pointwise bounds use tail probability 0.05 and the six simultaneous bounds use 0.05/6 each, conditional on the daily block model. Each encoding defines its own Bayes gain target. The two evaluation windows were previously analyzed, so this is a retrospective sensitivity analysis.
+The script scans the registered XS H5 once, verifies that the baseline reproduces the archived rule, cohort counts, and both daily pooled product bounds, and reports all three encodings in both windows. The pointwise bounds use tail probability 0.05. The Bonferroni family for the simultaneous bounds includes four candidate certificates, three encodings, and two windows, with tail probability `0.05/24` per bound under the daily block model. The four candidates are pooled Hoeffding, pooled product, cell Hoeffding, and cell product. Accounting for the certificate choice allows the analysis to reuse the original window that informed the choice of pooled product. Each encoding defines its own Bayes gain target. The two evaluation windows were previously analyzed, so this is a retrospective sensitivity analysis.
 
 ```bash
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_cutpoint_sensitivity.py \
@@ -255,16 +255,24 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_cutpoi
   --out "artifacts/methodology/if_e1_timing_xs_cutpoints_$(date -u +%Y%m%dT%H%M%SZ).json"
 ```
 
-The [school-server archive](../artifacts/methodology/if_e1_timing_xs_cutpoints_20261115T011858Z.json) contains both windows and all three encodings. The original window has 2,038,134 retained flows in 91 day blocks, and the retrospective window has 2,318,322 flows in 86 day blocks. All entries below are percentage points.
+The [school-server archive](../artifacts/methodology/if_e1_timing_xs_cutpoints_20261115T011858Z.json) contains the daily pooled scores for both windows and all three encodings. Its original simultaneous fields use `0.05/6`. Recompute the manuscript's `0.05/24` bounds from the archived scores with this command.
+
+```bash
+python scripts/quic_timing_xs_cutpoint_sensitivity.py \
+  --from-archive artifacts/methodology/if_e1_timing_xs_cutpoints_20261115T011858Z.json \
+  --out "artifacts/methodology/if_e1_timing_xs_cutpoints_adjusted_$(date -u +%Y%m%dT%H%M%SZ).json"
+```
+
+The original window has 2,038,134 retained flows in 91 daily blocks, and the retrospective window has 2,318,322 flows in 86 daily blocks. All entries below are percentage points.
 
 | Window | Cuts (ms) | Sample Bayes gain | Pointwise lower bound | Simultaneous lower bound |
 |---|---|---:|---:|---:|
-| Original | 0, 1, 4, 16 | 6.39494 | 2.03485 | 1.73888 |
-| Original | 0, 1, 3, 8 | 6.71185 | 2.02411 | 1.72834 |
-| Original | 0, 2, 4, 15 | 6.15949 | 1.68444 | 1.39530 |
-| Retrospective | 0, 1, 4, 16 | 6.15866 | 2.06194 | 1.73600 |
-| Retrospective | 0, 1, 3, 8 | 6.06132 | 1.95466 | 1.63095 |
-| Retrospective | 0, 2, 4, 15 | 5.98141 | 1.74199 | 1.42265 |
+| Original | 0, 1, 4, 16 | 6.39494 | 2.03485 | 1.51385 |
+| Original | 0, 1, 3, 8 | 6.71185 | 2.02411 | 1.50347 |
+| Original | 0, 2, 4, 15 | 6.15949 | 1.68444 | 1.17546 |
+| Retrospective | 0, 1, 4, 16 | 6.15866 | 2.06194 | 1.48844 |
+| Retrospective | 0, 1, 3, 8 | 6.06132 | 1.95466 | 1.38509 |
+| Retrospective | 0, 2, 4, 15 | 5.98141 | 1.74199 | 1.18009 |
 
 The retrospective registered-cut bound of 2.06194 pp uses a pointwise tail probability of 0.05. The primary temporal-check bound is 1.93505 pp at its original allocation of 0.025, as verified in the archive's `reproduced_archived_bound` field.
 

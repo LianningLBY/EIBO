@@ -20,6 +20,7 @@ from quic_timing_temporal_check import FAMILY_ALPHA, REFERENCE, check_windows
 
 TEMPORAL = REFERENCE.with_name("if_e1_timing_temporal_xs_20261112_150118.json")
 QUANTILE_LEVELS = (0.10, 0.25, 0.40, 0.60, 0.75, 0.90)
+CANDIDATE_CERTIFICATES = ("pooled_hoeffding", "pooled_product", "cell_hoeffding", "cell_product")
 
 
 def cutpoint_designs(pilot_ms):
@@ -56,6 +57,19 @@ def pooled_at_alpha(blocks, alpha):
     return {"alpha": alpha, "untruncated_lower": lower, "lower": max(0.0, lower)}
 
 
+def apply_simultaneous_bounds(report):
+    windows = report["windows"]
+    family_size = len(CANDIDATE_CERTIFICATES) * sum(len(row["encodings"]) for row in windows.values())
+    alpha = FAMILY_ALPHA / family_size
+    report["simultaneous_candidate_certificates"] = list(CANDIDATE_CERTIFICATES)
+    report["simultaneous_family_size"] = family_size
+    report["simultaneous_family_alpha"] = FAMILY_ALPHA
+    report["simultaneous_alpha_per_bound"] = alpha
+    for window in windows.values():
+        for encoding in window["encodings"].values():
+            encoding["pooled_product_simultaneous"] = pooled_at_alpha(encoding["pooled_blocks"], alpha)
+
+
 def verify_baseline(result, archived, period):
     expected = archived["results_by_block_width"]["1d"]
     expected_bound = expected["certificate_comparison"]["pooled_product"]
@@ -71,7 +85,7 @@ def verify_baseline(result, archived, period):
     return actual_bound
 
 
-def evaluate_window(data, classes, priors, designs, archived, period, simultaneous_alpha):
+def evaluate_window(data, classes, priors, designs, archived, period):
     apps, coarse, interval, first, last = data
     day = (first // DAY).astype(np.int64)
     fitted = np.isin(apps, classes)
@@ -96,7 +110,6 @@ def evaluate_window(data, classes, priors, designs, archived, period, simultaneo
             "sample_bayes_gain": result["sample_bayes_gain"],
             "frozen_rule_minus_sample_coarse_optimum": result["frozen_rule_minus_sample_coarse_optimum"],
             "pooled_product_pointwise": result["certificate_comparison"]["pooled_product"],
-            "pooled_product_simultaneous": pooled_at_alpha(blocks, simultaneous_alpha),
             "pooled_blocks": blocks,
         }
         if name == "registered":
@@ -163,8 +176,7 @@ def run(args):
         raise ValueError("the registered cuts did not reproduce the archived frequency rule")
 
     archives = {"original": original, "retrospective": retrospective}
-    simultaneous_alpha = FAMILY_ALPHA / (len(designs) * len(archives))
-    results = {period: evaluate_window(periods[period], classes, priors, designs, archived, period, simultaneous_alpha)
+    results = {period: evaluate_window(periods[period], classes, priors, designs, archived, period)
                for period, archived in archives.items()}
     for design in designs.values():
         design["fine_rule"] = design["fine_rule"].tolist()
@@ -181,8 +193,6 @@ def run(args):
         "block_width_days": 1,
         "block_independence_is_assumed": True,
         "pointwise_alpha_per_bound": FAMILY_ALPHA,
-        "simultaneous_family_alpha": FAMILY_ALPHA,
-        "simultaneous_alpha_per_bound": simultaneous_alpha,
         "encodings": designs,
         "windows": results,
     }
@@ -190,16 +200,23 @@ def run(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--xs-h5", type=Path, required=True)
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--xs-h5", type=Path)
+    source.add_argument("--from-archive", type=Path, help="recompute the simultaneous bounds from archived block scores")
     parser.add_argument("--backend", choices=("auto", "tables", "h5py"), default="auto")
     parser.add_argument("--chunk-rows", type=int, default=20_000)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     if args.out.exists() or args.chunk_rows <= 0:
         parser.error("use a new output path and a positive chunk size")
-    result = run(args)
+    if args.from_archive is None:
+        result = run(args)
+        print("PASS: registered cuts reproduced the archived rule and both daily bounds")
+    else:
+        result = json.loads(args.from_archive.read_text())
+    apply_simultaneous_bounds(result)
     write_json(args.out, result)
-    print("PASS: registered cuts reproduced the archived rule and both daily bounds")
+    print(f"Simultaneous tail probability per bound: {FAMILY_ALPHA:g}/{result['simultaneous_family_size']}")
     for period, row in result["windows"].items():
         print(f"{period}: {row['flows']:,} flows | {row['sampling_units']} daily blocks")
         for name, entry in row["encodings"].items():
