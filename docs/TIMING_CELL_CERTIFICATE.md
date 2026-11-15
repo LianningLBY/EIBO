@@ -255,6 +255,19 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -u scripts/quic_timing_xs_cutpoi
   --out "artifacts/methodology/if_e1_timing_xs_cutpoints_$(date -u +%Y%m%dT%H%M%SZ).json"
 ```
 
+The [school-server archive](../artifacts/methodology/if_e1_timing_xs_cutpoints_20261115T011858Z.json) contains both windows and all three encodings. The original window has 2,038,134 retained flows in 91 day blocks, and the retrospective window has 2,318,322 flows in 86 day blocks. All entries below are percentage points.
+
+| Window | Cuts (ms) | Sample Bayes gain | Pointwise lower bound | Simultaneous lower bound |
+|---|---|---:|---:|---:|
+| Original | 0, 1, 4, 16 | 6.39494 | 2.03485 | 1.73888 |
+| Original | 0, 1, 3, 8 | 6.71185 | 2.02411 | 1.72834 |
+| Original | 0, 2, 4, 15 | 6.15949 | 1.68444 | 1.39530 |
+| Retrospective | 0, 1, 4, 16 | 6.15866 | 2.06194 | 1.73600 |
+| Retrospective | 0, 1, 3, 8 | 6.06132 | 1.95466 | 1.63095 |
+| Retrospective | 0, 2, 4, 15 | 5.98141 | 1.74199 | 1.42265 |
+
+The retrospective registered-cut bound of 2.06194 pp uses a pointwise tail probability of 0.05. The primary temporal-check bound is 1.93505 pp at its original allocation of 0.025, as verified in the archive's `reproduced_archived_bound` field.
+
 ## XS time-block diagnostics and prior comparison
 
 Run one scan of the XS file with the archived 44-class frequency rules and two evaluation windows. Keep the daily guard, flows, feature cuts, and equal evaluation weights fixed for the block diagnostic.
